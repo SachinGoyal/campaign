@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :roles
   resources :attributes
   resources :newsletters
   resources :campeigns

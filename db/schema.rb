@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904071015) do
+ActiveRecord::Schema.define(version: 20150904071640) do
 
   create_table "attributes", force: :cascade do |t|
     t.integer  "company_id",  limit: 4
@@ -122,6 +122,12 @@ ActiveRecord::Schema.define(version: 20150904071015) do
   add_index "profiles_newsletters", ["newsletter_id"], name: "index_profiles_newsletters_on_newsletter_id", using: :btree
   add_index "profiles_newsletters", ["profile_id"], name: "index_profiles_newsletters_on_profile_id", using: :btree
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "settings", force: :cascade do |t|
     t.integer  "user_id",              limit: 4
     t.string   "site_title",           limit: 255
@@ -147,6 +153,9 @@ ActiveRecord::Schema.define(version: 20150904071015) do
   add_index "templates", ["user_id"], name: "index_templates_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
+    t.integer  "role_id",                limit: 4,                null: false
+    t.string   "user_type",              limit: 255
+    t.string   "username",               limit: 255, default: "", null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
