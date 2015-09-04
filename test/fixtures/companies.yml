@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  free_emails: 1
+  status: false
+  created_by: 1
+  updated_by: 1
+
+two:
+  name: MyString
+  free_emails: 1
+  status: false
+  created_by: 1
+  updated_by: 1

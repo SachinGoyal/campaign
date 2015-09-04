@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @setting.user %>
+</p>
+
+<p>
+  <strong>Site title:</strong>
+  <%= @setting.site_title %>
+</p>
+
+<p>
+  <strong>Admin email:</strong>
+  <%= @setting.admin_email %>
+</p>
+
+<p>
+  <strong>Admin footer content:</strong>
+  <%= @setting.admin_footer_content %>
+</p>
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>

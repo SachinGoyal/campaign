@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :attributes
+  resources :newsletters
+  resources :campeigns
+  resources :contacts
+  resources :profiles
+  resources :templates
+  resources :settings
+  resources :companies
   get 'home/index'
 
   devise_for :users

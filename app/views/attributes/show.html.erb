@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @attribute.company %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @attribute.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @attribute.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @attribute.status %>
+</p>
+
+<%= link_to 'Edit', edit_attribute_path(@attribute) %> |
+<%= link_to 'Back', attributes_path %>

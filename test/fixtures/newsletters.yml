@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  campeign_id: 
+  template_id: 
+  name: MyString
+  subject: MyString
+  from_name: MyString
+  from_address: MyString
+  reply_email: MyString
+  created_by: 1
+  updated_by: 1
+
+two:
+  campeign_id: 
+  template_id: 
+  name: MyString
+  subject: MyString
+  from_name: MyString
+  from_address: MyString
+  reply_email: MyString
+  created_by: 1
+  updated_by: 1

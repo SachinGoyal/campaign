@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Campeign:</strong>
+  <%= @newsletter.campeign %>
+</p>
+
+<p>
+  <strong>Template:</strong>
+  <%= @newsletter.template %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @newsletter.name %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @newsletter.subject %>
+</p>
+
+<p>
+  <strong>From name:</strong>
+  <%= @newsletter.from_name %>
+</p>
+
+<p>
+  <strong>From address:</strong>
+  <%= @newsletter.from_address %>
+</p>
+
+<p>
+  <strong>Reply email:</strong>
+  <%= @newsletter.reply_email %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @newsletter.created_by %>
+</p>
+
+<p>
+  <strong>Updated by:</strong>
+  <%= @newsletter.updated_by %>
+</p>
+
+<%= link_to 'Edit', edit_newsletter_path(@newsletter) %> |
+<%= link_to 'Back', newsletters_path %>

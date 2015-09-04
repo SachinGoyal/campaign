@@ -1,0 +1,2 @@
+module CampeignsHelper
+end
