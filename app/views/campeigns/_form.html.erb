@@ -1,4 +1,4 @@
-<%= form_for(@campeign) do |f| %>
+<%= form_for([current_user ,@campeign]) do |f| %>
   <% if @campeign.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@campeign.errors.count, "error") %> prohibited this campeign from being saved:</h2>

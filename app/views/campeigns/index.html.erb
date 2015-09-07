@@ -24,9 +24,9 @@
         <td><%= campeign.status %></td>
         <td><%= campeign.created_by %></td>
         <td><%= campeign.updated_by %></td>
-        <td><%= link_to 'Show', campeign %></td>
-        <td><%= link_to 'Edit', edit_campeign_path(campeign) %></td>
-        <td><%= link_to 'Destroy', campeign, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user_campeigns_path(current_user,campeign) %></td>
+        <td><%= link_to 'Edit', edit_user_campeign_path(current_user,campeign) %></td>
+        <td><%= link_to 'Destroy', [current_user,campeign], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Campeign', new_campeign_path %>
+<%= link_to 'New Campeign', new_user_campeign_path(current_user) %>

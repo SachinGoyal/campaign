@@ -1,16 +1,18 @@
 Rails.application.routes.draw do
   resources :roles
-  resources :attributes
-  resources :newsletters
-  resources :campeigns
-  resources :contacts
-  resources :profiles
-  resources :templates
-  resources :settings
-  resources :companies
   get 'home/index'
 
   devise_for :users
+  resources :users do 
+    resources :attributes
+    resources :newsletters
+    resources :campeigns
+    resources :contacts
+    resources :profiles
+    resources :templates
+    resources :settings
+    resources :companies
+  end
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

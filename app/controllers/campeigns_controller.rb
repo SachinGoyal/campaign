@@ -14,21 +14,23 @@ class CampeignsController < ApplicationController
 
   # GET /campeigns/new
   def new
-    @campeign = Campeign.new
+    @campeign = current_user.campeigns.build
   end
 
   # GET /campeigns/1/edit
   def edit
+    @campeign = Campeign.find(params[:id])
   end
 
   # POST /campeigns
   # POST /campeigns.json
   def create
     @campeign = Campeign.new(campeign_params)
+    binding.pry
 
     respond_to do |format|
       if @campeign.save
-        format.html { redirect_to @campeign, notice: 'Campeign was successfully created.' }
+        format.html { redirect_to [current_user,@campeign], notice: 'Campeign was successfully created.' }
         format.json { render :show, status: :created, location: @campeign }
       else
         format.html { render :new }
@@ -40,6 +42,7 @@ class CampeignsController < ApplicationController
   # PATCH/PUT /campeigns/1
   # PATCH/PUT /campeigns/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @campeign.update(campeign_params)
         format.html { redirect_to @campeign, notice: 'Campeign was successfully updated.' }
@@ -56,7 +59,7 @@ class CampeignsController < ApplicationController
   def destroy
     @campeign.destroy
     respond_to do |format|
-      format.html { redirect_to campeigns_url, notice: 'Campeign was successfully destroyed.' }
+      format.html { redirect_to user_campeigns_url(current_user), notice: 'Campeign was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

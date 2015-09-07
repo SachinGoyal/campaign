@@ -30,5 +30,5 @@
   <%= @campeign.updated_by %>
 </p>
 
-<%= link_to 'Edit', edit_campeign_path(@campeign) %> |
-<%= link_to 'Back', campeigns_path %>
+<%= link_to 'Edit', [:edit , current_user ,@campeign] %> |
+<%= link_to 'Back', user_campeigns_path(current_user) %>
