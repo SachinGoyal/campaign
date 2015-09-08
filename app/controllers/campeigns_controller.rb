@@ -14,20 +14,18 @@ class CampeignsController < ApplicationController
 
   # GET /campeigns/new
   def new
-    @campeign = current_user.campeigns.build
+    @campeign = Campeign.new
   end
 
   # GET /campeigns/1/edit
   def edit
-    @campeign = Campeign.find(params[:id])
   end
 
   # POST /campeigns
   # POST /campeigns.json
   def create
-    @campeign = Campeign.new(campeign_params)
     binding.pry
-
+    @campeign = current_user.campeigns.build(campeign_params)
     respond_to do |format|
       if @campeign.save
         format.html { redirect_to [current_user,@campeign], notice: 'Campeign was successfully created.' }
@@ -42,7 +40,6 @@ class CampeignsController < ApplicationController
   # PATCH/PUT /campeigns/1
   # PATCH/PUT /campeigns/1.json
   def update
-    binding.pry
     respond_to do |format|
       if @campeign.update(campeign_params)
         format.html { redirect_to @campeign, notice: 'Campeign was successfully updated.' }

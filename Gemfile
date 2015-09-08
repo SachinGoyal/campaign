@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
+# Search feature with ransack
+gem 'ransack'
+
 gem 'devise'
 gem 'cancancan'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
@@ -23,6 +26,7 @@ group :development, :test do
 end
 
 group :production do
+ # If app deploy on heroku server
  gem 'pg'
 end
 
