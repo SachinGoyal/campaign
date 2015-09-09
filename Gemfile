@@ -5,9 +5,13 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.1'
 # Search feature with ransack
 gem 'ransack'
-
+# Login 
 gem 'devise'
+# Permission module
 gem 'cancancan'
+#Soft delete
+gem "paranoia"
+
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -20,7 +24,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   # Use mysql as the database for Active Record
-  gem 'mysql2'
+  gem 'pg'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -46,8 +50,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
-
+gem "unicorn-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

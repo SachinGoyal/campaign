@@ -5,6 +5,7 @@ class CreateAttributes < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.boolean :status
+      t.datetime :deleted_at
 
       t.timestamps null: false
     end

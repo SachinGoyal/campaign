@@ -1,4 +1,6 @@
 class Campeign < ActiveRecord::Base
+  # Soft Delete
+  acts_as_paranoid
   # relation
   belongs_to :user
   # relation

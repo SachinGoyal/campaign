@@ -10,6 +10,7 @@ class CreateNewsletters < ActiveRecord::Migration
       t.string :reply_email
       t.integer :created_by
       t.integer :updated_by
+      t.datetime :deleted_at
 
       t.timestamps null: false
     end

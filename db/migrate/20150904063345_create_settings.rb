@@ -5,6 +5,7 @@ class CreateSettings < ActiveRecord::Migration
       t.string :site_title
       t.string :admin_email
       t.string :admin_footer_content
+      t.datetime :deleted_at
 
       t.timestamps null: false
     end

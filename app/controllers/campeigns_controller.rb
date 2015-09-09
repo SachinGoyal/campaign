@@ -4,7 +4,9 @@ class CampeignsController < ApplicationController
   # GET /campeigns
   # GET /campeigns.json
   def index
-    @campeigns = Campeign.all
+    @search = Campeign.ransack(params[:q])
+    @campeigns = @search.result(distinct: true)
+    #@campeigns = Campeign.all
   end
 
   # GET /campeigns/1

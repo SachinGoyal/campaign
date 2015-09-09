@@ -8,6 +8,7 @@ class CreateContacts < ActiveRecord::Migration
       t.boolean :status
       t.integer :created_by
       t.integer :updated_by
+      t.datetime :deleted_at
 
       t.timestamps null: false
     end

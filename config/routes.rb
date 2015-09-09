@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :functions
   resources :roles
   get 'home/index'
 
