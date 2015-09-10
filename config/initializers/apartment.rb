@@ -70,4 +70,4 @@ end
 Rails.application.config.middleware.use 'Apartment::Elevators::Subdomain'
 
 # Exclude www as subdomain constraint
-Apartment::Elevators::FirstSubdomain.excluded_subdomains = ['www']
+#Apartment::Elevators::FirstSubdomain.excluded_subdomains = ['www']

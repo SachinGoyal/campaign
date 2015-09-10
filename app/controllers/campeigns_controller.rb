@@ -1,4 +1,5 @@
 class CampeignsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_campeign, only: [:show, :edit, :update, :destroy]
 
   # GET /campeigns
