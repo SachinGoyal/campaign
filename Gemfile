@@ -3,6 +3,11 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
+
+
+# Multi tenant Database
+gem 'apartment'# Use postgresql as the database for Active Record
+
 # Search feature with ransack
 gem 'ransack'
 # Login 
@@ -21,6 +26,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 group :development, :test do
   # debugging too;
+  gem 'awesome_print'
   gem 'pry'
   gem 'pry-nav'
   # Use mysql as the database for Active Record

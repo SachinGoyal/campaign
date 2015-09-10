@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :companies
   resources :functions
   resources :roles
   get 'home/index'
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
     resources :profiles
     resources :templates
     resources :settings
-    resources :companies
   end
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.

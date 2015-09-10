@@ -24,20 +24,20 @@ User.create(:role_id =>1 ,:username => 'sachin52',:email => 'goyalsachin52@gmail
 #  end
 # end
 
-
-# p "Data Functions"
-# Function.destroy_all
-# ActiveRecord::Base.connection.reset_pk_sequence!('functions')
-# File.open(File.expand_path('data/es/functions.txt', RUTA)) do |file|
-#   file.each_line do |line|
-#     controller, action, agroup = line.strip.split(';')
-#       function = Function.new
-#       function.controller = controller.strip
-#       function.action = action.strip
-#       function.agroup = agroup.strip
-#       function.save
-#   end
-# end
+RUTA = File.dirname(__FILE__)
+p "Data Functions"
+Function.destroy_all
+#ActiveRecord::Base.connection.reset_pk_sequence!('functions')
+File.open(File.expand_path('data/es/functions.txt', RUTA)) do |file|
+  file.each_line do |line|
+    controller, action, agroup = line.strip.split(';')
+      function = Function.new
+      function.controller = controller.strip
+      function.action = action.strip
+      function.agroup = agroup.strip
+      function.save
+  end
+end
 
 
 # Function.destroy_all

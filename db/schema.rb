@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908095238) do
+ActiveRecord::Schema.define(version: 20150910062649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,10 +95,19 @@ ActiveRecord::Schema.define(version: 20150908095238) do
   create_table "functions", force: :cascade do |t|
     t.string   "controller"
     t.string   "action"
+    t.string   "agroup"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "functions_roles", id: false, force: :cascade do |t|
+    t.integer "function_id", null: false
+    t.integer "role_id",     null: false
+  end
+
+  add_index "functions_roles", ["function_id"], name: "index_functions_roles_on_function_id", using: :btree
+  add_index "functions_roles", ["role_id"], name: "index_functions_roles_on_role_id", using: :btree
 
   create_table "newsletters", force: :cascade do |t|
     t.integer  "campeign_id"
@@ -203,6 +212,8 @@ ActiveRecord::Schema.define(version: 20150908095238) do
   add_foreign_key "contacts_newsletters", "newsletters"
   add_foreign_key "contacts_profiles", "contacts"
   add_foreign_key "contacts_profiles", "profiles"
+  add_foreign_key "functions_roles", "functions"
+  add_foreign_key "functions_roles", "roles"
   add_foreign_key "newsletters", "campeigns"
   add_foreign_key "newsletters", "templates"
   add_foreign_key "profiles", "companies"
