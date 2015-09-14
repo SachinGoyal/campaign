@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150910062649) do
 
   add_index "attributes", ["company_id"], name: "index_attributes_on_company_id", using: :btree
 
-  create_table "campeigns", force: :cascade do |t|
+  create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20150910062649) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "campeigns", ["user_id"], name: "index_campeigns_on_user_id", using: :btree
+  add_index "campaigns", ["user_id"], name: "index_campaigns_on_user_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20150910062649) do
   add_index "functions_roles", ["role_id"], name: "index_functions_roles_on_role_id", using: :btree
 
   create_table "newsletters", force: :cascade do |t|
-    t.integer  "campeign_id"
+    t.integer  "campaign_id"
     t.integer  "template_id"
     t.string   "name"
     t.string   "subject"
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20150910062649) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "newsletters", ["campeign_id"], name: "index_newsletters_on_campeign_id", using: :btree
+  add_index "newsletters", ["campaign_id"], name: "index_newsletters_on_campaign_id", using: :btree
   add_index "newsletters", ["template_id"], name: "index_newsletters_on_template_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 20150910062649) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "attributes", "companies"
-  add_foreign_key "campeigns", "users"
+  add_foreign_key "campaigns", "users"
   add_foreign_key "contacts", "companies"
   add_foreign_key "contacts_attributes", "attributes"
   add_foreign_key "contacts_attributes", "contacts"
@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(version: 20150910062649) do
   add_foreign_key "contacts_profiles", "profiles"
   add_foreign_key "functions_roles", "functions"
   add_foreign_key "functions_roles", "roles"
-  add_foreign_key "newsletters", "campeigns"
+  add_foreign_key "newsletters", "campaigns"
   add_foreign_key "newsletters", "templates"
   add_foreign_key "profiles", "companies"
   add_foreign_key "profiles_newsletters", "newsletters"

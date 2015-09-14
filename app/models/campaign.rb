@@ -1,10 +1,11 @@
 # == Schema Information
 #
-# Table name: public.companies
+# Table name: campaigns
 #
 #  id          :integer          not null, primary key
+#  user_id     :integer
 #  name        :string
-#  free_emails :integer
+#  description :text
 #  status      :boolean
 #  created_by  :integer
 #  updated_by  :integer
@@ -13,10 +14,15 @@
 #  updated_at  :datetime         not null
 #
 
-require 'test_helper'
+class Campaign < ActiveRecord::Base
+  # Soft Delete
+  acts_as_paranoid
+  # relation
+  belongs_to :user
+  # relation
+  
+  #delegate
+  delegate :username, to: :user, prefix: true
+  #delegate
 
-class CompanyTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 end

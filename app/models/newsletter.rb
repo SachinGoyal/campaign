@@ -1,6 +1,25 @@
+# == Schema Information
+#
+# Table name: newsletters
+#
+#  id           :integer          not null, primary key
+#  campaign_id  :integer
+#  template_id  :integer
+#  name         :string
+#  subject      :string
+#  from_name    :string
+#  from_address :string
+#  reply_email  :string
+#  created_by   :integer
+#  updated_by   :integer
+#  deleted_at   :datetime
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 class Newsletter < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
-  belongs_to :campeign
+  belongs_to :campaign
   belongs_to :template
 end

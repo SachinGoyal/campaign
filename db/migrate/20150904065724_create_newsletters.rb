@@ -1,7 +1,7 @@
 class CreateNewsletters < ActiveRecord::Migration
   def change
     create_table :newsletters do |t|
-      t.references :campeign, index: true, foreign_key: true
+      t.references :campaign, index: true, foreign_key: true
       t.references :template, index: true, foreign_key: true
       t.string :name
       t.string :subject

@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-
+gem 'rename'
+gem 'annotate'
 
 # Multi tenant Database
 gem 'apartment'# Use postgresql as the database for Active Record
@@ -37,7 +38,7 @@ end
 
 group :production do
  # If app deploy on heroku server
- gem 'pg'
+# gem 'pg'
 end
 
 # Use CoffeeScript for .coffee assets and views

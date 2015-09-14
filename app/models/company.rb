@@ -1,11 +1,16 @@
 # == Schema Information
 #
-# Table name: companies
+# Table name: public.companies
 #
-#  id                     :integer          not null, primary key
-#  name                   :string(255)      not null
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id          :integer          not null, primary key
+#  name        :string
+#  free_emails :integer
+#  status      :boolean
+#  created_by  :integer
+#  updated_by  :integer
+#  deleted_at  :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 class Company < ActiveRecord::Base

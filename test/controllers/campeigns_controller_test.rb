@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class CampeignsControllerTest < ActionController::TestCase
+class CampaignsControllerTest < ActionController::TestCase
   setup do
-    @campeign = campeigns(:one)
+    @campaign = campaigns(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:campeigns)
+    assert_not_nil assigns(:campaigns)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class CampeignsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create campeign" do
-    assert_difference('Campeign.count') do
-      post :create, campeign: { created_by: @campeign.created_by, description: @campeign.description, name: @campeign.name, status: @campeign.status, updated_by: @campeign.updated_by, user_id: @campeign.user_id }
+  test "should create campaign" do
+    assert_difference('Campaign.count') do
+      post :create, campaign: { created_by: @campaign.created_by, description: @campaign.description, name: @campaign.name, status: @campaign.status, updated_by: @campaign.updated_by, user_id: @campaign.user_id }
     end
 
-    assert_redirected_to campeign_path(assigns(:campeign))
+    assert_redirected_to campaign_path(assigns(:campaign))
   end
 
-  test "should show campeign" do
-    get :show, id: @campeign
+  test "should show campaign" do
+    get :show, id: @campaign
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @campeign
+    get :edit, id: @campaign
     assert_response :success
   end
 
-  test "should update campeign" do
-    patch :update, id: @campeign, campeign: { created_by: @campeign.created_by, description: @campeign.description, name: @campeign.name, status: @campeign.status, updated_by: @campeign.updated_by, user_id: @campeign.user_id }
-    assert_redirected_to campeign_path(assigns(:campeign))
+  test "should update campaign" do
+    patch :update, id: @campaign, campaign: { created_by: @campaign.created_by, description: @campaign.description, name: @campaign.name, status: @campaign.status, updated_by: @campaign.updated_by, user_id: @campaign.user_id }
+    assert_redirected_to campaign_path(assigns(:campaign))
   end
 
-  test "should destroy campeign" do
-    assert_difference('Campeign.count', -1) do
-      delete :destroy, id: @campeign
+  test "should destroy campaign" do
+    assert_difference('Campaign.count', -1) do
+      delete :destroy, id: @campaign
     end
 
-    assert_redirected_to campeigns_path
+    assert_redirected_to campaigns_path
   end
 end

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :users do 
     resources :attributes
     resources :newsletters
-    resources :campeigns
+    resources :campaigns
     resources :contacts
     resources :profiles
     resources :templates

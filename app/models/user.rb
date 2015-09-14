@@ -3,28 +3,23 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  role_id                :integer          not null, forign key
-#  user_type              :string(255)      default(""), not null
-#  username               :string(255)      not null
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
+#  role_id                :integer          not null
+#  user_type              :string
+#  username               :string           default(""), not null
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0)
+#  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  failed_attempts        :integer          default(0)
-#  unlock_token           :string(255)
-#  locked_at              :datetime
+#  current_sign_in_ip     :string
+#  last_sign_in_ip        :string
+#  deleted_at             :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-
-
-
 
 class User < ActiveRecord::Base
   # Soft Delete
@@ -46,7 +41,7 @@ class User < ActiveRecord::Base
   # validation
   
   # relations
-  has_many :campeigns
+  has_many :campaigns
   belongs_to :role
   before_save :set_role
   # relations

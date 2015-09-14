@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Campaign
+module CampaignApp
   class Application < Rails::Application
     config.middleware.use 'Apartment::Elevators::Subdomain'
     # Settings in config/environments/* take precedence over those specified here.

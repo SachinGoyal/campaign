@@ -18,7 +18,7 @@ class NewslettersControllerTest < ActionController::TestCase
 
   test "should create newsletter" do
     assert_difference('Newsletter.count') do
-      post :create, newsletter: { campeign_id: @newsletter.campeign_id, created_by: @newsletter.created_by, from_address: @newsletter.from_address, from_name: @newsletter.from_name, name: @newsletter.name, reply_email: @newsletter.reply_email, subject: @newsletter.subject, template_id: @newsletter.template_id, updated_by: @newsletter.updated_by }
+      post :create, newsletter: { campaign_id: @newsletter.campaign_id, created_by: @newsletter.created_by, from_address: @newsletter.from_address, from_name: @newsletter.from_name, name: @newsletter.name, reply_email: @newsletter.reply_email, subject: @newsletter.subject, template_id: @newsletter.template_id, updated_by: @newsletter.updated_by }
     end
 
     assert_redirected_to newsletter_path(assigns(:newsletter))
@@ -35,7 +35,7 @@ class NewslettersControllerTest < ActionController::TestCase
   end
 
   test "should update newsletter" do
-    patch :update, id: @newsletter, newsletter: { campeign_id: @newsletter.campeign_id, created_by: @newsletter.created_by, from_address: @newsletter.from_address, from_name: @newsletter.from_name, name: @newsletter.name, reply_email: @newsletter.reply_email, subject: @newsletter.subject, template_id: @newsletter.template_id, updated_by: @newsletter.updated_by }
+    patch :update, id: @newsletter, newsletter: { campaign_id: @newsletter.campaign_id, created_by: @newsletter.created_by, from_address: @newsletter.from_address, from_name: @newsletter.from_name, name: @newsletter.name, reply_email: @newsletter.reply_email, subject: @newsletter.subject, template_id: @newsletter.template_id, updated_by: @newsletter.updated_by }
     assert_redirected_to newsletter_path(assigns(:newsletter))
   end
 

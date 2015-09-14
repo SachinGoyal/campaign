@@ -70,6 +70,6 @@ class NewslettersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def newsletter_params
-      params.require(:newsletter).permit(:campeign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by)
+      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by)
     end
 end
