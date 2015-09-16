@@ -16,6 +16,11 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
+# Indexes
+#
+#  index_newsletters_on_campaign_id  (campaign_id)
+#  index_newsletters_on_template_id  (template_id)
+#
 
 require 'test_helper'
 
