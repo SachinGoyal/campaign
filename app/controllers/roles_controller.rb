@@ -11,22 +11,33 @@ class RolesController < ApplicationController
   # GET /roles/1
   # GET /roles/1.json
   def show
+    @role = Role.find(params[:id])
+    @functions = @role.functions.group_by(&:agroup)
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @role }
+    end
   end
 
   # GET /roles/new
   def new
     @role = Role.new
+    @functions = Function.all.group_by(&:agroup)
   end
 
   # GET /roles/1/edit
   def edit
+    @functions = Function.all.group_by(&:agroup)
+    @role = Role.find(params[:id])
   end
 
   # POST /roles
   # POST /roles.json
   def create
+    binding.pry
     @role = Role.new(role_params)
-
+    @functions = Function.all.group_by(&:agroup)
     respond_to do |format|
       if @role.save
         format.html { redirect_to @role, notice: 'Role was successfully created.' }
