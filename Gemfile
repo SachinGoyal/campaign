@@ -6,7 +6,7 @@ gem 'rails', '4.2.1'
 ruby '2.2.2'
 
 # Multi tenant Database
-gem 'apartment'# Use postgresql as the database for Active Record
+# gem 'apartment'# Use postgresql as the database for Active Record
 
 # Search feature with ransack
 gem 'ransack'

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: public.companies
+# Table name: companies
 #
 #  id          :integer          not null, primary key
 #  name        :string
@@ -26,11 +26,14 @@ class Company < ActiveRecord::Base
   after_create :create_tenant
   # callback
 
-
-  
+  # relations
+  has_many :users
+  accepts_nested_attributes_for :users
+  # relations
+    
   private
   
   def create_tenant
-    Apartment::Tenant.create(name)
+    #Apartment::Tenant.create(name)
   end
 end

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: public.companies
+# Table name: companies
 #
 #  id          :integer          not null, primary key
 #  name        :string
