@@ -19,12 +19,19 @@
 #  deleted_at             :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  company_id             :integer
+#
+# Indexes
+#
+#  index_users_on_company_id            (company_id)
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class User < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
-  
+    
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   
@@ -35,15 +42,15 @@ class User < ActiveRecord::Base
   # devise 
   
   # validation
-  validates_uniqueness_of :username
-  validates_presence_of :username
-  validates :username, length: { in: 4..20 }
+  validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
+  validates :role, presence: true
   # validation
   
   # relations
   has_many :campaigns
   belongs_to :role
   before_save :set_role
+  belongs_to :company
   # relations
 
   # class function
@@ -57,6 +64,14 @@ class User < ActiveRecord::Base
   end     
   # class function
 
+  def is_superadmin?
+    true
+  end
+
+  def is_companyadmin?
+    true
+  end
+
   def set_role
     if Role.first.present?
       self.role = Role.first
@@ -65,4 +80,24 @@ class User < ActiveRecord::Base
       self.role = Role.first
     end
   end
+
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(users.created_at)")
+  end
+
+  private
+
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w(username email created_at)
+  end
+
+  # def self.ransackable_scopes(auth_object = nil)
+  #   if auth_object.try(:admin?)
+  #     # allow admin users access to all three methods
+  #     %i(active hired_since salary_gt)
+  #   else
+  #     # allow other users to search on active and hired_since only
+  #     %i(auth_object.company.users)
+  #   end
+  # end
 end

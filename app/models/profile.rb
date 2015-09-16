@@ -12,6 +12,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_profiles_on_company_id  (company_id)
+#
 
 class Profile < ActiveRecord::Base
   # Soft Delete

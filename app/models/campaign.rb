@@ -13,6 +13,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_campaigns_on_user_id  (user_id)
+#
 
 class Campaign < ActiveRecord::Base
   # Soft Delete

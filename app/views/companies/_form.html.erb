@@ -16,19 +16,56 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <%= f.label :name, "Company Name", :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
     <%=f.error_span(:name) %>
   </div>
   <div class="form-group">
-    <%= f.label :free_emails, :class => 'control-label col-lg-2' %>
+    <%= f.label :free_emails, "Number of free emails", :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :free_emails, :class => 'form-control' %>
     </div>
     <%=f.error_span(:free_emails) %>
   </div>
+
+  <%= f.fields_for :users do |user_form| %>
+
+    <div class="form-group">
+      <%= user_form.label :email, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= user_form.text_field :email, :class => 'form-control' %>
+      </div>
+      <%= user_form.error_span(:email) %>
+    </div>
+
+    <div class="form-group">
+      <%= user_form.label :username, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= user_form.text_field :username, :class => 'form-control' %>
+      </div>
+      <%= user_form.error_span(:username) %>
+    </div>
+
+    <div class="form-group">
+      <%= user_form.label :password, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= user_form.password_field :password, :class => 'form-control' %>
+      </div>
+      <%= user_form.error_span(:password) %>
+    </div>
+
+    <div class="form-group">
+      <%= user_form.label :password_confirmation, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= user_form.password_field :password_confirmation, :class => 'form-control' %>
+      </div>
+      <%= user_form.error_span(:password_confirmation) %>
+    </div>
+
+  <% end %>
+
   <div class="form-group">
     <%= f.label :status, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
@@ -36,6 +73,7 @@
     </div>
     <%=f.error_span(:status) %>
   </div>
+
   <div class="form-group">
     <%= f.label :created_by, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
