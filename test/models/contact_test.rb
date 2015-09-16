@@ -14,6 +14,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_contacts_on_company_id  (company_id)
+#
 
 require 'test_helper'
 

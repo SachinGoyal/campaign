@@ -12,6 +12,22 @@
 #
 
 class Function < ActiveRecord::Base
+  
   # Soft Delete
-  acts_as_paranoid
+ # acts_as_paranoid
+  # Soft Delete
+  
+  #association
+  has_and_belongs_to_many :roles
+  
+  #association
+  
+  # validation
+  validates :controller, :action, presence: true
+  validates_uniqueness_of :controller, scope: :action
+  # validation
+  
+  #scope
+ # scope :order_by_controller, order: "controller ASC, action ASC"
+  #scope
 end

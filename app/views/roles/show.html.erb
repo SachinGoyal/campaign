@@ -7,3 +7,30 @@
 
 <%= link_to 'Edit', edit_role_path(@role) %> |
 <%= link_to 'Back', roles_path %>
+
+
+<div class="body-main rol-view">
+  
+  
+  
+  <div class="list-actions">
+    <% unless @functions.size == 0 %>
+      <% @functions.each do |group, actions| %>
+        <div class="blocks-rol">
+          <h4>
+            <%= t("frontend.role.group.#{group}") %>
+          </h4>
+          <div class="content-rols">
+            <% actions.each do |action| %>
+              <p>
+                <%= action.action %>
+                
+              </p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+

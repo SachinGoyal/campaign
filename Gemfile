@@ -3,8 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-gem 'rename'
-gem 'annotate'
+ruby '2.2.2'
 
 # Multi tenant Database
 gem 'apartment'# Use postgresql as the database for Active Record
@@ -25,8 +24,14 @@ gem 'jquery-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
+
 group :development, :test do
+  gem "better_errors"
+  gem "binding_of_caller"
   # debugging too;
+  gem 'rename'
+  gem 'annotate'
+  gem 'guard'
   gem 'awesome_print'
   gem 'pry'
   gem 'pry-nav'

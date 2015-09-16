@@ -20,6 +20,11 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
 class User < ActiveRecord::Base
   # Soft Delete
@@ -52,6 +57,7 @@ class User < ActiveRecord::Base
     if login = conditions.delete(:login)
       where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
     else
+      conditions.permit! if conditions.class.to_s == "ActionController::Parameters"
       where(conditions).first
     end
   end     
@@ -62,7 +68,14 @@ class User < ActiveRecord::Base
       self.role = Role.first
     else
       Role.create(:name => 'Guest')
-      self.role = Role.first
     end
+      self.role = Role.first
   end
+
+
+  def is_admin?
+    user.role.name == 'admin'
+  end
+
+
 end

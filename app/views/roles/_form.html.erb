@@ -15,7 +15,44 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
+            <% @functions.each do |group, actions| %>
+            <div class="blocks-rol">
+              <%= hidden_field_tag "role[function_ids][]", nil %>
+              <h4>
+                <%= t("frontend.role.group.#{group}") %>
+                <i class="icon-row"></i>
+              </h4>
+              <div class="content-rols contro_<%= group %>">
+                <p class="select-roles">
+                  <%= check_box_tag "select_all", 'select_all', false, data: {code: 'select_all'}, class: 'select_all_role', id: "select_all_#{group}" %>
+                  <%= label_tag "select_all_#{group}", t("actions.select_all") %>
+                </p>
+                <% actions.each do |action| %>
+                  <p>
+                    <!-- #optimize
+                    -->
+                    <%= check_box_tag "role[function_ids][]", action.id, @role.function_ids.include?(action.id), id: dom_id(action), data: {code: action.action} %>
+                    <% if action.controller == "process_unit" && action.action == 'read' %>
+                      <%= label_tag dom_id(action), t("frontend.role.action.show_process_unit") %>
+                    <% elsif (%(metraje_list price_list payment custom requirement client observation commission control_payment).include?(action.controller) && %(approved approve create_update close read complete).include?(action.action)) || action.controller == "progress" %>
+                      <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}_#{action.action}") %>
+                    <% elsif action.action == "manage" %>
+                      <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}") %>
+                    <% elsif action.action == "read" and action.controller =="project" %>
+                      <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}_#{action.action}") %>
+                    <% else %>
+                      <%= label_tag dom_id(action), t("frontend.role.action.#{action.action}") %>
+                    <% end %>
+                  </p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
