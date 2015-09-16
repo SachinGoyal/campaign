@@ -7,7 +7,7 @@ gem 'rename'
 gem 'annotate'
 
 # Multi tenant Database
-gem 'apartment'# Use postgresql as the database for Active Record
+# gem 'apartment'# Use postgresql as the database for Active Record
 
 # Search feature with ransack
 gem 'ransack'
