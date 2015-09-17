@@ -6,7 +6,7 @@ class Ability
   
     # alias_action :cancel, :start_cancel, to: :cancel_process
     # alias_action :form_disapproved_changes, :approved_changes, :disapproved_changes,  to: :aproved_changes_contract
-    binding.pry
+
     if user.is_admin?
       can :manage, User
       can [:read, :update_password], User, id: user.id

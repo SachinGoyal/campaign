@@ -46,7 +46,6 @@ class RolesController < ApplicationController
     @role = Role.new(params[:role])
     @functions = Function.all.group_by(&:agroup)
     respond_to do |format|
-    binding.pry
       if @role.save
         format.html { redirect_to @role, notice: t("frontend.role.confirm_created") }
         format.json { render json: @role, status: :created, location: @role }

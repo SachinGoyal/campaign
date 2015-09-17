@@ -27,7 +27,6 @@ class CampaignsController < ApplicationController
   # POST /campaigns
   # POST /campaigns.json
   def create
-    binding.pry
     @campaign = current_user.campaigns.build(campaign_params)
     respond_to do |format|
       if @campaign.save
