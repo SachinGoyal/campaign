@@ -3,13 +3,13 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-ruby '2.2.2'
 
 # Multi tenant Database
 # gem 'apartment'# Use postgresql as the database for Active Record
 
 # Search feature with ransack
 gem 'ransack'
+
 # Login 
 gem 'devise'
 # Permission module
@@ -18,6 +18,7 @@ gem 'cancancan'
 gem "paranoia"
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'bootstrap-datepicker-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
