@@ -18,7 +18,6 @@ class Function < ActiveRecord::Base
   # Soft Delete
   
   #association
-  #has_and_belongs_to_many :roles
   has_many :accesses
   has_many :roles, through: :accesses
   
@@ -30,14 +29,13 @@ class Function < ActiveRecord::Base
   # validation
   
   #scope
- # scope :order_by_controller, order: "controller ASC, action ASC"
+  scope :order_by_controller, ->{ order("controller ASC, action ASC") }
   #scope
 
 
 
   # scope :function, where(published: true)
 
-  scope :order_by_controller, order: "controller ASC, action ASC"
 
   # <audits>
   # has_associated_audits

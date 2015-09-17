@@ -15,17 +15,18 @@
 #
 
 class Access < ActiveRecord::Base
+  #soft delete
+  #acts_as_paranoid
+  #soft delete
+
+  # relation
   belongs_to :function
   belongs_to :role
-
-  validates_uniqueness_of :role_id, scope: :function_id, allow_blank: true
-
-  # validates :role_id, :function_id, :presence => true
-
-  # <audits>
-  # audited
-  # audited :associated_with => :function
-  # audited :associated_with => :role
-  # </audits>
-
+  # relation
+  
+  #validation
+  validates :role, uniqueness: {scope: :function}#, allow_blank: true
+  validates :role, :function, presence: true                       
+  #validation
+  
 end

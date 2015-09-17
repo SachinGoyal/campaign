@@ -1,58 +1,66 @@
-<%= form_for(@role) do |f| %>
-  <% if @role.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
-
-      <ul>
-      <% @role.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="head-main">
+  <div class="head-main-top">
+    <div class="header-actions">
+      <span class="btn-group">
+        <div class="btn-navigation">
+          <%#= link_to_back %>
+        </div>
+      </span>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
   </div>
+  <div class="head-main-down">
+    <div class="arrow-down"></div>
+    <div class="btn-navigation">
+      <%#= button_submit_top @role %>
+    </div>
+  </div>
+</div>
+<div class="body-main">
+  <div class="dropeffect view-role form-submit">
+    <%= form_for @role, :html => { :class => "form-horizontal campaign" } do |f| %>
+      <div class="roles-new">
+        <div class="block-new">
+          <%= f.text_field :name, wrapper: 'inline', label: false, input_html: {class: "input-medium", placeholder: "#{t('frontend.role.titles.new')}" } %>
+          <%= f.button :submit, class: "boton-sky-blue" %>
+        </div>
 
-            <% @functions.each do |group, actions| %>
+        <div class="list-actions">
+        
+          <div class="blocks-rol">
+            <h4>
+              <%= t("frontend.role.works_as") %>
+              <i class="icon-row"></i>
+            </h4>          
+          </div>
+        
+          <% functions.each do |group, actions| %>
             <div class="blocks-rol">
-              <%= hidden_field_tag "role[function_ids][]", nil %>
+              
+              <%#= hidden_field_tag "role[function_ids][]", nil %>
               <h4>
                 <%= t("frontend.role.group.#{group}") %>
                 <i class="icon-row"></i>
               </h4>
+
               <div class="content-rols contro_<%= group %>">
                 <p class="select-roles">
-                  <%= check_box_tag "select_all", 'select_all', false, data: {code: 'select_all'}, class: 'select_all_role', id: "select_all_#{group}" %>
-                  <%= label_tag "select_all_#{group}", t("actions.select_all") %>
+                  <%#= check_box_tag "select_all", 'select_all', false, data: {code: 'select_all'}, class: 'select_all_role', id: "select_all_#{group}" %>
+                  <%#= label_tag "select_all_#{group}", t("actions.select_all") %>
                 </p>
+
                 <% actions.each do |action| %>
                   <p>
-                    <!-- #optimize
-                    -->
-                    <%= check_box_tag "role[function_ids][]", action.id, @role.function_ids.include?(action.id), id: dom_id(action), data: {code: action.action} %>
-                    <% if action.controller == "process_unit" && action.action == 'read' %>
-                      <%= label_tag dom_id(action), t("frontend.role.action.show_process_unit") %>
-                    <% elsif (%(metraje_list price_list payment custom requirement client observation commission control_payment).include?(action.controller) && %(approved approve create_update close read complete).include?(action.action)) || action.controller == "progress" %>
-                      <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}_#{action.action}") %>
-                    <% elsif action.action == "manage" %>
-                      <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}") %>
-                    <% elsif action.action == "read" and action.controller =="project" %>
-                      <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}_#{action.action}") %>
-                    <% else %>
+                    <%= check_box_tag "role[function_ids][]", action.id, role.function_ids.include?(action.id), id: dom_id(action), data: {code: action.action} %>
+
                       <%= label_tag dom_id(action), t("frontend.role.action.#{action.action}") %>
-                    <% end %>
                   </p>
                 <% end %>
               </div>
             </div>
           <% end %>
-
-
-  <div class="actions">
-    <%= f.submit %>
+        </div>
+        <div class="clear"></div>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
+</div>

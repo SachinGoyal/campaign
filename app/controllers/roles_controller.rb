@@ -1,4 +1,5 @@
 class RolesController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
@@ -6,13 +7,20 @@ class RolesController < ApplicationController
   # GET /roles.json
   def index
     @roles = Role.all
+    # @roles = @search.result
+    # @roles = @roles.paginate page: params[:page], per_page: 10
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @roles }
+    end
   end
 
   # GET /roles/1
   # GET /roles/1.json
   def show
     @role = Role.find(params[:id])
-    @functions = @role.functions.group_by(&:agroup)
+    @functions = @role.functions.order('agroup').group_by(&:agroup)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,9 +29,32 @@ class RolesController < ApplicationController
   end
 
   # GET /roles/new
+  # GET /roles/new.json
   def new
     @role = Role.new
     @functions = Function.all.group_by(&:agroup)
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @role }
+    end
+  end
+
+  # POST /roles
+  # POST /roles.json
+  def create
+    params.permit!
+    @role = Role.new(params[:role])
+    @functions = Function.all.group_by(&:agroup)
+    respond_to do |format|
+    binding.pry
+      if @role.save
+        format.html { redirect_to @role, notice: t("frontend.role.confirm_created") }
+        format.json { render json: @role, status: :created, location: @role }
+      else
+        format.html { render "new" }
+        format.json { render json: @role.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /roles/1/edit
@@ -32,32 +63,19 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
   end
 
-  # POST /roles
-  # POST /roles.json
-  def create
-    binding.pry
-    @role = Role.new(role_params)
-    @functions = Function.all.group_by(&:agroup)
-    respond_to do |format|
-      if @role.save
-        format.html { redirect_to @role, notice: 'Role was successfully created.' }
-        format.json { render :show, status: :created, location: @role }
-      else
-        format.html { render :new }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
-  # PATCH/PUT /roles/1
-  # PATCH/PUT /roles/1.json
+  # PUT /roles/1
+  # PUT /roles/1.json
   def update
+    params.permit!
+    @role = Role.find(params[:id])
+    @functions = Function.all.group_by(&:agroup) #need show
     respond_to do |format|
-      if @role.update(role_params)
-        format.html { redirect_to @role, notice: 'Role was successfully updated.' }
-        format.json { render :show, status: :ok, location: @role }
+      if @role.update_attributes(params[:role])
+        format.html { redirect_to @role, notice: t("frontend.role.confirm_updated") }
+        format.json { head :no_content }
       else
-        format.html { render :edit }
+        format.html { render "edit" }
         format.json { render json: @role.errors, status: :unprocessable_entity }
       end
     end
@@ -66,12 +84,17 @@ class RolesController < ApplicationController
   # DELETE /roles/1
   # DELETE /roles/1.json
   def destroy
-    @role.destroy
-    respond_to do |format|
-      format.html { redirect_to roles_url, notice: 'Role was successfully destroyed.' }
-      format.json { head :no_content }
+    role = Role.find(params[:id])
+    if role.destroy
+      respond_to do |format|
+        format.html { redirect_to roles_url, alert: t("frontend.role.confirm_deleted") }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to roles_path, alert: "#{role.errors.full_messages.join(" ")}"
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -81,6 +104,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:name)
+      params.require(:role).permit(:name, :function_ids)
     end
 end
