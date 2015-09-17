@@ -22,18 +22,10 @@ class Company < ActiveRecord::Base
   validates :name, uniqueness: true
   # validation
   
-  # callback
-  after_create :create_tenant
-  # callback
-
   # relations
   has_many :users
   accepts_nested_attributes_for :users
+  belongs_to :creator, class_name: "User", foreign_key: :created_by
+  belongs_to :updator, class_name: "User", foreign_key: :updated_by
   # relations
-    
-  private
-  
-  def create_tenant
-    #Apartment::Tenant.create(name)
-  end
 end

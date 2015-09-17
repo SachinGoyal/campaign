@@ -63,32 +63,20 @@
       </div>
       <%= user_form.error_span(:password_confirmation) %>
     </div>
-
+    <%= user_form.hidden_field :role_id, value: Role.where(:name => COMPANY_ADMIN).first.id %>
   <% end %>
 
   <div class="form-group">
     <%= f.label :status, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :status, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:status) %>
-  </div>
+      <%= label :status, "Enabled" %>
+      <%= f.radio_button :status, true , :checked => @company.new_record? ? true : @company.status , :value => true %>
+      <%= label :status, "Disabled" %>
+      <%= f.radio_button :status, false , :checked => @company.new_record? ? false : @company.status , :value => false %>
 
-  <div class="form-group">
-    <%= f.label :created_by, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :created_by, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:created_by) %>
+    <%= f.error_span(:status) %>
   </div>
-  <div class="form-group">
-    <%= f.label :updated_by, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :updated_by, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:updated_by) %>
-  </div>
-  
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
@@ -97,5 +85,4 @@
                 companies_path, :class => 'btn btn-default' %>
     </div>
   </div>
-
 <% end %>
