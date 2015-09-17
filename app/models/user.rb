@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   
   # validation
   validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
-#  validates :role, presence: true
+  validates :role, presence: true
   # validation
   
   # relations
