@@ -14,4 +14,9 @@
   </div>
 </div>
 
-<%= render 'results' %>
+<%- model_class = User -%>
+<div class="page-header">
+  <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
+</div>
+
+<%= render 'results', model_class: model_class %>

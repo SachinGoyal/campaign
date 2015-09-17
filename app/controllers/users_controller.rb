@@ -4,10 +4,9 @@ class UsersController < ApplicationController
 
   
   def index
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true)
     # if current_user.is_superadmin?
-      @search = User.search(params[:q])
-      @users = @search.result
-      @search.build_condition    
     # else current_user.is_companyadmin?
     #   @users = current_user.company.users
   	 #  @q = User.ransack(params[:q])
