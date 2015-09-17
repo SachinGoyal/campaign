@@ -1,9 +1,9 @@
 <div>
-  <h5>
+  <h4>
     <a class="show-advanced-search">Advanced Search <span class="fi-plus"/></a>
     <a class="close-advanced-search" style="display:none">Hide <span class="fi-minus"/></a>
-  </h5>
-  <div class='advanced-search' style="display:none">
+  </h4>
+  <div class='advanced-search'>
   <%= search_form_for @search, url: search_users_path, method: :post do |f| %>
     <%= f.condition_fields do |c| %>
       <%= render "condition_fields", f: c %>
@@ -13,3 +13,5 @@
   <% end %>
   </div>
 </div>
+
+<%= render 'results' %>

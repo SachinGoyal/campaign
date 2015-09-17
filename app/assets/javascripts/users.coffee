@@ -17,14 +17,6 @@ jQuery ->
     else
       $('.datepicker').datepicker('remove')
     
-  $('.show-advanced-search').click ->
-    $('.advanced-search').show()
-    $(this).hide()
-    $('.close-advanced-search').show()
-  $('.close-advanced-search').click ->
-    $('.advanced-search').hide()
-    $('.show-advanced-search').show()
-    $(this).hide()	
   $('form').on 'click', '.remove_fields', (event) ->
     $(this).closest('.field').remove()
     event.preventDefault()
