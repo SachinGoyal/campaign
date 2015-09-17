@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   devise_for :users, :path_prefix => 'auth'
   resources :users do
-    collection { post :search, to: 'users#index' }
+    collection { post :search, to: 'users#search'
+                get :search, to: 'users#search' }
     resources :attributes
     resources :newsletters
     resources :campaigns

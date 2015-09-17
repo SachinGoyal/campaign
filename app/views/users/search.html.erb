@@ -1,0 +1,15 @@
+<div>
+  <h5>
+    <a class="show-advanced-search">Advanced Search <span class="fi-plus"/></a>
+    <a class="close-advanced-search" style="display:none">Hide <span class="fi-minus"/></a>
+  </h5>
+  <div class='advanced-search' style="display:none">
+  <%= search_form_for @search, url: search_users_path, method: :post do |f| %>
+    <%= f.condition_fields do |c| %>
+      <%= render "condition_fields", f: c %>
+    <% end %>
+    <p><%= link_to_add_fields "Add Conditions", f, :condition %>
+    <div class="actions"><%= f.submit "Search" %></div>
+  <% end %>
+  </div>
+</div>

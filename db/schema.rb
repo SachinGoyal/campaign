@@ -111,6 +111,14 @@ ActiveRecord::Schema.define(version: 20150917071120) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "functions_roles", id: false, force: :cascade do |t|
+    t.integer "function_id", null: false
+    t.integer "role_id",     null: false
+  end
+
+  add_index "functions_roles", ["function_id"], name: "index_functions_roles_on_function_id", using: :btree
+  add_index "functions_roles", ["role_id"], name: "index_functions_roles_on_role_id", using: :btree
+
   create_table "newsletters", force: :cascade do |t|
     t.integer  "campaign_id"
     t.integer  "template_id"
@@ -219,6 +227,8 @@ ActiveRecord::Schema.define(version: 20150917071120) do
   add_foreign_key "contacts_newsletters", "newsletters"
   add_foreign_key "contacts_profiles", "contacts"
   add_foreign_key "contacts_profiles", "profiles"
+  add_foreign_key "functions_roles", "functions"
+  add_foreign_key "functions_roles", "roles"
   add_foreign_key "newsletters", "campaigns"
   add_foreign_key "newsletters", "templates"
   add_foreign_key "profiles", "companies"

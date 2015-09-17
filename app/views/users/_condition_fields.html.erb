@@ -1,11 +1,13 @@
 <div class="field">
   <%= f.attribute_fields do |a| %>
     <%#= a.attribute_select associations: [:company, :role] %>
-    <%= a.attribute_select %>
+    <%= a.select :name, 
+    			 User.ransackable_attributes.map{ |attrt| [attrt.to_s.humanize, attrt.to_s,  { 'data-type' => User.columns_hash[attrt].type}]}, {}, {class: 'field_values'} %>
+    <%#= a.attribute_select associations: [:company] %>
   <% end %>
-  <%= f.predicate_select %>
+  <%= f.predicate_select({only: [:eq, :not_eq, :lt, :lteq, :rt, :rteq, :cont, :not_cont, :start, :not_start], compounds: false}, {class: 'predicate_values'}) %>
   <%= f.value_fields do |v| %>
-    <%= v.text_field :value %>
+    <%= v.text_field :value, :class => 'datepicker' %>
   <% end %>
   <%= link_to "remove", '#', class: "remove_fields" %>
 </div>

@@ -6,21 +6,7 @@
 
   <%#= f.submit %>
 <%# end %>
-<div>
-  <h5>
-    <a class="show-advanced-search">Advanced Search <span class="fi-plus"/></a>
-    <a class="close-advanced-search" style="display:none">Hide <span class="fi-minus"/></a>
-  </h5>
-  <div class='advanced-search' style="display:none">
-  <%= search_form_for @search, url: search_users_path, method: :post do |f| %>
-    <%= f.condition_fields do |c| %>
-      <%= render "condition_fields", f: c %>
-    <% end %>
-    <p><%= link_to_add_fields "Add Conditions", f, :condition %>
-    <div class="actions"><%= f.submit "Search" %></div>
-  <% end %>
-  </div>
-</div>
+<%= link_to 'Advanced Search', search_users_path %>
 
 <%- model_class = User -%>
 <div class="page-header">
@@ -32,8 +18,8 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%= model_class.human_attribute_name(:username) %></th>
-      <th><%#= model_class.human_attribute_name(:status) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
@@ -42,7 +28,7 @@
         <td><%= link_to user.id, user %></td>
         <td><%= user.email %></td>
         <td><%= user.username %></td>
-        <td><%#= user.status %></td>
+        <td><%= user.status ? 'Enabled' : 'Disabled' %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_user_path(user), :class => 'btn btn-default btn-xs' %>
@@ -51,6 +37,10 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
+          <%= link_to user.status ? 'Disable' : 'Enable',
+                      user_path(user, :user => {:status => !user.status?}),
+                      :method => :put,
+                      :class => 'btn btn-default btn-xs' %>                                
         </td>
       </tr>
     <% end %>
