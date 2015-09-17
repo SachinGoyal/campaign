@@ -1,27 +1,52 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Roles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @roles.each do |role| %>
-      <tr>
-        <td><%= role.name %></td>
-        <td><%= link_to 'Show', role %></td>
-        <td><%= link_to 'Edit', edit_role_path(role) %></td>
-        <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="head-main">
+  <div class="head-main-top">
+    <div class="inline_bread">
+      <%# if (can? :create, Role) && @roles.present? %>
+        <%#= button_new new_role_path, t("buttons.new") %>
+      <%# end %>
+    </div>
+  </div>
+  
+</div>
+<div class="body-main">
+  <div class="roles-container">
+    <% if @roles.empty? && (can? :create, Role) %>
+      <%= link_to new_role_path do %>
+        <div class="rol-none">
+          <p>
+            <%= t("frontend.role.no_roles") %>
+          </p>
+        </div>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
+    <% @roles.each do |role| %>
+      <div class="roles-row">
+        <div class="roles-name">
+          <p>
+            <%= link_to role.name.titleize, role %>
+          </p>
+        </div>
+        <div class="roles-description">
+          <% functions = role.functions.select("DISTINCT(agroup)") %>
+          <p>
+            <% functions.each do |function| %>
+          
+              <%= function unless functions.last == function %>
+            <% end %>
+           
+          </p>
+        </div>
+        <div class="roles-actions">
+          <%= link_to role, class: 'btn', title: t("buttons.show") do %>
+            <i class="show-icon-gray"></i>
+          <% end %>
+          <%= link_to edit_role_path(role), class: 'btn', title: t("buttons.edit") do %>
+            <i class="edit-icon"></i>
+          <% end %>
+          <%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %>
 
-<br>
-
-<%= link_to 'New Role', new_role_path %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

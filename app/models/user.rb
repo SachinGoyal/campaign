@@ -32,6 +32,7 @@
 class User < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
+  # Soft Delete
     
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -44,34 +45,53 @@ class User < ActiveRecord::Base
   
   # validation
   validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
-  validates :role, presence: true
+#  validates :role, presence: true
   # validation
   
   # relations
   has_many :campaigns
   belongs_to :role
-  before_save :set_role
   belongs_to :company
   # relations
+  
+  # callback
+  #before_create :set_role
+  # callback
+
+  #ransack
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(users.created_at)")
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w(username email created_at)
+  end
+  #ransack
 
   # class function
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-    else
-      conditions.permit! if conditions.class.to_s == "ActionController::Parameters"
-      where(conditions).first
-    end
-  end     
+  class << self
+    def find_first_by_auth_conditions(warden_conditions)
+      conditions = warden_conditions.dup
+      if login = conditions.delete(:login)
+        where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      else
+        conditions.permit! if conditions.class.to_s == "ActionController::Parameters"
+        where(conditions).first
+      end
+    end  
+  end   
+  
   # class function
 
   def is_superadmin?
-    true
+    role.name == 'superadmin'
+  end
+
+  def is_admin?
+    role.name == 'admin'
   end
 
   def is_companyadmin?
-    true
   end
 
   def set_role
@@ -83,15 +103,9 @@ class User < ActiveRecord::Base
       self.role = Role.first
   end
 
-  ransacker :created_at do
-    Arel::Nodes::SqlLiteral.new("date(users.created_at)")
-  end
 
   private
 
-  def self.ransackable_attributes(auth_object = nil)
-    super & %w(username email created_at)
-  end
 
   # def self.ransackable_scopes(auth_object = nil)
   #   if auth_object.try(:admin?)
@@ -103,8 +117,5 @@ class User < ActiveRecord::Base
   #   end
   # end
 
-  def is_admin?
-    user.role.name == 'admin'
-  end
 
 end

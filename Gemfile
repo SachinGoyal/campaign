@@ -15,7 +15,7 @@ gem 'devise'
 # Permission module
 gem 'cancancan'
 #Soft delete
-gem "paranoia"
+gem 'paranoia'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'bootstrap-datepicker-rails'
@@ -27,15 +27,16 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 
 group :development, :test do
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'rename' # Rename application
+  gem 'quiet_assets' # Dont show assets log on console
+  gem "better_errors" # Debugger
+  gem "binding_of_caller" 
   # debugging too;
-  gem 'rename'
-  gem 'annotate'
-  gem 'guard'
-  gem 'awesome_print'
-  gem 'pry'
-  gem 'pry-nav'
+  gem 'annotate' # To annotate schema to model
+  gem 'guard' 
+  gem 'awesome_print' # Better reading of object on console
+  gem 'pry' # Debug tool
+  gem 'pry-nav' # Debug tool
   # Use mysql as the database for Active Record
   gem 'pg'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

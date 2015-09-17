@@ -12,5 +12,34 @@
 class Role < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
-  has_and_belongs_to_many :functions
+  # Soft Delete
+
+  # Association
+  has_many :users
+  has_many :accesses, dependent: :destroy
+  has_many :functions, through: :accesses
+  # Association
+
+  #validation
+  validates :name, presence: true, uniqueness: true, format: { with: /\A[[:word:][:blank:]]+\z/}
+  #validation
+
+  #scope
+  default_scope {order('name') }
+  #scope
+
+
+
+
+  def name=(value)
+    write_attribute(:name, value.downcase)
+  end
+
+  private
+    def check_admin
+      if self.id == ADMIN
+        errors.add :base, "no puedes eliminar el rol admin"
+        return false
+      end
+    end
 end

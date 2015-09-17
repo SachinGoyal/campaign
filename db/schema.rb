@@ -16,6 +16,16 @@ ActiveRecord::Schema.define(version: 20150917071120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "accesses", force: :cascade do |t|
+    t.integer  "role_id",     null: false
+    t.integer  "function_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "accesses", ["function_id"], name: "index_accesses_on_function_id", using: :btree
+  add_index "accesses", ["role_id"], name: "index_accesses_on_role_id", using: :btree
+
   create_table "attributes", force: :cascade do |t|
     t.integer  "company_id"
     t.string   "name"
@@ -100,14 +110,6 @@ ActiveRecord::Schema.define(version: 20150917071120) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "functions_roles", id: false, force: :cascade do |t|
-    t.integer "function_id", null: false
-    t.integer "role_id",     null: false
-  end
-
-  add_index "functions_roles", ["function_id"], name: "index_functions_roles_on_function_id", using: :btree
-  add_index "functions_roles", ["role_id"], name: "index_functions_roles_on_role_id", using: :btree
 
   create_table "newsletters", force: :cascade do |t|
     t.integer  "campaign_id"
@@ -206,6 +208,8 @@ ActiveRecord::Schema.define(version: 20150917071120) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "accesses", "functions"
+  add_foreign_key "accesses", "roles"
   add_foreign_key "attributes", "companies"
   add_foreign_key "campaigns", "users"
   add_foreign_key "contacts", "companies"
@@ -215,8 +219,6 @@ ActiveRecord::Schema.define(version: 20150917071120) do
   add_foreign_key "contacts_newsletters", "newsletters"
   add_foreign_key "contacts_profiles", "contacts"
   add_foreign_key "contacts_profiles", "profiles"
-  add_foreign_key "functions_roles", "functions"
-  add_foreign_key "functions_roles", "roles"
   add_foreign_key "newsletters", "campaigns"
   add_foreign_key "newsletters", "templates"
   add_foreign_key "profiles", "companies"
