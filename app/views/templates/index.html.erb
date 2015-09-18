@@ -2,7 +2,7 @@
 
 <h1>Listing Templates</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>User</th>
@@ -18,15 +18,15 @@
   <tbody>
     <% @templates.each do |template| %>
       <tr>
-        <td><%= template.user %></td>
+        <td><%= template.user.username %></td>
         <td><%= template.name %></td>
         <td><%= template.content %></td>
         <td><%= template.status %></td>
         <td><%= template.created_by %></td>
         <td><%= template.updated_by %></td>
-        <td><%= link_to 'Show', template %></td>
-        <td><%= link_to 'Edit', edit_template_path(template) %></td>
-        <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [current_user ,template] %></td>
+        <td><%= link_to 'Edit', edit_user_template_path(current_user ,template) %></td>
+        <td><%= link_to 'Destroy', [current_user  ,template], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Template', new_template_path %>
+<%= link_to 'New Template', new_user_template_path(current_user) %>

@@ -2,7 +2,7 @@
 
 <h1>Listing Profiles</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -20,9 +20,9 @@
         <td><%= profile.status %></td>
         <td><%= profile.created_by %></td>
         <td><%= profile.updated_by %></td>
-        <td><%= link_to 'Show', profile %></td>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [current_user ,profile] %></td>
+        <td><%= link_to 'Edit', edit_user_profile_path(current_user ,profile) %></td>
+        <td><%= link_to 'Destroy', [current_user ,profile], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Profile', new_profile_path %>
+<%= link_to 'New Profile', new_user_profile_path(current_user) %>

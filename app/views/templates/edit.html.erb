@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @template %> |
-<%= link_to 'Back', templates_path %>
+<%= link_to 'Show', [current_user ,@template] %> |
+<%= link_to 'Back', user_templates_path(current_user) %>

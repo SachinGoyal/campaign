@@ -30,5 +30,5 @@
   <%= @template.updated_by %>
 </p>
 
-<%= link_to 'Edit', edit_template_path(@template) %> |
-<%= link_to 'Back', templates_path %>
+<%= link_to 'Edit', edit_user_template_path(current_user ,@template) %> |
+<%= link_to 'Back', user_templates_path(current_user) %>

@@ -56,18 +56,54 @@
                         <div class="menu_section">
                             <h3>&nbsp; </h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-bullhorn"></i> Campaigns</a></li>
-                                <li><a><i class="fa fa-newspaper-o"></i> Newsletter</a></li>
-                                <li><a><i class="fa fa-clone"></i> Templates</a></li>
-                                <li><a><i class="fa fa-users"></i> Profile </a></li>
-                                <li><a><i class="fa fa-tty"></i> Contacts </a></li>
-                                <li><a><i class="fa fa-key"></i> Roles</a></li>
-                                <li><a><i class="fa fa-edit"></i> Attributes</a></li>
-                                <li><a><i class="fa fa-building-o"></i> Companies </a></li>
-                                <li><a><i class="fa fa-user"></i> Users </a></li>
-                                <li><a><i class="fa fa-line-chart"></i> Stats </a></li>
-                                <li><a><i class="fa fa-pie-chart"></i> Reports </a></li>
-                                <li><a><i class="fa fa-cog"></i> Settings </a></li>
+                                <li><%= link_to user_campaigns_path(current_user) do %>
+                                   <i class="fa fa-bullhorn"></i>
+                                  <span>Campaign</span>
+                                <% end %></li>
+                                <li><%= link_to user_newsletters_path(current_user) do %>
+                                   <i class="fa fa-newspaper-o"></i>
+                                  <span>Newsletter</span>
+                                <% end %></li>
+                                <li><%= link_to user_templates_path(current_user) do %>
+                                   <i class="fa fa-clone"></i>
+                                  <span>Templates</span>
+                                <% end %></li>
+                                <li><%= link_to user_profiles_path(current_user) do %>
+                                   <i class="fa fa-users"></i>
+                                  <span>Profile</span>
+                                <% end %></li>
+                                <li><%= link_to user_contacts_path(current_user) do %>
+                                   <i class="fa fa-tty"></i>
+                                  <span>Contacts</span>
+                                <% end %></li>
+                                <li><%= link_to user_roles_path(current_user) do %>
+                                   <i class="fa fa-key"></i>
+                                  <span>Roles</span>
+                                <% end %></li>
+                                <li><%= link_to user_attributes_path(current_user) do %>
+                                   <i class="fa fa-edit"></i>
+                                  <span>Attributes</span>
+                                <% end %></li>
+                                <li><%= link_to companies_path do %>
+                                   <i class="fa fa-building-o"></i>
+                                  <span>Companies</span>
+                                <% end %></li>
+                                <li><%= link_to users_path(current_user) do %>
+                                   <i class="fa fa-user"></i>
+                                  <span>Users</span>
+                                <% end %></li>
+                                <li><%= link_to '#' do %>
+                                   <i class="fa fa-line-chart"></i>
+                                  <span>Stats</span>
+                                <% end %></li>
+                                <li><%= link_to '#' do %>
+                                   <i class="fa fa-pie-chart"></i>
+                                  <span>Reports</span>
+                                <% end %></li>
+                                <li><%= link_to settings_path do %>
+                                   <i class="fa fa-cog"></i>
+                                  <span>Settings</span>
+                                <% end %></li>
                             </ul>
                         </div>
                      </div>

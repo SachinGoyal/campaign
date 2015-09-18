@@ -2,7 +2,7 @@
 
 <h1>Listing Newsletters</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Campeign</th>
@@ -21,7 +21,7 @@
   <tbody>
     <% @newsletters.each do |newsletter| %>
       <tr>
-        <td><%= newsletter.campaign %></td>
+        <td><%= newsletter.campaign.name %></td>
         <td><%= newsletter.template %></td>
         <td><%= newsletter.name %></td>
         <td><%= newsletter.subject %></td>
@@ -30,9 +30,9 @@
         <td><%= newsletter.reply_email %></td>
         <td><%= newsletter.created_by %></td>
         <td><%= newsletter.updated_by %></td>
-        <td><%= link_to 'Show', newsletter %></td>
-        <td><%= link_to 'Edit', edit_newsletter_path(newsletter) %></td>
-        <td><%= link_to 'Destroy', newsletter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [current_user,newsletter] %></td>
+        <td><%= link_to 'Edit', edit_user_newsletter_path(current_user ,newsletter) %></td>
+        <td><%= link_to 'Destroy', [current_user , newsletter], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -40,4 +40,4 @@
 
 <br>
 
-<%= link_to 'New Newsletter', new_newsletter_path %>
+<%= link_to 'New Newsletter', new_user_newsletter_path(current_user) %>

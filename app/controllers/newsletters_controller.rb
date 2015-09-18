@@ -29,7 +29,7 @@ class NewslettersController < ApplicationController
 
     respond_to do |format|
       if @newsletter.save
-        format.html { redirect_to @newsletter, notice: 'Newsletter was successfully created.' }
+        format.html { redirect_to [current_user ,@newsletter], notice: 'Newsletter was successfully created.' }
         format.json { render :show, status: :created, location: @newsletter }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class NewslettersController < ApplicationController
   def update
     respond_to do |format|
       if @newsletter.update(newsletter_params)
-        format.html { redirect_to @newsletter, notice: 'Newsletter was successfully updated.' }
+        format.html { redirect_to [current_user ,@newsletter], notice: 'Newsletter was successfully updated.' }
         format.json { render :show, status: :ok, location: @newsletter }
       else
         format.html { render :edit }

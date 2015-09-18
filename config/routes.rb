@@ -2,20 +2,20 @@ Rails.application.routes.draw do
 
   resources :companies
   resources :functions
-  resources :roles
+  resources :settings
   get 'home/index'
 
   devise_for :users, :path_prefix => 'auth'
   resources :users do
     collection { post :search, to: 'users#search'
                 get :search, to: 'users#search' }
+    resources :roles
     resources :attributes
     resources :newsletters
     resources :campaigns
     resources :contacts
     resources :profiles
     resources :templates
-    resources :settings
   end
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
