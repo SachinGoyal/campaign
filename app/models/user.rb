@@ -99,6 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def is_companyadmin?
+    role.name == COMPANY_ADMIN
   end
 
   def set_role

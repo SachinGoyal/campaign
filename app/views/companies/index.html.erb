@@ -1,4 +1,14 @@
 <%- model_class = Company -%>
+
+<%= search_form_for @search do |f| %>
+  <div class="field">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont %>
+  </div>
+  <div class="actions"><%= f.submit "Search" %></div>
+<% end %>
+
+
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
@@ -9,9 +19,6 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:free_emails) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:created_by) %></th>
-      <th><%= model_class.human_attribute_name(:updated_by) %></th>
-      <th><%= model_class.human_attribute_name(:deleted_at) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -23,9 +30,6 @@
         <td><%= company.name %></td>
         <td><%= company.free_emails %></td>
         <td><%= company.status %></td>
-        <td><%= company.created_by %></td>
-        <td><%= company.updated_by %></td>
-        <td><%= company.deleted_at %></td>
         <td><%=l company.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

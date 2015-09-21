@@ -47,7 +47,7 @@ class RolesController < ApplicationController
     @functions = Function.all.group_by(&:agroup)
     respond_to do |format|
       if @role.save
-        format.html { redirect_to @role, notice: t("frontend.role.confirm_created") }
+        format.html { redirect_to [current_user ,@role], notice: t("frontend.role.confirm_created") }
         format.json { render json: @role, status: :created, location: @role }
       else
         format.html { render "new" }
@@ -71,7 +71,7 @@ class RolesController < ApplicationController
     @functions = Function.all.group_by(&:agroup) #need show
     respond_to do |format|
       if @role.update_attributes(params[:role])
-        format.html { redirect_to @role, notice: t("frontend.role.confirm_updated") }
+        format.html { redirect_to [current_user,@role], notice: t("frontend.role.confirm_updated") }
         format.json { head :no_content }
       else
         format.html { render "edit" }

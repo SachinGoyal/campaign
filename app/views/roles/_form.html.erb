@@ -17,7 +17,7 @@
 </div>
 <div class="body-main">
   <div class="dropeffect view-role form-submit">
-    <%= form_for @role, :html => { :class => "form-horizontal campaign" } do |f| %>
+    <%= form_for [current_user ,@role], :html => { :class => "form-horizontal campaign" } do |f| %>
       <div class="roles-new">
         <div class="block-new">
           <%= f.text_field :name, wrapper: 'inline', label: false, input_html: {class: "input-medium", placeholder: "#{t('frontend.role.titles.new')}" } %>
