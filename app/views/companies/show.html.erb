@@ -10,12 +10,6 @@
   <dd><%= @company.free_emails %></dd>
   <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
   <dd><%= @company.status %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:created_by) %>:</strong></dt>
-  <dd><%= @company.created_by %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:updated_by) %>:</strong></dt>
-  <dd><%= @company.updated_by %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:deleted_at) %>:</strong></dt>
-  <dd><%= @company.deleted_at %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

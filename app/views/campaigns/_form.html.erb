@@ -33,12 +33,15 @@
     <%=f.error_span(:description) %>
   </div>
   <div class="form-group">
+    <%= f.label :status, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= label :status, "Enabled" %>
+      <%= f.radio_button :status, true , :checked => @campaign.new_record? ? true : @campaign.status , :value => true %>
+      <%= label :status, "Disabled" %>
+      <%= f.radio_button :status, false , :checked => @campaign.new_record? ? false : @campaign.status , :value => false %>
 
-    <%= f.label :status ,:class => 'control-label col-lg-2' %>
-    <%= f.radio_button :status, '1' %> 
-    <%= f.label :status, 'ENABLE', :value => '1' %>
-    <%= f.radio_button :status, '0' %>
-    <%= f.label :status, 'Desable', :value => '0' %>
+    </div>
+    <%= f.error_span(:status) %>
   </div>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

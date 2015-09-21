@@ -11,10 +11,10 @@
   <div class="head-main-down">
     <div class="arrow-down"></div>
     <div class="btn-group-actions table-actions">
-      <%= link_to edit_role_path(@role), class: 'btn', title: t("buttons.edit") do %>
+      <%= link_to edit_user_role_path(current_user,@role), class: 'btn', title: t("buttons.edit") do %>
         <i class="edit-icon"></i>
       <% end %>
-      <%= link_to @role, method: :delete, data: { confirm: t("frontend.role.confirm_delete") }, class: 'btn', title: t("buttons.delete") do %>
+      <%= link_to [current_user,@role], method: :delete, data: { confirm: t("frontend.role.confirm_delete") }, class: 'btn', title: t("buttons.delete") do %>
         <i class="delete-icon"></i>
       <% end %>
     </div>
