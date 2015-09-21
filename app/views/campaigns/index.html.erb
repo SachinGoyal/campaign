@@ -1,4 +1,17 @@
 <%- model_class = Campaign -%>
+
+
+
+<%= search_form_for [current_user,@search] do |f| %>
+  <div class="field">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont %>
+  </div>
+  <div class="actions"><%= f.submit "Search" %></div>
+<% end %>
+
+
+
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
@@ -10,8 +23,6 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:created_by) %></th>
-      <th><%= model_class.human_attribute_name(:updated_by) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -24,8 +35,6 @@
         <td><%= campaign.name %></td>
         <td><%= campaign.description %></td>
         <td><%= campaign.status %></td>
-        <td><%= campaign.created_by %></td>
-        <td><%= campaign.updated_by %></td>
         <td><%=l campaign.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

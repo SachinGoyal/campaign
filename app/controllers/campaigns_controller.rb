@@ -7,7 +7,6 @@ class CampaignsController < ApplicationController
   def index
     @search = Campaign.ransack(params[:q])
     @campaigns = @search.result(distinct: true)
-    #@campaigns = campaign.all
   end
 
   # GET /campaigns/1
@@ -44,7 +43,7 @@ class CampaignsController < ApplicationController
   def update
     respond_to do |format|
       if @campaign.update(campaign_params)
-        format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
+        format.html { redirect_to [current_user ,@campaign], notice: 'Campaign was successfully updated.' }
         format.json { render :show, status: :ok, location: @campaign }
       else
         format.html { render :edit }
