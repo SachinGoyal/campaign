@@ -5,7 +5,8 @@
 
 
 jQuery ->
-  datepicker_update = -> $("input.datepicker").datepicker()
+  datepicker_update = -> $('.datepicker').datepicker({startDate: "01-01-1950", endDate: "today", todayHighlight: true, todayBtn: "linked", autoclose: true})
+
   options = 
     string: "<option value='eq'>equals</option><option value='not_eq'>not equal to</option><option value='cont' selected='selected'>contains</option><option value='not_cont'>doesn't contain</option><option value='start'>starts with</option><option value='not_start'>doesn't start with</option>"
    
@@ -13,7 +14,7 @@ jQuery ->
 
   $(document).on 'change', '.field_values', ->
     if($(this).val() == "created_at")
-      $('.datepicker').datepicker({startDate: "01-01-1950", endDate: "today", todayHighlight: true, todayBtn: "linked", autoclose: true})      
+      datepicker_update()          
     else
       $('.datepicker').datepicker('remove')
     
