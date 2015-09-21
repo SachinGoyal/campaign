@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :companies
   resources :functions
   resources :settings
+  resources :attributes
+  
+
   get 'home/index'
 
   devise_for :users, :path_prefix => 'auth'
@@ -10,7 +13,6 @@ Rails.application.routes.draw do
     collection { post :search, to: 'users#search'
                 get :search, to: 'users#search' }
     resources :roles
-    resources :attributes
     resources :newsletters
     resources :campaigns
     resources :contacts

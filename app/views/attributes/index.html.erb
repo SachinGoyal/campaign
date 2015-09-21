@@ -1,33 +1,43 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Attribute -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <%#= render 'keyword_search' %>
+</div>
 
-<h1>Listing Attributes</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Company</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:company_id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @attributes.each do |attribute| %>
       <tr>
-        <td><%= attribute.company %></td>
+        <td><%= attribute.company.name %></td>
         <td><%= attribute.name %></td>
-        <td><%= attribute.description %></td>
-        <td><%= attribute.status %></td>
-        <td><%= link_to 'Show', attribute %></td>
-        <td><%= link_to 'Edit', edit_attribute_path(attribute) %></td>
-        <td><%= link_to 'Destroy', attribute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= attribute.status ? 'Enabled' : 'Disabled' %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_attribute_path(attribute), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      attribute,
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+          <%= link_to attribute.status ? 'Disable' : 'Enable',
+                      attribute_path(attribute, :attribute => {:status => !attribute.status?}),
+                      :method => :put,
+                      :class => 'btn btn-default btn-xs' %>                                
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Attribute', new_attribute_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_attribute_path,
+            :class => 'btn btn-primary' %>
