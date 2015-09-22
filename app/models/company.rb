@@ -17,6 +17,7 @@ class Company < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
   # Company name is used as subdomain
+  # acts_as_universal_and_determines_tenant
   
   # validation
   validates :name, uniqueness: true
