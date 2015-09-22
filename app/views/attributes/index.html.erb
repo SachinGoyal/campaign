@@ -19,6 +19,7 @@
     <div class="col-md-1"><input name="" type="checkbox" value=""></div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:status) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
     <div class="col-md-2"><%= t '.actions', :default => t("helpers.actions") %></div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
@@ -28,6 +29,7 @@
       <div class="col-md-1"><input name="" type="checkbox" value=""></div>
       <div class="col-md-2"><%= attribute.name %></div>
       <div class="col-md-2"><%= attribute.status ? 'Enabled' : 'Disabled' %></div>
+      <div class="col-md-2"><%= format_date(attribute, :created_at) %></div>
       <div class="col-md-2">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_attribute_path(attribute), :class => 'btn btn-default btn-xs' %>
