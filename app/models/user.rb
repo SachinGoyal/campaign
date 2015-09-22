@@ -2,29 +2,34 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  role_id                :integer          not null
-#  user_type              :string
-#  username               :string           default(""), not null
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string
-#  last_sign_in_ip        :string
-#  deleted_at             :datetime
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  company_id             :integer
-#  status                 :boolean
+#  id                           :integer          not null, primary key
+#  role_id                      :integer          not null
+#  user_type                    :string
+#  username                     :string           default(""), not null
+#  email                        :string           default(""), not null
+#  encrypted_password           :string           default(""), not null
+#  reset_password_token         :string
+#  reset_password_sent_at       :datetime
+#  remember_created_at          :datetime
+#  sign_in_count                :integer          default(0), not null
+#  current_sign_in_at           :datetime
+#  last_sign_in_at              :datetime
+#  current_sign_in_ip           :string
+#  last_sign_in_ip              :string
+#  deleted_at                   :datetime
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  company_id                   :integer
+#  status                       :boolean
+#  confirmation_token           :string
+#  confirmed_at                 :datetime
+#  confirmation_sent_at         :datetime
+#  skip_confirm_change_password :boolean          default(FALSE)
 #
 # Indexes
 #
 #  index_users_on_company_id            (company_id)
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
@@ -33,6 +38,8 @@ class User < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
   # Soft Delete
+
+  # acts_as_universal_and_determines_account
     
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

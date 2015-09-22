@@ -17,7 +17,9 @@ jQuery ->
       datepicker_update()          
     else
       $('.datepicker').datepicker('remove')
-    
+    $('.predicate_values').find('option').remove().end().append(eval("options." + $(this).find(':selected').data('type'));)
+
+    $(this).find(':selected').data('id')  
   $('form').on 'click', '.remove_fields', (event) ->
     $(this).closest('.field').remove()
     event.preventDefault()
