@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :companies
   resources :functions
   resources :settings
+  resources :contacts
   resources :attributes
   
 
@@ -15,7 +16,6 @@ Rails.application.routes.draw do
     resources :roles
     resources :newsletters
     resources :campaigns
-    resources :contacts
     resources :profiles
     resources :templates
   end

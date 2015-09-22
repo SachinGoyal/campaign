@@ -33,7 +33,7 @@ body.nav-sm .navbar.nav_title a i {
     border-radius: 50%;
 }
 .site_title span {
-	background-image:url('logo.png');
+	background-image:url(logo.png);
 	background-repeat:no-repeat;
 	padding: 10px 50px;
 	background-position: 6px 7px;
@@ -411,7 +411,7 @@ body {
     float: left;
     display: block;
 }
-.title_left h2 {color:#39455b; font-weight:600;}
+.title_left h2 {color:#39455b; font-weight:600; padding-left:10px;}
 
 .page-title .title_left h3 {
     margin: 9px 0;
@@ -6341,6 +6341,7 @@ ul.notifications {
 
 .dark-theme-btn{background-color:#39455b;line-height:23px; text-shadow:none; color:#fff; border-radius:5px;}
 .dark-theme-btn:hover{background-color:#00bbb9; color:#fff;}
+.custom-input-search{width:84%; float:left; margin-right:10px;}
 .custom-input-search input {box-shadow:none!important; border-top:1px solid #d9dee4!important; border-left:1px solid #d9dee4!important;
 border-bottom:1px solid #d9dee4!important;border-right:none!important; line-height:15pt;}
 .custom-input-search button {box-shadow:none!important;border-top:1px solid #d9dee4!important; border-bottom:1px solid #d9dee4!important;border-right:1px solid #d9dee4!important;border-left:1px solid #fff!important;}
@@ -6378,8 +6379,11 @@ border-bottom:1px solid #d9dee4!important;border-right:none!important; line-heig
 .blue-heading{color:#01bbba!important;; font-weight:bold!important;}
 .custom-from-group {text-align:center;}
 .custom-from-group button{padding:8px 20px; background-color:#39455b; color:#fff; border:none;border-radius:3px;}
+.dark-btn button{padding:8px 20px; background-color:#39455b; color:#fff; border:none;border-radius:3px;margin:0px;}
+.dark-btn button:hover{background-color:#000;}
 
-
+.custom-label{font-weight:normal; font-size:14px; line-height:26pt;}
+.custom-radio-input label{margin-right:30px;}
 
 .custom-radio-input input[type="radio"] {
   display: none;
@@ -6438,3 +6442,146 @@ z-index: 1081;}
 .custom-delete i{ -ms-transform: rotate(45deg); /* IE 9 */
     -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
     transform: rotate(45deg);}
+	
+.greyBg {backgrounf-color:#f3f3f3; border:1px solid #e6eaed; padding:20px 30px;}
+.delete-icon i {-ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+		font-size:18px;
+		line-height:24pt;
+}
+.grey-box{background-color:#f9f9f9; border:1px solid #e1e1e1; padding:10px; display:none;}
+.green-Border{border-bottom:#00a5a1 1px solid; cursor:pointer; }
+.green-text {color:#00a5a1; font-size:14px;}
+.custom-checkbox-style input[type="checkbox"] {
+    display:none;
+}
+.custom-checkbox-style input[type="checkbox"] + label span {
+    display:inline-block;
+    width:21px;
+    height:21px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(../images/check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+.custom-checkbox-style input[type="checkbox"]:checked + label span {
+    background:url(../images/check_radio_sheet.png) -21px top no-repeat;
+}
+.custom-checkbox-style label{margin-right:30px;}
+.custom-spacing{margin-right:37px!important;}
+.green-details-row{}
+.spacing-top{margin-top:20px;}
+
+
+/* ----------------- forgot passowrd -------------------------*/
+
+.login-heading h2{margin:30px 0px 30px 0px; font-size:30px;}
+/* ----------------- Popup -------------------------*/
+
+.overlay{position:fixed; background-color:#000000; opacity:0.7; top:0px; left:0px; width:100%; height:100%; z-index:0;}
+.custom-popup{width:600px; position:absolute; background-color:#fff; left:50%; margin-left:-300px; top:20%; padding:10px;}
+.popup-heading{font-size:16px; font-weight:bold; float:left; color:#394659;}
+.popup-close {float:right; cursor:pointer;}
+.popup-container input, .popup-container select, .popup-container button{border-radius:0px!important; box-shadow:none;}
+.popup-container label{font-weight:normal; text-align:right; font-size:14px; line-height:22pt; color:#000;}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  border-radius:0px;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+
+.sample-fields-heading{font-size:14px; color:#282f41;margin-bottom:10px;}
+
+.custom-dark-btn {padding:4px 12px!important; background-color:#3a455b; border-radius:0px;margin-right: 0px; }
+.green-import-btn button{background-color:#01bbba; border:none; font-size: 14px; padding:5px 14px; color:#fff;}
+.popup-sample-table table th{background-color:#eeeeee; padding:5px; color:#282f41; font-weight:normal;}
+.popup-sample-table table td{background-color:#eeeeee; background-color:#fff; padding:5px; color:#282f41;}
+.popup-sample-table table tr{border:1px solid #d9dee4;}
+.popup-sample-table table{border:1px solid #d9dee4;}
+/* ----------------- Roles -------------------------*/
+
+.roles-section{
+	background-color:#fff;
+	padding:0px;
+}
+.role-section-header{padding:20px 30px;}
+.roles-section input {box-shadow:none; border-radius:0px;}
+
+
+
+.accordion, .accordion * {
+	-webkit-box-sizing:border-box; 
+	-moz-box-sizing:border-box; 
+	box-sizing:border-box;
+}
+
+.accordion {
+	overflow:hidden;
+	box-shadow:0px 1px 1px rgba(0,0,0,0.15);
+	border-radius:3px;
+	background:#f7f7f7;
+}
+
+/*----- Section Titles -----*/
+.accordion-section-title {
+	width:100%;
+	padding:7px;
+	display:inline-block;
+	border-bottom:1px solid #d3d3d3;
+	background:#f2f2f2;
+	transition:all linear 0.15s;
+	/* Type */
+	font-size:1.200em;
+	color:#000;
+}
+
+.accordion-section-title.active, .accordion-section-title:hover {
+	background:#f2f2f2;
+	/* Type */
+	text-decoration:none;
+}
+
+.accordion-section:last-child .accordion-section-title {
+	border-bottom:none;
+}
+
+/*----- Section Content -----*/
+.accordion-section-content {
+	padding:15px;
+	display:none;
+	background-color:#fff;
+}
+.default-style-accordion ul{
+	margin:0px;
+	padding:0px;
+}
+.default-style-accordion ul li{
+	margin:0px;
+	list-style:none;
+}
+.default-style-accordion label{
+	font-weight:normal;
+	font-size:14px;
+	margin-left:20px;
+}
+.arrow-right{float:right;}
