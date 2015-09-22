@@ -19,14 +19,16 @@ class Company < ActiveRecord::Base
   # Company name is used as subdomain
   # acts_as_universal_and_determines_tenant
   
-  # validation
-  validates :name, uniqueness: true
-  # validation
-  
   # relations
   has_many :users
   accepts_nested_attributes_for :users
   belongs_to :creator, class_name: "User", foreign_key: :created_by
   belongs_to :updator, class_name: "User", foreign_key: :updated_by
   # relations
+
+  # validation
+  validates :name, uniqueness: true
+  validates_presence_of :users  
+  # validation
+  
 end
