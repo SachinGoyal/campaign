@@ -32,7 +32,8 @@
 class User < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
-  # Soft Delete
+  self.per_page = 10
+
 
   # acts_as_universal_and_determines_account
     

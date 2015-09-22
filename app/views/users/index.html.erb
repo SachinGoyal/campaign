@@ -1,11 +1,4 @@
 
-<%#= search_form_for @q do |f| %>
-
-  <%#= f.label :username_or_email_cont, "Keyword Search" %>
-  <%#= f.search_field :username_or_email_cont %>
-
-  <%#= f.submit %>
-<%# end %>
 <%= link_to 'Advanced Search', search_users_path %>
 
 <%- model_class = User -%>
@@ -15,6 +8,7 @@
 </div>
 
 <%= render 'results', model_class: model_class %>
+<div><%= will_paginate @users %></div>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_user_path,
             :class => 'btn btn-primary' %>

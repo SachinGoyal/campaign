@@ -7,4 +7,8 @@ module ApplicationHelper
     end
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
+
+  def format_date(obj, field)
+  	obj.send(field).send(:strftime, "%d/%m/%y, %I:%M %p")
+  end
 end

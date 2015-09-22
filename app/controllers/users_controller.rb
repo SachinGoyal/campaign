@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   
   def index
     @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true)
+    @users = @q.result(distinct: true).page(params[:page])
     # if current_user.is_superadmin?
     # else current_user.is_companyadmin?
     #   @users = current_user.company.users
