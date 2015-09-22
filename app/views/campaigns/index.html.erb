@@ -34,7 +34,7 @@
         <td><%= campaign.user_username %></td>
         <td><%= campaign.name %></td>
         <td><%= campaign.description %></td>
-        <td><%= campaign.status %></td>
+        <td><%= campaign.status ? 'Enabled' : 'Disabled' %></td>
         <td><%=l campaign.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -44,6 +44,10 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
+          <%= link_to campaign.status ? 'Disable' : 'Enable',
+                      user_campaign_path(current_user,campaign, :campaign => {:status => !campaign.status?}),
+                      :method => :put,
+                      :class => 'btn btn-default btn-xs' %>    
         </td>
       </tr>
     <% end %>
