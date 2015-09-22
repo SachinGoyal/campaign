@@ -16,6 +16,9 @@ gem 'devise'
 gem 'cancancan'
 #Soft delete
 gem 'paranoia'
+gem 'milia'
+# gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+gem 'will_paginate', '~> 3.0.6'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'bootstrap-datepicker-rails'

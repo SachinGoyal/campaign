@@ -15,6 +15,7 @@
 </div>
 
 <%= render 'results', model_class: model_class %>
+<div><%= will_paginate @users %></div>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_user_path,
             :class => 'btn btn-primary' %>
