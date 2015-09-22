@@ -1,43 +1,46 @@
+<div class="row">
+  <div class="page-title">
+    <div class="title_left"><h2>Attributes lists</h2></div><!-- title_left -->
+      <div class="title_right">
+        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
+          <div class="advance-search"><i class="fa fa-dot-circle-o"></i></div>
+          <div class="custom-add"><i class="fa fa-plus"></i></div>
+        </div>
+        <%= render 'layouts/keyword_search', :condition => :name_cont %>
+      </div><!--title_right -->
+      <div class="clearfix"></div>                
+  </div><!-- page-title -->
+</div><!--row-->
+
+
 <%- model_class = Attribute -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-  <%#= render 'keyword_search' %>
-</div>
+<div class="custom-table">
+  <div class="row th">
+    <div class="col-md-1"><input name="" type="checkbox" value=""></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:status) %></div>
+    <div class="col-md-2"><%= t '.actions', :default => t("helpers.actions") %></div>
+    <div class="col-md-1">&nbsp;</div>
+  </div><!-- row -->
 
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:company_id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @attributes.each do |attribute| %>
-      <tr>
-        <td><%= attribute.company.name %></td>
-        <td><%= attribute.name %></td>
-        <td><%= attribute.status ? 'Enabled' : 'Disabled' %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+  <% @attributes.each do |attribute| %>
+    <div class="row td">
+      <div class="col-md-1"><input name="" type="checkbox" value=""></div>
+      <div class="col-md-2"><%= attribute.name %></div>
+      <div class="col-md-2"><%= attribute.status ? 'Enabled' : 'Disabled' %></div>
+      <div class="col-md-2">
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_attribute_path(attribute), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       attribute,
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
-          <%= link_to attribute.status ? 'Disable' : 'Enable',
+        <%= link_to attribute.status ? 'Disable' : 'Enable',
                       attribute_path(attribute, :attribute => {:status => !attribute.status?}),
                       :method => :put,
                       :class => 'btn btn-default btn-xs' %>                                
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_attribute_path,
-            :class => 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

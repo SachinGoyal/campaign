@@ -4,7 +4,8 @@ class AttributesController < ApplicationController
   # GET /attributes
   # GET /attributes.json
   def index
-    @attributes = Attribute.all
+    @q = Attribute.ransack(params[:q])
+    @attributes = @q.result(distinct: true)
   end
 
   # GET /attributes/1
