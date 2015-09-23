@@ -1,14 +1,21 @@
-
-<%= link_to 'Advanced Search', search_users_path %>
-
-<%- model_class = User -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-  <%= render 'keyword_search' %>
-</div>
-
+<div class="row">
+  <div class="page-title">
+    <div class="title_left"><h2>Users list</h2></div><!-- title_left -->
+      <div class="title_right">
+        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
+          <div class="advance-search"><%= link_to search_users_path do %>
+          								<i class="fa fa-dot-circle-o"></i>
+          							  <% end %>
+          </div>
+          <div class="custom-add"><i class="fa fa-plus"></i></div>
+        </div>
+        <%= render 'shared/keyword_search', :condition => :username_or_email_cont %>
+      </div><!--title_right -->
+      <div class="clearfix"></div>                
+  </div><!-- page-title -->
+</div><!--row-->
+<% model_class = 'User' %>
 <%= render 'results', model_class: model_class %>
-<div><%= will_paginate @users %></div>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_user_path,
             :class => 'btn btn-primary' %>

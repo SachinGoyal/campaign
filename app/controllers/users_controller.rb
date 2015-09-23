@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def search
     @search = User.search(params[:q])
-    @users = @search.result
+    @users = @search.result(distinct: true).page(params[:page])
     @search.build_condition    
   end
 
