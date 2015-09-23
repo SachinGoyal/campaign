@@ -1,7 +1,11 @@
 class CampaignsController < ApplicationController
+  layout 'dashboard' # set custom layout 
+
+  #filter
   before_action :authenticate_user!
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
-
+  #filter
+  
   # GET /campaigns
   # GET /campaigns.json
   def index

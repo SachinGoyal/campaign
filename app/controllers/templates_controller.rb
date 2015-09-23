@@ -1,4 +1,7 @@
 class TemplatesController < ApplicationController
+  
+  layout 'dashboard' # set custom layout 
+  
   before_action :authenticate_user!
   before_action :set_template, only: [:show, :edit, :update, :destroy]
 

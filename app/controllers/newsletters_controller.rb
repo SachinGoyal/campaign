@@ -1,4 +1,7 @@
 class NewslettersController < ApplicationController
+  
+  layout 'dashboard' # set custom layout 
+
   before_action :authenticate_user!
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
 

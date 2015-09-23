@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= content_for?(:title) ? yield(:title) : "Sperant" %></title>
     
-    <%= stylesheet_link_tag "https//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600"%>
+    <%#= stylesheet_link_tag "https//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600"%>
 
     <%= stylesheet_link_tag "application", :media => "all" %>
 
@@ -29,134 +29,10 @@
 
 </head>
 
-<body class="nav-md">
-    <div class="container body">
-        <div class="main_container">
-            <%if current_user %>
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><span>Sperant</span></a>
-                    </div>
-                    <div class="clearfix"></div>
-                    <!-- menu prile quick info -->
-                    <div class="profile">
-                        <div class="profile_pic">                            
-                            <%= image_tag image_path("img.jpg"), :class => "img-circle profile_img" %>
-                        </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>Anthony Fernando</h2>
-                        </div>
-                    </div>
-                   <!-- /menu prile quick info -->
-                    
-
-                    <!-- sidebar menu -->
-                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                        <div class="menu_section">
-                            <h3>&nbsp; </h3>
-                            <ul class="nav side-menu">
-                                <li><%= link_to user_campaigns_path(User.first) do %>
-                                   <i class="fa fa-bullhorn"></i>
-                                  <span>Campaign</span>
-                                <% end %></li>
-                                <li><%= link_to user_newsletters_path(User.first) do %>
-                                   <i class="fa fa-newspaper-o"></i>
-                                  <span>Newsletter</span>
-                                <% end %></li>
-                                <li><%= link_to user_templates_path(User.first) do %>
-                                   <i class="fa fa-clone"></i>
-                                  <span>Templates</span>
-                                <% end %></li>
-                                <li><%= link_to user_profiles_path(User.first) do %>
-                                   <i class="fa fa-users"></i>
-                                  <span>Profile</span>
-                                <% end %></li>
-                                <li><%= link_to contacts_path do %>
-                                   <i class="fa fa-tty"></i>
-                                  <span>Contacts</span>
-                                <% end %></li>
-                                <li><%= link_to user_roles_path(User.first) do %>
-                                   <i class="fa fa-key"></i>
-                                  <span>Roles</span>
-                                <% end %></li>
-                                <li><%= link_to attributes_path do %>
-                                   <i class="fa fa-edit"></i>
-                                  <span>Attributes</span>
-                                <% end %></li>
-                                <li><%= link_to companies_path do %>
-                                   <i class="fa fa-building-o"></i>
-                                  <span>Companies</span>
-                                <% end %></li>
-                                <li><%= link_to users_path(User.first) do %>
-                                   <i class="fa fa-user"></i>
-                                  <span>Users</span>
-                                <% end %></li>
-                                <li><%= link_to '#' do %>
-                                   <i class="fa fa-line-chart"></i>
-                                  <span>Stats</span>
-                                <% end %></li>
-                                <li><%= link_to '#' do %>
-                                   <i class="fa fa-pie-chart"></i>
-                                  <span>Reports</span>
-                                <% end %></li>
-                                <li><%= link_to settings_path do %>
-                                   <i class="fa fa-cog"></i>
-                                  <span>Settings</span>
-                                <% end %></li>
-                            </ul>
-                        </div>
-                     </div>
-                    <!-- /sidebar menu -->
-                  </div>
-            </div>
-            <!-- top navigation -->
-            <% end %>
-            <div class="top_nav">
-                <div class="nav_menu">
-                    <nav class="" role="navigation">
-                        <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                        </div>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <%= image_tag image_path("img.jpg") %>John Doe
-                                    <span class=" fa fa-angle-down"><li><%= link_to "Sign Out",destroy_user_session_path, :method => :delete if user_signed_in?  %></li></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="javascript:;">  Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="badge bg-red pull-right">50%</span>
-                                            <span>Settings</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">Help</a>
-                                    </li>
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
-                                    </li>
-                                </ul>
-                            </li>
-                           
-
-                        </ul>
-                    </nav>
-                </div>
-
-            </div>
-            <!-- /top navigation -->
-            <!-- page content -->
-            <div class="right_col" role="main">
-              <%= yield %>
-            </div>
-            <!-- /page content -->
-        </div>
-    </div>
-    </body>
+  <body style="background:#F7F7F7;">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>  
+  </body>
 
 </html>

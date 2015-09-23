@@ -1,4 +1,7 @@
 class CompaniesController < ApplicationController
+  
+  layout 'dashboard' # set custom layout 
+
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /companies

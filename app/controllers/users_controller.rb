@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
+  
+  layout 'dashboard' # set custom layout 
+
+  #filter
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  #filter
 
   
   def index

@@ -1,4 +1,7 @@
 class ProfilesController < ApplicationController
+  
+  layout 'dashboard' # set custom layout 
+
   before_action :authenticate_user!
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 

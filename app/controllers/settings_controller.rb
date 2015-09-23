@@ -1,4 +1,7 @@
 class SettingsController < ApplicationController
+  
+  layout 'dashboard' # set custom layout 
+  
   before_action :authenticate_user!
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
 
