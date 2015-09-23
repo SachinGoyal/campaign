@@ -4,7 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  role_id                :integer          not null
-#  user_type              :string
 #  username               :string           default(""), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
@@ -34,8 +33,7 @@ class User < ActiveRecord::Base
   acts_as_paranoid
   self.per_page = 10
 
-
-  # acts_as_universal_and_determines_account
+  acts_as_tenant(:company)
     
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

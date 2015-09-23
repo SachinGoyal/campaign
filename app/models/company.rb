@@ -11,11 +11,13 @@
 #  deleted_at  :datetime
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  subdomain   :string
 #
 
 class Company < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
+
   # Company name is used as subdomain
   # acts_as_universal_and_determines_tenant
   
@@ -31,4 +33,9 @@ class Company < ActiveRecord::Base
   validates_presence_of :users  
   # validation
   
+  before_create :set_subdomain
+
+  def set_subdomain
+    self.subdomain = self.name
+  end
 end
