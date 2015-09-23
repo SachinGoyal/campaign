@@ -30,6 +30,8 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 
 group :development, :test do
+  gem 'execjs'
+  gem 'therubyracer'
   gem 'rename' # Rename application
   gem 'quiet_assets' # Dont show assets log on console
   gem "better_errors" # Debugger
