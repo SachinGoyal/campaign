@@ -7,7 +7,7 @@
           								<i class="fa fa-dot-circle-o"></i>
           							  <% end %>
           </div>
-          <div class="custom-add"><i class="fa fa-plus"></i></div>
+          <div class="custom-add"><%= link_to new_user_path do %><i class="fa fa-plus"></i><% end %></div>
         </div>
         <%= render 'shared/keyword_search', :condition => :username_or_email_cont %>
       </div><!--title_right -->
@@ -16,6 +16,3 @@
 </div><!--row-->
 <% model_class = 'User' %>
 <%= render 'results', model_class: model_class %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_user_path,
-            :class => 'btn btn-primary' %>
