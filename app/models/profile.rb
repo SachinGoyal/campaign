@@ -20,4 +20,6 @@
 class Profile < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
+  validates :name, presence: true
+  has_and_belongs_to_many :contacts
 end

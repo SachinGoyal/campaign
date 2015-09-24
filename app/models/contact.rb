@@ -19,8 +19,18 @@
 #  index_contacts_on_company_id  (company_id)
 #
 
+require 'csv'
+
 class Contact < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
+  acts_as_tenant(:company)
+  has_and_belongs_to_many :profiles
 
+  def self.import_records(file, profile_id = nil)
+  	profile = Profile.find(profile_id)
+  	CSV.foreach(file.path, headers: true) do |row|  
+    	(profile ? profile.contacts : Contact).create(row.to_hash) 
+  	end      
+  end
 end
