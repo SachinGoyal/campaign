@@ -19,8 +19,6 @@
 #  index_contacts_on_company_id  (company_id)
 #
 
-require 'csv'
-
 class Contact < ActiveRecord::Base
   # Soft Delete
   acts_as_paranoid
