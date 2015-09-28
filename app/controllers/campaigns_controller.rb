@@ -1,6 +1,9 @@
 class CampaignsController < ApplicationController
-  layout 'dashboard' # set custom layout 
 
+  layout 'dashboard' # set custom layout 
+  
+  load_and_authorize_resource #cancan
+  
   #filter
   before_action :authenticate_user!
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]

@@ -1,10 +1,13 @@
 class RolesController < ApplicationController
-  
+
   layout 'dashboard' # set custom layout 
   
-  load_and_authorize_resource
+  load_and_authorize_resource #cancan
+
+  #filter
   before_action :authenticate_user!
   before_action :set_role, only: [:show, :edit, :update, :destroy]
+  #filter
 
   # GET /roles
   # GET /roles.json
@@ -50,7 +53,7 @@ class RolesController < ApplicationController
     @functions = Function.all.group_by(&:agroup)
     respond_to do |format|
       if @role.save
-        format.html { redirect_to [current_user ,@role], notice: t("frontend.role.confirm_created") }
+        format.html { redirect_to  @role, notice: t("frontend.role.confirm_created") }
         format.json { render json: @role, status: :created, location: @role }
       else
         format.html { render "new" }
@@ -74,7 +77,7 @@ class RolesController < ApplicationController
     @functions = Function.all.group_by(&:agroup) #need show
     respond_to do |format|
       if @role.update_attributes(params[:role])
-        format.html { redirect_to [current_user,@role], notice: t("frontend.role.confirm_updated") }
+        format.html { redirect_to @role, notice: t("frontend.role.confirm_updated") }
         format.json { head :no_content }
       else
         format.html { render "edit" }
@@ -106,6 +109,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:name, :function_ids)
+      params.require(:role).permit(:name, :company_id, :function_ids)
     end
 end

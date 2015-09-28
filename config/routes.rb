@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :settings
   resources :contacts
   resources :attributes
+  resources :roles
   
 
   get 'home/index'
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
   resources :users do
     collection { post :search, to: 'users#search'
                 get :search, to: 'users#search' }
-    resources :roles
     resources :newsletters
     resources :campaigns
     resources :profiles

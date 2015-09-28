@@ -40,10 +40,10 @@
           <%= link_to role, class: 'btn', title: t("buttons.show") do %>
             <i class="show-icon-gray"></i>
           <% end %>
-          <%= link_to edit_user_role_path(current_user,role), class: 'btn', title: t("buttons.edit") do %>
+          <%= link_to edit_role_path(role), class: 'btn', title: t("buttons.edit") do %>
             <i class="edit-icon"></i>
           <% end %>
-          <%= link_to 'Destroy', [current_user ,role], method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %>
 
         </div>
       </div>

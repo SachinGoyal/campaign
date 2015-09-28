@@ -29,11 +29,13 @@
 #
 
 class User < ActiveRecord::Base
-  # Soft Delete
-  acts_as_paranoid
+  
+  acts_as_paranoid # Soft Delete
+  
+  acts_as_tenant(:company) #multitenant#multitenant
+  
   self.per_page = 10
 
-  acts_as_tenant(:company)
     
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -46,7 +48,7 @@ class User < ActiveRecord::Base
   
   # validation
   validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
-  validates :role, presence: true
+  #validates :role, presence: true
   # validation
   
   # relations

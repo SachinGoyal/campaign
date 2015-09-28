@@ -15,9 +15,10 @@
 #
 
 class Access < ActiveRecord::Base
-  #soft delete
-  #acts_as_paranoid
-  #soft delete
+  
+  #acts_as_paranoid #soft delete
+  
+  #acts_as_tenant(:company) #multitenant
 
   # relation
   belongs_to :function

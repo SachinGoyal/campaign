@@ -14,7 +14,12 @@
 #
 
 class Template < ActiveRecord::Base
-  # Soft Delete
-  acts_as_paranoid
+  
+  acts_as_paranoid # Soft Delete
+
+  acts_as_tenant(:company) #multitenant#multitenant
+
+  #association
   belongs_to :user
+  #association
 end

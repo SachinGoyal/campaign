@@ -31,7 +31,7 @@
     <% @campaigns.each do |campaign| %>
       <tr>
         <td><%= link_to campaign.id, user_campaign_path(current_user,campaign) %></td>
-        <td><%= campaign.user_username %></td>
+        <td><%#= campaign.company.name %></td>
         <td><%= campaign.name %></td>
         <td><%= campaign.description %></td>
         <td><%= campaign.status ? 'Enabled' : 'Disabled' %></td>

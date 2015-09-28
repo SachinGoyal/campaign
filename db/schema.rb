@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917071120) do
+ActiveRecord::Schema.define(version: 20150923072437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20150917071120) do
   add_index "attributes", ["company_id"], name: "index_attributes_on_company_id", using: :btree
 
   create_table "campaigns", force: :cascade do |t|
-    t.integer  "user_id"
     t.string   "name"
     t.text     "description"
     t.boolean  "status"
@@ -48,9 +47,10 @@ ActiveRecord::Schema.define(version: 20150917071120) do
     t.datetime "deleted_at"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "company_id"
   end
 
-  add_index "campaigns", ["user_id"], name: "index_campaigns_on_user_id", using: :btree
+  add_index "campaigns", ["company_id"], name: "index_campaigns_on_company_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150917071120) do
     t.datetime "deleted_at"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "subdomain"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -155,7 +156,10 @@ ActiveRecord::Schema.define(version: 20150917071120) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "company_id"
   end
+
+  add_index "roles", ["company_id"], name: "index_roles_on_company_id", using: :btree
 
   create_table "settings", force: :cascade do |t|
     t.integer  "user_id"
@@ -170,7 +174,6 @@ ActiveRecord::Schema.define(version: 20150917071120) do
   add_index "settings", ["user_id"], name: "index_settings_on_user_id", using: :btree
 
   create_table "templates", force: :cascade do |t|
-    t.integer  "user_id"
     t.string   "name"
     t.text     "content"
     t.boolean  "status"
@@ -181,11 +184,8 @@ ActiveRecord::Schema.define(version: 20150917071120) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "templates", ["user_id"], name: "index_templates_on_user_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.integer  "role_id",                             null: false
-    t.string   "user_type"
     t.string   "username",               default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -211,7 +211,7 @@ ActiveRecord::Schema.define(version: 20150917071120) do
   add_foreign_key "accesses", "functions"
   add_foreign_key "accesses", "roles"
   add_foreign_key "attributes", "companies"
-  add_foreign_key "campaigns", "users"
+  add_foreign_key "campaigns", "companies"
   add_foreign_key "contacts", "companies"
   add_foreign_key "contacts_attributes", "attributes"
   add_foreign_key "contacts_attributes", "contacts"
@@ -224,7 +224,7 @@ ActiveRecord::Schema.define(version: 20150917071120) do
   add_foreign_key "profiles", "companies"
   add_foreign_key "profiles_newsletters", "newsletters"
   add_foreign_key "profiles_newsletters", "profiles"
+  add_foreign_key "roles", "companies"
   add_foreign_key "settings", "users"
-  add_foreign_key "templates", "users"
   add_foreign_key "users", "companies"
 end

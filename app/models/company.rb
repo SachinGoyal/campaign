@@ -15,13 +15,15 @@
 #
 
 class Company < ActiveRecord::Base
-  # Soft Delete
-  acts_as_paranoid
+  
+  acts_as_paranoid  # Soft Delete
+
 
   # Company name is used as subdomain
   # acts_as_universal_and_determines_tenant
   
   # relations
+  has_many :roles
   has_many :users
   accepts_nested_attributes_for :users
   belongs_to :creator, class_name: "User", foreign_key: :created_by

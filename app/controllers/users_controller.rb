@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   
   layout 'dashboard' # set custom layout 
 
+  load_and_authorize_resource #cancan
+  skip_authorize_resource :only => :search  
+
   #filter
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
@@ -9,6 +12,7 @@ class UsersController < ApplicationController
 
   
   def index
+    User.all
     @q = User.ransack(params[:q])
     @users = @q.result(distinct: true).page(params[:page])
     # if current_user.is_superadmin?

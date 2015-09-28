@@ -20,7 +20,10 @@
 #
 
 class Contact < ActiveRecord::Base
-  # Soft Delete
-  acts_as_paranoid
+  
+  acts_as_paranoid # Soft Delete
+
+  acts_as_tenant(:company) #multitenant
+
 
 end
