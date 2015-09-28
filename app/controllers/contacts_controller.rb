@@ -9,6 +9,10 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   #filter
 
+  def import  
+    Contact.import_records(params[:file], 1)  
+    redirect_to root_url, notice: "Contacts imported."  
+  end  
   # GET /contacts
   # GET /contacts.json
   def index

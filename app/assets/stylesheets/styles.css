@@ -6360,9 +6360,11 @@ ul.notifications {
 border-bottom:1px solid #d9dee4!important;border-right:none!important; line-height:15pt;}
 .custom-input-search button {box-shadow:none!important;border-top:1px solid #d9dee4!important; border-bottom:1px solid #d9dee4!important;border-right:1px solid #d9dee4!important;border-left:1px solid #fff!important;}
 .advance-search{background-color:#00bbb9; width:38px; height:38px; border-radius:50px; font-size:20px; color:#fff; text-align:center; line-height:38px; box-shadow:0px 0px 6px 1px rgba(0,0,0,0.3); float:left; cursor:pointer;}
+.advance-search a{color: #fff}
 .custom-add {background-color:#00bbb9; width:38px; height:38px; border-radius:50px; font-size:20px; color:#fff; text-align:center; line-height:38px; box-shadow:0px 0px 6px 1px rgba(0,0,0,0.3); float:right; cursor:pointer;}
 .custom-add:hover, .advance-search:hover
  {background-color:#273042;}
+ .custom-add a{color: #fff;}
 .custom-table-grid th{background-color:#f3f3f3; padding:6px;}
 .custom-table-grid td{ padding:6px;}
 .custom-table-grid tr{border:1px solid #eaeaea; background-color:#fff;}
@@ -6613,4 +6615,12 @@ background-position: 19px 3px;
 }
 .default-top-spacing{
     padding-top: 70px;
+
+	font-weight:normal;
+	font-size:14px;
+	margin-left:20px;
+}
+.arrow-right{float:right;}
+.modal-dialog {
+    z-index: 111111111111;
 }

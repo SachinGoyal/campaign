@@ -68,7 +68,7 @@
                                    <i class="fa fa-clone"></i>
                                   <span>Templates</span>
                                 <% end %></li>
-                                <li><%= link_to user_profiles_path(User.first) do %>
+                                <li><%= link_to profiles_path do %>
                                    <i class="fa fa-users"></i>
                                   <span>Profile</span>
                                 <% end %></li>
@@ -121,9 +121,9 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <%= image_tag image_path("img.jpg"),:class=>"user-profile dropdown-toggle"  %>
-                                    John Doe
-                                    <span class=" fa fa-angle-down"></span>
+
+                                    <%= image_tag image_path("img.jpg") %>John Doe                                    
+                                    <span class=" fa fa-angle-down"><li><%= link_to "Sign Out",destroy_user_session_path, :method => :delete if user_signed_in?  %></li></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                                     <li><a href="javascript:;">  Profile</a>

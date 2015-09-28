@@ -23,4 +23,12 @@ class Profile < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant
 
+  #relaion
+  has_and_belongs_to_many :contacts
+  #relaion
+  
+  #validation
+  validates :name, presence: true
+  #validation
+  
 end

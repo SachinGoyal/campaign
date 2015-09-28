@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   resources :companies
   resources :functions
   resources :settings
-  resources :contacts
+  resources :contacts do
+    collection { post :import }  
+  end
   resources :attributes
   resources :roles
-  
+  resources :profiles  
 
   get 'home/index'
 
@@ -16,7 +18,6 @@ Rails.application.routes.draw do
                 get :search, to: 'users#search' }
     resources :newsletters
     resources :campaigns
-    resources :profiles
     resources :templates
   end
   root to: "home#index"

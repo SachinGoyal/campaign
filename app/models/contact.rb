@@ -24,6 +24,15 @@ class Contact < ActiveRecord::Base
   acts_as_paranoid # Soft Delete
 
   acts_as_tenant(:company) #multitenant
+  
+  #relation
+  has_and_belongs_to_many :profiles
+  #relation
 
-
+  def self.import_records(file, profile_id = nil)
+  	profile = Profile.find(profile_id)
+  	CSV.foreach(file.path, headers: true) do |row|  
+    	(profile ? profile.contacts : Contact).create(row.to_hash) 
+  	end      
+  end
 end
