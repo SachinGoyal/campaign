@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     collection { post :import }  
   end
   resources :attributes
-  resources :profiles
-  
+  resources :roles
+  resources :profiles  
 
   get 'home/index'
 
@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   resources :users do
     collection { post :search, to: 'users#search'
                 get :search, to: 'users#search' }
-    resources :roles
     resources :newsletters
     resources :campaigns
     resources :templates

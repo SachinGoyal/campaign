@@ -2,8 +2,12 @@ class TemplatesController < ApplicationController
   
   layout 'dashboard' # set custom layout 
   
+  load_and_authorize_resource #cancan
+
+  #filter
   before_action :authenticate_user!
   before_action :set_template, only: [:show, :edit, :update, :destroy]
+  #filter
 
   # GET /templates
   # GET /templates.json

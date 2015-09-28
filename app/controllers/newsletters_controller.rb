@@ -1,9 +1,13 @@
 class NewslettersController < ApplicationController
-  
-  layout 'dashboard' # set custom layout 
 
+  layout 'dashboard' # set custom layout 
+  
+  load_and_authorize_resource #cancan
+  
+  #filter
   before_action :authenticate_user!
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
+  #filter
 
   # GET /newsletters
   # GET /newsletters.json

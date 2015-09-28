@@ -18,8 +18,17 @@
 #
 
 class Profile < ActiveRecord::Base
-  # Soft Delete
-  acts_as_paranoid
-  validates :name, presence: true
+  
+  acts_as_paranoid # Soft Delete
+
+  acts_as_tenant(:company) #multitenant
+
+  #relaion
   has_and_belongs_to_many :contacts
+  #relaion
+  
+  #validation
+  validates :name, presence: true
+  #validation
+  
 end

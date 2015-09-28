@@ -1,9 +1,13 @@
-class ProfilesController < ApplicationController
+class ProfilesController < ApplicationController 
   
   layout 'dashboard' # set custom layout 
-
+  
+  load_and_authorize_resource #cancan
+  
+  #filter
   before_action :authenticate_user!
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  #filter
 
   # GET /profiles
   # GET /profiles.json

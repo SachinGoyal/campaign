@@ -1,5 +1,10 @@
 class FunctionsController < ApplicationController
+  
+  load_and_authorize_resource #cancan
+  
+  #filter
   before_action :set_function, only: [:show, :edit, :update, :destroy]
+  #filter
 
   # GET /functions
   # GET /functions.json

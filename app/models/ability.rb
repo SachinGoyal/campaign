@@ -6,66 +6,17 @@ class Ability
   
     # alias_action :cancel, :start_cancel, to: :cancel_process
     # alias_action :form_disapproved_changes, :approved_changes, :disapproved_changes,  to: :aproved_changes_contract
-
     if user.is_admin?
-      can :manage, User
-      can [:read, :update_password], User, id: user.id
-      # cannot [:create], User do |user_item|
-      #   account = Account.where(name: Setting.first.subdomain).first
-      #   (User.list_users_active.count - 1) >= account.limit_user_active
-      # end
-      can :manage, Role
-      can :manage, Company
-      can :manage, Campaign
-      can :manage, Newsletter
-      can :manage, Template
-      can :manage, Profile
-      can :manage, Contact
-      can :manage, Setting
-     
-    else
-    
-       user.role.functions.group_by(&:controller).each do |controller, functions|
+      can :manage, :all     
+    else    
+      user.role.functions.group_by(&:controller).each do |controller, functions|
         functions.each do |function|
-          if ['personalization', 'commission', 'control_payment'].include?(function.controller)
-            can [function.action.to_sym], function.controller.to_sym #referencia https://github.com/ryanb/cancan/issues/22
-          else
-            can [function.action.to_sym], function.controller.camelcase.constantize
-          end
-          permissions_dependients controller, function.action
-          permissions_special controller, function.action
+          can [function.action.to_sym], function.controller.camelcase.constantize
         end
       end
     end
   end
 
-  def permissions_special controller, action
-    case controller
-    when 'unit'
-      case action
-      when 'destroy'
-        cannot :destroy, Unit, locked: true
-        cannot :destroy, Unit do |unit|
-          Unit::AVAILABLE < unit.commercial_status_id
-        end
-        cannot :destroy, Unit do |unit|
-          Unit::AVAILABLE > unit.commercial_status_id
-        end
-
-      when 'update'
-        can [:assigned_unit, :destroy_assigned], Unit, locked: false
-        cannot [:update], Unit, commercial_status_id: Unit::SOLD
-        # can [:assigned, :assigned_update], Unit, commercial_status_id: [Unit::AVAILABLE, Unit::RESERVED] #assigned client or agente to Unit
-      end
-    when 'price_list'
-      case action
-      when 'create_update'
-        cannot :update, PriceList do |price_list|
-          price_list.budgets.any?
-        end
-      end
-    end
-  end
 
   def permissions_dependients controller, action
     case controller

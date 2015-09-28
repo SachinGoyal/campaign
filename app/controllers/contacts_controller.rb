@@ -1,6 +1,8 @@
 class ContactsController < ApplicationController
   
   layout 'dashboard' # set custom layout 
+  
+  load_and_authorize_resource #cancan
 
   #filter
   before_action :authenticate_user!

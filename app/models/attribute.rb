@@ -17,7 +17,12 @@
 #
 
 class Attribute < ActiveRecord::Base
-  # Soft Delete
-  acts_as_paranoid
+  
+  acts_as_paranoid # Soft Delete
+  
+  acts_as_tenant(:company) #multitenant
+  
+  #association
   belongs_to :company
+  #association
 end

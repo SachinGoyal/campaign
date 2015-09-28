@@ -17,7 +17,8 @@
 #
 
 class Setting < ActiveRecord::Base
-  # Soft Delete
-  acts_as_paranoid
+  
+  acts_as_paranoid # Soft Delete
+  
   belongs_to :user
 end

@@ -1,7 +1,13 @@
 class AttributesController < ApplicationController
-  before_action :set_attribute, only: [:show, :edit, :update, :destroy]
   
   layout 'dashboard' # set custom layout 
+  
+  load_and_authorize_resource #cancan
+
+  #filter
+  before_action :set_attribute, only: [:show, :edit, :update, :destroy]
+  #filter
+  
 
   # GET /attributes
   # GET /attributes.json
