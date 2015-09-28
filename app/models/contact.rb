@@ -28,7 +28,15 @@ class Contact < ActiveRecord::Base
   #relation
   has_and_belongs_to_many :profiles
   #relation
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
+  validates :email, :presence => true, :uniqueness => true
 
+
+  def self.accessible_attributes
+    ["first_name", "last_name", "email", "company_id"]
+  end
+  
   def self.import_records(file, profile_id = nil)
   	profile = Profile.find(profile_id)
   	CSV.foreach(file.path, headers: true) do |row|  

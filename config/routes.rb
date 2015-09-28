@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'contact_imports/new'
+
   resources :companies
   resources :functions
   resources :settings
@@ -9,6 +11,7 @@ Rails.application.routes.draw do
   resources :attributes
   resources :roles
   resources :profiles  
+  resources :contact_imports
 
   get 'home/index'
 
