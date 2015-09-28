@@ -1,14 +1,27 @@
 <div class="field">
-  <%= f.attribute_fields do |a| %>
-    <%#= a.attribute_select associations: [:company, :role] %>
-    <%= a.select :name, 
-    			 User.ransackable_attributes.map{ |attrt| [attrt.to_s.humanize, attrt.to_s,  { 'data-type' => User.columns_hash[attrt].type}]}, {}, {class: 'field_values'} %>
-    <%#= a.attribute_select associations: [:company] %>
-  <% end %>
-  <%= f.predicate_select({only: [:eq, :not_eq, :lt, :lteq, :rt, :rteq, :cont, :not_cont, :start, :not_start], compounds: false}, {class: 'predicate_values'}) %>
-  <%= f.value_fields do |v| %>
-    <%= v.text_field :value, :class => 'datepicker' %>
-  <% end %>
-  <%= link_to "remove", '#', class: "remove_fields" %>
-</div>
+  <div class="row form-group">
+    <div class="col-xs-3">
+      <%= f.attribute_fields do |a| %>
+        <%= a.select :name, 
+      			 User.ransackable_attributes.map{ |attrt| [attrt.to_s.humanize, attrt.to_s,  { 'data-type' => User.columns_hash[attrt].type}]}, {}, {class: 'field_values form-control'} %>
+      <% end %>
+    </div>  
 
+    <div class="col-xs-4">
+      <%= f.predicate_select({only: [:eq, :not_eq, :cont, :not_cont, :start, :not_start], compounds: false}, {class: 'predicate_values form-control'}) %>
+    </div>
+    
+    <div class="col-xs-4">  
+      <%= f.value_fields do |v| %>
+        <%= v.text_field :value, :class => 'datepicker form-control' %>
+      <% end %>
+    </div>  
+
+    <div class="col-xs-1 text-center delete-icon">
+      <%= link_to "#", {:class => 'remove_fields'} do %>
+        <i class="fa fa-plus"></i>
+      <% end %>    
+    </div>
+    
+  </div>
+</div>
