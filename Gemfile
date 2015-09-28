@@ -28,7 +28,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'sidekiq'
 # Use Uglifier as compressor for JavaScript assets
+# gem 'activerecord-import'
 
 group :development, :test do
   gem 'execjs'
