@@ -4,7 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  role_id                :integer          not null
-#  user_type              :string
 #  username               :string           default(""), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
