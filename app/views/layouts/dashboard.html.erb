@@ -56,54 +56,80 @@
                         <div class="menu_section">
                             <h3>&nbsp; </h3>
                             <ul class="nav side-menu">
-                                <li><%= link_to user_campaigns_path(User.first) do %>
-                                   <i class="fa fa-bullhorn"></i>
-                                  <span>Campaign</span>
-                                <% end %></li>
-                                <li><%= link_to user_newsletters_path(User.first) do %>
-                                   <i class="fa fa-newspaper-o"></i>
-                                  <span>Newsletter</span>
-                                <% end %></li>
-                                <li><%= link_to user_templates_path(User.first) do %>
-                                   <i class="fa fa-clone"></i>
-                                  <span>Templates</span>
-                                <% end %></li>
-                                <li><%= link_to profiles_path do %>
-                                   <i class="fa fa-users"></i>
-                                  <span>Profile</span>
-                                <% end %></li>
-                                <li><%= link_to contacts_path do %>
-                                   <i class="fa fa-tty"></i>
-                                  <span>Contacts</span>
-                                <% end %></li>
-                                <li><%= link_to roles_path do %>
-                                   <i class="fa fa-key"></i>
-                                  <span>Roles</span>
-                                <% end %></li>
-                                <li><%= link_to attributes_path do %>
-                                   <i class="fa fa-edit"></i>
-                                  <span>Attributes</span>
-                                <% end %></li>
-                                <li><%= link_to companies_path do %>
-                                   <i class="fa fa-building-o"></i>
-                                  <span>Companies</span>
-                                <% end %></li>
-                                <li><%= link_to users_path do %>
-                                   <i class="fa fa-user"></i>
-                                  <span>Users</span>
-                                <% end %></li>
-                                <li><%= link_to '#' do %>
-                                   <i class="fa fa-line-chart"></i>
-                                  <span>Stats</span>
-                                <% end %></li>
-                                <li><%= link_to '#' do %>
-                                   <i class="fa fa-pie-chart"></i>
-                                  <span>Reports</span>
-                                <% end %></li>
-                                <li><%= link_to settings_path do %>
-                                   <i class="fa fa-cog"></i>
-                                  <span>Settings</span>
-                                <% end %></li>
+                                <% if can? :read, Campaign %>
+                                  <li><%= link_to user_campaigns_path(User.first) do %>
+                                     <i class="fa fa-bullhorn"></i>
+                                    <span>Campaign</span>
+                                  <% end %></li>
+                                <% end %>
+
+                                <% if can? :read, Newsletter %>
+                                  <li><%= link_to user_newsletters_path(User.first) do %>
+                                     <i class="fa fa-newspaper-o"></i>
+                                    <span>Newsletter</span>
+                                  <% end %></li>
+                                <% end %>
+                                
+                                <% if can? :read, Template %>
+                                  <li><%= link_to user_templates_path(User.first) do %>
+                                     <i class="fa fa-clone"></i>
+                                    <span>Templates</span>
+                                  <% end %></li>
+                                <% end %>
+
+                                <% if can? :read, Profile %>
+                                  <li><%= link_to profiles_path do %>
+                                     <i class="fa fa-users"></i>
+                                    <span>Profile</span>
+                                  <% end %></li>
+                                <% end %>
+
+                                <% if can? :read, Contact %>
+                                  <li><%= link_to contacts_path do %>
+                                     <i class="fa fa-tty"></i>
+                                    <span>Contacts</span>
+                                  <% end %></li>
+                                <% end %>
+
+                                <% if can? :read, Role %>
+                                  <li><%= link_to roles_path do %>
+                                     <i class="fa fa-key"></i>
+                                    <span>Roles</span>
+                                  <% end %></li>
+                                <% end %>
+
+                                <% if can? :read, Attribute %>
+                                  <li><%= link_to attributes_path do %>
+                                     <i class="fa fa-edit"></i>
+                                    <span>Attributes</span>
+                                  <% end %></li>
+                                <% end %>
+
+                                <% if can? :read, Company %>
+                                  <li><%= link_to companies_path do %>
+                                     <i class="fa fa-building-o"></i>
+                                    <span>Companies</span>
+                                  <% end %></li>
+                                <% end %>
+
+                                <% if can? :read, User %>
+                                  <li><%= link_to users_path do %>
+                                     <i class="fa fa-user"></i>
+                                    <span>Users</span>
+                                  <% end %></li>
+                                <% end %>
+                                  <li><%= link_to '#' do %>
+                                     <i class="fa fa-line-chart"></i>
+                                    <span>Stats</span>
+                                  <% end %></li>
+                                  <li><%= link_to '#' do %>
+                                     <i class="fa fa-pie-chart"></i>
+                                    <span>Reports</span>
+                                  <% end %></li>
+                                  <li><%= link_to settings_path do %>
+                                     <i class="fa fa-cog"></i>
+                                    <span>Settings</span>
+                                  <% end %></li>
                             </ul>
                         </div>
                      </div>
@@ -123,7 +149,7 @@
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 
                                     <%= image_tag image_path("img.jpg") %>John Doe                                    
-                                    <span class=" fa fa-angle-down"><li><%= link_to "Sign Out",destroy_user_session_path, :method => :delete if user_signed_in?  %></li></span>
+                                    <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                                     <li><a href="javascript:;">  Profile</a>
@@ -137,7 +163,11 @@
                                     <li>
                                         <a href="javascript:;">Help</a>
                                     </li>
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    <li>
+                                      <%= link_to destroy_user_session_path, :method => :delete  do %>
+                                        <i class="fa fa-sign-out pull-right"></i>
+                                        <span>Log Out</span>
+                                     <% end %>
                                     </li>
                                 </ul>
                             </li>

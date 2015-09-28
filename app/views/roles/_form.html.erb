@@ -1,13 +1,3 @@
-<div class="left_col" role="main">
-              
-  <div class="page-title">
-    <div class="title_left"><h2>Add Roles</h2></div><!-- title_left -->
-      <!--title_right -->
-      <div class="clearfix"></div>
-      
-      
-      
-  </div><!-- page-title -->
   <div class="clearfix"></div>
   
   <div class="roles-section">
@@ -24,19 +14,20 @@
     <div class="accordion">
       <% functions.each do |group, actions| %>
         <div class="accordion-section">
-          <a class="accordion-section-title" href="#accordion-1"><%= group.capitalize %> <span class="text-right arrow-right"><i class="fa fa-chevron-down"></i></span></a>
-            <div id="accordion-1" class="accordion-section-content default-style-accordion">
-          <p class="select-roles">
-                  <%= check_box_tag "select_all", 'select_all', false, data: {code: 'select_all'}, class: 'select_all_role', id: "select_all_#{group}" %>
-                  <%= label_tag "select_all_#{group}", t("actions.select_all") %>
-                </p>
-          <% actions.each do |action| %>        
+          <a class="accordion-section-title" href=<%= "#accordion-#{group}"%> ><%= group.capitalize %> <span class="text-right arrow-right"><i class="fa fa-chevron-down"></i></span></a>
+          <div id=<%= "accordion-#{group}" %> class="accordion-section-content default-style-accordion">
+            <p class="select-roles">
+            <%= check_box_tag "select_all", 'select_all', false, data: {code: 'select_all'}, class: 'select_all_role', id: "select_all_#{group}" %>
+            <%= label_tag "select_all_#{group}", t("actions.select_all") %>
+            </p>
+          
+            <% actions.each do |action| %>        
               <ul>
                 <%= check_box_tag "role[function_ids][]", action.id, role.function_ids.include?(action.id), id: dom_id(action), data: {code: action.action} %>
                 <%= label_tag dom_id(action), t("frontend.role.action.#{action.action}") %>
               </ul>
-          <% end %>
-            </div><!--end .accordion-section-content-->
+            <% end %>
+          </div><!--end .accordion-section-content-->
         </div><!--end .accordion-section-->
       <% end %>
     </div><!--end .accordion-->
