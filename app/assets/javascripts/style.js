@@ -5,6 +5,7 @@
  */
 
 /** ******  left menu  *********************** **/
+$(document).ready( function() {
 $(function () {
     $('#sidebar-menu li ul').slideUp();
     $('#sidebar-menu li').removeClass('active');
@@ -24,16 +25,15 @@ $(function () {
             $(this).addClass('active');
         }
     });
-	
-	
-	$(document).on('change', '.btn-file :file', function() {
+    
+    
+    $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
       numFiles = input.get(0).files ? input.get(0).files.length : 1,
       label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
   input.trigger('fileselect', [numFiles, label]);
 });
 
-$(document).ready( function() {
     $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
         
         var input = $(this).parents('.input-group').find(':text'),
@@ -46,7 +46,6 @@ $(document).ready( function() {
         }
         
     });
-});
 
     $('#menu_toggle').click(function () {
         if ($('body').hasClass('nav-md')) {
@@ -327,26 +326,26 @@ $(function () {
     });
 });
 $(".green-Border").click(function(){
-	if(!$(".green-Border i").hasClass("fa-caret-up")){
-	$(".green-Border i").addClass("fa-caret-up");
-	$(".green-Border i").removeClass("fa-caret-down");
+    if(!$(".green-Border i").hasClass("fa-caret-up")){
+    $(".green-Border i").addClass("fa-caret-up");
+    $(".green-Border i").removeClass("fa-caret-down");
 }
 else{
-	$(".green-Border i").removeClass("fa-caret-up");
-	$(".green-Border i").addClass("fa-caret-down");
-	}
-	$(".grey-box").slideToggle(500);
+    $(".green-Border i").removeClass("fa-caret-up");
+    $(".green-Border i").addClass("fa-caret-down");
+    }
+    $(".grey-box").slideToggle(500);
 });
 
 $(".accordion-section-title").click(function(){
-	if(!$(".accordion-section-title span i").hasClass("fa-chevron-up")){
-	$(".accordion-section-title span i").addClass("fa-chevron-up");
-	$(".accordion-section-title span i").removeClass("fa-chevron-down");
+    if(!$(".accordion-section-title span i").hasClass("fa-chevron-up")){
+    $(".accordion-section-title span i").addClass("fa-chevron-up");
+    $(".accordion-section-title span i").removeClass("fa-chevron-down");
 }
 else{
-	$(".accordion-section-title span i").removeClass("fa-chevron-up");
-	$(".accordion-section-title span i").addClass("fa-chevron-down");
-	}
+    $(".accordion-section-title span i").removeClass("fa-chevron-up");
+    $(".accordion-section-title span i").addClass("fa-chevron-down");
+    }
 
 });
 
@@ -370,26 +369,27 @@ $(document).ready(function () {
    
    
    jQuery(document).ready(function() {
-	function close_accordion_section() {
-		jQuery('.accordion .accordion-section-title').removeClass('active');
-		jQuery('.accordion .accordion-section-content').slideUp(300).removeClass('open');
-	}
+    function close_accordion_section() {
+        jQuery('.accordion .accordion-section-title').removeClass('active');
+        jQuery('.accordion .accordion-section-content').slideUp(300).removeClass('open');
+    }
 
-	jQuery('.accordion-section-title').click(function(e) {
-		// Grab current anchor value
-		var currentAttrValue = jQuery(this).attr('href');
+    jQuery('.accordion-section-title').click(function(e) {
+        // Grab current anchor value
+        var currentAttrValue = jQuery(this).attr('href');
 
-		if(jQuery(e.target).is('.active')) {
-			close_accordion_section();
-		}else {
-			close_accordion_section();
+        if(jQuery(e.target).is('.active')) {
+            close_accordion_section();
+        }else {
+            close_accordion_section();
 
-			// Add active class to section title
-			jQuery(this).addClass('active');
-			// Open up the hidden content panel
-			jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open'); 
-		}
+            // Add active class to section title
+            jQuery(this).addClass('active');
+            // Open up the hidden content panel
+            jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open'); 
+        }
 
-		e.preventDefault();
-	});
+        e.preventDefault();
+    });
+});
 });
