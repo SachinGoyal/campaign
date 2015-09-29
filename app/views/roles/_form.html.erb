@@ -6,7 +6,7 @@
   <%= form_for @role, :html => { :class => "form-horizontal campaign" } do |f| %>
     <div class="row">
       <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control" ,:placeholder=>"New Roles" %></div>
-        <div class="col-xs-3"><%= f.button :save , :class=>"btn  dark-theme-btn" %></div>
+        <div class="col-xs-3"><%= f.button :Save , :class=>"btn  dark-theme-btn" %></div>
         <div class="col-xs-6">&nbsp;</div>
     </div>
     </div>
@@ -17,7 +17,7 @@
           <a class="accordion-section-title" href=<%= "#accordion-#{group}"%> ><%= group.capitalize %> <span class="text-right arrow-right"><i class="fa fa-chevron-down"></i></span></a>
           <div id=<%= "accordion-#{group}" %> class="accordion-section-content default-style-accordion">
             <p class="select-roles">
-            <%= check_box_tag "select_all", 'select_all', false, data: {code: 'select_all'}, class: 'select_all_role', id: "select_all_#{group}" %>
+            <%= check_box_tag "select_all", 'select_all', false, data: {code: 'select_all'} %>
             <%= label_tag "select_all_#{group}", t("actions.select_all") %>
             </p>
           
