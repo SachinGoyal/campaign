@@ -2,11 +2,13 @@ Rails.application.routes.draw do
 
   get 'contact_imports/new'
   get 'profiles/edit_all'
+  get 'contacts/edit_all'
   resources :companies
   resources :functions
   resources :settings
   resources :contacts do
     collection { post :import }  
+    member {get :edit_all}
   end
   resources :attributes
   resources :roles

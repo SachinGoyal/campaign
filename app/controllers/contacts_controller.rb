@@ -32,6 +32,11 @@ class ContactsController < ApplicationController
   # GET /contacts/1/edit
   def edit
   end
+  # GET /contacts/edit_all
+  def edit_all
+    Contact.edit_all(params[:contacts_id], params[:get_action])  
+    redirect_to index
+  end
 
   # POST /contacts
   # POST /contacts.json

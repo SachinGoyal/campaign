@@ -29,31 +29,30 @@ $(document).ready( function() {
 		e.stopPropagation();
 	});
 
-	$('.profile-enable').click(function(e){ 
+	$(".selected-row-bottom").find('ul').children().on('click', function(){
+	      var action = $(this).text();
+	      a = myFunction();
+	      alert(a);
+	    $.ajax({
+		  method: "GET",
+		  url: "/contacts/edit_all/",
+		  data: { contacts_id: a , get_action: action }
+		})
+	    .done(function( msg ) {
+	        alert( "Data Saved: " + msg );
+	    });
+	});
+
+
+	function myFunction(){
 	    var a = [];
 	    $('input[type=checkbox]').each(function (index) {
 	       if (this.checked) {
 	           a[index] = $(this).val()
 	       }
-	        console.log(a); 
-		    $.ajax({
-			  method: "GET",
-			  url: "some.php",
-			  data: { name: "John", location: "Boston" }
-			})
-		    .done(function( msg ) {
-		        alert( "Data Saved: " + msg );
-		    });
 	    });
-
-	});
-
-
-	function myFunction(){
-       console.log("hello");
-
+     return a;
 	}
-	myFunction();
 
 
 
