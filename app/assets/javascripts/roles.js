@@ -8,9 +8,5 @@ $(document).ready( function() {
    $(this).parent().parent().find("input").prop("checked", false);
 
   }
-  
-  
-        
-  
  });
 });

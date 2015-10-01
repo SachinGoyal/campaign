@@ -1,33 +1,67 @@
-<p id="notice"><%= notice %></p>
+<%#= render 'shared/import' %>
 
-<h1>Listing Contacts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Email</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="page-title">
+    <div class="title_left"><h2>Contact list</h2></div><!-- title_left -->
+      <div class="title_right">
+        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
+          <div class="advance-search"><i class="fa fa-dot-circle-o"></i></div>
+          <div class="custom-add"><%= link_to new_contact_path do %><i class="fa fa-plus"></i><% end %></div>
+        </div>
+        <%#= render 'shared/keyword_search', :condition => :name_cont %>
+      </div><!--title_right -->
+      <div class="clearfix"></div>                
+  </div><!-- page-title -->
+</div><!--row-->
 
-  <tbody>
-    <% @contacts.each do |contact| %>
-      <tr>
-        <td><%= contact.first_name %></td>
-        <td><%= contact.last_name %></td>
-        <td><%= contact.email %></td>
-        <td><%= contact.status %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+<%- model_class = Profile -%>
+<div class="custom-table">
+  <div class="row th">
+    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:first_name) %></div>
+    <div class="col-md-2">Last Name</div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:email) %></div>
+    <div class="col-md-1"><%= model_class.human_attribute_name(:status) %></div>
+    <div class="col-md-1"><%= model_class.human_attribute_name(:created_at) %></div>
+    <div class="col-md-1">&nbsp;</div>
+  </div><!-- row -->
 
-<%= link_to 'New Contact', new_contact_path %>
+  <% @contacts.each do |contact| %>
+    <div class="row td">
+      <div class="col-md-1"><input name="" type="checkbox" value=<%= contact.id %> ></div>
+      <div class="col-md-2"><%= contact.last_name %></div>
+      <div class="col-md-2"><%= contact.email %></div>
+      <div class="col-md-1"><%= contact.status ? 'Enabled' : 'Disabled' %></div>
+      <div class="col-md-2"><%= format_date(contact, :created_at) %></div>
+      <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
+    </div>
+
+     <div class="row selected-row selected-row-inline">
+      <div class="col-md-12 selected-td">
+        <ul>
+          <li><i class="fa fa-line-chart"></i> Edit</li>
+          <li><%= link_to edit_contact_path(contact) do %>
+                                     <i class="fa fa-pencil"></i>
+                                    <span>Edit</span>
+                                  <% end %></li>
+            <li><i class="fa fa-pencil"></i> Show</li>
+            <li class="custom-delete"><i class="fa fa-plus"></i> Delete</li>
+
+         </ul>
+      </div>
+      </div>
+  <% end %>
+  <div class="row selected-row selected-row-bottom">
+  <div class="col-md-12 selected-td">
+    <ul>
+      <li><i class="fa fa-line-chart profile-enable"></i> Enable</li>
+        <li><i class="fa fa-pencil"></i> Disable</li>
+        <li class="custom-delete"><i class="fa fa-plus"></i> Delete</li>
+
+     </ul>
+  </div>
+</div>
+  <%#= will_paginate @profiles %>
+</div>

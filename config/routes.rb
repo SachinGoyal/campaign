@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'contact_imports/new'
-
+  get 'profiles/edit_all'
   resources :companies
   resources :functions
   resources :settings
@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   end
   resources :attributes
   resources :roles
-  resources :profiles  
+  resources :profiles do
+    member do
+      get 'edit_all'
+    end
+  end  
   resources :contact_imports
 
   get 'home/index'

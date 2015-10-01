@@ -4,21 +4,7 @@
       <div class="col-lg-2 col-xs-1">&nbsp;</div>
         <div class="col-md-6 col-xs-10">
           <%= form_for(@profile, :html => {:class => 'form-horizontal'}) do |f| %>
-            <% if @profile.errors.any? %>
-              <div id="error_expl" class="panel panel-danger">
-                <div class="panel-heading">
-                  <h3 class="panel-title"><%= pluralize(@profile.errors.count, "error") %> prohibited this company from being saved:</h3>
-                </div>
-                <div class="panel-body">
-                  <ul>
-                    <% @profile.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                    <% end %>
-                  </ul>
-                </div>
-              </div>
-            <% end %>
-
+            
             <div class="field form-group form-group-sm">
               <%= f.label :name, :class => "col-sm-3 col-xs-12 control-label" %>
               <div class="col-sm-9 col-xs-12"> <%= f.text_field :name, :class => 'form-control' %> </div>
@@ -32,6 +18,18 @@
                 <%= f.radio_button :status, false , :checked => @profile.new_record? ? false : @profile.status , :value => false %>
               </div>
             </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
+              <div class="col-xs-8 custom-checkbox-style">
+              <input type="checkbox" id="c1" name="cc" /><label for="c1"><span></span>Life Style</label>
+              <input type="checkbox" id="c2" name="cc" /><label for="c2"><span></span>Cricket</label>
+              <input type="checkbox" id="c3" name="cc" /><label class="custom-spacing" for="c3"><span></span>Fashion</label>
+              <input type="checkbox" id="c4" name="cc" /><label for="c4"><span></span>Sports</label>
+              </div>
+              <div class="clearfix"></div> 
+            </div>
+
             <div class="col-md-12 col-xs-12">
               <div class="col-lg-2 col-xs-1"> </div>
               <div class="col-md-6 col-xs-10">

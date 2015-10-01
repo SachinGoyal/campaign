@@ -1,33 +1,89 @@
-<%= form_for(@contact) do |f| %>
-  <% if @contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+<div class="custom-container">
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-5 col-xs-10">
+        <%= form_for @contact, :html => { :class => "form-horizontal contact" } do |f| %>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">First Name</label>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.text_field :first_name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+          </div>
+        </div>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Last Name</label>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.text_field :last_name, :class => 'form-control',:id=>"formGroupInputSmall" %>
+          </div>
+        </div>
 
-      <ul>
-      <% @contact.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Email</label>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.text_field :email, :class => 'form-control',:id=>"formGroupInputSmall" %>
+          </div>
+        </div>
+
+
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+          <div class="col-sm-8 col-xs-12 custom-radio-input">
+            <input id="radio01" name="" type="radio" value="">
+            <label for="radio01"><span></span>Enabled</label>
+
+            <input id="radio02" name="" type="radio" value="">
+            <label for="radio02"><span></span>Disabled</label>
+
+          </div>
+        </div>                                     
+      </div>
+      <div class="col-lg-4 col-xs-1">
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+          <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+        </div>
+
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="divider"></div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.check_box :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-5 col-xs-10">
+        <div class="form-group custom-from-group">
+          <div class="col-xs-4">&nbsp;</div>
+
+          <div class="col-xs-8 text-left">
+            <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
+
+            <a href="/contacts/">Cancel</a>
+          </div>
+          <% end %>
+        </div>
+
+      </div>
+      <div class="col-lg-4 col-xs-1">&nbsp;</div>
+      <div class="clearfix"></div>
+
+    </div>
+  </div><!-- row -->
+</div><!--  custom-container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

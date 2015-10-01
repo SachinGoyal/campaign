@@ -3,7 +3,7 @@
     <div class="header-actions">
       <span class="btn-group">
         <div class="btn-navigation">
-          <%#= link_to_back roles_path %>
+          <%= link_to 'Back', roles_path, :class => 'btn' %>
         </div>
       </span>
     </div>
@@ -11,11 +11,11 @@
   <div class="head-main-down">
     <div class="arrow-down"></div>
     <div class="btn-group-actions table-actions">
-      <%= link_to edit_role_path(@role), class: 'btn', title: t("buttons.edit") do %>
-        <i class="edit-icon"></i>
+      <%= link_to edit_role_path(@role), class: 'btn' do %>
+        <i class="edit-icon">Edit</i>
       <% end %>
-      <%= link_to @role, method: :delete, data: { confirm: t("frontend.role.confirm_delete") }, class: 'btn', title: t("buttons.delete") do %>
-        <i class="delete-icon"></i>
+      <%= link_to @role, method: :delete, data: { confirm: "frontend.role.confirm_delete" }, class: 'btn' do %>
+        <i class="delete-icon">Delete</i>
       <% end %>
     </div>
   </div>
@@ -25,7 +25,7 @@
     <div class="rol-profile">
       <div class="client-name">
         <h5>
-          <%= "#{t("frontend.role.group.role")} :" %>
+          <%#= "#{t("frontend.role.group.role")} :" %>
         </h5>
         <h3>
           <%= @role.name %>
@@ -45,12 +45,11 @@
           <div class="content-rols">
             <% actions.each do |action| %>
               <p>
-                <% if (%w(metraje_list price_list payment custom requirement client observation).include?(action.controller) && %w(read approved approve create_update close complete).include?(action.action)) || (action.controller == "progress") %>
-                  <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}_#{action.action}") %>
-                <% elsif action.action == "manage" %>
+                
+                <% if action.action == "manage" %>
                   <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}") %>
-                <% elsif(action.controller == "project" && action.action == "read") %>
-                  <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}_#{action.action}") %>
+                <% elsif(action.action == "read") %>
+                  <%= label_tag dom_id(action), t("frontend.role.action.#{action.action}") %>
                 <% else %>
                   <%= label_tag t("frontend.role.action.#{action.action}") %>
                 <% end %>

@@ -30,5 +30,22 @@ class Profile < ActiveRecord::Base
   #validation
   validates :name, presence: true
   #validation
-  
+
+  # class methods
+  class << self
+    def edit_all(ids, action)
+      action = action.strip.downcase
+      ids.reject!(&:empty?)
+      Profile.find(ids).each do |profile|
+      	if action == 'delete'
+          profile.destroy!
+        else
+          status = action == 'enable' ? 1 : 0
+          profile.update(:status => status )
+        end
+      end
+    end
+  end
+  # class methods
+
 end
