@@ -12,8 +12,8 @@ class CampaignsController < ApplicationController
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @search = Campaign.ransack(params[:q])
-    @campaigns = @search.result(distinct: true)
+    @q = Campaign.ransack(params[:q])
+    @campaigns = @q.result(distinct: true).page(params[:page])
   end
 
   # GET /campaigns/1
@@ -36,7 +36,7 @@ class CampaignsController < ApplicationController
     @campaign = current_user.campaigns.build(campaign_params)
     respond_to do |format|
       if @campaign.save
-        format.html { redirect_to [current_user,@campaign], notice: 'Campaign was successfully created.' }
+        format.html { redirect_to @campaign, notice: 'Campaign was successfully created.' }
         format.json { render :show, status: :created, location: @campaign }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class CampaignsController < ApplicationController
   def update
     respond_to do |format|
       if @campaign.update(campaign_params)
-        format.html { redirect_to [current_user ,@campaign], notice: 'Campaign was successfully updated.' }
+        format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
         format.json { render :show, status: :ok, location: @campaign }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class CampaignsController < ApplicationController
   def destroy
     @campaign.destroy
     respond_to do |format|
-      format.html { redirect_to user_campaigns_url(current_user), notice: 'Campaign was successfully destroyed.' }
+      format.html { redirect_to campaigns_url, notice: 'Campaign was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

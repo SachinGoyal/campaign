@@ -5,7 +5,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>User</th>
       <th>Name</th>
       <th>Content</th>
       <th>Status</th>
@@ -18,7 +17,6 @@
   <tbody>
     <% @templates.each do |template| %>
       <tr>
-        <td><%= template.user.username %></td>
         <td><%= template.name %></td>
         <td><%= template.content %></td>
         <td><%= template.status %></td>

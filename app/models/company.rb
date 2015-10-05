@@ -22,6 +22,11 @@ class Company < ActiveRecord::Base
   # Company name is used as subdomain
   # acts_as_universal_and_determines_tenant
   
+  # validation
+  validates :name, uniqueness: true
+  validates_presence_of :users  
+  # validation
+
   # relations
   has_many :roles
   has_many :users
@@ -32,11 +37,6 @@ class Company < ActiveRecord::Base
   #nested attribute
   accepts_nested_attributes_for :users
   #nested attribute
-
-  # validation
-  validates :name, uniqueness: true
-  validates_presence_of :users  
-  # validation
    
   #callback
   before_create :set_subdomain

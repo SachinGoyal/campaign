@@ -1,59 +1,91 @@
+<div class="row">
+  <div class="page-title">
+    <div class="title_left"><h2>Profiles list</h2></div><!-- title_left -->
+      <div class="title_right">
+        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
+          <div class="advance-search"><i class="fa fa-dot-circle-o"></i></div>
+          <div class="custom-add"><%= link_to new_campaign_path do %><i class="fa fa-plus"></i><% end %></div>
+        </div>
+        <%= render 'shared/keyword_search', :condition => :name_cont %>
+      </div><!--title_right -->
+      <div class="clearfix"></div>                
+  </div><!-- page-title -->
+</div><!--row-->
+
+
 <%- model_class = Campaign -%>
+<div class="custom-table">
+  <div class="row th">
+    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:description) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:status) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
+    <div class="col-md-1">&nbsp;</div>
+  </div><!-- row -->
 
+  <% @campaigns.each do |campaign| %>
+    <div class="row td">
+      <div class="col-md-1"><input name="" type="checkbox" value=<%=campaign.id%> ></div>
+      <div class="col-md-2"><%= campaign.name %></div>
+      <div class="col-md-2"><%= campaign.description %></div>
+      <div class="col-md-2"><%= campaign.status ? 'Enabled' : 'Disabled' %></div>
+      <div class="col-md-2"><%= format_date(campaign, :created_at) %></div>
+      <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
+    </div>
 
+     <div class="row selected-row selected-row-inline">
+      <div class="col-md-12 selected-td">
+        <ul>
+          <li><i class="fa fa-line-chart"></i> Edit</li>
+          <li><%= link_to edit_campaign_path(campaign) do %>
+                                     <i class="fa fa-pencil"></i>
+                                    <span>Edit</span>
+                                  <% end %></li>
+          <li><%= link_to campaign_path(campaign) do %>
+                                     <i class="fa fa-pencil"></i>
+                                    <span>Show</span>
+                                  <% end %></li>
+          <li class="custom-delete"><%= link_to campaign_path(campaign) ,method: :delete do %>
+                                     <i class="fa fa-plus"></i>
+                                    <span>Delete</span>
+                                  <% end %></li>
 
-<%= search_form_for [current_user,@search] do |f| %>
-  <div class="field">
-    <%= f.label :name_cont, "Name contains" %>
-    <%= f.text_field :name_cont %>
+         </ul>
+      </div>
+      </div>
+  <% end %>
+  <div class="row selected-row selected-row-bottom">
+  <div class="col-md-12 selected-td">
+    <ul>
+      <li><i class="fa fa-line-chart profile-enable"></i> Enable</li>
+        <li><i class="fa fa-pencil"></i> Disable</li>
+        <li class="custom-delete"><i class="fa fa-plus"></i> Delete</li>
+
+     </ul>
   </div>
-  <div class="actions"><%= f.submit "Search" %></div>
-<% end %>
-
-
-
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @campaigns.each do |campaign| %>
-      <tr>
-        <td><%= link_to campaign.id, user_campaign_path(current_user,campaign) %></td>
-        <td><%#= campaign.company.name %></td>
-        <td><%= campaign.name %></td>
-        <td><%= campaign.description %></td>
-        <td><%= campaign.status ? 'Enabled' : 'Disabled' %></td>
-        <td><%=l campaign.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_user_campaign_path(current_user,campaign), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      [current_user, campaign],
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-          <%= link_to campaign.status ? 'Disable' : 'Enable',
-                      user_campaign_path(current_user,campaign, :campaign => {:status => !campaign.status?}),
-                      :method => :put,
-                      :class => 'btn btn-default btn-xs' %>    
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <%= will_paginate @campaigns %>
+</div>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_user_campaign_path(current_user),
-            :class => 'btn btn-primary' %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

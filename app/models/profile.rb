@@ -28,7 +28,7 @@ class Profile < ActiveRecord::Base
   #relaion
   
   #validation
-  validates :name, presence: true
+  validate_presence_of :name,:status
   #validation
 
   # class methods

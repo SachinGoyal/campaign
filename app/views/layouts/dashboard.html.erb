@@ -57,7 +57,7 @@
                             <h3>&nbsp; </h3>
                             <ul class="nav side-menu">
                                 <% if can? :read, Campaign %>
-                                  <li><%= link_to user_campaigns_path(User.first) do %>
+                                  <li><%= link_to campaigns_path do %>
                                      <i class="fa fa-bullhorn"></i>
                                     <span>Campaign</span>
                                   <% end %></li>

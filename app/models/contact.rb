@@ -24,13 +24,16 @@ class Contact < ActiveRecord::Base
   acts_as_paranoid # Soft Delete
 
   acts_as_tenant(:company) #multitenant
+
+  #validation
+    validates_presence_of :name,:status,:first_name,:email
+    validates_uniqueness_of :email
+  #validation
+
   
   #relation
   has_and_belongs_to_many :profiles
   #relation
-  validates :first_name, :presence => true
-  validates :last_name, :presence => true
-  validates :email, :presence => true, :uniqueness => true
 
   # class methods
   class << self

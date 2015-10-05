@@ -45,10 +45,16 @@
                                      <i class="fa fa-pencil"></i>
                                     <span>Edit</span>
                                   <% end %></li>
-            <li><i class="fa fa-pencil"></i> Show</li>
-            <li class="custom-delete"><i class="fa fa-plus"></i> Delete</li>
+          <li><%= link_to profile_path(profile) do %>
+                                     <i class="fa fa-pencil"></i>
+                                    <span>Show</span>
+                                  <% end %></li>
+          <li class="custom-delete"><%= link_to profile_path(profile) ,method: :delete do %>
+                                     <i class="fa fa-plus"></i>
+                                    <span>Delete</span>
+                                  <% end %></li>
 
-         </ul>
+        </ul>
       </div>
       </div>
   <% end %>

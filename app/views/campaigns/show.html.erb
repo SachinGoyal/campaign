@@ -1,25 +1,38 @@
-<%- model_class = Campaign -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-</div>
+  <div class="row">
+    <div class="page-title">
+      <div class="title_left"><h2>Campaign</h2></div><!-- title_left -->
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @campaign.user.username %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @campaign.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @campaign.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
-  <dd><%= @campaign.status %></dd>
-</dl>
+      <div class="clearfix"></div>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              user_campaigns_path(current_user), :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_user_campaign_path(current_user,@campaign), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              [current_user,@campaign],
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+
+
+    </div><!-- page-title -->
+  </div><!--row-->
+
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-5 col-xs-10">
+          <form class="form-horizontal">
+
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @campaign.name%>
+              </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Description</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @campaign.description%>
+              </div>
+            </div>
+
+          
+
+      </div><!-- row -->
+    </div><!--  custom-container -->
+

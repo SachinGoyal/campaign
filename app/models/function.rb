@@ -14,19 +14,19 @@
 class Function < ActiveRecord::Base
   
   # Soft Delete
- # acts_as_paranoid
+    # acts_as_paranoid
   # Soft Delete
-  
-  #association
-  has_many :accesses
-  has_many :roles, through: :accesses
-  
-  #association
   
   # validation
   validates :controller, :action, presence: true
   validates_uniqueness_of :controller, scope: :action
   # validation
+
+  #association
+  has_many :accesses
+  has_many :roles, through: :accesses
+  #association
+  
   
   #scope
   scope :order_by_controller, ->{ order("controller ASC, action ASC") }

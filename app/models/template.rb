@@ -19,6 +19,10 @@ class Template < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant#multitenant
 
+  # validation
+  validates_presence_of :name, :status,:content
+  # validation
+
   #association
   belongs_to :user
   #association

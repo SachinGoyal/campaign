@@ -24,6 +24,10 @@ class Campaign < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant
 
+  #validation
+    validates_presence_of :name,:status
+  #validation
+
   # relation
   belongs_to :user
   # relation

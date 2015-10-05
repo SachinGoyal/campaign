@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     collection { post :import }  
     member {get :edit_all}
   end
+  resources :campaigns
   resources :attributes
   resources :roles
   resources :profiles do
@@ -26,7 +27,6 @@ Rails.application.routes.draw do
     collection { post :search, to: 'users#search'
                 get :search, to: 'users#search' }
     resources :newsletters
-    resources :campaigns
     resources :templates
   end
   root to: "home#index"

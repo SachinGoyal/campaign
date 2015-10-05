@@ -28,6 +28,10 @@ class Newsletter < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant
 
+  # validation
+  validates_presence_of :campaign_id, :template_id,:name,:subject
+  # validation
+
   #association
   belongs_to :campaign
   belongs_to :template
