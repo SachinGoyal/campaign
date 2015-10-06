@@ -6635,3 +6635,14 @@ a.anchor-block {
     text-align: center;
 }
 .default-without-input{padding:5px 10px; font-size:14px; color:#595959;}
+.custom-box{padding:5px;}
+.custom-box span {margin-left:5px; font-size:16px; border:1px solid #ccc; padding:2px 5px;}
+.custom-box span.delate-icon {padding:2px 8px; display:inline-block;}
+.custom-panel-heading{padding:5px; background-color:#eeeeee; font-weight:bold; border:1px solid #e6e6e6;}
+.custom-panel-body{padding:10px; background-color:#f7f7f5;border-left:1px solid #e6e6e6; border-right:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6; }
+.custom-lisiting-style ul{margin:0px; padding:0px;}
+.custom-lisiting-style ul li{ padding:5px; list-style:none; border-left:5px solid #3998e2; margin:2px;}
+.bottom-spacer {margin-bottom:10px;}
+.custom-box span.pagination-numbring{border:none!important;}
+.custom-role-bar {background-color:#f3f3f3; border:1px solid #e5e6e7; padding:5px;}
+.roles-icon-lists span a {border:1px solid #d5d5d5; padding:2px 5px; display:inline-block; font-size:16px;}
