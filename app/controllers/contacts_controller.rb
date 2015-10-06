@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
   #filter
 
   def import  
-    Contact.import_records(params[:file], 1)  
+    Contact.import_records(params[:file], params[:profile_id])  
     redirect_to root_url, notice: "Contacts imported."  
   end  
   # GET /contacts

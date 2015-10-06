@@ -1,63 +1,47 @@
-<div class="head-main rol-view">
-  <div class="head-main-top">
-    <div class="header-actions">
-      <span class="btn-group">
-        <div class="btn-navigation">
-          <%= link_to 'Back', roles_path, :class => 'btn' %>
+<div class="row">
+    <div class="page-title">
+      <div class="title_left"><h2>Role</h2></div><!-- title_left -->
+        <div class="pull-right custom-box">
+        <span class="edit-icon">
+        <%= link_to edit_role_path(@role) do %>
+          <i class="fa fa-pencil"></i>
+        <% end %>
+        </span>
+        <span class="delate-icon">
+          <%= link_to @role ,method: :delete do %>
+            <i class="fa fa-trash-o"></i>
+          <% end %>
+        </span>
         </div>
-      </span>
+        <div class="clearfix"></div>
+        
+        
+        
+    </div><!-- page-title -->
+</div><!--row-->
+<div class="custom-container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="text-center">Role:</h4>
+          <h2 class="text-center"><%= @role.name %></h2>
+      </div><!-- col-md-12 -->
+      
+
     </div>
-  </div>
-  <div class="head-main-down">
-    <div class="arrow-down"></div>
-    <div class="btn-group-actions table-actions">
-      <%= link_to edit_role_path(@role), class: 'btn' do %>
-        <i class="edit-icon">Edit</i>
-      <% end %>
-      <%= link_to @role, method: :delete, data: { confirm: "frontend.role.confirm_delete" }, class: 'btn' do %>
-        <i class="delete-icon">Delete</i>
-      <% end %>
-    </div>
-  </div>
-</div>
-<div class="body-main rol-view">
-  <div class="head-show">
-    <div class="rol-profile">
-      <div class="client-name">
-        <h5>
-          <%#= "#{t("frontend.role.group.role")} :" %>
-        </h5>
-        <h3>
-          <%= @role.name %>
-        </h3>
-      </div>
-    </div>
-    <div class="clear"></div>
-  </div>
-  <div class="list-actions">
-    
-    <% unless @functions.size == 0 %>
-      <% @functions.each do |group, actions| %>
-        <div class="blocks-rol">
-          <h4>
-            <%= t("frontend.role.group.#{group}") %>
-          </h4>
-          <div class="content-rols">
-            <% actions.each do |action| %>
-              <p>
-                
-                <% if action.action == "manage" %>
-                  <%= label_tag dom_id(action), t("frontend.role.action.#{action.controller}") %>
-                <% elsif(action.action == "read") %>
-                  <%= label_tag dom_id(action), t("frontend.role.action.#{action.action}") %>
-                <% else %>
-                  <%= label_tag t("frontend.role.action.#{action.action}") %>
-                <% end %>
-              </p>
-            <% end %>
+<!-- row -->
+      <% @functions.each do |group,actions|%>
+        <div class="row">
+          <div class="col-md-8 col-xs-offset-2 bottom-spacer">
+            <div class="custom-panel-heading"><%= group.capitalize%></div>
+              <div class="custom-panel-body custom-lisiting-style">
+                <ul>
+                  <% actions.each do |action|%>
+                      <li><%= action.action.capitalize %></li>
+                  <%end%> 
+                  </ul>
+              </div>
           </div>
         </div>
       <% end %>
-    <% end %>
-  </div>
-</div>
+
+</div><!--  custom-container -->
