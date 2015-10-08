@@ -15,43 +15,18 @@
   <% @users.each do |user| %>
     <div class="row td">
       <div class="col-md-1"><input name="" type="checkbox" value=<%= user.id %> ></div>
-      <div class="col-md-2"><%= user.username %></div>
-      <div class="col-md-2"><%= user.email %></div>
-      <div class="col-md-2"><%= user.status ? 'Enabled' : 'Disabled' %></div>
-      <div class="col-md-2"><%= format_date(user, :created_at) %></div>
+      <div class="col-md-2"><%= user.username %>&nbsp;</div>
+      <div class="col-md-2"><%= user.email %>&nbsp;</div>
+      <div class="col-md-2"><%= user.status ? 'Enabled' : 'Disabled' %>&nbsp;</div>
+      <div class="col-md-2"><%= format_date(user, :created_at) %>&nbsp;</div>
       <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
     </div>
 
-     <div class="row selected-row selected-row-inline">
-      <div class="col-md-12 selected-td">
-        <ul>
-          <li><i class="fa fa-line-chart"></i> Edit</li>
-          <li><%= link_to edit_user_path(user) do %>
-                                     <i class="fa fa-pencil"></i>
-                                    <span>Edit</span>
-                                  <% end %></li>
-          <li><%= link_to user_path(user) do %>
-                                     <i class="fa fa-pencil"></i>
-                                    <span>Show</span>
-                                  <% end %></li>
-          <li class="custom-delete"><%= link_to user_path(user) ,method: :delete do %>
-                                     <i class="fa fa-plus"></i>
-                                    <span>Delete</span>
-                                  <% end %></li>
+    <%= render 'shared/inline_action_link', element: user %>
 
-         </ul>
-      </div>
-      </div>
   <% end %>
-  <div class="row selected-row selected-row-bottom">
-  <div class="col-md-12 selected-td">
-    <ul>
-      <li><i class="fa fa-line-chart profile-enable"></i> Enable</li>
-        <li><i class="fa fa-pencil"></i> Disable</li>
-        <li class="custom-delete"><i class="fa fa-plus"></i> Delete</li>
-
-     </ul>
-  </div>
+  
+  <%= render 'shared/bootam_action_link'%>
 </div>
 
 

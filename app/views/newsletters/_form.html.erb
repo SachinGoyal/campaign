@@ -1,4 +1,4 @@
-<%= form_for [current_user ,@newsletter] do |f| %>
+<%= form_for @newsletter do |f| %>
   <% if @newsletter.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@newsletter.errors.count, "error") %> prohibited this newsletter from being saved:</h2>

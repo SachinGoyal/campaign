@@ -28,11 +28,11 @@
   <% @companies.each do |company| %>
     <div class="row td">
       <div class="col-md-1"><input name="" type="checkbox" value=<%=company.id%> ></div>
-      <div class="col-md-2"><%= company.name %></div>
-      <div class="col-md-1"><%= company.subdomain %></div>
-      <div class="col-md-1"><%= company.free_emails %></div>
-      <div class="col-md-1"><%= company.status ? 'Enabled' : 'Disabled' %></div>
-      <div class="col-md-2"><%= format_date(company, :created_at) %></div>
+      <div class="col-md-2"><%= company.name %>&nbsp;</div>
+      <div class="col-md-1"><%= company.subdomain %>&nbsp;</div>
+      <div class="col-md-1"><%= company.free_emails %>&nbsp;</div>
+      <div class="col-md-1"><%= company.status ? 'Enabled' : 'Disabled' %>&nbsp;</div>
+      <div class="col-md-2"><%= format_date(company, :created_at) %>&nbsp;</div>
       <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
     </div>
 
