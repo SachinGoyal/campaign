@@ -38,36 +38,9 @@
       <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
     </div>
 
-     <div class="row selected-row selected-row-inline">
-      <div class="col-md-12 selected-td">
-        <ul>
-          <li><i class="fa fa-line-chart"></i> Edit</li>
-          <li><%= link_to edit_contact_path(contact) do %>
-                                     <i class="fa fa-pencil"></i>
-                                    <span>Edit</span>
-                                  <% end %></li>
-          <li><%= link_to contact_path(contact) do %>
-                                     <i class="fa fa-pencil"></i>
-                                    <span>Show</span>
-                                  <% end %></li>
-          <li class="custom-delete"><%= link_to contact_path(contact) ,method: :delete do %>
-                                     <i class="fa fa-plus"></i>
-                                    <span>Delete</span>
-                                  <% end %></li>
+     <%= render 'shared/inline_action_link', element: contact %>
 
-         </ul>
-      </div>
-      </div>
   <% end %>
-  <div class="row selected-row selected-row-bottom">
-  <div class="col-md-12 selected-td">
-    <ul>
-      <li><i class="fa fa-line-chart profile-enable"></i> Enable</li>
-        <li><i class="fa fa-pencil"></i> Disable</li>
-        <li class="custom-delete"><i class="fa fa-plus"></i> Delete</li>
-
-     </ul>
-  </div>
-</div>
+  <%= render 'shared/bootam_action_link'%>
   <%#= will_paginate @profiles %>
 </div>

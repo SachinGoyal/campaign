@@ -1,24 +1,74 @@
-<p id="notice"><%= notice %></p>
+  <div class="row">
+    <div class="page-title">
+      <div class="title_left"><h2>Company</h2></div><!-- title_left -->
 
-<p>
-  <strong>Company:</strong>
-  <%= @attribute.company %>
-</p>
+      <div class="clearfix"></div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @attribute.name %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @attribute.description %>
-</p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @attribute.status %>
-</p>
+    </div><!-- page-title -->
+  </div><!--row-->
 
-<%= link_to 'Edit', edit_attribute_path(@attribute) %> |
-<%= link_to 'Back', attributes_path %>
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-5 col-xs-10">
+          <form class="form-horizontal">
+
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @attribute.name%>
+              </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Description</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @attribute.description%>
+              </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @attribute.status%>
+              </div>
+            </div>
+
+
+
+            <div class="form-group form-group-sm">
+              <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                Life Style, Cricket, Fashion, Sports </div>
+                <div class="clearfix"></div> 
+              </div>
+            </form>
+
+          </div>
+          <div class="col-lg-4 col-xs-1">
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+              <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+            </div>
+
+
+          </div>
+          <div class="clearfix"></div>
+          <div class="divider"></div>
+        </div>
+
+      </div><!-- row -->
+    </div><!--  custom-container -->
+
+
+
+
+
+
+
+
+

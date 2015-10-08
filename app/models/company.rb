@@ -24,7 +24,8 @@ class Company < ActiveRecord::Base
   
   # validation
   validates :name, uniqueness: true
-  validates_presence_of :users  
+  validates_presence_of :users ,:name
+  validates_inclusion_of :status, in: [true, false]
   # validation
 
   # relations

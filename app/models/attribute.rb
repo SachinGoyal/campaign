@@ -23,7 +23,8 @@ class Attribute < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
   
   #validation
-    validates_presence_of :name,:status
+  validates_presence_of :name
+  validates_inclusion_of :status, in: [true, false]
   #validation
 
   #association

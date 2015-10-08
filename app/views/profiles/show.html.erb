@@ -1,24 +1,62 @@
-<p id="notice"><%= notice %></p>
+  <div class="row">
+    <div class="page-title">
+      <div class="title_left"><h2>Profile</h2></div><!-- title_left -->
 
-<p>
-  <strong>Name:</strong>
-  <%= @profile.name %>
-</p>
+      <div class="clearfix"></div>
 
-<p>
-  <strong>Status:</strong>
-  <%= @profile.status %>
-</p>
 
-<p>
-  <strong>Created by:</strong>
-  <%= @profile.created_by %>
-</p>
 
-<p>
-  <strong>Updated by:</strong>
-  <%= @profile.updated_by %>
-</p>
+    </div><!-- page-title -->
+  </div><!--row-->
+
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-5 col-xs-10">
+          <form class="form-horizontal">
+
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @profile.name%>
+              </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">No of free Emails</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @profile.status%>
+              </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @profile.status%>
+              </div>
+            </div>
+
+
+            </form>
+
+          </div>
+          <div class="col-lg-4 col-xs-1">
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+              <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+            </div>
+
+
+          </div>
+          <div class="clearfix"></div>
+          <div class="divider"></div>
+        </div>
+
+      </div><!-- row -->
+    </div><!--  custom-container -->
+
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>

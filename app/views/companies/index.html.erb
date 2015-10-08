@@ -1,56 +1,57 @@
-<%- model_class = Company -%>
+<div class="row">
+  <div class="page-title">
+    <div class="title_left"><h2>Company list</h2></div><!-- title_left -->
+      <div class="title_right">
+        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
+          <div class="advance-search"><i class="fa fa-dot-circle-o"></i></div>
+          <div class="custom-add"><%= link_to new_company_path do %><i class="fa fa-plus"></i><% end %></div>
+        </div>
+        <%= render 'shared/keyword_search', :condition => :name_cont %>
+      </div><!--title_right -->
+      <div class="clearfix"></div>                
+  </div><!-- page-title -->
+</div><!--row-->
 
-<%= search_form_for @search do |f| %>
-  <div class="field">
-    <%= f.label :name_cont, "Name contains" %>
-    <%= f.text_field :name_cont %>
-  </div>
-  <div class="actions"><%= f.submit "Search" %></div>
-<% end %>
 
+<%- model_class = Campaign -%>
+<div class="custom-table">
+  <div class="row th">
+    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
+    <div class="col-md-1"><%= model_class.human_attribute_name(:subdomain) %></div>
+    <div class="col-md-1"><%= model_class.human_attribute_name(:free_emails) %></div>
+    <div class="col-md-1"><%= model_class.human_attribute_name(:status) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
+    <div class="col-md-1">&nbsp;</div>
+  </div><!-- row -->
 
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <% @companies.each do |company| %>
+    <div class="row td">
+      <div class="col-md-1"><input name="" type="checkbox" value=<%=company.id%> ></div>
+      <div class="col-md-2"><%= company.name %></div>
+      <div class="col-md-1"><%= company.subdomain %></div>
+      <div class="col-md-1"><%= company.free_emails %></div>
+      <div class="col-md-1"><%= company.status ? 'Enabled' : 'Disabled' %></div>
+      <div class="col-md-2"><%= format_date(company, :created_at) %></div>
+      <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
+    </div>
+
+     <%= render 'shared/inline_action_link', element: company %>
+
+  <% end %>
+  <%= render 'shared/bootam_action_link'%>
+  <%#= will_paginate @attributes %>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:free_emails) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:subdomain) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @companies.each do |company| %>
-      <tr>
-        <td><%= link_to company.id, company_path(company) %></td>
-        <td><%= company.name %></td>
-        <td><%= company.free_emails %></td>
-        <td><%= company.status? ? 'Enable' : 'Disable' %></td>
-        <td><%= company.subdomain %></td>
-        <td><%=l company.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_company_path(company), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      company_path(company),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-          <%= link_to company.status ? 'Disable' : 'Enable',
-                      company_path(company, :company => {:status => !company.status?}),
-                      :method => :put,
-                      :class => 'btn btn-default btn-xs' %>    
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_company_path,
-            :class => 'btn btn-primary' %>
+
+
+
+
+
+
+
+
+
+
+
+

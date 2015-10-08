@@ -1,0 +1,23 @@
+<div class="row selected-row selected-row-inline">
+  <div class="col-md-12 selected-td">
+    <ul>
+      <li><i class="fa fa-line-chart"></i> Edit</li>
+      <li><%= link_to [:edit , element] do %>
+        <i class="fa fa-pencil"></i>
+        <span>Edit</span>
+        <% end %>
+      </li>
+      <li><%= link_to element do %>
+        <i class="fa fa-pencil"></i>
+        <span>Show</span>
+        <% end %>
+      </li>
+      <li class="custom-delete"><%= link_to element,method: :delete do %>
+        <i class="fa fa-plus"></i>
+        <span>Delete</span>
+        <% end %>
+      </li>
+
+    </ul>
+  </div>
+</div>

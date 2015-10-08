@@ -26,8 +26,9 @@ class Contact < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #validation
-    validates_presence_of :name,:status,:first_name,:email
-    validates_uniqueness_of :email
+  validates_presence_of :first_name,:last_name,:email
+  validates_uniqueness_of :email
+  validates_inclusion_of :status, in: [true, false]
   #validation
 
   

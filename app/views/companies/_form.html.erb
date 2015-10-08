@@ -17,6 +17,7 @@
                                <%= f.text_field :free_emails, :class => 'form-control',:id=>"formGroupInputSmall" %>
                             </div>
                           </div>
+                          <%if @company.new_record? %>
                           <%= f.fields_for :users do |user_form| %>
                             <div class="form-group form-group-sm">
                               <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Email</label>
@@ -44,18 +45,18 @@
                               <%= user_form.hidden_field :role_id, value: Role.first.id %>
                             </div>
                           <% end %>
+                          <% end %>
                             
-                          <div class="form-group form-group-sm">
+                          <div class="form-group form-group-sm field">
                             <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
-                            <div class="col-sm-8 col-xs-12 custom-radio-input">
-                              <input id="radio01" name="" type="radio" value="">
-                                <label for="radio01"><span></span>Enabled</label>
-                                
-                                <input id="radio02" name="" type="radio" value="">
-                                <label for="radio02"><span></span>Disabled</label>
-                               
-                            </div>
-                          </div>                                     
+                                 <div class="col-sm-8 col-xs-12">
+                                  <%= f.radio_button :status ,1, :checked => @company.new_record? ? true : @company.status ,:id=>"radio01" %>
+                                  <label for="radio01"><span></span>Enabled</label>
+                                  <%= f.radio_button :status ,0, :checked => @company.new_record? ? false : @company.status ,:id=>"radio02" %>
+                                  <label for="radio02"><span></span>Disabled</label>
+                                </div>
+                          </div>
+                                                  
                     </div>
                     <div class="col-lg-4 col-xs-1">
                     <div class="form-group form-group-sm">

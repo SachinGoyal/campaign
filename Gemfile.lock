@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/DavyJonesLocker/client_side_validations.git
+  revision: 9e0b844b8267e2ae1d4c87711cca14c8579cfffd
+  specs:
+    client_side_validations (4.2.0)
+      jquery-rails (>= 3.1.2, < 5.0.0)
+      rails (>= 4.0.0, < 4.3.0)
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 665e50e7511d5418fbcf76ccb15c593f953d197a
   specs:
@@ -64,47 +72,23 @@ GEM
     bootstrap-datepicker-rails (1.4.0)
       railties (>= 3.0)
     builder (3.2.2)
-    cancancan (1.12.0)
-    celluloid (0.17.1.2)
-      bundler
+    cancancan (1.13.0)
+    celluloid (0.17.2)
       celluloid-essentials
       celluloid-extras
       celluloid-fsm
       celluloid-pool
       celluloid-supervision
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
       timers (>= 4.1.1)
-    celluloid-essentials (0.20.2.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-essentials (0.20.5)
       timers (>= 4.1.1)
-    celluloid-extras (0.20.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-extras (0.20.5)
       timers (>= 4.1.1)
-    celluloid-fsm (0.20.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-fsm (0.20.5)
       timers (>= 4.1.1)
-    celluloid-pool (0.20.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-pool (0.20.5)
       timers (>= 4.1.1)
-    celluloid-supervision (0.20.1.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-supervision (0.20.5)
       timers (>= 4.1.1)
     coderay (1.1.0)
     coffee-rails (4.1.0)
@@ -124,7 +108,6 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    dotenv (2.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
@@ -143,13 +126,16 @@ GEM
     hitimes (1.2.3)
     i18n (0.7.0)
     iconv (1.0.4)
-    jbuilder (2.3.1)
+    jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     json (1.8.3)
     kgio (2.10.0)
     less (2.6.0)
@@ -169,14 +155,14 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.6.1)
+    mime-types (2.6.2)
     mini_portile (0.6.2)
-    minitest (5.8.0)
+    minitest (5.8.1)
     multi_json (1.11.2)
     nenv (0.2.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    notiffany (0.0.7)
+    notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
@@ -185,7 +171,7 @@ GEM
     pg (0.18.3)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
-    pry (0.10.1)
+    pry (0.10.2)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
@@ -244,7 +230,6 @@ GEM
     roo (2.1.1)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
-    rspec-logsplit (0.1.3)
     rubyzip (1.1.7)
     sass (3.4.18)
     sass-rails (5.0.4)
@@ -264,10 +249,10 @@ GEM
       redis (~> 3.2, >= 3.2.1)
       redis-namespace (~> 1.5, >= 1.5.2)
     slop (3.6.0)
-    spring (1.3.6)
-    sprockets (3.3.4)
-      rack (~> 1.0)
-    sprockets-rails (2.3.2)
+    spring (1.4.0)
+    sprockets (3.4.0)
+      rack (> 1, < 3)
+    sprockets-rails (2.3.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
@@ -308,6 +293,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-datepicker-rails
   cancancan
+  client_side_validations!
   coffee-rails (~> 4.1.0)
   devise
   execjs
@@ -315,6 +301,7 @@ DEPENDENCIES
   iconv (~> 1.0.3)
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-turbolinks
   paranoia
   pg
   pry

@@ -2,24 +2,25 @@
   <div class="row">
     <div class="col-md-12 col-xs-12">
       <div class="col-lg-2 col-xs-1">&nbsp;</div>
-        <div class="col-md-6 col-xs-10">
-          <%= form_for(@profile, :html => {:class => 'form-horizontal'}) do |f| %>
-            
-            <div class="field form-group form-group-sm">
-              <%= f.label :name, :class => "col-sm-3 col-xs-12 control-label" %>
-              <div class="col-sm-9 col-xs-12"> <%= f.text_field :name, :class => 'form-control' %> </div>
-            </div>          
-            <div class="form-group form-group-sm field">
-              <%= f.label :status, :class => "col-sm-3 col-xs-12 control-label" %>
-              <div class="col-sm-9 col-xs-12">
-                <%= label :status, "Enabled" %>
-                <%= f.radio_button :status, true , :checked => @profile.new_record? ? true : @profile.status , :value => true %>
-                <%= label :status, "Disabled" %>
-                <%= f.radio_button :status, false , :checked => @profile.new_record? ? false : @profile.status , :value => false %>
+      <div class="col-md-5 col-xs-10">
+        <%= form_for(@profile, :html => {:class => 'form-horizontal'}) do |f| %>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.text_field :name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+          </div>
+        </div>
+        <div class="form-group form-group-sm field">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+               <div class="col-sm-8 col-xs-12">
+                <%= f.radio_button :status ,1, :checked => @profile.new_record? ? true : @profile.status ,:id=>"radio01" %>
+                <label for="radio01"><span></span>Enabled</label>
+                <%= f.radio_button :status ,0, :checked => @profile.new_record? ? false : @profile.status ,:id=>"radio02" %>
+                <label for="radio02"><span></span>Disabled</label>
               </div>
-            </div>
+        </div>
 
-            <div class="form-group form-group-sm">
+        <div class="form-group form-group-sm">
               <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
               <div class="col-xs-8 custom-checkbox-style">
               <input type="checkbox" id="c1" name="cc" /><label for="c1"><span></span>Life Style</label>
@@ -30,19 +31,63 @@
               <div class="clearfix"></div> 
             </div>
 
-            <div class="col-md-12 col-xs-12">
-              <div class="col-lg-2 col-xs-1"> </div>
-              <div class="col-md-6 col-xs-10">
-                <div class="form-group custom-from-group">
-                  <%= f.submit %>
-                </div>
-              </div>
-              <div class="col-lg-4 col-xs-1"> </div>
-              <div class="clearfix"></div>
-            </div>
+
+       
+           <div class="col-lg-4 col-xs-1">
+             <div class="form-group form-group-sm">
+             <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+             <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+           </div>
+
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="divider"></div>
+    </div>
+
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-5 col-xs-10">
+        <div class="form-group custom-from-group">
+          <div class="col-xs-4">&nbsp;</div>
+
+          <div class="col-xs-8 text-left">
+            <%= f.submit :Save%>
+
+            <a href="/contacts/">Cancel</a>
+          </div>
           <% end %>
         </div>
+
       </div>
+      <div class="col-lg-4 col-xs-1">&nbsp;</div>
+      <div class="clearfix"></div>
+
     </div>
-  </div>
-</div>  
+  </div><!-- row -->
+</div><!--  custom-container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

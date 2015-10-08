@@ -12,8 +12,8 @@
     <%#= stylesheet_link_tag "https//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600"%>
 
     <%= stylesheet_link_tag "application", :media => "all" %>
-
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag :defaults, "rails.validations" %>
     <%= csrf_meta_tags %>
   
       
@@ -64,7 +64,7 @@
                                 <% end %>
 
                                 <% if can? :read, Newsletter %>
-                                  <li><%= link_to user_newsletters_path(User.first) do %>
+                                  <li><%= link_to newsletters_path do %>
                                      <i class="fa fa-newspaper-o"></i>
                                     <span>Newsletter</span>
                                   <% end %></li>

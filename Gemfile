@@ -6,10 +6,10 @@ gem 'rails', '4.2.1'
 
 # Multi tenant Database
 # gem 'apartment'# Use postgresql as the database for Active Record
-
+#client side validation 
+gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 # Search feature with ransack
 gem 'ransack'
-
 # Login 
 gem 'devise'
 # Permission module
@@ -65,6 +65,7 @@ end
 # Use jquery as the JavaScript library
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.

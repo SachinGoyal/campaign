@@ -33,7 +33,7 @@ class CampaignsController < ApplicationController
   # POST /campaigns
   # POST /campaigns.json
   def create
-    @campaign = current_user.campaigns.build(campaign_params)
+    @campaign = Campaign.new(campaign_params)
     respond_to do |format|
       if @campaign.save
         format.html { redirect_to @campaign, notice: 'Campaign was successfully created.' }

@@ -1,43 +1,66 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="page-title">
+    <div class="title_left"><h2>Newsletter list</h2></div><!-- title_left -->
+      <div class="title_right">
+        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
+          <div class="advance-search"><i class="fa fa-dot-circle-o"></i></div>
+          <div class="custom-add"><%= link_to new_company_path do %><i class="fa fa-plus"></i><% end %></div>
+        </div>
+        <%= render 'shared/keyword_search', :condition => :name_cont %>
+      </div><!--title_right -->
+      <div class="clearfix"></div>                
+  </div><!-- page-title -->
+</div><!--row-->
 
-<h1>Listing Newsletters</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Campeign</th>
-      <th>Template</th>
-      <th>Name</th>
-      <th>Subject</th>
-      <th>From name</th>
-      <th>From address</th>
-      <th>Reply email</th>
-      <th>Created by</th>
-      <th>Updated by</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%- model_class = Newsletter -%>
+<div class="custom-table">
+  <div class="row th">
+    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:campaign) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:template) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:subject) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
+    <div class="col-md-1">&nbsp;</div>
+  </div><!-- row -->
 
-  <tbody>
-    <% @newsletters.each do |newsletter| %>
-      <tr>
-        <td><%= newsletter.campaign.name %></td>
-        <td><%= newsletter.template %></td>
-        <td><%= newsletter.name %></td>
-        <td><%= newsletter.subject %></td>
-        <td><%= newsletter.from_name %></td>
-        <td><%= newsletter.from_address %></td>
-        <td><%= newsletter.reply_email %></td>
-        <td><%= newsletter.created_by %></td>
-        <td><%= newsletter.updated_by %></td>
-        <td><%= link_to 'Show', [current_user,newsletter] %></td>
-        <td><%= link_to 'Edit', edit_user_newsletter_path(current_user ,newsletter) %></td>
-        <td><%= link_to 'Destroy', [current_user , newsletter], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% @newsletters.each do |newsletter| %>
+    <div class="row td">
+      <div class="col-md-1"><input name="" type="checkbox" value=<%=newsletter.id %> ></div>
+      <div class="col-md-2"><%= newsletter.name %></div>
+      <div class="col-md-2"><%= newsletter.campaign.try(:name) %></div>
+      <div class="col-md-2"><%= newsletter.template.try(:name) %></div>
+      <div class="col-md-2"><%= newsletter.subject %></div>
+      <div class="col-md-2"><%= format_date(newsletter, :created_at) %></div>
+      <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
+    </div>
 
-<br>
+     <%= render 'shared/inline_action_link', element: newsletter %>
 
-<%= link_to 'New Newsletter', new_user_newsletter_path(current_user) %>
+  <% end %>
+  <%= render 'shared/bootam_action_link'%>
+  <%#= will_paginate @attributes %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

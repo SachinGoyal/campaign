@@ -12,7 +12,8 @@ class NewslettersController < ApplicationController
   # GET /newsletters
   # GET /newsletters.json
   def index
-    @newsletters = Newsletter.all
+    @q = Newsletter.ransack(params[:q])
+    @newsletters = @q.result(distinct: true)
   end
 
   # GET /newsletters/1

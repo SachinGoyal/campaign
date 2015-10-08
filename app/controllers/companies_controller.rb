@@ -11,8 +11,8 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @search = Company.ransack(params[:q])
-    @companies = @search.result(distinct: true)
+    @q = Company.ransack(params[:q])
+    @companies = @q.result(distinct: true)
    # @companies = Company.all
   end
 

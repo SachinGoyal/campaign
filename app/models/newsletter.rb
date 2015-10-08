@@ -30,6 +30,7 @@ class Newsletter < ActiveRecord::Base
 
   # validation
   validates_presence_of :campaign_id, :template_id,:name,:subject
+  validates_inclusion_of :status, in: [true, false]
   # validation
 
   #association
