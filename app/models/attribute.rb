@@ -29,6 +29,8 @@ class Attribute < ActiveRecord::Base
 
   #association
   belongs_to :company
+  has_and_belongs_to_many :contacts
+  has_and_belongs_to_many :profiles
   #association
 
 end

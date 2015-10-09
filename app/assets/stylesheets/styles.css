@@ -6474,7 +6474,7 @@ z-index: 1081;}
 .green-Border{border-bottom:#00a5a1 1px solid; cursor:pointer; }
 .green-text {color:#00a5a1; font-size:14px;}
 .custom-checkbox-style input[type="checkbox"] {
-    display:none;
+/*    display:none;*/ Sachin checkbox hide
 }
 .custom-checkbox-style input[type="checkbox"] + label span {
     display:inline-block;

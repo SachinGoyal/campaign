@@ -64,8 +64,8 @@ class RolesController < ApplicationController
 
   # GET /roles/1/edit
   def edit
-    @functions = Function.all.group_by(&:agroup)
     @role = Role.find(params[:id])
+    @functions = Function.all.group_by(&:agroup)
   end
 
 

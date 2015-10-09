@@ -34,6 +34,7 @@ class Contact < ActiveRecord::Base
   
   #relation
   has_and_belongs_to_many :profiles
+  has_and_belongs_to_many :interest_areas ,class_name: "Attribute", join_table: "contacts_attributes"
   #relation
 
   # class methods

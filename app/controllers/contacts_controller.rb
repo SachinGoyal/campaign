@@ -29,20 +29,11 @@ class ContactsController < ApplicationController
     @contact = Contact.new
   end
 
-  # GET /contacts/1/edit
-  def edit
-  end
-  # GET /contacts/edit_all
-  def edit_all
-    Contact.edit_all(params[:contacts_id], params[:get_action])  
-    redirect_to index
-  end
-
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(contact_params)
-
+    params.permit!
+    @contact = Contact.new(params[:contact])
     respond_to do |format|
       if @contact.save
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
@@ -54,11 +45,24 @@ class ContactsController < ApplicationController
     end
   end
 
+  # GET /contacts/1/edit
+  def edit
+  end
+  # GET /contacts/edit_all
+  def edit_all
+    Contact.edit_all(params[:contacts_id], params[:get_action])  
+    redirect_to index
+  end
+
+
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
+    params.permit!
+    params[:contact][:interest_area_ids] ||= []
+    @contact = Contact.find(params[:id])
     respond_to do |format|
-      if @contact.update(contact_params)
+      if @contact.update(params[:contact])
         format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @contact }
       else

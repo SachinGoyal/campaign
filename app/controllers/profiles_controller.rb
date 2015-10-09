@@ -26,20 +26,11 @@ class ProfilesController < ApplicationController
     @profile = Profile.new
   end
 
-  # GET /profiles/1/edit
-  def edit
-  end
-
-  # GET /profiles/edit_all
-  def edit_all
-    Profile.edit_all(params[:profiles_id], params[:get_action])  
-    redirect_to index
-  end
-
   # POST /profiles
   # POST /profiles.json
   def create
-    @profile = Profile.new(profile_params)
+    params.permit!
+    @profile = Profile.new(params[:profile])
 
     respond_to do |format|
       if @profile.save
@@ -52,11 +43,25 @@ class ProfilesController < ApplicationController
     end
   end
 
+  # GET /profiles/1/edit
+  def edit
+  end
+
+  # GET /profiles/edit_all
+  def edit_all
+    Profile.edit_all(params[:profiles_id], params[:get_action])  
+    redirect_to index
+  end
+
+ 
+
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
+    params.permit!
+    params[:profile][:interest_area_ids] ||= []
     respond_to do |format|
-      if @profile.update(profile_params)
+      if @profile.update(params[:profile])
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else

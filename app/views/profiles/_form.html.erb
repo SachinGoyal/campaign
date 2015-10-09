@@ -23,10 +23,10 @@
         <div class="form-group form-group-sm">
               <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
               <div class="col-xs-8 custom-checkbox-style">
-              <input type="checkbox" id="c1" name="cc" /><label for="c1"><span></span>Life Style</label>
-              <input type="checkbox" id="c2" name="cc" /><label for="c2"><span></span>Cricket</label>
-              <input type="checkbox" id="c3" name="cc" /><label class="custom-spacing" for="c3"><span></span>Fashion</label>
-              <input type="checkbox" id="c4" name="cc" /><label for="c4"><span></span>Sports</label>
+                <% for attribute in Attribute.all %>
+                  <%= check_box_tag "profile[interest_area_ids][]", attribute.id, @profile.interest_areas.include?(attribute) %>
+                  <%= attribute.name.capitalize %>
+                <% end %>
               </div>
               <div class="clearfix"></div> 
             </div>

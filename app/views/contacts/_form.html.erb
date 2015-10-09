@@ -38,8 +38,9 @@
         <div class="form-group form-group-sm">
                     <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
                     <div class="col-xs-8 custom-checkbox-style">
-                      <% Attribute.pluck(:name).each do |attribute|%>
-                      <input type="checkbox" id=attribute name=attribute /><label for="c1"><span></span><%= attribute %></label>
+                      <% for attribute in Attribute.all %>
+                          <%= check_box_tag "contact[interest_area_ids][]", attribute.id, @contact.interest_areas.include?(attribute) %>
+                          <%= attribute.name.capitalize %>
                       <% end %>
                     </div>
                     <div class="clearfix"></div> 

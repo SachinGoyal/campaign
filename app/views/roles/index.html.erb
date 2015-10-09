@@ -20,7 +20,7 @@
                             <div class="col-md-3"><strong><%=link_to role.name.capitalize ,role_path(role) %></strong></div>
                               <div class="col-md-7">
                               Authorized to:
-                                <%= role.functions.collect(&:agroup).uniq.map(&:capitalize).to_sentence %>
+                                <%= role.functions.collect(&:agroup).uniq.map(&:capitalize).join(' ') %>
                               </div>
                           <div class="col-md-2 roles-icon-lists">
                             <span class="hideandShow-icon">

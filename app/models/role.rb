@@ -20,18 +20,19 @@ class Role < ActiveRecord::Base
   
   acts_as_tenant(:company) #multitenant
 
+  #validation
+  validates :name, presence: true, uniqueness: true, format: { with: /\A[[:word:][:blank:]]+\z/}
+  #validation
 
   # Association
   belongs_to :company
   has_many :users
   has_many :accesses, dependent: :destroy
   has_many :functions, through: :accesses
-  accepts_nested_attributes_for :functions
   # Association
   
-  #validation
-  validates :name, presence: true, uniqueness: true, format: { with: /\A[[:word:][:blank:]]+\z/}
-  #validation
+  accepts_nested_attributes_for :functions
+  
 
   #scope
   default_scope {order('name') }
