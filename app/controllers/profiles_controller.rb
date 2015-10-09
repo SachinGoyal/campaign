@@ -29,8 +29,7 @@ class ProfilesController < ApplicationController
   # POST /profiles
   # POST /profiles.json
   def create
-    params.permit!
-    @profile = Profile.new(params[:profile])
+    @profile = Profile.new(profile_params)
 
     respond_to do |format|
       if @profile.save
@@ -58,10 +57,9 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
-    params.permit!
     params[:profile][:interest_area_ids] ||= []
     respond_to do |format|
-      if @profile.update(params[:profile])
+      if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -89,6 +87,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:name, :status, :created_by, :updated_by)
+      params.require(:profile).permit(:name, :status, :created_by, :updated_by,interest_area_ids: [])
     end
 end

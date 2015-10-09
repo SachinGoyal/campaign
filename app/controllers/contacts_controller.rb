@@ -32,8 +32,7 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    params.permit!
-    @contact = Contact.new(params[:contact])
+    @contact = Contact.new(contact_params)
     respond_to do |format|
       if @contact.save
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
@@ -58,11 +57,10 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
-    params.permit!
     params[:contact][:interest_area_ids] ||= []
     @contact = Contact.find(params[:id])
     respond_to do |format|
-      if @contact.update(params[:contact])
+      if @contact.update(contact_params)
         format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @contact }
       else
@@ -90,6 +88,6 @@ class ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:first_name, :last_name, :email, :status, :created_by, :updated_by)
+      params.require(:contact).permit(:first_name, :last_name, :email, :status, :created_by, :updated_by, interest_area_ids: [])
     end
 end

@@ -48,8 +48,7 @@ class RolesController < ApplicationController
   # POST /roles
   # POST /roles.json
   def create
-    params.permit!
-    @role = Role.new(params[:role])
+    @role = Role.new(role_params)
     @functions = Function.all.group_by(&:agroup)
     respond_to do |format|
       if @role.save
@@ -72,11 +71,10 @@ class RolesController < ApplicationController
   # PUT /roles/1
   # PUT /roles/1.json
   def update
-    params.permit!
     @role = Role.find(params[:id])
     @functions = Function.all.group_by(&:agroup) #need show
     respond_to do |format|
-      if @role.update_attributes(params[:role])
+      if @role.update_attributes(role_params)
         format.html { redirect_to @role, notice: t("frontend.role.confirm_updated") }
         format.json { head :no_content }
       else
@@ -109,6 +107,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:name, :company_id, :function_ids)
+      params.require(:role).permit(:name, :company_id, :function_ids: [])
     end
 end
