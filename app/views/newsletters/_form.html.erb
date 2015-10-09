@@ -1,4 +1,241 @@
-<%= form_for @newsletter do |f| %>
+<div class="custom-container">
+  <%= form_for(@newsletter, :html => {:class => 'form-horizontal'}) do |f| %>
+    <div class="row">
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-6 col-xs-10">
+        <div class="form-horizontal">
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+            <div class="col-sm-9 col-xs-12">
+              <%= f.text_field :name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Select Campaign</label>
+            <div class="col-sm-9 col-xs-12">
+               <select name="newsletter[:campaign_id]" class= 'form-control'>
+                  <% Campaign.all.each do |campaign| %>
+                      <option value="<%= campaign.id %>"><%= campaign.name.capitalize %></option>
+                  <% end %>
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Subject</label>
+            <div class="col-sm-9 col-xs-12">
+              <%= f.text_field :subject, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Select Template</label>
+            <div class="col-sm-9 col-xs-12">
+              <select name="newsletter[:campaign_id]" class= 'form-control'>
+                <% Campaign.all.each do |campaign| %>
+                  <option value="<%= campaign.id %>"><%= campaign.name.capitalize %></option>
+                <% end %>
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Select contact Group</label>
+            <div class="col-sm-9 col-xs-12">
+              <select class="form-control" name=""><option></option></select>
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+            <div class="col-sm-9 col-xs-12">
+              <div class="saprator">or</div>
+            </div>
+          </div>
+
+
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+            <div class="col-sm-9 col-xs-12">
+              <textarea class="form-control" name="" cols="" rows=""></textarea>
+            </div>
+          </div>
+
+
+
+
+        </div><!-- form-horizontal -->
+
+
+      </div>
+      <div class="col-lg-4 col-xs-1">&nbsp;</div>
+      <div class="clearfix"></div>
+
+    </div>
+
+    <div class="col-xs-1">&nbsp;</div>
+    <div class="col-xs-10">
+      <div class="green-Border green-text text-right">Advance Search <i class="fa fa-caret-down"></i></div> 
+      <div class="grey-box">
+        <div class="row">
+
+          <div class="form-group form-group-sm">
+            <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Gender</label>
+            <div class="col-xs-3 custom-radio-input">  <input id="radio01" name="" type="radio" value="">
+              <label for="radio01"><span></span>Male</label>
+
+              <input id="radio02" name="" type="radio" value="">
+              <label for="radio02"><span></span>Female</label>
+            </div>
+            <div class="clearfix"></div> 
+          </div>
+          <div class="clearfix"></div> 
+          <div class="form-group form-group-sm">
+            <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Country</label>
+            <div class="col-xs-3"> <select class="form-control" name=""><option></option></select></div>
+            <div class="clearfix"></div> 
+          </div>
+
+          <div class="form-group form-group-sm">
+            <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">City</label>
+            <div class="col-xs-3"> <input class="form-control" type="text" id="formGroupInputSmall" ></div>
+            <div class="clearfix"></div> 
+          </div>
+
+          <div class="form-group form-group-sm">
+            <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Area of interest</label>
+            <div class="col-xs-3 custom-checkbox-style">
+              <input type="checkbox" id="c1" name="cc" /><label for="c1"><span></span>Life Style</label>
+              <input type="checkbox" id="c2" name="cc" /><label for="c2"><span></span>Cricket</label>
+              <input type="checkbox" id="c3" name="cc" /><label class="custom-spacing" for="c3"><span></span>Fashion</label>
+              <input type="checkbox" id="c4" name="cc" /><label for="c4"><span></span>Sports</label>
+            </div>
+            <div class="clearfix"></div> 
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-1">&nbsp;</div>
+
+
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-6 col-xs-10">
+        <div class="form-horizontal">
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 spacing-top blue-heading col-xs-12 control-label" for="formGroupInputSmall">Sender Settings</label>
+            <div class="col-sm-9 col-xs-12">
+
+            </div>
+          </div>
+
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">From Name</label>
+            <div class="col-sm-9 col-xs-12">
+              <%= f.text_field :from_name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">From Address</label>
+            <div class="col-sm-9 col-xs-12">
+              <%= f.text_field :from_address, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Reply-To Address</label>
+            <div class="col-sm-9 col-xs-12">
+              <%= f.text_field :reply_email, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">CC Email</label>
+            <div class="col-sm-9 col-xs-12">
+              <input class="form-control" type="text" id="formGroupInputSmall" >
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">BCC Email</label>
+            <div class="col-sm-9 col-xs-12">
+              <input class="form-control" type="text" id="formGroupInputSmall" >
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-4 col-xs-1">&nbsp;</div>
+      <div class="clearfix"></div>
+      <div class="custom-divider"></div>
+    </div>
+
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-6 col-xs-10">
+        <div class="form-horizontal">
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 blue-heading col-xs-12 control-label" for="formGroupInputSmall">Sample Email</label>
+            <div class="col-sm-9 col-xs-12">
+
+            </div>
+          </div>
+
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Email Address</label>
+            <div class="col-sm-9 col-xs-12">
+              <input class="form-control" type="text" id="formGroupInputSmall" >
+              <span class="small">Send a copy of the campaign to the following email address(es), separated by commas:</span>
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+            <div class="col-sm-9 col-xs-12 custom-radio-input">
+              <input id="radio01" name="" type="radio" value="">
+              <label for="radio01"><span></span>Auto Responder Rules</label>
+              <input class="form-control" type="text" id="formGroupInputSmall" >
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+            <div class="col-sm-9 col-xs-12 custom-radio-input">
+              <input id="radio02" name="" type="radio" value="">
+              <label for="radio02"><span></span>Auto Sent</label>
+              <input class="form-control" type="text" id="formGroupInputSmall" >
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="col-lg-4 col-xs-1">&nbsp;</div>
+      <div class="clearfix"></div>
+      <div class="custom-divider"></div>
+    </div>
+
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-6 col-xs-10">
+        <div class="form-group custom-from-group">
+          <button>Preview</button>
+          <button>Save</button>
+          <a href="#">Cancel</a>
+        </div>
+
+      </div>
+      <div class="col-lg-4 col-xs-1">&nbsp;</div>
+      <div class="clearfix"></div>
+
+    </div>
+  </div><!-- row -->
+ <% end %>
+</div><!--  custom-container -->
+
+
+
+
+
+
+
+
+<% if false %>
+<%= form_for [current_user ,@newsletter] do |f| %>
   <% if @newsletter.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@newsletter.errors.count, "error") %> prohibited this newsletter from being saved:</h2>
@@ -50,4 +287,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+<% end %>
 <% end %>
