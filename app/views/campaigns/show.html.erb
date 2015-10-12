@@ -24,12 +24,22 @@
               </div>
             </div>
 
+            <% if @campaign.description.present? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Description</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @campaign.description %>
+                </div>
+              </div>
+            <% end %>
+
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Description</label>
+              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
               <div class="col-sm-8 col-xs-12 default-without-input">
-                <%= @campaign.description%>
+                <%= display_status(@campaign) %>
               </div>
             </div>
+
 
           
 

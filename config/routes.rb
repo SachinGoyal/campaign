@@ -17,7 +17,12 @@ Rails.application.routes.draw do
     end
   end
   resources :campaigns
-  resources :attributes
+  resources :attributes do
+    member do
+      get 'edit_all'
+    end
+  end 
+
   resources :roles
   resources :newsletters
   resources :profiles do

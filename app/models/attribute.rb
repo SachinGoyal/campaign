@@ -34,4 +34,22 @@ class Attribute < ActiveRecord::Base
   has_and_belongs_to_many :profiles
   #association
 
+  #Class Methods
+  class << self
+    def edit_all(ids, action)
+      action = action.strip.downcase
+      ids.reject!(&:empty?)
+      Attribute.find(ids).each do |attribute|
+        if action == 'delete'
+          attribute.destroy!
+        else
+          status = action == 'enable' ? 1 : 0
+          attribute.update(:status => status )
+        end
+      end
+    end
+  end
+  #Class Methods
+
+
 end

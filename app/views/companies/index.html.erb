@@ -31,7 +31,7 @@
       <div class="col-md-2"><%= company.name %>&nbsp;</div>
       <div class="col-md-1"><%= company.subdomain %>&nbsp;</div>
       <div class="col-md-1"><%= company.free_emails %>&nbsp;</div>
-      <div class="col-md-1"><%= company.status ? 'Enabled' : 'Disabled' %>&nbsp;</div>
+      <div class="col-md-1"><%= display_status(company) %>&nbsp;</div>
       <div class="col-md-2"><%= format_date(company, :created_at) %>&nbsp;</div>
       <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
     </div>

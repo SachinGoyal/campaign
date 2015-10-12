@@ -17,7 +17,7 @@
       <div class="col-md-1"><input name="" type="checkbox" value=<%= user.id %> ></div>
       <div class="col-md-2"><%= user.username %>&nbsp;</div>
       <div class="col-md-2"><%= user.email %>&nbsp;</div>
-      <div class="col-md-2"><%= user.status ? 'Enabled' : 'Disabled' %>&nbsp;</div>
+      <div class="col-md-2"><%= display_status(user) %>&nbsp;</div>
       <div class="col-md-2"><%= format_date(user, :created_at) %>&nbsp;</div>
       <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
     </div>

@@ -45,5 +45,5 @@
   <%= @newsletter.updated_by %>
 </p>
 
-<%= link_to 'Edit', edit_user_newsletter_path(current_user ,@newsletter) %> |
-<%= link_to 'Back', user_newsletters_path(current_user) %>
+<%= link_to 'Edit', edit_newsletter_path(@newsletter) %> |
+<%= link_to 'Back', newsletters_path %>

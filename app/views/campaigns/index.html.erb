@@ -29,7 +29,7 @@
       <div class="col-md-1"><input name="" type="checkbox" value=<%=campaign.id%> ></div>
       <div class="col-md-2"><%= campaign.name %>&nbsp;</div>
       <div class="col-md-2"><%= campaign.description %>&nbsp;</div>
-      <div class="col-md-2"><%= campaign.status ? 'Enabled' : 'Disabled' %>&nbsp;</div>
+      <div class="col-md-2"><%= display_status(campaign) %>&nbsp;</div>
       <div class="col-md-2"><%= format_date(campaign, :created_at) %>&nbsp;</div>
       <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
     </div>
