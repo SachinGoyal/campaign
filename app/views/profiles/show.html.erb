@@ -24,26 +24,22 @@
               </div>
             </div>
 
-            <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">No of free Emails</label>
-              <div class="col-sm-8 col-xs-12 default-without-input">
-                <%= @profile.status%>
-              </div>
-            </div>
 
             <div class="form-group form-group-sm">
               <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
               <div class="col-sm-8 col-xs-12 default-without-input">
-                <%= @profile.status%>
+                <%= display_status(@profile) %>
               </div>
             </div>
 
-             <div class="form-group form-group-sm">
-              <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
-              <div class="col-sm-8 col-xs-12 default-without-input">
-                <%=  @profile.interest_areas.collect(&:name).uniq.map(&:capitalize).join(' ') %> </div>
-                <div class="clearfix"></div> 
-              </div>
+            <% unless @profile.interest_areas.empty? %>            
+               <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  @profile.interest_areas.collect(&:name).uniq.map(&:capitalize).join(' ') %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>    
             </form>
 
 

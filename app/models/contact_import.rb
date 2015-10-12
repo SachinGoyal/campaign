@@ -19,7 +19,7 @@ class ContactImport
   end
 
   def save
-    if valid?
+    # if valid?
       if imported_contacts.map(&:valid?).all?
         imported_contacts.each(&:save!)
         true
@@ -31,9 +31,9 @@ class ContactImport
         end
         false
       end
-    else
-      false
-    end
+    # else
+    #   false
+    # end
   end
 
   def imported_contacts

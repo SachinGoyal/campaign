@@ -47,7 +47,7 @@
                 <%= label :status, "Enabled" %>
                 <%= f.radio_button :status, true , :checked => @user.new_record? ? true : @user.status , :value => true %>
                 <%= label :status, "Disabled" %>
-                <%= f.radio_button :status, false , :checked => @user.new_record? ? false : @user.status , :value => false %>
+                <%= f.radio_button :status, false , :checked => @user.new_record? ? false : !@user.status , :value => false %>
               </div>
             </div>
             <div class="col-md-12 col-xs-12">

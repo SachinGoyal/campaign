@@ -1,4 +1,5 @@
 <%#= content_tag :a, "Import", href: "#", data: {toggle: 'modal', target: '#mymodal'} %>
+
 <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
 <div id="myModal" class="modal fade" role="dialog">
 <div class="modal-dialog">
@@ -10,7 +11,8 @@
       	</div>
       	<div class="modal-body">
        		<div class="popup-container">
-    			<%= form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, :html => {"data-type" => :js}  do |f| %>  
+          <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, data: {type: "script"} do |f| %>
+    			
             <% if @contact_import and @contact_import.errors.any? %>
               <div id="error_explanation">
                 <%= render 'errors', :locals => {:model_name => @contact_import} %>
@@ -43,7 +45,9 @@
                       <span class="help-block"></span>
             			</div>
             		</div>
-            		<div class="col-xs-3 green-import-btn"><button>Import <i class="fa fa-cloud-download"></i></button></div>
+            		<div class="col-xs-3 green-import-btn">
+                  <%= button_tag("Import", type: 'submit', class: "fa fa-cloud-downloadt") %>
+                </div>
             	  <div class="clearfix"></div>
         		<% end %>
         		</div>
@@ -80,3 +84,19 @@
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {  
+  $('.new_contact_import').submit(function() {      
+    $.ajax({
+      type: "POST",
+      url: $(this).attr('action'),
+      data: new FormData( this ),
+      processData: false,
+      contentType: false
+    });
+    return false; // prevents normal behaviour
+  });
+});
+</script>
