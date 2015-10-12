@@ -30,6 +30,7 @@ class Profile < ActiveRecord::Base
   
   #validation
   validates_presence_of :name
+  validates_uniqueness_to_tenant :name
   validates_inclusion_of :status, in: [true, false]  
   #validation
 

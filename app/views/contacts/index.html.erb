@@ -16,25 +16,28 @@
 </div><!--row-->
 
 
-<%- model_class = Profile -%>
+<%- model_class = Contact -%>
 <div class="custom-table">
   <div class="row th">
     <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:first_name) %></div>
-    <div class="col-md-2">Last Name</div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:last_name) %></div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:email) %></div>
     <div class="col-md-1"><%= model_class.human_attribute_name(:status) %></div>
     <div class="col-md-1"><%= model_class.human_attribute_name(:created_at) %></div>
+    <div class="col-md-1"><%= model_class.human_attribute_name(:profile_id) %></div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
   <% @contacts.each do |contact| %>
     <div class="row td">
       <div class="col-md-1"><input name="" type="checkbox" value=<%= contact.id %> ></div>
+      <div class="col-md-2"><%= contact.first_name %>&nbsp;</div>
       <div class="col-md-2"><%= contact.last_name %>&nbsp;</div>
       <div class="col-md-2"><%= contact.email %>&nbsp;</div>
       <div class="col-md-1"><%= contact.status ? 'Enabled' : 'Disabled' %>&nbsp;</div>
       <div class="col-md-2"><%= format_date(contact, :created_at) %>&nbsp;</div>
+      <div class="col-md-2"><%= contact.profiles.map(&:name).join(", ") %>&nbsp;</div>
       <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
     </div>
 
