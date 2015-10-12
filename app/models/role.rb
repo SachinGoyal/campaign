@@ -32,11 +32,11 @@ class Role < ActiveRecord::Base
   # Association
   
   accepts_nested_attributes_for :functions
-  
 
   #scope
   default_scope {order('name') }
   #scope
+
 
   def name=(value)
     write_attribute(:name, value.downcase)

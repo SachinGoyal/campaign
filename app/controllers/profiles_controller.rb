@@ -1,11 +1,11 @@
 class ProfilesController < ApplicationController 
   
-  layout 'dashboard' # set custom layout 
-  
-  load_and_authorize_resource #cancan
+  layout 'dashboard' # set custom layout   
+
   
   #filter
   before_action :authenticate_user!
+  load_and_authorize_resource #cancan
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   #filter
 

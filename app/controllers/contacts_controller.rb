@@ -11,7 +11,7 @@ class ContactsController < ApplicationController
 
   def import  
     Contact.import_records(params[:file], params[:profile_id])  
-    redirect_to root_url, notice: "Contacts imported."  
+    redirect_to profiles_path, notice: "Contacts imported."  
   end  
  
   def search

@@ -1,14 +1,17 @@
 class ContactImportsController < ApplicationController
-   def new
+  def new
     @contact_import = ContactImport.new
   end
 
   def create
+    # @contact_import = ContactImport.initialize_values(params[:contact_import])
+    
     @contact_import = ContactImport.new(params[:contact_import])
+    
     if @contact_import.save
-      redirect_to root_url, notice: "Imported contacts successfully."
+      redirect_to profiles_path, notice: "Imported contacts successfully."
     else
-      render :new
+      render 'create.js.erb'
     end
   end
 end

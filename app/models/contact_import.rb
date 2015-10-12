@@ -31,6 +31,8 @@ class ContactImport
         end
         false
       end
+    # else
+    #   false
     # end
   end
 

@@ -11,4 +11,8 @@ module ApplicationHelper
   def format_date(obj, field)
   	obj.send(field).send(:strftime, "%d/%m/%y, %I:%M %p")
   end
+
+  def display_status(obj)
+    obj.status ? 'Enabled' : 'Disabled' 
+  end
 end

@@ -7,7 +7,7 @@
 #  first_name :string
 #  last_name  :string
 #  email      :string
-#  status     :boolean
+#  status     :boolean          default(TRUE)
 #  created_by :integer
 #  updated_by :integer
 #  deleted_at :datetime
@@ -27,7 +27,8 @@ class Contact < ActiveRecord::Base
 
   #validation
   validates_presence_of :first_name,:last_name,:email
-  validates_uniqueness_of :email
+  validates_uniqueness_to_tenant :email
+  validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
   #validation
 
