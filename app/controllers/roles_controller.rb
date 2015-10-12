@@ -71,6 +71,7 @@ class RolesController < ApplicationController
   # PUT /roles/1
   # PUT /roles/1.json
   def update
+    params[:role][:function_ids] ||= []
     @role = Role.find(params[:id])
     @functions = Function.all.group_by(&:agroup) #need show
     respond_to do |format|

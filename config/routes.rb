@@ -7,8 +7,13 @@ Rails.application.routes.draw do
   resources :functions
   resources :settings
   resources :contacts do
-    collection { post :import }  
-    member {get :edit_all}
+    collection do
+     post :import 
+     get :search
+    end
+    member do 
+      get :edit_all
+    end
   end
   resources :campaigns
   resources :attributes

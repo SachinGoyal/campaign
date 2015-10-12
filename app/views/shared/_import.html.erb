@@ -1,5 +1,7 @@
 <%#= content_tag :a, "Import", href: "#", data: {toggle: 'modal', target: '#mymodal'} %>
 <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
+<%= link_to "Export Excel", contacts_path(format: "xls") %>|
+<%= link_to "Export CSV", contacts_path(format: "csv") %> 
 <div id="myModal" class="modal fade" role="dialog">
 <div class="modal-dialog">
     <!-- Modal content-->

@@ -13,10 +13,28 @@ class ContactsController < ApplicationController
     Contact.import_records(params[:file], params[:profile_id])  
     redirect_to root_url, notice: "Contacts imported."  
   end  
+ 
+  def search
+    @q  = User.search(params[:q])
+    @users = @q.result(distinct: true).page(params[:page])
+    @q.build_condition    
+  end
+
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @q = Contact.ransack(params[:q])
+    @contacts = @q.result(distinct: true).page(params[:page])       
+    respond_to do |format|
+      format.html
+      if current_user.is_admin?
+        format.csv { send_data @contacts.to_admin_csv }
+        format.xls { send_data @contacts.to_admin_csv(col_sep: "\t") }
+      else
+        format.csv { send_data @contacts.to_csv }
+        format.xls { send_data @contacts.to_csv(col_sep: "\t") }
+      end        
+    end
   end
 
   # GET /contacts/1

@@ -6,22 +6,26 @@
     <div class="title_left"><h2>Contact list</h2></div><!-- title_left -->
       <div class="title_right">
         <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
-          <div class="advance-search"><i class="fa fa-dot-circle-o"></i></div>
+          <div class="advance-search">
+            <%= link_to search_contacts_path do %>
+             <i class="fa fa-dot-circle-o"></i>
+            <% end %>
+          </div>
           <div class="custom-add"><%= link_to new_contact_path do %><i class="fa fa-plus"></i><% end %></div>
         </div>
-        <%#= render 'shared/keyword_search', :condition => :name_cont %>
+        <%= render 'shared/keyword_search', :condition => :email_cont %>
       </div><!--title_right -->
       <div class="clearfix"></div>                
   </div><!-- page-title -->
 </div><!--row-->
 
 
-<%- model_class = Profile -%>
+<%- model_class = Contact -%>
 <div class="custom-table">
   <div class="row th">
     <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:first_name) %></div>
-    <div class="col-md-2">Last Name</div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:last_name) %></div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:email) %></div>
     <div class="col-md-1"><%= model_class.human_attribute_name(:status) %></div>
     <div class="col-md-1"><%= model_class.human_attribute_name(:created_at) %></div>
@@ -31,6 +35,7 @@
   <% @contacts.each do |contact| %>
     <div class="row td">
       <div class="col-md-1"><input name="" type="checkbox" value=<%= contact.id %> ></div>
+      <div class="col-md-2"><%= contact.first_name %>&nbsp;</div>
       <div class="col-md-2"><%= contact.last_name %>&nbsp;</div>
       <div class="col-md-2"><%= contact.email %>&nbsp;</div>
       <div class="col-md-1"><%= contact.status ? 'Enabled' : 'Disabled' %>&nbsp;</div>

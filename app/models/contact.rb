@@ -63,7 +63,36 @@ class Contact < ActiveRecord::Base
         (profile ? profile.contacts : Contact).create(row.to_hash) 
       end      
     end
-  
+    
+    #Company Export contact 
+    def to_csv(options = {})
+      column_names = ["first_name", "last_name", "email", "status","created_at", "updated_at"] 
+      CSV.generate(options) do |csv|
+        csv << column_names
+        all.each do |contact|
+          contact = contact.attributes.values_at(*column_names)
+          contact[3] = contact[3].present? ? 'enable' : 'desable' # override product status to enabel desable
+          csv << contact
+        end
+      end
+    end
+
+    #Admin Export
+    def to_admin_csv(options = {})
+      column_names = ["company_id", "first_name", "last_name", "email", "status", "deleted_at", "created_at", "updated_at"] 
+      column_names_csv = ["company", "first_name", "last_name", "email", "status", "deleted_at", "created_at", "updated_at"] 
+      CSV.generate(options) do |csv|
+        csv << column_names_csv
+        all.each do |contact|
+          contact = contact.attributes.values_at(*column_names)
+          contact[0] = Company.find(contact[0]).try(:name) if contact[0].present?
+          contact[4] = contact[4].present? ? 'enable' : 'desable' # override product status to enabel desable
+          csv << contact
+        end
+      end
+    end
+
   end
   # class methods
+
 end
