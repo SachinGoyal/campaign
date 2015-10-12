@@ -40,7 +40,7 @@
 
   <% end %>
   <%= render 'shared/bootam_action_link'%>
-  <%#= will_paginate @attributes %>
+  <%= will_paginate @companies , renderer: BootstrapPagination::Rails %>
 </div>
 
 

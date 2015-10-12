@@ -24,7 +24,7 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def index
     @q = Contact.ransack(params[:q])
-    @contacts = @q.result(distinct: true).page(params[:page])       
+    @contacts = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)       
     respond_to do |format|
       format.html
       if current_user.is_admin?

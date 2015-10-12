@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :companies
   resources :functions
   resources :settings
+  resources :templates
   resources :contacts do
     collection do
      post :import 
@@ -32,7 +33,6 @@ Rails.application.routes.draw do
   resources :users do
     collection { post :search, to: 'users#search'
                 get :search, to: 'users#search' }
-    resources :templates
   end
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.

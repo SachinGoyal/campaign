@@ -36,7 +36,7 @@
   <%= render 'shared/inline_action_link', element: campaign %>
   <% end %>
   <%= render 'shared/bootam_action_link'%>
-  <%= will_paginate @campaigns %>
+  <%= will_paginate @campaigns, renderer: BootstrapPagination::Rails %>
 </div>
 
 

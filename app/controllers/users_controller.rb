@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def index
     User.all
     @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true).page(params[:page])
+    @users = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
     # if current_user.is_superadmin?
     # else current_user.is_companyadmin?
     #   @users = current_user.company.users

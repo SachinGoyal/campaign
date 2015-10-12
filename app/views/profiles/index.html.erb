@@ -41,5 +41,5 @@
 
   <% end %>
   <%= render 'shared/bootam_action_link'%>
-  <%= will_paginate @profiles %>
+  <%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>
 </div>

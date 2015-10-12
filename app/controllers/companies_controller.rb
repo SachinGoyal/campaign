@@ -12,7 +12,7 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @q = Company.ransack(params[:q])
-    @companies = @q.result(distinct: true)
+    @companies = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
    # @companies = Company.all
   end
 

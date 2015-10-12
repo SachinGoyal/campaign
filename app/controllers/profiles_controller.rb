@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @q = Profile.ransack(params[:q])
-    @profiles = @q.result(distinct: true).page(params[:page])
+    @profiles = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /profiles/1

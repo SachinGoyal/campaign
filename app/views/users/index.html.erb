@@ -21,3 +21,4 @@
 </div><!--row-->
 <% model_class = 'User' %>
 <%= render 'results', model_class: model_class %>
+<%= will_paginate @users , renderer: BootstrapPagination::Rails%>

@@ -13,7 +13,7 @@ class CampaignsController < ApplicationController
   # GET /campaigns.json
   def index
     @q = Campaign.ransack(params[:q])
-    @campaigns = @q.result(distinct: true).page(params[:page])
+    @campaigns = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /campaigns/1

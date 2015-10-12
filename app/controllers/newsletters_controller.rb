@@ -13,7 +13,7 @@ class NewslettersController < ApplicationController
   # GET /newsletters.json
   def index
     @q = Newsletter.ransack(params[:q])
-    @newsletters = @q.result(distinct: true)
+    @newsletters = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /newsletters/1

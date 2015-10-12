@@ -70,7 +70,7 @@
                                 <% end %>
                                 
                                 <% if can? :read, Template %>
-                                  <li><%= link_to user_templates_path(User.first) do %>
+                                  <li><%= link_to templates_path do %>
                                      <i class="fa fa-clone"></i>
                                     <span>Templates</span>
                                   <% end %></li>
