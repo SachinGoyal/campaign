@@ -21,7 +21,8 @@ class Role < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #validation
-  validates :name, presence: true, uniqueness: true, format: { with: /\A[[:word:][:blank:]]+\z/}
+  validates :name, presence: true, format: { with: /\A[[:word:][:blank:]]+\z/}
+  validates_uniqueness_to_tenant :name
   #validation
 
   # Association
