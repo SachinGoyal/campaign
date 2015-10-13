@@ -22,6 +22,7 @@ class ContactImport
     # if valid?
       if imported_contacts.map(&:valid?).all?
         imported_contacts.each(&:save!)        
+        # binding.pry
         (Profile.find(profile_id.to_i).contacts << imported_contacts) if profile_id
         true
       else

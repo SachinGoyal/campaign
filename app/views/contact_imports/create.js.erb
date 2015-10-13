@@ -2,9 +2,10 @@
 	$('#error_explanation').append("<%= j render partial: 'shared/errors', locals: {model_name: @contact_import } %>");
 <% else %>
 	$('#myModal').modal('hide');
+	$('#new_contact_import').trigger("reset");
 	<% if @profile %>
-		var new_contact_count = parseInt($("#profile_<%= profile.id %> .contact_count").html()) + 1;
-		$("#profile_<%= profile.id %> .contact_count").html("<%= new_contact_count %>");
+		var new_contact_count = parseInt($("#profile_<%= @profile.id %> .contact_count").html()) + 1;
+		$("#profile_<%= @profile.id %> .contact_count").html(new_contact_count);
 	<% end %>
 
 <% end %>
