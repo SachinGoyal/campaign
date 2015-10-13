@@ -6533,7 +6533,7 @@ input[readonly] {
 .sample-fields-heading{font-size:14px; color:#282f41;margin-bottom:10px;}
 
 .custom-dark-btn {padding:4px 12px!important; background-color:#3a455b; border-radius:0px;margin-right: 0px; }
-.green-import-btn button{background-color:#01bbba; border:none; font-size: 14px; padding:5px 14px; color:#fff;}
+.green-import-btn button{background-color:#01bbba; border:none; font-size: 14px; padding:8px 14px; color:#fff;}
 .popup-sample-table table th{background-color:#eeeeee; padding:5px; color:#282f41; font-weight:normal;}
 .popup-sample-table table td{background-color:#eeeeee; background-color:#fff; padding:5px; color:#282f41;}
 .popup-sample-table table tr{border:1px solid #d9dee4;}

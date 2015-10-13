@@ -18,21 +18,20 @@
       	<div class="modal-body">
        		<div class="popup-container">
           <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, data: {type: "script"} do |f| %>
-    			
-            <% if @contact_import and @contact_import.errors.any? %>
-              <div id="error_explanation">
-                <%= render 'errors', :locals => {:model_name => @contact_import} %>
+    			    <div id="error_explanation">
+                <% if @contact_import and @contact_import.errors.any? %>              
+                  <%= render 'errors', :locals => {:model_name => @contact_import} %>
+                <% end %>
               </div>
-            <% end %>
 
 		    	  <div class="row">
 		        	<div class="form-group form-group-sm">
 		            <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select Profile</label>
 		            <div class="col-xs-6">
-		            	<% if current_user.is_admin? %>
-  							    <%= select_tag :profile_id, options_for_select(Profile.pluck(:name, :id)), :class => "form-control" %>
-  						    <% else %>
-  						    <% end %>
+		            	<%# if current_user.is_admin? %>
+  							    <%= f.select :profile_id, options_for_select(Profile.pluck(:name, :id)),  {include_blank: "Select Profile"}, { :class => 'form-control' } %>
+  						    <%# else %>
+  						    <%# end %>
 		            </div>
 		            <div class="col-xs-3">&nbsp;</div>
 		            <div class="clearfix"></div>
@@ -42,19 +41,22 @@
             		<label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select File</label>
             		<div class="col-xs-6">
             			<div class="input-group">
-                			<input type="text" class="form-control" readonly="">
+                			<input type="text" class="form-control" readonly="" placeholder = "Upload only CSV files">
                 			<span class="input-group-btn">
             	        		<span class="btn btn-primary btn-file custom-dark-btn">
-                	        		<%= f.file_field :file %> Browse
-                    			</span>
+                	        		<%= f.file_field :file, :accept => "text/csv" %> Browse
+                    			</span>                          
                 			</span>
+
                       <span class="help-block"></span>
             			</div>
             		</div>
             		<div class="col-xs-3 green-import-btn">
-                  <%= button_tag("Import", type: 'submit', class: "fa fa-cloud-downloadt") %>
+                  <%= button_tag("Import", type: 'submit', class: "fa fa-cloud-download") %>
                 </div>
+
             	  <div class="clearfix"></div>
+
         		<% end %>
         		</div>
     		</div>
@@ -66,17 +68,15 @@
     			<div class="col-xs-12 popup-sample-table">
         			<table width="100%" border="0" cellspacing="0" cellpadding="0">
              			<tr>
-              				<th scope="col">First Name</th>
-              				<th scope="col">Last Name</th>
-              				<th scope="col">Email Address</th>
-              				<th scope="col">Gender</th>	
+              				<th scope="col">first_name</th>
+              				<th scope="col">last_name</th>
+              				<th scope="col">email</th>
              			</tr>
              			
              			<tr>
 			              <td scope="col">John</td>
 			              <td scope="col">Doe</td>
 			              <td scope="col">John.Doe@gmail.com</td>
-			              <td scope="col">Male</td>	
 			            </tr>
             		</table>
         		</div>
