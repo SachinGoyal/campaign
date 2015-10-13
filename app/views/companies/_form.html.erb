@@ -1,112 +1,99 @@
-           <div class="custom-container">
-              <div class="row">
-                <div class="col-md-12 col-xs-12">
-                  <div class="col-lg-2 col-xs-1">&nbsp;</div>
-                    <div class="col-md-5 col-xs-10">
-                      <%= form_for @company, :html => { :class => "form-horizontal company" } do |f| %>
-                          
-                          <div class="form-group form-group-sm">
-                            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Company Name</label>
-                            <div class="col-sm-8 col-xs-12">
-                              <%= f.text_field :name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
-                            </div>
-                          </div>
-                          <div class="form-group form-group-sm">
-                            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Number of Free Email's</label>
-                            <div class="col-sm-8 col-xs-12">
-                               <%= f.text_field :free_emails, :class => 'form-control',:id=>"formGroupInputSmall" %>
-                            </div>
-                          </div>
-                          <%if @company.new_record? %>
-                          <%= f.fields_for :users do |user_form| %>
-                            <div class="form-group form-group-sm">
-                              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Email</label>
-                              <div class="col-sm-8 col-xs-12">
-                                <%= user_form.text_field :email, :class => 'form-control',:id=>"formGroupInputSmall" %>
-                              </div>
-                            </div>
-                             <div class="form-group form-group-sm">
-                              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">User Name</label>
-                              <div class="col-sm-8 col-xs-12">
-                                  <%= user_form.text_field :username, :class => 'form-control',:id=>"formGroupInputSmall" %>
-                              </div>
-                            </div>
-                             <div class="form-group form-group-sm">
-                              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Password</label>
-                              <div class="col-sm-8 col-xs-12">
-                                  <%= user_form.password_field :password, :class => 'form-control',:id=>"formGroupInputSmall" %>
-                              </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Confirm Password</label>
-                              <div class="col-sm-8 col-xs-12">
-                                <%= user_form.password_field :password_confirmation, :class => 'form-control',:id=>"formGroupInputSmall" %>
-                              </div>
-                              <%= user_form.hidden_field :role_id, value: Role.first.id %>
-                            </div>
-                          <% end %>
-                          <% end %>
-                            
-                          <div class="form-group form-group-sm field">
-                            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
-                                 <div class="col-sm-8 col-xs-12">
-                                  <%= f.radio_button :status ,1, :checked => @company.new_record? ? true : @company.status ,:id=>"radio01" %>
-                                  <label for="radio01"><span></span>Enabled</label>
-                                  <%= f.radio_button :status ,0, :checked => @company.new_record? ? false : @company.status ,:id=>"radio02" %>
-                                  <label for="radio02"><span></span>Disabled</label>
-                                </div>
-                          </div>
-                                                  
-                    </div>
-                    <div class="col-lg-4 col-xs-1">
-                    <div class="form-group form-group-sm">
-                            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
-                            <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
-                          </div>
-                          
-                          <div class="form-group form-group-sm">
-                            <label class="col-sm-1 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
-                            <div class="col-sm-11 col-xs-12 custom-radio-input">( Per Month )</div>
-                          </div>
-                          </div>
-                    <div class="clearfix"></div>
-                    <div class="divider"></div>
+<div class="custom-container">
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-5 col-xs-10">
+        <%= form_for @company, :html => { :class => "form-horizontal company" } do |f| %>
+                      
+          <div class="form-group form-group-sm">
+            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Company Name</label>
+            <div class="col-sm-8 col-xs-12">
+              <%= f.text_field :name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+            </div>
+          </div>
+
+          <div class="form-group form-group-sm">
+            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Number of Free Email's</label>
+            <div class="col-sm-8 col-xs-12">
+               <%= f.text_field :free_emails, :class => 'form-control',:id=>"formGroupInputSmall" %>
+            </div>
+          </div>
+          <% if @company.new_record? %>
+            <%= f.fields_for :users do |user_form| %>
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Email</label>
+                <div class="col-sm-8 col-xs-12">
+                  <%= user_form.text_field :email, :class => 'form-control',:id=>"formGroupInputSmall" %>
                 </div>
-                             
-                <div class="col-md-12 col-xs-12">
-                  <div class="col-lg-2 col-xs-1">&nbsp;</div>
-                    <div class="col-md-5 col-xs-10">
-                      <div class="form-group custom-from-group">
-                        <div class="col-xs-4">&nbsp;</div>
-                        
-                        <div class="col-xs-8 text-left">
-                            <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
-                            <%= link_to "Cancel", companies_path %>
-                            </div>
-                        <% end %>
-                        </div>
-                         
-                    </div>
-                    <div class="col-lg-4 col-xs-1">&nbsp;</div>
-                    <div class="clearfix"></div>
-                   
-                </div>
-              </div><!-- row -->
-              </div><!--  custom-container -->
+              </div>
               
-
-
-
-
-
-
-
-
-   
-
-    
-
-   
-
-
-  
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">User Name</label>
+                <div class="col-sm-8 col-xs-12">
+                  <%= user_form.text_field :username, :class => 'form-control',:id=>"formGroupInputSmall" %>
+                </div>
+              </div>
+              
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Password</label>
+                <div class="col-sm-8 col-xs-12">
+                  <%= user_form.password_field :password, :class => 'form-control',:id=>"formGroupInputSmall" %>
+                </div>
+              </div>
+              
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Confirm Password</label>
+                <div class="col-sm-8 col-xs-12">
+                  <%= user_form.password_field :password_confirmation, :class => 'form-control',:id=>"formGroupInputSmall" %>
+                </div>
+                <%= user_form.hidden_field :role_id, value: Role.company_admin.first.id %>
+                <%= user_form.hidden_field :status, value: true %>
+              </div>
+            <% end %>
+          <% end %>
+                            
+          <div class="form-group form-group-sm field">
+            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+            <div class="col-sm-8 col-xs-12">
+              <%= f.radio_button :status ,1, :checked => @company.new_record? ? true : @company.status ,:id=>"radio01" %>
+              <label for="radio01"><span></span>Enabled</label>
+              <%= f.radio_button :status ,0, :checked => @company.new_record? ? false : @company.status ,:id=>"radio02" %>
+              <label for="radio02"><span></span>Disabled</label>
+            </div>
+          </div>                                                  
+        
+        </div>
+        <div class="col-lg-4 col-xs-1">
+          <div class="form-group form-group-sm">
+            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+            <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+          </div>
+              
+          <div class="form-group form-group-sm">
+            <label class="col-sm-1 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+            <div class="col-sm-11 col-xs-12 custom-radio-input">( Per Month )</div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="divider"></div>
+      </div>
+                             
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-5 col-xs-10">
+          <div class="form-group custom-from-group">
+            <div class="col-xs-4">&nbsp;</div>
+                        
+            <div class="col-xs-8 text-left">
+              <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
+              <%= link_to "Cancel", companies_path %>
+            </div>
+          <% end %>
+        </div>
+                         
+      </div>
+      <div class="col-lg-4 col-xs-1">&nbsp;</div>
+      <div class="clearfix"></div>
+    </div>
+  </div><!-- row -->
+</div><!--  custom-container -->
