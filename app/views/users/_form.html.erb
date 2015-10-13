@@ -1,3 +1,18 @@
+<script type="text/javascript">
+  $(document).ready(function (){
+    <% if current_user.is_admin? %>
+      $(".role_company").show();
+    <% end %>
+    $("#user_role_id").change(function() {
+        if ($(this).val() == "<%= Role.superadmin.first.id %>") {
+            $(".role_company").hide();
+        }else{
+            $(".role_company").show();
+        } 
+    });
+  });
+
+</script>
 <div class="custom-container">
   <div class="row">
     <div class="col-md-12 col-xs-12">
@@ -16,7 +31,7 @@
               </div>
             </div>
 
-            <div class="field form-group form-group-sm">
+            <div class="field form-group form-group-sm role_company" style="display:none">
               <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
               <% if current_user.is_admin? %>
                 <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => 'Please select a company'}, {:class => 'form-control'}) %>  </div>

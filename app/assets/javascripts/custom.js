@@ -356,6 +356,7 @@ $(document).ready(function () {
         
 
 });
+
 /** ******  /scrollview  *********************** **/
 
 
@@ -369,6 +370,7 @@ $(document).ready(function () {
    
    
    jQuery(document).ready(function() {
+
     function close_accordion_section() {
         jQuery('.accordion .accordion-section-title').removeClass('active');
         jQuery('.accordion .accordion-section-content').slideUp(300).removeClass('open');
