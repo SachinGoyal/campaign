@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   get 'contact_imports/new'
   get 'profiles/edit_all'
   get 'contacts/edit_all'
-  resources :companies
+  resources :companies do
+    collection do
+      get :search
+    end
+  end
   resources :functions
   resources :settings
   resources :templates

@@ -5,16 +5,21 @@
   <div class="page-title">
     <div class="title_left"><h2>Contact list</h2></div><!-- title_left -->
       <div class="title_right">
-        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
+
+      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
+       
+          <%= render 'shared/keyword_search', :condition => :email_cont %>
+       
           <div class="advance-search">
             <%= link_to search_contacts_path do %>
              <i class="fa fa-dot-circle-o"></i>
             <% end %>
           </div>
-          <div class="custom-add"><%= link_to new_contact_path do %><i class="fa fa-plus"></i><% end %></div>
-        </div>
-        <%= render 'shared/keyword_search', :condition => :email_cont %>
-      </div><!--title_right -->
+        <div class="custom-add"><%= link_to new_campaign_path do %><i class="fa fa-plus"></i><% end %></div>
+
+      </div>
+
+    </div>
       <div class="clearfix"></div>                
   </div><!-- page-title -->
 </div><!--row-->
