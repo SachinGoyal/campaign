@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   # class function
 
   def is_superadmin?
-    role.name == 'superadmin'
+    role.name == SUPERADMIN
   end
 
   def is_admin?

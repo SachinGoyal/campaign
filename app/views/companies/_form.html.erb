@@ -47,7 +47,9 @@
                   <%= user_form.password_field :password_confirmation, :class => 'form-control',:id=>"formGroupInputSmall" %>
                 </div>
                 <%= user_form.hidden_field :role_id, value: Role.company_admin.first.id %>
-                <%= user_form.hidden_field :status, value: true %>
+                <% if @company.new_record? %>
+                  <%= user_form.hidden_field :status, value: true %>
+                <% end %>
               </div>
             <% end %>
           <% end %>
@@ -88,12 +90,13 @@
               <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
               <%= link_to "Cancel", companies_path %>
             </div>
-          <% end %>
         </div>
                          
       </div>
       <div class="col-lg-4 col-xs-1">&nbsp;</div>
       <div class="clearfix"></div>
+      <% end %>
+
     </div>
   </div><!-- row -->
 </div><!--  custom-container -->
