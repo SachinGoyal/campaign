@@ -19,45 +19,42 @@
 
         <div class="form-group form-group-sm field">
           <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
-               <div class="col-sm-8 col-xs-12">
-                <%= f.radio_button :status ,1, :checked => @attribute.new_record? ? true : @attribute.status ,:id=>"radio01" %>
-                <label for="radio01"><span></span>Enabled</label>
-                <%= f.radio_button :status ,0, :checked => @attribute.new_record? ? false : @attribute.status ,:id=>"radio02" %>
-                <label for="radio02"><span></span>Disabled</label>
-              </div>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.radio_button :status ,1, :checked => @attribute.new_record? ? true : @attribute.status ,:id=>"radio01" %>
+            <label for="radio01"><span></span>Enabled</label>
+            <%= f.radio_button :status ,0, :checked => @attribute.new_record? ? false : @attribute.status ,:id=>"radio02" %>
+            <label for="radio02"><span></span>Disabled</label>
+          </div>
         </div>
 
        
-      <div class="col-lg-4 col-xs-1">
+      <div class="col-lg-4 col-xs-1">        
         <div class="form-group form-group-sm">
           <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
           <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
         </div>
-
-
       </div>
+
       <div class="clearfix"></div>
       <div class="divider"></div>
     </div>
 
-    <div class="col-md-12 col-xs-12">
-      <div class="col-lg-2 col-xs-1">&nbsp;</div>
-      <div class="col-md-5 col-xs-10">
-        <div class="form-group custom-from-group">
-          <div class="col-xs-4">&nbsp;</div>
-
-          <div class="col-xs-8 text-left">
-            <%= f.submit :Save%>
-
-            <a href="/contacts/">Cancel</a>
-          </div>
-          <% end %>
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-5 col-xs-10">
+          <div class="form-group custom-from-group">
+            <div class="col-xs-4">&nbsp;</div>
+                        
+            <div class="col-xs-8 text-left">
+              <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
+              <%= link_to "Cancel", attributes_path %>
+            </div>
         </div>
-
+                         
       </div>
       <div class="col-lg-4 col-xs-1">&nbsp;</div>
-      <div class="clearfix"></div>
-
+      <div class="clearfix"></div>    
+      <% end %>
     </div>
   </div><!-- row -->
 </div><!--  custom-container -->

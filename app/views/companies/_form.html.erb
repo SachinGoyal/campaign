@@ -46,8 +46,10 @@
                 <div class="col-sm-8 col-xs-12">
                   <%= user_form.password_field :password_confirmation, :class => 'form-control',:id=>"formGroupInputSmall" %>
                 </div>
-                <%#= user_form.hidden_field :role_id, value: Role.company_admin.first.id %>
-                <%= user_form.hidden_field :status, value: true %>
+
+                <% if @company.new_record? %>
+                  <%= user_form.hidden_field :status, value: true %>
+                <% end %>
               </div>
             <% end %>
           <% end %>
@@ -57,7 +59,7 @@
             <div class="col-sm-8 col-xs-12">
               <%= f.radio_button :status ,1, :checked => @company.new_record? ? true : @company.status ,:id=>"radio01" %>
               <label for="radio01"><span></span>Enabled</label>
-              <%= f.radio_button :status ,0, :checked => @company.new_record? ? false : @company.status ,:id=>"radio02" %>
+              <%= f.radio_button :status ,0, :checked => @company.new_record? ? false : !@company.status ,:id=>"radio02" %>
               <label for="radio02"><span></span>Disabled</label>
             </div>
           </div>                                                  
@@ -88,12 +90,13 @@
               <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
               <%= link_to "Cancel", companies_path %>
             </div>
-          <% end %>
         </div>
                          
       </div>
       <div class="col-lg-4 col-xs-1">&nbsp;</div>
       <div class="clearfix"></div>
+      <% end %>
+
     </div>
   </div><!-- row -->
 </div><!--  custom-container -->

@@ -46,23 +46,21 @@
     </div>
 
     <div class="col-md-12 col-xs-12">
-      <div class="col-lg-2 col-xs-1">&nbsp;</div>
-      <div class="col-md-5 col-xs-10">
-        <div class="form-group custom-from-group">
-          <div class="col-xs-4">&nbsp;</div>
-
-          <div class="col-xs-8 text-left">
-            <%= f.submit :Save%>
-
-            <a href="/contacts/">Cancel</a>
-          </div>
-          <% end %>
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-5 col-xs-10">
+          <div class="form-group custom-from-group">
+            <div class="col-xs-4">&nbsp;</div>
+                        
+            <div class="col-xs-8 text-left">
+              <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
+              <%= link_to "Cancel", attributes_path %>
+            </div>
         </div>
-
+                         
       </div>
       <div class="col-lg-4 col-xs-1">&nbsp;</div>
-      <div class="clearfix"></div>
-
+      <div class="clearfix"></div>    
+    <% end %>
     </div>
   </div><!-- row -->
 </div><!--  custom-container -->

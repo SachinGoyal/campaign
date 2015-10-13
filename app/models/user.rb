@@ -83,7 +83,6 @@ class User < ActiveRecord::Base
   end   
   
   # class function
-  
   def is_admin?
     role.name == 'admin'
   end

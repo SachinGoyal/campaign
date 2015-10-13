@@ -7,13 +7,15 @@
               
             <div class="field form-group form-group-sm">
               <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
-              <div class="col-sm-9 col-xs-12"> 
-                <%= collection_select(:user, :role_id, Role.all, :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control'}) %> 
+              <div class="col-sm-9 col-xs-12">
+                <% if current_user.is_admin? %>
+                
+                  <%= collection_select(:user, :role_id, Role.all, :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control'}) %> 
+                <% else %>
+                  <%= collection_select(:user, :role_id, [current_user.company.roles], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control'}) %> 
+                <% end %>
               </div>
             </div>
-
-           </div>
-
 
             <div class="field form-group form-group-sm">
               <%= f.label :email, :class => "col-sm-3 col-xs-12 control-label" %>
