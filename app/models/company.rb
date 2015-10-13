@@ -23,8 +23,8 @@ class Company < ActiveRecord::Base
   # acts_as_universal_and_determines_tenant
   
   # validation
-  validates :name, uniqueness: true
-  validates_presence_of :users ,:name
+  validates :name, uniqueness: true, presence: true, format: { with: /[a-zA-Z][a-zA-Z ]+/}
+  validates_presence_of :users 
   validates_inclusion_of :status, in: [true, false]
   # validation
 
@@ -44,6 +44,6 @@ class Company < ActiveRecord::Base
   #callback
 
   def set_subdomain
-    self.subdomain = self.name
+    self.subdomain = self.name.gsub(' ', '_')
   end
 end
