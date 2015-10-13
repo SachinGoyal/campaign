@@ -36,6 +36,17 @@
         </div>
 
         <div class="form-group form-group-sm">
+                    <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Profiles</label>
+                    <div class="col-xs-8 custom-checkbox-style">
+                      <% for profile in Profile.all %>
+                          <%= check_box_tag "contact[profile_ids][]", profile.id, @contact.profiles.include?(profile) %>
+                          <%= profile.name.capitalize %>
+                      <% end %>
+                    </div>
+                    <div class="clearfix"></div> 
+                    </div>                                   
+
+        <div class="form-group form-group-sm">
                     <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
                     <div class="col-xs-8 custom-checkbox-style">
                       <% for attribute in Attribute.all %>
