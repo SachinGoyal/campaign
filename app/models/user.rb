@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   
   # validation
   validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
-  validates :role, presence: true
+  validates :role_id, presence: true
   # validation
   
   # relations
@@ -58,7 +58,6 @@ class User < ActiveRecord::Base
   # relations
   
   # callback
-  #before_create :set_role
   # callback
 
   #ransack
@@ -97,16 +96,6 @@ class User < ActiveRecord::Base
   def is_companyadmin?
     role.name == COMPANY_ADMIN
   end
-
-  def set_role
-    if Role.first.present?
-      self.role = Role.first
-    else
-      Role.create(:name => 'Guest')
-    end
-      self.role = Role.first
-  end
-
 
   private
 
