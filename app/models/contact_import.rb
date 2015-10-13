@@ -6,7 +6,7 @@ class ContactImport
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  attr_accessor :file
+  attr_accessor :file, :profile_id
   validates :file, presence: true
   validates :file, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
 
@@ -21,7 +21,8 @@ class ContactImport
   def save
     # if valid?
       if imported_contacts.map(&:valid?).all?
-        imported_contacts.each(&:save!)
+        imported_contacts.each(&:save!)        
+        (Profile.find(profile_id.to_i).contacts << imported_contacts) if profile_id
         true
       else
         imported_contacts.each_with_index do |contact, index|
