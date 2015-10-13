@@ -15,6 +15,7 @@ class Ability
       can :manage, Profile
       can :manage, Contact
       can :manage, Role
+      can :manage, User
     else   
       user.role.functions.group_by(&:controller).each do |controller, functions|
         functions.each do |function|
