@@ -46,7 +46,7 @@
                 <div class="col-sm-8 col-xs-12">
                   <%= user_form.password_field :password_confirmation, :class => 'form-control',:id=>"formGroupInputSmall" %>
                 </div>
-                <%= user_form.hidden_field :role_id, value: Role.company_admin.first.id %>
+
                 <% if @company.new_record? %>
                   <%= user_form.hidden_field :status, value: true %>
                 <% end %>

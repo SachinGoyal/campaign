@@ -31,6 +31,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 gem "iconv", "~> 1.0.3"
 gem 'roo'
+gem 'roo-xls'
 # Use Uglifier as compressor for JavaScript assets
 # gem 'activerecord-import'
 
