@@ -37,6 +37,7 @@
                         <a href="index.html" class="site_title"><span>Sperant</span></a>
                     </div>
                     <div class="clearfix"></div>
+                    
                     <!-- menu prile quick info -->
                     <div class="profile">
                         <div class="profile_pic">                            
@@ -181,6 +182,10 @@
             <!-- page content -->
             <div class="right_col" role="main">
               <div class='default-top-spacing'>
+
+                <% flash.each do |key, value| %>
+                      <%= content_tag :div, value, class: "flash alert-#{key} alert" %>
+                    <% end %>
                 <%= yield %>
                 <%= render 'layouts/footer'%> <!-- /footer section -->
               </div>

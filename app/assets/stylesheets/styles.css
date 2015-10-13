@@ -6654,3 +6654,43 @@ a.anchor-block {
 .import_export_links a i {
     color: #78dbda;
 }
+.white_text ul li a{
+    color: white;
+    text-decoration: none;
+}
+.white_text ul li a:hover{
+    color: white;
+    text-decoration: underline;
+    
+}
+
+.alert-notice{
+    color: #31708F;
+    background-color: #D9EDF7;
+    border-color: #BCE8F1;
+}
+.alert-success{
+    color: #3C763D;
+    background-color: #DFF0D8;
+    border-color: #D6E9C6;
+}
+.alert-error{    
+    color: #A94442;
+    background-color: #F2DEDE;
+    border-color: #EBCCD1;
+}
+#error_explanation{
+    color: #A94442;
+    background-color: #F2DEDE;
+    border-color: #EBCCD1;
+    margin-bottom: 10px;
+}
+#error_explanation div{
+    padding: 5px;
+}
+#error_explanation h2{
+   font-size: 13px;
+}
+#error_explanation li{
+    font-size: 12px;
+}

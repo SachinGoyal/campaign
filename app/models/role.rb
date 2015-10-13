@@ -40,6 +40,7 @@ class Role < ActiveRecord::Base
   scope :superadmin, -> { where(name: SUPERADMIN) }
   #scope
 
+  
 
   def name=(value)
     write_attribute(:name, value.downcase)

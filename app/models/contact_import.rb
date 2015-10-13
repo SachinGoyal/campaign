@@ -7,8 +7,8 @@ class ContactImport
   include ActiveModel::Validations
 
   attr_accessor :file, :profile_id
-  validates :file, presence: true
-  validates :file, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
+  validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
+  validates :profile_id, presence: true
 
   def initialize(attributes = {})
     attributes.each { |name, value| send("#{name}=", value) }
@@ -19,7 +19,7 @@ class ContactImport
   end
 
   def save
-    # if valid?
+    if valid?
       if imported_contacts.map(&:valid?).all?
         imported_contacts.each(&:save!)        
         # binding.pry
@@ -33,9 +33,9 @@ class ContactImport
         end
         false
       end
-    # else
-    #   false
-    # end
+    else
+      false
+    end
   end
 
   def imported_contacts
