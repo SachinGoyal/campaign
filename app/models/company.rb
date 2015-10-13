@@ -24,6 +24,7 @@ class Company < ActiveRecord::Base
   
   # validation
   validates :name, uniqueness: true, presence: true, format: { with: /[a-zA-Z][a-zA-Z ]+/}
+  validates :free_emails, numericality: {greater_than_or_equal_to: 0}, allow_blank: true
   validates_presence_of :users 
   validates_inclusion_of :status, in: [true, false]
   # validation
