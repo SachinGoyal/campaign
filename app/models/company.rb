@@ -41,9 +41,15 @@ class Company < ActiveRecord::Base
    
   #callback
   before_create :set_subdomain
+  after_create :create_role
   #callback
 
   def set_subdomain
     self.subdomain = self.name
+  end
+
+  def create_role
+    role = Role.create(name: COMPANY_ADMIN,company_id: self.id)
+    users.first.update(role_id: role.id)
   end
 end

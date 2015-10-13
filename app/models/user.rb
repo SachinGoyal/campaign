@@ -48,7 +48,6 @@ class User < ActiveRecord::Base
   
   # validation
   validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
-  validates :role_id, presence: true
   # validation
   
   # relations
@@ -84,11 +83,7 @@ class User < ActiveRecord::Base
   end   
   
   # class function
-
-  def is_superadmin?
-    role.name == 'superadmin'
-  end
-
+  
   def is_admin?
     role.name == 'admin'
   end
