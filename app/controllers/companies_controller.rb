@@ -72,6 +72,9 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def select_roles
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company

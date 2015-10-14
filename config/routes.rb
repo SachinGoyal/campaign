@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'profiles/edit_all'
   get 'contacts/edit_all'
   resources :companies do
+    member do
+      get :select_roles
+    end
     collection do
       get :search
     end

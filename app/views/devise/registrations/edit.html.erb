@@ -66,12 +66,9 @@
           </div>
           <div class="upload-pic">
             <div class="input-group">
-              <input type="text" class="form-control" readonly="" placeholder = "Upload only CSV files">
+              <input type="text" class="form-control" readonly="" placeholder = "Upload images only">
               
               <span class="input-group-btn">
-              
-                                                  
-              
                 <span class="btn btn-primary btn-file upload-btn custom-dark-btn">
                   <%= f.file_field :image, :class => 'form-control fa fa-upload' %> Upload
                   <%= f.hidden_field :image_cache %>

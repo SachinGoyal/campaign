@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   # devise 
   
   # validation
-  validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
+  validates :username, presence: true, uniqueness: true, length: { in: 4..50 }
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
   # validation
   
