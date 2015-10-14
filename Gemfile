@@ -17,6 +17,9 @@ gem 'cancancan'
 #Soft delete
 gem 'paranoia'
 gem 'simple_form'
+gem 'carrierwave'
+gem "rmagick"
+gem 'mini_magick'
 # gem 'milia'
 # gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'acts_as_tenant'

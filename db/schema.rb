@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009065826) do
+ActiveRecord::Schema.define(version: 20151014050016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,14 @@ ActiveRecord::Schema.define(version: 20151009065826) do
 
   add_index "profiles", ["company_id"], name: "index_profiles_on_company_id", using: :btree
 
+  create_table "profiles_attributes", id: false, force: :cascade do |t|
+    t.integer "profile_id",   null: false
+    t.integer "attribute_id", null: false
+  end
+
+  add_index "profiles_attributes", ["attribute_id"], name: "index_profiles_attributes_on_attribute_id", using: :btree
+  add_index "profiles_attributes", ["profile_id"], name: "index_profiles_attributes_on_profile_id", using: :btree
+
   create_table "profiles_newsletters", id: false, force: :cascade do |t|
     t.integer "profile_id",    null: false
     t.integer "newsletter_id", null: false
@@ -185,7 +193,7 @@ ActiveRecord::Schema.define(version: 20151009065826) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer  "role_id",                             null: false
+    t.integer  "role_id"
     t.string   "username",               default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -202,6 +210,7 @@ ActiveRecord::Schema.define(version: 20151009065826) do
     t.datetime "updated_at",                          null: false
     t.integer  "company_id"
     t.boolean  "status"
+    t.string   "image"
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
@@ -222,6 +231,8 @@ ActiveRecord::Schema.define(version: 20151009065826) do
   add_foreign_key "newsletters", "campaigns"
   add_foreign_key "newsletters", "templates"
   add_foreign_key "profiles", "companies"
+  add_foreign_key "profiles_attributes", "attributes"
+  add_foreign_key "profiles_attributes", "profiles"
   add_foreign_key "profiles_newsletters", "newsletters"
   add_foreign_key "profiles_newsletters", "profiles"
   add_foreign_key "roles", "companies"
