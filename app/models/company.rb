@@ -23,7 +23,7 @@ class Company < ActiveRecord::Base
   # acts_as_universal_and_determines_tenant
   
   # validation
-  validates :name, uniqueness: true, presence: true, format: { with: /\A[a-zA-Z][a-zA-Z ]+\z/}
+  validates :name, uniqueness: true, presence: true, format: { with: /\A[a-zA-Z][a-zA-Z ]+\z/}, length: {in: 2..50}
   validates :free_emails, numericality: {greater_than_or_equal_to: 0}, allow_blank: true
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id == Role.superadmin.first.id }
   # validates_presence_of :users 

@@ -26,7 +26,8 @@ class Contact < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #validation
-  validates_presence_of :first_name,:email
+  validates :first_name, presence: true, length: { in: 2..50}
+  validates_presence_of :email
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
