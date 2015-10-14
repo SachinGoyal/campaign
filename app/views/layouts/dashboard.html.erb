@@ -175,10 +175,11 @@
             <!-- page content -->
             <div class="right_col" role="main">
               <div class='default-top-spacing'>
-
-                <% flash.each do |key, value| %>
-                  <%= content_tag :div, value, class: "flash alert-#{key} alert" %>
-                <% end %>
+                <div class="display_flash">
+                  <% flash.each do |key, value| %>
+                    <%= content_tag :div, value, class: "flash alert-#{key} alert" %>
+                  <% end %>
+                </div>
                 <%= yield %>
                 <%= render 'layouts/footer'%> <!-- /footer section -->
               </div>
