@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
   load_and_authorize_resource #cancan
 
   #filter
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :select_roles]
   #filter
 
   # GET /companies
@@ -78,6 +78,7 @@ class CompaniesController < ApplicationController
   end
 
   def select_roles
+    @roles = @company.roles
   end
 
   private

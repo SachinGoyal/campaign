@@ -10,11 +10,9 @@ Rails.application.routes.draw do
   end
 
   resources :companies ,concerns: :edit_all do
-    member do
-      get :select_roles
-    end
     collection do
       get :search
+      get :select_roles
     end
   end
   resources :functions

@@ -1,9 +1,9 @@
 <script type="text/javascript">
   $( document ).ready(function() {
-    $('#user_company_id').on('change', function() {
+    $('#user_company_id').on('change', function() {      
       $.ajax({
-        url: "<%= %>",
-        data: data
+        url: '/companies/select_roles',
+        data: "id="+$(this).val()
       });
     });
   });
@@ -22,7 +22,7 @@
               </div> 
               <div class="field form-group form-group-sm">
                 <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                <div class="col-sm-9 col-xs-12">
+                <div class="col-sm-9 col-xs-12" id="dynamic_company_roles">
                   <%= collection_select(:user, :role_id, Role.all, :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control'}) %> 
                 </div>
               </div>
