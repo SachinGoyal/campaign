@@ -6679,6 +6679,11 @@ a.anchor-block {
     background-color: #F2DEDE;
     border-color: #EBCCD1;
 }
+.alert-alert{    
+    color: #A94442;
+    background-color: #F2DEDE;
+    border-color: #EBCCD1;
+}
 #error_explanation{
     color: #A94442;
     background-color: #F2DEDE;
@@ -6693,4 +6698,8 @@ a.anchor-block {
 }
 #error_explanation li{
     font-size: 12px;
+}
+#error_explanation .error_display{
+    max-height: 150px;
+    overflow-y: auto; 
 }

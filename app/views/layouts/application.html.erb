@@ -30,9 +30,9 @@
 </head>
 
   <body style="background:#F7F7F7;">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%#= current_tenant.id %>
+    <% flash.each do |key, value| %>
+        <%= content_tag :div, value, class: "flash alert-#{key} alert" %>
+    <% end %>
     <%= yield %>  
   </body>
 

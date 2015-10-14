@@ -40,9 +40,11 @@
                     
                     <!-- menu prile quick info -->
                     <div class="profile">
-                        <div class="profile_pic">                            
+                        <% if user_signed_in? %>
+                          <div class="profile_pic">  
                             <%= image_tag current_user.image.url(:small), :class => "img-circle profile_img" %>
-                        </div>
+                          </div>
+                        <% end %>
                         <div class="profile_info">
                             <span>Welcome,</span>
                             <h2><%= current_user.username %></h2>
@@ -175,8 +177,8 @@
               <div class='default-top-spacing'>
 
                 <% flash.each do |key, value| %>
-                      <%= content_tag :div, value, class: "flash alert-#{key} alert" %>
-                    <% end %>
+                  <%= content_tag :div, value, class: "flash alert-#{key} alert" %>
+                <% end %>
                 <%= yield %>
                 <%= render 'layouts/footer'%> <!-- /footer section -->
               </div>

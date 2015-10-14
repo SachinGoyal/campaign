@@ -1,39 +1,108 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="row">
+  <div class="page-title">
+    <div class="title_left"><h2>Edit Profile</h2></div><!-- title_left -->    
+    <div class="clearfix"></div>
+  </div><!-- page-title -->
+</div><!--row-->
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+<div class="custom-container">
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-5 col-xs-10">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Email</label>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.email_field :email, :autofocus => true, :class => 'form-control' %>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Password</label>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.password_field :password, autocomplete: "off", :class => 'form-control' %>
+          </div>
+          <div class="clearfix"></div>
+        </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Confirm Password</label>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control' %>
+          </div>
+          <div class="clearfix"></div>
+        </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+        <div class="form-group form-group-sm">
+          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Current password</label>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.password_field :current_password, autocomplete: "off", :class => 'form-control' %>
+          </div>
+          <div class="clearfix"></div>
+        </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
 
-<h3>Cancel my account</h3>
+        <div class="col-lg-4 col-xs-1">
+          <div class="form-group form-group-sm">
+            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+            <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+        <div class="clearfix"></div>
+        <div class="divider"></div>
 
-<%= link_to "Back", :back %>
+      </div>
+
+        <div class="col-lg-4 col-xs-1">
+          <div class="user-pic">
+            <%= image_tag current_user.image.url(:medium) %>
+          </div>
+          <div class="upload-pic">
+            <div class="input-group">
+              <input type="text" class="form-control" readonly="" placeholder = "Upload only CSV files">
+              
+              <span class="input-group-btn">
+              
+                                                  
+              
+                <span class="btn btn-primary btn-file upload-btn custom-dark-btn">
+                  <%= f.file_field :image, :class => 'form-control fa fa-upload' %> Upload
+                  <%= f.hidden_field :image_cache %>
+
+                  <!-- <i class="fa fa-upload"></i>Upload Picture<input type="file" multiple=""> -->
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+
+        </div>
+
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-5 col-xs-10">
+          <div class="form-group custom-from-group">
+            <div class="col-xs-4">&nbsp;</div>
+
+            <div class="col-xs-8 text-left">
+              <%= f.submit 'Update' ,:class => 'btn dark-btn-custom'%>
+              <%= link_to "Cancel", root_path %>
+
+            </div>
+            <% end %>
+          </div>
+
+        </div>
+        <div class="col-lg-4 col-xs-1">&nbsp;</div>
+        <div class="clearfix"></div>
+
+      </div>
+    </div><!-- row -->
+</div><!--  custom-container -->

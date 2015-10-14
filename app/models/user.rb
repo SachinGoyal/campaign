@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   
   # validation
   validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
-  validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
+  # validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
   # validation
   
   # relations
@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   
   # class function
   def is_admin?
-    role.name == 'admin'
+    role.name == SUPERADMIN
   end
 
   def is_companyadmin?
@@ -105,6 +105,4 @@ class User < ActiveRecord::Base
   #     %i(auth_object.company.users)
   #   end
   # end
-
-
 end
