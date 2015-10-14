@@ -67,7 +67,7 @@ class ContactsController < ApplicationController
   end
   # GET /contacts/edit_all
   def edit_all
-    Contact.edit_all(params[:contacts_id], params[:get_action])  
+    Contact.edit_all(params[:group_ids], params[:get_action])  
     redirect_to index
   end
 

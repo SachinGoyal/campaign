@@ -32,7 +32,7 @@ class AttributesController < ApplicationController
 
   # GET /profiles/edit_all
   def edit_all
-    Profile.edit_all(params[:profiles_id], params[:get_action])  
+    Attribute.edit_all(params[:group_ids], params[:get_action])  
     redirect_to index
   end
 

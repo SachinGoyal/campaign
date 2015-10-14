@@ -31,6 +31,11 @@ class CompaniesController < ApplicationController
   def edit
   end
 
+  def edit_all
+    Company.edit_all(params[:group_ids], params[:get_action])  
+    redirect_to index
+  end
+
   # POST /companies
   # POST /companies.json
   def create

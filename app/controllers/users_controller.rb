@@ -52,6 +52,11 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def edit_all
+    User.edit_all(params[:group_ids], params[:get_action])  
+    redirect_to index
+  end
+
   def update
     params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?

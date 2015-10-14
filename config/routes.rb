@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
 
   get 'contact_imports/new'
-  get 'profiles/edit_all'
-  get 'contacts/edit_all'
-  resources :companies do
+
+  concern :edit_all do
+    collection do 
+      get :edit_all
+    end
+  end
+
+  resources :companies ,concerns: :edit_all do
     collection do
       get :search
     end
@@ -11,35 +16,24 @@ Rails.application.routes.draw do
   resources :functions
   resources :settings
   resources :templates
-  resources :contacts do
+  resources :contacts ,concerns: :edit_all do
     collection do
      post :import 
      get :search
     end
-    member do 
-      get :edit_all
-    end
   end
-  resources :campaigns
-  resources :attributes do
-    member do
-      get 'edit_all'
-    end
-  end 
+  resources :campaigns ,concerns: :edit_all
+  resources :attributes ,concerns: :edit_all
 
   resources :roles
-  resources :newsletters
-  resources :profiles do
-    member do
-      get 'edit_all'
-    end
-  end  
+  resources :newsletters ,concerns: :edit_all
+  resources :profiles ,concerns: :edit_all
   resources :contact_imports
 
   get 'home/index'
 
   devise_for :users, :path_prefix => 'auth'
-  resources :users do
+  resources :users,concerns: :edit_all do
     collection { post :search, to: 'users#search'
                 get :search, to: 'users#search' }
   end
