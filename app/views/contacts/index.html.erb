@@ -37,21 +37,12 @@
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
-  <% unless @contacts.empty? %>
-    <% @contacts.each do |contact| %>
-      <div class="row td">
-        <div class="col-md-1"><input name="" type="checkbox" value=<%= contact.id %> ></div>
-        <div class="col-md-2"><%= contact.name %>&nbsp;</div>
-        <div class="col-md-3 custom-break"><%= contact.email %>&nbsp;</div>
-        <div class="col-md-1"><%= display_status(contact) %>&nbsp;</div>
-        <div class="col-md-2"><%= format_date(contact, :created_at) %>&nbsp;</div>
-        <div class="col-md-2 "><%= contact.profiles.map(&:name).join(", ") %>&nbsp;</div>
-        <div class="col-md-1 text-right pull-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
-      </div>
-      <%= render 'shared/inline_action_link', element: contact %>
-  <% end %>
-  <% else %>
-      <h2 class='text-center'><em>No Record Found</em></h2>  
+  <% if @contacts.present? %>
+    <div id="contact">
+      <%= render @contacts %>
+    </div>
+  <%else%>
+    <h2 class='text-center'><em>No Record Found</em></h2>  
   <% end %>
   <%= render 'shared/bootam_action_link', element: 'contacts' %>
   <%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>

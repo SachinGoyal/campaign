@@ -46,9 +46,6 @@ $(document).ready( function() {
           url: "/" + controller + "/edit_all/",
           data: { group_ids: a , get_action: action }
         })
-        .done(function( msg ) {
-            alert( "Data Saved: " + msg );
-        });
     });
 
     function myFunction(){
@@ -101,7 +98,7 @@ $(document).ready( function() {
         if( input.length ) {
             input.val(log);
         } else {
-            if( log ) alert(log);
+            if( log ) {} //alert(log);
         }
         
     });

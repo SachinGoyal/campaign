@@ -33,7 +33,7 @@ class CompaniesController < ApplicationController
 
   def edit_all
     Company.edit_all(params[:group_ids], params[:get_action])  
-    redirect_to index
+    @companies = Company.all
   end
 
   # POST /companies
