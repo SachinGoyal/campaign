@@ -10,12 +10,12 @@
        
           <%= render 'shared/keyword_search', :condition => :email_cont %>
        
-          <div class="advance-search">
-            <%= link_to search_contacts_path do %>
+          <!-- <div class="advance-search">
+            <%#= link_to search_contacts_path do %>
              <i class="fa fa-dot-circle-o"></i>
-            <% end %>
-          </div>
-        <div class="custom-add"><%= link_to new_contact_path do %><i class="fa fa-plus"></i><% end %></div>
+            <%# end %>
+          </div> -->
+        <div class="custom-add"><%= link_to new_contact_path, :title => "New Contact" do %><i class="fa fa-plus"></i><% end %></div>
 
       </div>
 

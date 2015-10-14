@@ -8,11 +8,11 @@
           <%= render 'shared/keyword_search', :condition => :email_cont %>
        
           <div class="advance-search">
-            <%= link_to search_users_path do %>
+            <%= link_to search_users_path, :title => "Advance Search" do %>
              <i class="fa fa-dot-circle-o"></i>
             <% end %>
           </div>
-        <div class="custom-add"><%= link_to new_user_path do %><i class="fa fa-plus"></i><% end %></div>
+        <div class="custom-add"><%= link_to new_user_path, :title => "New User" do %><i class="fa fa-plus"></i><% end %></div>
 
       </div>
 
