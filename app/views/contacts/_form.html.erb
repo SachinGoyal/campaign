@@ -5,20 +5,20 @@
       <div class="col-md-5 col-xs-10">
         <%= form_for @contact, :html => { :class => "form-horizontal contact" } do |f| %>
         <div class="form-group form-group-sm">
-          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">First Name</label>
+          <%= f.label :first_name, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
             <%= f.text_field :first_name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
           </div>
         </div>
         <div class="form-group form-group-sm">
-          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Last Name</label>
+          <%= f.label :last_name, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
             <%= f.text_field :last_name, :class => 'form-control',:id=>"formGroupInputSmall" %>
           </div>
         </div>
 
         <div class="form-group form-group-sm">
-          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Email</label>
+          <%= f.label :email, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
             <%= f.text_field :email, :class => 'form-control',:id=>"formGroupInputSmall" %>
           </div>
@@ -26,7 +26,7 @@
 
 
         <div class="form-group form-group-sm field">
-          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+          <%= f.label :status, :class => "col-sm-4 col-xs-12 control-label"%>
                <div class="col-sm-8 col-xs-12">
                 <%= f.radio_button :status ,1, :checked => @contact.new_record? ? true : @contact.status ,:id=>"radio01" %>
                 <label for="radio01"><span></span>Enabled</label>

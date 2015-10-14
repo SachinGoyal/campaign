@@ -6703,3 +6703,7 @@ a.anchor-block {
     max-height: 150px;
     overflow-y: auto; 
 }
+label.required:after {
+    content: " *";
+    color: red;
+}
