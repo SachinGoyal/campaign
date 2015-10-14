@@ -1,4 +1,12 @@
 <%#= content_tag :a, "Import", href: "#", data: {toggle: 'modal', target: '#mymodal'} %>
+<script type="text/javascript">
+  $(document).ready( function() {
+    $('[data-dismiss=modal]').on('click', function (e) {
+      $('#error_explanation').html('');
+      $('#new_contact_import').trigger("reset");
+    });
+});
+</script>
 <div class='text-right import_export_links'>
 <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
 <%= link_to contacts_path(format: "xls") do %>
