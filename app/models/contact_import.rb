@@ -7,7 +7,7 @@ class ContactImport
   include ActiveModel::Validations
 
   attr_accessor :file, :profile_id
-  validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
+  validates :file, presence: true, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
   validates :profile_id, presence: true
 
   def initialize(attributes = {})
