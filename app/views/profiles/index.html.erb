@@ -24,20 +24,12 @@
     <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
-  <% unless @profiles.empty? %>
-    <% @profiles.each do |profile| %>
-      <div class="row td" id="profile_<%=profile.id%>">
-        <div class="col-md-1"><input name="" type="checkbox" value=<%=profile.id%> ></div>
-        <div class="col-md-2"><%= profile.name %>&nbsp;</div>
-        <div class="col-md-2 contact_count"><%= profile.contacts.count %></div>
-        <div class="col-md-2"><%= display_status(profile) %>&nbsp;</div>
-        <div class="col-md-2"><%= format_date(profile, :created_at) %>&nbsp;</div>
-        <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
-      </div>
-       <%= render 'shared/inline_action_link', element: profile %>
-    <% end %>
-  <% else %>
-      <h2 class='text-center'><em>No Record Found</em></h2>  
+  <% if @profiles.present? %>
+    <div id="profile">
+      <%= render @profiles %>
+    </div>
+  <%else%>
+    <h2 class='text-center'><em>No Record Found</em></h2>  
   <% end %>
   <%= render 'shared/bootam_action_link', element: 'profiles'%>
   <%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>

@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
   def edit_all
     User.edit_all(params[:group_ids], params[:get_action])  
-    redirect_to index
+    @users = User.all
   end
 
   def update

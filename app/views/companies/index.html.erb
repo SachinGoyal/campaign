@@ -28,21 +28,12 @@
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
-  <% unless @companies.empty? %>
-    <% @companies.each do |company| %>
-      <div class="row td">
-        <div class="col-md-1"><input name="" type="checkbox" value=<%=company.id%> ></div>
-        <div class="col-md-2"><%= company.name %>&nbsp;</div>
-        <div class="col-md-1"><%= company.subdomain %>&nbsp;</div>
-        <div class="col-md-1"><%= company.free_emails %>&nbsp;</div>
-        <div class="col-md-1"><%= display_status(company) %>&nbsp;</div>
-        <div class="col-md-2"><%= format_date(company, :created_at) %>&nbsp;</div>
-        <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
-      </div>
-      <%= render 'shared/inline_action_link', element: company %>
-  <% end %>
-  <% else %>
-      <h2 class='text-center'><em>No Record Found</em></h2>  
+  <% if @companies.present? %>
+    <div id="company">
+      <%= render @companies %>
+    </div>
+  <%else%>
+    <h2 class='text-center'><em>No Record Found</em></h2>  
   <% end %>
   <%= render 'shared/bootam_action_link', element: 'companies' %>
   <%= will_paginate @companies , renderer: BootstrapPagination::Rails %>

@@ -32,7 +32,7 @@ class NewslettersController < ApplicationController
 
   def edit_all
     Newsletter.edit_all(params[:group_ids], params[:get_action])  
-    redirect_to index
+    @newsletters = Newsletter.all
   end
 
 

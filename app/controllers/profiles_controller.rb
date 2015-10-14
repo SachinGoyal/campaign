@@ -49,7 +49,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/edit_all
   def edit_all
     Profile.edit_all(params[:group_ids], params[:get_action])  
-    redirect_to index
+    @profiles = Profile.all
   end
 
  

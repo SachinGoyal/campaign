@@ -28,18 +28,11 @@
       <div class="col-md-3"><%= model_class.human_attribute_name(:created_at) %></div>
       <div class="col-md-1">&nbsp;</div>
     </div><!-- row -->
-    <% unless @campaigns.empty? %>
-      <% @campaigns.each do |campaign| %>
-      <div class="row td">
-        <div class="col-md-2"><input name="" type="checkbox" value=<%=campaign.id%> ></div>
-        <div class="col-md-3"><%= campaign.name %>&nbsp;</div>
-        <div class="col-md-3"><%= display_status(campaign) %>&nbsp;</div>
-        <div class="col-md-3"><%= format_date(campaign, :created_at) %>&nbsp;</div>
-        <div class="col-md-1 pull-right text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
-      </div>
-      <%= render 'shared/inline_action_link', element: campaign %>
-      <% end %>
-    <% else %>
+    <% if @campaigns.present? %>
+    <div id="campaign">
+      <%= render @campaigns %>
+    </div>
+    <%else%>
       <h2 class='text-center'><em>No Record Found</em></h2>  
     <% end %>
   <%= render 'shared/bootam_action_link', element: 'campaigns' %>

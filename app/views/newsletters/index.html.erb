@@ -25,19 +25,12 @@
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
-  <% @newsletters.each do |newsletter| %>
-    <div class="row td">
-      <div class="col-md-1"><input name="" type="checkbox" value=<%=newsletter.id %> ></div>
-      <div class="col-md-2"><%= newsletter.name %>&nbsp;</div>
-      <div class="col-md-2"><%= newsletter.campaign.try(:name) %>&nbsp;</div>
-      <div class="col-md-2"><%= newsletter.template.try(:name) %>&nbsp;</div>
-      <div class="col-md-2"><%= newsletter.subject %>&nbsp;</div>
-      <div class="col-md-2"><%= format_date(newsletter, :created_at) %>&nbsp;</div>
-      <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
+  <% if @newsletters.present? %>
+    <div id="newsletter">
+      <%= render @newsletters %>
     </div>
-
-     <%= render 'shared/inline_action_link', element: newsletter %>
-
+  <%else%>
+    <h2 class='text-center'><em>No Record Found</em></h2>  
   <% end %>
   <%= render 'shared/bootam_action_link',element: 'newsletters' %>
   <%= will_paginate @attributes , renderer: BootstrapPagination::Rails%>
