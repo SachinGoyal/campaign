@@ -41,7 +41,7 @@
                     <!-- menu prile quick info -->
                     <div class="profile">
                         <div class="profile_pic">                            
-                            <%= image_tag image_path("img.jpg"), :class => "img-circle profile_img" %>
+                            <%= image_tag current_user.image.url(:small), :class => "img-circle profile_img" %>
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -148,7 +148,7 @@
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 
-                                    <%= image_tag image_path("img.jpg") %>John Doe                                    
+                                    <%= image_tag @user.image.url(:thumb) %>John Doe                                    
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
