@@ -47,7 +47,7 @@ class Company < ActiveRecord::Base
   #callback
 
   def set_subdomain
-    self.subdomain = self.name.gsub(' ', '_')
+    self.subdomain = self.name.gsub(' ', '').downcase
   end
 
   def create_role

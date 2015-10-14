@@ -27,19 +27,20 @@
     <div class="col-md-3"><%= model_class.human_attribute_name(:created_at) %></div>
     <div class="col-md-2">&nbsp;</div>
   </div><!-- row -->
-
-  <% @attributes.each do |attribute| %>
-    <div class="row td">
-      <div class="col-md-1"><input name="" type="checkbox" value=<%=attribute.id%> ></div>
-      <div class="col-md-2"><%= attribute.name %>&nbsp;</div>
-      <div class="col-md-3"><%= attribute.description %>&nbsp;</div>
-      <div class="col-md-1"><%= display_status(attribute) %>&nbsp;</div>
-      <div class="col-md-3"><%= format_date(attribute, :created_at) %>&nbsp;</div>
-      <div class="col-md-2 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
-    </div>
-
+  <% unless @attributes.empty? %>
+    <% @attributes.each do |attribute| %>
+      <div class="row td">
+        <div class="col-md-1"><input name="" type="checkbox" value=<%=attribute.id%> ></div>
+        <div class="col-md-2"><%= attribute.name %>&nbsp;</div>
+        <div class="col-md-3"><%= attribute.description %>&nbsp;</div>
+        <div class="col-md-1"><%= display_status(attribute) %>&nbsp;</div>
+        <div class="col-md-3"><%= format_date(attribute, :created_at) %>&nbsp;</div>
+        <div class="col-md-2 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
+      </div>
       <%= render 'shared/inline_action_link', element: attribute %>
-
+    <% end %>
+  <% else %>
+      <h2 class='text-center'><em>No Record Found</em></h2>  
   <% end %>
   <%= render 'shared/bootam_action_link'%>
   <%= will_paginate @attributes, renderer: BootstrapPagination::Rails %>
