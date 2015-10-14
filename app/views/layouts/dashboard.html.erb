@@ -45,7 +45,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>Anthony Fernando</h2>
+                            <h2><%= current_user.username %></h2>
                         </div>
                     </div>
                    <!-- /menu prile quick info -->
@@ -148,20 +148,15 @@
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 
-                                    <%= image_tag image_path("img.jpg") %>John Doe                                    
+                                    <%= image_tag image_path("img.jpg") %><%= current_user.username%>                                  
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="javascript:;">  Profile</a>
-                                    </li>
                                     <li>
                                       <%= link_to edit_user_registration_path  do %>
                                         <i class="badge bg-red pull-right"></i>
-                                        <span>Setting</span>
+                                        <span>Edit Profile</span>
                                      <% end %>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">Help</a>
                                     </li>
                                     <li>
                                       <%= link_to destroy_user_session_path, :method => :delete  do %>
