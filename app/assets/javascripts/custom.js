@@ -6,25 +6,84 @@
 
 /** ******  left menu  *********************** **/
 $(document).ready( function() {
-$(function () {
-    $('#sidebar-menu li ul').slideUp();
-    $('#sidebar-menu li').removeClass('active');
 
-    $('#sidebar-menu li').click(function () {
-        if ($(this).is('.active')) {
-            $(this).removeClass('active');
-            $('ul', this).slideUp();
-            $(this).removeClass('nv');
-            $(this).addClass('vn');
-        } else {
-            $('#sidebar-menu li ul').slideUp();
-            $(this).removeClass('vn');
-            $(this).addClass('nv');
-            $('ul', this).slideDown();
-            $('#sidebar-menu li').removeClass('active');
-            $(this).addClass('active');
+    $("#select-all").change(function () {
+        var checked = $("#select-all").find(":checkbox").is(":checked")
+        if(checked){
+            $('.custom-table').find(":checkbox").prop("checked", true);
+        }
+
+        else{
+            $('.custom-table').find(":checkbox").prop("checked", false); 
         }
     });
+
+    $(":checkbox").on('click',function (e) {
+        if ($('input[type=checkbox]').is(':checked')){
+            $(".selected-row-bottom").show();
+            $(".selected-row-inline").hide();
+        }
+        else{
+            $(".selected-row-bottom").hide();
+        }
+    });
+
+
+    $('.anchor-block').click(function(e){ 
+        $('.custom-table').find(":checkbox").prop("checked", false); 
+        $(".selected-row-bottom").hide();
+        $(".selected-row-inline").hide();
+        $(this).parent().parent().next().slideToggle();
+        e.stopPropagation();
+    });
+
+    $(".selected-row-bottom").find('ul').children().on('click', function(){
+          var controller = $(".selected-row-bottom").attr('class').split(' ')[3].split('-')[1]
+          var action = $(this).text();
+          var a = myFunction();
+        $.ajax({
+          method: "GET",
+          url: "/" + controller + "/edit_all/",
+          data: { group_ids: a , get_action: action }
+        })
+        .done(function( msg ) {
+            alert( "Data Saved: " + msg );
+        });
+    });
+
+    function myFunction(){
+        var a = [];
+        $('input[type=checkbox]').each(function (index) {
+           if (this.checked) {
+               a[index] = $(this).val()
+           }
+        });
+     return a;
+    }
+
+    
+
+    $(function () {
+        $('#sidebar-menu li ul').slideUp();
+        $('#sidebar-menu li').removeClass('active');
+
+        $('#sidebar-menu li').click(function () {
+            if ($(this).is('.active')) {
+                $(this).removeClass('active');
+                $('ul', this).slideUp();
+                $(this).removeClass('nv');
+                $(this).addClass('vn');
+            } else {
+                $('#sidebar-menu li ul').slideUp();
+                $(this).removeClass('vn');
+                $(this).addClass('nv');
+                $('ul', this).slideDown();
+                $('#sidebar-menu li').removeClass('active');
+                $(this).addClass('active');
+            }
+    });
+
+
     
     
     $(document).on('change', '.btn-file :file', function() {

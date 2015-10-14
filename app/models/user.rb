@@ -73,6 +73,20 @@ class User < ActiveRecord::Base
 
   # class function
   class << self
+    
+    def edit_all(ids, action)
+      action = action.strip.downcase
+      ids.reject!(&:empty?)
+      User.find(ids).each do |user|
+        if action == 'delete'
+          user.destroy!
+        else
+          status = action == 'enable' ? 1 : 0
+          user.update(:status => status )
+        end
+      end
+    end
+
     def find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
       if login = conditions.delete(:login)

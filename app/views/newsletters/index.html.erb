@@ -39,7 +39,7 @@
      <%= render 'shared/inline_action_link', element: newsletter %>
 
   <% end %>
-  <%= render 'shared/bootam_action_link'%>
+  <%= render 'shared/bootam_action_link',element: 'newsletters' %>
   <%= will_paginate @attributes , renderer: BootstrapPagination::Rails%>
 </div>
 

@@ -30,6 +30,11 @@ class CampaignsController < ApplicationController
   def edit
   end
 
+  def edit_all
+    Campaign.edit_all(params[:group_ids], params[:get_action])  
+    redirect_to index
+  end
+
   # POST /campaigns
   # POST /campaigns.json
   def create

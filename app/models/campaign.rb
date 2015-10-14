@@ -38,4 +38,21 @@ class Campaign < ActiveRecord::Base
   delegate :username, to: :user, prefix: true
   #delegate
 
+  #class methods
+  class << self
+    def edit_all(ids, action)
+      action = action.strip.downcase
+      ids.reject!(&:empty?)
+      Campaign.find(ids).each do |campaign|
+        if action == 'delete'
+          campaign.destroy!
+        else
+          status = action == 'enable' ? 1 : 0
+          campaign.update(:status => status )
+        end
+      end
+    end
+  end
+  #class methods
+
 end

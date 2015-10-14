@@ -30,6 +30,12 @@ class NewslettersController < ApplicationController
   def edit
   end
 
+  def edit_all
+    Newsletter.edit_all(params[:group_ids], params[:get_action])  
+    redirect_to index
+  end
+
+
   # POST /newsletters
   # POST /newsletters.json
   def create

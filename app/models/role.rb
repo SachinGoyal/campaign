@@ -37,7 +37,7 @@ class Role < ActiveRecord::Base
   #scope
   default_scope {order('name') }
   scope :company_admin, -> { where(name: COMPANY_ADMIN) }
-  scope :superadmin, -> { where(name: SUPERADMIN) }
+  scope :admin, -> { where(name: admin) }
   #scope
 
   

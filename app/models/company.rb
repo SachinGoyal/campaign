@@ -46,6 +46,23 @@ class Company < ActiveRecord::Base
   after_create :create_role
   #callback
 
+  #class methods
+  class << self
+    def edit_all(ids, action)
+      action = action.strip.downcase
+      ids.reject!(&:empty?)
+      Company.find(ids).each do |company|
+        if action == 'delete'
+          company.destroy!
+        else
+          status = action == 'enable' ? 1 : 0
+          company.update(:status => status )
+        end
+      end
+    end
+  end
+  #class methods
+
   def set_subdomain
     self.subdomain = self.name.gsub(' ', '').downcase
   end
