@@ -64,10 +64,10 @@
           <div class="user-pic">
             <%= image_tag current_user.image.url(:medium) %>
           </div>
+ 
           <div class="upload-pic">
             <div class="input-group">
-              <input type="text" class="form-control" readonly="" placeholder = "Upload images only">
-              
+              <input type="text" readonly="" placeholder = "Upload images only">              
               <span class="input-group-btn">
                 <span class="btn btn-primary btn-file upload-btn custom-dark-btn">
                   <%= f.file_field :image, :class => 'form-control fa fa-upload' %> Upload

@@ -6707,3 +6707,6 @@ label.required:after {
     content: " *";
     color: red;
 }
+.upload-pic {width:128px;}
+.user-pic{padding:10px; border:1px solid #ccc; width:128px;}
+.user-pic img{width: 100%;}
