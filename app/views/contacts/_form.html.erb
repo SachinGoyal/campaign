@@ -4,6 +4,17 @@
       <div class="col-lg-2 col-xs-1">&nbsp;</div>
       <div class="col-md-5 col-xs-10">
         <%= form_for @contact, :html => { :class => "form-horizontal contact" } do |f| %>
+
+        <div class="form-group form-group-sm">
+          <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Profiles</label>
+          <div class="col-xs-8 custom-checkbox-style">
+            <%= collection_select(:contact, :profile_ids, Profile.all, :id, :name,{:include_blank => 'Press ctrl for multiselect'},
+{:multiple => true, :name=>'contact[profile_ids][]',:selected => 0,:class => 'form-control'}) %>
+          </div>
+          <div class="clearfix"></div> 
+        </div>                                   
+
+
         <div class="form-group form-group-sm">
           <%= f.label :first_name, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
@@ -35,17 +46,7 @@
               </div>
         </div>
 
-        <div class="form-group form-group-sm">
-                    <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Profiles</label>
-                    <div class="col-xs-8 custom-checkbox-style">
-                      <% for profile in Profile.all %>
-                          <%= check_box_tag "contact[profile_ids][]", profile.id, @contact.profiles.include?(profile) %>
-                          <%= profile.name.capitalize %>
-                      <% end %>
-                    </div>
-                    <div class="clearfix"></div> 
-                    </div>                                   
-
+        
         <div class="form-group form-group-sm">
                     <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
                     <div class="col-xs-8 custom-checkbox-style">
