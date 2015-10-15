@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def index
     @q = User.ransack(params[:q])
     @users = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @users = @users.where.not(id: 1)
     # if current_user.is_superadmin?
     # else current_user.is_companyadmin?
     #   @users = current_user.company.users
@@ -26,6 +27,8 @@ class UsersController < ApplicationController
     @search = User.search(params[:q])
     @users = @search.result(distinct: true).page(params[:page])
     @search.build_condition    
+        @users = @users.where.not(id: 1)
+
   end
 
   def new
