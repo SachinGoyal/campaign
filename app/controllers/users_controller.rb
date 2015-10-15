@@ -70,8 +70,11 @@ class UsersController < ApplicationController
 
   def destroy
   	@user = User.find(params[:id])
-  	@user.destroy
-  	redirect_to users_path, :notice => "successfully deleted"
+  	if @user.destroy
+  	 redirect_to users_path, :success => "Successfully deleted user"
+    else
+      redirect_to users_path, :notice => @user.errors.full_messages.join(", ")
+    end
   end
 
 	private

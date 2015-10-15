@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
   # relations
   
   # callback
+  before_destroy :check_company_admin
   # callback
 
   #ransack
@@ -66,6 +67,12 @@ class User < ActiveRecord::Base
     Arel::Nodes::SqlLiteral.new("date(users.created_at)")
   end
 
+  def check_company_admin
+    if role.name == COMPANY_ADMIN
+      errors[:base] << "Cannot delete user with company admin role"
+      return false
+    end
+  end
   def self.ransackable_attributes(auth_object = nil)
     super & %w(username email created_at)
   end
