@@ -1,7 +1,7 @@
 
 Role.create(:name => 'admin')
 Role.create(:name => 'company admin')
-User.create(:role_id =>1 ,:username => 'sachin52',:email => 'goyalsachin52@gmail.com',:password => 'sachin@123',:password_confirmation => 'sachin@123')
+User.create(:role_id =>1 ,:username => 'admin',:email => 'goyalsachin52@gmail.com',:password => 'admin@123',:password_confirmation => 'sachin@123')
 
 RUTA = File.dirname(__FILE__)
 p "Data Functions"

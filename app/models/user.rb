@@ -73,7 +73,12 @@ class User < ActiveRecord::Base
       errors[:base] << "Cannot delete user with company admin role"
       return false
     end
+    if role.name == SUPERADMIN
+      errors[:base] << "Cannot delete super admin"
+      return false
+    end
   end
+
   def self.ransackable_attributes(auth_object = nil)
     super & %w(username email created_at)
   end
