@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  role_id                :integer          not null
+#  role_id                :integer
 #  username               :string           default(""), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
@@ -20,6 +20,7 @@
 #  updated_at             :datetime         not null
 #  company_id             :integer
 #  status                 :boolean
+#  image                  :string
 #
 # Indexes
 #
