@@ -16,7 +16,9 @@
     <div class="col-md-8 col-xs-offset-2 bottom-spacer">
       <div class="custom-role-bar">
         <div class="row">
-          <div class="col-md-3"><strong><%=link_to role.name.capitalize, role_path(role) %></strong></div>
+          <div class="col-md-3">
+            <strong><%=link_to "#{role.name.capitalize} #{role.company.try(:name).try(:capitalize)}", role_path(role) %></strong>
+          </div>
           <div class="col-md-7">
             Authorized to:
             <%= role.functions.collect(&:agroup).uniq.map(&:capitalize).join(' ') %>
@@ -27,16 +29,18 @@
               <i class="fa fa-eye"></i>
               <% end %>
             </span>
-            <span class="hideandShow-icon">
-              <%= link_to edit_role_path(role)  do %>
-              <i class="fa fa-pencil"></i>
-              <% end %>
-            </span>
-            <span class="hideandShow-icon">
-              <%= link_to role, method: :delete, data: { confirm: 'Are you sure?' }  do %>
-              <i class="fa fa-trash-o"></i>
-              <% end %>
-            </span>
+            <% unless [1,2].include?(role.id) %>
+              <span class="hideandShow-icon">
+                <%= link_to edit_role_path(role)  do %>
+                <i class="fa fa-pencil"></i>
+                <% end %>
+              </span>
+              <span class="hideandShow-icon">
+                <%= link_to role, method: :delete, data: { confirm: 'Are you sure?' }  do %>
+                <i class="fa fa-trash-o"></i>
+                <% end %>
+              </span>
+            <% end %>
           </div>
         </div><!-- row -->
       </div>
