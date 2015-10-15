@@ -12,12 +12,15 @@
         <span>Show</span>
         <% end %>
       </li>
-      <li class="custom-delete"><%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <i class="fa fa-plus"></i>
-        <span>Delete</span>
-        <% end %>
+      <li class="custom-delete">
+        <% if element.is_a?(User) and (element.is_admin? or element == current_user) %>
+        <% else %>
+          <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <i class="fa fa-plus"></i>
+            <span>Delete</span>
+          <% end %>
+        <% end %>  
       </li>
-
     </ul>
   </div>
 </div>

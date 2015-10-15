@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
   
   # validation
   validates :username, presence: true, uniqueness: true, length: { in: 4..50 }
+  validates :role_id, presence: true
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
   # validation
   
@@ -59,11 +60,23 @@ class User < ActiveRecord::Base
   # relations
   
   # callback
+  before_destroy :check_company_admin
   # callback
 
   #ransack
   ransacker :created_at do
     Arel::Nodes::SqlLiteral.new("date(users.created_at)")
+  end
+
+  def check_company_admin
+    if role.name == COMPANY_ADMIN
+      errors[:base] << "Cannot delete user with company admin role"
+      return false
+    end
+    if role.name == SUPERADMIN
+      errors[:base] << "Cannot delete super admin"
+      return false
+    end
   end
 
   def self.ransackable_attributes(auth_object = nil)

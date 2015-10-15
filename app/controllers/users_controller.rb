@@ -70,8 +70,11 @@ class UsersController < ApplicationController
 
   def destroy
   	@user = User.find(params[:id])
-  	@user.destroy
-  	redirect_to users_path, :notice => "successfully deleted"
+  	if @user.destroy
+  	 redirect_to users_path, :success => "Successfully deleted user"
+    else
+      redirect_to users_path, :notice => @user.errors.full_messages.join(", ")
+    end
   end
 
 	private
@@ -82,7 +85,7 @@ class UsersController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def user_params
-	  params.require(:user).permit(:username, :email, :status, :password, :password_confirmation, :role_id, :image)
+	  params.require(:user).permit(:username, :email, :status, :password, :password_confirmation, :role_id, :image, :company_id)
 	end
 
 end
