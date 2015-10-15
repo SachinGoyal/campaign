@@ -16,7 +16,7 @@
     <div class="col-md-8 col-xs-offset-2 bottom-spacer">
       <div class="custom-role-bar">
         <div class="row">
-          <div class="col-md-3"><strong><%=link_to role.name.capitalize ,role_path(role) %></strong></div>
+          <div class="col-md-3"><strong><%=link_to role.name.capitalize, role_path(role) %></strong></div>
           <div class="col-md-7">
             Authorized to:
             <%= role.functions.collect(&:agroup).uniq.map(&:capitalize).join(' ') %>
@@ -33,7 +33,7 @@
               <% end %>
             </span>
             <span class="hideandShow-icon">
-              <%= link_to @role,method: :delete  do %>
+              <%= link_to role, method: :delete, data: { confirm: 'Are you sure?' }  do %>
               <i class="fa fa-trash-o"></i>
               <% end %>
             </span>

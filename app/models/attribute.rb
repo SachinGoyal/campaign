@@ -34,6 +34,15 @@ class Attribute < ActiveRecord::Base
   has_and_belongs_to_many :profiles
   #association
 
+  before_destroy :check_contacts_and_profiles
+
+  def check_contacts_and_profiles
+    if contacts.count > 0 or profiles.count > 0
+      errors[:base] << "Cannot delete Attribute while Contacts/Profiles exist"
+      return false
+    end
+  end
+
   #Class Methods
   class << self
     def edit_all(ids, action)

@@ -95,7 +95,7 @@ class RolesController < ApplicationController
         format.json { head :no_content }
       end
     else
-      redirect_to roles_path, alert: "#{role.errors.full_messages.join(" ")}"
+      redirect_to roles_path, error: "#{role.errors.full_messages.join(", ")}"
     end
   end
 

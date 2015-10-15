@@ -69,10 +69,13 @@ class AttributesController < ApplicationController
   # DELETE /attributes/1
   # DELETE /attributes/1.json
   def destroy
-    @attribute.destroy
     respond_to do |format|
-      format.html { redirect_to attributes_url, notice: 'Attribute was successfully destroyed.' }
-      format.json { head :no_content }
+      if @attribute.destroy
+        format.html { redirect_to attributes_url, notice: 'Attribute was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to attributes_url, notice: @attribute.errors.full_messages}
+      end
     end
   end
 

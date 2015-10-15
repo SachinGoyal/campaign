@@ -31,8 +31,8 @@ class Company < ActiveRecord::Base
   # validation
 
   # relations
-  has_many :roles
-  has_many :users
+  has_many :roles, :dependent => :destroy
+  has_many :users, :dependent => :restrict_with_error
   belongs_to :creator, class_name: "User", foreign_key: :created_by
   belongs_to :updator, class_name: "User", foreign_key: :updated_by
   # relations
