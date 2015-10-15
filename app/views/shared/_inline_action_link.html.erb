@@ -2,18 +2,21 @@
   <div class="col-md-12 selected-td white_text">
     <ul>
       <!-- <li><i class="fa fa-line-chart"></i> Edit</li> -->
-      <li><%= link_to [:edit , element] do %>
-        <i class="fa fa-pencil"></i>
-        <span>Edit</span>
-        <% end %>
-      </li>
+      <% if element.is_a?(User) and element == current_user %>
+      <% else %>
+        <li><%= link_to [:edit , element] do %>
+          <i class="fa fa-pencil"></i>
+          <span>Edit</span>
+          <% end %>
+        </li>
+      <% end %>
       <li><%= link_to element do %>
         <i class="fa fa-eye"></i>
         <span>Show</span>
         <% end %>
       </li>
       <li class="custom-delete">
-        <% if element.is_a?(User) and (element.is_admin? or element == current_user) %>
+        <% if element.is_a?(User) and element == current_user %>
         <% else %>
           <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
             <i class="fa fa-plus"></i>

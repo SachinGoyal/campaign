@@ -1,12 +1,14 @@
-<div class="row td">
-  <div class="col-md-1"><input name="" type="checkbox" value=<%= user.id %> ></div>
-  <div class="col-md-2"><%= user.username %>&nbsp;</div>
-  <div class="col-md-2"><%= user.email %>&nbsp;</div>
-  <div class="col-md-2"><%= display_status(user) %>&nbsp;</div>
-  <div class="col-md-2"><%= format_date(user, :created_at) %>&nbsp;</div>
-  <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
-</div>
-<%= render 'shared/inline_action_link', element: user %>
+<% unless user == current_user %>
+	<div class="row td">
+	  <div class="col-md-1"><input name="" type="checkbox" value=<%= user.id %> ></div>
+	  <div class="col-md-2"><%= user.username %>&nbsp;</div>
+	  <div class="col-md-2"><%= user.email %>&nbsp;</div>
+	  <div class="col-md-2"><%= display_status(user) %>&nbsp;</div>
+	  <div class="col-md-2"><%= format_date(user, :created_at) %>&nbsp;</div>
+	  <div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
+	</div>
+	<%= render 'shared/inline_action_link', element: user %>
+<% end %>
   
 
 
