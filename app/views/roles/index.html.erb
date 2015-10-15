@@ -16,7 +16,9 @@
     <div class="col-md-8 col-xs-offset-2 bottom-spacer">
       <div class="custom-role-bar">
         <div class="row">
-          <div class="col-md-3"><strong><%=link_to role.name.capitalize, role_path(role) %></strong></div>
+          <div class="col-md-3">
+            <strong><%=link_to "#{role.name.capitalize} #{role.company.try(:name).try(:capitalize)}", role_path(role) %></strong>
+          </div>
           <div class="col-md-7">
             Authorized to:
             <%= role.functions.collect(&:agroup).uniq.map(&:capitalize).join(' ') %>
