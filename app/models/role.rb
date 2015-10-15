@@ -27,7 +27,8 @@ class Role < ActiveRecord::Base
 
   # Association
   belongs_to :company
-  has_many :users
+
+  has_many :users#, :dependent => :restrict_with_error
   has_many :accesses, dependent: :destroy
   has_many :functions, through: :accesses
   # Association

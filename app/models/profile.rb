@@ -25,7 +25,7 @@ class Profile < ActiveRecord::Base
 
   #relaion
   has_and_belongs_to_many :contacts
-  has_and_belongs_to_many :interest_areas ,class_name: "Attribute", join_table: "profiles_attributes"
+  has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "profiles_attributes"
   #relaion
   
   #validation
@@ -33,6 +33,15 @@ class Profile < ActiveRecord::Base
   validates_uniqueness_to_tenant :name
   validates_inclusion_of :status, in: [true, false]  
   #validation
+
+  before_destroy :check_contacts
+
+  def check_contacts
+    if contacts.count > 0
+      errors[:base] << "Cannot delete Profile while Contacts exist"
+      return false
+    end
+  end
 
   # class methods
   class << self
