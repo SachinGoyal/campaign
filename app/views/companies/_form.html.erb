@@ -51,6 +51,7 @@
 
                 <% if @company.new_record? %>
                   <%= user_form.hidden_field :status, value: true %>
+                  <%= user_form.hidden_field :role_id, value: 2 %>
                 <% end %>
               </div>
             <% end %>
