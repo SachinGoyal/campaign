@@ -16,6 +16,12 @@ class CompaniesController < ApplicationController
    # @companies = Company.all
   end
 
+  def search
+    @search  = Company.search(params[:q])
+    @companies = @search.result(distinct: true).page(params[:page])
+    @search.build_condition    
+  end
+
   # GET /companies/1
   # GET /companies/1.json
   def show
