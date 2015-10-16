@@ -40,12 +40,13 @@ class Contact < ActiveRecord::Base
   #relation
 
   #ransack
+
   ransacker :created_at do
     Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
   end
   
   def self.ransackable_attributes(auth_object = nil)
-    super & %w(first_name last_name email created_at)
+    super & %w(first_name last_name email status created_at interest_areas_name)
   end
 
   #ransack
@@ -67,7 +68,7 @@ class Contact < ActiveRecord::Base
     end
 
     def accessible_attributes
-      ["first_name", "last_name", "email", "company_id"]
+      ["first_name", "last_name", "email", "company_id","interest_area_ids"]
     end
     
     def import_records(file, profile_id = nil)

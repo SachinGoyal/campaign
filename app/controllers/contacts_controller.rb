@@ -15,9 +15,9 @@ class ContactsController < ApplicationController
   end  
  
   def search
-    @search  = Contact.search(params[:q])
-    @contacts = @search.result(distinct: true).page(params[:page])
-    @search.build_condition    
+    @q  = Contact.search(params[:q])
+    @contacts = @q.result.includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @q.build_condition    
   end
 
   # GET /contacts

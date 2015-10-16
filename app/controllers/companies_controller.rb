@@ -17,9 +17,9 @@ class CompaniesController < ApplicationController
   end
 
   def search
-    @search  = Company.search(params[:q])
-    @companies = @search.result(distinct: true).page(params[:page])
-    @search.build_condition    
+    @q  = Company.search(params[:q])
+    @companies = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @q.build_condition    
   end
 
   # GET /companies/1

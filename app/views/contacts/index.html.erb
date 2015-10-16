@@ -23,27 +23,7 @@
       <div class="clearfix"></div>                
   </div><!-- page-title -->
 </div><!--row-->
+<%= render "results"%>
+<%= render 'shared/bootam_action_link', element: 'contacts' %>
+<%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>
 
-
-<%- model_class = Contact -%>
-<div class="custom-table">
-  <div class="row th">
-    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
-    <div class="col-md-3"><%= model_class.human_attribute_name(:email) %></div>
-    <div class="col-md-1"><%= model_class.human_attribute_name(:status) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:profile_id) %></div>
-    <div class="col-md-1">&nbsp;</div>
-  </div><!-- row -->
-
-  <% if @contacts.present? %>
-    <div id="contact">
-      <%= render @contacts %>
-    </div>
-  <%else%>
-    <h2 class='text-center'><em>No Record Found</em></h2>  
-  <% end %>
-  <%= render 'shared/bootam_action_link', element: 'contacts' %>
-  <%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>
-</div>
