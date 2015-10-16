@@ -5,51 +5,48 @@
       <div class="col-lg-2 col-xs-1">&nbsp;</div>
       <div class="col-md-6 col-xs-10">
         <div class="form-horizontal">
+          
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+            <%= f.label :name, :class => "col-sm-3 col-xs-12 control-label"%>      
             <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+              <%= f.text_field :name, :class => 'form-control' %>
             </div>
           </div>
+          
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Select Campaign</label>
+            <%= f.label :campaign_id, :class => "col-sm-3 col-xs-12 control-label"%>      
             <div class="col-sm-9 col-xs-12">
-               <select name="newsletter[:campaign_id]" class= 'form-control'>
-                  <% Campaign.all.each do |campaign| %>
-                      <option value="<%= campaign.id %>"><%= campaign.name.capitalize %></option>
-                  <% end %>
-              </select>
+              <%= collection_select(:newsletter, :campaign_id, Campaign.all, :id, :name, {:prompt => 'Please select a campaign'}, {:class => 'form-control'}) %> 
             </div>
           </div>
+
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Subject</label>
+            <%= f.label :subject, :class => "col-sm-3 col-xs-12 control-label"%>      
             <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :subject, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+              <%= f.text_field :subject, :class => 'form-control' %>
             </div>
           </div>
+
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Select Template</label>
+            <%= f.label :template_id, :class => "col-sm-3 col-xs-12 control-label"%>      
             <div class="col-sm-9 col-xs-12">
-              <select name="newsletter[:campaign_id]" class= 'form-control'>
-                <% Campaign.all.each do |campaign| %>
-                  <option value="<%= campaign.id %>"><%= campaign.name.capitalize %></option>
-                <% end %>
-              </select>
+              <%= collection_select(:newsletter, :template_id, Template.all, :id, :name, {:prompt => 'Please select a campaign'}, {:class => 'form-control'}) %> 
             </div>
           </div>
+
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Select contact Group</label>
             <div class="col-sm-9 col-xs-12">
               <select class="form-control" name=""><option></option></select>
             </div>
           </div>
+          
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
             <div class="col-sm-9 col-xs-12">
               <div class="saprator">or</div>
             </div>
           </div>
-
 
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
