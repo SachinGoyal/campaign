@@ -9,19 +9,24 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies ,concerns: :edit_all do
-    collection do
+  concern :search do
+    collection do 
+      post :search
       get :search
+    end
+  end   
+
+  resources :companies ,concerns: [:edit_all,:search] do
+    collection do
       get :select_roles
     end
   end
   resources :functions
   resources :settings
   resources :templates
-  resources :contacts ,concerns: :edit_all do
+  resources :contacts ,concerns: [:edit_all,:search] do
     collection do
      post :import 
-     get :search
     end
   end
   resources :campaigns ,concerns: :edit_all
@@ -35,10 +40,7 @@ Rails.application.routes.draw do
   get 'home/index'
 
   devise_for :users, :path_prefix => 'auth'
-  resources :users,concerns: :edit_all do
-    collection { post :search, to: 'users#search'
-                get :search, to: 'users#search' }
-  end
+  resources :users,concerns: [:edit_all,:search]
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

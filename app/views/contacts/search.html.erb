@@ -1,30 +1,31 @@
-<%#= render 'shared/import' %>
-
-
 <div class="row">
   <div class="page-title">
-    <div class="title_left"><h2>Contact list</h2></div><!-- title_left -->
-      <div class="title_right">
-
-      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
-       
-          <%= render 'shared/keyword_search', :condition => :email_cont %>
-       
-          <div class="advance-search">
-            <%= link_to search_contacts_path do %>
-             <i class="fa fa-dot-circle-o"></i>
-            <% end %>
-          </div> 
-        <div class="custom-add"><%= link_to new_contact_path, :title => "New Contact" do %><i class="fa fa-plus"></i><% end %></div>
-
-      </div>
-
-    </div>
-      <div class="clearfix"></div>                
+    <div class="title_left"><h2>Contact List - Advance Search </h2></div><!-- title_left -->
+      <div class="title_right">                     
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group custom-input-search">
+          </div><!-- input-group -->                     
+        </div>                           
+      </div><!--title_right -->
+      <div class="clearfix"></div>
   </div><!-- page-title -->
 </div><!--row-->
 
+<div class="greyBg">
 
+  <%= search_form_for @search, url: search_contacts_path, method: :post do |f| %>
+    <%= f.condition_fields do |c| %>
+      <%= render "condition_fields", f: c %>
+    <% end %>
+    
+    <div class="row add_link">
+      <div class="col-xs-11 text-right custom-label"><%= link_to_add_fields "Add Conditions", f, :condition %></div>
+      <div class="col-xs-1 dark-btn"><%= button_tag("Search", type: 'submit', class: "btn btn-default") %></div>
+    </div>
+  <% end %>
+
+
+</div><!-- greyBg -->
 <%- model_class = Contact -%>
 <div class="custom-table">
   <div class="row th">

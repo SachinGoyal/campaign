@@ -15,9 +15,9 @@ class ContactsController < ApplicationController
   end  
  
   def search
-    @q  = User.search(params[:q])
-    @users = @q.result(distinct: true).page(params[:page])
-    @q.build_condition    
+    @search  = Contact.search(params[:q])
+    @contacts = @search.result(distinct: true).page(params[:page])
+    @search.build_condition    
   end
 
   # GET /contacts
