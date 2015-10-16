@@ -12,7 +12,8 @@ class TemplatesController < ApplicationController
   # GET /templates
   # GET /templates.json
   def index
-    @templates = Template.all
+    @q = Template.ransack(params[:q])
+    @templates = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /templates/1
