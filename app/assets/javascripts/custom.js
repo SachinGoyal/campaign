@@ -38,7 +38,7 @@ $(document).ready( function() {
     });
 
     $(".selected-row-bottom").find('ul').children().on('click', function(){
-          var controller = $(".selected-row-bottom").attr('class').split(' ')[3].split('-')[1]
+          var controller = $(".selected-row-bottom").attr('id').split('-')[1]
           var action = $(this).text();
           var a = myFunction();
         $.ajax({
