@@ -17,18 +17,20 @@ $(document).ready( function() {
             $('.custom-table').find(":checkbox").prop("checked", false); 
         }
     });
-
+//////////////////////////////////////////////////////////////
     $(":checkbox").on('click',function (e) {
-        if ($('input[type=checkbox]').is(':checked')){
+        if ($('.td').find(':checkbox').is(':checked')){
             $(".selected-row-bottom").show();
             $(".selected-row-inline").hide();
         }
         else{
             $(".selected-row-bottom").hide();
         }
+        $('.td').find("input:checkbox").not(":checked").length > 0 ? $("#select-all input").prop('checked',false) : $("#select-all input").prop('checked',true);
     });
 
 
+///////////////////////////////////////////////////
     $('.anchor-block').click(function(e){ 
         $('.custom-table').find(":checkbox").prop("checked", false); 
         $(".selected-row-bottom").hide();
