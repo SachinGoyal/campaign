@@ -36,6 +36,7 @@ gem "iconv", "~> 1.0.3"
 gem 'roo'
 gem 'roo-xls'
 gem 'bootstrap-wysihtml5-rails'
+gem 'country_select'
 # Use Uglifier as compressor for JavaScript assets
 # gem 'activerecord-import'
 
