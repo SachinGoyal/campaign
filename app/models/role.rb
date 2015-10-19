@@ -43,8 +43,6 @@ class Role < ActiveRecord::Base
   scope :admin, -> { where(name: admin) }
   #scope
 
-  
-
   def name=(value)
     write_attribute(:name, value.downcase)
   end
