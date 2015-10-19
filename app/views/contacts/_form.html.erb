@@ -17,29 +17,29 @@
         <div class="form-group form-group-sm">
           <%= f.label :first_name, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :first_name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+            <%= f.text_field :first_name, :class => 'form-control' %>
           </div>
         </div>
         <div class="form-group form-group-sm">
           <%= f.label :last_name, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :last_name, :class => 'form-control',:id=>"formGroupInputSmall" %>
+            <%= f.text_field :last_name, :class => 'form-control' %>
           </div>
         </div>
 
         <div class="form-group form-group-sm">
           <%= f.label :email, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :email, :class => 'form-control',:id=>"formGroupInputSmall" %>
+            <%= f.text_field :email, :class => 'form-control' %>
           </div>
         </div>
 
 
         <div class="form-group form-group-sm field">
-          <%= f.label :status, :class => "col-sm-4 col-xs-12 control-label"%>
-               <div class="col-sm-8 col-xs-12">
+          <%= f.label :status, :class => "col-sm-4 col-xs-12 control-label status_radio"%>
+               <div class="col-sm-8 col-xs-12 radio_status">
                 <%= f.radio_button :status ,1, :checked => @contact.new_record? ? true : @contact.status ,:id=>"radio01" %>
-                <label for="radio01"><span></span>Enabled</label>
+                <label for="radio01" class="status_spacer"><span></span>Enabled</label>
                 <%= f.radio_button :status ,0, :checked => @contact.new_record? ? false : !@contact.status ,:id=>"radio02" %>
                 <label for="radio02"><span></span>Disabled</label>
               </div>
