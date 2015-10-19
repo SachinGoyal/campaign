@@ -30,7 +30,7 @@
           <div class="form-group form-group-sm">
             <%= f.label :template_id, :class => "col-sm-3 col-xs-12 control-label"%>      
             <div class="col-sm-9 col-xs-12">
-              <%= collection_select(:newsletter, :template_id, Template.all, :id, :name, {:prompt => 'Please select a campaign'}, {:class => 'form-control'}) %> 
+              <%= collection_select(:newsletter, :template_id, @templates, :id, :name, {:prompt => 'Please select a template'}, {:class => 'form-control'}) %> 
             </div>
           </div>
 
@@ -68,50 +68,53 @@
     </div>
 
     <div class="col-xs-1">&nbsp;</div>
+
     <div class="col-xs-10">
       <div class="green-Border green-text text-right">Advance Search <i class="fa fa-caret-down"></i></div> 
-      <div class="grey-box">
-        <div class="row">
-
-          <div class="form-group form-group-sm">
-            <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Gender</label>
-            <div class="col-xs-3 custom-radio-input">  <input id="radio01" name="" type="radio" value="">
-              <label for="radio01"><span></span>Male</label>
-
-              <input id="radio02" name="" type="radio" value="">
-              <label for="radio02"><span></span>Female</label>
+        <div class="grey-box">
+          <div class="row">
+            <%#= form_tag search_contacts_path do |f| %>
+            <div class="form-group form-group-sm">
+              <label class="col-xs-3 text-right control-label">Gender</label>
+              <div class="col-xs-3 ">  
+                <% Gender.all.each do |gender| %>
+                  <%= radio_button_tag 'contact[gender_id]', gender.id %>                  
+                  <label><span></span><%= gender.name %></label>              
+                <% end %>
+              </div >                            
+              <div class="clearfix"></div> 
             </div>
-            <div class="clearfix"></div> 
-          </div>
-          <div class="clearfix"></div> 
-          <div class="form-group form-group-sm">
-            <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Country</label>
-            <div class="col-xs-3"> <select class="form-control" name=""><option></option></select></div>
-            <div class="clearfix"></div> 
-          </div>
 
-          <div class="form-group form-group-sm">
-            <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">City</label>
-            <div class="col-xs-3"> <input class="form-control" type="text" id="formGroupInputSmall" ></div>
             <div class="clearfix"></div> 
-          </div>
-
-          <div class="form-group form-group-sm">
-            <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Area of interest</label>
-            <div class="col-xs-3 custom-checkbox-style">
-              <input type="checkbox" id="c1" name="cc" /><label for="c1"><span></span>Life Style</label>
-              <input type="checkbox" id="c2" name="cc" /><label for="c2"><span></span>Cricket</label>
-              <input type="checkbox" id="c3" name="cc" /><label class="custom-spacing" for="c3"><span></span>Fashion</label>
-              <input type="checkbox" id="c4" name="cc" /><label for="c4"><span></span>Sports</label>
+            
+            <div class="form-group form-group-sm">
+              <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Country</label>
+              <div class="col-xs-3">
+                <%= country_select("contact", "country") %>
+              </div>
+              <div class="clearfix"></div> 
             </div>
-            <div class="clearfix"></div> 
+
+            <div class="form-group form-group-sm">
+              <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">City</label>
+              <div class="col-xs-3"> <input class="form-control" type="text" id="formGroupInputSmall" ></div>
+              <div class="clearfix"></div> 
+            </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Area of interest</label>
+              <div class="col-xs-3">
+                <% Attribute.all.each do |attribute| %>
+                  <%= check_box_tag 'contact[interest_area_ids][]', attribute.id %> <label><span></span><%= attribute.name %></label><br/>
+                <% end %>
+              </div>              
+              <div class="clearfix"></div> 
+            </div>
+            <%= link_to "Search" %> 
           </div>
-
-
         </div>
       </div>
-    </div>
-    <div class="col-xs-1">&nbsp;</div>
+      <div class="col-xs-1">&nbsp;</div>
 
 
     <div class="col-md-12 col-xs-12">
@@ -126,33 +129,33 @@
           </div>
 
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">From Name</label>
+            <%= f.label :from_name, :class => "col-sm-3 col-xs-12 control-label" %>
             <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :from_name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+              <%= f.text_field :from_name, :class => 'form-control' %>
             </div>
           </div>
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">From Address</label>
+            <%= f.label :from_address, :class => "col-sm-3 col-xs-12 control-label" %>
             <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :from_address, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+              <%= f.text_field :from_address, :class => 'form-control' %>
             </div>
           </div>
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Reply-To Address</label>
+            <%= f.label :reply_email, :class => "col-sm-3 col-xs-12 control-label" %>
             <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :reply_email, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+              <%= f.email_field :reply_email, :class => 'form-control' %>
             </div>
           </div>
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">CC Email</label>
+            <%= f.label :cc_email, :class => "col-sm-3 col-xs-12 control-label" %>
             <div class="col-sm-9 col-xs-12">
-              <input class="form-control" type="text" id="formGroupInputSmall" >
+              <%= f.email_field :cc_email, :class => 'form-control' %>
             </div>
           </div>
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">BCC Email</label>
+            <%= f.label :bcc_email, :class => "col-sm-3 col-xs-12 control-label" %>
             <div class="col-sm-9 col-xs-12">
-              <input class="form-control" type="text" id="formGroupInputSmall" >
+              <%= f.email_field :bcc_email, :class => 'form-control' %>
             </div>
           </div>
         </div>

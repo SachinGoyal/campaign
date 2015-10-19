@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014050016) do
+ActiveRecord::Schema.define(version: 20151019050956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,9 @@ ActiveRecord::Schema.define(version: 20151014050016) do
     t.datetime "deleted_at"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.string   "city"
+    t.string   "country"
+    t.integer  "gender_id"
   end
 
   add_index "contacts", ["company_id"], name: "index_contacts_on_company_id", using: :btree
@@ -112,6 +115,12 @@ ActiveRecord::Schema.define(version: 20151014050016) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "genders", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "newsletters", force: :cascade do |t|
     t.integer  "campaign_id"
     t.integer  "template_id"
@@ -125,6 +134,8 @@ ActiveRecord::Schema.define(version: 20151014050016) do
     t.datetime "deleted_at"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "cc_email"
+    t.string   "bcc_email"
   end
 
   add_index "newsletters", ["campaign_id"], name: "index_newsletters_on_campaign_id", using: :btree

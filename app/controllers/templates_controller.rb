@@ -37,7 +37,7 @@ class TemplatesController < ApplicationController
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to [current_user ,@template], notice: 'Template was successfully created.' }
+        format.html { redirect_to @template, notice: 'Template was successfully created.' }
         format.json { render :show, status: :created, location: @template }
       else
         format.html { render :new }

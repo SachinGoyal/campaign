@@ -24,6 +24,7 @@ class NewslettersController < ApplicationController
   # GET /newsletters/new
   def new
     @newsletter = Newsletter.new
+    @templates = Template.all
   end
 
   # GET /newsletters/1/edit

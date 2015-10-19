@@ -3,6 +3,9 @@ Role.create(:name => 'admin')
 Role.create(:name => 'company admin')
 User.create(:role_id =>1 ,:username => 'admin',:email => 'goyalsachin52@gmail.com',:password => 'admin@123',:password_confirmation => 'sachin@123')
 
+Gender.create(:name => 'Male')
+Gender.create(:name => 'Female')
+
 RUTA = File.dirname(__FILE__)
 p "Data Functions"
 Function.destroy_all

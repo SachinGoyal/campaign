@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies ,concerns: :edit_all do
+  resources :companies, concerns: :edit_all do
     collection do
       get :search
       get :select_roles
@@ -18,24 +18,24 @@ Rails.application.routes.draw do
   resources :functions
   resources :settings
   resources :templates
-  resources :contacts ,concerns: :edit_all do
+  resources :contacts, concerns: :edit_all do
     collection do
      post :import 
      get :search
     end
   end
-  resources :campaigns ,concerns: :edit_all
-  resources :attributes ,concerns: :edit_all
+  resources :campaigns, concerns: :edit_all
+  resources :attributes, concerns: :edit_all
 
   resources :roles
-  resources :newsletters ,concerns: :edit_all
-  resources :profiles ,concerns: :edit_all
+  resources :newsletters, concerns: :edit_all
+  resources :profiles, concerns: :edit_all
   resources :contact_imports
 
   get 'home/index'
 
   devise_for :users, :path_prefix => 'auth'
-  resources :users,concerns: :edit_all do
+  resources :users, concerns: :edit_all do
     collection { post :search, to: 'users#search'
                 get :search, to: 'users#search' }
   end

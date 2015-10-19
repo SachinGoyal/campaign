@@ -9,4 +9,7 @@ class ContactImportsController < ApplicationController
     @contact_import.save
     render 'create.js.erb'
   end
+
+  def search
+  end
 end
