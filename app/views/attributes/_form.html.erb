@@ -22,7 +22,7 @@
           <div class="col-sm-8 col-xs-12">
             <%= f.radio_button :status ,1, :checked => @attribute.new_record? ? true : @attribute.status ,:id=>"radio01" %>
             <label for="radio01"><span></span>Enabled</label>
-            <%= f.radio_button :status ,0, :checked => @attribute.new_record? ? false : @attribute.status ,:id=>"radio02" %>
+            <%= f.radio_button :status ,0, :checked => @attribute.new_record? ? false : !@attribute.status ,:id=>"radio02" %>
             <label for="radio02"><span></span>Disabled</label>
           </div>
         </div>
