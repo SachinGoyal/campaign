@@ -2,17 +2,17 @@ class RolesController < ApplicationController
 
   layout 'dashboard' # set custom layout 
   
-  load_and_authorize_resource #cancan
-
   #filter
   before_action :authenticate_user!
+  load_and_authorize_resource #cancan
   before_action :set_role, only: [:show, :edit, :update, :destroy]
   #filter
 
   # GET /roles
   # GET /roles.json
   def index
-    @roles = Role.all.paginate(:page => params[:page], :per_page => 10)
+    @q = Role.ransack(params[:q])
+    @roles = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
     # @roles = @search.result
     # @roles = @roles.paginate page: params[:page], per_page: 10
 

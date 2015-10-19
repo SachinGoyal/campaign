@@ -2,8 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-
-
 jQuery ->
   datepicker_update = -> $('.datepicker').datepicker({startDate: "01-01-1950", endDate: "today", todayHighlight: true, todayBtn: "linked", autoclose: true})
 

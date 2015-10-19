@@ -34,9 +34,7 @@ setting; read; setting
 setting; create; setting
 setting; update; setting
 setting; destroy; setting
-function; read; function
-function; create; function
-function; update; function
-function; destroy; function
-
-
+attribute; read; attribute
+attribute; create; attribute
+attribute; update; attribute
+attribute; destroy; attribute

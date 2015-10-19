@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019050956) do
+ActiveRecord::Schema.define(version: 20151019095651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,9 +173,11 @@ ActiveRecord::Schema.define(version: 20151019050956) do
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "company_id"
+    t.boolean  "status"
+    t.boolean  "editable",   default: true
   end
 
   add_index "roles", ["company_id"], name: "index_roles_on_company_id", using: :btree
