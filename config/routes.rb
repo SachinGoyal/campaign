@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   get 'home/index'
 
   devise_for :users, :path_prefix => 'auth'
+  devise_scope :user do
+    get '/signout', to: 'devise/sessions#destroy', as: :signout
+  end
   resources :users,concerns: [:edit_all,:search]
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
