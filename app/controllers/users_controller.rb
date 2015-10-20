@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def search
     @search = User.search(params[:q])
-    @users = @search.result(distinct: true).page(params[:page])
+    @users = @search.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @search.build_condition    
         @users = @users.where.not(id: 1)
 

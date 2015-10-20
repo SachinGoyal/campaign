@@ -1,9 +1,9 @@
 <div class="row td" id="profile_<%=profile.id%>">
-	<div class="col-md-1"><input name="" type="checkbox" value=<%=profile.id%> ></div>
+	<div class="col-md-2"><input name="" type="checkbox" value=<%=profile.id%> ></div>
 	<div class="col-md-2"><%= profile.name %>&nbsp;</div>
 	<div class="col-md-2 contact_count"><%= profile.contacts.count %></div>
 	<div class="col-md-2"><%= display_status(profile) %>&nbsp;</div>
 	<div class="col-md-2"><%= format_date(profile, :created_at) %>&nbsp;</div>
-	<div class="col-md-1 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
+	<div class="col-md-2 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
 </div>
 <%= render 'shared/inline_action_link', element: profile %>

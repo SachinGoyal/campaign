@@ -47,6 +47,19 @@ class Company < ActiveRecord::Base
   after_create :create_role
   #callback
 
+  #ransack
+
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(companies.created_at)")
+  end
+  
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w(name subdomain created_at)
+  end
+
+  #ransack
+
+
   #class methods
   class << self
     def edit_all(ids, action)
