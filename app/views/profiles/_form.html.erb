@@ -24,7 +24,7 @@
         <div class="form-group form-group-sm">
               <label class="col-xs-4 text-right control-label" >Area of interest</label>
               <div class="col-xs-8 custom-checkbox-style">
-                <% for attribute in Attribute.all %>
+                <% for attribute in Attribute.active %>
                   <%= check_box_tag "profile[interest_area_ids][]", attribute.id, @profile.interest_areas.include?(attribute) %>
                   <%= attribute.name.capitalize %><br/>
                 <% end %>

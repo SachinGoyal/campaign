@@ -30,6 +30,8 @@ class Contact < ActiveRecord::Base
 
   #scope
   default_scope {order('id ASC')}
+  scope :active, -> { where(status: 'true') }
+
   #scope
   
 
