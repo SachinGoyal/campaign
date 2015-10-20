@@ -28,6 +28,7 @@ class Company < ActiveRecord::Base
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id == Role.superadmin.first.id }
   # validates_presence_of :users 
   validates_inclusion_of :status, in: [true, false]
+  validates_numericality_of :free_emails,  :greater_than => 0, :less_than => 1000
   # validation
 
   # relations
