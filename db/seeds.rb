@@ -3,9 +3,9 @@ Role.create(:name => 'admin', :editable => false)
 Role.create(:name => 'company admin', :editable => false)
 User.create(:role_id =>1 ,
 	:username => 'admin',
-	:email => 'goyalsachin52@gmail.com',
+	:email => 'admin@gmail.com',
 	:password => 'admin@123',
-	:password_confirmation => 'sachin@123',
+	:password_confirmation => 'admin@123',
 	:status => true)
 
 Gender.create(:name => 'Male')
