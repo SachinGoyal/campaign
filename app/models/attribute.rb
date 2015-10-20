@@ -32,13 +32,13 @@ class Attribute < ActiveRecord::Base
   #association
   belongs_to :company
   has_and_belongs_to_many :contacts, join_table: "contacts_attributes"
-  has_and_belongs_to_many :profiles
+  has_and_belongs_to_many :profiles, join_table: "profiles_attributes"
   #association
 
   before_destroy :check_contacts_and_profiles
 
   def check_contacts_and_profiles
-    if contacts.count > 0 or profiles.count > 0
+    if contacts.any? or profiles.any?
       errors[:base] << "Cannot delete Attribute while Contacts/Profiles exist"
       return false
     end
