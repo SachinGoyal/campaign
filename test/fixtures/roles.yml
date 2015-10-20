@@ -8,6 +8,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  company_id :integer
+#  status     :boolean
+#  editable   :boolean          default(TRUE)
 #
 # Indexes
 #
