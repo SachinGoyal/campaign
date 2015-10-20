@@ -143,6 +143,11 @@ class User < ActiveRecord::Base
   end 
 
   # class function
+
+  def active_for_authentication?
+    super && status == true
+  end
+
   def is_admin?
     role.name == SUPERADMIN
   end
