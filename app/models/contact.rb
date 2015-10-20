@@ -87,7 +87,6 @@ class Contact < ActiveRecord::Base
       CSV.generate(options) do |csv|
         csv << column_names
         all.each do |contact|
-          binding.pry
           contact = contact.attributes.values_at(*column_names)
           contact[3] = contact[3].present? ? 'enable' : 'desable' # override product status to enabel desable
           contact[4] = contact[4].to_datetime

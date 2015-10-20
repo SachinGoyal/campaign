@@ -10,6 +10,7 @@ class Ability
       can :manage, :all     
     elsif user.is_companyadmin?
       can :manage, Campaign
+      can :manage, Attribute
       can :manage, Newsletter
       can :manage, Template
       can :manage, Profile
