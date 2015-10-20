@@ -22,6 +22,10 @@ class Attribute < ActiveRecord::Base
   
   acts_as_tenant(:company) #multitenant
   
+  #scope
+  default_scope {order('id ASC')}
+  #scope
+
   #validation
   validates_uniqueness_to_tenant :name
   validates :name, presence: true, length: {in: 2..50}

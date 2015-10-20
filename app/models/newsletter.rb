@@ -30,6 +30,11 @@ class Newsletter < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant
 
+  #scope
+  default_scope {order('id ASC')}
+  #scope
+  
+
   # validation
   validates_presence_of :campaign_id, :template_id,:name,:subject
   # validates_inclusion_of :status, in: [true, false]

@@ -21,6 +21,11 @@ class Company < ActiveRecord::Base
 
   # Company name is used as subdomain
   # acts_as_universal_and_determines_tenant
+
+  #scope
+  default_scope {order('id ASC')}
+  #scope
+  
   
   # validation
   validates :name, uniqueness: true, presence: true, format: { with: /\A[a-zA-Z][a-zA-Z ]+\z/}, length: {in: 2..50}

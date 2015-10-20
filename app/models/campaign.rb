@@ -24,6 +24,11 @@ class Campaign < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant
 
+  #scope
+  default_scope {order('id ASC')}
+  #scope
+  
+
   #validation
   validates_presence_of :name
   validates_length_of :name,:minimum => 4

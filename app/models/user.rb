@@ -34,6 +34,11 @@ class User < ActiveRecord::Base
   acts_as_paranoid # Soft Delete
   
   acts_as_tenant(:company) #multitenant#multitenant
+
+  #scope
+  default_scope {order('id ASC')}
+  #scope
+  
   
   self.per_page = 10
   mount_uploader :image, ImageUploader

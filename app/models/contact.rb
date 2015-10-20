@@ -28,6 +28,11 @@ class Contact < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant
 
+  #scope
+  default_scope {order('id ASC')}
+  #scope
+  
+
   #validation
   validates :first_name, presence: true, length: { in: 2..50}
   validates_presence_of :email
