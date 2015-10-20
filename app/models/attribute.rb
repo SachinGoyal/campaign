@@ -25,6 +25,7 @@ class Attribute < ActiveRecord::Base
   #validation
   validates_uniqueness_to_tenant :name
   validates :name, presence: true, length: {in: 2..50}
+  validates :description, presence: true, length: {in: 2..50}
   validates_inclusion_of :status, in: [true, false]
   #validation
 
