@@ -49,6 +49,7 @@ class CompaniesController < ApplicationController
     @company.creator = current_user
     respond_to do |format|
       if @company.save
+        @company.create_role
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else

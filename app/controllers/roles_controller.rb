@@ -76,6 +76,7 @@ class RolesController < ApplicationController
     @functions = Function.all.group_by(&:agroup) #need show
     respond_to do |format|
       if @role.update_attributes(role_params)
+        @role.assign_permission if @role.id == COMPANY_ADMIN_ID
         format.html { redirect_to @role, notice: "Role was successfully updated. " }
         format.json { head :no_content }
       else

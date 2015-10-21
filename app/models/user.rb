@@ -150,7 +150,7 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    role.name == SUPERADMIN
+     role.id == ADMIN_ID
   end
 
   def is_companyadmin?
