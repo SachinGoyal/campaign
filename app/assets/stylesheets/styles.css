@@ -6713,3 +6713,6 @@ label.required:after {
 .radio_status{padding-top: 7px!important;}
 .status_spacer{margin-right: 10px;}
 .field_with_errors input{margin-bottom: 0px!important}
+.advance-search-drop{float:left;margin-right: 10px;}
+.advance-search-delete{float: left;}
+.cb{clear: both;}

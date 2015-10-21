@@ -43,6 +43,16 @@ class Attribute < ActiveRecord::Base
     end
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w(name)
+  end
+  # ransacker :id do
+  #   Arel.sql(
+  #     "regexp_replace(
+  #       to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')"
+  #   )
+  # end
+
   #Class Methods
   class << self
     def edit_all(ids, action)

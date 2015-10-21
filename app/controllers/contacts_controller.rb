@@ -1,11 +1,10 @@
 class ContactsController < ApplicationController
   
   layout 'dashboard' # set custom layout 
-  
+  before_action :authenticate_user!
   load_and_authorize_resource #cancan
 
   #filter
-  before_action :authenticate_user!
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   #filter
 
@@ -15,8 +14,23 @@ class ContactsController < ApplicationController
   end  
  
   def search
+    # binding.pry
+    # @attributes = {}
+    # @attributes["interest_areas_id"] = {value: 'id', type: 'integer', association: 'sdfs'}
+    association = Hash.new()
+    # Contact.reflect_on_all_associations(:belongs_to).each { |a| association[a.foreign_key.to_s] = a.class_name }
+    
+    @attributes = Hash.new()
+
+    Contact.columns_hash.slice('first_name', 'email', 'last_name', 'created_at').each do |k,v|
+      @attributes[k] = {value: k, type: v.type.to_s, association: association[k]}
+    end
+    
+    Attribute.columns_hash.slice('name').each do |k,v|
+      @attributes["interest_areas_#{k}"] = {value: k, type: v.type.to_s, association: nil}
+    end
     @q  = Contact.search(params[:q])
-    @contacts = @q.result.includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @contacts = @q.result(distinct: true).includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end
 

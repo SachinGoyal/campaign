@@ -1,3 +1,10 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    var attributes = <%= @attributes.to_json.html_safe %>
+    search_init.selectSearch(attributes);
+  });
+</script>
+
 <div class="row">
   <div class="page-title">
     <div class="title_left"><h2>Contact List - Advance Search </h2></div><!-- title_left -->
@@ -14,14 +21,18 @@
 <div class="greyBg">
 
   <%= search_form_for @q, url: search_contacts_path, method: :post do |f| %>
-    <%= f.condition_fields do |c| %>
-      <%= render "condition_fields", f: c %>
+    <%= f.grouping_fields do |g| %>
+      <%= render "grouping_fields", f: g %>
     <% end %>
-    
+   
+    <%#= f.condition_fields do |c| %>
+      <%#= render "condition_fields", f: c %>
+    <%# end %>    
     <div class="row add_link">
-      <div class="col-xs-11 text-right custom-label"><%= link_to_add_fields "Add Conditions", f, :condition %></div>
+      <div class="col-xs-11 text-right custom-label"><%= link_to_add_condition_group "Add Conditions", f, :grouping %></div>
       <div class="col-xs-1 dark-btn"><%= button_tag("Search", type: 'submit', class: "btn btn-default") %></div>
     </div>
+
   <% end %>
 
 

@@ -24,6 +24,12 @@ class UsersController < ApplicationController
   end
 
   def search
+    @attributes = Hash.new()
+
+    User.columns_hash.slice('first_name', 'email', 'last_name', 'created_at').each do |k,v|
+      @attributes[k] = {value: k, type: v.type.to_s, association: nil}
+    end
+
     @search = User.search(params[:q])
     @users = @search.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @search.build_condition    

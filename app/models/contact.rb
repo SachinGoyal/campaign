@@ -27,7 +27,6 @@ class Contact < ActiveRecord::Base
   acts_as_paranoid # Soft Delete
 
   acts_as_tenant(:company) #multitenant
-
   #validation
   validates :first_name, presence: true, length: { in: 2..50}
   validates_presence_of :email
@@ -43,15 +42,17 @@ class Contact < ActiveRecord::Base
   #relation
 
   #ransack
+  # delegate :id, to: :interest_areas, prefix: true
 
   ransacker :created_at do
     Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
   end
-  
+
   def self.ransackable_attributes(auth_object = nil)
-    super & %w(first_name last_name email status created_at interest_areas_name)
+    %w(first_name last_name email created_at)
   end
 
+  
   #ransack
 
   # class methods
@@ -71,7 +72,7 @@ class Contact < ActiveRecord::Base
     end
 
     def accessible_attributes
-      ["first_name", "last_name", "email", "company_id","interest_area_ids"]
+      ["first_name", "last_name", "email", "company_id"]
     end
     
     def import_records(file, profile_id = nil)

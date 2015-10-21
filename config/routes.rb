@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'contact_imports/new'
+  get 'apis/index'
 
 
   concern :edit_all do
