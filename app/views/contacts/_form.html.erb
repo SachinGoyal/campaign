@@ -8,7 +8,7 @@
         <div class="form-group form-group-sm">
           <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Profiles</label>
           <div class="col-xs-8 custom-checkbox-style">
-            <%= collection_select(:contact, :profile_ids, Profile.all, :id, :name,{:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :name => 'contact[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
+            <%= collection_select(:contact, :profile_ids, Profile.active, :id, :name,{:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :name => 'contact[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
           </div>
           <div class="clearfix"></div> 
         </div>                                   
@@ -49,7 +49,7 @@
         <div class="form-group form-group-sm">
                     <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
                     <div class="col-xs-8 custom-checkbox-style">
-                      <% for attribute in Attribute.all %>
+                      <% for attribute in Attribute.active %>
                           <%= check_box_tag "contact[interest_area_ids][]", attribute.id, @contact.interest_areas.include?(attribute) %>
                           <%= attribute.name.capitalize %><br/>
                       <% end %>
@@ -78,8 +78,7 @@
 
           <div class="col-xs-8 text-left">
             <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
-
-            <a href="/contacts/">Cancel</a>
+            <%= link_to "Cancel", contacts_path %>
           </div>
           <% end %>
         </div>

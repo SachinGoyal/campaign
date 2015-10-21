@@ -27,6 +27,12 @@ class Contact < ActiveRecord::Base
   acts_as_paranoid # Soft Delete
 
   acts_as_tenant(:company) #multitenant
+
+  #scope
+  default_scope {order('id ASC')}
+  scope :active, -> { where(status: 'true') }
+  #scope
+
   #validation
   validates :first_name, presence: true, length: { in: 2..50}
   validates_presence_of :email
@@ -84,12 +90,13 @@ class Contact < ActiveRecord::Base
     
     #Company Export contact 
     def to_csv(options = {})
-      column_names = ["first_name", "last_name", "email", "status","created_at", "updated_at"] 
+      column_names = ["first_name", "last_name", "email", "status","created_at"] 
       CSV.generate(options) do |csv|
         csv << column_names
         all.each do |contact|
           contact = contact.attributes.values_at(*column_names)
           contact[3] = contact[3].present? ? 'enable' : 'desable' # override product status to enabel desable
+          contact[4] = contact[4].to_datetime
           csv << contact
         end
       end
@@ -97,14 +104,15 @@ class Contact < ActiveRecord::Base
 
     #Admin Export
     def to_admin_csv(options = {})
-      column_names = ["company_id", "first_name", "last_name", "email", "status", "deleted_at", "created_at", "updated_at"] 
-      column_names_csv = ["company", "first_name", "last_name", "email", "status", "deleted_at", "created_at", "updated_at"] 
+      column_names = ["company_id", "first_name", "last_name", "email", "status","created_at"] 
+      column_names_csv = ["company", "first_name", "last_name", "email", "status","created_at"] 
       CSV.generate(options) do |csv|
         csv << column_names_csv
         all.each do |contact|
           contact = contact.attributes.values_at(*column_names)
           contact[0] = Company.find(contact[0]).try(:name) if contact[0].present?
           contact[4] = contact[4].present? ? 'enable' : 'desable' # override product status to enabel desable
+          contact[5] = contact[5].to_datetime
           csv << contact
         end
       end

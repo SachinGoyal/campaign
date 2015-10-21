@@ -8,14 +8,6 @@ class Ability
     # alias_action :form_disapproved_changes, :approved_changes, :disapproved_changes,  to: :aproved_changes_contract
     if user.is_admin?
       can :manage, :all     
-    elsif user.is_companyadmin?
-      can :manage, Campaign
-      can :manage, Newsletter
-      can :manage, Template
-      can :manage, Profile
-      can :manage, Contact
-      can :manage, Role
-      can :manage, User
     else   
       user.role.functions.group_by(&:controller).each do |controller, functions|
         functions.each do |function|

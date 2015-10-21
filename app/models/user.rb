@@ -34,6 +34,12 @@ class User < ActiveRecord::Base
   acts_as_paranoid # Soft Delete
   
   acts_as_tenant(:company) #multitenant#multitenant
+
+  #scope
+  default_scope {order('id ASC')}
+  scope :active, -> { where(status: 'true') }
+  #scope
+  
   
   self.per_page = 10
   mount_uploader :image, ImageUploader
@@ -138,8 +144,13 @@ class User < ActiveRecord::Base
   end 
 
   # class function
+
+  def active_for_authentication?
+    super && status == true
+  end
+
   def is_admin?
-    role.name == SUPERADMIN
+     role.id == ADMIN_ID
   end
 
   def is_companyadmin?
