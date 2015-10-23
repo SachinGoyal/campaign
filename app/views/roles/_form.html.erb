@@ -10,7 +10,16 @@
       <% else %>
         <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control", :placeholder=>"New Role" %></div>
       <% end %>
-        <div class="col-xs-3"><%= f.button :Save , :class=>"btn  dark-theme-btn" %></div>
+        <div class="col-xs-3">
+        <% if @role.new_record? %>
+          <%= f.button "Create Role" , :class=>"btn  dark-theme-btn" %>
+        <% else %>
+          <%= f.button "Update Role" , :class=>"btn  dark-theme-btn" %>
+        <% end %>
+        <% if can? :read, Role %>
+                <%= link_to "Cancel", roles_path %>
+              <% end %>
+        </div>
         <div class="col-xs-6">&nbsp;</div>
     </div>
     </div>

@@ -47,7 +47,9 @@
                         
             <div class="col-xs-8 text-left">
               <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
-              <%= link_to "Cancel", attributes_path %>
+              <% if can? :read, Attribute %>
+                <%= link_to "Cancel", attributes_path %>
+              <% end %>
             </div>
         </div>
                          

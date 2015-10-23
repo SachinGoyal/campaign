@@ -40,7 +40,7 @@
 		            <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select Profile</label>
 		            <div class="col-xs-6">
 		            	<%# if current_user.is_admin? %>
-  							    <%= f.select :profile_id, options_for_select(Profile.pluck(:name, :id)), {}, { :class => 'form-control' } %>
+  							    <%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), {}, { :class => 'form-control' } %>
   						    <%# else %>
   						    <%# end %>
 		            </div>

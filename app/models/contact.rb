@@ -110,7 +110,7 @@ class Contact < ActiveRecord::Base
         csv << column_names
         all.each do |contact|
           contact = contact.attributes.values_at(*column_names)
-          contact[3] = contact[3].present? ? 'enable' : 'desable' # override product status to enabel desable
+          contact[3] = contact[3].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
           contact[4] = contact[4].to_datetime
           csv << contact
         end

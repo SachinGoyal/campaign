@@ -90,7 +90,9 @@
                         
             <div class="col-xs-8 text-left">
               <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
-              <%= link_to "Cancel", companies_path %>
+              <% if can? :read, Company %>
+                <%= link_to "Cancel", companies_path %>
+              <% end %>
             </div>
         </div>
                          
