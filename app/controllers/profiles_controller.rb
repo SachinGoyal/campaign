@@ -12,6 +12,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @q = Profile.ransack(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
     @profiles = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
   end
 

@@ -6629,7 +6629,7 @@ background-position: 19px 3px;
     z-index: 111111111111;
 }
 a.anchor-block {
-    display: block;
+    display: inline-block;
     width: 25px;
     height: 25px;
     text-align: center;
