@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController 
   
   layout 'dashboard' # set custom layout   
-
   
   #filter
   before_action :authenticate_user!
@@ -87,6 +86,9 @@ class ProfilesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
       @profile = Profile.find(params[:id])
+      unless @profile
+        return redirect_to profiles_path, :alert => "Could not find profile"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

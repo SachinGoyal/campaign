@@ -28,16 +28,23 @@ class Company < ActiveRecord::Base
   
   
   # validation
-  validates :name, uniqueness: true, presence: true, format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/}, length: {in: 2..50}
-  validates :free_emails, numericality: {greater_than_or_equal_to: 0, :less_than => 1000}, allow_blank: true
+  validates :name, uniqueness: true, 
+                   presence: true, 
+                   format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
+                             message: 'Can only contain alphanumeric and space. Must begin with a character'},
+                   length: {in: 2..50}
+
+  validates :free_emails, numericality: {greater_than_or_equal_to: 0, :less_than_or_equal_to => 1000}, 
+                          allow_blank: true
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id == Role.superadmin.first.id }
   # validates_presence_of :users 
   validates_inclusion_of :status, in: [true, false]
   # validation
 
   # relations
-  has_many :roles, :dependent => :restrict_with_error
-  has_many :users, :dependent => :restrict_with_error
+  has_many :users, :dependent => :destroy
+  has_many :roles, :dependent => :destroy
+
   belongs_to :creator, class_name: "User", foreign_key: :created_by
   belongs_to :updator, class_name: "User", foreign_key: :updated_by
   # relations
@@ -88,6 +95,7 @@ class Company < ActiveRecord::Base
   def create_role
     role = roles.new(name: COMPANY_ADMIN , editable: false)
     role.save
+    role.assign_permission if role.name == COMPANY_ADMIN
     users.first.update(role_id: role.id)
   end
 end

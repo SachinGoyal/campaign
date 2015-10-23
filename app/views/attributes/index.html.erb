@@ -4,11 +4,12 @@
       <div class="title_right">
 
       <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
-       
+        <% if can? :read, Attribute %>
           <%= render 'shared/keyword_search', :condition => :name_cont %>
-       
-        <div class="custom-add"><%= link_to new_attribute_path, :title => "New Attribute" do %><i class="fa fa-plus"></i><% end %></div>
-
+        <% end %>  
+        <% if can? :create, Attribute %>
+          <div class="custom-add"><%= link_to new_attribute_path, :title => "New Attribute" do %><i class="fa fa-plus"></i><% end %></div>
+        <% end %>  
       </div>
 
     </div>

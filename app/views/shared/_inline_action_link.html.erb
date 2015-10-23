@@ -4,11 +4,13 @@
       <!-- <li><i class="fa fa-line-chart"></i> Edit</li> -->
       <% if element.is_a?(User) and element == current_user %>
       <% else %>
-        <li><%= link_to [:edit , element] do %>
-          <i class="fa fa-pencil"></i>
-          <span>Edit</span>
-          <% end %>
-        </li>
+        <% if can? :update, element    %>
+          <li><%= link_to [:edit , element] do %>
+            <i class="fa fa-pencil"></i>
+            <span>Edit</span>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
       <li><%= link_to element do %>
         <i class="fa fa-eye"></i>
@@ -18,9 +20,11 @@
       <li class="custom-delete">
         <% if element.is_a?(User) and element == current_user %>
         <% else %>
-          <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <i class="fa fa-plus"></i>
-            <span>Delete</span>
+          <% if can? :destroy, element    %>
+            <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="fa fa-plus"></i>
+              <span>Delete</span>
+            <% end %>
           <% end %>
         <% end %>  
       </li>

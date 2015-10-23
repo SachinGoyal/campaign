@@ -39,8 +39,7 @@ class User < ActiveRecord::Base
   default_scope {order('id ASC')}
   scope :active, -> { where(status: 'true') }
   #scope
-  
-  
+    
   self.per_page = 10
   mount_uploader :image, ImageUploader
     
@@ -75,10 +74,10 @@ class User < ActiveRecord::Base
   end
 
   def check_company_admin
-    if role.name == COMPANY_ADMIN
-      errors[:base] << "Cannot delete user with company admin role"
-      return false
-    end
+    # if role.name == COMPANY_ADMIN
+    #   errors[:base] << "Cannot delete user with company admin role"
+    #   return false
+    # end
     if role.name == SUPERADMIN
       errors[:base] << "Cannot delete super admin"
       return false

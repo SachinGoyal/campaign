@@ -11,10 +11,13 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
-    @q = Role.ransack(params[:q])
+    if current_user.is_admin?
+      @q = Role.where(editable: true).ransack(params[:q])
+    else
+      @q = Role.where.not(name: COMPANY_ADMIN).where(editable: true).ransack(params[:q])
+    end
+    
     @roles = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
-    # @roles = @search.result
-    # @roles = @roles.paginate page: params[:page], per_page: 10
 
     respond_to do |format|
       format.html # index.html.erb
@@ -92,7 +95,7 @@ class RolesController < ApplicationController
     role = Role.find(params[:id])
     if role.destroy
       respond_to do |format|
-        format.html { redirect_to roles_url, alert: "Role was successfully destroyed." }
+        format.html { redirect_to roles_url, notice: "Role was successfully destroyed." }
         format.json { head :no_content }
       end
     else
@@ -105,6 +108,9 @@ class RolesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_role
       @role = Role.find(params[:id])
+      unless @role
+        return redirect_to roles_path, :alert => "Could not find role"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

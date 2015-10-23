@@ -23,14 +23,17 @@ class Role < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #validation
-  validates :name, presence: true, format: { with: /\A[[:word:][:blank:]]+\z/}
+  validates :name, presence: true, format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
+                             message: 'Can only contain alphanumeric and space. Must begin with a character'}
+
   #validates_uniqueness_to_tenant :name
   validates_uniqueness_of :name, :scope => :company_id  
   #validation
 
   # Association
   belongs_to :company
-  has_many :users, :dependent => :restrict_with_error
+  has_many :users, :dependent => :destroy
+
   has_many :accesses, dependent: :destroy
   has_many :functions, through: :accesses
   # Association
@@ -70,7 +73,7 @@ class Role < ActiveRecord::Base
   private
     def check_admin
       if self.id == ADMIN
-        errors.add :base, "no puedes eliminar el rol admin"
+        errors.add :base, "Cannot delete super admin role"
         return false
       end
     end

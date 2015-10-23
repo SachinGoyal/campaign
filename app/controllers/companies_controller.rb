@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
 
   layout 'dashboard' # set custom layout 
-
+  before_action :authenticate_user!
   load_and_authorize_resource #cancan
 
   #filter
@@ -17,6 +17,12 @@ class CompaniesController < ApplicationController
   end
 
   def search
+    @attributes = Hash.new()
+
+    User.columns_hash.slice('name', 'subdomain', 'created_at').each do |k,v|
+      @attributes[k] = {value: k, type: v.type.to_s, association: nil}
+    end
+
     @q  = Company.search(params[:q])
     @companies = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
@@ -95,6 +101,9 @@ class CompaniesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_company
       @company = Company.find(params[:id])
+      unless @company
+        return redirect_to companies_path, :alert => "Could not find company"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

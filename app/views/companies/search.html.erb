@@ -1,3 +1,10 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    var attributes = <%= @attributes.to_json.html_safe %>
+    search_init.selectSearch(attributes);
+  });
+</script>
+
 <div class="row">
   <div class="page-title">
     <div class="title_left"><h2>Company List - Advance Search </h2></div><!-- title_left -->
