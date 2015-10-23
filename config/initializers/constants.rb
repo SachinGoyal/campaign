@@ -1,4 +1,4 @@
 SUPERADMIN = "admin"
 COMPANY_ADMIN = "company admin"
 COMPANY_ADMIN_ID = 2
-ADMIN_ID = 
+ADMIN_ID = 1
