@@ -27,7 +27,7 @@ class Contact < ActiveRecord::Base
   acts_as_paranoid # Soft Delete
 
   acts_as_tenant(:company) #multitenant
-
+  GENDERS = ['male', 'female']
   #scope
   default_scope {order('id ASC')}
   scope :active, -> { where(status: 'true') }
@@ -39,6 +39,7 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
+  validates_inclusion_of :gender, in: GENDERS
   #validation
 
   
@@ -49,6 +50,7 @@ class Contact < ActiveRecord::Base
 
   # callbacks
   before_validation :convert_lower
+  before_validation :convert_country_code
   # callbacks
 
   #ransack
@@ -59,7 +61,7 @@ class Contact < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(first_name last_name email created_at)
+    %w(id first_name last_name email created_at)
   end
 
   def country_name
@@ -72,9 +74,11 @@ class Contact < ActiveRecord::Base
     self.gender.try(:downcase!) 
   end
 
+  def convert_country_code
+    self.country = ISO3166::Country.find_by_name(country).try(:first) unless ISO3166::Country[country]
+  end
   # class methods
   class << self
-
     def edit_all(ids, action)
       action = action.strip.downcase
       ids.reject!(&:empty?)
@@ -89,7 +93,7 @@ class Contact < ActiveRecord::Base
     end
 
     def accessible_attributes
-      ["first_name", "last_name", "email", "company_id"]
+      ["first_name", "last_name", "email", "company_id", "gender", "country", "city"]
     end
     
     def import_records(file, profile_id = nil)

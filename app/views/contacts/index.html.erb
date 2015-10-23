@@ -24,7 +24,9 @@
       <div class="clearfix"></div>                
   </div><!-- page-title -->
 </div><!--row-->
-<%= render "results"%>
-<%= render 'shared/bootam_action_link', element: 'contacts' %>
-<%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>
+<div id="results">
+  <%= render :partial => "results", :locals => {:contacts => @contacts} %>
+</div>
 
+<%= render 'shared/bootam_action_link', element: 'contacts' %>
+<%= will_paginate @contacts , renderer: BootstrapPagination::Rails%>

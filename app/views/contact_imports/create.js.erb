@@ -7,5 +7,6 @@
 		var new_contact_count = parseInt($("#profile_<%= @profile.id %> .contact_count").html()) + 1;
 		$("#profile_<%= @profile.id %> .contact_count").html(new_contact_count);
 	<% end %>
+	$('#results').html("<%= j render partial: 'contacts/results', locals: {contacts: @contacts} %>");
 	$('.display_flash').html("<div class='flash alert-success alert'>Contacts successfully imported</div>")
 <% end %>

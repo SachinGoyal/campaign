@@ -40,7 +40,7 @@ class Attribute < ActiveRecord::Base
   has_and_belongs_to_many :profiles, join_table: "profiles_attributes"
   #association
 
-  before_destroy :check_contacts_and_profiles
+  #before_destroy :check_contacts_and_profiles
 
   def check_contacts_and_profiles
     if contacts.any? or profiles.any?

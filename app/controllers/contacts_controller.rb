@@ -14,9 +14,6 @@ class ContactsController < ApplicationController
   end  
  
   def search
-    # binding.pry
-    # @attributes = {}
-    # @attributes["interest_areas_id"] = {value: 'id', type: 'integer', association: 'sdfs'}
     association = Hash.new()
     # Contact.reflect_on_all_associations(:belongs_to).each { |a| association[a.foreign_key.to_s] = a.class_name }
     
@@ -30,6 +27,7 @@ class ContactsController < ApplicationController
       @attributes["interest_areas_#{k}"] = {value: k, type: v.type.to_s, association: nil}
     end
     @q  = Contact.search(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
     @contacts = @q.result(distinct: true).includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end
@@ -38,6 +36,7 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def index
     @q = Contact.ransack(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
     @contacts = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)       
     contacts = @q.result(distinct: true)
     respond_to do |format|

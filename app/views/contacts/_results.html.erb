@@ -10,11 +10,14 @@
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
-  <% if @contacts.present? %>
+  <% if contacts.present? %>
     <div id="contact">
-      <%= render @contacts %>
+      <% contacts.each do |c| %>
+        <%= render :partial => 'contacts/contact', :locals => {:contact => c} %>
+      <% end %>
     </div>
   <%else%>
     <h2 class='text-center'><em>No Record Found</em></h2>  
   <% end %>
 </div>
+

@@ -78,7 +78,7 @@ class AttributesController < ApplicationController
         format.html { redirect_to attributes_url, notice: 'Attribute was successfully destroyed.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to attributes_url, notice: @attribute.errors.full_messages}
+        format.html { redirect_to attributes_url, notice: @attribute.errors.full_messages.join(", ")}
       end
     end
   end
