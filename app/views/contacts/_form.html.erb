@@ -34,6 +34,27 @@
           </div>
         </div>
 
+        <div class="form-group form-group-sm">
+          <%= f.label :country, :class => "col-sm-4 col-xs-12 control-label"%>
+          <div class="col-sm-8 col-xs-12">
+            <%= country_select("contact", "country",  { priority_countries: ["IN", "ES"] }, { selected: "IN", class: 'form-control'} ) %>
+            <%#= f.text_field :email, :class => 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+          <%= f.label :city, :class => "col-sm-4 col-xs-12 control-label"%>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.text_field :city, :class => 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+          <%= f.label :gender, :class => "col-sm-4 col-xs-12 control-label"%>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.select :gender, options_for_select(['Male', 'Female']), {include_blank: "Select Gender"}, { :class => 'form-control'} %>
+          </div>
+        </div>
 
         <div class="form-group form-group-sm field">
           <%= f.label :status, :class => "col-sm-4 col-xs-12 control-label status_radio"%>

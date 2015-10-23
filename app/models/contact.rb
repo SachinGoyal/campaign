@@ -15,7 +15,7 @@
 #  updated_at :datetime         not null
 #  city       :string
 #  country    :string
-#  gender_id  :integer
+#  gender     :string
 #
 # Indexes
 #
@@ -47,6 +47,10 @@ class Contact < ActiveRecord::Base
   has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "contacts_attributes"
   #relation
 
+  # callbacks
+  before_validation :convert_lower
+  # callbacks
+
   #ransack
   # delegate :id, to: :interest_areas, prefix: true
 
@@ -58,8 +62,15 @@ class Contact < ActiveRecord::Base
     %w(first_name last_name email created_at)
   end
 
-  
+  def country_name
+    country_name = ISO3166::Country[country]
+    country_name.name
+  end  
   #ransack
+
+  def convert_lower
+    self.gender.try(:downcase!) 
+  end
 
   # class methods
   class << self

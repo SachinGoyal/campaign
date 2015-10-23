@@ -15,7 +15,7 @@
 #  updated_at :datetime         not null
 #  city       :string
 #  country    :string
-#  gender_id  :integer
+#  gender     :string
 #
 # Indexes
 #
