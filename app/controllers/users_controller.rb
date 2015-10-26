@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     end
 
     @search = User.search(params[:q])
-    # @q.sorts = 'id desc' if @q.sorts.empty?
+    @search.sorts = 'id desc' if @search.sorts.empty?
     @users = @search.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @search.build_condition    
     @users = @users.where.not(id: 1)

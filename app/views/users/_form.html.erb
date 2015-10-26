@@ -20,11 +20,12 @@
         <div class="col-md-6 col-xs-10">
           <%= form_for(@user, :validate => true, :html => {:class => 'form-horizontal', :multipart => true}) do |f| %>
             <% if current_user.is_admin? %>
-              
-              <div class="field form-group form-group-sm role_company">
-                <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => 'Please select a company'}, {:class => 'form-control required'}) %>  </div>
-              </div> 
+              <% if @user.new_record? %>
+                <div class="field form-group form-group-sm role_company">
+                  <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
+                  <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => 'Please select a company'}, {:class => 'form-control required'}) %>  </div>
+                </div> 
+              <% end %>
               
               <% if @user.new_record? %>
                 <div class="field form-group form-group-sm">
@@ -46,10 +47,12 @@
               <% end %>
 
             <% else %>
-              <div class="field form-group form-group-sm role_company">
-                <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, [current_user.company], :id, :name, {}, {:class => 'form-control required'}) %>  </div>
-              </div> 
+              <% if @user.new_record? %>
+                <div class="field form-group form-group-sm role_company">
+                  <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
+                  <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, [current_user.company], :id, :name, {}, {:class => 'form-control required'}) %>  </div>
+                </div> 
+              <% end %>              
               
               <% if @user.new_record? %>
                 <div class="field form-group form-group-sm">
