@@ -70,7 +70,7 @@ class Role < ActiveRecord::Base
 
   def check_generic_companyadmin
     if self.id == COMPANY_ADMIN_ID
-      errors[:base] << "cannot delete Company admin"
+      errors[:base] << "Cannot delete Company admin"
       return false
     end
   end
