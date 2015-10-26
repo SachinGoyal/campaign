@@ -8,7 +8,7 @@
         <div class="form-group form-group-sm">
           <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Profiles</label>
           <div class="col-xs-8 custom-checkbox-style">
-            <%= collection_select(:contact, :profile_ids, Profile.active, :id, :name,{:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :name => 'contact[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
+            <%= collection_select(:contact, :profile_ids, Profile.active, :id, :name, {:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :name => 'contact[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
           </div>
           <div class="clearfix"></div> 
         </div>                                   
@@ -30,7 +30,7 @@
         <div class="form-group form-group-sm">
           <%= f.label :email, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :email, :class => 'form-control', , :maxlength => 255 %>
+            <%= f.text_field :email, :class => 'form-control' , :maxlength => 255 %>
           </div>
         </div>
 
