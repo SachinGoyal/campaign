@@ -41,5 +41,5 @@
 </div>
 
 <%= render 'results', model_class: model_class %>
-<%= render 'shared/bootam_action_link', element: 'users'%>
+<%= render 'shared/bootam_action_link', element: User %>
 <%= will_paginate @users , renderer: BootstrapPagination::Rails%>
