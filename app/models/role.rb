@@ -48,7 +48,15 @@ class Role < ActiveRecord::Base
 
   #callback
   before_update :check_companyadmin
+  before_destroy :check_generic_companyadmin
   #callback
+
+  def check_generic_companyadmin
+    if self.id == COMPANY_ADMIN_ID
+      errors[:base] << "cannot delete Company admin"
+      return false
+    end
+  end
 
   def check_companyadmin
     name == COMPANY_ADMIN if !editable?

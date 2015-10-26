@@ -7,6 +7,7 @@
     <div class="row">
       <% if @role.name == COMPANY_ADMIN %>
         <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control", :placeholder=>"New Role", :disabled => true %></div>
+      <%= f.hidden_field :name %>
       <% else %>
         <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control", :placeholder=>"New Role" %></div>
       <% end %>
@@ -17,8 +18,8 @@
           <%= f.button "Update Role" , :class=>"btn  dark-theme-btn" %>
         <% end %>
         <% if can? :read, Role %>
-                <%= link_to "Cancel", roles_path %>
-              <% end %>
+          <%= link_to "Cancel", roles_path %>
+        <% end %>
         </div>
         <div class="col-xs-6">&nbsp;</div>
     </div>
