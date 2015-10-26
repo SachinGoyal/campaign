@@ -64,6 +64,7 @@ class UsersController < ApplicationController
   def edit_all
     User.edit_all(params[:group_ids], params[:get_action])  
     @users = User.all
+    @message = updateable_messages(params[:get_action])
   end
 
   def update
@@ -101,6 +102,16 @@ class UsersController < ApplicationController
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def user_params
 	  params.require(:user).permit(:username, :email, :status, :password, :password_confirmation, :role_id, :image, :company_id)
-	end
+  end
+
+  def updateable_messages(action)
+    case action
+      when 'Delete'
+        "Users deleted successfully. Users with associated data could not be deleted."
+      else
+        "Users updated successfully."
+    end
+
+  end
 
 end
