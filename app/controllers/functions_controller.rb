@@ -1,6 +1,6 @@
 class FunctionsController < ApplicationController
   
-  load_and_authorize_resource #cancan
+  # load_and_authorize_resource #cancan
   
   #filter
   before_action :set_function, only: [:show, :edit, :update, :destroy]
