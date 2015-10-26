@@ -39,6 +39,7 @@ class AttributesController < ApplicationController
   def edit_all
     Attribute.edit_all(params[:group_ids], params[:get_action])
     @attributes = Attribute.all
+    @message = updateable_messages(params[:get_action])
   end
 
   # POST /attributes
@@ -96,5 +97,15 @@ class AttributesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def attribute_params
       params.require(:attribute).permit(:company_id, :name, :description, :status)
+    end
+
+    def updateable_messages(action)
+    case action
+      when 'Delete'
+        "Attributes deleted successfully."
+      else
+        "Attributes updated successfully."
+    end
+
     end
 end

@@ -75,6 +75,7 @@ class RolesController < ApplicationController
     Role.edit_all(params[:group_ids], params[:get_action])  
     @roles = Role.where(editable: true)
     @functions = Function.all.group_by(&:agroup)
+    @message = updateable_messages(params[:get_action])
   end
 
 
@@ -125,4 +126,14 @@ class RolesController < ApplicationController
     def role_params
       params.require(:role).permit(:name, :company_id, function_ids: [])
     end
+
+    def updateable_messages(action)
+      case action
+        when 'Delete'
+          "Roles deleted successfully."
+        else
+          "Roles updated successfully."
+      end
+
+  end
 end

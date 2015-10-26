@@ -83,6 +83,7 @@ class ContactsController < ApplicationController
   def edit_all
     Contact.edit_all(params[:group_ids], params[:get_action])  
     @contacts = Contact.all
+    @message = updateable_messages(params[:get_action])
   end
 
 
@@ -121,5 +122,15 @@ class ContactsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
       params.require(:contact).permit(:first_name, :last_name, :email, :status, :country, :city, :gender, :created_by, :updated_by, interest_area_ids: [],profile_ids: [])
+    end
+
+    def updateable_messages(action)
+      case action
+        when 'Delete'
+          "Contacts deleted successfully."
+        else
+          "Contacts updated successfully."
+      end
+
     end
 end

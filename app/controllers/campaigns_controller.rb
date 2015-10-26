@@ -33,6 +33,7 @@ class CampaignsController < ApplicationController
   def edit_all
     Campaign.edit_all(params[:group_ids], params[:get_action])  
     @campaigns = Campaign.all
+    @message = updateable_messages(params[:get_action])
   end
 
   # POST /campaigns
@@ -83,5 +84,15 @@ class CampaignsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def campaign_params
       params.require(:campaign).permit(:user_id, :name, :description, :status, :created_by, :updated_by)
+    end
+
+    def updateable_messages(action)
+      case action
+        when 'Delete'
+          "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+        else
+          "Campaigns updated successfully."
+      end
+
     end
 end
