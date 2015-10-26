@@ -15,7 +15,7 @@
 
 
         <div class="form-group form-group-sm">
-          <%= f.label :first_name, :class => "col-sm-4 col-xs-12 control-label"%>
+          <%= f.label :first_name, :class => "col-sm-4 col-xs-12 control-label", :maxlength => 150 %>
           <div class="col-sm-8 col-xs-12">
             <%= f.text_field :first_name, :class => 'form-control' %>
           </div>
@@ -23,14 +23,14 @@
         <div class="form-group form-group-sm">
           <%= f.label :last_name, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :last_name, :class => 'form-control' %>
+            <%= f.text_field :last_name, :class => 'form-control', :maxlength => 150 %>
           </div>
         </div>
 
         <div class="form-group form-group-sm">
           <%= f.label :email, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :email, :class => 'form-control' %>
+            <%= f.text_field :email, :class => 'form-control', , :maxlength => 255 %>
           </div>
         </div>
 
