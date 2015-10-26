@@ -2,10 +2,12 @@ role; read; role
 role; create; role
 role; update; role
 role; destroy; role
+role; edit_all; role
 user; read; user
 user; create; user
 user; update; user
 user; destroy; user
+user; edit_all; user
 company; read; company
 company; create; company
 company; update; company
@@ -14,22 +16,27 @@ campaign; read; campaign
 campaign; create; campaign
 campaign; update; campaign
 campaign; destroy; campaign
+campaign; edit_all; campaign
 newsletter; read; newsletter
 newsletter; create; newsletter
 newsletter; update; newsletter
 newsletter; destroy; newsletter
+newsletter; edit_all; newsletter
 template; read; template
 template; create; template
 template; update; template
 template; destroy; template
+template; edit_all; template
 profile; read; profile
 profile; create; profile
 profile; update; profile
 profile; destroy; profile
+profile; edit_all; profile
 contact; read; contact
 contact; create; contact
 contact; update; contact
 contact; destroy; contact
+contact; edit_all; contact
 setting; read; setting
 setting; create; setting
 setting; update; setting
@@ -38,4 +45,5 @@ attribute; read; attribute
 attribute; create; attribute
 attribute; update; attribute
 attribute; destroy; attribute
+attribute; edit_all; attribute
 

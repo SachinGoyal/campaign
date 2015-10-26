@@ -1,7 +1,7 @@
-<div class="row selected-row selected-row-bottom " id='controller-<%=element%>'>
+<div class="row selected-row selected-row-bottom " id='controller-<%= element.name.downcase.pluralize %>'>
   <div class="col-md-12 selected-td">
     <ul>
-      <% if can? :update, element.classify %>
+      <% if can? :update, element %>
         <li>
 	      <%= link_to '#' , data: { confirm: 'Are you sure You want to enable selected?' } do %>
 	        <i class="fa fa-line-chart profile-enable"></i>
@@ -16,7 +16,7 @@
 	      <% end %>
       	</li>
       <% end %>
-      <% if can? :destroy, element.classify %>
+      <% if can? :destroy, element %>
       	<li>
 	      <%= link_to '#' , data: { confirm: 'Are you sure You want to delete selected ?' } do %>
 	        <i class="custom-delete"></i>

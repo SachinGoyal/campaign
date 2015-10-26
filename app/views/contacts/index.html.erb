@@ -28,5 +28,5 @@
   <%= render :partial => "results", :locals => {:contacts => @contacts} %>
 </div>
 
-<%= render 'shared/bootam_action_link', element: 'contacts' %>
+<%= render 'shared/bootam_action_link', element: Contact %>
 <%= will_paginate @contacts , renderer: BootstrapPagination::Rails%>
