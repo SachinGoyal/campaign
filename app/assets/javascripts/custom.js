@@ -39,15 +39,19 @@ $(document).ready( function() {
 //        e.stopPropagation();
 //    });
 
-    $(".selected-row-bottom").find('ul').children().on('click', function(){
+    $(".selected-td ul li a").on('click', function(){
           var controller = $(".selected-row-bottom").attr('id').split('-')[1]
           var action = $(this).text();
           var a = myFunction();
-        $.ajax({
-          method: "GET",
-          url: "/" + controller + "/edit_all/",
-          data: { group_ids: a , get_action: action }
-        })
+        $(this).on('confirm:complete', function(e, response) {
+          if(response) {
+            $.ajax({
+              method: "GET",
+              url: "/" + controller + "/edit_all/",
+              data: {group_ids: a, get_action: action}
+            })
+          }
+        });
     });
 
     function myFunction(){
