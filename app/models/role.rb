@@ -51,6 +51,23 @@ class Role < ActiveRecord::Base
   before_destroy :check_generic_companyadmin
   #callback
 
+  class << self
+
+    def edit_all(ids, action)
+      action = action.strip.downcase
+      ids.reject!(&:empty?)
+      Role.find(ids).each do |role|
+        if action == 'delete'
+          role.destroy!
+        else
+          status = action == 'enable' ? 1 : 0
+          role.update(:status => status )
+        end
+      end
+    end
+
+  end
+
   def check_generic_companyadmin
     if self.id == COMPANY_ADMIN_ID
       errors[:base] << "cannot delete Company admin"
