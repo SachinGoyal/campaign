@@ -7,16 +7,16 @@
 /** ******  left menu  *********************** **/
 $(document).ready( function() {
 
-    $("#select-all").change(function () {
-        var checked = $("#select-all").find(":checkbox").is(":checked")
-        if(checked){
-            $('.custom-table').find(":checkbox").prop("checked", true);
-        }
-
-        else{
-            $('.custom-table').find(":checkbox").prop("checked", false);
-        }
-    });
+    //$("#select-all").change(function () {
+    //    var checked = $("#select-all").find(":checkbox").is(":checked")
+    //    if(checked){
+    //        $('.custom-table').find(":checkbox").prop("checked", true);
+    //    }
+    //
+    //    else{
+    //        $('.custom-table').find(":checkbox").prop("checked", false);
+    //    }
+    //});
 //////////////////////////////////////////////////////////////
 //    $(":checkbox").on('click',function (e) {
 //        if ($('.td').find(':checkbox').is(':checked')){

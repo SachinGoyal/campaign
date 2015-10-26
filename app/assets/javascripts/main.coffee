@@ -17,3 +17,13 @@ jQuery ->
     else
       $("#select-all input").prop('checked',true)
 
+  $('#select-all').on 'change', ->
+    if $(this).is(":checked") && $('.check').find(":checkbox").length > 0
+      $('.check').find(":checkbox").prop("checked", true)
+      $(".selected-row-bottom").show()
+      $(".selected-row-inline").hide()
+    else
+      $('.check').find(":checkbox").prop("checked", false)
+      $(".selected-row-bottom").hide()
+
+

@@ -1,5 +1,5 @@
 <div class="row td">
-  <div class="col-md-1"><input name="" type="checkbox" value=<%=newsletter.id %> ></div>
+  <div class="col-md-1 check"><input name="" type="checkbox" value=<%=newsletter.id %> ></div>
   <div class="col-md-2"><%= newsletter.name %>&nbsp;</div>
   <div class="col-md-2"><%= newsletter.campaign.try(:name) %>&nbsp;</div>
   <div class="col-md-2"><%= newsletter.template.try(:name) %>&nbsp;</div>
