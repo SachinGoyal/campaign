@@ -22,26 +22,42 @@ class Attribute < ActiveRecord::Base
   
   acts_as_tenant(:company) #multitenant
   
+  #scope
+  default_scope {order('id ASC')}
+  scope :active, -> { where(status: 'true') }
+  #scope
+
   #validation
   validates_uniqueness_to_tenant :name
   validates :name, presence: true, length: {in: 2..50}
+  validates :description, presence: true, length: {in: 2..50}
   validates_inclusion_of :status, in: [true, false]
   #validation
 
   #association
   belongs_to :company
   has_and_belongs_to_many :contacts, join_table: "contacts_attributes"
-  has_and_belongs_to_many :profiles
+  has_and_belongs_to_many :profiles, join_table: "profiles_attributes"
   #association
 
-  before_destroy :check_contacts_and_profiles
+  #before_destroy :check_contacts_and_profiles
 
   def check_contacts_and_profiles
-    if contacts.count > 0 or profiles.count > 0
+    if contacts.any? or profiles.any?
       errors[:base] << "Cannot delete Attribute while Contacts/Profiles exist"
       return false
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(name)
+  end
+  # ransacker :id do
+  #   Arel.sql(
+  #     "regexp_replace(
+  #       to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')"
+  #   )
+  # end
 
   #Class Methods
   class << self

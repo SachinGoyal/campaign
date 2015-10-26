@@ -12,7 +12,8 @@ class TemplatesController < ApplicationController
   # GET /templates
   # GET /templates.json
   def index
-    @templates = Template.all
+    @q = Template.ransack(params[:q])
+    @templates = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /templates/1
@@ -36,7 +37,7 @@ class TemplatesController < ApplicationController
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to [current_user ,@template], notice: 'Template was successfully created.' }
+        format.html { redirect_to @template, notice: 'Template was successfully created.' }
         format.json { render :show, status: :created, location: @template }
       else
         format.html { render :new }

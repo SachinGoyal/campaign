@@ -1,35 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="page-title">
+    <div class="title_left"><h2>Template list</h2></div><!-- title_left -->
+    <div class="title_right">
+      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
+        <%= render 'shared/keyword_search', :condition => :name_cont %>
+        <div class="custom-add"><%= link_to new_template_path, :title => "New Template" do %><i class="fa fa-plus"></i><% end %></div>
+      </div>
+    </div>
+    <div class="clearfix"></div>                
+  </div><!-- page-title -->
+</div><!--row-->
 
-<h1>Listing Templates</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Content</th>
-      <th>Status</th>
-      <th>Created by</th>
-      <th>Updated by</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @templates.each do |template| %>
-      <tr>
-        <td><%= template.name %></td>
-        <td><%= template.content %></td>
-        <td><%= template.status %></td>
-        <td><%= template.created_by %></td>
-        <td><%= template.updated_by %></td>
-        <td><%= link_to 'Show', template %></td>
-        <td><%= link_to 'Edit', edit_template_path(template) %></td>
-        <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Template', new_template_path %>
+<%- model_class = Template -%>
+<div class="custom-table">
+  <div class="row th">
+    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
+    <div class="col-md-2">Name</div>
+    <div class="col-md-2">Content</div>
+    <div class="col-md-2">Status</div>
+    <div class="col-md-2">Created At</div>
+    <div class="col-md-1">&nbsp;</div>
+  </div><!-- row -->
+  <% if @templates.present? %>
+    <div id="profile">
+      <%= render @templates %>
+    </div>
+  <% else %>
+    <h2 class='text-center'><em>No Record Found</em></h2>  
+  <% end %>
+  <%= render 'shared/bootam_action_link', element: 'templates'%>
+  <%= will_paginate @templates , renderer: BootstrapPagination::Rails%>
+</div>

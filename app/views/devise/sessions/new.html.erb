@@ -8,13 +8,13 @@
                     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                         <h1>Sperant</h1>
                         <div class="custom-user-name">
-                            <%= f.text_field :login, autofocus: true ,:class => "form-control" ,:placeholder => "Username or Email"  %>
+                            <%= f.text_field :login, autofocus: true ,:class => "form-control" ,:placeholder => "Username"  %>
                         </div>
                         <div class="custom-user-password">
                             <%= f.password_field :password, autocomplete: "off",:class => "form-control", :placeholder => "Password" %>
                         </div>
                         <div>
-                            <%= f.submit "Log in" , :class =>"btn btn-default form-control dark-theme-btn submit"%>
+                            <%= f.submit "Login" , :class =>"btn btn-default form-control dark-theme-btn submit"%>
                             <a class="reset_pass" href= '/auth/users/password/new' >Lost your password?</a>                        </div>
                         <div class="clearfix"></div>
                         

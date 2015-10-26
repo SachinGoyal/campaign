@@ -1,51 +1,38 @@
 <div class="row">
   <div class="page-title">
-    <div class="title_left"><h2>Role</h2></div><!-- title_left -->
-    <div class="title_right">
-      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
-        <div class="custom-add"><%= link_to new_role_path, :title => "New Role" do %><i class="fa fa-plus"></i><% end %></div>
+    <div class="title_left"><h2>Role list</h2></div><!-- title_left -->
+      <div class="title_right">
+        <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">       
+        <% if can? :read, Role %>
+          <%= render 'shared/keyword_search', :condition => :name_cont %>       
+        <% end %>
+        <% if can? :create, Role %>
+          <div class="custom-add"><%= link_to new_role_path, :title => "New Role" do %><i class="fa fa-plus"></i><% end %></div>
+        <% end %>
       </div>
     </div>
     <div class="clearfix"></div>                
   </div><!-- page-title -->
 </div><!--row-->
 
-<div class="custom-container">
-  <div class="row">
-    <% @roles.each do |role|%>
-    <div class="col-md-8 col-xs-offset-2 bottom-spacer">
-      <div class="custom-role-bar">
-        <div class="row">
-          <div class="col-md-3">
-            <strong><%=link_to "#{role.name.capitalize} #{role.company.try(:name).try(:capitalize)}", role_path(role) %></strong>
-          </div>
-          <div class="col-md-7">
-            Authorized to:
-            <%= role.functions.collect(&:agroup).uniq.map(&:capitalize).join(' ') %>
-          </div>
-          <div class="col-md-2 roles-icon-lists">
-            <span class="hideandShow-icon">
-              <%= link_to role_path(role)  do %>
-              <i class="fa fa-eye"></i>
-              <% end %>
-            </span>
-            <% unless [1,2].include?(role.id) %>
-              <span class="hideandShow-icon">
-                <%= link_to edit_role_path(role)  do %>
-                <i class="fa fa-pencil"></i>
-                <% end %>
-              </span>
-              <span class="hideandShow-icon">
-                <%= link_to role, method: :delete, data: { confirm: 'Are you sure?' }  do %>
-                <i class="fa fa-trash-o"></i>
-                <% end %>
-              </span>
-            <% end %>
-          </div>
-        </div><!-- row -->
-      </div>
-    </div>
-    <% end %>
-    <%= will_paginate @roles , renderer: BootstrapPagination::Rails%>
-  </div><!--  custom-container -->
-</div>
+<%- model_class = Role -%>
+<div class="custom-table">
+  <div class="row th" id="attributes_header">
+    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
+    <div class="col-md-3"><%= model_class.human_attribute_name(:name) %></div>
+    <div class="col-md-3"><%= model_class.human_attribute_name(:status) %>&nbsp;</div>
+    <div class="col-md-3"><%= model_class.human_attribute_name(:created_at) %></div>
+    <div class="col-md-2">&nbsp;</div>
+  </div><!-- row -->
+
+  <% if @roles.present? %>
+  <div id="role">
+   <%= render @roles %>
+  </div>
+  <%else%>
+   <h2 class='text-center'><em>No Record Found</em></h2>  
+  <% end %>
+  <%= render 'shared/bootam_action_link', element: 'roles' %>
+
+  <%= will_paginate @roles, renderer: BootstrapPagination::Rails %>
+  </div>

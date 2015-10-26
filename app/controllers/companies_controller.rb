@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
 
   layout 'dashboard' # set custom layout 
-
+  before_action :authenticate_user!
   load_and_authorize_resource #cancan
 
   #filter
@@ -12,8 +12,22 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @q = Company.ransack(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
     @companies = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
    # @companies = Company.all
+  end
+
+  def search
+    @attributes = Hash.new()
+
+    User.columns_hash.slice('name', 'subdomain', 'created_at').each do |k,v|
+      @attributes[k] = {value: k, type: v.type.to_s, association: nil}
+    end
+
+    @q  = Company.search(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
+    @companies = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @q.build_condition    
   end
 
   # GET /companies/1
@@ -43,6 +57,7 @@ class CompaniesController < ApplicationController
     @company.creator = current_user
     respond_to do |format|
       if @company.save
+        @company.create_role
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
@@ -88,6 +103,9 @@ class CompaniesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_company
       @company = Company.find(params[:id])
+      unless @company
+        return redirect_to companies_path, :alert => "Could not find company"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

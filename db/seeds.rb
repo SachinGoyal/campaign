@@ -1,7 +1,15 @@
 
-Role.create(:name => 'admin')
+Role.create(:name => 'admin', :editable => false)
 Role.create(:name => 'company admin')
-User.create(:role_id =>1 ,:username => 'admin',:email => 'goyalsachin52@gmail.com',:password => 'admin@123',:password_confirmation => 'sachin@123')
+User.create(:role_id =>1 ,
+	:username => 'admin',
+	:email => 'admin@gmail.com',
+	:password => 'admin@123',
+	:password_confirmation => 'admin@123',
+	:status => true)
+
+Gender.create(:name => 'Male')
+Gender.create(:name => 'Female')
 
 RUTA = File.dirname(__FILE__)
 p "Data Functions"
@@ -18,6 +26,9 @@ File.open(File.expand_path('data/es/functions.txt', RUTA)) do |file|
   end
 end
 
+Function.all.each do |f|
+  Access.create(:role_id => 2, :function_id => f.id)
+end
 # # user.add_role :admin
 # Role.destroy_all
 # #ActiveRecord::Base.connection.reset_pk_sequence!('roles')

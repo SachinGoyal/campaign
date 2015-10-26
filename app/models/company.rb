@@ -21,18 +21,30 @@ class Company < ActiveRecord::Base
 
   # Company name is used as subdomain
   # acts_as_universal_and_determines_tenant
+
+  #scope
+  default_scope {order('id ASC')}
+  #scope
+  
   
   # validation
-  validates :name, uniqueness: true, presence: true, format: { with: /\A[a-zA-Z][a-zA-Z ]+\z/}, length: {in: 2..50}
-  validates :free_emails, numericality: {greater_than_or_equal_to: 0}, allow_blank: true
+  validates :name, uniqueness: true, 
+                   presence: true, 
+                   format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
+                             message: 'Can only contain alphanumeric and space. Must begin with a character'},
+                   length: {in: 2..50}
+
+  validates :free_emails, numericality: {greater_than_or_equal_to: 0, :less_than_or_equal_to => 99999}, 
+                          allow_blank: true
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id == Role.superadmin.first.id }
   # validates_presence_of :users 
   validates_inclusion_of :status, in: [true, false]
   # validation
 
   # relations
-  has_many :roles, :dependent => :restrict_with_error
-  has_many :users, :dependent => :restrict_with_error
+  has_many :users, :dependent => :destroy
+  has_many :roles, :dependent => :destroy
+
   belongs_to :creator, class_name: "User", foreign_key: :created_by
   belongs_to :updator, class_name: "User", foreign_key: :updated_by
   # relations
@@ -43,8 +55,21 @@ class Company < ActiveRecord::Base
    
   #callback
   before_create :set_subdomain
-  after_create :create_role
+  # after_create :create_role
   #callback
+
+  #ransack
+
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(companies.created_at)")
+  end
+  
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w(name subdomain created_at)
+  end
+
+  #ransack
+
 
   #class methods
   class << self
@@ -64,11 +89,13 @@ class Company < ActiveRecord::Base
   #class methods
 
   def set_subdomain
-    self.subdomain = self.name.gsub(' ', '').downcase
+    self.subdomain = self.name.strip.gsub(' ', '').downcase
   end
 
   def create_role
-    role = Role.create(name: COMPANY_ADMIN,company_id: self.id)
+    role = roles.new(name: COMPANY_ADMIN , editable: false)
+    role.save
+    role.assign_permission if role.name == COMPANY_ADMIN
     users.first.update(role_id: role.id)
   end
 end

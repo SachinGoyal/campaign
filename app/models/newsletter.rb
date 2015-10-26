@@ -15,6 +15,8 @@
 #  deleted_at   :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  cc_email     :string
+#  bcc_email    :string
 #
 # Indexes
 #
@@ -28,9 +30,14 @@ class Newsletter < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant
 
+  #scope
+  default_scope {order('id ASC')}
+  #scope
+  
+
   # validation
   validates_presence_of :campaign_id, :template_id,:name,:subject
-  validates_inclusion_of :status, in: [true, false]
+  # validates_inclusion_of :status, in: [true, false]
   # validation
 
   #association

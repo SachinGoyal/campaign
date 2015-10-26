@@ -6629,7 +6629,7 @@ background-position: 19px 3px;
     z-index: 111111111111;
 }
 a.anchor-block {
-    display: block;
+    display: inline-block;
     width: 25px;
     height: 25px;
     text-align: center;
@@ -6710,3 +6710,15 @@ label.required:after {
 .upload-pic {width:128px;}
 .user-pic{padding:10px; border:1px solid #ccc; width:128px;}
 .user-pic img{width: 100%;}
+.radio_status{padding-top: 7px!important;}
+.status_spacer{margin-right: 10px;}
+.field_with_errors input{margin-bottom: 0px!important}
+.advance-search-drop{float:left;margin-right: 10px;}
+.advance-search-delete{float: left;}
+.cb{clear: both;}
+.my_fieldset{
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}

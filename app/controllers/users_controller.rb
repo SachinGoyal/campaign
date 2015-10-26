@@ -12,9 +12,9 @@ class UsersController < ApplicationController
 
   
   def index
-    @q = User.ransack(params[:q])
+    @q = User.where.not(id: 1).ransack(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
     @users = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
-    @users = @users.where.not(id: 1)
     # if current_user.is_superadmin?
     # else current_user.is_companyadmin?
     #   @users = current_user.company.users
@@ -24,11 +24,17 @@ class UsersController < ApplicationController
   end
 
   def search
-    @search = User.search(params[:q])
-    @users = @search.result(distinct: true).page(params[:page])
-    @search.build_condition    
-        @users = @users.where.not(id: 1)
+    @attributes = Hash.new()
 
+    User.columns_hash.slice('first_name', 'email', 'last_name', 'created_at').each do |k,v|
+      @attributes[k] = {value: k, type: v.type.to_s, association: nil}
+    end
+
+    @search = User.search(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
+    @users = @search.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @search.build_condition    
+    @users = @users.where.not(id: 1)
   end
 
   def new
@@ -72,7 +78,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
-  	@user = User.find(params[:id])
+    if @user.role.try(:name) == COMPANY_ADMIN
+      return redirect_to users_path, :notice => "Cannot delete user with company admin role"
+    end
+
   	if @user.destroy
   	 redirect_to users_path, :success => "Successfully deleted user"
     else
@@ -84,6 +93,9 @@ class UsersController < ApplicationController
 	# Use callbacks to share common setup or constraints between actions.
 	def set_user
 	  @user = User.find(params[:id])
+    unless @user
+      return redirect_to users_path, :alert => "Could not find user"
+    end
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.

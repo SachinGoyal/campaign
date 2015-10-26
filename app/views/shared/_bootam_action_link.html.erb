@@ -1,10 +1,29 @@
-<div class="row selected-row selected-row-bottom controller-<%=element%>">
+<div class="row selected-row selected-row-bottom " id='controller-<%=element%>'>
   <div class="col-md-12 selected-td">
     <ul>
-      <li><i class="fa fa-line-chart profile-enable"></i> Enable</li>
-      <li><i class="fa fa-pencil"></i> Disable</li>
-      <li class="custom-delete"><i class="fa fa-plus"></i> Delete</li>
+      <% if can? :update, element.classify %>
+        <li>
+	      <%= link_to '#' , data: { confirm: 'Are you sure You want to enable selected?' } do %>
+	        <i class="fa fa-line-chart profile-enable"></i>
+	        <span>Enable</span>
+	      <% end %>
+      	</li>
 
+      	<li>
+	      <%= link_to '#' , data: { confirm: 'Are you sure You want to desable selected?' } do %>
+	        <i class="fa fa-pencil"></i>
+	        <span>Disable</span>
+	      <% end %>
+      	</li>
+      <% end %>
+      <% if can? :destroy, element.classify %>
+      	<li>
+	      <%= link_to '#' , data: { confirm: 'Are you sure You want to delete selected ?' } do %>
+	        <i class="custom-delete"></i>
+	        <span>Delete</span>
+	      <% end %>
+      	</li>
+      <% end %>
     </ul>
   </div>
 </div>

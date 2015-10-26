@@ -71,6 +71,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.4.0)
       railties (>= 3.0)
+    bootstrap-wysihtml5-rails (0.3.3.7)
+      railties (>= 3.0)
     builder (3.2.2)
     cancancan (1.13.0)
     carrierwave (0.10.0)
@@ -105,6 +107,13 @@ GEM
     coffee-script-source (1.9.1.1)
     commonjs (0.2.7)
     connection_pool (2.2.0)
+    countries (1.1.0)
+      currencies (~> 0.4.2)
+      i18n_data (~> 0.7.0)
+    country_select (2.4.0)
+      countries (~> 1.1.0)
+      sort_alphabetical (~> 1.0)
+    currencies (0.4.2)
     debug_inspector (0.0.2)
     devise (3.5.2)
       bcrypt (~> 3.0)
@@ -130,6 +139,7 @@ GEM
       thor (>= 0.18.1)
     hitimes (1.2.3)
     i18n (0.7.0)
+    i18n_data (0.7.0)
     iconv (1.0.4)
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
@@ -261,6 +271,8 @@ GEM
       actionpack (~> 4.0)
       activemodel (~> 4.0)
     slop (3.6.0)
+    sort_alphabetical (1.0.2)
+      unicode_utils (>= 1.2.2)
     spreadsheet (1.0.7)
       ruby-ole (>= 1.0)
     spring (1.4.0)
@@ -283,6 +295,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicode_utils (1.4.0)
     unicorn (4.9.0)
       kgio (~> 2.6)
       rack
@@ -306,10 +319,12 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-datepicker-rails
+  bootstrap-wysihtml5-rails
   cancancan
   carrierwave
   client_side_validations!
   coffee-rails (~> 4.1.0)
+  country_select
   devise
   execjs
   guard

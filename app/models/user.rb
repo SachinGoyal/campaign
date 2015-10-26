@@ -34,7 +34,12 @@ class User < ActiveRecord::Base
   acts_as_paranoid # Soft Delete
   
   acts_as_tenant(:company) #multitenant#multitenant
-  
+
+  #scope
+  default_scope {order('id ASC')}
+  scope :active, -> { where(status: 'true') }
+  #scope
+    
   self.per_page = 10
   mount_uploader :image, ImageUploader
     
@@ -69,10 +74,10 @@ class User < ActiveRecord::Base
   end
 
   def check_company_admin
-    if role.name == COMPANY_ADMIN
-      errors[:base] << "Cannot delete user with company admin role"
-      return false
-    end
+    # if role.name == COMPANY_ADMIN
+    #   errors[:base] << "Cannot delete user with company admin role"
+    #   return false
+    # end
     if role.name == SUPERADMIN
       errors[:base] << "Cannot delete super admin"
       return false
@@ -110,10 +115,41 @@ class User < ActiveRecord::Base
       end
     end  
   end   
-  
+
+  def active?
+    status?
+  end
+
+  def active_for_authentication? 
+    super && active? 
+  end 
+
+  def inactive_message 
+    if !active? 
+      :not_approved 
+    else 
+      super # Use whatever other message 
+    end 
+  end 
+
+  def self.send_reset_password_instructions(attributes={})
+    recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+    if !recoverable.active?
+      recoverable.errors[:base] << I18n.t("devise.failure.not_approved")
+    elsif recoverable.persisted?
+      recoverable.send_reset_password_instructions
+    end
+    recoverable
+  end 
+
   # class function
+
+  def active_for_authentication?
+    super && status == true
+  end
+
   def is_admin?
-    role.name == SUPERADMIN
+     role.id == ADMIN_ID
   end
 
   def is_companyadmin?

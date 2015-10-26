@@ -2,19 +2,22 @@ class RolesController < ApplicationController
 
   layout 'dashboard' # set custom layout 
   
-  load_and_authorize_resource #cancan
-
   #filter
   before_action :authenticate_user!
+  load_and_authorize_resource #cancan
   before_action :set_role, only: [:show, :edit, :update, :destroy]
   #filter
 
   # GET /roles
   # GET /roles.json
   def index
-    @roles = Role.all.paginate(:page => params[:page], :per_page => 10)
-    # @roles = @search.result
-    # @roles = @roles.paginate page: params[:page], per_page: 10
+    if current_user.is_admin?
+      @q = Role.where(editable: true).ransack(params[:q])
+    else
+      @q = Role.where.not(name: COMPANY_ADMIN).where(editable: true).ransack(params[:q])
+    end
+    @q.sorts = 'id desc' if @q.sorts.empty?    
+    @roles = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -76,6 +79,7 @@ class RolesController < ApplicationController
     @functions = Function.all.group_by(&:agroup) #need show
     respond_to do |format|
       if @role.update_attributes(role_params)
+        @role.assign_permission if @role.id == COMPANY_ADMIN_ID
         format.html { redirect_to @role, notice: "Role was successfully updated. " }
         format.json { head :no_content }
       else
@@ -91,7 +95,7 @@ class RolesController < ApplicationController
     role = Role.find(params[:id])
     if role.destroy
       respond_to do |format|
-        format.html { redirect_to roles_url, alert: "Role was successfully destroyed." }
+        format.html { redirect_to roles_url, notice: "Role was successfully destroyed." }
         format.json { head :no_content }
       end
     else
@@ -104,6 +108,9 @@ class RolesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_role
       @role = Role.find(params[:id])
+      unless @role
+        return redirect_to roles_path, :alert => "Could not find role"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

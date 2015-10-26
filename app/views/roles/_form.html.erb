@@ -5,8 +5,21 @@
 
   <%= form_for @role, :html => { :class => "form-horizontal campaign" } do |f| %>
     <div class="row">
-      <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control" ,:placeholder=>"New Roles" %></div>
-        <div class="col-xs-3"><%= f.button :Save , :class=>"btn  dark-theme-btn" %></div>
+      <% if @role.name == COMPANY_ADMIN %>
+        <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control", :placeholder=>"New Role", :disabled => true %></div>
+      <% else %>
+        <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control", :placeholder=>"New Role" %></div>
+      <% end %>
+        <div class="col-xs-3">
+        <% if @role.new_record? %>
+          <%= f.button "Create Role" , :class=>"btn  dark-theme-btn" %>
+        <% else %>
+          <%= f.button "Update Role" , :class=>"btn  dark-theme-btn" %>
+        <% end %>
+        <% if can? :read, Role %>
+                <%= link_to "Cancel", roles_path %>
+              <% end %>
+        </div>
         <div class="col-xs-6">&nbsp;</div>
     </div>
     </div>
@@ -15,7 +28,7 @@
       <% functions.each do |group, actions| %>
         <div class="accordion-section">
           <a class="accordion-section-title" href=<%= "#accordion-#{group}"%> ><%= group.capitalize %> <span class="text-right arrow-right"><i class="fa fa-chevron-down"></i></span></a>
-          <div id=<%= "accordion-#{group}" %> class="accordion-section-content default-style-accordion">
+          <div id="<%= "accordion-#{group}" %>" class="accordion-section-content default-style-accordion">
             <p class="select-roles">
             <%= check_box_tag "select_all", 'select_all', false, data: {code: 'select_all'} %>
             <%= label_tag "select_all_#{group}", t("actions.select_all") %>
@@ -34,3 +47,5 @@
   <% end %>
   </div>
   </div><!-- roles-section -->
+
+  

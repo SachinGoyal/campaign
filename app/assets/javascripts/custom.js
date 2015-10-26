@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,23 +14,25 @@ $(document).ready( function() {
         }
 
         else{
-            $('.custom-table').find(":checkbox").prop("checked", false); 
+            $('.custom-table').find(":checkbox").prop("checked", false);
         }
     });
-
+//////////////////////////////////////////////////////////////
     $(":checkbox").on('click',function (e) {
-        if ($('input[type=checkbox]').is(':checked')){
+        if ($('.td').find(':checkbox').is(':checked')){
             $(".selected-row-bottom").show();
             $(".selected-row-inline").hide();
         }
         else{
             $(".selected-row-bottom").hide();
         }
+        $('.td').find("input:checkbox").not(":checked").length > 0 ? $("#select-all input").prop('checked',false) : $("#select-all input").prop('checked',true);
     });
 
 
-    $('.anchor-block').click(function(e){ 
-        $('.custom-table').find(":checkbox").prop("checked", false); 
+///////////////////////////////////////////////////
+    $('.anchor-block').click(function(e){
+        $('.custom-table').find(":checkbox").prop("checked", false);
         $(".selected-row-bottom").hide();
         $(".selected-row-inline").hide();
         $(this).parent().parent().next().slideToggle();
@@ -38,7 +40,7 @@ $(document).ready( function() {
     });
 
     $(".selected-row-bottom").find('ul').children().on('click', function(){
-          var controller = $(".selected-row-bottom").attr('class').split(' ')[3].split('-')[1]
+          var controller = $(".selected-row-bottom").attr('id').split('-')[1]
           var action = $(this).text();
           var a = myFunction();
         $.ajax({
@@ -58,7 +60,7 @@ $(document).ready( function() {
      return a;
     }
 
-    
+
 
     $(function () {
         $('#sidebar-menu li ul').slideUp();
@@ -81,8 +83,8 @@ $(document).ready( function() {
     });
 
 
-    
-    
+
+
     $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
       numFiles = input.get(0).files ? input.get(0).files.length : 1,
@@ -91,16 +93,16 @@ $(document).ready( function() {
 });
 
     $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
-        
+
         var input = $(this).parents('.input-group').find(':text'),
             log = numFiles > 1 ? numFiles + ' files selected' : label;
-        
+
         if( input.length ) {
             input.val(log);
         } else {
             if( log ) {} //alert(log);
         }
-        
+
     });
 
     $('#menu_toggle').click(function () {
@@ -393,23 +395,23 @@ else{
     $(".grey-box").slideToggle(500);
 });
 
-$(".accordion-section-title").click(function(){
-    if(!$(".accordion-section-title span i").hasClass("fa-chevron-up")){
-    $(".accordion-section-title span i").addClass("fa-chevron-up");
-    $(".accordion-section-title span i").removeClass("fa-chevron-down");
-}
-else{
-    $(".accordion-section-title span i").removeClass("fa-chevron-up");
-    $(".accordion-section-title span i").addClass("fa-chevron-down");
-    }
-
-});
+//$(".accordion-section-title").click(function(){
+//    if(!$(".accordion-section-title span i").hasClass("fa-chevron-up")){
+//    $(".accordion-section-title span i").addClass("fa-chevron-up");
+//    $(".accordion-section-title span i").removeClass("fa-chevron-down");
+//}
+//else{
+//    $(".accordion-section-title span i").removeClass("fa-chevron-up");
+//    $(".accordion-section-title span i").addClass("fa-chevron-down");
+//    }
+//
+//});
 
 /** ******  Accordion  *********************** **/
 /** ******  scrollview  *********************** **/
 $(document).ready(function () {
-  
-        
+
+
 
 });
 
@@ -420,11 +422,11 @@ $(document).ready(function () {
    //              touchbehavior: true,
    //              cursorcolor: "rgba(42, 63, 84, 0.35)"
    //          });
-   
-   
+
+
    //jQuery for accordions
-   
-   
+
+
    jQuery(document).ready(function() {
 
     function close_accordion_section() {
@@ -434,17 +436,22 @@ $(document).ready(function () {
 
     jQuery('.accordion-section-title').click(function(e) {
         // Grab current anchor value
+
         var currentAttrValue = jQuery(this).attr('href');
 
-        if(jQuery(e.target).is('.active')) {
+        if(jQuery(this).hasClass('active')) {
             close_accordion_section();
+            $(this).find("i").removeClass("fa-chevron-up");
+            $(this).find("i").addClass("fa-chevron-down");
         }else {
             close_accordion_section();
 
             // Add active class to section title
             jQuery(this).addClass('active');
             // Open up the hidden content panel
-            jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open'); 
+            $(this).find("i").removeClass("fa-chevron-down");
+            $(this).find("i").addClass("fa-chevron-up");
+            jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open');
         }
 
         e.preventDefault();

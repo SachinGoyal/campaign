@@ -23,6 +23,12 @@ class Profile < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant
 
+  #scope
+  default_scope {order('id ASC')}
+  scope :active, -> { where(status: 'true') }
+  #scope
+  
+
   #relaion
   has_and_belongs_to_many :contacts
   has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "profiles_attributes"

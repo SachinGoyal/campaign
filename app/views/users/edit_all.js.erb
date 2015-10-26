@@ -1,1 +1,4 @@
+<% javascript_include_tag 'custom'%>
 $('#user').html("<%= j (render @users) %>");
+$('.selected-row-bottom').hide();
+$('#select-all > input').prop('checked',false);

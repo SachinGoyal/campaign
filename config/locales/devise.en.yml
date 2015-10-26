@@ -14,8 +14,11 @@ en:
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Invalid %{authentication_keys} or password."
       timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
+      unauthenticated: "You need to sign in before continuing."
       unconfirmed: "You have to confirm your email address before continuing."
+      user:
+        signed_up_but_unapproved: "You cannot sign in because your account is disabled."
+        not_approved: "You cannot sign in because your account is disabled."
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
@@ -40,6 +43,10 @@ en:
       signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
       updated: "Your account has been updated successfully."
+      user:
+        signed_up_but_unapproved: "You cannot sign in because your account is disabled."
+      failure:
+        not_approved: "You cannot sign in because your account is disabled."
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
@@ -53,7 +60,7 @@ en:
       already_confirmed: "was already confirmed, please try signing in"
       confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
       expired: "has expired, please request a new one"
-      not_found: "not found"
+      not_found: "Email is not registered"
       not_locked: "was not locked"
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"

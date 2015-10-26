@@ -8,11 +8,14 @@
 });
 </script>
 <div class='text-right import_export_links'>
-<a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
-<%= link_to contacts_path(format: "xls") do %>
-  
-  <span>Export Contacts</span>
-  <i class="fa fa-file-excel-o"></i>
+<% if can? :create, Contact %>
+  <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
+<% end %>
+<% if can? :read, Contact %>
+  <%= link_to contacts_path(format: "csv") do %>
+    <span>Export Contacts</span>
+    <i class="fa fa-file-excel-o"></i>
+  <% end %>
 <% end %>
 </div>
 <div id="myModal" class="modal fade" role="dialog">
@@ -37,7 +40,7 @@
 		            <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select Profile</label>
 		            <div class="col-xs-6">
 		            	<%# if current_user.is_admin? %>
-  							    <%= f.select :profile_id, options_for_select(Profile.pluck(:name, :id)), {}, { :class => 'form-control' } %>
+  							    <%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), {}, { :class => 'form-control' } %>
   						    <%# else %>
   						    <%# end %>
 		            </div>
@@ -79,12 +82,18 @@
               				<th scope="col">first_name</th>
               				<th scope="col">last_name</th>
               				<th scope="col">email</th>
+                      <th scope="col">country</th>
+                      <th scope="col">city</th>
+                      <th scope="col">gender</th>
              			</tr>
              			
              			<tr>
 			              <td scope="col">John</td>
 			              <td scope="col">Doe</td>
 			              <td scope="col">John.Doe@gmail.com</td>
+                    <td scope="col">India</td>
+                    <td scope="col">Delhi</td>
+                    <td scope="col">Male</td>
 			            </tr>
             		</table>
         		</div>

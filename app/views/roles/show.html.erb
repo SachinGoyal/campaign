@@ -8,7 +8,7 @@
         <% end %>
         </span>
         <span class="delate-icon">
-          <%= link_to @role ,method: :delete do %>
+          <%= link_to @role, method: :delete do %>
             <i class="fa fa-trash-o"></i>
           <% end %>
         </span>
@@ -23,13 +23,13 @@
     <div class="row">
       <div class="col-md-12">
         <h4 class="text-center">Role:</h4>
-          <h2 class="text-center"><%= @role.name %></h2>
+          <h2 class="text-center"><%= "#{@role.name} #{@role.company.try(:name)}" %></h2>
       </div><!-- col-md-12 -->
       
 
     </div>
 <!-- row -->
-      <% @functions.each do |group,actions|%>
+      <% @functions.each do |group, actions|%>
         <div class="row">
           <div class="col-md-8 col-xs-offset-2 bottom-spacer">
             <div class="custom-panel-heading"><%= group.capitalize%></div>
@@ -43,5 +43,8 @@
           </div>
         </div>
       <% end %>
+
+<%= link_to 'Edit', edit_role_path(@role) %> |
+<%= link_to 'Back', roles_path %>
 
 </div><!--  custom-container -->

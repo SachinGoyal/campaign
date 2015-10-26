@@ -11,9 +11,14 @@ class AttributesController < ApplicationController
 
   # GET /attributes
   # GET /attributes.json
-  def index
+  def index    
     @q = Attribute.ransack(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
     @attributes = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    respond_to do |format|
+      format.html
+      format.js { @attributes.to_json }
+    end
   end
   
   # GET /attributes/1
@@ -74,7 +79,7 @@ class AttributesController < ApplicationController
         format.html { redirect_to attributes_url, notice: 'Attribute was successfully destroyed.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to attributes_url, notice: @attribute.errors.full_messages}
+        format.html { redirect_to attributes_url, notice: @attribute.errors.full_messages.join(", ")}
       end
     end
   end
@@ -83,6 +88,9 @@ class AttributesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_attribute
       @attribute = Attribute.find(params[:id])
+      unless @attribute
+        return redirect_to attributes_path, :alert => "Could not find attribute"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

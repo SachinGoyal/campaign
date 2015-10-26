@@ -2,7 +2,7 @@
       <div class="row td">
         <div class="col-md-1"><input name="" type="checkbox" value=<%=attribute.id%> ></div>
         <div class="col-md-2"><%= attribute.name %>&nbsp;</div>
-        <div class="col-md-3"><%= attribute.description %>&nbsp;</div>
+        <!-- <div class="col-md-3"><%#= attribute.description %>&nbsp;</div> -->
         <div class="col-md-1"><%= display_status(attribute) %>&nbsp;</div>
         <div class="col-md-3"><%= format_date(attribute, :created_at) %>&nbsp;</div>
         <div class="col-md-2 text-right"><a href="#" class="anchor-block"><i class="fa fa-ellipsis-v"></i></a></div>
