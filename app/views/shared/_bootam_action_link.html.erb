@@ -3,14 +3,14 @@
     <ul>
       <% if can? :update, element %>
         <li>
-	      <%= link_to '#' , data: { confirm: 'Are you sure You want to enable selected?' } do %>
+	      <%= link_to '#' , data: { confirm: 'Are you sure you want to enable records?' } do %>
 	        <i class="fa fa-line-chart profile-enable"></i>
 	        <span>Enable</span>
 	      <% end %>
       	</li>
 
       	<li>
-	      <%= link_to '#' , data: { confirm: 'Are you sure You want to disable selected?' } do %>
+	      <%= link_to '#' , data: { confirm: 'Are you sure you want to disable records?' } do %>
 	        <i class="fa fa-pencil"></i>
 	        <span>Disable</span>
 	      <% end %>
@@ -18,7 +18,7 @@
       <% end %>
       <% if can? :destroy, element %>
       	<li>
-	      <%= link_to '#' , data: { confirm: 'Are you sure You want to delete selected ?' } do %>
+	      <%= link_to '#' , data: { confirm: 'Are you sure you want to delete records?' } do %>
 	        <i class="custom-delete"></i>
 	        <span>Delete</span>
 	      <% end %>

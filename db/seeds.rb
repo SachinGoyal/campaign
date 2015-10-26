@@ -26,7 +26,7 @@ File.open(File.expand_path('data/es/functions.txt', RUTA)) do |file|
   end
 end
 
-Function.all.each do |f|
+Function.where.not(agroup: 'company').each do |f|
   Access.create(:role_id => 2, :function_id => f.id)
 end
 # # user.add_role :admin
