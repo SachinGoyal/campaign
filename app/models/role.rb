@@ -23,7 +23,7 @@ class Role < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #validation
-  validates :name, presence: true, format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
+  validates :name, presence: true, length: { in: 2..50 }, format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
                              message: 'Can only contain alphanumeric and space. Must begin with a character'}
 
   #validates_uniqueness_to_tenant :name
