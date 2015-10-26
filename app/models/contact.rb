@@ -35,8 +35,8 @@ class Contact < ActiveRecord::Base
 
   #validation
   validates :first_name, presence: true, length: { in: 2..150}
-  validates :first_name, length: { in: 2..150}, allow_blank: true
-  validates_presence_of :email
+  validates :last_name, presence: true, length: { in: 2..150}
+  validates_presence_of :email, length: { in: 3..255}
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
