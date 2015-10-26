@@ -70,6 +70,14 @@ class RolesController < ApplicationController
     @functions = Function.all.group_by(&:agroup)
   end
 
+  # GET /contacts/edit_all
+  def edit_all
+    Role.edit_all(params[:group_ids], params[:get_action])  
+    @roles = Role.where(editable: true)
+    @functions = Function.all.group_by(&:agroup)
+  end
+
+
 
   # PUT /roles/1
   # PUT /roles/1.json
