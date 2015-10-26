@@ -23,22 +23,23 @@
               
               <div class="field form-group form-group-sm role_company">
                 <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => 'Please select a company'}, {:class => 'form-control'}) %>  </div>
+                <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => 'Please select a company'}, {:class => 'form-control required'}) %>  </div>
               </div> 
               
               <% if @user.new_record? %>
                 <div class="field form-group form-group-sm">
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                  <div class="col-sm-9 col-xs-12" id="dynamic_company_roles" class="dynamic_company_roles">
-                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required'}) %> 
+
+                  <div class="col-sm-9 col-xs-12">
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required dynamic_company_roles'}) %> 
                   </div>                
                 </div>
               <% elsif @user.role.try(:name) == COMPANY_ADMIN %>
               <% else %>
                   <div class="field form-group form-group-sm">
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                  <div class="col-sm-9 col-xs-12" id="dynamic_company_roles" class="dynamic_company_roles">
-                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required'}) %> 
+                  <div class="col-sm-9 col-xs-12">
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required dynamic_company_roles'}) %> 
                   </div>                
                 </div>
 
@@ -47,22 +48,22 @@
             <% else %>
               <div class="field form-group form-group-sm role_company">
                 <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, [current_user.company], :id, :name, {}, {:class => 'form-control'}) %>  </div>
+                <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, [current_user.company], :id, :name, {}, {:class => 'form-control required'}) %>  </div>
               </div> 
               
               <% if @user.new_record? %>
                 <div class="field form-group form-group-sm">
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                  <div class="col-sm-9 col-xs-12" id="dynamic_company_roles" class="dynamic_company_roles">
-                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required'}) %> 
+                  <div class="col-sm-9 col-xs-12">
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required dynamic_company_roles'}) %> 
                   </div>                
                 </div>
               <% elsif @user.role.try(:name) == COMPANY_ADMIN %>
               <% else %>
                   <div class="field form-group form-group-sm">
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                  <div class="col-sm-9 col-xs-12" id="dynamic_company_roles" class="dynamic_company_roles">
-                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required company_admin_select'}) %> 
+                  <div class="col-sm-9 col-xs-12">
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required company_admin_select dynamic_company_roles'}) %> 
                   </div>                
                 </div>
 

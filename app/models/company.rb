@@ -32,7 +32,7 @@ class Company < ActiveRecord::Base
                    presence: true, 
                    format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
                              message: 'Can only contain alphanumeric and space. Must begin with a character'},
-                   length: {in: 2..50}
+                   length: {in: 2..255}
 
   validates :free_emails, numericality: {greater_than_or_equal_to: 0, :less_than_or_equal_to => 99999}, 
                           allow_blank: true
