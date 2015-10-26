@@ -50,6 +50,7 @@ class ProfilesController < ApplicationController
   def edit_all
     Profile.edit_all(params[:group_ids], params[:get_action])  
     @profiles = Profile.all
+    @message = updateable_messages(params[:get_action])
   end
 
  
@@ -95,5 +96,15 @@ class ProfilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:name, :status, :created_by, :updated_by,interest_area_ids: [])
+    end
+
+    def updateable_messages(action)
+      case action
+        when 'Delete'
+          "Profiles deleted successfully. Profiles with associated data could not be deleted."
+        else
+          "Profiles updated successfully."
+      end
+
     end
 end

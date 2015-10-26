@@ -48,6 +48,7 @@ class CompaniesController < ApplicationController
   def edit_all
     Company.edit_all(params[:group_ids], params[:get_action])  
     @companies = Company.all
+    @message = updateable_messages(params[:get_action])
   end
 
   # POST /companies
@@ -111,5 +112,15 @@ class CompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, :free_emails, :status, :created_by, :updated_by, :subdomain, users_attributes: [:id, :email, :username, :password, :password_confirmation, :role_id, :status])
+    end
+
+    def updateable_messages(action)
+      case action
+        when 'Delete'
+          "Companies deleted successfully."
+        else
+          "Companies updated successfully."
+      end
+
     end
 end

@@ -1,3 +1,4 @@
 $('#profile').html("<%= j (render @profiles) %>");
 $('.selected-row-bottom').hide();
 $('#select-all > input').prop('checked',false);
+$('.display_flash').html("<div class='flash alert-success alert'><%= @message %></div>")
