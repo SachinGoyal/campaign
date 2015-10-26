@@ -106,13 +106,15 @@ class Contact < ActiveRecord::Base
     
     #Company Export contact 
     def to_csv(options = {})
-      column_names = ["first_name", "last_name", "email", "status","created_at"] 
+      column_names = ["first_name", "last_name", "email","country","city","gender","status","created_at" ] 
       CSV.generate(options) do |csv|
         csv << column_names
         all.each do |contact|
+          country = contact.country_name
           contact = contact.attributes.values_at(*column_names)
-          contact[3] = contact[3].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
-          contact[4] = contact[4].to_datetime
+          contact[3] = country
+          contact[6] = contact[6].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
+          contact[7] = contact[7].to_datetime
           csv << contact
         end
       end
@@ -120,15 +122,17 @@ class Contact < ActiveRecord::Base
 
     #Admin Export
     def to_admin_csv(options = {})
-      column_names = ["company_id", "first_name", "last_name", "email", "status","created_at"] 
-      column_names_csv = ["company", "first_name", "last_name", "email", "status","created_at"] 
+      column_names = ["company_id", "first_name", "last_name", "email","country","city","gender", "status","created_at"] 
+      column_names_csv = ["company", "first_name", "last_name", "email","country","city","gender", "status","created_at"] 
       CSV.generate(options) do |csv|
         csv << column_names_csv
         all.each do |contact|
+          country = contact.country_name
           contact = contact.attributes.values_at(*column_names)
           contact[0] = Company.find(contact[0]).try(:name) if contact[0].present?
-          contact[4] = contact[4].present? ? 'enable' : 'desable' # override product status to enabel desable
-          contact[5] = contact[5].to_datetime
+          contact[4] = country
+          contact[7] = contact[7].present? ? 'enable' : 'desable' # override product status to enabel desable
+          contact[8] = contact[8].to_datetime
           csv << contact
         end
       end
