@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
 
   layout 'dashboard' # set custom layout 
   before_action :authenticate_user!
-  load_and_authorize_resource #cancan
+  load_and_authorize_resource :except => [:select_roles] #cancan
 
   #filter
   before_action :set_company, only: [:show, :edit, :update, :destroy, :select_roles]

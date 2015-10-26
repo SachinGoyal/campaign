@@ -9,6 +9,8 @@ class Ability
     if user.is_admin?
       can :manage, :all     
     else   
+      can :manage, Function
+      can :manage, Access
       user.role.functions.group_by(&:controller).each do |controller, functions|
         functions.each do |function|
           can [function.action.to_sym], function.controller.camelcase.constantize

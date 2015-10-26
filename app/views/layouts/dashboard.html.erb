@@ -73,49 +73,49 @@
                                 <% end %>
                                 
                                 <% if can? :read, Template %>
-                                  <li><%= link_to templates_path do %>
+                                  <li ><%= link_to templates_path do %>
                                      <i class="fa fa-clone"></i>
                                     <span>Templates</span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Profile %>
-                                  <li><%= link_to profiles_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "profiles" %>"><%= link_to profiles_path do %>
                                      <i class="fa fa-users"></i>
                                     <span>Profile</span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Contact %>
-                                  <li><%= link_to contacts_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "contacts" %>"><%= link_to contacts_path do %>
                                      <i class="fa fa-tty"></i>
                                     <span>Contacts</span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Role %>
-                                  <li><%= link_to roles_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "roles" %>"><%= link_to roles_path do %>
                                      <i class="fa fa-key"></i>
                                     <span>Roles</span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Attribute %>
-                                  <li><%= link_to attributes_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "attributes" %>"><%= link_to attributes_path do %>
                                      <i class="fa fa-edit"></i>
                                     <span>Attributes</span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Company %>
-                                  <li><%= link_to companies_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "companies" %>"><%= link_to companies_path do %>
                                      <i class="fa fa-building-o"></i>
                                     <span>Companies</span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, User %>
-                                  <li><%= link_to users_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "users" %>"><%= link_to users_path do %>
                                      <i class="fa fa-user"></i>
                                     <span>Users</span>
                                   <% end %></li>
