@@ -12,6 +12,7 @@ company; read; company
 company; create; company
 company; update; company
 company; destroy; company
+company; edit_all; company
 campaign; read; campaign
 campaign; create; campaign
 campaign; update; campaign
