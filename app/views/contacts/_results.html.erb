@@ -3,10 +3,12 @@
   <div class="row th">
     <div class="col-md-1"><input name="" id='select-all' type="checkbox" value=""></div>
     <div class="col-md-2"><%= sort_link(@q, :first_name, "Name") %></div>
-    <div class="col-md-3"><%= sort_link(@q, :email) %></div>
+    <div class="col-md-2"><%= sort_link(@q, :email) %></div>
+    <div class="col-md-1"><%= model_class.human_attribute_name(:profile_id) %></div>
+    <div class="col-md-1"><%= model_class.human_attribute_name(:city) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:country) %></div>
     <div class="col-md-1"><%= model_class.human_attribute_name(:status) %></div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:profile_id) %></div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 

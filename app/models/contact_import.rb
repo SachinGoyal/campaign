@@ -21,12 +21,20 @@ class ContactImport
   def save
     if valid?
       if imported_contacts.map(&:valid?).all?
+        successfull_records = []
+        imported_contacts.each_with_index.each do |contact, index|
+          if contact.save
+            successfull_records << contact
+          else
+            contact.errors.full_messages.each do |message|
+              errors.add :base, "Row #{index+2}: #{message}"
+            end
+          end
+        end        
+        (Profile.find(profile_id.to_i).contacts << successfull_records) if profile_id
         
-        imported_contacts.each do |c|
-          ac = c.save
-        end
-        # (Profile.find(profile_id.to_i).contacts << imported_contacts) if profile_id
-        true
+        imported_contacts == successfull_records
+        
       else
         imported_contacts.each_with_index do |contact, index|
           contact.errors.full_messages.each do |message|
