@@ -67,7 +67,7 @@ class Contact < ActiveRecord::Base
 
   def country_name
     country_name = ISO3166::Country[country]
-    country_name.name
+    country_name.try(:name)
   end  
   #ransack
 
@@ -110,11 +110,11 @@ class Contact < ActiveRecord::Base
       CSV.generate(options) do |csv|
         csv << column_names
         all.each do |contact|
-          country = contact.country_name
+          country = contact.try(:country_name)
           contact = contact.attributes.values_at(*column_names)
           contact[3] = country
           contact[6] = contact[6].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
-          contact[7] = contact[7].to_datetime
+          contact[7] = contact[7].to_datetime.strftime("%d/%m/%y, %I:%M %p")
           csv << contact
         end
       end
@@ -127,12 +127,12 @@ class Contact < ActiveRecord::Base
       CSV.generate(options) do |csv|
         csv << column_names_csv
         all.each do |contact|
-          country = contact.country_name
+          country = contact.try(:country_name)
           contact = contact.attributes.values_at(*column_names)
           contact[0] = Company.find(contact[0]).try(:name) if contact[0].present?
           contact[4] = country
           contact[7] = contact[7].present? ? 'enable' : 'desable' # override product status to enabel desable
-          contact[8] = contact[8].to_datetime
+          contact[8] = contact[8].to_datetime.strftime("%d/%m/%y, %I:%M %p")
           csv << contact
         end
       end
