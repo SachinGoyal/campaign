@@ -5,7 +5,7 @@
   <div class="col-md-1 "><%= contact.profiles.map(&:name).join(", ") %>&nbsp;</div>
   <div class="col-md-1 "><%= contact.city %>&nbsp;</div>
   <% if contact.country %>
-  	<div class="col-md-2 "><%= contact.country_name %>&nbsp;</div>
+  	<div class="col-md-1 "><%= contact.country_name %>&nbsp;</div>
   <% else %>
   	<div class="col-md-2 "><%= contact.country %>&nbsp;</div>
   <% end %>
