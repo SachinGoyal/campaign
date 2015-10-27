@@ -40,7 +40,7 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
-  validates_inclusion_of :gender, in: GENDERS
+  validates_inclusion_of :gender, in: GENDERS, allow_blank: true
   #validation
 
   
