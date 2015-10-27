@@ -12,9 +12,9 @@
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
-  <% if contacts.present? %>
+  <% if @contacts.present? %>
     <div id="contact">
-      <% contacts.each do |c| %>
+      <% @contacts.each do |c| %>
         <%= render :partial => 'contacts/contact', :locals => {:contact => c} %>
       <% end %>
     </div>
