@@ -1,7 +1,7 @@
 <div class="row td">
   <div class="col-md-1 check"><input name="" type="checkbox" value=<%= contact.id %> ></div>
   <div class="col-md-2"><%= contact.name %>&nbsp;</div>
-  <div class="col-md-2 custom-break"><%= contact.email %>&nbsp;</div>
+  <div class="col-md-2 custom-break break_email"><%= contact.email %>&nbsp;</div>
   <div class="col-md-1 "><%= contact.profiles.map(&:name).join(", ") %>&nbsp;</div>
   <div class="col-md-1 "><%= contact.city %>&nbsp;</div>
   <% if contact.country %>
