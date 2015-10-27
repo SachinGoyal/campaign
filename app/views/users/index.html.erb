@@ -4,7 +4,7 @@
       <div class="title_right">
 
       <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
-          <% if can? :read, User %>      
+          <% if can? :search, User %>      
             <%= render 'shared/keyword_search', :condition => :email_or_username_cont %>      
             <div class="advance-search">
               <%= link_to search_users_path, :title => "Advance Search" do %>
