@@ -6722,3 +6722,6 @@ label.required:after {
     padding: 10px;
     margin-bottom: 10px;
 }
+.break_email{
+    word-break: break-all;
+}
