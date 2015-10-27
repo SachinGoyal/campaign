@@ -16,7 +16,6 @@ class RolesController < ApplicationController
     else
       @q = Role.where.not(name: COMPANY_ADMIN).where(editable: true).ransack(params[:q])
     end
-    @q.sorts = 'id desc' if @q.sorts.empty?    
     @roles = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|

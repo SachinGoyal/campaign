@@ -23,7 +23,7 @@ class Company < ActiveRecord::Base
   # acts_as_universal_and_determines_tenant
 
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   #scope
   
   

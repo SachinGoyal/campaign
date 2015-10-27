@@ -41,7 +41,7 @@ class Role < ActiveRecord::Base
   accepts_nested_attributes_for :functions
 
   #scope
-  default_scope {order('id') }
+  default_scope {order('id DESC') }
   scope :company_admin, -> { where(name: COMPANY_ADMIN) }
   scope :admin, -> { where(name: admin) }
   #scope
