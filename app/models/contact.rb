@@ -67,7 +67,7 @@ class Contact < ActiveRecord::Base
 
   def country_name
     country_name = ISO3166::Country[country]
-    country_name.name
+    country_name.try(:name)
   end  
   #ransack
 
