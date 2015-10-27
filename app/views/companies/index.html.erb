@@ -4,7 +4,7 @@
       <div class="title_right">
 
       <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
-          <% if can? :read, Company %>
+          <% if can? :search, Company %>
             <%= render 'shared/keyword_search', :condition => :name_or_subdomain_cont %>
             <div class="advance-search">
               <%= link_to search_companies_path do %>

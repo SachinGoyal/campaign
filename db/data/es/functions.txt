@@ -8,11 +8,13 @@ user; create; user
 user; update; user
 user; destroy; user
 user; edit_all; user
+user; search; user
 company; read; company
 company; create; company
 company; update; company
 company; destroy; company
 company; edit_all; company
+company; search; company
 campaign; read; campaign
 campaign; create; campaign
 campaign; update; campaign
@@ -38,6 +40,7 @@ contact; create; contact
 contact; update; contact
 contact; destroy; contact
 contact; edit_all; contact
+contact; search; contact
 setting; read; setting
 setting; create; setting
 setting; update; setting

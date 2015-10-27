@@ -6,7 +6,7 @@
       <div class="title_right">
 
       <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
-        <% if can? :read, Contact %>       
+        <% if can? :search, Contact %>       
           <%= render 'shared/keyword_search', :condition => :email_cont %>
        
           <div class="advance-search">
