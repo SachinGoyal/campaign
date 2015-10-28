@@ -90,7 +90,7 @@ class Company < ActiveRecord::Base
   #class methods
 
   def set_subdomain
-    self.subdomain = self.name.strip.gsub(' ', '').downcase
+    self.subdomain = self.name.strip.gsub(' ', '_').downcase
   end
 
   def create_role

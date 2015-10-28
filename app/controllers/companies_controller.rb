@@ -96,7 +96,7 @@ class CompaniesController < ApplicationController
   end
 
   def select_roles
-    @roles = @company.roles
+    @roles = Role.where(company_id: @company.id, editable: true)
   end
 
   private

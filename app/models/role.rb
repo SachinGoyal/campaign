@@ -8,7 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  company_id :integer
-#  status     :boolean
+#  status     :boolean          default(TRUE)
 #  editable   :boolean          default(TRUE)
 #
 # Indexes
@@ -41,9 +41,11 @@ class Role < ActiveRecord::Base
   accepts_nested_attributes_for :functions
 
   #scope
-  default_scope {order('id DESC') }
+  # default_scope {order('id DESC') }
   scope :company_admin, -> { where(name: COMPANY_ADMIN) }
   scope :admin, -> { where(name: admin) }
+  scope :editable, -> { where(editable: true)}
+  scope :non_editable, -> { where(editable: false)}
   #scope
 
   #callback
