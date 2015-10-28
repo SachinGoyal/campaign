@@ -1,0 +1,7 @@
+<div class="error_display">
+	<ul>
+  		<% model_name.errors.full_messages.each do |msg| %>
+    		<li><%= msg %></li>
+  		<% end %>
+	</ul>
+</div>
