@@ -74,10 +74,10 @@ class User < ActiveRecord::Base
   end
 
   def check_company_admin
-    # if role.name == COMPANY_ADMIN
-    #   errors[:base] << "Cannot delete user with company admin role"
-    #   return false
-    # end
+    if role.name == COMPANY_ADMIN
+      errors[:base] << "Cannot delete user with company admin role"
+      return false
+    end
     if role.name == SUPERADMIN
       errors[:base] << "Cannot delete super admin"
       return false
@@ -97,7 +97,7 @@ class User < ActiveRecord::Base
       ids.reject!(&:empty?)
       User.find(ids).each do |user|
         if action == 'delete'
-          user.destroy!
+          user.destroy
         else
           status = action == 'enable' ? 1 : 0
           user.update(:status => status )
