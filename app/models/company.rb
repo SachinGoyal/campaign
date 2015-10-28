@@ -34,9 +34,7 @@ class Company < ActiveRecord::Base
                              message: 'Can only contain alphanumeric and space. Must begin with a character'},
                    length: {in: 2..255}
 
-  validates :free_emails, numericality: {less_than_or_equal_to: 0, :message => "Value has to be greater than 0"}, 
-                          allow_blank: true
-  validates :free_emails, numericality: {greater_than_or_equal_to: 99999, :message => "Enter only 5 digits"}, 
+  validates :free_emails, numericality: {less_than_or_equal_to: 99999, greater_than_or_equal_to: 0, :message => "Enter values between 0 and 99999"}, 
                           allow_blank: true
 
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id == Role.superadmin.first.id }
