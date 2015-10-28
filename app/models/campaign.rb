@@ -50,7 +50,7 @@ class Campaign < ActiveRecord::Base
       ids.reject!(&:empty?)
       Campaign.find(ids).each do |campaign|
         if action == 'delete'
-          campaign.destroy!
+          campaign.destroy
         else
           status = action == 'enable' ? 1 : 0
           campaign.update(:status => status )

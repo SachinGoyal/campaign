@@ -56,7 +56,7 @@ class Profile < ActiveRecord::Base
       ids.reject!(&:empty?)
       Profile.find(ids).each do |profile|
       	if action == 'delete'
-          profile.destroy!
+          profile.destroy
         else
           status = action == 'enable' ? 1 : 0
           profile.update(:status => status )

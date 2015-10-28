@@ -66,7 +66,7 @@ class Attribute < ActiveRecord::Base
       ids.reject!(&:empty?)
       Attribute.find(ids).each do |attribute|
         if action == 'delete'
-          attribute.destroy!
+          attribute.destroy
         else
           status = action == 'enable' ? 1 : 0
           attribute.update(:status => status )
