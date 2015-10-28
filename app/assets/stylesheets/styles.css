@@ -6736,3 +6736,4 @@ label.required:after {
 ul.interest-area { list-style-type: none; margin: 0px; padding: 0px;}
 ul.interest-area li{ display: block; float: left; margin-right: 4px; width: 100px; padding-left: 20px; position: relative;}
 ul.interest-area li input[type="checkbox"]{ position: absolute; left: 0px; }
+li.current-page i{color:#1ABB9C;}
