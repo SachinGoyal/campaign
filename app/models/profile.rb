@@ -66,4 +66,12 @@ class Profile < ActiveRecord::Base
   end
   # class methods
 
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(name created_at)
+  end
+
 end

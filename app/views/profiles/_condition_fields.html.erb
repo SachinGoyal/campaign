@@ -1,0 +1,29 @@
+<div class="field">
+  <div class="row form-group">
+    <div class="search_attribute">
+      <div class="col-xs-3">      
+        <%= f.attribute_fields do |a| %>
+          <%= a.attribute_select({associations: %w(interest_areas), include_blank: "Select"}, {class: 'form-control select_attributes'}) %>
+        <% end %>
+      </div>  
+
+      <div class="col-xs-4">
+        <%= f.predicate_select({ only: [:cont, :not_cont, :gt, :gteq, :lt, :lteq, :eq, :not_eq, :start, :not_start, :end, :not_end, :date_eq, :date_not_eq, :date_lt, :date_lteq, :date_gt, :date_gteq, :in ], compounds: false}, {class: 'predicate_select form-control'}) %>
+      </div>
+    </div>
+    
+    <div class="col-xs-4 box_search">  
+      <%= f.value_fields do |v| %>
+        <%= v.text_field :value, :class => 'value_search form-control' %>
+      <% end %>
+      </div>  
+   
+    <div class="box_select inline col-xs-4" style="display:none"></div>     
+    <div class="col-xs-1 text-center delete-icon">
+      <%= link_to "#", {:class => 'remove_fields'} do %>
+        <i class="fa fa-plus"></i>
+      <% end %>    
+    </div>
+    
+  </div>
+</div>
