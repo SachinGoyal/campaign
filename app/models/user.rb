@@ -150,7 +150,7 @@ class User < ActiveRecord::Base
     if is_admin?
       super 
     else
-      super && company.status && status
+      super && status
     end
   end
 
