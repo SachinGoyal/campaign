@@ -49,7 +49,8 @@ class ProfilesController < ApplicationController
   def edit_all
     Profile.edit_all(params[:group_ids], params[:get_action])  
     @profiles = Profile.all
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
  

@@ -46,7 +46,8 @@ class CompaniesController < ApplicationController
   def edit_all
     Company.edit_all(params[:group_ids], params[:get_action])  
     @companies = Company.all
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
   # POST /companies
