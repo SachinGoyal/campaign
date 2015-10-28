@@ -86,7 +86,7 @@ class Contact < ActiveRecord::Base
       ids.reject!(&:empty?)
       Contact.find(ids).each do |contact|
         if action == 'delete'
-          contact.destroy!
+          contact.destroy
         else
           status = action == 'enable' ? 1 : 0
           contact.update(:status => status )

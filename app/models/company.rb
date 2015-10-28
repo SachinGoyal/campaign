@@ -81,7 +81,7 @@ class Company < ActiveRecord::Base
       ids.reject!(&:empty?)
       Company.find(ids).each do |company|
         if action == 'delete'
-          company.destroy!
+          company.destroy
         else
           status = action == 'enable' ? 1 : 0
           company.update(:status => status )
