@@ -44,3 +44,6 @@
 <%= render 'results', model_class: model_class %>
 <%= render 'shared/bootam_action_link', element: User %>
 <%= will_paginate @users , renderer: BootstrapPagination::Rails%>
+<div>
+  <%= link_to "Back", users_path %>
+</div>

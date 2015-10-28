@@ -419,7 +419,7 @@ z-index: 111;
     float: left;
     display: block;
 }
-.title_left h2 {color:#39455b; font-weight:600; padding-left:10px;}
+.title_left h2 {color:#39455b; font-weight:600; padding-left:0px;}
 
 .page-title .title_left h3 {
     margin: 9px 0;
@@ -6356,7 +6356,7 @@ ul.notifications {
 
 .dark-theme-btn{background-color:#39455b;line-height:23px; text-shadow:none; color:#fff; border-radius:5px;}
 .dark-theme-btn:hover{background-color:#00bbb9; color:#fff;}
-.custom-input-search{width:84%; float:left; margin-right:10px;}
+.custom-input-search{width:80%; float:left; margin-right:10px;}
 .custom-input-search input {box-shadow:none!important; border-top:1px solid #d9dee4!important; border-left:1px solid #d9dee4!important;
 border-bottom:1px solid #d9dee4!important;border-right:none!important; line-height:15pt;}
 .custom-input-search button {box-shadow:none!important;border-top:1px solid #d9dee4!important; border-bottom:1px solid #d9dee4!important;border-right:1px solid #d9dee4!important;border-left:1px solid #fff!important;}
@@ -6366,6 +6366,7 @@ border-bottom:1px solid #d9dee4!important;border-right:none!important; line-heig
 .custom-add a:hover, .advance-search:hover
  {background-color:#273042;}
  .custom-add a{color: #fff;}
+ .custom-add{ margin-right: 10px;}
 .custom-table-grid th{background-color:#f3f3f3; padding:6px;}
 .custom-table-grid td{ padding:6px;}
 .custom-table-grid tr{border:1px solid #eaeaea; background-color:#fff;}
@@ -6622,7 +6623,7 @@ background-position: 19px 3px;
 
 	font-weight:normal;
 	font-size:14px;
-	margin-left:20px;
+	margin-left:0px;
 }
 .arrow-right{float:right;}
 .modal-dialog {
@@ -6725,3 +6726,13 @@ label.required:after {
 .break_email{
     word-break: break-all;
 }
+.custom-container .form-group input{
+    vertical-align: top;
+}
+.import_export_links_margin{
+    display: block;
+    margin-top: 8px;
+}
+ul.interest-area { list-style-type: none; margin: 0px; padding: 0px;}
+ul.interest-area li{ display: block; float: left; margin-right: 4px; width: 100px; padding-left: 20px; position: relative;}
+ul.interest-area li input[type="checkbox"]{ position: absolute; left: 0px; }
