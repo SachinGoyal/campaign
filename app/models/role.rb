@@ -82,7 +82,7 @@ class Role < ActiveRecord::Base
   
   # change permission respective to generic company admin
   def assign_permission
-    company_admin,*company_admin_all = Role.company_admin
+    company_admin,*company_admin_all = Role.company_admin.reorder("id ASC")
     functions = company_admin.try(:function_ids) 
     if company_admin_all.any?
       company_admin_all.each do |c_admin|
