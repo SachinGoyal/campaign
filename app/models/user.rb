@@ -97,7 +97,9 @@ class User < ActiveRecord::Base
       ids.reject!(&:empty?)
       User.find(ids).each do |user|
         if action == 'delete'
-          user.destroy
+          unless user.role.name == COMPANY_ADMIN
+            user.destroy
+          end
         else
           status = action == 'enable' ? 1 : 0
           user.update(:status => status )
