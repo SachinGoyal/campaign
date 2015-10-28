@@ -29,7 +29,7 @@ class Contact < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
   GENDERS = ['male', 'female']
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   scope :active, -> { where(status: 'true') }
   #scope
 
@@ -37,6 +37,7 @@ class Contact < ActiveRecord::Base
   validates :first_name, presence: true, length: { in: 2..150}
   validates :last_name, presence: true, length: { in: 2..150}
   validates_presence_of :email, length: { in: 3..255}
+  validates_presence_of :profile_ids, message: 'Please select atleast one'
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
@@ -131,7 +132,7 @@ class Contact < ActiveRecord::Base
           contact = contact.attributes.values_at(*column_names)
           contact[0] = Company.find(contact[0]).try(:name) if contact[0].present?
           contact[4] = country
-          contact[7] = contact[7].present? ? 'enable' : 'desable' # override product status to enabel desable
+          contact[7] = contact[7].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
           contact[8] = contact[8].to_datetime.strftime("%d/%m/%y, %I:%M %p")
           csv << contact
         end

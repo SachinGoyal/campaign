@@ -29,6 +29,6 @@
   <% else %>
     <h2 class='text-center'><em>No Record Found</em></h2>  
   <% end %>
-  <%= render 'shared/bootam_action_link', element: 'templates'%>
+  <%= render 'shared/bootam_action_link', element: Template %>
   <%= will_paginate @templates , renderer: BootstrapPagination::Rails%>
 </div>

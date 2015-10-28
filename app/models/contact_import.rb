@@ -22,8 +22,9 @@ class ContactImport
     if valid?
       if imported_contacts.map(&:valid?).all?
         successfull_records = []
+        profile = Profile.find(profile_id.to_i)
         imported_contacts.each_with_index.each do |contact, index|
-          if contact.save
+          if profile.contacts.create(contact.attributes)
             successfull_records << contact
           else
             contact.errors.full_messages.each do |message|
@@ -31,7 +32,6 @@ class ContactImport
             end
           end
         end        
-        (Profile.find(profile_id.to_i).contacts << successfull_records) if profile_id
         
         imported_contacts == successfull_records
         

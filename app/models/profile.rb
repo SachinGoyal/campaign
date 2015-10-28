@@ -24,7 +24,7 @@ class Profile < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   scope :active, -> { where(status: 'true') }
   #scope
   
