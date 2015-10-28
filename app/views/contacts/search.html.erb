@@ -37,6 +37,6 @@
 
 
 </div><!-- greyBg -->
-<%= render 'results'%>
+<%= render 'results', :locals => {:contacts => @contacts }%>
 <%= render 'shared/bootam_action_link', element: Contact %>
 <%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>
