@@ -6,31 +6,21 @@
   <div class="col-xs-8 form-group pull-right top_search">
   <% if can? :read, Profile %>
     <%= render 'shared/keyword_search', :condition => :name_cont %>
+    <div class="advance-search">
+            <%= link_to search_profiles_path do %>
+             <i class="fa fa-dot-circle-o"></i>
+            <% end %>
+    </div> 
   <% end %>  
   <% if can? :create, Profile %>
     <div class="custom-add"><%= link_to new_profile_path, :title => "New Profile" do %><i class="fa fa-plus"></i><% end %></div>
   <% end %>    
   </div>              
+
 </div><!--row-->
-
-
-<%- model_class = Profile -%>
-<div class="custom-table">
-  <div class="row th">
-    <div class="col-md-2"><input name="" id='select-all' type="checkbox" value=""></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
-    <div class="col-md-2">No. of Contacts</div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:status) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
-    <div class="col-md-2">&nbsp;</div>
-  </div><!-- row -->
-  <% if @profiles.present? %>
-    <div id="profile">
-      <%= render @profiles %>
-    </div>
-  <%else%>
-    <h2 class='text-center'><em>No Record Found</em></h2>  
-  <% end %>
-  <%= render 'shared/bootam_action_link', element: Profile %>
-  <%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>
+<div id="results">
+  <%= render :partial => "results", :locals => {:profiles => @profiles} %>
 </div>
+
+<%= render 'shared/bootam_action_link', element: Profile %>
+<%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>

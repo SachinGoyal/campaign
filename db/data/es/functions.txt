@@ -35,6 +35,7 @@ profile; create; profile
 profile; update; profile
 profile; destroy; profile
 profile; edit_all; profile
+profile; search; profile
 contact; read; contact
 contact; create; contact
 contact; update; contact

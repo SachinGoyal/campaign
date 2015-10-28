@@ -6,7 +6,7 @@
         <%= form_for @contact, :html => { :class => "form-horizontal contact" } do |f| %>
 
         <div class="form-group form-group-sm">
-          <%= f.label :profile_ids,'Profiles', :class => "col-sm-4 col-xs-12 control-label"%>
+          <%= f.label :profile_ids,'Profiles', :class => "col-sm-4 col-xs-12 control-label required"%>
           <div class="col-xs-8 custom-checkbox-style" id="profile-custom-select">
             <%= collection_select(:contact, :profile_ids, Profile.active, :id, :name, {:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :name => 'contact[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
           </div>
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group form-group-sm">
-          <%= f.label :gender, :class => "col-sm-4 col-xs-12 control-label"%>
+          <%= f.label :gender, :class => "col-sm-4 col-xs-12 control-label required"%>
           <div class="col-sm-8 col-xs-12">
             <%= f.select :gender, options_for_select(['Male', 'Female'], :selected => @contact.gender.try(:titleize)), {include_blank: "Select Gender"}, { :class => 'form-control'} %>
           </div>

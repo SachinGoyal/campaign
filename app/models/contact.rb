@@ -37,11 +37,11 @@ class Contact < ActiveRecord::Base
   validates :first_name, presence: true, length: { in: 2..150}
   validates :last_name, presence: true, length: { in: 2..150}
   validates_presence_of :email, length: { in: 3..255}
-#  validates_presence_of :profile_ids, message: 'Please select atleast one'
+  # validates_presence_of :profile_ids, message: 'Please select atleast one'
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
-  validates_inclusion_of :gender, in: GENDERS, allow_blank: true
+  validates_inclusion_of :gender, in: GENDERS, message: "Please set a value"#,, allow_blank: true
   #validation
 
   
@@ -79,6 +79,7 @@ class Contact < ActiveRecord::Base
   def convert_country_code
     self.country = ISO3166::Country.find_by_name(country).try(:first) unless ISO3166::Country[country]
   end
+
   # class methods
   class << self
     def edit_all(ids, action)
@@ -95,7 +96,7 @@ class Contact < ActiveRecord::Base
     end
 
     def accessible_attributes
-      ["first_name", "last_name", "email", "company_id", "gender", "country", "city"]
+      ["first_name", "last_name", "email", "company_id", "gender", "country", "city", "profile_ids"]
     end
     
     def import_records(file, profile_id = nil)

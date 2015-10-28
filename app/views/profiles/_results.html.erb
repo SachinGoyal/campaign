@@ -1,0 +1,22 @@
+<%- model_class = Profile -%>
+<div class="custom-table">
+  <div class="row th">
+    <div class="col-md-2"><input name="" id='select-all' type="checkbox" value=""></div>
+    <div class="col-md-2"><%= sort_link(@q, :name, "Name") %></div>
+    <div class="col-md-2">No. of Contacts</div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:status) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
+    <div class="col-md-2">&nbsp;</div>
+  </div><!-- row -->
+
+  <% if @profiles.present? %>
+    <div id="profile">
+      <% @profiles.each do |p| %>
+        <%= render :partial => 'profiles/profile', :locals => {:profile => p} %>
+      <% end %>
+    </div>
+  <%else%>
+    <h2 class='text-center'><em>No Record Found</em></h2>  
+  <% end %>
+</div>
+

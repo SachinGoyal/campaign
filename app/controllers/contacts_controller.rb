@@ -63,9 +63,14 @@ class ContactsController < ApplicationController
   # POST /contacts.json
   def create
     @contact = Contact.new(contact_params)
+    if (contact_params[:profile_ids] - [""]).empty? and !@contact.valid?
+      @contact.errors[:profile_ids] << "Please select atleast one"
+      render :new
+      return
+    end
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
+        format.html { return redirect_to @contact, notice: 'Contact was successfully created.' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
