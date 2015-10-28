@@ -147,7 +147,11 @@ class User < ActiveRecord::Base
   # class function
 
   def active_for_authentication?
-    super && company.status && status
+    if is_admin?
+      super 
+    else
+      super && company.status && status
+    end
   end
 
   def is_admin?
