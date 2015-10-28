@@ -74,7 +74,8 @@ class RolesController < ApplicationController
     Role.edit_all(params[:group_ids], params[:get_action])  
     @roles = Role.where(editable: true)
     @functions = Function.all.group_by(&:agroup)
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
 

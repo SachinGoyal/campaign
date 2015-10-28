@@ -81,7 +81,8 @@ class ContactsController < ApplicationController
   def edit_all
     Contact.edit_all(params[:group_ids], params[:get_action])  
     @contacts = Contact.all
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
 

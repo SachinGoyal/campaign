@@ -33,7 +33,8 @@ class CampaignsController < ApplicationController
   def edit_all
     Campaign.edit_all(params[:group_ids], params[:get_action])  
     @campaigns = Campaign.all
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
   # POST /campaigns

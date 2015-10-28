@@ -38,7 +38,8 @@ class AttributesController < ApplicationController
   def edit_all
     Attribute.edit_all(params[:group_ids], params[:get_action])
     @attributes = Attribute.all
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
   # POST /attributes
