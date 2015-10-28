@@ -105,7 +105,7 @@ class UsersController < ApplicationController
   def updateable_messages(action)
     case action
       when 'Delete'
-        "Users deleted successfully. Users with associated data could not be deleted."
+        "Users deleted successfully. Users with associated data or company admin role could not be deleted."
       else
         "Users updated successfully."
     end
