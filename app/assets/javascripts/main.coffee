@@ -5,22 +5,26 @@ jQuery ->
     $('.custom-table').find(":checkbox").prop("checked", false)
     $(".selected-row-bottom").hide()
     if((f_row_inline).is(':visible'))
-      $(f_row_inline).slideUp(500)
+      $(f_row_inline).slideUp(300)
     else
-      $(".selected-row-inline").slideUp(500)
-      $(f_row_inline).slideDown(500)
+      $(".selected-row-inline").slideUp(300)
+      $(f_row_inline).slideDown(300)
     e.stopPropagation()
 
-  $(document).on 'click', ":checkbox", (e) ->
-    if($('.td').find(':checkbox').is(':checked'))
+  $(document).on 'click', ".check input:checkbox", (e) ->
+    length    = $('.check input:checkbox').length
+    unchecked = $('.check input:checkbox').not(":checked").length
+    if(unchecked == 0)
       $(".selected-row-bottom").show()
       $(".selected-row-inline").hide()
-    else
-      $(".selected-row-bottom").hide()
-    if $('.td').find("input:checkbox").not(":checked").length > 0
+      $("#select-all").prop('checked',true)
+    else if (unchecked > 0 && unchecked < length)
+      $(".selected-row-bottom").show()
+      $(".selected-row-inline").hide()
       $("#select-all").prop('checked',false)
     else
-      $("#select-all").prop('checked',true)
+      $(".selected-row-bottom").hide()
+      $("#select-all").prop('checked',false)
 
   $('#select-all').on 'change', ->
     if $(this).is(":checked") && $('.check').find(":checkbox").length > 0

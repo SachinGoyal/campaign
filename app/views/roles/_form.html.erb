@@ -18,7 +18,7 @@
           <%= f.button "Update Role" , :class=>"btn  dark-theme-btn" %>
         <% end %>
         <% if can? :read, Role %>
-          <%= link_to "Cancel", roles_path %>
+          <%= link_to "Cancel", roles_path,class: 'btn custom-link-btn' %>
         <% end %>
         </div>
         <div class="col-xs-6">&nbsp;</div>
