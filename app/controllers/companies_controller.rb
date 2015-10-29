@@ -96,7 +96,7 @@ class CompaniesController < ApplicationController
   end
 
   def select_roles
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:user_id]) if params[:user_id].present?
     @roles = Role.where(company_id: @company.id, editable: true)
   end
 
