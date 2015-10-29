@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   concern :search do
     collection do 
       post :search
@@ -37,7 +36,7 @@ Rails.application.routes.draw do
 
   resources :roles, concerns: :edit_all
   resources :newsletters, concerns: :edit_all
-  resources :profiles, concerns: :edit_all
+  resources :profiles, concerns: [:edit_all, :search]
   resources :contact_imports
 
   get 'home/index'

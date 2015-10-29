@@ -1,11 +1,19 @@
-<%= render 'shared/import' %>
+
 
 <div class="row">
-  <div class="page-title">
+<div class="col-xs-3">
+  
     <div class="title_left"><h2>Contact list</h2></div><!-- title_left -->
-      <div class="title_right">
+      </div>
 
-      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
+      <div class="col-xs-9 form-group pull-right top_search">
+<div class="row">
+ 
+<div class="col-xs-4">
+<%= render 'shared/import' %>
+</div>
+        <div class="col-xs-8">
+          
         <% if can? :search, Contact %>       
           <%= render 'shared/keyword_search', :condition => :email_cont %>
        
@@ -17,10 +25,13 @@
         <% end %>
         <% if can? :create, Contact %>
           <div class="custom-add"><%= link_to new_contact_path, :title => "New Contact" do %><i class="fa fa-plus"></i><% end %></div>
-        <% end %>  
+        <% end %> 
+
+        </div>
+        </div>
       </div>
 
-    </div>
+     
       <div class="clearfix"></div>                
   </div><!-- page-title -->
 </div><!--row-->

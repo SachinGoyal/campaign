@@ -8,8 +8,17 @@ class ContactImport
 
   attr_accessor :file, :profile_id
   validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
+  # validates_format_of :file, :with => %r{\.csv\z}i, :message => "file must be in .csv format"
+   validate :check_file_ext
   validates :profile_id, presence: true
 
+  def check_file_ext
+    if file and file.content_type != "text/csv"
+      errors[:file] = "should be csv"
+      false
+    end
+  end
+  
   def initialize(attributes = {})
     attributes.each { |name, value| send("#{name}=", value) }
   end
@@ -19,11 +28,13 @@ class ContactImport
   end
 
   def save
+
     if valid?
       if imported_contacts.map(&:valid?).all?
         successfull_records = []
+        profile = Profile.find(profile_id.to_i)
         imported_contacts.each_with_index.each do |contact, index|
-          if contact.save
+          if profile.contacts.create(contact.attributes)
             successfull_records << contact
           else
             contact.errors.full_messages.each do |message|
@@ -31,7 +42,6 @@ class ContactImport
             end
           end
         end        
-        (Profile.find(profile_id.to_i).contacts << successfull_records) if profile_id
         
         imported_contacts == successfull_records
         
@@ -58,7 +68,15 @@ class ContactImport
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       contact = Contact.find_by_id(row["id"]) || Contact.new
-      contact.attributes = row.to_hash.slice(*Contact.accessible_attributes)
+      h = row.to_hash.slice(*Contact.accessible_attributes)
+      if h.has_key?("gender")
+        if h["gender"] == "male" or h["gender"] == "Male"
+          h["gender"] = true
+        elsif h["gender"] == "female" or h["gender"] == "Female"
+          h["gender"] = false
+        end
+      end
+      contact.attributes = h
       contact
     end
   end

@@ -31,7 +31,7 @@ class Newsletter < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   #scope
   
 
@@ -52,7 +52,7 @@ class Newsletter < ActiveRecord::Base
       ids.reject!(&:empty?)
       Newsletter.find(ids).each do |newsletter|
         if action == 'delete'
-          newsletter.destroy!
+          newsletter.destroy
         else
           status = action == 'enable' ? 1 : 0
           newsletter.update(:status => status )

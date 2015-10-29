@@ -13,7 +13,6 @@ class AttributesController < ApplicationController
   # GET /attributes.json
   def index    
     @q = Attribute.ransack(params[:q])
-    @q.sorts = 'id desc' if @q.sorts.empty?
     @attributes = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html
@@ -39,7 +38,8 @@ class AttributesController < ApplicationController
   def edit_all
     Attribute.edit_all(params[:group_ids], params[:get_action])
     @attributes = Attribute.all
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
   # POST /attributes

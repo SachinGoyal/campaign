@@ -15,7 +15,7 @@
 #  updated_at :datetime         not null
 #  city       :string
 #  country    :string
-#  gender     :string
+#  gender     :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -29,7 +29,7 @@ class Contact < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
   GENDERS = ['male', 'female']
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   scope :active, -> { where(status: 'true') }
   #scope
 
@@ -37,10 +37,12 @@ class Contact < ActiveRecord::Base
   validates :first_name, presence: true, length: { in: 2..150}
   validates :last_name, presence: true, length: { in: 2..150}
   validates_presence_of :email, length: { in: 3..255}
+  # validates_presence_of :profile_ids, message: 'Please select atleast one'
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
-  validates_inclusion_of :gender, in: GENDERS
+  # validates :gender, :presence => true
+  # validates_inclusion_of :gender, in: [true, false], message: "Should either be male or female"
   #validation
 
   
@@ -50,7 +52,7 @@ class Contact < ActiveRecord::Base
   #relation
 
   # callbacks
-  before_validation :convert_lower
+  # before_validation :convert_lower
   before_validation :convert_country_code
   # callbacks
 
@@ -62,7 +64,7 @@ class Contact < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(id first_name last_name email created_at)
+    %w(first_name last_name email created_at)
   end
 
   def country_name
@@ -72,12 +74,13 @@ class Contact < ActiveRecord::Base
   #ransack
 
   def convert_lower
-    self.gender.try(:downcase!) 
+    # self.gender.try(:downcase!) 
   end
 
   def convert_country_code
     self.country = ISO3166::Country.find_by_name(country).try(:first) unless ISO3166::Country[country]
   end
+
   # class methods
   class << self
     def edit_all(ids, action)
@@ -85,7 +88,7 @@ class Contact < ActiveRecord::Base
       ids.reject!(&:empty?)
       Contact.find(ids).each do |contact|
         if action == 'delete'
-          contact.destroy!
+          contact.destroy
         else
           status = action == 'enable' ? 1 : 0
           contact.update(:status => status )
@@ -94,7 +97,7 @@ class Contact < ActiveRecord::Base
     end
 
     def accessible_attributes
-      ["first_name", "last_name", "email", "company_id", "gender", "country", "city"]
+      ["first_name", "last_name", "email", "company_id", "gender", "country", "city", "profile_ids"]
     end
     
     def import_records(file, profile_id = nil)
@@ -107,12 +110,14 @@ class Contact < ActiveRecord::Base
     #Company Export contact 
     def to_csv(options = {})
       column_names = ["first_name", "last_name", "email","country","city","gender","status","created_at" ] 
+      column_names_csv = ["first_name", "last_name", "email","country","city","gender","status","Date" ] 
       CSV.generate(options) do |csv|
-        csv << column_names
+        csv << column_names_csv
         all.each do |contact|
           country = contact.try(:country_name)
           contact = contact.attributes.values_at(*column_names)
           contact[3] = country
+          contact[5] = contact[5].present? ? 'Male' : 'Female' # override product status to enabel desable
           contact[6] = contact[6].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
           contact[7] = contact[7].to_datetime.strftime("%d/%m/%y, %I:%M %p")
           csv << contact
@@ -123,7 +128,7 @@ class Contact < ActiveRecord::Base
     #Admin Export
     def to_admin_csv(options = {})
       column_names = ["company_id", "first_name", "last_name", "email","country","city","gender", "status","created_at"] 
-      column_names_csv = ["company", "first_name", "last_name", "email","country","city","gender", "status","created_at"] 
+      column_names_csv = ["company", "first_name", "last_name", "email","country","city","gender", "status","Date"] 
       CSV.generate(options) do |csv|
         csv << column_names_csv
         all.each do |contact|
@@ -131,7 +136,8 @@ class Contact < ActiveRecord::Base
           contact = contact.attributes.values_at(*column_names)
           contact[0] = Company.find(contact[0]).try(:name) if contact[0].present?
           contact[4] = country
-          contact[7] = contact[7].present? ? 'enable' : 'desable' # override product status to enabel desable
+          contact[6] = contact[6].present? ? 'Male' : 'Female'
+          contact[7] = contact[7].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
           contact[8] = contact[8].to_datetime.strftime("%d/%m/%y, %I:%M %p")
           csv << contact
         end

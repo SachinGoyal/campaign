@@ -1,5 +1,4 @@
 <div class="error_display">
-	<h2><%= pluralize(model_name.errors.count, "error") %> prohibited this person from being saved:</h2>
 	<ul>
   		<% model_name.errors.full_messages.each do |msg| %>
     		<li><%= msg %></li>

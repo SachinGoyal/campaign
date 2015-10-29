@@ -8,7 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  company_id :integer
-#  status     :boolean
+#  status     :boolean          default(TRUE)
 #  editable   :boolean          default(TRUE)
 #
 # Indexes
@@ -41,9 +41,11 @@ class Role < ActiveRecord::Base
   accepts_nested_attributes_for :functions
 
   #scope
-  default_scope {order('id') }
+  # default_scope {order('id DESC') }
   scope :company_admin, -> { where(name: COMPANY_ADMIN) }
   scope :admin, -> { where(name: admin) }
+  scope :editable, -> { where(editable: true)}
+  scope :non_editable, -> { where(editable: false)}
   #scope
 
   #callback
@@ -58,7 +60,7 @@ class Role < ActiveRecord::Base
       ids.reject!(&:empty?)
       Role.find(ids).each do |role|
         if action == 'delete'
-          role.destroy!
+          role.destroy
         else
           status = action == 'enable' ? 1 : 0
           role.update(:status => status )
@@ -82,7 +84,7 @@ class Role < ActiveRecord::Base
   
   # change permission respective to generic company admin
   def assign_permission
-    company_admin,*company_admin_all = Role.company_admin
+    company_admin,*company_admin_all = Role.company_admin.reorder("id ASC")
     functions = company_admin.try(:function_ids) 
     if company_admin_all.any?
       company_admin_all.each do |c_admin|

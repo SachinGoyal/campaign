@@ -13,7 +13,6 @@ class UsersController < ApplicationController
   
   def index
     @q = User.where.not(id: 1).ransack(params[:q])
-    @q.sorts = 'id desc' if @q.sorts.empty?
     @users = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
     # if current_user.is_superadmin?
     # else current_user.is_companyadmin?
@@ -31,7 +30,6 @@ class UsersController < ApplicationController
     end
 
     @search = User.search(params[:q])
-    @search.sorts = 'id desc' if @search.sorts.empty?
     @users = @search.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @search.build_condition    
     @users = @users.where.not(id: 1)
@@ -63,7 +61,8 @@ class UsersController < ApplicationController
   def edit_all
     User.edit_all(params[:group_ids], params[:get_action])  
     @users = User.all
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
   def update
@@ -106,7 +105,7 @@ class UsersController < ApplicationController
   def updateable_messages(action)
     case action
       when 'Delete'
-        "Users deleted successfully. Users with associated data could not be deleted."
+        "Users deleted successfully. Users with associated data or company admin role could not be deleted."
       else
         "Users updated successfully."
     end

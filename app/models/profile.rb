@@ -24,7 +24,7 @@ class Profile < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   scope :active, -> { where(status: 'true') }
   #scope
   
@@ -56,7 +56,7 @@ class Profile < ActiveRecord::Base
       ids.reject!(&:empty?)
       Profile.find(ids).each do |profile|
       	if action == 'delete'
-          profile.destroy!
+          profile.destroy
         else
           status = action == 'enable' ? 1 : 0
           profile.update(:status => status )
@@ -65,5 +65,13 @@ class Profile < ActiveRecord::Base
     end
   end
   # class methods
+
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(name created_at)
+  end
 
 end

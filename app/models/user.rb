@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant#multitenant
 
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   scope :active, -> { where(status: 'true') }
   #scope
     
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   # devise 
   
   # validation
-  validates :username, presence: true, uniqueness: true, length: { in: 4..50 }, format: { with: /\A[a-zA-Z][a-zA-Z ]+\z/}
+  validates :username, presence: true, uniqueness: true, length: { in: 4..50 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, :message => "Only alphanumeric and space allowed"}
   validates :role_id, presence: true
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
   # validation
@@ -97,7 +97,9 @@ class User < ActiveRecord::Base
       ids.reject!(&:empty?)
       User.find(ids).each do |user|
         if action == 'delete'
-          user.destroy!
+          unless user.role.name == COMPANY_ADMIN
+            user.destroy
+          end
         else
           status = action == 'enable' ? 1 : 0
           user.update(:status => status )
@@ -145,7 +147,11 @@ class User < ActiveRecord::Base
   # class function
 
   def active_for_authentication?
-    super && status == true
+    if is_admin?
+      super 
+    else
+      super && status
+    end
   end
 
   def is_admin?

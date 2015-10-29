@@ -27,7 +27,6 @@ class ContactsController < ApplicationController
       @attributes["interest_areas_#{k}"] = {value: k, type: v.type.to_s, association: nil}
     end
     @q  = Contact.search(params[:q])
-    @q.sorts = 'id desc' if @q.sorts.empty?
     @contacts = @q.result(distinct: true).includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end
@@ -36,7 +35,6 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def index
     @q = Contact.ransack(params[:q])
-    @q.sorts = 'id desc' if @q.sorts.empty?
     @contacts = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)       
     contacts = @q.result(distinct: true)
     respond_to do |format|
@@ -65,9 +63,14 @@ class ContactsController < ApplicationController
   # POST /contacts.json
   def create
     @contact = Contact.new(contact_params)
+    if (contact_params[:profile_ids] - [""]).empty? and !@contact.valid?
+      @contact.errors[:profile_ids] << "Please select atleast one"
+      render :new
+      return
+    end
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
+        format.html { return redirect_to @contact, notice: 'Contact was successfully created.' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
@@ -83,7 +86,8 @@ class ContactsController < ApplicationController
   def edit_all
     Contact.edit_all(params[:group_ids], params[:get_action])  
     @contacts = Contact.all
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
 

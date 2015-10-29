@@ -12,9 +12,7 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @q = Company.ransack(params[:q])
-    @q.sorts = 'id desc' if @q.sorts.empty?
     @companies = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
-   # @companies = Company.all
   end
 
   def search
@@ -25,7 +23,7 @@ class CompaniesController < ApplicationController
     end
 
     @q  = Company.search(params[:q])
-    @q.sorts = 'id desc' if @q.sorts.empty?
+   # @q.sorts = 'id desc' if @q.sorts.empty?
     @companies = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end
@@ -48,7 +46,8 @@ class CompaniesController < ApplicationController
   def edit_all
     Company.edit_all(params[:group_ids], params[:get_action])  
     @companies = Company.all
-    @message = updateable_messages(params[:get_action])
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
   # POST /companies
@@ -97,7 +96,7 @@ class CompaniesController < ApplicationController
   end
 
   def select_roles
-    @roles = @company.roles
+    @roles = Role.where(company_id: @company.id, editable: true)
   end
 
   private

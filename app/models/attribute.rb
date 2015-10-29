@@ -23,7 +23,7 @@ class Attribute < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
   
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   scope :active, -> { where(status: 'true') }
   #scope
 
@@ -66,7 +66,7 @@ class Attribute < ActiveRecord::Base
       ids.reject!(&:empty?)
       Attribute.find(ids).each do |attribute|
         if action == 'delete'
-          attribute.destroy!
+          attribute.destroy
         else
           status = action == 'enable' ? 1 : 0
           attribute.update(:status => status )

@@ -25,7 +25,7 @@ class Campaign < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   #scope
   
 
@@ -50,7 +50,7 @@ class Campaign < ActiveRecord::Base
       ids.reject!(&:empty?)
       Campaign.find(ids).each do |campaign|
         if action == 'delete'
-          campaign.destroy!
+          campaign.destroy
         else
           status = action == 'enable' ? 1 : 0
           campaign.update(:status => status )

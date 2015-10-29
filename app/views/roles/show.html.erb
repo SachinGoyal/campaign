@@ -22,8 +22,11 @@
 <div class="custom-container">
     <div class="row">
       <div class="col-md-12">
-        <h4 class="text-center">Role:</h4>
-          <h2 class="text-center"><%= "#{@role.name} #{@role.company.try(:name)}" %></h2>
+        <h4 class="text-center">Role: <%= @role.name %></h4>
+        <% if @role.company %>
+          <h4 class="text-center">Company: <%= @role.company.name %>
+        </h4>
+        <% end %>
       </div><!-- col-md-12 -->
       
 

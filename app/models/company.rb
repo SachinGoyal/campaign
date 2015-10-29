@@ -23,19 +23,20 @@ class Company < ActiveRecord::Base
   # acts_as_universal_and_determines_tenant
 
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   #scope
   
   
   # validation
   validates :name, uniqueness: true, 
                    presence: true, 
-                   format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
-                             message: 'Can only contain alphanumeric and space. Must begin with a character'},
+                   format: { with: /\A[a-zA-Z0-9 ]+\z/, 
+                             message: 'Can only contain alphanumeric and space.'},
                    length: {in: 2..255}
 
-  validates :free_emails, numericality: {greater_than_or_equal_to: 0, :less_than_or_equal_to => 99999}, 
+  validates :free_emails, numericality: {less_than_or_equal_to: 99999, greater_than_or_equal_to: 0, :message => "Enter values between 0 and 99999"}, 
                           allow_blank: true
+
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id == Role.superadmin.first.id }
   # validates_presence_of :users 
   validates_inclusion_of :status, in: [true, false]
@@ -78,7 +79,7 @@ class Company < ActiveRecord::Base
       ids.reject!(&:empty?)
       Company.find(ids).each do |company|
         if action == 'delete'
-          company.destroy!
+          company.destroy
         else
           status = action == 'enable' ? 1 : 0
           company.update(:status => status )
@@ -89,7 +90,7 @@ class Company < ActiveRecord::Base
   #class methods
 
   def set_subdomain
-    self.subdomain = self.name.strip.gsub(' ', '').downcase
+    self.subdomain = self.name.strip.gsub(' ', '_').downcase
   end
 
   def create_role
