@@ -9,7 +9,7 @@ class ContactImport
   attr_accessor :file, :profile_id
   validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
   # validates_format_of :file, :with => %r{\.csv\z}i, :message => "file must be in .csv format"
-   validate :check_file_ext
+  # validate :check_file_ext
   validates :profile_id, presence: true
 
   def check_file_ext
