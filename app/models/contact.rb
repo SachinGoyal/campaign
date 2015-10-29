@@ -15,7 +15,7 @@
 #  updated_at :datetime         not null
 #  city       :string
 #  country    :string
-#  gender     :string
+#  gender     :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -41,7 +41,8 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
-  validates_inclusion_of :gender, in: GENDERS, message: "Please set a value"#,, allow_blank: true
+  # validates :gender, :presence => true
+  # validates_inclusion_of :gender, in: [true, false], message: "Should either be male or female"
   #validation
 
   
@@ -51,7 +52,7 @@ class Contact < ActiveRecord::Base
   #relation
 
   # callbacks
-  before_validation :convert_lower
+  # before_validation :convert_lower
   before_validation :convert_country_code
   # callbacks
 
@@ -73,7 +74,7 @@ class Contact < ActiveRecord::Base
   #ransack
 
   def convert_lower
-    self.gender.try(:downcase!) 
+    # self.gender.try(:downcase!) 
   end
 
   def convert_country_code
@@ -109,12 +110,14 @@ class Contact < ActiveRecord::Base
     #Company Export contact 
     def to_csv(options = {})
       column_names = ["first_name", "last_name", "email","country","city","gender","status","created_at" ] 
+      column_names_csv = ["first_name", "last_name", "email","country","city","gender","status","Date" ] 
       CSV.generate(options) do |csv|
-        csv << column_names
+        csv << column_names_csv
         all.each do |contact|
           country = contact.try(:country_name)
           contact = contact.attributes.values_at(*column_names)
           contact[3] = country
+          contact[5] = contact[5].present? ? 'Male' : 'Female' # override product status to enabel desable
           contact[6] = contact[6].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
           contact[7] = contact[7].to_datetime.strftime("%d/%m/%y, %I:%M %p")
           csv << contact
@@ -125,7 +128,7 @@ class Contact < ActiveRecord::Base
     #Admin Export
     def to_admin_csv(options = {})
       column_names = ["company_id", "first_name", "last_name", "email","country","city","gender", "status","created_at"] 
-      column_names_csv = ["company", "first_name", "last_name", "email","country","city","gender", "status","created_at"] 
+      column_names_csv = ["company", "first_name", "last_name", "email","country","city","gender", "status","Date"] 
       CSV.generate(options) do |csv|
         csv << column_names_csv
         all.each do |contact|
@@ -133,6 +136,7 @@ class Contact < ActiveRecord::Base
           contact = contact.attributes.values_at(*column_names)
           contact[0] = Company.find(contact[0]).try(:name) if contact[0].present?
           contact[4] = country
+          contact[6] = contact[6].present? ? 'Male' : 'Female'
           contact[7] = contact[7].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
           contact[8] = contact[8].to_datetime.strftime("%d/%m/%y, %I:%M %p")
           csv << contact
