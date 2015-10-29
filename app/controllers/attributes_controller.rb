@@ -78,7 +78,7 @@ class AttributesController < ApplicationController
   def destroy
     respond_to do |format|
       if @attribute.destroy
-        format.html { redirect_to attributes_url, notice: 'Attribute was successfully destroyed.' }
+        format.html { redirect_to attributes_url, notice: 'Attribute was successfully deleted.' }
         format.json { head :no_content }
       else
         format.html { redirect_to attributes_url, notice: @attribute.errors.full_messages.join(", ")}
