@@ -46,8 +46,9 @@
           </div>
         </div>
       <% end %>
-
-<%= link_to 'Edit', edit_role_path(@role) %> |
+<% if can? :update, Role %>
+  <%= link_to 'Edit', edit_role_path(@role) %> |
+<% end %>
 <%= link_to 'Back', roles_path %>
 
 </div><!--  custom-container -->

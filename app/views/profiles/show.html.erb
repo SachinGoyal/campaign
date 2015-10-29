@@ -61,6 +61,7 @@
       </div><!-- row -->
     </div><!--  custom-container -->
 
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<% if can? :update, Profile %>
+  <%= link_to 'Edit', edit_profile_path(@profile) %> |
+<% end %>
 <%= link_to 'Back', profiles_path %>
