@@ -6,8 +6,8 @@
         <input name="" id='select-all' type="checkbox" value="">
       <% end %>
     </div>
-    <div class="col-md-2"><%= sort_link(@q, :first_name, "Name") %></div>
-    <div class="col-md-2"><%= sort_link(@q, :email) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:email) %></div>
     <div class="col-md-1"><%= model_class.human_attribute_name(:profile_id) %></div>
     <div class="col-md-1"><%= model_class.human_attribute_name(:city) %></div>
     <div class="col-md-1"><%= model_class.human_attribute_name(:country) %></div>
