@@ -220,6 +220,7 @@ body .container.body .right_col {
 body.nav-md .container.body .right_col {
     padding: 10px 20px 0;
     margin-left: 230px;
+    margin-bottom: 45px;
 }
 
 .nav_title {
@@ -6398,7 +6399,7 @@ border-bottom:1px solid #d9dee4!important;border-right:none!important; line-heig
 .custom-from-group {text-align:center;}
 .custom-from-group button{padding:8px 20px; background-color:#39455b; color:#fff; border:none;border-radius:3px;}
 .dark-btn button{padding:8px 20px; background-color:#39455b; color:#fff; border:none;border-radius:3px;margin:0px;}
-.dark-btn button:hover{background-color:#000;}
+.dark-btn button:hover{background-color:#000;color:white;}
 
 .dark-btn-custom{padding:8px 20px; background-color:#39455b; color:#fff; border:none!important;border-radius:3px!important;margin:0px;}
 .dark-btn-custom:hover{background-color:#000; color:#fff!important;}
@@ -6612,8 +6613,22 @@ input[readonly] {
     background-size: 65%;
     background-position: 0px 3px;
     height:20px;
-
 }
+.fa-attributes:hover{
+    background-image:url(icon-hover.svg);
+    background-repeat:no-repeat;
+    background-size: 65%;
+    background-position: 0px 3px;
+    height:20px;
+}
+.current-page .fa-attributes{
+    background-image:url(icon-hover.svg);
+    background-repeat:no-repeat;
+    background-size: 65%;
+    background-position: 0px 3px;
+    height:20px;
+}
+
 body.nav-sm .nav.side-menu li a i.fa-attributes{
 background-size: 36%;
 background-position: 19px 3px;
@@ -6740,3 +6755,4 @@ li.current-page i{color:#1ABB9C;}
 .custom-link-btn:hover {
  text-decoration:underline;
 }
+.fil0 {fill:#1ABB9C}

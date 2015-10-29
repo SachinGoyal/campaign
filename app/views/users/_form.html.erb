@@ -2,7 +2,7 @@
   $( document ).ready(function() {
       $.ajax({
         url: '/companies/select_roles',
-        data: "id="+$('#user_company_id').val()
+        data: "id="+$('#user_company_id').val() + "&user_id="+"<%= @user.try(:id)%>"
       });
       
     $('#user_company_id').on('change', function() {      

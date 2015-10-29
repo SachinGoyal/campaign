@@ -3,7 +3,7 @@
    <div class="col-xs-4">
     <div class="title_left"><h2>Profile list</h2></div><!-- title_left -->
   </div>
-  <div class="col-xs-8 form-group pull-right top_search">
+  <div class="col-xs-5 form-group pull-right top_search">
   <% if can? :read, Profile %>
     <%= render 'shared/keyword_search', :condition => :name_cont %>
     <div class="advance-search">
