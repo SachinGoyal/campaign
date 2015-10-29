@@ -21,7 +21,7 @@
         <% if can? :destroy, element    %>
           <% if element.is_a?(User) and element == current_user %>
           <% elsif element.is_a?(Company) %>
-            <%= link_to element, method: :delete, data: { confirm: 'Are you sure this company? It will delete associated admin and other data.' } do %>
+            <%= link_to element, method: :delete, data: { confirm: 'Are you sure want to delete this company? It will delete associated admin and other data.' } do %>
               <i class="fa fa-plus"></i>
               <span>Delete</span>
             <% end %>

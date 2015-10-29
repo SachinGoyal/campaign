@@ -33,7 +33,6 @@ jQuery ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $('.add_link').before($(this).data('fields').replace(regexp, time))
-    $( ".add_fields_fieldset" ).trigger( "click" );
     event.preventDefault()
 
   $('form').on 'click', '.add_fields_fieldset', (event) ->
