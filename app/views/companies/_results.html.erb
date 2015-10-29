@@ -1,7 +1,11 @@
 <%- model_class = Company -%>
 <div class="custom-table">
   <div class="row th">
-    <div class="col-md-1 check"><input name="select-all"  id='select-all' type="checkbox" value=""></div>
+    <div class="col-md-1 check">
+    <% if can?(:update , Company) or can?(:delete , Company ) %>
+      <input name="select-all"  id='select-all' type="checkbox" value="">
+    <% end %>  
+    </div>
     <div class="col-md-2"><%= sort_link(@q, :name, "Company Name") %></div>
     <!-- <div class="col-md-2"><%#= sort_link(@q, :subdomain) %></div> -->
     <div class="col-md-3"><%= sort_link(@q, :free_emails, "Per Month Emails") %></div>

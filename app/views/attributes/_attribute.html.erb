@@ -1,6 +1,10 @@
 
       <div class="row td">
-        <div class="col-md-1 check"><input name="" type="checkbox" value=<%=attribute.id%> ></div>
+        <div class="col-md-1 check">
+        <% if can?(:update , Attribute) or can?(:delete , Attribute) %>
+        	<input name="" type="checkbox" value=<%=attribute.id%> >
+        <% end %>
+        </div>
         <div class="col-md-2"><%= attribute.name %>&nbsp;</div>
         <!-- <div class="col-md-3"><%#= attribute.description %>&nbsp;</div> -->
         <div class="col-md-1"><%= display_status(attribute) %>&nbsp;</div>

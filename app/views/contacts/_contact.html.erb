@@ -1,5 +1,9 @@
 <div class="row td">
-  <div class="col-md-1 check"><input name="" type="checkbox" value=<%= contact.id %> ></div>
+  <div class="col-md-1 check">
+      <% if can?(:update , Contact) or can?(:delete , Contact) %>
+        <input name="" type="checkbox" value=<%= contact.id %> >
+      <% end %>
+  </div>
   <div class="col-md-2"><%= contact.name %>&nbsp;</div>
   <div class="col-md-2 custom-break break_email"><%= contact.email %>&nbsp;</div>
   <div class="col-md-1 "><%= contact.profiles.map(&:name).join(", ") %>&nbsp;</div>

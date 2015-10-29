@@ -1,6 +1,10 @@
 <% unless user == current_user %>
 	<div class="row td">
-	  <div class="col-md-1 check"><input name="" type="checkbox" value=<%= user.id %> ></div>
+	  <div class="col-md-1 check">
+        <% if can?(:update , User) or can?(:delete , User) %>
+	  		<input name="" type="checkbox" value=<%= user.id %> >
+	  	<% end %>
+	  </div>
 	  <div class="col-md-2"><%= user.username %>&nbsp;</div>
 	  <div class="col-md-3"><%= display_status(user) %>&nbsp;</div>
 	  <div class="col-md-4"><%= format_date(user, :created_at) %>&nbsp;</div>

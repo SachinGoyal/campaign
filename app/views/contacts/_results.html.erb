@@ -1,7 +1,11 @@
 <%- model_class = Contact -%>
 <div class="custom-table">
   <div class="row th">
-    <div class="col-md-1"><input name="" id='select-all' type="checkbox" value=""></div>
+    <div class="col-md-1">
+      <% if can?(:update , Contact) or can?(:delete , Contact) %>
+        <input name="" id='select-all' type="checkbox" value="">
+      <% end %>
+    </div>
     <div class="col-md-2"><%= sort_link(@q, :first_name, "Name") %></div>
     <div class="col-md-2"><%= sort_link(@q, :email) %></div>
     <div class="col-md-1"><%= model_class.human_attribute_name(:profile_id) %></div>
