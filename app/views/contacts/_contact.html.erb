@@ -7,7 +7,7 @@
   <% if contact.country %>
   	<div class="col-md-1 "><%= contact.country_name %>&nbsp;</div>
   <% else %>
-  	<div class="col-md-2 "><%= contact.country %>&nbsp;</div>
+  	<div class="col-md-1 "><%= contact.country %>&nbsp;</div>
   <% end %>
   <div class="col-md-1"><%= display_status(contact) %>&nbsp;</div>
   <div class="col-md-2"><%= format_date(contact, :created_at) %>&nbsp;</div>
