@@ -2,10 +2,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user (not logged in)
+   # user ||= User.new # guest user (not logged in)
   
-    # alias_action :cancel, :start_cancel, to: :cancel_process
-    # alias_action :form_disapproved_changes, :approved_changes, :disapproved_changes,  to: :aproved_changes_contract
+    alias_action :search, to: :read
+    alias_action :edit_all, to: :update
+    alias_action :delete, to: :destroy
+
     if user.is_admin?
       can :manage, :all     
     else   
