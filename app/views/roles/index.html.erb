@@ -16,7 +16,11 @@
 <%- model_class = Role -%>
 <div class="custom-table">
   <div class="row th" id="attributes_header">
-    <div class="col-md-1"><input name="" id='select-all' type="checkbox" value=""></div>
+    <div class="col-md-1">
+      <% if can?(:update , Role) or can?(:delete , Role) %>
+        <input name="" id='select-all' type="checkbox" value="">
+      <% end %>
+    </div>
     <div class="col-md-3"><%= model_class.human_attribute_name(:name) %></div>
     <div class="col-md-3"><%= model_class.human_attribute_name(:status) %>&nbsp;</div>
     <div class="col-md-3"><%= model_class.human_attribute_name(:created_at) %></div>

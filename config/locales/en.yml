@@ -24,3 +24,13 @@ en:
     errors:
       messages:
         blank: "This field cannot be blank"
+  ransack:
+    asc: "ascending"
+    desc: "descending"
+    predicates:
+      date_eq: "Equals(Date)"
+      date_not_eq: 'Not Equals(Date)'
+      date_lt: "Less than(Date)"
+      date_lteq: "Less than or equal to(Date)"
+      date_gteq: "Greater than or equal to(Date)"
+      date_gt: "Greater than(Date)"
