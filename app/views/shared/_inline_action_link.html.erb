@@ -12,27 +12,34 @@
           </li>
         <% end %>
       <% end %>
-      <li><%= link_to element do %>
-        <i class="fa fa-eye"></i>
-        <span>View</span>
-        <% end %>
-      </li>
-      <li class="custom-delete">
-        <% if can? :destroy, element    %>
+      <% if can? :read , element %> 
+        <li><%= link_to element do %>
+          <i class="fa fa-eye"></i>
+          <span>View</span>
+          <% end %>
+        </li>
+      <% end %>            
+        <% if can? :delete, element    %>
           <% if element.is_a?(User) and element == current_user %>
           <% elsif element.is_a?(Company) %>
-            <%= link_to element, method: :delete, data: { confirm: 'Are you sure want to delete this company? It will delete associated admin and other data.' } do %>
-              <i class="fa fa-plus"></i>
-              <span>Delete</span>
-            <% end %>
+            <li class="custom-delete">
+              <%= link_to element, method: :delete, data: { confirm: 'Are you sure want to delete this company? It will delete associated admin and other data.' } do %>
+                <i class="fa fa-plus"></i>
+                <span>Delete</span>
+              <% end %>
+            <li class="custom-delete">
           <% else %>
-            <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <i class="fa fa-plus"></i>
-              <span>Delete</span>
-            <% end %>
+            <li class="custom-delete">
+              <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="fa fa-plus"></i>
+                <span>Delete</span>
+              <% end %>
+            </li>
           <% end %>
         <% end %>  
       </li>
+
+
     </ul>
   </div>
 </div>

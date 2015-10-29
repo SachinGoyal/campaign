@@ -36,7 +36,7 @@
                <div class="form-group form-group-sm">
                 <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
-                  <%=  @profile.interest_areas.collect(&:name).uniq.map(&:capitalize).join(' ') %> </div>
+                  <%=  @profile.interest_areas.collect(&:name).uniq.map(&:capitalize).join(', ') %> </div>
                   <div class="clearfix"></div> 
                 </div>
             <% end %>    

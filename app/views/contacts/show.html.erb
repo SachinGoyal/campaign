@@ -48,14 +48,6 @@
               </div>
             <% end %>
 
-            <% unless @contact.interest_areas.empty? %>            
-              <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
-                <div class="col-sm-8 col-xs-12 default-without-input">
-                  <%=  @contact.interest_areas.collect(&:name).uniq.map(&:capitalize).join(', ') %> </div>
-                  <div class="clearfix"></div> 
-                </div>
-            <% end %>
 
             <% unless @contact.country.blank? %>            
               <div class="form-group form-group-sm">
@@ -81,6 +73,16 @@
                 <%= @contact.gender ? "Male" : "Female" %>
               </div>
             </div>
+
+            <% unless @contact.interest_areas.empty? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  @contact.interest_areas.collect(&:name).uniq.map(&:capitalize).join(', ') %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+
             </form>
 
           </div>

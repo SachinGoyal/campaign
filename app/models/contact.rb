@@ -15,7 +15,7 @@
 #  updated_at :datetime         not null
 #  city       :string
 #  country    :string
-#  gender     :boolean          default(TRUE)
+#  gender     :string           default("t")
 #
 # Indexes
 #
