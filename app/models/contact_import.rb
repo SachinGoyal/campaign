@@ -13,7 +13,7 @@ class ContactImport
   validates :profile_id, presence: true
 
   def check_file_ext
-    if file and !(['text/csv', 'application/csv', 'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel"].include?(file.content_type))
+    if file and !(['text/csv', 'application/csv', 'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel", "application/octet-stream"].include?(file.content_type))
       errors[:file] = "should be csv"
       false
     end
