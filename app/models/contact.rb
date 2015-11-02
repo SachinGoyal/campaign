@@ -64,7 +64,12 @@ class Contact < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(first_name last_name email created_at)
+    # binding.pry
+    if auth_object
+      %w(gender country city)
+    else
+      %w(first_name last_name email created_at)
+    end
   end
 
   def country_name

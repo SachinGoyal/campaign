@@ -1,11 +1,10 @@
 class NewslettersController < ApplicationController
 
   layout 'dashboard' # set custom layout 
-  
-  load_and_authorize_resource #cancan
-  
+    
   #filter
   before_action :authenticate_user!
+  load_and_authorize_resource #cancan
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
   #filter
 
@@ -25,6 +24,8 @@ class NewslettersController < ApplicationController
   def new
     @newsletter = Newsletter.new
     @templates = Template.all
+    @search = Contact.ransack(params[:q], auth_object: "dummy")
+    @newsletters = @search.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /newsletters/1/edit

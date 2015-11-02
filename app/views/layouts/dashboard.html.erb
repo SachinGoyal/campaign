@@ -80,7 +80,8 @@
                                 <% end %>
 
                                 <% if can? :read, Profile %>
-                                  <li class="<%= "current-page" if params[:controller] == "profiles" %>"><%= link_to profiles_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "profiles" %>">
+                                  <%= link_to profiles_path do %>
                                      <i class="fa fa-users"></i>
                                     <span>Profile</span>
                                   <% end %></li>

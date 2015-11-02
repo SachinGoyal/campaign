@@ -5,7 +5,8 @@ class ContactImport
   extend ActiveModel::Naming
   include ActiveModel::Conversion
   include ActiveModel::Validations
-
+  FILE_TYPES = ['text/csv', 'application/csv', 
+    'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel", "application/octet-stream"]
   attr_accessor :file, :profile_id
   validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
   # validates_format_of :file, :with => %r{\.csv\z}i, :message => "file must be in .csv format"
@@ -13,10 +14,14 @@ class ContactImport
   validates :profile_id, presence: true
 
   def check_file_ext
-    if file and !(['text/csv', 'application/csv', 'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel", "application/octet-stream"].include?(file.content_type))
-      errors[:file] = "should be csv"
-      false
-    end
+    begin
+      if file and !(FILE_TYPES.include?(file.content_type))
+        errors[:file] = "should be csv"
+        false
+      end
+    rescue
+      true
+    end  
   end
   
   def initialize(attributes = {})
