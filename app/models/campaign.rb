@@ -17,7 +17,7 @@
 #
 #  index_campaigns_on_company_id  (company_id)
 #
-
+ 
 class Campaign < ActiveRecord::Base
 
   acts_as_paranoid # Soft Delete
@@ -30,8 +30,17 @@ class Campaign < ActiveRecord::Base
   
 
   #validation
-  validates_presence_of :name
-  validates_length_of :name,:minimum => 4
+  validates :name, uniqueness: true, 
+                   presence: true, 
+                   format: { with: /\A[a-zA-Z0-9 ]+\z/, 
+                             message: 'Can only contain alphanumeric and space.'},
+                   length: {in: 2..155}
+
+  validates :description, 
+                   presence: true, 
+                   format: { with: /\A[a-zA-Z0-9 ]+\z/, 
+                             message: 'Can only contain alphanumeric and space.'},
+                   length: {in: 2..155}
   validates_inclusion_of :status, in: [true, false]
   #validation
 

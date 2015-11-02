@@ -39,10 +39,12 @@
                 <%= display_status(@campaign) %>
               </div>
             </div>
-
-
-          
-
       </div><!-- row -->
     </div><!--  custom-container -->
+    <% if can? :update, Company %>
+     <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+    <% end %>
+    <%= link_to 'Back', campaigns_path %>
+
+
 
