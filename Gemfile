@@ -35,7 +35,6 @@ gem 'sidekiq'
 gem "iconv", "~> 1.0.3"
 gem 'roo'
 gem 'roo-xls'
-gem 'bootstrap-wysihtml5-rails'
 gem 'country_select'
 # Use Uglifier as compressor for JavaScript assets
 # gem 'activerecord-import'
@@ -57,6 +56,10 @@ group :development, :test do
   gem 'pg'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  #editor
+  gem 'summernote-rails'
+  #editor
 end
 
 group :production do
