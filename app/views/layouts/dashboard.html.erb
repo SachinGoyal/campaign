@@ -59,21 +59,21 @@
                             <h3>&nbsp; </h3>
                             <ul class="nav side-menu">
                                 <% if can? :read, Campaign %>
-                                  <li><%= link_to campaigns_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "campaigns" %>"><%= link_to campaigns_path do %>
                                      <i class="fa fa-bullhorn"></i>
                                     <span>Campaign</span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Newsletter %>
-                                  <li><%= link_to newsletters_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "newsletters" %>"><%= link_to newsletters_path do %>
                                      <i class="fa fa-newspaper-o"></i>
                                     <span>Newsletter</span>
                                   <% end %></li>
                                 <% end %>
                                 
                                 <% if can? :read, Template %>
-                                  <li ><%= link_to templates_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "templates" %>"><%= link_to templates_path do %>
                                      <i class="fa fa-clone"></i>
                                     <span>Templates</span>
                                   <% end %></li>

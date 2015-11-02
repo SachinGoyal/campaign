@@ -5,11 +5,11 @@
         <div class="col-md-6 col-xs-10">
           <%= form_for @campaign, :html => { :class => "form-horizontal campaign" } do |f| %>            
             <div class="field form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+              <%=f.label :name,:class=>"col-sm-4 col-xs-12 control-label"  %>
               <div class="col-sm-8 col-xs-12"> <%= f.text_field :name, :class => 'form-control' %> </div>
             </div>      
             <div class="field form-group form-group-sm">
-             <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Description</label>
+             <%= f.label :description, :class=> "col-sm-4 col-xs-12 control-label" %>
               <div class="col-sm-8 col-xs-12"> <%= f.text_area :description, :class => 'form-control' %> </div>
             </div>          
 
@@ -28,7 +28,7 @@
               <div class="col-md-6 col-xs-10">
                 <div class="form-group custom-from-group">
                   <%= f.submit :Save ,:class => 'btn dark-btn-custom' %>
-                  <%= link_to "Cancel", campaigns_path,class: 'btn' %>
+                  <%= link_to "Cancel", campaigns_path,:class => 'btn custom-link-btn' %>
                 </div>
               </div>
               <div class="col-lg-4 col-xs-1"> </div>
