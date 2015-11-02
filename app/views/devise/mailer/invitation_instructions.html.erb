@@ -1,0 +1,5 @@
+<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+
+<p>Welcome to <%= root_url %></p>
+
+<p>Please reset your password. <%= link_to "Reset", accept_invitation_url(@resource, :invitation_token => @token) %></p>

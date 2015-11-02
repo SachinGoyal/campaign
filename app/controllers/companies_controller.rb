@@ -57,6 +57,12 @@ class CompaniesController < ApplicationController
     @company.creator = current_user
     respond_to do |format|
       if @company.save
+        @user = @company.users.first
+        @user.confirm!
+        @user = User.invite!(:email => @user.email) do |u|
+          u.skip_invitation = true
+        end
+        @user.deliver_invitation
         @company.create_role
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }

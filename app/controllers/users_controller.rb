@@ -14,12 +14,6 @@ class UsersController < ApplicationController
   def index
     @q = User.where.not(id: 1).ransack(params[:q])
     @users = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
-    # if current_user.is_superadmin?
-    # else current_user.is_companyadmin?
-    #   @users = current_user.company.users
-  	 #  @q = User.ransack(params[:q])
-    #   @users = @q.result(distinct: true)
-    # end    
   end
 
   def search
@@ -43,6 +37,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
+        @user.confirm!
+        user = User.invite!(:email => @user.email) do |u|
+          u.skip_invitation = true
+        end
+        @user.deliver_invitation
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
