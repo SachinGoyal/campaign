@@ -1,5 +1,11 @@
-<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.username) %></p>
 
-<p>Welcome to <%= root_url %></p>
+<p>Welcome to Sperant Campaign.</p>
 
-<p>Please reset your password. <%= link_to "Reset", accept_invitation_url(@resource, :invitation_token => @token) %></p>
+<p>Please find your account details below:</p>
+<p>Username: <%= @resource.username %></p>
+<p>Site Url: <%= root_url(:subdomain => @resource.company.try(:subdomain)) %> <p>
+<p><%= link_to "Click Here", accept_invitation_url(@resource, :invitation_token => @token, :subdomain => @resource.company.try(:subdomain) ) %> to set your password</p>
+
+<p>Thanks,</p>
+<p>Support Team</p>
