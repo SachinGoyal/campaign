@@ -2,11 +2,25 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  $('form').on 'click', '.contact_search_for_newsletter', (event) ->
-  	city = $('#q_city_cont').val()
-  	country = $('#q_country_eq').val()
+  $('#q_gender_true_1').change ->
+  	$('#q_gender_false_1').prop('checked', false)
+  $('#q_gender_false_1').change ->
+  	$('#q_gender_true_1').prop('checked', false)
 
-  	$.get '/contacts/search', (data) ->
-  		$('body').append "Successfully got the page."
+  $('form').on 'click', '.contact_search_for_newsletter', (event) ->
+  	search_params = {q:{}}
+  	search_params['q']['auth_object'] = true
+  	search_params['q']['city_cont'] = $('#q_city_cont').val()  	
+  	search_params['q']['country_eq'] = $('#q_country_eq').val()  	 
+  	if $('#q_gender_true_1').is(':checked')
+  	  search_params['q']['gender_true'] = 1
+  	if $('#q_gender_false_1').is(':checked') 
+  	  search_params['q']['gender_false'] = 1
+
+  	$.ajax
+      type: 'GET'
+      url: '/contacts.js'
+      data: search_params
+	
   	event.preventDefault()
 

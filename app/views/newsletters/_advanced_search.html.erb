@@ -4,10 +4,10 @@
             <%#= search_form_for @search, :html => {:class => "form-inline"} do |f| %>
               <div class="form-group form-group-sm">
                 <label class="col-xs-3 text-right control-label">Gender</label>
-                <div class="col-xs-3 ">  
-                    <%= radio_button_tag 'q[gender_true]', 1 %>
+                <div class="col-xs-3 gender_buttons">  
+                    <%= radio_button_tag 'q[gender_true]', 1, false, {"data-value" => 0} %>
                     <label><span></span>Male</label>              
-                    <%= radio_button_tag 'q[gender_false]', 1 %>
+                    <%= radio_button_tag 'q[gender_false]', 1, false, {"data-value" => 1} %>
                     <label><span></span>Female</label>              
                 </div >                            
                 <div class="clearfix"></div> 
@@ -18,14 +18,14 @@
               <div class="form-group form-group-sm">
                 <label class="col-xs-3 text-right control-label" >Country</label>
                 <div class="col-xs-3">
-                  <%= country_select("q", "country_eq", {priority: %w(IN ES), prompt: 'Select Country'}, :class=>"form-control" ) %>
+                  <%= country_select("q", "country_eq", {priority: %w(IN ES), prompt: 'Select a Country'}, :class=>"form-control" ) %>
                 </div>
                 <div class="clearfix"></div> 
               </div>
 
               <div class="form-group form-group-sm">
                 <label class="col-xs-3 text-right control-label" >City</label>
-                <div class="col-xs-3"> <%= text_field_tag 'q[city_cont]', '', :class => "form-control" %> </div>
+                <div class="col-xs-3"> <%= text_field_tag 'q[city_cont]', '', :class => "form-control", :placeholder => "Enter the city" %> </div>
                 <div class="clearfix"></div> 
               </div>
 
@@ -43,4 +43,5 @@
             <%# end %>
           </div>
         </div>
+        <div id="results"></div>
       </div>
