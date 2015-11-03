@@ -41,7 +41,7 @@ class NewslettersController < ApplicationController
     Newsletter.edit_all(params[:group_ids], params[:get_action])  
     @newsletters = Newsletter.all
     action = params[:get_action].strip.capitalize
-    @message = updateable_messages(action)
+    @message = updateable_messages
   end
 
 
@@ -96,13 +96,7 @@ class NewslettersController < ApplicationController
       params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by)
     end
 
-    def updateable_messages(action)
-      case action
-        when 'Delete'
-          "Newsletter deleted successfully. Newsletter with associated data could not be deleted."
-        else
-          "Newsletter updated successfully."
-      end
-
+    def updateable_messages
+      "Newsletter deleted successfully. Newsletter with associated data could not be deleted."
     end
 end

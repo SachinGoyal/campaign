@@ -36,8 +36,11 @@ class Newsletter < ActiveRecord::Base
   
 
   # validation
-  validates_presence_of :campaign_id, :template_id,:name,:subject
-  # validates_inclusion_of :status, in: [true, false]
+  validates_presence_of :campaign, :template
+  validates_presence_of :name, length: { in: 2..250}
+  validates_presence_of :subject, length: { in: 2..255}
+  validates_presence_of :from_name, length: { in: 2..150}
+  validates_presence_of :from_address, length: { in: 2..250}
   # validation
 
   #association
@@ -53,9 +56,6 @@ class Newsletter < ActiveRecord::Base
       Newsletter.find(ids).each do |newsletter|
         if action == 'delete'
           newsletter.destroy
-        else
-          status = action == 'enable' ? 1 : 0
-          newsletter.update(:status => status )
         end
       end
     end
