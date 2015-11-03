@@ -41,6 +41,7 @@ class Newsletter < ActiveRecord::Base
   validates_presence_of :subject, length: { in: 2..255}
   validates_presence_of :from_name, length: { in: 2..150}
   validates_presence_of :from_address, length: { in: 2..250}
+  validates_format_of :from_address,:reply_email,:cc_email,:bcc_email, :with => Devise.email_regexp,:allow_blank => true
   # validation
 
   #association
