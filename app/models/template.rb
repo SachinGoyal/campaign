@@ -24,6 +24,11 @@ class Template < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant#multitenant
 
+  #scope
+  default_scope {order('id DESC')}
+  scope :active, -> { where(status: 'true') }
+  #scope
+
   # validation
   validates_presence_of :name, :content
   validates_uniqueness_to_tenant :name
@@ -33,4 +38,21 @@ class Template < ActiveRecord::Base
   #association
   belongs_to :user
   #association
+
+  # class methods
+  class << self
+    def edit_all(ids, action)
+      action = action.strip.downcase
+      ids.reject!(&:empty?)
+      Template.find(ids).each do |template|
+        if action == 'delete'
+          template.destroy
+        else
+          status = action == 'enable' ? 1 : 0
+          template.update(:status => status )
+        end
+      end
+    end
+  end
+  # class methods
 end

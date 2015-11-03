@@ -1,0 +1,4 @@
+$('#template').html("<%= j (render @templates) %>");
+$('.selected-row-bottom').hide();
+$('#select-all').prop('checked',false);
+$('.display_flash').html("<div class='flash alert-success alert'><%= @message %></div>")

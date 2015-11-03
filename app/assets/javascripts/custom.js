@@ -40,14 +40,14 @@ $(document).ready( function() {
 //    });
 
     $(".selected-td ul li a").on('click', function(){
-          var controller = $(".selected-row-bottom").attr('id').split('-')[1]
+          var url = $(".custom-table").data('bottom-url');
           var action = $(this).text();
           var a = myFunction();
         $(this).on('confirm:complete', function(e, response) {
           if(response) {
             $.ajax({
               method: "GET",
-              url: "/" + controller + "/edit_all/",
+              url: url,
               data: {group_ids: a, get_action: action}
             })
           }

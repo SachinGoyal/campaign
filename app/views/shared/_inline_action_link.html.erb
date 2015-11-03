@@ -4,12 +4,22 @@
       <!-- <li><i class="fa fa-line-chart"></i> Edit</li> -->
       <% if element.is_a?(User) and element == current_user %>
       <% else %>
-        <% if can? :update, element    %>
-          <li><%= link_to [:edit , element] do %>
-            <i class="fa fa-pencil"></i>
-            <span>Edit</span>
-            <% end %>
-          </li>
+        <% if element.class.name != 'Template'%>
+          <% if can? :update, element    %>
+            <li><%= link_to [:edit , element] do %>
+              <i class="fa fa-pencil"></i>
+              <span>Edit</span>
+              <% end %>
+            </li>
+          <% end %>
+        <% else %>
+          <% if can? :create, element    %>
+            <li><%= link_to copy_templates_path(template_id: element.id) do %>
+              <i class="fa fa-pencil"></i>
+              <span>Copy</span>
+              <% end %>
+            </li>
+          <% end %>
         <% end %>
       <% end %>
       <% if can? :read , element %> 

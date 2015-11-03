@@ -1,5 +1,5 @@
 <%- model_class = Company -%>
-<div class="custom-table">
+<div class="custom-table" data-bottom-url='/companies/edit_all'>
   <div class="row th">
     <div class="col-md-1">
     <% if can?(:update , Company) or can?(:delete , Company ) %>

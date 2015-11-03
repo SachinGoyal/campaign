@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'contact_imports/new'
   get 'apis/index'
 
@@ -24,7 +23,11 @@ Rails.application.routes.draw do
   end
   resources :functions
   resources :settings
-  resources :templates
+  resources :templates ,concerns: [:edit_all,:search] do 
+    collection do 
+      get :copy
+    end
+  end
 
   resources :contacts ,concerns: [:edit_all,:search] do
     collection do

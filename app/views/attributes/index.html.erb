@@ -15,7 +15,7 @@
 </div><!--row-->
 
 <%- model_class = Campaign -%>
-<div class="custom-table">
+<div class="custom-table" data-bottom-url='/attributes/edit_all'>
   <div class="row th" id="attributes_header">
     <div class="col-md-1">
       <% if can?(:update , Attribute) or can?(:delete , Attribute) %>

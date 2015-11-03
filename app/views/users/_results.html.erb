@@ -1,5 +1,5 @@
 <% model_class = User %>
-<div class="custom-table">
+<div class="custom-table" data-bottom-url='/users/edit_all'>
   <div class="row th">
     <div class="col-md-1">
       <% if can?(:update , User) or can?(:delete , User) %>
