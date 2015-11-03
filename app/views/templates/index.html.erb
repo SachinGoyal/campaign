@@ -1,34 +1,23 @@
 <div class="row">
-  <div class="page-title">
+   <div class="col-xs-4">
     <div class="title_left"><h2>Template list</h2></div><!-- title_left -->
-    <div class="title_right">
-      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
-        <%= render 'shared/keyword_search', :condition => :name_cont %>
-        <div class="custom-add"><%= link_to new_template_path, :title => "New Template" do %><i class="fa fa-plus"></i><% end %></div>
-      </div>
-    </div>
-    <div class="clearfix"></div>                
-  </div><!-- page-title -->
+  </div>
+  <div class="col-xs-5 form-group pull-right top_search">
+  <% if can? :read, Template %>
+    <%= render 'shared/keyword_search', :condition => :name_cont %>
+    <div class="advance-search">
+            <%= link_to search_templates_path do %>
+             <i class="fa fa-dot-circle-o"></i>
+            <% end %>
+    </div> 
+  <% end %>  
+  <% if can? :create, Template %>
+    <div class="custom-add"><%= link_to new_template_path, :title => "New Template" do %><i class="fa fa-plus"></i><% end %></div>
+  <% end %>    
+  </div>              
+
 </div><!--row-->
-
-
-<%- model_class = Template -%>
-<div class="custom-table">
-  <div class="row th">
-    <div class="col-md-1"><input name="" id='select-all' type="checkbox" value=""></div>
-    <div class="col-md-2">Name</div>
-    <div class="col-md-2">Content</div>
-    <div class="col-md-2">Status</div>
-    <div class="col-md-2">Created At</div>
-    <div class="col-md-1">&nbsp;</div>
-  </div><!-- row -->
-  <% if @templates.present? %>
-    <div id="profile">
-      <%= render @templates %>
-    </div>
-  <% else %>
-    <h2 class='text-center'><em>No Record Found</em></h2>  
-  <% end %>
-  <%= render 'shared/bootam_action_link', element: Template %>
-  <%= will_paginate @templates , renderer: BootstrapPagination::Rails%>
+<div id="results">
+  <%= render :partial => "results", :locals => {:templates => @templates} %>
 </div>
+

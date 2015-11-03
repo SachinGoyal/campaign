@@ -1,4 +1,4 @@
-<div class="row selected-row selected-row-bottom white_text" id='controller-<%= element.name.downcase.pluralize %>'>
+<div class="row selected-row selected-row-bottom white_text" id='controller-<%= element.to_s.downcase.pluralize %>'>
   <div class="col-md-12 selected-td">
     <ul>
       <% if can? :update, element %>

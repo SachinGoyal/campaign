@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-datepicker
-//= require bootstrap-wysihtml5
+//= require summernote
+
 //= require_tree .
