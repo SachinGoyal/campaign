@@ -37,7 +37,13 @@ class Template < ActiveRecord::Base
 
   #association
   belongs_to :user
+  has_many :newsletters
   #association
+
+  #callback
+    before_destroy :check_newsletter
+    before_update :check_newsletter
+  #callback
 
   #ransack
 
@@ -67,4 +73,13 @@ class Template < ActiveRecord::Base
     end
   end
   # class methods
+
+  protected
+
+  def check_newsletter
+    if newsletters.any?
+      errors[:base] << "Cannot update or delete template It is associated with Newsletter"
+      return false
+    end
+  end
 end
