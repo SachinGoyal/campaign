@@ -1,5 +1,5 @@
 <div class="custom-container">
-  <%= form_for(@newsletter, :html => {:class => 'form-horizontal'}) do |f| %>
+  <%= form_for(@newsletter, :html => {:class => 'form-horizontal newsletter_form'}) do |f| %>
     <div class="row">
       <div class="col-md-12 col-xs-12">
         <div class="col-lg-2 col-xs-1">&nbsp;</div>
@@ -51,7 +51,7 @@
             <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
               <div class="col-sm-9 col-xs-12">
-                <textarea class="form-control contact_emails" name="" cols="" rows=""></textarea>
+                <textarea class="form-control contact_emails" cols="" rows="" name="emails"></textarea>
               </div>
             </div>
           </div><!-- form-horizontal -->

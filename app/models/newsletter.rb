@@ -34,14 +34,13 @@ class Newsletter < ActiveRecord::Base
   default_scope {order('id DESC')}
   #scope
   
-
   # validation
-  validates_presence_of :campaign, :template
-  validates_presence_of :name, length: { in: 2..250}
-  validates_presence_of :subject, length: { in: 2..255}
-  validates_presence_of :from_name, length: { in: 2..150}
-  validates_presence_of :from_address, length: { in: 2..250}
-  validates_format_of :from_address,:reply_email,:cc_email,:bcc_email, :with => Devise.email_regexp,:allow_blank => true
+  validates_presence_of :campaign_id, :template_id
+  validates :name, presence: true, length: { in: 2..250 }
+  validates :subject, presence: true, length: { in: 2..255 }
+  validates :from_name, presence: true, length: { in: 2..150 }
+  validates :from_address, presence: true, format: {with: Devise.email_regexp}
+  validates_format_of :reply_email, :cc_email, :bcc_email, :with => Devise.email_regexp, :allow_blank => true
   # validation
 
   #association

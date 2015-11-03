@@ -23,4 +23,6 @@ jQuery ->
       data: search_params
 	
   	event.preventDefault()
-
+  $('.newsletter_form').submit (e) ->
+    arr = $.unique($('.contact_emails').val().replace(/ /g,'').split(','))
+    $('.contact_emails').val arr.join(',')
