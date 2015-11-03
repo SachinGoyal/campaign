@@ -16,7 +16,7 @@
             <div class="form-group form-group-sm">
               <%= f.label :campaign_id, :class => "col-sm-3 col-xs-12 control-label"%>      
               <div class="col-sm-9 col-xs-12">
-                <%= collection_select(:newsletter, :campaign_id, Campaign.all, :id, :name, {:prompt => 'Please select a campaign'}, {:class => 'form-control'}) %> 
+                <%= collection_select(:newsletter, :campaign_id, Campaign.active.all, :id, :name, {:prompt => 'Please select a campaign'}, {:class => 'form-control'}) %> 
               </div>
             </div>
 
@@ -36,8 +36,8 @@
 
             <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-12 control-label" >Select contact Group</label>
-              <div class="col-sm-9 col-xs-12">
-                <select class="form-control" name=""><option></option></select>
+              <div class="col-xs-9 custom-checkbox-style" id="profile-custom-select">
+                <%= collection_select(:contact, :profile_ids, Profile.active, :id, :name, {:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :name => 'newsletter[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
               </div>
             </div>
           

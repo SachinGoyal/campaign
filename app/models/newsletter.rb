@@ -36,6 +36,7 @@ class Newsletter < ActiveRecord::Base
   
   # validation
   validates_presence_of :campaign_id, :template_id
+
   validates :name, presence: true, length: { in: 2..250 }
   validates :subject, presence: true, length: { in: 2..255 }
   validates :from_name, presence: true, length: { in: 2..150 }
@@ -46,6 +47,7 @@ class Newsletter < ActiveRecord::Base
   #association
   belongs_to :campaign
   belongs_to :template
+  has_and_belongs_to_many :profiles, join_table: "profiles_newsletters"
   #association
 
   #class methods
