@@ -1,17 +1,14 @@
       <div class="green-Border green-text text-right">Advance Search <i class="fa fa-caret-down"></i></div> 
         <div class="grey-box">
           <div class="row">
-            <%= search_form_for @search, :html => {:class => "form-inline"} do |f| %>
+            <%#= search_form_for @search, :html => {:class => "form-inline"} do |f| %>
               <div class="form-group form-group-sm">
                 <label class="col-xs-3 text-right control-label">Gender</label>
                 <div class="col-xs-3 ">  
-                  <%# Gender.all.each do |gender| %>
-                    <%= f.radio_button :gender_true, true %>
-                    <%#= radio_button_tag 'contact[gender_id]', gender.id %>                  
-                    <label><span></span>Male<%#= gender.name %></label>              
-                    <%= f.radio_button :gender_false, false %>
-                    <label><span></span>Female<%#= gender.name %></label>              
-                  <%# end %>
+                    <%= radio_button_tag 'q[gender_true]', 1 %>
+                    <label><span></span>Male</label>              
+                    <%= radio_button_tag 'q[gender_false]', 1 %>
+                    <label><span></span>Female</label>              
                 </div >                            
                 <div class="clearfix"></div> 
               </div>
@@ -21,14 +18,14 @@
               <div class="form-group form-group-sm">
                 <label class="col-xs-3 text-right control-label" >Country</label>
                 <div class="col-xs-3">
-                  <%= country_select("contact", "country") %>
+                  <%= country_select("q", "country_eq", {priority: %w(IN ES), prompt: 'Select Country'}, :class=>"form-control" ) %>
                 </div>
                 <div class="clearfix"></div> 
               </div>
 
               <div class="form-group form-group-sm">
                 <label class="col-xs-3 text-right control-label" >City</label>
-                <div class="col-xs-3"> <input class="form-control" type="text" id="formGroupInputSmall" ></div>
+                <div class="col-xs-3"> <%= text_field_tag 'q[city_cont]', '', :class => "form-control" %> </div>
                 <div class="clearfix"></div> 
               </div>
 
@@ -41,8 +38,9 @@
                 </div>              
                 <div class="clearfix"></div> 
               </div>
-              <%= f.submit "Search" %> 
-            <% end %>
+              <%= link_to "Search", "#", :class => 'contact_search_for_newsletter' %>
+              <%#= f.submit "Search" %> 
+            <%# end %>
           </div>
         </div>
       </div>

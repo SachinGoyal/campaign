@@ -1,11 +1,11 @@
 class TemplatesController < ApplicationController
   
   layout 'dashboard' # set custom layout 
-  
-  load_and_authorize_resource #cancan
+
 
   #filter
-  before_action :authenticate_user!
+  before_action :authenticate_user!  
+  load_and_authorize_resource #cancan
   before_action :set_template, only: [:show, :edit, :update, :destroy]
   #filter
 
@@ -22,6 +22,7 @@ class TemplatesController < ApplicationController
     User.columns_hash.slice('name', 'content', 'created_at').each do |k,v|
       @attributes[k] = {value: k, type: v.type.to_s, association: nil}
     end
+
     @q  = Template.search(params[:q])
     @templates = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    

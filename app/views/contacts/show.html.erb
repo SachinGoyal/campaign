@@ -18,14 +18,14 @@
 
  
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+              <label class="col-sm-4 col-xs-12 control-label" >Name</label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @contact.name%>
               </div>
             </div>
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Email</label>
+              <label class="col-sm-4 col-xs-12 control-label" >Email</label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @contact.email%>
               </div>
@@ -33,7 +33,7 @@
 
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+              <label class="col-sm-4 col-xs-12 control-label" >Status</label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= display_status(@contact) %>
               </div>
@@ -41,7 +41,7 @@
 
             <% unless @contact.profiles.empty? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Profile</label>
+                <label class="col-sm-4 col-xs-12 control-label" >Profile</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @contact.profiles.collect(&:name).uniq.map(&:capitalize).join(', ')%>
                 </div>
@@ -51,7 +51,7 @@
 
             <% unless @contact.country.blank? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Country</label>
+                <label class="col-sm-4 col-xs-12 control-label" >Country</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @contact.country_name.titleize %>
                 </div>
@@ -60,7 +60,7 @@
 
             <% unless @contact.city.blank? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">City</label>
+                <label class="col-sm-4 col-xs-12 control-label" >City</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @contact.city.titleize %>
                 </div>
@@ -68,15 +68,15 @@
             <% end %>
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Gender</label>
+              <label class="col-sm-4 col-xs-12 control-label">Gender</label>
               <div class="col-sm-8 col-xs-12 default-without-input">
-                <%= @contact.gender ? "Female" : "Male" %>
+                <%= @contact.gender ? "Male" : "Female" %>
               </div>
             </div>
 
             <% unless @contact.interest_areas.empty? %>            
               <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
+                <label class="col-xs-4 text-right control-label" >Area of interest</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%=  @contact.interest_areas.collect(&:name).uniq.map(&:capitalize).join(', ') %> </div>
                   <div class="clearfix"></div> 
@@ -88,7 +88,7 @@
           </div>
           <div class="col-lg-4 col-xs-1">
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+              <label class="col-sm-4 col-xs-12 control-label" >&nbsp;</label>
               <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
             </div>
 
