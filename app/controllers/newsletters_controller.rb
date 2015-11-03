@@ -29,6 +29,7 @@ class NewslettersController < ApplicationController
   def new
     @newsletter = Newsletter.new
     @templates = Template.active
+    @template = Template.find(6)
     @search = Contact.ransack(params[:q], auth_object: "dummy")
     @newsletters = @search.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
@@ -94,11 +95,7 @@ class NewslettersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def newsletter_params
-<<<<<<< HEAD
-      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email)
-=======
-      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by,:profile_ids[])
->>>>>>> a377392969c4ca6d5b7f95ca82a39bea85342192
+      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email,:profile_ids[])
     end
 
     def updateable_messages

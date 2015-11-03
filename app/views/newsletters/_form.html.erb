@@ -161,7 +161,7 @@
       <div class="col-lg-2 col-xs-1">&nbsp;</div>
       <div class="col-md-6 col-xs-10">
         <div class="form-group custom-from-group">
-          <button>Preview</button>
+          <button type="button"  data-toggle="modal" data-target=".bs-example-modal-lg">Preview</button>
           <button>Save</button>
           <a href="#">Cancel</a>
         </div>
@@ -175,65 +175,8 @@
  <% end %>
 </div><!--  custom-container -->
 
+<!-- Preview Template -->
+<!-- Modal -->
+<%= render :partial => "preview_template" %>
+<!-- Preview Template -->
 
-
-
-
-
-
-
-<% if false %>
-<%= form_for [current_user ,@newsletter] do |f| %>
-  <% if @newsletter.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@newsletter.errors.count, "error") %> prohibited this newsletter from being saved:</h2>
-
-      <ul>
-      <% @newsletter.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :campaign_id %><br>
-    <%= f.text_field :campaign_id %>
-  </div>
-  <div class="field">
-    <%= f.label :template_id %><br>
-    <%= f.text_field :template_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :subject %><br>
-    <%= f.text_field :subject %>
-  </div>
-  <div class="field">
-    <%= f.label :from_name %><br>
-    <%= f.text_field :from_name %>
-  </div>
-  <div class="field">
-    <%= f.label :from_address %><br>
-    <%= f.text_field :from_address %>
-  </div>
-  <div class="field">
-    <%= f.label :reply_email %><br>
-    <%= f.text_field :reply_email %>
-  </div>
-  <div class="field">
-    <%= f.label :created_by %><br>
-    <%= f.number_field :created_by %>
-  </div>
-  <div class="field">
-    <%= f.label :updated_by %><br>
-    <%= f.number_field :updated_by %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-<% end %>
