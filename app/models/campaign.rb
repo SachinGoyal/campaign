@@ -26,6 +26,7 @@ class Campaign < ActiveRecord::Base
 
   #scope
   default_scope {order('id DESC')}
+  scope :active, -> { where(status: 'true') }
   #scope
   
 
