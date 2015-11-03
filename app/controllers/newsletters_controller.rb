@@ -40,6 +40,8 @@ class NewslettersController < ApplicationController
   def edit_all
     Newsletter.edit_all(params[:group_ids], params[:get_action])  
     @newsletters = Newsletter.all
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
 
@@ -50,7 +52,7 @@ class NewslettersController < ApplicationController
 
     respond_to do |format|
       if @newsletter.save
-        format.html { redirect_to [current_user ,@newsletter], notice: 'Newsletter was successfully created.' }
+        format.html { redirect_to @newsletter, notice: 'Newsletter was successfully created.' }
         format.json { render :show, status: :created, location: @newsletter }
       else
         format.html { render :new }
@@ -64,7 +66,7 @@ class NewslettersController < ApplicationController
   def update
     respond_to do |format|
       if @newsletter.update(newsletter_params)
-        format.html { redirect_to [current_user ,@newsletter], notice: 'Newsletter was successfully updated.' }
+        format.html { redirect_to @newsletter, notice: 'Newsletter was successfully updated.' }
         format.json { render :show, status: :ok, location: @newsletter }
       else
         format.html { render :edit }
@@ -78,7 +80,7 @@ class NewslettersController < ApplicationController
   def destroy
     @newsletter.destroy
     respond_to do |format|
-      format.html { redirect_to newsletters_url, notice: 'Newsletter was successfully destroyed.' }
+      format.html { redirect_to newsletters_url, notice: 'Newsletter was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -92,5 +94,15 @@ class NewslettersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def newsletter_params
       params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by)
+    end
+
+    def updateable_messages(action)
+      case action
+        when 'Delete'
+          "Newsletter deleted successfully. Newsletter with associated data could not be deleted."
+        else
+          "Newsletter updated successfully."
+      end
+
     end
 end

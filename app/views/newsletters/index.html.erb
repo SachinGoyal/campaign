@@ -1,37 +1,29 @@
-<div class="row">
-  <div class="page-title">
+ <div class="row">
+   <div class="col-xs-4">
     <div class="title_left"><h2>Newsletter list</h2></div><!-- title_left -->
-      <div class="title_right">
-        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
-          <div class="advance-search"><i class="fa fa-dot-circle-o"></i></div>
-          <div class="custom-add"><%= link_to new_newsletter_path do %><i class="fa fa-plus"></i><% end %></div>
-        </div>
-        <%= render 'shared/keyword_search', :condition => :name_cont %>
-      </div><!--title_right -->
-      <div class="clearfix"></div>                
-  </div><!-- page-title -->
+  </div>
+  <div class="col-xs-5 form-group pull-right top_search">
+  <% if can? :read, Newsletter %>
+    <%= render 'shared/keyword_search', :condition => :name_cont %>
+    <div class="advance-search">
+            <%= link_to search_newsletters_path do %>
+             <i class="fa fa-dot-circle-o"></i>
+            <% end %>
+    </div> 
+  <% end %>  
+  <% if can? :create, Newsletter %>
+    <div class="custom-add"><%= link_to new_newsletter_path, :title => "New Newsletter" do %><i class="fa fa-plus"></i><% end %></div>
+  <% end %>    
+  </div>              
+
 </div><!--row-->
-
-
-<%- model_class = Newsletter -%>
-<div class="custom-table" data-bottom-url='/newsletters/edit_all'>
-  <div class="row th">
-    <div class="col-md-1"><input name="" id='select-all' type="checkbox" value=""></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:subject) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:campaign_id) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:template_id) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:created_at) %></div>
-    <div class="col-md-1">&nbsp;</div>
-  </div><!-- row -->
-
-  <% if @newsletters.present? %>
-    <div id="newsletter">
-      <%= render @newsletters %>
-    </div>
-  <%else%>
-    <h2 class='text-center'><em>No Record Found</em></h2>  
-  <% end %>
-  <%= render 'shared/bootam_action_link',element: Newsletter %>
-  <%= will_paginate @attributes , renderer: BootstrapPagination::Rails%>
+<div id="results">
+  <%= render :partial => "results", :locals => {:newsletters => @newsletters} %>
 </div>
+
+<%= render 'shared/bootam_action_link', element: Newsletter %>
+<%= will_paginate @newsletters , renderer: BootstrapPagination::Rails%>
+
+
+
+

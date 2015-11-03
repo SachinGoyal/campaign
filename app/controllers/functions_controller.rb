@@ -61,7 +61,7 @@ class FunctionsController < ApplicationController
   def destroy
     @function.destroy
     respond_to do |format|
-      format.html { redirect_to functions_url, notice: 'Function was successfully destroyed.' }
+      format.html { redirect_to functions_url, notice: 'Function was successfully deleted.' }
       format.json { head :no_content }
     end
   end
