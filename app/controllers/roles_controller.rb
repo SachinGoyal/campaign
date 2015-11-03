@@ -104,7 +104,7 @@ class RolesController < ApplicationController
     role = Role.find(params[:id])
     if role.destroy
       respond_to do |format|
-        format.html { redirect_to roles_url, notice: "Role was successfully destroyed." }
+        format.html { redirect_to roles_url, notice: "Role was successfully deleted." }
         format.json { head :no_content }
       end
     else

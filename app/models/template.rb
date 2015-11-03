@@ -30,13 +30,13 @@ class Template < ActiveRecord::Base
   #scope
 
   # validation
-  validates_presence_of :name, :content
+  validates_presence_of :name, length: { in: 2..250}
+  validates_presence_of :content
   validates_uniqueness_to_tenant :name
   validates_inclusion_of :status, in: [true, false]
   # validation
 
   #association
-  belongs_to :user
   has_many :newsletters
   #association
 

@@ -94,7 +94,7 @@ class ProfilesController < ApplicationController
     
     respond_to do |format|
       if @profile.destroy
-        format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
+        format.html { redirect_to profiles_url, notice: 'Profile was successfully deleted.' }
         format.json { head :no_content }
       else
         format.html { redirect_to profiles_url, notice: @profile.errors.full_messages.join(", ") }

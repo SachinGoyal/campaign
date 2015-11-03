@@ -87,7 +87,7 @@ class CompaniesController < ApplicationController
   def destroy
     respond_to do |format|
       if @company.destroy
-        format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
+        format.html { redirect_to companies_url, notice: 'Company was successfully deleted.' }
         format.json { head :no_content }
       else
         format.html { redirect_to companies_url, notice: @company.errors.full_messages.join(", ") }
