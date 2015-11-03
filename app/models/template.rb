@@ -39,6 +39,18 @@ class Template < ActiveRecord::Base
   belongs_to :user
   #association
 
+  #ransack
+
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(templates.created_at)")
+  end
+  
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w(name content created_at)
+  end
+
+  #ransack
+
   # class methods
   class << self
     def edit_all(ids, action)
