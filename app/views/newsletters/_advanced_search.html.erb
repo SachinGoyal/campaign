@@ -1,0 +1,48 @@
+      <div class="green-Border green-text text-right">Advance Search <i class="fa fa-caret-down"></i></div> 
+        <div class="grey-box">
+          <div class="row">
+            <%= search_form_for @search, :html => {:class => "form-inline"} do |f| %>
+              <div class="form-group form-group-sm">
+                <label class="col-xs-3 text-right control-label">Gender</label>
+                <div class="col-xs-3 ">  
+                  <%# Gender.all.each do |gender| %>
+                    <%= f.radio_button :gender_true, true %>
+                    <%#= radio_button_tag 'contact[gender_id]', gender.id %>                  
+                    <label><span></span>Male<%#= gender.name %></label>              
+                    <%= f.radio_button :gender_false, false %>
+                    <label><span></span>Female<%#= gender.name %></label>              
+                  <%# end %>
+                </div >                            
+                <div class="clearfix"></div> 
+              </div>
+
+              <div class="clearfix"></div> 
+            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-3 text-right control-label" >Country</label>
+                <div class="col-xs-3">
+                  <%= country_select("contact", "country") %>
+                </div>
+                <div class="clearfix"></div> 
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label class="col-xs-3 text-right control-label" >City</label>
+                <div class="col-xs-3"> <input class="form-control" type="text" id="formGroupInputSmall" ></div>
+                <div class="clearfix"></div> 
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label class="col-xs-3 text-right control-label" >Area of interest</label>
+                <div class="col-xs-3">
+                  <% Attribute.active.each do |attribute| %>
+                    <%= check_box_tag 'contact[interest_area_ids][]', attribute.id %> <label><span></span><%= attribute.name %></label><br/>
+                  <% end %>
+                </div>              
+                <div class="clearfix"></div> 
+              </div>
+              <%= f.submit "Search" %> 
+            <% end %>
+          </div>
+        </div>
+      </div>

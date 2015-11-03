@@ -152,6 +152,5 @@ class ContactsController < ApplicationController
         else
           "Contacts updated successfully."
       end
-
     end
 end

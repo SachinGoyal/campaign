@@ -64,9 +64,9 @@
         <div class="form-group form-group-sm field">
           <%= f.label :gender, :class => "col-sm-4 col-xs-12 control-label status_radio required"%>
                <div class="col-sm-8 col-xs-12 radio_status">
-                <%= f.radio_button :gender ,1, :checked => @contact.new_record? ? true : @contact.gender ,:id=>"radio01" %>
+                <%= f.radio_button :gender, true, :checked => @contact.new_record? ? true : @contact.gender ,:id=>"radio01" %>
                 <label for="radio01" class="status_spacer"><span></span>Male</label>
-                <%= f.radio_button :gender ,0, :checked => @contact.new_record? ? false : !@contact.gender ,:id=>"radio02" %>
+                <%= f.radio_button :gender, false, :checked => @contact.new_record? ? false : !@contact.gender ,:id=>"radio02" %>
                 <label for="radio02"><span></span>Female</label>
               </div>
         </div>

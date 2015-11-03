@@ -8,8 +8,8 @@ User.create(:role_id =>1 ,
 	:password_confirmation => 'admin@123',
 	:status => true)
 
-Gender.create(:name => 'Male')
-Gender.create(:name => 'Female')
+# Gender.create(:name => 'Male')
+# Gender.create(:name => 'Female')
 
 RUTA = File.dirname(__FILE__)
 p "Data Functions"

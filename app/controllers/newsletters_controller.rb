@@ -15,6 +15,11 @@ class NewslettersController < ApplicationController
     @newsletters = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
 
+  def search
+    # Contact.load_custom_attributes
+    @q = Contact.includes(:interest_areas).ransack(params[:q], auth_object: 'dummy')
+    @contacts = @q.result(distinct: true).includes(:interest_areas).paginate(:page => params[:page], :per_page => 10)
+  end
   # GET /newsletters/1
   # GET /newsletters/1.json
   def show

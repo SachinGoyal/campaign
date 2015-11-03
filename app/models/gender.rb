@@ -8,11 +8,11 @@
 #  updated_at :datetime         not null
 #
 
-class Gender < ActiveRecord::Base
-	VALUES = ['Male', 'Female']
+ class Gender #< ActiveRecord::Base
+# 	VALUES = ['Male', 'Female']
 
-	# validations
-	validates :name, presence: true, uniqueness: true
-	validates_inclusion_of :name, in: VALUES
+# 	# validations
+# 	validates :name, presence: true, uniqueness: true
+# 	validates_inclusion_of :name, in: VALUES
 	# validations
 end

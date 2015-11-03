@@ -15,7 +15,7 @@
 #  updated_at :datetime         not null
 #  city       :string
 #  country    :string
-#  gender     :boolean          default(TRUE)
+#  gender     :string           default("t")
 #
 # Indexes
 #
@@ -27,7 +27,8 @@ class Contact < ActiveRecord::Base
   acts_as_paranoid # Soft Delete
 
   acts_as_tenant(:company) #multitenant
-  GENDERS = ['male', 'female']
+  # GENDERS = ['male', 'female']
+  
   #scope
   default_scope {order('id DESC')}
   scope :active, -> { where(status: 'true') }
@@ -63,10 +64,31 @@ class Contact < ActiveRecord::Base
     Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
   end
 
+  # scope :matches_all_interest_areas, -> *interest_area_ids { where(matches_all_attributes_arel(interest_area_ids)) }
+
+  # def self.matches_all_interest_areas_arel(interest_area_ids)
+  #   contacts = Arel::Table.new(:contacts)
+  #   interest_areas = Arel::Table.new(:attributes)
+  #   contacts_attributes = Arel::Table.new(:contacts_attributes)
+
+  #   contacts[:id].in(
+  #     contacts.project(contacts[:id])
+  #       .join(contacts_attributes).on(contacts[:id].eq(contacts_attributes[:contact_id]))
+  #       .join(interest_areas).on(contacts_attributes[:attribute_id].eq(interest_areas[:id]))
+  #       .where(interest_areas[:id].in(interest_area_ids))
+  #       .group(interest_areas[:id])
+  #       .having(interest_areas[:id].count.eq(interest_area_ids.length))
+  #   )
+  # end
+
+  # def self.ransackable_scopes(auth_object = nil)
+  #   super + %w(matches_all_interest_areas)
+  # end
+
   def self.ransackable_attributes(auth_object = nil)
     # binding.pry
     if auth_object
-      %w(gender country city)
+      %w(gender country city interest_areas_id)
     else
       %w(first_name last_name email created_at)
     end
@@ -88,6 +110,7 @@ class Contact < ActiveRecord::Base
 
   # class methods
   class << self
+
     def edit_all(ids, action)
       action = action.strip.downcase
       ids.reject!(&:empty?)
@@ -102,7 +125,7 @@ class Contact < ActiveRecord::Base
     end
 
     def accessible_attributes
-      ["first_name", "last_name", "email", "company_id", "gender", "country", "city", "profile_ids"]
+      ["first_name", "last_name", "email", "company_id", "gender", "country", "city", "profile_ids", "interest_areas_id"]
     end
     
     def import_records(file, profile_id = nil)

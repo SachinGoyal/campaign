@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :attributes, concerns: :edit_all
 
   resources :roles, concerns: :edit_all
-  resources :newsletters, concerns: :edit_all
+  resources :newsletters, concerns: [:edit_all, :search]
   resources :profiles, concerns: [:edit_all, :search]
   resources :contact_imports
 
