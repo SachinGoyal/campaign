@@ -15,11 +15,14 @@ class NewslettersController < ApplicationController
     @newsletters = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
 
+
   def search
     # Contact.load_custom_attributes
     @q = Contact.includes(:interest_areas).ransack(params[:q], auth_object: 'dummy')
     @contacts = @q.result(distinct: true).includes(:interest_areas).paginate(:page => params[:page], :per_page => 10)
   end
+
+
   # GET /newsletters/1
   # GET /newsletters/1.json
   def show
@@ -29,9 +32,8 @@ class NewslettersController < ApplicationController
   def new
     @newsletter = Newsletter.new
     @templates = Template.active
-    @template = Template.find(6)
-    @search = Contact.ransack(params[:q], auth_object: "dummy")
-    @newsletters = @search.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @template = Template.first
+    @newsletter.newsletter_emails.build
   end
 
   # GET /newsletters/1/edit
@@ -40,7 +42,7 @@ class NewslettersController < ApplicationController
 
   def edit_all
     Newsletter.edit_all(params[:group_ids], params[:get_action])  
-    @newsletters = Newsletter.all
+    @newsletters = Newsletter.active
     action = params[:get_action].strip.capitalize
     @message = updateable_messages
   end
@@ -95,7 +97,7 @@ class NewslettersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def newsletter_params
-      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email,:profile_ids[])
+      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email, :profile_ids => [], :newsletter_emails_attributes => [ :emails ])
     end
 
     def updateable_messages

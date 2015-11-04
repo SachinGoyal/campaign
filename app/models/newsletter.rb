@@ -17,6 +17,7 @@
 #  updated_at   :datetime         not null
 #  cc_email     :string
 #  bcc_email    :string
+#  send_at      :datetime
 #
 # Indexes
 #
@@ -47,7 +48,11 @@ class Newsletter < ActiveRecord::Base
   #association
   belongs_to :campaign
   belongs_to :template
-  has_and_belongs_to_many :profiles, join_table: "profiles_newsletters"
+  # has_and_belongs_to_many :profiles, join_table: "profiles_newsletters"
+  has_many :newsletter_emails
+  has_many :profiles, :through => :newsletter_emails
+
+  accepts_nested_attributes_for :newsletter_emails
   #association
 
   #class methods

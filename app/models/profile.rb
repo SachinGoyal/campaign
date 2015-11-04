@@ -31,8 +31,11 @@ class Profile < ActiveRecord::Base
 
   #relaion
   has_and_belongs_to_many :contacts
-  has_and_belongs_to_many :newsletters, join_table: "profiles_newsletters"
+  # has_and_belongs_to_many :newsletters, join_table: "profiles_newsletters"
   has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "profiles_attributes"
+  has_many :newsletter_emails
+  has_many :newsletters, :through => :newsletter_emails
+
   #relaion
   
   #validation

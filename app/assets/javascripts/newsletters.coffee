@@ -26,3 +26,11 @@ jQuery ->
   $('.newsletter_form').submit (e) ->
     arr = $.unique($('.contact_emails').val().replace(/ /g,'').split(','))
     $('.contact_emails').val arr.join(',')
+  $('.datepicker').datepicker
+    format: "dd/mm/yyyy"
+    startDate: "today"
+    endDate: "31-12-2016"
+    todayHighlight: true 
+    todayBtn: "linked"
+    autoclose: true
+    useStrict: true

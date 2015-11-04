@@ -37,7 +37,7 @@
             <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-12 control-label" >Select contact Group</label>
               <div class="col-xs-9 custom-checkbox-style" id="profile-custom-select">
-                <%= collection_select(:contact, :profile_ids, Profile.active, :id, :name, {:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :name => 'newsletter[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
+                <%= collection_select(:newsletter, :profile_ids, Profile.active, :id, :name, {:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :class => 'form-control'}) %>
               </div>
             </div>
           
@@ -50,9 +50,11 @@
 
             <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
-              <div class="col-sm-9 col-xs-12">
-                <textarea class="form-control contact_emails" cols="" rows="" name="emails"></textarea>
-              </div>
+              <%= f.fields_for :newsletter_emails do |newsletter_email_form| %>
+                <div class="col-sm-9 col-xs-12">
+                  <%= newsletter_email_form.text_area :emails, :class => "form-control contact_emails" %>                  
+                </div>
+              <% end %>
             </div>
           </div><!-- form-horizontal -->
         </div>
@@ -128,30 +130,32 @@
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" >Email Address</label>
             <div class="col-sm-9 col-xs-12">
-              <input class="form-control" type="text" id="formGroupInputSmall" >
+              <input class="form-control" type="text" >
               <span class="small">Send a copy of the campaign to the following email address(es), separated by commas:</span>
             </div>
           </div>
+
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
             <div class="col-sm-9 col-xs-12 custom-radio-input">
               <input id="radio01" name="" type="radio" value="">
               <label for="radio01"><span></span>Auto Responder Rules</label>
-              <input class="form-control" type="text" id="formGroupInputSmall" >
+              <input class="form-control" type="text" >
             </div>
           </div>
+          
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
             <div class="col-sm-9 col-xs-12 custom-radio-input">
               <input id="radio02" name="" type="radio" value="">
               <label for="radio02"><span></span>Auto Sent</label>
-              <input class="form-control" type="text" id="formGroupInputSmall" >
+              <%= f.text_field :send_at, :class => "form-control datepicker"%>
+              
             </div>
           </div>
-
         </div>
-
       </div>
+
       <div class="col-lg-4 col-xs-1">&nbsp;</div>
       <div class="clearfix"></div>
       <div class="custom-divider"></div>
@@ -162,8 +166,8 @@
       <div class="col-md-6 col-xs-10">
         <div class="form-group custom-from-group">
           <button type="button"  data-toggle="modal" data-target=".bs-example-modal-lg">Preview</button>
-          <button>Save</button>
-          <a href="#">Cancel</a>
+          <%= f.submit :Save ,:class => 'btn dark-btn-custom' %>
+          <%= link_to "Cancel", newsletters_path, :class => 'btn custom-link-btn' %>
         </div>
 
       </div>
@@ -179,4 +183,3 @@
 <!-- Modal -->
 <%= render :partial => "preview_template" %>
 <!-- Preview Template -->
-

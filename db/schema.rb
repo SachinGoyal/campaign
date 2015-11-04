@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151029063723) do
+ActiveRecord::Schema.define(version: 20151104063717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20151029063723) do
     t.datetime "updated_at",                null: false
     t.string   "city"
     t.string   "country"
-    t.string   "gender",     default: "t"
+    t.boolean  "gender",     default: true
   end
 
   add_index "contacts", ["company_id"], name: "index_contacts_on_company_id", using: :btree
@@ -121,6 +121,14 @@ ActiveRecord::Schema.define(version: 20151029063723) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "newsletter_emails", force: :cascade do |t|
+    t.integer  "newsletter_id"
+    t.integer  "profile_id"
+    t.string   "emails"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "newsletters", force: :cascade do |t|
     t.integer  "campaign_id"
     t.integer  "template_id"
@@ -136,6 +144,7 @@ ActiveRecord::Schema.define(version: 20151029063723) do
     t.datetime "updated_at",   null: false
     t.string   "cc_email"
     t.string   "bcc_email"
+    t.datetime "send_at"
   end
 
   add_index "newsletters", ["campaign_id"], name: "index_newsletters_on_campaign_id", using: :btree
@@ -203,7 +212,10 @@ ActiveRecord::Schema.define(version: 20151029063723) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "company_id"
   end
+
+  add_index "templates", ["company_id"], name: "index_templates_on_company_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.integer  "role_id"
@@ -250,5 +262,6 @@ ActiveRecord::Schema.define(version: 20151029063723) do
   add_foreign_key "profiles_newsletters", "profiles"
   add_foreign_key "roles", "companies"
   add_foreign_key "settings", "users"
+  add_foreign_key "templates", "companies"
   add_foreign_key "users", "companies"
 end
