@@ -63,6 +63,14 @@ class Newsletter < ActiveRecord::Base
     end
   end
 
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(companies.created_at)")
+  end
+  
+  def self.ransackable_attributes(auth_object = nil)
+    %w(name subject created_at)
+  end
+
   #class methods
   class << self
     def edit_all(ids, action)

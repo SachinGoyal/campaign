@@ -6,9 +6,9 @@
   <% if can? :read, Newsletter %>
     <%= render 'shared/keyword_search', :condition => :name_cont %>
     <div class="advance-search">
-            <%= link_to search_newsletters_path do %>
-             <i class="fa fa-dot-circle-o"></i>
-            <% end %>
+      <%= link_to search_newsletters_path do %>
+        <i class="fa fa-dot-circle-o"></i>
+      <% end %>
     </div> 
   <% end %>  
   <% if can? :create, Newsletter %>
