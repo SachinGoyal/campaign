@@ -37,6 +37,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
+        @user.confirm!
+        user = User.invite!(:email => @user.email) do |u|
+          u.skip_invitation = true
+        end
+        @user.deliver_invitation
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else

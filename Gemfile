@@ -12,6 +12,7 @@ gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 gem 'ransack'
 # Login 
 gem 'devise'
+gem 'devise_invitable'
 # Permission module
 gem 'cancancan'
 #Soft delete

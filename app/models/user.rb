@@ -21,11 +21,27 @@
 #  company_id             :integer
 #  status                 :boolean
 #  image                  :string
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#  invitation_token       :string
+#  invitation_created_at  :datetime
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_id          :integer
+#  invited_by_type        :string
+#  invitations_count      :integer          default(0)
 #
 # Indexes
 #
 #  index_users_on_company_id            (company_id)
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_invitation_token      (invitation_token) UNIQUE
+#  index_users_on_invitations_count     (invitations_count)
+#  index_users_on_invited_by_id         (invited_by_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
@@ -48,7 +64,7 @@ class User < ActiveRecord::Base
   
   # devise 
   attr_accessor :login
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   # devise 
   
@@ -133,6 +149,10 @@ class User < ActiveRecord::Base
       super # Use whatever other message 
     end 
   end 
+
+  def confirmation_required?
+    false
+  end
 
   def self.send_reset_password_instructions(attributes={})
     recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
