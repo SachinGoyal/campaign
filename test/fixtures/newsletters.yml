@@ -17,6 +17,7 @@
 #  updated_at   :datetime         not null
 #  cc_email     :string
 #  bcc_email    :string
+#  send_at      :datetime
 #
 # Indexes
 #
