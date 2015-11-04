@@ -39,8 +39,8 @@ class NewslettersController < ApplicationController
   # GET /newsletters/1/edit
   def edit
     @templates = Template.active
-    @newsletter_email = @newsletter.newsletter_emails.where(from_contacts: true)
-    @sample_newsletter_email = @newsletter.newsletter_emails.where(sample: true)
+    @newsletter_email = @newsletter.newsletter_emails.where(from_contacts: true).first || @newsletter.newsletter_emails.build(from_contacts: true)
+    @sample_newsletter_email = @newsletter.newsletter_emails.where(sample: true).first || @newsletter.newsletter_emails.build(sample: true)
   end
 
   def edit_all
@@ -62,9 +62,13 @@ class NewslettersController < ApplicationController
         format.html { redirect_to @newsletter, notice: 'Newsletter was successfully created.' }
         format.json { render :show, status: :created, location: @newsletter }
       else
-        format.html {         
-          @sample_newsletter_email = @newsletter.newsletter_emails.where(:sample => true).try(:first)
-          @newsletter_email = @newsletter.newsletter_emails.where(:from_contacts => true).try(:first)
+        format.html {
+          if params[:newsletter][:newsletter_emails_attributes]["0"][:emails].blank?
+            @newsletter_email = @newsletter.newsletter_emails.where(from_contacts: true).first || @newsletter.newsletter_emails.build(from_contacts: true)
+          end
+          if params[:newsletter][:newsletter_emails_attributes]["1"][:email].blank?
+            @sample_newsletter_email = @newsletter.newsletter_emails.where(sample: true).first || @newsletter.newsletter_emails.build(sample: true)
+          end
           render :new 
         }
         format.json { render json: @newsletter.errors, status: :unprocessable_entity }
