@@ -52,8 +52,16 @@ class Newsletter < ActiveRecord::Base
   has_many :newsletter_emails
   has_many :profiles, :through => :newsletter_emails
 
-  accepts_nested_attributes_for :newsletter_emails, reject_if: proc { |attrs| attrs['profile_id'].blank? and attrs['emails'].blank? }
+  accepts_nested_attributes_for :newsletter_emails, reject_if: proc { |attrs| attrs['profile_id'].blank? and attrs['emails'].blank? and attrs['id'].blank? }, :allow_destroy => true
   #association
+
+  before_update :mark_children_for_removal
+
+  def mark_children_for_removal
+    newsletter_emails.each do |child|
+      child.mark_for_destruction if child.emails.blank? and child.profile_id.blank?
+    end
+  end
 
   #class methods
   class << self
