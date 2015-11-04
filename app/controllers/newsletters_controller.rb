@@ -29,7 +29,6 @@ class NewslettersController < ApplicationController
   def new
     @newsletter = Newsletter.new
     @templates = Template.active
-    @template = Template.find(6)
     @search = Contact.ransack(params[:q], auth_object: "dummy")
     @newsletters = @search.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
