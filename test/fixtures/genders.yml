@@ -1,19 +1,11 @@
 # == Schema Information
 #
-# Table name: roles
+# Table name: genders
 #
 #  id         :integer          not null, primary key
 #  name       :string
-#  deleted_at :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  company_id :integer
-#  status     :boolean          default(TRUE)
-#  editable   :boolean          default(TRUE)
-#
-# Indexes
-#
-#  index_roles_on_company_id  (company_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
