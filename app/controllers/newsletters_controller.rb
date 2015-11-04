@@ -32,12 +32,15 @@ class NewslettersController < ApplicationController
   def new
     @newsletter = Newsletter.new
     @templates = Template.active
-    @template = Template.first
-    @newsletter.newsletter_emails.build
+    @newsletter_email = @newsletter.newsletter_emails.build(from_contacts: true)
+    @sample_newsletter_email = @newsletter.newsletter_emails.build(sample: true)
   end
 
   # GET /newsletters/1/edit
   def edit
+    @templates = Template.active
+    @newsletter_email = @newsletter.newsletter_emails.where(from_contacts: true)
+    @sample_newsletter_email = @newsletter.newsletter_emails.where(sample: true)
   end
 
   def edit_all
@@ -59,7 +62,11 @@ class NewslettersController < ApplicationController
         format.html { redirect_to @newsletter, notice: 'Newsletter was successfully created.' }
         format.json { render :show, status: :created, location: @newsletter }
       else
-        format.html { render :new }
+        format.html {         
+          @sample_newsletter_email = @newsletter.newsletter_emails.where(:sample => true).try(:first)
+          @newsletter_email = @newsletter.newsletter_emails.where(:from_contacts => true).try(:first)
+          render :new 
+        }
         format.json { render json: @newsletter.errors, status: :unprocessable_entity }
       end
     end
@@ -68,12 +75,17 @@ class NewslettersController < ApplicationController
   # PATCH/PUT /newsletters/1
   # PATCH/PUT /newsletters/1.json
   def update
+    @templates = Template.active
     respond_to do |format|
       if @newsletter.update(newsletter_params)
         format.html { redirect_to @newsletter, notice: 'Newsletter was successfully updated.' }
         format.json { render :show, status: :ok, location: @newsletter }
       else
-        format.html { render :edit }
+        format.html { 
+          @sample_newsletter_email = @newsletter.newsletter_emails.where(:sample => true).try(:first)
+          @newsletter_email = @newsletter.newsletter_emails.where(:from_contacts => true).try(:first)
+          render :edit 
+        }
         format.json { render json: @newsletter.errors, status: :unprocessable_entity }
       end
     end
@@ -97,7 +109,7 @@ class NewslettersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def newsletter_params
-      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email, :profile_ids => [], :newsletter_emails_attributes => [ :emails ])
+      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email, :profile_ids => [], :newsletter_emails_attributes => [ :emails, :sample, :from_contacts, :id ])
     end
 
     def updateable_messages

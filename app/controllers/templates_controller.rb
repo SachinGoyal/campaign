@@ -33,6 +33,11 @@ class TemplatesController < ApplicationController
   def show
   end
 
+  #PREVIEW Template
+  def preview
+    @template = Template.find(params[:id])
+  end
+
   # GET /templates/new
   def new
     @template = Template.new

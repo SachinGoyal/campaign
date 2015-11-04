@@ -50,11 +50,16 @@
 
             <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
-              <%= f.fields_for :newsletter_emails do |newsletter_email_form| %>
-                <div class="col-sm-9 col-xs-12">
-                  <%= newsletter_email_form.text_area :emails, :class => "form-control contact_emails" %>                  
-                </div>
-              <% end %>
+              <div class="col-sm-9 col-xs-12">
+                <%= f.fields_for :newsletter_emails, @newsletter_email do |newsletter_email_form| %>
+                  
+                  <% if newsletter_email_form.object.from_contacts? %>
+                    <%= newsletter_email_form.text_area :emails, :class => "form-control contact_emails" %>
+                    <%= newsletter_email_form.hidden_field :from_contacts, :value => true %>
+                  <% end %>
+                <% end %>
+              </div>
+
             </div>
           </div><!-- form-horizontal -->
         </div>
@@ -123,14 +128,20 @@
           <div class="form-group form-group-sm">
             <label class="col-sm-3 blue-heading col-xs-12 control-label" >Sample Email</label>
             <div class="col-sm-9 col-xs-12">
-
             </div>
           </div>
 
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" >Email Address</label>
             <div class="col-sm-9 col-xs-12">
-              <input class="form-control" type="text" >
+              <%= f.fields_for :newsletter_emails, @sample_newsletter_email do |sample_newsletter_email_form| %>
+                
+                <% if sample_newsletter_email_form.object.sample? %>
+                  <%= sample_newsletter_email_form.email_field :emails, :class => "form-control" %>
+                  <%= sample_newsletter_email_form.hidden_field :sample, :value => true %>              
+                <% end %>
+              <% end %>
+              
               <span class="small">Send a copy of the campaign to the following email address(es), separated by commas:</span>
             </div>
           </div>
@@ -165,9 +176,10 @@
       <div class="col-lg-2 col-xs-1">&nbsp;</div>
       <div class="col-md-6 col-xs-10">
         <div class="form-group custom-from-group">
-          <button type="button"  data-toggle="modal" data-target=".bs-example-modal-lg">Preview</button>
+          <button type="button" id='preview-template'>Preview</button>
           <%= f.submit :Save ,:class => 'btn dark-btn-custom' %>
           <%= link_to "Cancel", newsletters_path, :class => 'btn custom-link-btn' %>
+           
         </div>
 
       </div>
@@ -181,5 +193,5 @@
 
 <!-- Preview Template -->
 <!-- Modal -->
-<%= render :partial => "preview_template" %>
+<%#= render :partial => "preview_template" %>
 <!-- Preview Template -->

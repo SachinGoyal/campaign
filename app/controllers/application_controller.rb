@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def layout_by_resource
-    if devise_controller? && resource_name == :user && ["sessions", "passwords"].include?(controller_name)
+    if devise_controller? && resource_name == :user && ["sessions", "passwords", "confirmations", 'invitations'].include?(controller_name)
       "application"
     else
       "dashboard"

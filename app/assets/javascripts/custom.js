@@ -54,6 +54,18 @@ $(document).ready( function() {
         });
     });
 
+    $("#preview-template").on('click', function(){
+          var template_id = $('#newsletter_template_id').val();
+          if (template_id == '')
+              alert("Please Select a template");
+          else {
+              $.ajax({
+                method: "GET",
+                url: '/templates/' + template_id + '/preview.js'
+              })
+          }
+    });
+
     function myFunction(){
         var a = [];
         $('input[type=checkbox]').each(function (index) {
