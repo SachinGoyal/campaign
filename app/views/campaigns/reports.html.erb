@@ -1,0 +1,71 @@
+<script type="text/javascript">
+  
+  $(function () { 
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        title: {
+            text: 'Newsletter'
+        },
+        xAxis: {
+            categories:  ["Sent", "Bounsed", "Opened", "Deleted"]
+        },
+        yAxis: {
+            title: {
+                text: 'Newsletter Sent'
+            }
+        },
+        series: [
+           <%#Record.all.each do |record|%>
+           {
+            name: 'Newsletter',
+            data: [32,34,43,43 ]
+        },
+        {
+            name: 'Newsletter',
+            data: [32,34,43,43 ]
+        }
+        <%# end %>
+        ]
+    });
+});
+
+
+</script>
+
+
+<%= form_for @campaign, :url => {:controller => "campaigns", :action => "reports"},:method => :get do |f| %>
+
+  <div class="row">
+	<div class="col-md-12">
+		<div class="col-md-8">
+		<label class="col-xs-2 custom-label-control control-label">Repots <i class="fa fa-chevron-right custom-spacing-left"></i></label>
+		<div class="col-xs-5">
+		<%= collection_select(:report, :campaign_id, Campaign.active, :id, :name, {:prompt => 'select a campaign'}, {:class => 'form-control required'}) %>
+		</div><!-- col-xs-5 -->
+		<div class="col-xs-5" id= 'campaign-newsletter'>
+			<select class="form-control"><option>select Newsletter</option></select>
+		</div><!-- col-xs-5 -->
+		</div><!-- col-md-8 -->
+	</div>
+  </div><!-- row -->
+  <div class="custom-white-spacer">
+  	<div id="container" style="width:100%; height:400px;"></div>
+  </div>
+<% end %>

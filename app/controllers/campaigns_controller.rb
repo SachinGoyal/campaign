@@ -16,6 +16,14 @@ class CampaignsController < ApplicationController
     @campaigns = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
 
+  def reports
+    @campaign = Campaign.first
+  end
+
+  def select_newsletter
+    @newsletters = Campaign.find(params[:campaign_id]).newsletters
+  end
+
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show

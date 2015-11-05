@@ -1,0 +1,1 @@
+$('#campaign-newsletter').html("<%= j (collection_select(:report, :newsletter_id, @newsletters, :id, :name, {:prompt => 'select Newsletter'}, {:class => 'form-control required'})) %>");

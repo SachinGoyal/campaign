@@ -6756,3 +6756,6 @@ li.current-page i{color:#1ABB9C;}
  text-decoration:underline;
 }
 .fil0 {fill:#1ABB9C}
+.custom-white-spacer{background-color: #fff; padding-left: 20px; margin-top: 10px;}
+.custom-label-control{margin-top: 6px}
+.custom-spacing-left{margin-left: 10px;}

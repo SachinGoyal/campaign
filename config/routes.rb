@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
   resources :functions
-  resources :settings
+  resources :settings ,only: [:edit , :update , :show]
   resources :templates
 
   resources :contacts ,concerns: [:edit_all,:search] do
@@ -31,7 +31,13 @@ Rails.application.routes.draw do
      post :import 
     end
   end
-  resources :campaigns, concerns: :edit_all
+  resources :campaigns, concerns: :edit_all do
+    collection do
+     # get :reports
+      get :select_newsletter
+      get "reports" , to: "campaigns#reports"
+    end
+  end
   resources :attributes, concerns: :edit_all
 
   resources :roles, concerns: :edit_all
