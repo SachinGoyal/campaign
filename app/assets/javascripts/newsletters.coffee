@@ -7,6 +7,11 @@ jQuery ->
   $('#q_gender_false_1').change ->
   	$('#q_gender_true_1').prop('checked', false)
 
+  $('form').on 'click', '.auto_response_toggle', (event) ->
+    $('#newsletter_auto_response').toggle()
+  $('form').on 'click', '.send_at_toggle', (event) ->
+    $('#newsletter_send_at').toggle()
+      
   $('form').on 'click', '.contact_search_for_newsletter', (event) ->
   	search_params = {q:{}}
   	search_params['q']['auth_object'] = true
@@ -23,31 +28,8 @@ jQuery ->
       data: search_params
 	
   	event.preventDefault()
-  
-  checkEmail = (email) ->
-    regExp = /(^[a-z]([a-z_\.]*)@([a-z_\.]*)([.][a-z]{3})$)|(^[a-z]([a-z_\.]*)@([a-z_\.]*)(\.[a-z]{3})(\.[a-z]{2})*$)/i
-    regExp.test email
-
-  checkEmails = (emails) ->
-    emailArray = emails.split(',')
-    invEmails = ''
-    i = 0
-    while i <= emailArray.length - 1
-      if checkEmail(emailArray[i])
-      else
-        invEmails += emailArray[i] + '\n'
-      i++
-    invEmails
-
-    if invEmails != ''
-      alert 'Invalid emails:\n' + invEmails
-    return
-
 
   $('.newsletter_form').submit (e) ->
-    #arr = $.unique($('.contact_emails').val().replace(/ /g,'').split(','))
-    #$('.contact_emails').val arr.join(',')
-    #checkEmails($('.contact_emails').val()) 
     #e.preventDefault()
 
   $('.datepicker').datepicker

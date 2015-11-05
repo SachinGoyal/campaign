@@ -135,7 +135,6 @@
             <label class="col-sm-3 col-xs-12 control-label" >Email Address</label>
             <div class="col-sm-9 col-xs-12">
               <%= f.fields_for :newsletter_emails, @sample_newsletter_email do |sample_newsletter_email_form| %>
-                
                 <% if sample_newsletter_email_form.object.sample? %>
                   <%= sample_newsletter_email_form.text_field :emails, :class => "form-control" %>
                   <%= sample_newsletter_email_form.hidden_field :sample, :value => true %>              
@@ -149,19 +148,26 @@
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
             <div class="col-sm-9 col-xs-12 custom-radio-input">
-              <input id="radio01" name="" type="radio" value="">
+              <input id="radio01" name="" type="radio" value="" class="auto_response_toggle">
               <label for="radio01"><span></span>Auto Responder Rules</label>
-              <input class="form-control" type="text" >
+              <% if @newsletter.auto_response %>
+                <%= f.email_field :auto_response, :class => "form-control" %>
+              <% else %>
+                <%= f.email_field :auto_response, :class => "form-control", :style => "display:none" %>
+              <% end %>
             </div>
           </div>
           
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
             <div class="col-sm-9 col-xs-12 custom-radio-input">
-              <input id="radio02" name="" type="radio" value="">
+              <input id="radio02" name="" type="radio" value="" class="send_at_toggle">
               <label for="radio02"><span></span>Auto Sent</label>
-              <%= f.text_field :send_at, :class => "form-control datepicker"%>
-              
+              <% if @newsletter.send_at %>
+                <%= f.text_field :send_at, :class => "form-control datepicker" %>
+              <% else %>
+                <%= f.text_field :send_at, :class => "form-control datepicker", :style => "display:none" %>
+              <% end %>              
             </div>
           </div>
         </div>
