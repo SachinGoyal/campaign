@@ -86,5 +86,7 @@ class Newsletter < ActiveRecord::Base
   end
   #class methods
 
-
+  def all_emails
+    newsletter_emails.map(&:emails).flatten.uniq.join(", ")
+  end
 end

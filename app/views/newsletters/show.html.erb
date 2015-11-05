@@ -1,49 +1,145 @@
-<p id="notice"><%= notice %></p>
+  <div class="row">
+    <div class="page-title">
+      <div class="title_left"><h2>View Newsletter</h2></div><!-- title_left -->
+      <div class="clearfix"></div>
+    </div><!-- page-title -->
+  </div><!--row-->
 
-<p>
-  <strong>Campaign:</strong>
-  <%= @newsletter.campaign.name %>
-</p>
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-5 col-xs-10">
+          <form class="form-horizontal">
 
-<p>
-  <strong>Template:</strong>
-  <%= @newsletter.template %>
-</p>
+ 
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" >Name</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @newsletter.name %>
+              </div>
+            </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @newsletter.name %>
-</p>
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" >Campaign</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @newsletter.campaign.name %>
+              </div>
+            </div>
 
-<p>
-  <strong>Subject:</strong>
-  <%= @newsletter.subject %>
-</p>
 
-<p>
-  <strong>From name:</strong>
-  <%= @newsletter.from_name %>
-</p>
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" >Subject</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @newsletter.subject %>
+              </div>
+            </div>
 
-<p>
-  <strong>From address:</strong>
-  <%= @newsletter.from_address %>
-</p>
+            <%# unless @contact.profiles.empty? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label" >Template</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @newsletter.template.name %>
+                </div>
+              </div>
+            <%# end %>
 
-<p>
-  <strong>Reply email:</strong>
-  <%= @newsletter.reply_email %>
-</p>
 
-<p>
-  <strong>Created by:</strong>
-  <%= @newsletter.created_by %>
-</p>
+            <% unless @newsletter.profiles.blank? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label">Profile(s)</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @newsletter.profiles.map(&:name).join(", ") %>
+                </div>
+              </div>
+            <% end %>
 
-<p>
-  <strong>Updated by:</strong>
-  <%= @newsletter.updated_by %>
-</p>
+            <% unless @newsletter.newsletter_emails.blank? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label">Email</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @newsletter.all_emails %>
+                </div>
+              </div>
+            <% end %>
 
-<%= link_to 'Edit', edit_newsletter_path(@newsletter) %> |
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label">From Name</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @newsletter.from_name %>
+              </div>
+            </div>
+
+            <%# unless @contact.interest_areas.empty? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label" >From Email</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  @newsletter.from_address %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <%# end %>
+
+            <% unless @newsletter.reply_email.empty? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label">Reply Email</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  @newsletter.reply_email %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+
+            <% unless @newsletter.cc_email.empty? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label">CC Email</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  @newsletter.cc_email %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+
+            <% unless @newsletter.bcc_email.empty? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label">Bcc Email</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  @newsletter.bcc_email %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+
+            <% if @newsletter.send_at.present? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label">Send at</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  @newsletter.send_at %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+            
+            <% if @newsletter.auto_response.present? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label">Auto Response</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  @newsletter.auto_response %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+            </form>
+          </div>
+          <div class="col-lg-4 col-xs-1">
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" >&nbsp;</label>
+              <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+            </div>
+
+
+          </div>
+          <div class="clearfix"></div>
+          <div class="divider"></div>
+        </div>
+
+      </div><!-- row -->
+    </div><!--  custom-container -->
+<% if can? :update, Newsletter %>    
+  <%= link_to 'Edit', edit_newsletter_path(@newsletter) %> |
+<% end %>
 <%= link_to 'Back', newsletters_path %>
