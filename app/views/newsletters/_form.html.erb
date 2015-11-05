@@ -137,7 +137,7 @@
               <%= f.fields_for :newsletter_emails, @sample_newsletter_email do |sample_newsletter_email_form| %>
                 
                 <% if sample_newsletter_email_form.object.sample? %>
-                  <%= sample_newsletter_email_form.email_field :emails, :class => "form-control" %>
+                  <%= sample_newsletter_email_form.text_field :emails, :class => "form-control" %>
                   <%= sample_newsletter_email_form.hidden_field :sample, :value => true %>              
                 <% end %>
               <% end %>

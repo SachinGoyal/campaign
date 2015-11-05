@@ -6,6 +6,7 @@ class NewslettersController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource #cancan
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
+  before_action :set_templates, only: [:new, :create, :edit, :update]
   #filter
 
   # GET /newsletters
@@ -23,22 +24,16 @@ class NewslettersController < ApplicationController
   end
 
 
-  # GET /newsletters/1
-  # GET /newsletters/1.json
   def show
   end
 
-  # GET /newsletters/new
   def new
     @newsletter = Newsletter.new
-    @templates = Template.active
     @newsletter_email = @newsletter.newsletter_emails.build(from_contacts: true)
     @sample_newsletter_email = @newsletter.newsletter_emails.build(sample: true)
   end
 
-  # GET /newsletters/1/edit
   def edit
-    @templates = Template.active
     @newsletter_email = @newsletter.newsletter_emails.where(from_contacts: true).first || @newsletter.newsletter_emails.build(from_contacts: true)
     @sample_newsletter_email = @newsletter.newsletter_emails.where(sample: true).first || @newsletter.newsletter_emails.build(sample: true)
   end
@@ -50,9 +45,6 @@ class NewslettersController < ApplicationController
     @message = updateable_messages
   end
 
-
-  # POST /newsletters
-  # POST /newsletters.json
   def create
     @newsletter = Newsletter.new(newsletter_params)
     @templates = Template.active
@@ -63,11 +55,15 @@ class NewslettersController < ApplicationController
         format.json { render :show, status: :created, location: @newsletter }
       else
         format.html {
-          if params[:newsletter][:newsletter_emails_attributes]["0"][:emails].blank?
-            @newsletter_email = @newsletter.newsletter_emails.where(from_contacts: true).first || @newsletter.newsletter_emails.build(from_contacts: true)
+          email_attrs = params[:newsletter][:newsletter_emails_attributes]
+          contact_emails = email_attrs[email_attrs.keys.first][:emails]
+          sample_emails = email_attrs[email_attrs.keys.last][:emails]
+          if contact_emails.blank?
+            @newsletter_email = @newsletter.newsletter_emails.build(from_contacts: true)
           end
-          if params[:newsletter][:newsletter_emails_attributes]["1"][:email].blank?
-            @sample_newsletter_email = @newsletter.newsletter_emails.where(sample: true).first || @newsletter.newsletter_emails.build(sample: true)
+
+          if sample_emails.blank?
+            @sample_newsletter_email = @newsletter.newsletter_emails.build(sample: true)
           end
           render :new 
         }
@@ -76,8 +72,6 @@ class NewslettersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /newsletters/1
-  # PATCH/PUT /newsletters/1.json
   def update
     @templates = Template.active
     respond_to do |format|
@@ -86,8 +80,8 @@ class NewslettersController < ApplicationController
         format.json { render :show, status: :ok, location: @newsletter }
       else
         format.html { 
-          @sample_newsletter_email = @newsletter.newsletter_emails.where(:sample => true).try(:first)
-          @newsletter_email = @newsletter.newsletter_emails.where(:from_contacts => true).try(:first)
+          # @sample_newsletter_email = @newsletter.newsletter_emails.where(:sample => true).try(:first)
+          # @newsletter_email = @newsletter.newsletter_emails.where(:from_contacts => true).try(:first)
           render :edit 
         }
         format.json { render json: @newsletter.errors, status: :unprocessable_entity }
@@ -106,17 +100,19 @@ class NewslettersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_newsletter
       @newsletter = Newsletter.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def newsletter_params
-      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email, :profile_ids => [], :newsletter_emails_attributes => [ :emails, :sample, :from_contacts, :id ])
+      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email, :send_at, :profile_ids => [], :newsletter_emails_attributes => [ :emails, :sample, :from_contacts, :id ])
     end
 
     def updateable_messages
       "Newsletter deleted successfully. Newsletter with associated data could not be deleted."
+    end
+
+    def set_templates
+      @templates = Template.active
     end
 end

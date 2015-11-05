@@ -49,7 +49,7 @@ class Newsletter < ActiveRecord::Base
   belongs_to :campaign
   belongs_to :template
   # has_and_belongs_to_many :profiles, join_table: "profiles_newsletters"
-  has_many :newsletter_emails
+  has_many :newsletter_emails, inverse_of: :newsletter
   has_many :profiles, :through => :newsletter_emails
 
   accepts_nested_attributes_for :newsletter_emails, reject_if: proc { |attrs| attrs['profile_id'].blank? and attrs['emails'].blank? and attrs['id'].blank? }, :allow_destroy => true
