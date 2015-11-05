@@ -50,6 +50,7 @@ class Contact < ActiveRecord::Base
   #relation
   has_and_belongs_to_many :profiles
   has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "contacts_attributes"
+  # has_and_belongs_to_many :attributes
   #relation
 
   # callbacks
@@ -62,6 +63,29 @@ class Contact < ActiveRecord::Base
 
   ransacker :created_at do
     Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
+  end
+
+  scope :matches_all_attributes, -> *attribute_ids { where(matches_all_attributes_arel(attribute_ids)) }
+
+  def self.matches_all_attributes_arel(attribute_ids)
+    contacts = Arel::Table.new(:contacts)
+    attributes = Arel::Table.new(:attributes)
+    contacts_attributes = Arel::Table.new(:contacts_attributes)
+
+    contacts[:id].in(
+      contacts.project(contacts[:id])
+        .join(contacts_attributes).on(contacts[:id].eq(contacts_attributes[:contact_id]))
+        .join(attributes).on(contacts_attributes[:attribute_id].eq(attributes[:id]))
+        .where(attributes[:id].in(attribute_ids))
+    )
+  end
+
+  def self.ransackable_scopes(auth_object = nil)
+    if auth_object
+      super + %w(matches_all_attributes)
+    else
+      super
+    end
   end
 
   # scope :matches_all_interest_areas, -> *interest_area_ids { where(matches_all_attributes_arel(interest_area_ids)) }

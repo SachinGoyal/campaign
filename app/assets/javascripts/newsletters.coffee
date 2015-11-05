@@ -13,21 +13,27 @@ jQuery ->
     $('#newsletter_send_at').toggle()
       
   $('form').on 'click', '.contact_search_for_newsletter', (event) ->
-  	search_params = {q:{}}
-  	search_params['q']['auth_object'] = true
-  	search_params['q']['city_cont'] = $('#q_city_cont').val()  	
-  	search_params['q']['country_eq'] = $('#q_country_eq').val()  	 
-  	if $('#q_gender_true_1').is(':checked')
+    search_params = {q:{}}
+    search_params['q']['auth_object'] = true
+    search_params['q']['city_cont'] = $('#q_city_cont').val()
+    search_params['q']['country_eq'] = $('#q_country_eq').val()
+    a = []
+    $("input[name='q[matches_all_attributes][]']:checked").each (index) ->
+      if @checked
+        a[index] = $(this).val()
+
+    search_params['q']['matches_all_attributes'] = a
+    if $('#q_gender_true_1').is(':checked')
   	  search_params['q']['gender_true'] = 1
-  	if $('#q_gender_false_1').is(':checked') 
+    if $('#q_gender_false_1').is(':checked') 
   	  search_params['q']['gender_false'] = 1
 
-  	$.ajax
+    $.ajax
       type: 'GET'
       url: '/contacts.js'
       data: search_params
 	
-  	event.preventDefault()
+    event.preventDefault()
 
   $('.newsletter_form').submit (e) ->
     #e.preventDefault()

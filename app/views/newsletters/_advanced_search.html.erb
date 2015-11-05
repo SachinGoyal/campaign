@@ -32,8 +32,11 @@
               <div class="form-group form-group-sm">
                 <label class="col-xs-3 text-right control-label" >Area of interest</label>
                 <div class="col-xs-3">
+
                   <% Attribute.active.each do |attribute| %>
-                    <%= check_box_tag 'contact[interest_area_ids][]', attribute.id %> <label><span></span><%= attribute.name %></label><br/>
+                    <%#= check_box_tag 'contact[interest_area_ids][]', attribute.id %> 
+                    <%= check_box_tag('q[matches_all_attributes][]', attribute.id, params["q"] && params["q"].fetch("matches_all_attributes", []).include?(attribute.id.to_s)) %>
+                    <label><span></span><%= attribute.name %></label><br/>
                   <% end %>
                 </div>              
                 <div class="clearfix"></div> 
