@@ -4,8 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 
-# Multi tenant Database
-# gem 'apartment'# Use postgresql as the database for Active Record
+gem "highcharts-rails", "~> 3.0.0" # report chart use
 #client side validation 
 gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 # Search feature with ransack

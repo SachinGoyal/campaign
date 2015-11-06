@@ -14,5 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap-datepicker
 //= require summernote
-
+//= require highcharts
 //= require_tree .

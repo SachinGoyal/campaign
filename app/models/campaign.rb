@@ -46,7 +46,7 @@ class Campaign < ActiveRecord::Base
   #validation
 
   # relation
-  belongs_to :user
+  has_many :newsletters
   # relation
   
   #delegate

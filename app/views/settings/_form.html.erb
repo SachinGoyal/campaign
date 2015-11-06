@@ -1,33 +1,58 @@
-<%= form_for(@setting) do |f| %>
-  <% if @setting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+<div class="custom-container">
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-6 col-xs-10">
+          <%= form_for @setting, :html => { :class => "form-horizontal campaign" } do |f| %>            
+            <div class="field form-group form-group-sm">
+              <%= f.label :site_title ,:class=>"col-sm-4 col-xs-12 control-label"%>
+              <div class="col-sm-8 col-xs-12"> <%= f.text_field :site_title, :class => 'form-control' %> </div>
+            </div>  
 
-      <ul>
-      <% @setting.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+            <div class="field form-group form-group-sm">
+              <%= f.label :free_emails ,:class=>"col-sm-4 col-xs-12 control-label"%>
+              <div class="col-sm-8 col-xs-12"> <%= f.text_field :free_emails, :class => 'form-control' %> </div>
+            </div>      
+           
+            <div class="field form-group form-group-sm">
+              <%= f.label :admin_email ,:class=>"col-sm-4 col-xs-12 control-label"%>
+              <div class="col-sm-8 col-xs-12"> <%= f.text_field :admin_email, :class => 'form-control' %> </div>
+            </div>      
+
+            <div class="field form-group form-group-sm">
+              <%= f.label :admin_footer_content ,:class=>"col-sm-4 col-xs-12 control-label"%>
+              <div class="col-sm-8 col-xs-12"> <%= f.text_field :admin_footer_content, :class => 'form-control' %> </div>
+            </div>   
+            
+            <div class="col-md-12 col-xs-12">
+              <div class="col-lg-2 col-xs-1"> </div>
+              <div class="col-md-6 col-xs-10">
+                <div class="form-group custom-from-group">
+                  <%= f.submit :Save ,:class => 'btn dark-btn-custom' %>
+                  <%= link_to "Cancel", setting_path(Setting.first) ,class: 'btn' %>
+                </div>
+              </div>
+              <div class="col-lg-4 col-xs-1"> </div>
+              <div class="clearfix"></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
+  </div>
+</div>  
 
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :site_title %><br>
-    <%= f.text_field :site_title %>
-  </div>
-  <div class="field">
-    <%= f.label :admin_email %><br>
-    <%= f.text_field :admin_email %>
-  </div>
-  <div class="field">
-    <%= f.label :admin_footer_content %><br>
-    <%= f.text_field :admin_footer_content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
