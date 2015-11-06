@@ -55,7 +55,7 @@ class Company < ActiveRecord::Base
   #nested attribute
    
   #callback
-  before_create :set_subdomain
+  before_create :set_subdomain, :check_email
   # after_create :create_role
   #callback
 
@@ -88,6 +88,10 @@ class Company < ActiveRecord::Base
     end
   end
   #class methods
+
+  def check_email
+     self.free_emails = Setting.first.free_emails if !free_emails.present?
+  end
 
   def set_subdomain
     self.subdomain = self.name.strip.gsub(' ', '_').downcase
