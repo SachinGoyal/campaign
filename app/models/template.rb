@@ -78,7 +78,7 @@ class Template < ActiveRecord::Base
 
   def check_newsletter
     if newsletters.any?
-      errors[:base] << "Cannot update or delete template It is associated with Newsletter"
+      errors[:base] << "Cannot update or delete template. It is associated with a Newsletter"
       return false
     end
   end
