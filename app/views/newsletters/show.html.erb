@@ -56,7 +56,7 @@
 
             <% unless @newsletter.newsletter_emails.blank? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label">Email</label>
+                <label class="col-sm-4 col-xs-12 control-label">Email List</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @newsletter.all_emails %>
                 </div>
@@ -110,7 +110,7 @@
               <div class="form-group form-group-sm">
                 <label class="col-xs-4 text-right control-label">Send at</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
-                  <%=  @newsletter.send_at %> </div>
+                  <%=  format_date(@newsletter, :send_at) %> </div>
                   <div class="clearfix"></div> 
                 </div>
             <% end %>

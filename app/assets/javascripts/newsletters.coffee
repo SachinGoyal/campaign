@@ -37,12 +37,4 @@ jQuery ->
 
   $('.newsletter_form').submit (e) ->
     #e.preventDefault()
-
-  $('.datepicker').datepicker
-    format: "dd/mm/yyyy"
-    startDate: "today"
-    endDate: "31-12-2016"
-    todayHighlight: true 
-    todayBtn: "linked"
-    autoclose: true
-    useStrict: true
+  $('.datepicker').datetimepicker()
