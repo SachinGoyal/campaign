@@ -74,15 +74,16 @@ class User < ActiveRecord::Base
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
   # validation
   
+  # callback
+  before_destroy :check_company_admin
+  # callback
+
   # relations
   has_many :campaigns
   belongs_to :role
   belongs_to :company
   # relations
   
-  # callback
-  before_destroy :check_company_admin
-  # callback
 
   #ransack
   ransacker :created_at do

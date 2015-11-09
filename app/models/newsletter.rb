@@ -46,6 +46,10 @@ class Newsletter < ActiveRecord::Base
   validates_format_of :reply_email, :cc_email, :bcc_email, :with => Devise.email_regexp, :allow_blank => true
   # validation
 
+  #callback
+  before_update :mark_children_for_removal
+  #callback
+
   #association
   belongs_to :campaign
   belongs_to :template
@@ -55,7 +59,6 @@ class Newsletter < ActiveRecord::Base
   accepts_nested_attributes_for :newsletter_emails, reject_if: proc { |attrs| attrs['profile_id'].blank? and attrs['emails'].blank? and attrs['id'].blank? }, :allow_destroy => true
   #association
 
-  before_update :mark_children_for_removal
 
   def mark_children_for_removal
     newsletter_emails.each do |child|

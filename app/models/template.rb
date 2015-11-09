@@ -36,14 +36,15 @@ class Template < ActiveRecord::Base
   validates_inclusion_of :status, in: [true, false]
   # validation
 
+  #callback
+  before_destroy :check_newsletter
+  before_update :check_newsletter
+  #callback
+
   #association
   has_many :newsletters
   #association
 
-  #callback
-    before_destroy :check_newsletter
-    before_update :check_newsletter
-  #callback
 
   #ransack
 

@@ -47,16 +47,15 @@ class Contact < ActiveRecord::Base
   #validation
 
   
-  #relation
-  has_and_belongs_to_many :profiles
-  has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "contacts_attributes"
-  # has_and_belongs_to_many :attributes
-  #relation
-
   # callbacks
   # before_validation :convert_lower
   before_validation :convert_country_code
   # callbacks
+
+  #relation
+  has_and_belongs_to_many :profiles
+  has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "contacts_attributes"
+  #relation
 
   #ransack
   # delegate :id, to: :interest_areas, prefix: true

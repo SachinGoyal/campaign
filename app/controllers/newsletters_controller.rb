@@ -7,7 +7,7 @@ class NewslettersController < ApplicationController
   load_and_authorize_resource #cancan
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
   before_action :set_templates, only: [:new, :create, :edit, :update]
-  before_action :check_editable_or_deletable, only: [:edit, :create, :destroy]
+  before_action :check_editable_or_deletable, only: [:edit, :update, :destroy]
   #filter
 
   # GET /newsletters

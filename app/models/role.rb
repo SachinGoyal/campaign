@@ -30,6 +30,11 @@ class Role < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => :company_id  
   #validation
 
+  #callback
+  before_update :check_companyadmin
+  before_destroy :check_generic_companyadmin
+  #callback
+
   # Association
   belongs_to :company
   has_many :users, :dependent => :destroy
@@ -48,10 +53,6 @@ class Role < ActiveRecord::Base
   scope :non_editable, -> { where(editable: false)}
   #scope
 
-  #callback
-  before_update :check_companyadmin
-  before_destroy :check_generic_companyadmin
-  #callback
 
   class << self
 

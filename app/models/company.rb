@@ -42,6 +42,11 @@ class Company < ActiveRecord::Base
   validates_inclusion_of :status, in: [true, false]
   # validation
 
+  #callback
+  before_create :set_subdomain, :check_email
+  # after_create :create_role
+  #callback
+
   # relations
   has_many :users, :dependent => :destroy
   has_many :roles, :dependent => :destroy
@@ -54,13 +59,8 @@ class Company < ActiveRecord::Base
   accepts_nested_attributes_for :users
   #nested attribute
    
-  #callback
-  before_create :set_subdomain, :check_email
-  # after_create :create_role
-  #callback
 
   #ransack
-
   ransacker :created_at do
     Arel::Nodes::SqlLiteral.new("date(companies.created_at)")
   end
@@ -68,7 +68,6 @@ class Company < ActiveRecord::Base
   def self.ransackable_attributes(auth_object = nil)
     super & %w(name subdomain created_at)
   end
-
   #ransack
 
 

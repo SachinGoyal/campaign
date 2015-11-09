@@ -45,19 +45,24 @@ class Campaign < ActiveRecord::Base
   validates_inclusion_of :status, in: [true, false]
   #validation
 
+  #callbacks
+  before_destroy :check_newsletter
+  #callbacks
+
   # relation
-  has_many :newsletters
+  has_many :newsletters, :dependent => :destroy
   # relation
   
   #delegate
   delegate :username, to: :user, prefix: true
   #delegate
 
-  #callbacks
-  before_destroy :check_newsletter
-  #callbacks
 
   def check_newsletter
+    if newsletters.any? and newsletters.map(&:editable_or_deletable?).include?(false)
+      errors[:base] << "Cannot delete campaign as it has sent newsletters."
+      return false
+    end
   end
 
   #class methods

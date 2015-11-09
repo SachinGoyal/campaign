@@ -23,28 +23,30 @@ class Profile < ActiveRecord::Base
 
   acts_as_tenant(:company) #multitenant
 
-  #scope
-  default_scope {order('id DESC')}
-  scope :active, -> { where(status: 'true') }
-  #scope
-  
-
-  #relaion
-  has_and_belongs_to_many :contacts
-  # has_and_belongs_to_many :newsletters, join_table: "profiles_newsletters"
-  has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "profiles_attributes"
-  has_many :newsletter_emails
-  has_many :newsletters, :through => :newsletter_emails
-
-  #relaion
-  
   #validation
   validates :name, presence: true, length: { in: 2..250}
   validates_uniqueness_to_tenant :name
   validates_inclusion_of :status, in: [true, false]  
   #validation
 
+  #scope
+  default_scope {order('id DESC')}
+  scope :active, -> { where(status: 'true') }
+  #scope
+
+  
+  #callback
   before_destroy :check_contacts
+  #callback
+
+  #relation
+  has_and_belongs_to_many :contacts
+  has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "profiles_attributes"
+  has_many :newsletter_emails
+  has_many :newsletters, :through => :newsletter_emails
+  #relation
+  
+
 
   def check_contacts
     if contacts.count > 0
