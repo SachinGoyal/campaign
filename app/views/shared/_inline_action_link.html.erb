@@ -32,7 +32,13 @@
         <% end %>
       <% end %>
       
-      
+      <% if element.is_a?(Newsletter) and can?(:create , element) and element.send_at.nil? %> 
+        <li><%= link_to element,  method: :post do %>
+          <i class="fa fa-eye"></i>
+          <span>Send Now</span>
+          <% end %>
+        </li>
+      <% end %>
 
       <% if can? :read , element %> 
         <li><%= link_to element do %>

@@ -100,6 +100,10 @@ class NewslettersController < ApplicationController
     end
   end
 
+  def send_now
+    return redirect_to newsletters_path
+  end
+
   private
 
     def set_newsletter

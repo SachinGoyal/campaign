@@ -7,7 +7,8 @@ class Ability
     alias_action :search, to: :read
     alias_action :edit_all, to: :update
     alias_action :delete, to: :destroy
-
+    alias_action :send_now, to: :create
+    
     if user.is_admin?
       can :manage, :all     
     else   
