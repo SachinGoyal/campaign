@@ -13,7 +13,7 @@ class TemplatesController < ApplicationController
   # GET /templates.json
   def index
     @q = Template.ransack(params[:q])
-    @templates = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @templates = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
   end
 
   def search
@@ -24,7 +24,7 @@ class TemplatesController < ApplicationController
     end
 
     @q  = Template.search(params[:q])
-    @templates = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @templates = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end
 
