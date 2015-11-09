@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   
   def index
     @q = User.where.not(id: 1).ransack(params[:q])
-    @users = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @users = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
   def search
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     end
 
     @search = User.search(params[:q])
-    @users = @search.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @users = @search.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @search.build_condition    
     @users = @users.where.not(id: 1)
   end

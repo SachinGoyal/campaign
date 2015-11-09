@@ -14,14 +14,14 @@ class NewslettersController < ApplicationController
   # GET /newsletters.json
   def index
     @q = Newsletter.ransack(params[:q])
-    @newsletters = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @newsletters = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
 
   def search
     # Contact.load_custom_attributes
     @q = Newsletter.ransack(params[:q])
-    @newsletters = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @newsletters = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
 

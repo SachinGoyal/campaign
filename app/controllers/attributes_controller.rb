@@ -14,7 +14,7 @@ class AttributesController < ApplicationController
   # GET /attributes.json
   def index    
     @q = Attribute.ransack(params[:q])
-    @attributes = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @attributes = @q.result.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html
       format.js { @attributes.to_json }

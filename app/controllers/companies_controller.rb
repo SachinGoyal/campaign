@@ -12,7 +12,7 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @q = Company.ransack(params[:q])
-    @companies = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @companies = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
   def search
@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
 
     @q  = Company.search(params[:q])
    # @q.sorts = 'id desc' if @q.sorts.empty?
-    @companies = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @companies = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end
 
