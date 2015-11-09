@@ -19,7 +19,7 @@ class TemplatesController < ApplicationController
   def search
     @attributes = Hash.new()
 
-    User.columns_hash.slice('name', 'content', 'created_at').each do |k,v|
+    Template.columns_hash.slice('name', 'content', 'created_at').each do |k,v|
       @attributes[k] = {value: k, type: v.type.to_s, association: nil}
     end
 
