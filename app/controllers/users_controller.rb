@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def search
     @attributes = Hash.new()
 
-    User.columns_hash.slice('first_name', 'email', 'last_name', 'created_at').each do |k,v|
+    User.columns_hash.slice('first_name', 'email', 'last_name', 'created_at' , 'username' , 'status').each do |k,v|
       @attributes[k] = {value: k, type: v.type.to_s, association: nil}
     end
 
