@@ -6760,3 +6760,11 @@ li.current-page i{color:#1ABB9C;}
 .custom-white-spacer{background-color: #fff; padding-left: 20px; margin-top: 10px;}
 .custom-label-control{margin-top: 6px}
 .custom-spacing-left{margin-left: 10px;}
+.contact_search_for_newsletter{
+    background-color: #39455b;
+    color: #fff;
+}
+.contact_search_for_newsletter:focus{
+    background-color: #39455b;
+    color: #fff;
+}

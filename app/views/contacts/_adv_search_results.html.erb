@@ -1,6 +1,45 @@
-<% @contacts.each do |contact| %>
-	<%= check_box_tag '', contact.email, false, class: 'contact_newsletter' %> <%= contact.email %><br/>
-<% end %>
+<%# @contacts.each do |contact| %>
+	<!-- <%#= check_box_tag '', contact.email, false, class: 'contact_newsletter' %> <%#= contact.email %><br/> -->
+<%# end %>
+
+<%- model_class = Contact -%>
+<div class="custom-table" data-bottom-url='/contacts/edit_all'>
+  <div class="row th">
+    <div class="col-md-2">
+        <input name="" id='select-all' type="checkbox" value="">
+    </div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:email) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:profile_id) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:city) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:country) %></div>
+  </div><!-- row -->
+
+  <% if @contacts.present? %>
+    <div id="contact">
+      <% @contacts.each do |contact| %>
+        <div class="row td">
+	  		<div class="col-md-2">
+        		<%= check_box_tag '', contact.email, false, class: 'contact_newsletter' %>
+    		</div>
+  			
+  			<div class="col-md-2"><%= contact.name %>&nbsp;</div>
+  			<div class="col-md-2 custom-break break_email"><%= contact.email %>&nbsp;</div>
+  			<div class="col-md-2 "><%= contact.profiles.map(&:name).join(", ") %>&nbsp;</div>
+  			<div class="col-md-2 "><%= contact.city %>&nbsp;</div>
+  			<% if contact.country %>
+  				<div class="col-md-2 "><%= contact.country_name %>&nbsp;</div>
+  			<% else %>
+  				<div class="col-md-2 "><%= contact.country %>&nbsp;</div>
+  			<% end %>  			
+		</div>
+      <% end %>
+    </div>
+  <%else%>
+    <h2 class='text-center'><em>No Record Found</em></h2>  
+  <% end %>
+</div>
+
 <script type="text/javascript">	
 	$(".contact_newsletter").change(function(){
 		if ($(this).is(':checked')){
