@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
     Attribute.columns_hash.slice('name').each do |k,v|
       @attributes["interest_areas_#{k}"] = {value: k, type: v.type.to_s, association: nil}
     end
-    @q  = Profile.search(params[:q])
+    @q  = Profile.search(params[:q], auth_object: "own")
     @profiles = @q.result(distinct: true).includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end

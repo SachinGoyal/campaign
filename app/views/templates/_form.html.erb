@@ -8,7 +8,7 @@
           <!-- <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label> -->
           <%= f.label :name, 'Title', :class => "col-sm-3 col-xs-3 control-label" %>
           <div class="col-sm-5 col-xs-5">
-            <%= f.text_field :name, :class => 'form-control' ,:id=>"formGroupInputSmall"%>
+            <%= f.text_field :name, :class => 'form-control', :maxlength => 250 %>
           </div>
         </div>
 
@@ -21,7 +21,7 @@
 
 
         <div class="form-group form-group-sm field">
-          <label class="col-sm-3 col-xs-3 control-label custom-my-label" for="formGroupInputSmall">Status</label>
+          <label class="col-sm-3 col-xs-3 control-label custom-my-label">Status</label>
           <div class="col-sm-9 col-xs-9">
             <%= f.radio_button :status ,1, :checked => @template.new_record? ? true : @template.status ,:id=>"radio01" %>
             <label for="radio01" class="status_spacer"><span></span>Enabled</label>
@@ -32,7 +32,7 @@
        
         <div class="col-lg-4 col-xs-1">
           <div class="form-group form-group-sm">
-          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+          <label class="col-sm-4 col-xs-12 control-label">&nbsp;</label>
           <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
         </div>
       </div>
@@ -62,13 +62,7 @@
 
 
 <script type="text/javascript">
-$(document).ready(function() {
+  $(document).ready(function() {
     $('#summernote').summernote();
   });
-  // $(document).ready(function(){
-
-  //   $('.wysihtml5').each(function(i, elem) {
-  //     $(elem).wysihtml5({'toolbar': {"fa": true ,'blockquote': false, 'html': true}})
-  //   });
-  // })
 </script>
