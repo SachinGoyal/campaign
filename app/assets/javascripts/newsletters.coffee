@@ -14,7 +14,7 @@ jQuery ->
       
   $('form').on 'click', '.contact_search_for_newsletter', (event) ->
     search_params = {q:{}}
-    search_params['q']['auth_object'] = true
+    search_params['q']['auth_object'] = 'newsletter'
     search_params['q']['city_cont'] = $('#q_city_cont').val()
     search_params['q']['country_eq'] = $('#q_country_eq').val()
     a = []
