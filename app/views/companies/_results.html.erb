@@ -10,7 +10,7 @@
     <!-- <div class="col-md-2"><%#= sort_link(@q, :subdomain) %></div> -->
     <div class="col-md-3"><%=sort_link(@q, :free_emails,"Free Emails") %></div>
     <div class="col-md-2"><%=sort_link(@q, :status) %></div>
-    <div class="col-md-3">Date</div>
+    <div class="col-md-3"><%=sort_link(@q, :created_at, 'Date') %></div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
