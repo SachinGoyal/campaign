@@ -37,4 +37,4 @@ jQuery ->
 
   $('.newsletter_form').submit (e) ->
     #e.preventDefault()
-  $('.datepicker').datetimepicker()
+  $('.datepicker').datepicker()

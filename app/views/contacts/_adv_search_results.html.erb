@@ -6,7 +6,7 @@
 <div class="custom-table" data-bottom-url='/contacts/edit_all'>
   <div class="row th">
     <div class="col-md-2">
-        <input name="" id='select-all' type="checkbox" value="">
+        <input name="" id='select-all-newsletters' type="checkbox" value="">
     </div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:email) %></div>
@@ -41,10 +41,21 @@
 </div>
 
 <script type="text/javascript">	
+  $("#select-all-newsletters").change(function () {
+    $(".contact_newsletter").prop('checked',this.checked);
+    if ($(this).is(':checked')){
+      var value = $('.contact_newsletter').map(function (i,cb) { return cb.value} ).get().join(", ");
+      $('.contact_emails').html(value);
+    }
+    else{
+      $('.contact_emails').html('');
+    }  
+  });
+
 	$(".contact_newsletter").change(function(){
 		if ($(this).is(':checked')){
 			if(!$.trim($(".contact_emails").val()))
-	    	    $('.contact_emails').html($(this).val())
+	    	$('.contact_emails').html($(this).val())
 			else
 				$('.contact_emails').append(", " + $(this).val())
 		}
