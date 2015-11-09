@@ -3,6 +3,15 @@
     <ul>
       <!-- <li><i class="fa fa-line-chart"></i> Edit</li> -->
       <% if element.is_a?(User) and element == current_user %>
+      <% elsif element.is_a?(Newsletter) %>
+        <% if element.editable_or_deletable? %>
+          <li><%= link_to [:edit , element] do %>
+            <i class="fa fa-pencil"></i>
+            <span>Edit</span>
+            <% end %>
+          </li>
+        <% end %>  
+
       <% else %>
         <% if element.class.name != 'Template'%>
           <% if can? :update, element    %>
@@ -22,6 +31,9 @@
           <% end %>
         <% end %>
       <% end %>
+      
+      
+
       <% if can? :read , element %> 
         <li><%= link_to element do %>
           <i class="fa fa-eye"></i>
@@ -29,27 +41,37 @@
           <% end %>
         </li>
       <% end %>            
-        <% if can? :delete, element    %>
-          <% if element.is_a?(User) and element == current_user %>
-          <% elsif element.is_a?(Company) %>
-            <li class="custom-delete">
-              <%= link_to element, method: :delete, data: { confirm: 'Are you sure want to delete this company? It will delete associated admin and other data.' } do %>
-                <i class="fa fa-plus"></i>
-                <span>Delete</span>
-              <% end %>
-            <li class="custom-delete">
-          <% else %>
-            <li class="custom-delete">
-              <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                <i class="fa fa-plus"></i>
-                <span>Delete</span>
-              <% end %>
-            </li>
-          <% end %>
-        <% end %>  
-      </li>
+      
 
 
+      <% if can? :delete, element    %>
+        <% if element.is_a?(User) and element == current_user %>
+        <% elsif element.is_a?(Newsletter) %>
+          <% if element.editable_or_deletable? %>
+            <li class="custom-delete">
+            <%= link_to element, method: :delete, data: { confirm: 'Are you sure you want delete campaign and all the associated data?' } do %>
+              <i class="fa fa-plus"></i>
+              <span>Delete</span>
+            <% end %>
+          </li>
+          <% end %>  
+
+        <% elsif element.is_a?(Company) %>
+          <li class="custom-delete">
+            <%= link_to element, method: :delete, data: { confirm: 'Are you sure want to delete this company? It will delete associated admin and other data.' } do %>
+              <i class="fa fa-plus"></i>
+              <span>Delete</span>
+            <% end %>
+          </li>
+        <% else %>
+          <li class="custom-delete">
+            <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="fa fa-plus"></i>
+              <span>Delete</span>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>  
     </ul>
   </div>
 </div>

@@ -7,6 +7,7 @@ class NewslettersController < ApplicationController
   load_and_authorize_resource #cancan
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
   before_action :set_templates, only: [:new, :create, :edit, :update]
+  before_action :check_editable_or_deletable, only: [:edit, :create, :destroy]
   #filter
 
   # GET /newsletters
@@ -100,6 +101,7 @@ class NewslettersController < ApplicationController
   end
 
   private
+
     def set_newsletter
       @newsletter = Newsletter.find(params[:id])
     end
@@ -109,10 +111,16 @@ class NewslettersController < ApplicationController
     end
 
     def updateable_messages
-      "Newsletter deleted successfully. Newsletter with associated data could not be deleted."
+      "Newsletter deleted successfully. Newsletter which have already been sent could not be deleted."
     end
 
     def set_templates
       @templates = Template.active
+    end
+
+    def check_editable_or_deletable
+      unless @newsletter.editable_or_deletable?
+        return redirect_to newsletters_path, :notice => "Cannot edit/delete the newsletter since it has already been sent."
+      end
     end
 end

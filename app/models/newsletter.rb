@@ -49,7 +49,6 @@ class Newsletter < ActiveRecord::Base
   #association
   belongs_to :campaign
   belongs_to :template
-  # has_and_belongs_to_many :profiles, join_table: "profiles_newsletters"
   has_many :newsletter_emails, inverse_of: :newsletter
   has_many :profiles, :through => :newsletter_emails
 
@@ -65,11 +64,24 @@ class Newsletter < ActiveRecord::Base
   end
 
   ransacker :created_at do
-    Arel::Nodes::SqlLiteral.new("date(companies.created_at)")
+    Arel::Nodes::SqlLiteral.new("date(newsletters.created_at)")
   end
   
   def self.ransackable_attributes(auth_object = nil)
     %w(name subject created_at)
+  end
+
+  def sent?
+    if send_at
+      send_at <= Time.now
+    else
+      true
+    end
+  end
+
+  def editable_or_deletable?
+    sent?
+    false
   end
 
   #class methods
