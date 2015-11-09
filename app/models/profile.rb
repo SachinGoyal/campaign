@@ -45,8 +45,6 @@ class Profile < ActiveRecord::Base
   has_many :newsletter_emails
   has_many :newsletters, :through => :newsletter_emails
   #relation
-  
-
 
   def check_contacts
     if contacts.count > 0
@@ -77,7 +75,11 @@ class Profile < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(name created_at)
+    if auth_object == "own"
+      %w(name created_at)
+    else
+      %w(name)
+    end
   end
 
 end

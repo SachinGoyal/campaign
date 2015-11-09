@@ -22,7 +22,7 @@ class  SearchbyDateType
     attr = @attributes[@attribute_select_val]
     switch attr.type
       when 'boolean'
-        @renderDropDownAssociation(null, name_select_value)
+        @renderDropDownBoolean(@name_select_value)
         @selectPredicateDisabled(booleans_association)
       when 'string', 'text'
         if attr.association
@@ -53,6 +53,22 @@ class  SearchbyDateType
     @predicate_select.find('option').each (i) ->
       this.disabled = false if this.value in attributes_enabled
       return true
+
+  renderDropDownBoolean: (name_select_value) ->
+    row_current = @row
+    elem = $('input[name='+ "'" + name_select_value + "'" +']')
+    
+    selected = row_current.find(".box_search").find('input').val()
+    row_current.find(".box_search").hide()
+    row_current.find(".box_select").empty()
+    select_row = $("<select class='form-control'><option value=''>- Select - </option>")    
+    select_row.prop({'name': name_select_value, 'id': elem.attr('id')})    
+    select_row.append("<option value='true'> Enabled </option>")
+    select_row.append("<option value='false'> Disabled </option>")
+    select_row.val(selected)
+    row_current.find(".box_select").append(select_row)
+    row_current.find(".box_select").show()
+
 
   renderDropDownAssociation: (model, name_select_value) ->
     url = "/apis/index?model=#{model}"
