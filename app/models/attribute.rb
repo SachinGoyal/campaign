@@ -50,7 +50,7 @@ class Attribute < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(name)
+    %w(name status created_at)
   end
   # ransacker :id do
   #   Arel.sql(
