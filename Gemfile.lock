@@ -71,8 +71,6 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.4.0)
       railties (>= 3.0)
-    bootstrap3-datetimepicker-rails (4.17.37)
-      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     cancancan (1.13.0)
     carrierwave (0.10.0)
@@ -176,8 +174,6 @@ GEM
     mini_magick (4.3.6)
     mini_portile (0.6.2)
     minitest (5.8.1)
-    momentjs-rails (2.10.6)
-      railties (>= 3.1)
     multi_json (1.11.2)
     nenv (0.2.0)
     nokogiri (1.6.6.2)
@@ -328,7 +324,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-datepicker-rails
-  bootstrap3-datetimepicker-rails (~> 4.17.37)
   cancancan
   carrierwave
   client_side_validations!
@@ -343,7 +338,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick
-  momentjs-rails (>= 2.9.0)
   paranoia
   pg
   pry
