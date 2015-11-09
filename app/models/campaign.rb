@@ -35,13 +35,13 @@ class Campaign < ActiveRecord::Base
                    presence: true, 
                    format: { with: /\A[a-zA-Z0-9 ]+\z/, 
                              message: 'Can only contain alphanumeric and space.'},
-                   length: {in: 2..155}
+                   length: {in: 2..150}
 
   validates :description, 
                    presence: true, 
                    format: { with: /\A[a-zA-Z0-9 ]+\z/, 
                              message: 'Can only contain alphanumeric and space.'},
-                   length: {in: 2..155}
+                   length: {in: 2..255}
   validates_inclusion_of :status, in: [true, false]
   #validation
 
@@ -52,6 +52,13 @@ class Campaign < ActiveRecord::Base
   #delegate
   delegate :username, to: :user, prefix: true
   #delegate
+
+  #callbacks
+  before_destroy :check_newsletter
+  #callbacks
+
+  def check_newsletter
+  end
 
   #class methods
   class << self
@@ -69,5 +76,4 @@ class Campaign < ActiveRecord::Base
     end
   end
   #class methods
-
 end
