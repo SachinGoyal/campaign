@@ -29,6 +29,7 @@ end
 Function.where.not(agroup: 'company').each do |f|
   Access.create(:role_id => 2, :function_id => f.id)
 end
+Setting.create(:site_title => "Sperant", :admin_footer_content => "Sperant", :free_emails => 10, :admin_email => "admin@sperant.com")
 # # user.add_role :admin
 # Role.destroy_all
 # #ActiveRecord::Base.connection.reset_pk_sequence!('roles')
