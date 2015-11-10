@@ -20,7 +20,7 @@
 
 <div class="greyBg">
 
-  <%= search_form_for @search, url: search_users_path, method: :post do |f| %>
+  <%= search_form_for @q, url: search_users_path, method: :post do |f| %>
     <%= f.grouping_fields do |c| %>
       <%= render "grouping_fields", f: c %>
     <% end %>

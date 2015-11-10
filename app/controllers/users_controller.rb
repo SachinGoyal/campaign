@@ -23,9 +23,9 @@ class UsersController < ApplicationController
       @attributes[k] = {value: k, type: v.type.to_s, association: nil}
     end
 
-    @search = User.search(params[:q])
-    @users = @search.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
-    @search.build_condition    
+    @q = User.search(params[:q])
+    @users = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @q.build_condition    
     @users = @users.where.not(id: 1)
   end
 
