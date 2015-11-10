@@ -33,6 +33,11 @@
       <% end %>
       
       <% if element.is_a?(Newsletter) and can?(:create , element) and element.send_at.nil? %> 
+        <li><%= link_to stats_campaigns_path(newsletter_id: element.id),  method: :post do %>
+          <i class="fa fa-line-chart"></i>
+          <span>View Stat</span>
+          <% end %>
+        </li>
         <li><%= link_to send_now_newsletter_path(element),  method: :post do %>
           <i class="fa fa-eye"></i>
           <span>Send Now</span>
