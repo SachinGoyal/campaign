@@ -1,0 +1,222 @@
+<script type="text/javascript">
+        var noBorder = { 
+        states:{
+            hover:{
+                halo: {
+                    size: 1
+                }     
+            }
+        }
+    };
+    $(function() {
+        Highcharts.setOptions({
+            colors: ['#8edce7', '#e8ebeb']
+        });
+
+        // Create the chart for completion
+        var chart_completion = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container1',
+                type: 'pie',
+                margin: [0,0,0,0],
+                height: 100,
+                width: 100
+
+            },
+            tooltip: {
+                enabled: false,
+            },
+            plotOptions: {
+                pie: {
+                    slicedOffset: 0,
+                    size: '100%',
+                    dataLabels: {
+                        enabled: false
+                    }
+                },
+                series: noBorder
+            }, 
+            title: {
+                text: 'Sent',
+                align: 'center',
+                verticalAlign: 'middle',
+                style: {
+                    fontSize: '9.5px'
+                }
+                
+            },      
+            credits: {
+               enabled: false
+            },
+            series: [{
+                name: 'Browsers',
+                data: [["MSIE",1.00],[,99.00]],
+                innerSize: '80%',
+                showInLegend:false,
+                dataLabels: {
+                    enabled: false
+                },
+                states:{
+                    hover: {
+                        enabled: false
+                    }
+                },
+                point : {
+                    events: {
+                        mouseOver: function(){
+                           this.oldTitle = chart_completion.options.title.text;
+
+                           chart_completion.setTitle({
+                                text: 'New title '
+                            });
+                           
+                        },
+                        mouseOut: function(){
+                            chart_completion.setTitle({
+                                text: this.oldTitle
+                            });
+                        }
+                    }
+                }
+            }]
+        });
+        
+
+
+
+        Highcharts.setOptions({
+            colors: ['#f07173', '#e8ebeb']
+        });
+
+        // Create the chart for time
+        var chart_time = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container2',
+                type: 'pie',
+                margin: 0,
+                 height: 100,
+                width: 100
+            },
+
+            plotOptions: {
+                pie: {
+                        slicedOffset: 0,
+                        size: '100%',
+                        dataLabels: {
+                        enabled: false
+                    }
+                },
+                series : noBorder
+            },
+            tooltip: {
+                enabled: false,
+            },
+
+            title: {
+                text: 'Hours',
+                align: 'center',
+                verticalAlign: 'middle',
+                style: {
+                    fontSize: '9.5px'
+                }
+                
+            },
+            
+            credits: {
+               enabled: false
+            },
+            series: [{
+                name: 'Browsers',
+                data: [["MSIE",10],[,2]],
+                innerSize: '80%',
+                showInLegend:false,
+                dataLabels: {
+                    enabled: false
+                },
+                states:{
+                    hover: {
+                        enabled: false
+                    }
+                }
+            }]
+        });
+      
+        Highcharts.setOptions({
+            colors: ['#8adfb9', '#e8ebeb']
+        });
+
+        // Create the chart for Budget
+        var chart_budget = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container3',
+                type: 'pie',
+                margin: 0,
+                 height: 100,
+                width: 100
+            },
+
+            plotOptions: {
+            pie: {
+                    slicedOffset: 0,
+                    size: '100%',
+                    dataLabels: {
+                        enabled: false
+                    }
+                },
+                series: noBorder
+            },
+            title: {
+                text: 'Budget',
+                align: 'center',
+                verticalAlign: 'middle',
+                style: {
+                    fontSize: '9.5px'
+                } 
+            },
+            tooltip: {
+                enabled: false,
+                animation: false,
+                backgroundColor: null
+            },
+
+            credits: {
+               enabled: false
+            },
+            series: [{
+                name: 'Browsers',
+                data: [["MSIE",10],[,2]],
+                innerSize: '80%',
+                showInLegend:false,
+                dataLabels: {
+                    enabled: false
+                },
+                states:{
+                    hover: {
+                        enabled: false
+                    }
+                }
+            }]
+        });
+    });
+</script>
+<%= form_for @campaign, :url => {:controller => "campaigns", :action => "reports"},:method => :get do |f| %>
+
+  <div class="row">
+	<div class="col-md-12">
+		<div class="col-md-8">
+		<label class="col-xs-2 custom-label-control control-label">Repots <i class="fa fa-chevron-right custom-spacing-left"></i></label>
+		<div class="col-xs-5">
+		<%= collection_select(:report, :campaign_id, Campaign.active, :id, :name, {:prompt => 'select a campaign'}, {:class => 'form-control required'}) %>
+		</div><!-- col-xs-5 -->
+		<div class="col-xs-5" id= 'campaign-newsletter'>
+			<select class="form-control"><option>select Newsletter</option></select>
+		</div><!-- col-xs-5 -->
+		</div><!-- col-md-8 -->
+	</div>
+  </div><!-- row -->
+  <div class="custom-white-spacer">
+    <div id="container1" style="display:inline-block;"></div>
+    <div id="container2" style="display:inline-block;"></div>
+    <div id="container3" style="display:inline-block;"></div>
+  </div>
+<% end %>

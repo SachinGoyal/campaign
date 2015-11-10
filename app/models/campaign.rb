@@ -17,7 +17,7 @@
 #
 #  index_campaigns_on_company_id  (company_id)
 #
- 
+  
 class Campaign < ActiveRecord::Base
 
   acts_as_paranoid # Soft Delete
@@ -56,6 +56,16 @@ class Campaign < ActiveRecord::Base
   #delegate
   delegate :username, to: :user, prefix: true
   #delegate
+
+  #ransack
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(campaigns.created_at)")
+  end
+  
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w(name  status created_at)
+  end
+  #ransack
 
 
   def check_newsletter
