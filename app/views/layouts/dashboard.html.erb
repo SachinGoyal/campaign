@@ -121,7 +121,7 @@
                                     <span>Users</span>
                                   <% end %></li>
                                 <% end %>
-                                 <li><%= link_to stats_campaigns_path do %>
+                                 <li><%= link_to stats_campaigns_path(newsletter_id: nil),  method: :post do %>
                                      <i class="fa fa-line-chart"></i>
                                     <span>Stats</span>
                                   <% end %></li>
