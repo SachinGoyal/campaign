@@ -12,7 +12,8 @@
   <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
 <% end %>
 <% if can? :read, Contact %>
-  <%= link_to contacts_path(format: "csv") do %>
+  <%#= link_to contacts_path(format: "csv") do %>
+  <%= link_to contacts_path(format: "xls") do %>
     <span>Export Contacts</span>
     <i class="fa fa-file-excel-o"></i>
   <% end %>
