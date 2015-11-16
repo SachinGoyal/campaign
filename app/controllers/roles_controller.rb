@@ -72,7 +72,7 @@ class RolesController < ApplicationController
   # GET /contacts/edit_all
   def edit_all
     Role.edit_all(params[:group_ids], params[:get_action])  
-    @roles = Role.where(editable: true)
+    @roles = Role.where(editable: true).paginate(:page => params[:page], :per_page => 10)
     @functions = Function.all.group_by(&:agroup)
     action = params[:get_action].strip.capitalize
     @message = updateable_messages(action)

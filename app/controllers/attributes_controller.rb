@@ -38,7 +38,7 @@ class AttributesController < ApplicationController
   # GET /profiles/edit_all
   def edit_all
     Attribute.edit_all(params[:group_ids], params[:get_action])
-    @attributes = Attribute.all
+    @attributes = Attribute.all.paginate(:page => params[:page], :per_page => 10)
     action = params[:get_action].strip.capitalize
     @message = updateable_messages(action)
   end

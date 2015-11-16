@@ -61,7 +61,7 @@ class CampaignsController < ApplicationController
 
   def edit_all
     Campaign.edit_all(params[:group_ids], params[:get_action])  
-    @campaigns = Campaign.all
+    @campaigns = Campaign.all.paginate(:page => params[:page], :per_page => 10)
     action = params[:get_action].strip.capitalize
     @message = updateable_messages(action)
   end
