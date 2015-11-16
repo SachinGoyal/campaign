@@ -28,8 +28,10 @@ class ProfilesController < ApplicationController
     Attribute.columns_hash.slice('name').each do |k,v|
       @attributes["interest_areas_#{k}"] = {value: k, type: v.type.to_s, association: nil}
     end
+
     @q  = Profile.search(params[:q])
     @profiles = @q.result.includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+
     @q.build_condition    
   end
 
@@ -66,7 +68,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/edit_all
   def edit_all
     Profile.edit_all(params[:group_ids], params[:get_action])  
-    @profiles = Profile.all
+    @profiles = Profile.all.paginate(:page => params[:page], :per_page => 10)
     action = params[:get_action].strip.capitalize
     @message = updateable_messages(action)
   end

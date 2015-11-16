@@ -38,10 +38,10 @@ class Campaign < ActiveRecord::Base
                    length: {in: 2..150}
 
   validates :description, 
-                   presence: true, 
-                   format: { with: /\A[a-zA-Z0-9 ]+\z/, 
-                             message: 'Can only contain alphanumeric and space.'},
-                   length: {in: 2..255}
+                   presence: true#, 
+                   # format: { with: /\A[a-zA-Z0-9 ]+\z/, 
+                   #           message: 'Can only contain alphanumeric and space.'},
+                   # length: {in: 2..255}
   validates_inclusion_of :status, in: [true, false]
   #validation
 
@@ -84,7 +84,7 @@ class Campaign < ActiveRecord::Base
         if action == 'delete'
           campaign.destroy
         else
-          status = action == 'enable' ? 1 : 0
+          status = action == 'enable' ? true : false
           campaign.update(:status => status )
         end
       end

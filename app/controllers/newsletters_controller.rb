@@ -47,14 +47,13 @@ class NewslettersController < ApplicationController
 
   def edit_all
     Newsletter.edit_all(params[:group_ids], params[:get_action])  
-    @newsletters = Newsletter.active
+    @newsletters = Newsletter.all.paginate(:page => params[:page], :per_page => 10)
     action = params[:get_action].strip.capitalize
     @message = updateable_messages
   end
 
   def create
     @newsletter = Newsletter.new(newsletter_params)
-    @templates = Template.active
 
     respond_to do |format|
       if @newsletter.save
@@ -80,7 +79,6 @@ class NewslettersController < ApplicationController
   end
 
   def update
-    @templates = Template.active
     respond_to do |format|
       if @newsletter.update(newsletter_params)
         format.html { redirect_to @newsletter, notice: 'Newsletter was successfully updated.' }

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require datetimepicker
 //= require bootstrap-datepicker
 //= require summernote
 //= require highcharts

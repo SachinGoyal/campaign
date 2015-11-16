@@ -66,7 +66,7 @@ class TemplatesController < ApplicationController
 
   def edit_all
     Template.edit_all(params[:group_ids], params[:get_action])  
-    @templates = Template.all
+    @templates = Template.all.paginate(:page => params[:page], :per_page => 10)
     action = params[:get_action].strip.capitalize
     @message = updateable_messages(action)
   end
