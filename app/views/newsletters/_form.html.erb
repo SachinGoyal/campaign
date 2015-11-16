@@ -164,9 +164,9 @@
               <input id="radio02" name="" type="radio" value="" class="send_at_toggle">
               <label for="radio02"><span></span>Auto Sent</label>
               <% if @newsletter.send_at %>
-                <%= f.text_field :send_at, :class => "form-control datepicker" %>
+                <%= f.text_field :send_at, :class => "form-control datetimepicker" %>
               <% else %>
-                <%= f.text_field :send_at, :class => "form-control datepicker", :style => "display:none" %>
+                <%= f.text_field :send_at, :class => "form-control datetimepicker", :style => "display:none" %>
               <% end %>              
             </div>
           </div>

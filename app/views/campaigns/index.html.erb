@@ -3,18 +3,19 @@
     <div class="title_left"><h2>Campaign list</h2></div><!-- title_left -->
   </div>
      
+  <div class="col-xs-8 form-group pull-right top_search">     
+          <% if can? :search, Campaign %>      
+            <%= render 'shared/keyword_search', :condition => :name_cont %>      
+            <div class="advance-search">
+              <%= link_to search_campaigns_path, :title => "Advance Search" do %>
+               <i class="fa fa-dot-circle-o"></i>
+              <% end %>
+            </div>
+          <% end %>
 
-      <div class="col-xs-8 form-group pull-right top_search">
-       
-          <%= render 'shared/keyword_search', :condition => :name_cont %>
-       
-        <div class="custom-add"><%= link_to new_campaign_path do %><i class="fa fa-plus"></i><% end %></div>
-
-      </div>
-
-    
-            
-  
+    <%= render 'shared/keyword_search', :condition => :name_cont %>   
+    <div class="custom-add"><%= link_to new_campaign_path do %><i class="fa fa-plus"></i><% end %></div>
+  </div>
 </div><!--row-->
 
 
@@ -37,25 +38,3 @@
   <%= render 'shared/bootam_action_link', element: Campaign %>
   <%= will_paginate @campaigns, renderer: BootstrapPagination::Rails %>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
