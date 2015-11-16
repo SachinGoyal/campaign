@@ -84,7 +84,7 @@ class Newsletter < ActiveRecord::Base
 
   def editable_or_deletable?
     sent?
-    false
+    # false
   end
 
   #class methods
@@ -104,4 +104,17 @@ class Newsletter < ActiveRecord::Base
   def all_emails
     newsletter_emails.map(&:emails).flatten.uniq.join(", ")
   end
+
+  ransacker :created_at do
+    Arel::Nodes::SqlLiteral.new("date(newsletters.created_at)")
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    if auth_object == "own"
+      %w(name created_at subject)
+    else
+      %w(name)
+    end
+  end
+
 end

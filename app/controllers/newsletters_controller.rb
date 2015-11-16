@@ -13,15 +13,21 @@ class NewslettersController < ApplicationController
   # GET /newsletters
   # GET /newsletters.json
   def index
-    @q = Newsletter.ransack(params[:q])
-    @newsletters = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @q = Newsletter.ransack(params[:q], auth_object: 'own')
+    @newsletters = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
 
   def search
-    # Contact.load_custom_attributes
-    @q = Newsletter.ransack(params[:q])
-    @newsletters = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @attributes = Hash.new()
+
+    Newsletter.columns_hash.slice('name', 'subject', 'created_at').each do |k,v|
+      @attributes[k] = {value: k, type: v.type.to_s, association: nil}
+    end
+
+    @q = Newsletter.search(params[:q], auth_object: 'own')
+    @newsletters = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @q.build_condition    
   end
 
 

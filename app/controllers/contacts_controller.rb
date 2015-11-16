@@ -14,9 +14,7 @@ class ContactsController < ApplicationController
   end  
  
   def search
-    association = Hash.new()
-    # Contact.reflect_on_all_associations(:belongs_to).each { |a| association[a.foreign_key.to_s] = a.class_name }
-    
+    association = Hash.new()    
     @attributes = Hash.new()
 
     Contact.columns_hash.slice('first_name', 'email', 'last_name', 'created_at').each do |k,v|
@@ -27,21 +25,21 @@ class ContactsController < ApplicationController
       @attributes["interest_areas_#{k}"] = {value: k, type: v.type.to_s, association: nil}
     end
     @q  = Contact.search(params[:q])
-    @contacts = @q.result(distinct: true).includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @contacts = @q.result.includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end
 
   # GET /contacts
   # GET /contacts.json
   def index
-    if params[:q] and params[:q][:auth_object].present?
-      @q = Contact.active.ransack(params[:q], auth_object: 'dummy')
-      @contacts = @q.result(distinct: true)       
+    if params[:q] and params[:q][:auth_object] == "newsletter"
+      @q = Contact.active.ransack(params[:q], auth_object: 'newsletter')
+      @contacts = @q.result
     else
       @q = Contact.active.ransack(params[:q])
-      @contacts = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)       
+      @contacts = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)       
     end    
-    contacts = @q.result(distinct: true)
+    contacts = @q.result
     
     respond_to do |format|
       format.html 

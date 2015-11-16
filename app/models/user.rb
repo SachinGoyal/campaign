@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    super & %w(username email created_at)
+    super & %w(username email created_at status)
   end
   #ransack
 

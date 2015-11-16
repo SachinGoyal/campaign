@@ -11,8 +11,8 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @q = Profile.ransack(params[:q])
-    @profiles = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @q = Profile.ransack(params[:q], auth_object: "own")
+    @profiles = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
   end
 
   def search
@@ -28,8 +28,10 @@ class ProfilesController < ApplicationController
     Attribute.columns_hash.slice('name').each do |k,v|
       @attributes["interest_areas_#{k}"] = {value: k, type: v.type.to_s, association: nil}
     end
-    @q  = Profile.search(params[:q], auth_object: "own")
-    @profiles = @q.result(distinct: true).includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+
+    @q  = Profile.search(params[:q])
+    @profiles = @q.result.includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+
     @q.build_condition    
   end
 

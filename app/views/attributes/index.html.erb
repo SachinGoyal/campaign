@@ -22,17 +22,17 @@
         <input name="" id='select-all' type="checkbox" value="">
       <% end %>
     </div>
-    <div class="col-md-4">Attribute Name</div>
+    <div class="col-md-2"><%=sort_link(@q, :name, 'Attribute Name')%></div>
     <!-- <div class="col-md-3"><%#= model_class.human_attribute_name(:description) %></div> -->
-    <div class="col-md-3"><%= model_class.human_attribute_name(:status) %></div>
-    <div class="col-md-3">Date</div>
-    <div class="col-md-1">&nbsp;</div>
+    <div class="col-md-1"><%=sort_link(@q, :status)%></div>
+    <div class="col-md-3"><%=sort_link(@q, :created_at, 'Date')%></div>
+    <div class="col-md-2">&nbsp;</div>
   </div><!-- row -->
 
   <% if @attributes.present? %>
-  <div id="attribute">
-   <%= render @attributes %>
-  </div>
+    <div id="attribute">
+     <%= render @attributes %>
+    </div>
   <%else%>
    <h2 class='text-center'><em>No Record Found</em></h2>  
   <% end %>

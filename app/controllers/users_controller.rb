@@ -13,19 +13,19 @@ class UsersController < ApplicationController
   
   def index
     @q = User.where.not(id: 1).ransack(params[:q])
-    @users = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @users = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
   def search
     @attributes = Hash.new()
 
-    User.columns_hash.slice('first_name', 'email', 'last_name', 'created_at').each do |k,v|
+    User.columns_hash.slice('first_name', 'email', 'last_name', 'created_at' , 'username' , 'status').each do |k,v|
       @attributes[k] = {value: k, type: v.type.to_s, association: nil}
     end
 
-    @search = User.search(params[:q])
-    @users = @search.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
-    @search.build_condition    
+    @q = User.search(params[:q])
+    @users = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @q.build_condition    
     @users = @users.where.not(id: 1)
   end
 

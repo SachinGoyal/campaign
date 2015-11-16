@@ -13,18 +13,18 @@ class TemplatesController < ApplicationController
   # GET /templates.json
   def index
     @q = Template.ransack(params[:q])
-    @templates = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @templates = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
   end
 
   def search
     @attributes = Hash.new()
 
-    User.columns_hash.slice('name', 'content', 'created_at').each do |k,v|
+    Template.columns_hash.slice('name', 'content', 'created_at').each do |k,v|
       @attributes[k] = {value: k, type: v.type.to_s, association: nil}
     end
 
     @q  = Template.search(params[:q])
-    @templates = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @templates = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end
 

@@ -40,11 +40,11 @@ Rails.application.routes.draw do
      post :import 
     end
   end
-  resources :campaigns, concerns: :edit_all do
+  resources :campaigns, concerns: [:edit_all,:search] do
     collection do
-     # get :reports
       get :select_newsletter
-      get "reports" , to: "campaigns#reports"
+      get :reports
+      post :stats
     end
   end
   resources :attributes, concerns: :edit_all

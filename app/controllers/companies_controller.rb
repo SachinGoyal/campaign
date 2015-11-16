@@ -12,19 +12,19 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @q = Company.ransack(params[:q])
-    @companies = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @companies = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
   def search
     @attributes = Hash.new()
 
-    User.columns_hash.slice('name', 'subdomain', 'created_at', 'status').each do |k,v|
+    Company.columns_hash.slice('name', 'subdomain', 'created_at', 'status' , 'free_emails').each do |k,v|
       @attributes[k] = {value: k, type: v.type.to_s, association: nil}
     end
 
     @q  = Company.search(params[:q])
    # @q.sorts = 'id desc' if @q.sorts.empty?
-    @companies = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @companies = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
   end
 

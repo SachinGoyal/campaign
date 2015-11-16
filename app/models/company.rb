@@ -66,7 +66,7 @@ class Company < ActiveRecord::Base
   end
   
   def self.ransackable_attributes(auth_object = nil)
-    super & %w(name subdomain created_at status)
+    super & %w(name subdomain created_at status free_emails)
   end
   #ransack
 

@@ -13,15 +13,36 @@ class CampaignsController < ApplicationController
   # GET /campaigns.json
   def index
     @q = Campaign.ransack(params[:q])
-    @campaigns = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @campaigns = @q.result.paginate(:page => params[:page], :per_page => 10)
+  end
+
+  def search
+    @attributes = Hash.new()
+
+    Campaign.columns_hash.slice('name','created_at', 'status').each do |k,v|
+      @attributes[k] = {value: k, type: v.type.to_s, association: nil}
+    end
+
+    @q  = Campaign.search(params[:q])
+   # @q.sorts = 'id desc' if @q.sorts.empty?
+    @campaigns = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @q.build_condition    
   end
 
   def reports
     @campaign = Campaign.first
   end
 
+  def stats
+    @campaign = Campaign.first
+  end
+
   def select_newsletter
-    @newsletters = Campaign.find(params[:campaign_id]).newsletters
+    begin
+      @newsletters = Campaign.find(params[:campaign_id]).newsletters
+    rescue
+      @newsletters = nil
+    end 
   end
 
   # GET /campaigns/1

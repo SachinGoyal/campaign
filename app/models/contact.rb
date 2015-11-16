@@ -87,33 +87,13 @@ class Contact < ActiveRecord::Base
     end
   end
 
-  # scope :matches_all_interest_areas, -> *interest_area_ids { where(matches_all_attributes_arel(interest_area_ids)) }
-
-  # def self.matches_all_interest_areas_arel(interest_area_ids)
-  #   contacts = Arel::Table.new(:contacts)
-  #   interest_areas = Arel::Table.new(:attributes)
-  #   contacts_attributes = Arel::Table.new(:contacts_attributes)
-
-  #   contacts[:id].in(
-  #     contacts.project(contacts[:id])
-  #       .join(contacts_attributes).on(contacts[:id].eq(contacts_attributes[:contact_id]))
-  #       .join(interest_areas).on(contacts_attributes[:attribute_id].eq(interest_areas[:id]))
-  #       .where(interest_areas[:id].in(interest_area_ids))
-  #       .group(interest_areas[:id])
-  #       .having(interest_areas[:id].count.eq(interest_area_ids.length))
-  #   )
-  # end
-
-  # def self.ransackable_scopes(auth_object = nil)
-  #   super + %w(matches_all_interest_areas)
-  # end
-
   def self.ransackable_attributes(auth_object = nil)
-    # binding.pry
-    if auth_object
+    if auth_object == "newsletter"
       %w(gender country city interest_areas_id)
+    elsif auth_object == "own"
+      %w(first_name last_name email created_at status)
     else
-      %w(first_name last_name email created_at)
+      %w(first_name last_name email created_at status)
     end
   end
 

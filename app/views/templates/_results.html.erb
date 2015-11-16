@@ -2,8 +2,8 @@
 <div class="custom-table" data-bottom-url='/templates/edit_all'>
   <div class="row th">
     <div class="col-md-1"><input name="" id='select-all' type="checkbox" value=""></div>
-    <div class="col-md-8">Name</div>
-    <div class="col-md-2">Date</div>
+    <div class="col-md-8"><%=sort_link(@q, :name, 'Name')%></div>
+    <div class="col-md-2"><%=sort_link(@q, :created_at, 'Date')%></div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
   <% if true %>
