@@ -23,8 +23,13 @@
         title: {
             text: 'Newsletter'
         },
+
+        credits: {
+          enabled: false
+        },
+
         xAxis: {
-            categories:  ["Sent", "Bounsed", "Opened", "Deleted"]
+            categories:  ["Total Sent Email", "Bounsed Email", "Efective Sent Emails", "Deleted Emails" , "Mobile Emails", "Tab Emails", "Desktop Emails", "Viewed Emails", "Clicked Emails" , "Shared Emails"]
         },
         yAxis: {
             title: {
@@ -34,13 +39,13 @@
         series: [
            <%#Record.all.each do |record|%>
            {
+            showInLegend: false,  
             name: 'Newsletter',
-            data: [32,34,43,43 ]
+            data: [32,34,43,43,35,23,12,54,45,54 ],
+            color: '#1ABB9C',
+            pointWidth: 35
+
         },
-        {
-            name: 'Newsletter',
-            data: [32,34,43,43 ]
-        }
         <%# end %>
         ]
     });
