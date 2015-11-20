@@ -61,21 +61,21 @@
                                 <% if can? :read, Campaign %>
                                   <li class="<%= "current-page" if params[:controller] == "campaigns" %>"><%= link_to campaigns_path do %>
                                      <i class="fa fa-bullhorn"></i>
-                                    <span>Campaign</span>
+                                    <span><%= t("menu.campaign")%></span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Newsletter %>
                                   <li class="<%= "current-page" if params[:controller] == "newsletters" %>"><%= link_to newsletters_path do %>
                                      <i class="fa fa-newspaper-o"></i>
-                                    <span>Newsletter</span>
+                                    <span><%= t("menu.newsletter")%></span>
                                   <% end %></li>
                                 <% end %>
                                 
                                 <% if can? :read, Template %>
                                   <li class="<%= "current-page" if params[:controller] == "templates" %>"><%= link_to templates_path do %>
                                      <i class="fa fa-clone"></i>
-                                    <span>Templates</span>
+                                    <span><%= t("menu.template")%></span>
                                   <% end %></li>
                                 <% end %>
 
@@ -83,56 +83,56 @@
                                   <li class="<%= "current-page" if params[:controller] == "profiles" %>">
                                   <%= link_to profiles_path do %>
                                      <i class="fa fa-users"></i>
-                                    <span>Profile</span>
+                                    <span><%= t("menu.profile")%></span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Contact %>
                                   <li class="<%= "current-page" if params[:controller] == "contacts" %>"><%= link_to contacts_path do %>
                                      <i class="fa fa-tty"></i>
-                                    <span>Contacts</span>
+                                    <span><%= t("menu.contact")%></span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Role %>
                                   <li class="<%= "current-page" if params[:controller] == "roles" %>"><%= link_to roles_path do %>
                                      <i class="fa fa-key"></i>
-                                    <span>Roles</span>
+                                    <span><%= t("menu.role")%></span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Attribute %>
                                   <li class="<%= "current-page" if params[:controller] == "attributes" %>"><%= link_to attributes_path do %>
                                      <i class="fa fa-attributes"></i>
-                                    <span>Attributes</span>
+                                    <span><%= t("menu.attribute")%></span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Company %>
                                   <li class="<%= "current-page" if params[:controller] == "companies" %>"><%= link_to companies_path do %>
                                      <i class="fa fa-building-o"></i>
-                                    <span>Companies</span>
+                                    <span><%= t("menu.company")%></span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, User %>
                                   <li class="<%= "current-page" if params[:controller] == "users" %>"><%= link_to users_path do %>
                                      <i class="fa fa-user"></i>
-                                    <span>Users</span>
+                                    <span><%= t("menu.user")%></span>
                                   <% end %></li>
                                 <% end %>
                                  <li><%= link_to stats_campaigns_path(newsletter_id: nil),  method: :post do %>
                                      <i class="fa fa-line-chart"></i>
-                                    <span>Stats</span>
+                                    <span><%= t("menu.stat")%></span>
                                   <% end %></li>
                                   <li><%= link_to reports_campaigns_path do %>
                                      <i class="fa fa-pie-chart"></i>
-                                    <span>Reports</span>
+                                    <span><%= t("menu.report")%></span>
                                   <% end %></li>
 
                                   <li><%= link_to setting_path(Setting.first) do %>
                                      <i class="fa fa-cog"></i>
-                                    <span>Settings</span>
+                                    <span><%= t("menu.setting")%></span>
                                   <% end %></li>
                             </ul>
                         </div>

@@ -1,0 +1,62 @@
+es-PE:
+  simple_form:
+    labels:
+      project_setting:
+        igv: IGV(%)
+        validity: "Tiempo de vida de una proforma (días):"
+        unit_type_ids: Filtro para el progreso de unidades vendidas por tipo de unidad
+        reserve_expired: "Cuando la reserva vence, deshabilitarla de manera:"
+        reserve_day: "Tiempo predeterminado para la duración de una reserva:"
+        reserve_day_modified: "Permitir que el usuario defina la duración de la reserva:"
+        separation_expire: "Tiempo de vida del proceso de separación (días):"
+        sale_expire: "Tiempo de vida del proceso de venta (días):"
+        independent_expire: "Tiempo de vida del proceso de aprobación (días):"
+        process_custom_expire: "Tiempo de vida del proceso de personalización (días):"
+        cancel_expire: "Tiempo de vida del proceso de anulación (días):"
+        discount: 'Límite de Descuento para las proformas:'
+        percentage_discount: 'Descuento tipo porcentaje:'
+        warranty_years: 'Tiempo de garantía:'
+    options:
+      frecuency_period:
+        name:
+          second: Segundos
+          minutes: Minutos
+          hour: Hora
+          day: Dia
+          week: Semana
+          month: Mes
+
+      client:
+        client_status:
+          buyer: "something"
+          interested: "something something"
+          new: "algo"
+          owner: "algo mas"
+          pontencial: "potencial"
+          male: "malo"
+          female: "femenino"
+
+    "yes": 'Si'
+    "no": 'No'
+    required:
+      text: 'requerido'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Por favor revise los siguiente problemas  :"
+    # Labels and hints examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+

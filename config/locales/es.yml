@@ -1,0 +1,199 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  log-out: "Cerrar Sesion"
+  search: "Buscar"
+  cancan:
+    default_message: "Usted no está autorizado para acceder a esta página."
+  unauthorized:
+    default: Usted no está autorizado para acceder a esta página.
+  actions:
+    select_all: "Seleccionar todo"
+    metraje_list_approved: "Aprobar Lista de Metraje"
+  ransack:
+    any: 'O'
+    all: 'Y'
+    asc: "ascending"
+    desc: "descending"
+    predicates:
+      lt: "Menor que"
+      lteq: "Menor igual que"
+      eq: "Igual"
+      gteq: "Mayor igual que"
+      gt: "Mayor que"
+      cont: "Contiene"
+      not_cont: "No contiene"
+      blank: "Está en blanco"
+      present: "Está presente"
+      null: "Es nulo"
+      not_null: "No es nulo"
+      not_eq: 'No igual a'
+      true: "Es verdadero"
+      false: "Es falso"
+      in: "En"
+      not_in: "No en"
+      start: "Inicia con"
+      not_start: "No inicia con"
+      end: "Termina con"
+      not_end: "No termina con"
+      date_eq: "Igual(Fecha)"
+      date_not_eq: 'No igual a(Fecha)'
+      date_lt: "Menor que(Fecha)"
+      date_lteq: "Menor igual que(Fecha)"
+      date_eq: "Igual(Fecha)"
+      date_gteq: "Mayor igual que(Fecha)"
+      date_gt: "Mayor que(Fecha)"
+  buttons:
+    login: "Entrar"
+    save: "Guardar"
+    send: "Enviar"
+    cancel: "Cancelar"
+    messages: "Mensajes"
+    profile: "Perfil"
+    edit: "Editar"
+    delete: "Eliminar"
+    new: "Nuevo"
+    show: "Ver"
+    back: "Volver"
+    select: "Seleccionar"
+    list_view: "Vista de lista"
+    import: "Importar desde Excel"
+    export: "Exportar a Excel"
+    pay_commissions: "Pagar commisíon"
+    send: "Enviar"
+
+  links:
+    signin: "Iniciar sesión"
+    forgotpass: "¿Olvidó su contraseña?"
+  asearch:
+    addcondition: "Agregar condición"
+    results: "Resultados encontrados"
+    noresults: "No hay ningun resultado para su busqueda"
+    breadcrumb: "Búsqueda Avanzada"
+    select_field: "Seleccione un campo"
+  menu:
+    campaign: Campañas
+    newsletter: Newsletter
+    template: Plantilla
+    profile: profile
+    contact: Contact
+    role: Role
+    attribute: Attribute
+    company:  Company
+    user: Usuario   
+    stat: Stat
+    report: Report  
+    setting: Setting
+  submenus:
+    metraje: "Lista de Metraje"
+    plans: "Planos"
+    price_list: "Lista de Precios"
+
+  activerecord:
+    units_reserved: "Reservas"
+    errors:
+      messages:
+        record_invalid: "La Validación falló: %{errors}"
+      models:
+        user:
+          attributes:
+            email:
+              taken: "ya está en uso"
+        zone:
+          attributes:
+            name:
+              taken: "ya está en uso"
+    models:
+      campaign: Campañas
+      newsletter: Newsletter
+      template: Plantilla
+      profile: profile
+      contact: Contact
+      role: Role
+      attribute: Attribute
+      company:  Company
+      user: Usuario     
+      setting: Setting
+    attributes:
+      campaign:
+        name: "Nombre"
+        description: "Descripción"
+        status: 
+      newsletter:
+        name: "Nombre"
+      template:
+        name: "Nombre"
+        content:
+        status:
+      profile:
+        name: "Nombre"
+        status:
+      contact:
+        first_name: "Nombre"
+        last_name: "Nombre"
+        email:
+        status:
+        city:
+        country:
+        gender:
+      role:
+        name: "Nombre"
+      attribute:
+        name: "Nombre"
+        description: "Descripción"
+      company: 
+        name: "Nombre"
+        free_emails:
+        subdomain:
+        status:
+      user:   
+        username:
+        email:
+        password:
+        status:  
+      role:
+        name: "Nombre"
+      setting:
+        site_title:
+        free_emails:
+        admin_email:
+        admin_footer_content:
+        name: "Nombre"
+
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Siguiente &#8594;"
+    page_gap: "&hellip;"
+    page_entries_info:
+      single_page:
+        zero:  "No %{model} encontrado"
+        one:   "Viendo 1 %{model}"
+        other: "Viendo todo %{count} %{model}"
+      single_page_html:
+        zero:  "No %{model} encontrado"
+        one:   "Viendo <b>1</b> %{model}"
+        other: "<b>%{count}</b>&nbsp; Resultados"
+
+      multi_page: "%{model} %{from} - %{to} de %{count}"
+      multi_page_html: "<b>%{from}&nbsp;-&nbsp;%{to}</b> de <b>%{count}</b>"
+  frontend:
+    file:
+      confirm_delete: "¿Está seguro que desea eliminar el archivo?"
+
+    role:
+      name: "Nombre"
+      actions: "Acciones"
+
+    user:
+      username: "Usuario"
+      password: "Contraseña"
+
+    settings:
+      name: "Nombre"
+      email: "Correo electrónico"
+      web: "Página web"
+
+  words:
+    procedent: Procedente
+    improcedent: Improcedente
