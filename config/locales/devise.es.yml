@@ -32,6 +32,7 @@ es:
       send_instructions: 'Usted recibirá un correo electrónico con instrucciones sobre cómo confirmar su cuenta en unos minutos.'
       send_paranoid_instructions: 'Si su correo electrónico existe en nuestra base de datos, usted recibirá un correo con instrucciones sobre cómo confirmar su cuenta en unos minutos.'
       confirmed: 'Su cuenta fue confirmada exitosamente, usted ha sido ingresado al sistema.'
+      resend: "Resend confirmation instrucciones"
     registrations:
       signed_up: '¡Bienvenido! Ha ingresado al sistema exitosamente.'
       inactive_signed_up: 'Se ha registrado exitosamente; sin embargo, no lo hemos podido ingresar debido a que su cuenta está %{reason}.'

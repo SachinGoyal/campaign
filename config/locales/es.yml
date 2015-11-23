@@ -7,8 +7,10 @@ es:
       create: "Créer"
       update: "Modifier "
   welcome: "Bienvenido"
-  enable: "Enable"
-  desable: "Desable"
+  dashboard:
+    edit_profile: "Editar perfil"
+  enable: "Habilitar"
+  desable: "Inhabilitar"
   log-out: "Cerrar Sesion"
   search: "Buscar"
   save: "Guardar"
@@ -23,8 +25,8 @@ es:
   ransack:
     any: 'O'
     all: 'Y'
-    asc: "ascending"
-    desc: "descending"
+    asc: "ascendente"
+    desc: "descendiendo"
     predicates:
       lt: "Menor que"
       lteq: "Menor igual que"
@@ -71,12 +73,10 @@ es:
     export: "Exportar a Excel"
     pay_commissions: "Pagar commisíon"
     send: "Enviar"
-
   links:
     cancel: "Cancelar"
     signin: "Iniciar sesión"
     forgotpass: "¿Olvidó su contraseña?"
-
   asearch:
     addcondition: "Agregar condición"
     results: "Resultados encontrados"
@@ -85,22 +85,21 @@ es:
     select_field: "Seleccione un campo"
   menu:
     campaign: Campañas
-    newsletter: Newsletter
+    newsletter: "Hoja informativa"
     template: Plantilla
-    profile: Profile
-    contact: Contact
-    role: Role
-    attribute: Attribute
-    company:  Company
+    profile: Perfil
+    contact: Contacto
+    role: Papel
+    attribute: Atributo
+    company:  Compañía
     user: Usuario   
-    stat: Stat
-    report: Report  
-    setting: Setting
+    stat: Estadísticas
+    report: Informe  
+    setting: Ajuste
   submenus:
     metraje: "Lista de Metraje"
     plans: "Planos"
     price_list: "Lista de Precios"
-
   activerecord:
     units_reserved: "Reservas"
     errors:
@@ -119,20 +118,33 @@ es:
       campaign: Campañas
       newsletter: Newsletter
       template: Plantilla
-      profile: profile
-      contact: Contact
-      role: Role
-      attribute: Attribute
-      company:  Company
+      profile: Perfil
+      contact: Contacto
+      role: Papel
+      attribute: Atributo
+      company:  Compañía
       user: Usuario     
-      setting: Setting
+      setting: Ajuste
     attributes:
       campaign:
         name: "Nombre"
         description: "Descripción"
-        status: 
+        status: "Estado"
       newsletter:
         name: "Nombre"
+        subject: "Sujeto"
+        campaign_id: "Campañas"
+        template_id: "Plantilla"
+        company_id: "Compañía"
+        created_at: "Fecha"
+        from_name: "De Nombre"
+        from_address: "De Dirección"
+        reply_email: "Responder Email"
+        cc_email: "CC Email"
+        bcc_email: "BCC Email"
+        send_at: "Enviar A"
+        auto_response: "Auto Response"
+
       template:
         name: "Nombre"
         content:
@@ -144,10 +156,10 @@ es:
         first_name: "Nombre"
         last_name: "Nombre"
         email:
-        status:
-        city:
-        country:
-        gender:
+        status: "Estado"
+        city: "Ciudad"
+        country: "País"
+        gender: "Género"
       role:
         name: "Nombre"
       attribute:
@@ -171,7 +183,6 @@ es:
         admin_email:
         admin_footer_content:
         name: "Nombre"
-
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "Siguiente &#8594;"
@@ -185,48 +196,74 @@ es:
         zero:  "No %{model} encontrado"
         one:   "Viendo <b>1</b> %{model}"
         other: "<b>%{count}</b>&nbsp; Resultados"
-
       multi_page: "%{model} %{from} - %{to} de %{count}"
       multi_page_html: "<b>%{from}&nbsp;-&nbsp;%{to}</b> de <b>%{count}</b>"
   frontend:
-
     shared:
-      edit: "Edit"
-      view: "View"
-      delete: "Delete"
-      confirm_delete: "Are you sure?"
-      enable: "Enable"
-      disable: "Disable"
-      confirm_enable: "Are you sure you want to enable records?"
-      confirm_disable: "Are you sure you want to disable records?"
-      confirm_delete_all: "Are you sure you want to delete records?"
-    file:
-      confirm_delete: "¿Está seguro que desea eliminar el archivo?"
-
+      placeholder:
+        search: "Inserte palabra clave"
+      edit_link: "Editar"
+      view_link: "Ver"
+      delete_link: "Borrar"
+      confirm_delete: "Estas seguro"
+      enable: "Habilitar"
+      disable: "Inhabilitar"
+      confirm_enable: "Seguro que desea habilitar registros?"
+      confirm_disable: "Seguro que deseas desactivar los registros?"
+      confirm_delete_all: "Seguro que quieres borrar registros?"
+      addcondition: "Añadir | Condiciones"
+      enabled: "Activado"
+      disabled: "Incapacitado"
+      advance_search: "Búsqueda avanzada"
+      no_record: "Ningún record fue encontrado"
+      created_at: "Fecha"
+      list: "%{model_name} Lista"
+      edit: "Editar %{model_name}"
+      new: "Nuevo %{model_name}"
+      add: "Añadir %{model_name}"
+      view: "Ver %{model_name}"
+      status: "Estado"
+      multiselect: "Presione Ctrl para múltiples seleccione"
+      gender:
+        male: "Masculino"
+        female: "Hembra"
     role:
       name: "Nombre"
       actions: "Acciones"
-
     user:
       username: "Usuario"
       password: "Contraseña"
-
     settings:
       name: "Nombre"
       email: "Correo electrónico"
       web: "Página web"
     attribute:
-      list: "Attribute List"
+      list: "Lista de atributos"
     template:
-      copy: "Copy"
+      copy: "Copia"
     campaign:
-      view_stat: "View Stat"
-      confirm_delete: "Are you sure you want delete newsletter and all the associated data?"
+      view_stat: "Ver Stat"
     newsletter:
-      send_now: "Send Now"
+      sample_email: "Muestra Email"
+      email_address: "Dirección de correo electrónico"
+      sample_email_hint: "Enviar una copia de la campaña para la dirección de correo electrónico siguiente (s ), separados por comas"
+      auto_responder_rules: "Auto Reglas Responder"
+      sender_settings: "ajustes del emisor"
+      interest_areas: "Area de interes"
+      send_now: "Enviar ahora"
+      confirm_delete: "Seguro que quieres eliminar boletín y todos los datos asociados?"
+      select_campaign: "Por favor, seleccione una campaña"
+      select_template: "Por favor, seleccione una modelo"
+      select_profile: "Prupo de contacto de selección"
+      search:
+        city: "Introduce la ciudad"
+        country: "Seleccione un país"
+        gender:
+          male: "Masculino"
+          female: "Hembra"
     company:
-      confirm_delete: "Are you sure want to delete this company? It will delete associated admin and other data."
-      
+      confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."
   words:
     procedent: Procedente
     improcedent: Improcedente
+    and: "y"

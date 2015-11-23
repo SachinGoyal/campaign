@@ -16,7 +16,7 @@
             <div class="form-group form-group-sm">
               <%= f.label :campaign_id, :class => "col-sm-3 col-xs-12 control-label"%>      
               <div class="col-sm-9 col-xs-12">
-                <%= collection_select(:newsletter, :campaign_id, Campaign.active, :id, :name, {:prompt => 'Please select a campaign'}, {:class => 'form-control'}) %> 
+                <%= collection_select(:newsletter, :campaign_id, Campaign.active, :id, :name, {:prompt => t('frontend.newsletter.select_campaign')}, {:class => 'form-control'}) %> 
               </div>
             </div>
 
@@ -30,21 +30,21 @@
             <div class="form-group form-group-sm">
               <%= f.label :template_id, :class => "col-sm-3 col-xs-12 control-label"%>      
               <div class="col-sm-9 col-xs-12">
-                <%= collection_select(:newsletter, :template_id, @templates, :id, :name, {:prompt => 'Please select a template'}, {:class => 'form-control'}) %> 
+                <%= collection_select(:newsletter, :template_id, @templates, :id, :name, {:prompt => t('frontend.newsletter.select_template')}, {:class => 'form-control'}) %> 
               </div>
             </div>
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-3 col-xs-12 control-label" >Select contact Group</label>
+              <label class="col-sm-3 col-xs-12 control-label" ><%= t("frontend.newsletter.select_profile") %></label>
               <div class="col-xs-9 custom-checkbox-style" id="profile-custom-select">
-                <%= collection_select(:newsletter, :profile_ids, Profile.active, :id, :name, {:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :class => 'form-control'}) %>
+                <%= collection_select(:newsletter, :profile_ids, Profile.active, :id, :name, {:include_blank => t('frontend.shared.multiselect')}, {:multiple => true, :class => 'form-control'}) %>
               </div>
             </div>
           
             <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
               <div class="col-sm-9 col-xs-12">
-                <div class="saprator">and</div>
+                <div class="saprator"><%= t('words.and')%></div>
               </div>
             </div>
 
@@ -79,7 +79,7 @@
           <div class="col-md-6 col-xs-10">
             <div class="form-horizontal">
               <div class="form-group form-group-sm">
-                <label class="col-sm-3 spacing-top blue-heading col-xs-12 control-label" >Sender Settings</label>
+                <label class="col-sm-3 spacing-top blue-heading col-xs-12 control-label" ><%= t('frontend.newsletter.sender_settings') %></label>
                 <div class="col-sm-9 col-xs-12">  </div>
               </div>
 
@@ -126,13 +126,13 @@
       <div class="col-md-6 col-xs-10">
         <div class="form-horizontal">
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 blue-heading col-xs-12 control-label" >Sample Email</label>
+            <label class="col-sm-3 blue-heading col-xs-12 control-label" ><%= t('frontend.newsletter.sample_email') %></label>
             <div class="col-sm-9 col-xs-12">
             </div>
           </div>
 
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" >Email Address</label>
+            <label class="col-sm-3 col-xs-12 control-label" ><%= t('frontend.newsletter.email_address') %></label>
             <div class="col-sm-9 col-xs-12">
               <%= f.fields_for :newsletter_emails, @sample_newsletter_email do |sample_newsletter_email_form| %>
                 <% if sample_newsletter_email_form.object.sample? %>
@@ -141,7 +141,7 @@
                 <% end %>
               <% end %>
               
-              <span class="small">Send a copy of the campaign to the following email address(es), separated by commas:</span>
+              <span class="small"><%= t('frontend.newsletter.sample_email_hint') %>:</span>
             </div>
           </div>
 
@@ -149,7 +149,7 @@
             <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
             <div class="col-sm-9 col-xs-12 custom-radio-input">
               <input id="radio01" name="" type="radio" value="" class="auto_response_toggle">
-              <label for="radio01"><span></span>Auto Responder Rules</label>
+              <label for="radio01"><span></span><%= t('frontend.newsletter.auto_response')%></label>
               <% if @newsletter.auto_response %>
                 <%= f.email_field :auto_response, :class => "form-control" %>
               <% else %>

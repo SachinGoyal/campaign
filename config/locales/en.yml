@@ -6,7 +6,7 @@ en:
   search: "Search"
   dashboard:
     log-out: "Log-Out"
-    edit-profile: "Edit"
+    edit_profile: "Edit Profile"
   cancan:
     default_message: 'You are not authorized to access this page.'
   unauthorized:
@@ -252,6 +252,7 @@ en:
       add: "Add %{model_name}"
       view: "View %{model_name}"
       status: "Status"
+      multiselect: "Press Ctrl for multiselect"
       gender:
         male: "Male"
         female: "Female"
@@ -276,15 +277,29 @@ en:
       copy: "Copy"
     campaign:
       view_stat: "View Stat"
-      confirm_delete: "Are you sure you want delete newsletter and all the associated data?"
       new: "New Campaign"
       edit: "Edit Campaign"
       advanced_search: "Campaign-List Advanced Search"
       placeholder:
     newsletter: 
+      sample_email: "Sample Email"
+      email_address: "Email Address"
+      sample_email_hint: "Send a copy of the campaign to the following email address(es), separated by commas"
+      auto_responder_rules: "Auto Responder Rules"
+      sender_settings: "Sender Settings"
+      interest_areas: "Area of Interest"
       advanced_search: "Newsletter-List Advanced Search"
+      confirm_delete: "Are you sure you want delete newsletter and all the associated data?"
       placeholder:
       send_now: "Send Now"
+      select_campaign: "Please select a campaign"
+      select_profile: "Select Contact Group"
+      search:
+        city: "Enter the city"
+        country: "Select a Country"
+        gender:
+          male: "Male"
+          female: "Female"
     template: 
       copy: "Copy"
       placeholder:
@@ -333,6 +348,7 @@ en:
   words:
     procedent: Procedente
     improcedent: Improcedente
+    and: "and"
     
   controller:
     shared: 
