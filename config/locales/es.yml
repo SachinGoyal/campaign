@@ -2,8 +2,19 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 es:
+  helpers:
+    submit:
+      # This will be the default ones, will take effect if no other
+      # are specifically defined for the models.
+      create: "Créer"
+      update: "Modifier "
+  welcome: "Bienvenido"
+  enable: "Enable"
+  desable: "Desable"
   log-out: "Cerrar Sesion"
   search: "Buscar"
+  save: "Guardar"
+  cancel: "Cancelar"
   cancan:
     default_message: "Usted no está autorizado para acceder a esta página."
   unauthorized:
@@ -46,7 +57,7 @@ es:
       date_gt: "Mayor que(Fecha)"
   buttons:
     login: "Entrar"
-    save: "Guardar"
+    submit: "Guardar"
     send: "Enviar"
     cancel: "Cancelar"
     messages: "Mensajes"
@@ -64,8 +75,10 @@ es:
     send: "Enviar"
 
   links:
+    cancel: "Cancelar"
     signin: "Iniciar sesión"
     forgotpass: "¿Olvidó su contraseña?"
+
   asearch:
     addcondition: "Agregar condición"
     results: "Resultados encontrados"
