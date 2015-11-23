@@ -19,10 +19,12 @@
 #  bcc_email     :string
 #  send_at       :datetime
 #  auto_response :string
+#  company_id    :integer
 #
 # Indexes
 #
 #  index_newsletters_on_campaign_id  (campaign_id)
+#  index_newsletters_on_company_id   (company_id)
 #  index_newsletters_on_template_id  (template_id)
 #
 

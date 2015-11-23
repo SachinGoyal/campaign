@@ -4,8 +4,6 @@
 es:
   helpers:
     submit:
-      # This will be the default ones, will take effect if no other
-      # are specifically defined for the models.
       create: "Créer"
       update: "Modifier "
   welcome: "Bienvenido"
@@ -89,7 +87,7 @@ es:
     campaign: Campañas
     newsletter: Newsletter
     template: Plantilla
-    profile: profile
+    profile: Profile
     contact: Contact
     role: Role
     attribute: Attribute

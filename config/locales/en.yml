@@ -118,26 +118,92 @@ en:
             name:
               taken: "ya está en uso"
     models:
-      contact: "Contacto"
-      message: "Message"
-      user: "User"
+      campaign: Campaign
+      newsletter: Newsletter
+      template: Template
+      profile: Profile
+      contact: Contact
+      role: Role
+      attribute: Attribute
+      company:  Company
+      user: User  
+      setting: Setting
     attributes:
+      campaign:
+        name: "Name"
+        description: "Description"
+        status: "Status"
+        created_at: "Date"
+        company_id: "Company"
+      newsletter:
+        name: "Name"
+        created_at: "Date"
+        company_id: "Company"
+        campaign_id: "Campaign"
+        template_id: "Template"
+        subject: "Subject"
+        from_name: "From Name"
+        from_address: "From Address"
+        reply_email: "Reply Email"
+        cc_email: "CC Email"
+        bcc_email: "BCC Email"
+        send_at: "Send At"
+        auto_response: "Auto Response"
+      template:
+        name: "Name"
+        content: "Content"
+        status: "Status"
+        created_at: "Date"
+        company_id: "Company"
+      profile:
+        name: "Name"
+        status: "Status"
+        created_at: "Date"
+        company_id: "Company"
+      contact:
+        first_name: "Firstname"
+        last_name: "Lastname"
+        email: "Email"
+        status: "Status"
+        city: "City"
+        country: "Country"
+        gender: "Gender"
+        created_at: "Date"
+        company_id: "Company"
       role:
         name: "Name"
-      setting:
-
-      user:
-        email: "E-mail"
-        password: "Password"
-        password_confirmation: "Password confirmation"
-        current_password: "Current password"
-        role_id: "Role"
-        role: "Rol"
+        status: "Status"
+        editable: "Editable"
+        created_at: "Date"
+        company_id: "Company"
+      attribute:
+        name: "Name"
+        description: "Description"
+        created_at: "Date"
+        company_id: "Company"
+      company: 
+        name: "Name"
+        free_emails: "Free Emails"
+        subdomain: "Subdomain"
+        status: "Status"
+        created_at: "Date"
+      user:   
         username: "Username"
-
-      contact:
-        state: Status
-        web: Pagina web
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+        status: "Status"
+        created_at: "Date"
+        company_id: "Company"
+        role_id: "Role"
+        image: "Image"
+      setting:
+        site_title: "Site Title"
+        free_emails: "Free Emails"
+        admin_email: "Admin Email"
+        admin_footer_content: "Admin Footer Content"
+        name: "Name"
+        created_at: "Date"
 
   will_paginate:
     previous_label: "&#8592; Previous"
