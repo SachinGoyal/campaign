@@ -7,7 +7,7 @@
         <% if element.editable_or_deletable? %>
           <li><%= link_to [:edit , element] do %>
             <i class="fa fa-pencil"></i>
-            <span>Edit</span>
+            <span><%= t("frontend.shared.edit") %></span>
             <% end %>
           </li>
         <% end %>  
@@ -17,7 +17,7 @@
           <% if can? :update, element    %>
             <li><%= link_to [:edit , element] do %>
               <i class="fa fa-pencil"></i>
-              <span>Edit</span>
+              <span><%= t("frontend.shared.edit") %></span>
               <% end %>
             </li>
           <% end %>
@@ -25,7 +25,7 @@
           <% if can? :create, element    %>
             <li><%= link_to copy_templates_path(template_id: element.id) do %>
               <i class="fa fa-pencil"></i>
-              <span>Copy</span>
+              <span><%= t("frontend.template.copy") %></span>
               <% end %>
             </li>
           <% end %>
@@ -35,12 +35,12 @@
       <% if element.is_a?(Newsletter) and can?(:create , element) and element.send_at.nil? %> 
         <li><%= link_to stats_campaigns_path(newsletter_id: element.id),  method: :post do %>
           <i class="fa fa-line-chart"></i>
-          <span>View Stat</span>
+          <span><%= t("frontend.campaign.view_stat") %></span>
           <% end %>
         </li>
         <li><%= link_to send_now_newsletter_path(element),  method: :post do %>
           <i class="fa fa-eye"></i>
-          <span>Send Now</span>
+          <span><%= t("frontend.newsletter.send_now") %></span>
           <% end %>
         </li>
       <% end %>
@@ -48,7 +48,7 @@
       <% if can? :read , element %> 
         <li><%= link_to element do %>
           <i class="fa fa-eye"></i>
-          <span>View</span>
+          <span><%= t("frontend.shared.view") %></span>
           <% end %>
         </li>
       <% end %>            
@@ -60,25 +60,25 @@
         <% elsif element.is_a?(Newsletter) %>
           <% if element.editable_or_deletable? %>
             <li class="custom-delete">
-            <%= link_to element, method: :delete, data: { confirm: 'Are you sure you want delete campaign and all the associated data?' } do %>
+            <%= link_to element, method: :delete, data: { confirm: t('frontend.newsletter.confirm_delete') } do %>
               <i class="fa fa-plus"></i>
-              <span>Delete</span>
+              <span><%= t("frontend.shared.delete") %></span>
             <% end %>
           </li>
           <% end %>  
 
         <% elsif element.is_a?(Company) %>
           <li class="custom-delete">
-            <%= link_to element, method: :delete, data: { confirm: 'Are you sure want to delete this company? It will delete associated admin and other data.' } do %>
+            <%= link_to element, method: :delete, data: { confirm: t('frontend.company.confirm_delete') } do %>
               <i class="fa fa-plus"></i>
-              <span>Delete</span>
+              <span><%= t("frontend.shared.delete") %></span>
             <% end %>
           </li>
         <% else %>
           <li class="custom-delete">
-            <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete') } do %>
               <i class="fa fa-plus"></i>
-              <span>Delete</span>
+              <span><%= t("frontend.shared.delete") %></span>
             <% end %>
           </li>
         <% end %>

@@ -4,8 +4,6 @@
 es:
   helpers:
     submit:
-      # This will be the default ones, will take effect if no other
-      # are specifically defined for the models.
       create: "Créer"
       update: "Modifier "
   welcome: "Bienvenido"
@@ -89,7 +87,7 @@ es:
     campaign: Campañas
     newsletter: Newsletter
     template: Plantilla
-    profile: profile
+    profile: Profile
     contact: Contact
     role: Role
     attribute: Attribute
@@ -191,6 +189,17 @@ es:
       multi_page: "%{model} %{from} - %{to} de %{count}"
       multi_page_html: "<b>%{from}&nbsp;-&nbsp;%{to}</b> de <b>%{count}</b>"
   frontend:
+
+    shared:
+      edit: "Edit"
+      view: "View"
+      delete: "Delete"
+      confirm_delete: "Are you sure?"
+      enable: "Enable"
+      disable: "Disable"
+      confirm_enable: "Are you sure you want to enable records?"
+      confirm_disable: "Are you sure you want to disable records?"
+      confirm_delete_all: "Are you sure you want to delete records?"
     file:
       confirm_delete: "¿Está seguro que desea eliminar el archivo?"
 
@@ -206,7 +215,18 @@ es:
       name: "Nombre"
       email: "Correo electrónico"
       web: "Página web"
-
+    attribute:
+      list: "Attribute List"
+    template:
+      copy: "Copy"
+    campaign:
+      view_stat: "View Stat"
+      confirm_delete: "Are you sure you want delete newsletter and all the associated data?"
+    newsletter:
+      send_now: "Send Now"
+    company:
+      confirm_delete: "Are you sure want to delete this company? It will delete associated admin and other data."
+      
   words:
     procedent: Procedente
     improcedent: Improcedente
