@@ -5,16 +5,16 @@
       <%if element.name != 'Newsletter'%>
         <% if can? :update, element %>
           <li>
-  	      <%= link_to '#' , data: { confirm: 'Are you sure you want to enable records?' } do %>
+  	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_enable') } do %>
   	        <i class="fa fa-pencil profile-enable"></i>
-  	        <span>Enable</span>
+  	        <span><%= t('frontend.shared.enable') %></span>
   	      <% end %>
         	</li>
 
         	<li>
-  	      <%= link_to '#' , data: { confirm: 'Are you sure you want to disable records?' } do %>
+  	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_disable') } do %>
   	        <i class="fa fa-pencil"></i>
-  	        <span>Disable</span>
+  	        <span><%= t('frontend.shared.disable') %></span>
   	      <% end %>
         	</li>
         <% end %>
@@ -22,9 +22,9 @@
 
       <% if can? :delete, element %>
       	<li>
-	      <%= link_to '#' , data: { confirm: 'Are you sure you want to delete records?' } do %>
+	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_delete_all') } do %>
 	        <span class="custom-delete"><i class="fa fa-plus"></i></span>
-	        <span>Delete</span>
+	        <span><%= t('frontend.shared.delete') %></span>
 	      <% end %>
       	</li>
       <% end %>

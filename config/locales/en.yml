@@ -227,6 +227,11 @@ en:
       view: "View"
       delete: "Delete"
       confirm_delete: "Are you sure?"
+      enable: "Enable"
+      disable: "Disable"
+      confirm_enable: "Are you sure you want to enable records?"
+      confirm_disable: "Are you sure you want to disable records?"
+      confirm_delete_all: "Are you sure you want to delete records?"
     file:
       confirm_delete: "Are you sure you want to delete this project?, all its dependent objects will be also deleted."
 
