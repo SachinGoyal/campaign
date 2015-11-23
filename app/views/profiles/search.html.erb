@@ -38,5 +38,5 @@
 <%= render 'shared/bootam_action_link', element: Profile %>
 <%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>
 <div>
-  <%= link_to "Back", profiles_path %>
+  <%= link_to t('buttons.back'), profiles_path %>
 </div>

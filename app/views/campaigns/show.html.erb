@@ -51,6 +51,6 @@
     </div><!--  custom-container -->
 
     <% if can? :update, Campaign %>
-     <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+     <%= link_to t('buttons.edit'), edit_campaign_path(@campaign) %> |
     <% end %>
-    <%= link_to 'Back', campaigns_path %>
+    <%= link_to t('buttons.back'), campaigns_path %>

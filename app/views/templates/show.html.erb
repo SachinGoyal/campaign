@@ -40,9 +40,9 @@
       </div><!-- row -->
     </div><!--  custom-container -->
     <% if can? :update, Company %>
-     <%= link_to 'Edit', edit_template_path(@template) %> |
+     <%= link_to t('buttons.edit'), edit_template_path(@template) %> |
     <% end %>
-    <%= link_to 'Back', templates_path %>
+    <%= link_to t('buttons.back'), templates_path %>
 
 
 
