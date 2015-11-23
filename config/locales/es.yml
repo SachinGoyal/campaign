@@ -204,7 +204,11 @@ es:
       name: "Nombre"
       email: "Correo electrónico"
       web: "Página web"
-
+    attribute:
+      list: "Attribute List"
+    newsletter:
+      copy: "Copy"
+      
   words:
     procedent: Procedente
     improcedent: Improcedente
