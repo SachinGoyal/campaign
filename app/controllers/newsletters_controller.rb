@@ -57,7 +57,7 @@ class NewslettersController < ApplicationController
 
     respond_to do |format|
       if @newsletter.save
-        format.html { redirect_to @newsletter, notice: 'Newsletter was successfully created.' }
+        format.html { redirect_to @newsletter, notice: t("controller.shared.flash.create.notice", model: "Newsletter") }
         format.json { render :show, status: :created, location: @newsletter }
       else
         format.html {
@@ -73,7 +73,7 @@ class NewslettersController < ApplicationController
           end
           render :new 
         }
-        format.json { render json: @newsletter.errors, status: :unprocessable_entity }
+        format.json { render json: @newsletter.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -81,7 +81,7 @@ class NewslettersController < ApplicationController
   def update
     respond_to do |format|
       if @newsletter.update(newsletter_params)
-        format.html { redirect_to @newsletter, notice: 'Newsletter was successfully updated.' }
+        format.html { redirect_to @newsletter, notice: t("controller.shared.flash.update.notice", model: "Newsletter") }
         format.json { render :show, status: :ok, location: @newsletter }
       else
         format.html { 
@@ -89,7 +89,7 @@ class NewslettersController < ApplicationController
           # @newsletter_email = @newsletter.newsletter_emails.where(:from_contacts => true).try(:first)
           render :edit 
         }
-        format.json { render json: @newsletter.errors, status: :unprocessable_entity }
+        format.json { render json: @newsletter.errors, status: t("controller.shared.flash.update.status") }
       end
     end
   end
@@ -99,7 +99,7 @@ class NewslettersController < ApplicationController
   def destroy
     @newsletter.destroy
     respond_to do |format|
-      format.html { redirect_to newsletters_url, notice: 'Newsletter was successfully deleted.' }
+      format.html { redirect_to newsletters_url, notice: t("controller.shared.flash.destroy.notice", model: "Newsletter") }
       format.json { head :no_content }
     end
   end
