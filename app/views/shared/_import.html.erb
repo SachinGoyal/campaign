@@ -9,8 +9,6 @@
 </script>
 
 <div class='import_export_links import_export_links_margin'>
-<<<<<<< Updated upstream
-<<<<<<< HEAD
 <% if can? :create, Contact %>
   <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
 <% end %>
@@ -19,26 +17,15 @@
   <%= link_to contacts_path(format: "xls") do %>
     <span>Export Contacts</span>
     <i class="fa fa-file-excel-o"></i>
-=======
-=======
->>>>>>> Stashed changes
   <% if can? :create, Contact %>
     <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
   <% end %>
   
   <% if can? :read, Contact %>
-<<<<<<< Updated upstream
-=======
-    <%#= link_to contacts_path(format: "xls") do %>
->>>>>>> Stashed changes
     <%= link_to contacts_path(format: "csv") do %>
       <span>Export Contacts</span>
       <i class="fa fa-file-excel-o"></i>
     <% end %>
-<<<<<<< Updated upstream
->>>>>>> 268950fd5dd209a196534c68f1447982e47fcb14
-=======
->>>>>>> Stashed changes
   <% end %>
 </div>
 
