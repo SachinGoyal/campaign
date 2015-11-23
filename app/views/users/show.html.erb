@@ -1,6 +1,6 @@
 <div class="row">
     <div class="page-title">
-      <div class="title_left"><h2>View User</h2></div><!-- title_left -->
+      <div class="title_left"><h2><%= t("frontend.user.view") %></h2></div><!-- title_left -->
 
       <div class="clearfix"></div>
 
@@ -17,21 +17,21 @@
           <form class="form-horizontal">
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Username</label>
+              <label class="col-sm-4 col-xs-12 control-label">Username</label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @user.username%>
               </div>
             </div>
 
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Email</label>
+                <label class="col-sm-4 col-xs-12 control-label">Email</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @user.email%>
                 </div>
               </div>
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+              <label class="col-sm-4 col-xs-12 control-label">Status</label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= display_status(@user) %>
               </div>
@@ -43,7 +43,7 @@
           </div>
           <div class="col-lg-4 col-xs-1">
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+              <label class="col-sm-4 col-xs-12 control-label">&nbsp;</label>
               <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
             </div>
 

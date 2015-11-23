@@ -236,6 +236,7 @@ en:
     user:
       username: "Username"
       password: "Password"
+      view: "View User"
 
     settings:
       name: "Name"
