@@ -226,6 +226,8 @@ en:
       multi_page_html: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{count}</b> in total"
   frontend:
     shared:
+      placeholder:
+        search: "Enter Keyword"
       edit: "Edit"
       view: "View"
       delete: "Delete"
@@ -235,24 +237,27 @@ en:
       confirm_enable: "Are you sure you want to enable records?"
       confirm_disable: "Are you sure you want to disable records?"
       confirm_delete_all: "Are you sure you want to delete records?"
-
-      placeholder:
-        search: "Enter Keyword"
+      addcondition: "Add Conditions Group"
     campaign:
       view_stat: "View Stat"
       confirm_delete: "Are you sure you want delete newsletter and all the associated data?"
       new: "New Campaign"
       edit: "Edit Campaign"
+      advanced_search: "Campaign-List Advanced Search"
       placeholder:
     newsletter: 
+      advanced_search: "Newsletter-List Advanced Search"
       placeholder:
       send_now: "Send Now"
     template: 
       copy: "Copy"
       placeholder:
+      advanced_search: "Template-List Advanced Search"
     profile: 
+      advanced_search: "Profile-List Advanced Search"
       placeholder:
     contact: 
+      advanced_search: "Contact-List Advanced Search"
       placeholder:
     role: 
       name: "Name"
@@ -261,9 +266,11 @@ en:
       list: "Attribute List"
       placeholder:
     company:  
+      advanced_search: "Company-List Advanced Search"
       placeholder:
       confirm_delete: "Are you sure want to delete this company? It will delete associated admin and other data."
     user:    
+      advanced_search: "User-List Advanced Search"
       placeholder:
       username: "Username"
       password: "Password"
