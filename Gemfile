@@ -20,8 +20,6 @@ gem 'simple_form'
 gem 'carrierwave'
 gem "rmagick"
 gem 'mini_magick'
-# gem 'milia'
-# gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'acts_as_tenant'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'will_paginate-bootstrap'
@@ -31,6 +29,7 @@ gem 'bootstrap-datepicker-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
 end
+
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
@@ -41,6 +40,9 @@ gem "iconv", "~> 1.0.3"
 gem 'roo'
 gem 'roo-xls'
 gem 'country_select'
+gem 'summernote-rails'
+gem 'gibbon'
+
 # Use Uglifier as compressor for JavaScript assets
 # gem 'activerecord-import'
 
@@ -61,10 +63,6 @@ group :development, :test do
   gem 'pg'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  #editor
-  gem 'summernote-rails'
-  #editor
 end
 
 group :production do
