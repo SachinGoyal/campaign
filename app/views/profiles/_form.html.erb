@@ -15,9 +15,9 @@
           <label class="col-sm-4 col-xs-12 control-label">Status</label>
           <div class="col-sm-8 col-xs-12 radio_status">
             <%= f.radio_button :status ,1, :checked => @profile.new_record? ? true : @profile.status ,:id=>"radio01" %>
-            <label for="radio01" class="status_spacer"><span></span>Enabled</label>
+            <label for="radio01" class="status_spacer"><span></span><%= t('frontend.shared.enabled') %></label>
             <%= f.radio_button :status ,0, :checked => @profile.new_record? ? false : !@profile.status ,:id=>"radio02" %>
-            <label for="radio02"><span></span>Disabled</label>
+            <label for="radio02"><span></span><%= t('frontend.shared.disabled') %></label>
           </div>
         </div>
 
