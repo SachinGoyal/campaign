@@ -72,11 +72,11 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new(campaign_params)
     respond_to do |format|
       if @campaign.save
-        format.html { redirect_to @campaign, notice: 'Campaign was successfully created.' }
+        format.html { redirect_to @campaign, notice: t("controller.campaign.create.notice") }
         format.json { render :show, status: :created, location: @campaign }
       else
         format.html { render :new }
-        format.json { render json: @campaign.errors, status: :unprocessable_entity }
+        format.json { render json: @campaign.errors, status: t("controller.campaign.create.status") }
       end
     end
   end
@@ -86,11 +86,11 @@ class CampaignsController < ApplicationController
   def update
     respond_to do |format|
       if @campaign.update(campaign_params)
-        format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
+        format.html { redirect_to @campaign, notice: t("controller.campaign.update.notice") }
         format.json { render :show, status: :ok, location: @campaign }
       else
         format.html { render :edit }
-        format.json { render json: @campaign.errors, status: :unprocessable_entity }
+        format.json { render json: @campaign.errors, status: t("controller.campaign.update.status") }
       end
     end
   end
@@ -100,7 +100,7 @@ class CampaignsController < ApplicationController
   def destroy
     if @campaign.destroy
       respond_to do |format|
-        format.html { redirect_to campaigns_url, notice: 'Campaign was successfully deleted.' }
+        format.html { redirect_to campaigns_url, notice: t("controller.campaign.destroy.notice") }
         format.json { head :no_content }
       end
     else
@@ -125,9 +125,9 @@ class CampaignsController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          t("controller.campaign.edit_all.notice.delete_all")
         else
-          "Campaigns updated successfully."
+          t("controller.campaign.edit_all.notice.update_all")
       end
 
     end
