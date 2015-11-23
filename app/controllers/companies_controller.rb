@@ -64,11 +64,11 @@ class CompaniesController < ApplicationController
         end
         @user.deliver_invitation
         @company.create_role
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
+        format.html { redirect_to @company, notice: t("controller.shared.flash.create.notice", model: "Company") }
         format.json { render :show, status: :created, location: @company }
       else
         format.html { render :new }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+        format.json { render json: @company.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -79,11 +79,11 @@ class CompaniesController < ApplicationController
     @company.updator = current_user
     respond_to do |format|
       if @company.update(company_params)
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+        format.html { redirect_to @company, notice: t("controller.shared.flash.update.notice", model: "Company") }
         format.json { render :show, status: :ok, location: @company }
       else
         format.html { render :edit }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+        format.json { render json: @company.errors, status: t("controller.shared.flash.update.status") }
       end
     end
   end
@@ -93,7 +93,7 @@ class CompaniesController < ApplicationController
   def destroy
     respond_to do |format|
       if @company.destroy
-        format.html { redirect_to companies_url, notice: 'Company was successfully deleted.' }
+        format.html { redirect_to companies_url, notice: t("controller.shared.flash.destroy.notice", model: "Company") }
         format.json { head :no_content }
       else
         format.html { redirect_to companies_url, notice: @company.errors.full_messages.join(", ") }
@@ -111,7 +111,7 @@ class CompaniesController < ApplicationController
     def set_company
       @company = Company.find(params[:id])
       unless @company
-        return redirect_to companies_path, :alert => "Could not find company"
+        return redirect_to companies_path, :alert => t("controller.shared.alert.message" , model: 'Company')
       end
     end
 
@@ -123,9 +123,9 @@ class CompaniesController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          "Companies deleted successfully."
+          t("controller.shared.flash.delete_all", model: "Companies")
         else
-          "Companies updated successfully."
+          t("controller.shared.flash.edit_all.notice.update_all", model: "Companies")
       end
 
     end

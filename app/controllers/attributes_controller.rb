@@ -50,11 +50,11 @@ class AttributesController < ApplicationController
 
     respond_to do |format|
       if @attribute.save
-        format.html { redirect_to @attribute, notice: 'Attribute was successfully created.' }
+        format.html { redirect_to @attribute, notice: t("controller.shared.flash.create.notice", model: "Attribute") }
         format.json { render :show, status: :created, location: @attribute }
       else
         format.html { render :new }
-        format.json { render json: @attribute.errors, status: :unprocessable_entity }
+        format.json { render json: @attribute.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -64,11 +64,11 @@ class AttributesController < ApplicationController
   def update
     respond_to do |format|
       if @attribute.update(attribute_params)
-        format.html { redirect_to @attribute, notice: 'Attribute was successfully updated.' }
+        format.html { redirect_to @attribute, notice: t("controller.shared.flash.update.notice", model: "Attribute") }
         format.json { render :show, status: :ok, location: @attribute }
       else
         format.html { render :edit }
-        format.json { render json: @attribute.errors, status: :unprocessable_entity }
+        format.json { render json: @attribute.errors, status: t("controller.shared.flash.update.status") }
       end
     end
   end
@@ -78,7 +78,7 @@ class AttributesController < ApplicationController
   def destroy
     respond_to do |format|
       if @attribute.destroy
-        format.html { redirect_to attributes_url, notice: 'Attribute was successfully deleted.' }
+        format.html { redirect_to attributes_url, notice: t("controller.shared.flash.destroy.notice", model: "Attribute") }
         format.json { head :no_content }
       else
         format.html { redirect_to attributes_url, notice: @attribute.errors.full_messages.join(", ")}
@@ -91,7 +91,7 @@ class AttributesController < ApplicationController
     def set_attribute
       @attribute = Attribute.find(params[:id])
       unless @attribute
-        return redirect_to attributes_path, :alert => "Could not find attribute"
+        return redirect_to attributes_path, :alert => t("controller.shared.alert.message" , model: 'Attribute')
       end
     end
 
@@ -103,10 +103,10 @@ class AttributesController < ApplicationController
     def updateable_messages(action)
     case action
       when 'Delete'
-        "Attributes deleted successfully."
+        t("controller.shared.flash.delete_all", model: "Attributes")
       else
-        "Attributes updated successfully."
-    end
+        t("controller.shared.flash.edit_all.notice.update_all", model: "Attributes")
+      end
 
     end
 end

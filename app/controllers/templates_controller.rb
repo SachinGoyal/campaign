@@ -96,7 +96,7 @@ class TemplatesController < ApplicationController
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit }
-        format.json { render json: @template.errors, status: t("controller.shared.flash.update.notice") }
+        format.json { render json: @template.errors, status: t("controller.shared.flash.update.status") }
       end
     end
   end
