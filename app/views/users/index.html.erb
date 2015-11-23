@@ -12,7 +12,7 @@
             </div>
           <% end %>
           <% if can? :create, User %>
-            <div class="custom-add"><%= link_to new_user_path, :title => t('frontend.user.new') do %><i class="fa fa-plus"></i><% end %></div>
+            <div class="custom-add"><%= link_to new_user_path, :title => t("frontend.shared.new", :model_name => "User") do %><i class="fa fa-plus"></i><% end %></div>
           <% end %>
       </div>
 

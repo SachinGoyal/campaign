@@ -1,6 +1,6 @@
 <div class="row">
     <div class="page-title">
-      <div class="title_left"><h2>View Role</h2></div><!-- title_left -->
+      <div class="title_left"><h2><%= t('frontend.shared.view', :model_name => 'Role') %></h2></div><!-- title_left -->
         <div class="pull-right custom-box">
 <!--           <span class="edit-icon">
             <%#= link_to edit_role_path(@role) do %>
@@ -24,7 +24,7 @@
       <div class="col-md-12">
         <h4 class="text-center">Role: <%= @role.name %></h4>
         <% if @role.company %>
-          <h4 class="text-center">Company: <%= @role.company.name %>
+          <h4 class="text-center"><%= t('attributes.role.company_id')%> <%= @role.company.name %>
         </h4>
         <% end %>
       </div><!-- col-md-12 -->

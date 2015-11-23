@@ -7,9 +7,9 @@
         <% end %>  
     </div>
     <div class="col-md-2"><%=sort_link(@q, :name) %></div>
-    <div class="col-md-2">No. of Contacts</div>
+    <div class="col-md-2"><%= t('frontend.profile.number_contacts') %></div>
     <div class="col-md-2"><%=sort_link(@q, :status) %></div>
-    <div class="col-md-2"><%=sort_link(@q, :created_at, 'Date') %></div>
+    <div class="col-md-2"><%=sort_link(@q, :created_at, t('frontend.shared.created_at') ) %></div>
     <div class="col-md-2">&nbsp;</div>
   </div><!-- row -->
 
