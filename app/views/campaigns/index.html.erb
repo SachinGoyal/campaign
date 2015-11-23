@@ -7,7 +7,7 @@
           <% if can? :search, Campaign %>
             <%= render 'shared/keyword_search', :condition => :name_cont %>
             <div class="advance-search">
-              <%= link_to search_campaigns_path do %>
+              <%= link_to search_campaigns_path, :title => t('frontend.shared.advance_search') do %>
               <i class="fa fa-dot-circle-o"></i>
               <% end %>
             </div> 
