@@ -46,7 +46,7 @@
                           </div>
                         <% end %>
                         <div class="profile_info">
-                            <span>Welcome,</span>
+                            <span><%= t(:welcome)%>,</span>
                             <h2><%= current_user.username %></h2>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                               <li>
                                 <%= link_to destroy_user_session_path, :method => :delete  do %>
                                   <i class="fa fa-sign-out pull-right"></i>
-                                  <span>Log Out</span>
+                                  <span><%= t("log-out")%></span>
                                <% end %>
                               </li>
                             </ul>
