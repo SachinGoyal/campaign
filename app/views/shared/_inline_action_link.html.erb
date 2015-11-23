@@ -7,7 +7,7 @@
         <% if element.editable_or_deletable? %>
           <li><%= link_to [:edit , element] do %>
             <i class="fa fa-pencil"></i>
-            <span><%= t("frontend.shared.edit") %></span>
+            <span><%= t("frontend.shared.edit_link") %></span>
             <% end %>
           </li>
         <% end %>  
@@ -17,7 +17,7 @@
           <% if can? :update, element    %>
             <li><%= link_to [:edit , element] do %>
               <i class="fa fa-pencil"></i>
-              <span><%= t("frontend.shared.edit") %></span>
+              <span><%= t("frontend.shared.edit_link") %></span>
               <% end %>
             </li>
           <% end %>
@@ -48,7 +48,7 @@
       <% if can? :read , element %> 
         <li><%= link_to element do %>
           <i class="fa fa-eye"></i>
-          <span><%= t("frontend.shared.view") %></span>
+          <span><%= t("frontend.shared.view_link") %></span>
           <% end %>
         </li>
       <% end %>            
@@ -62,7 +62,7 @@
             <li class="custom-delete">
             <%= link_to element, method: :delete, data: { confirm: t('frontend.newsletter.confirm_delete') } do %>
               <i class="fa fa-plus"></i>
-              <span><%= t("frontend.shared.delete") %></span>
+              <span><%= t("frontend.shared.delete_link") %></span>
             <% end %>
           </li>
           <% end %>  
@@ -71,14 +71,14 @@
           <li class="custom-delete">
             <%= link_to element, method: :delete, data: { confirm: t('frontend.company.confirm_delete') } do %>
               <i class="fa fa-plus"></i>
-              <span><%= t("frontend.shared.delete") %></span>
+              <span><%= t("frontend.shared.delete_link") %></span>
             <% end %>
           </li>
         <% else %>
           <li class="custom-delete">
             <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete') } do %>
               <i class="fa fa-plus"></i>
-              <span><%= t("frontend.shared.delete") %></span>
+              <span><%= t("frontend.shared.delete_link") %></span>
             <% end %>
           </li>
         <% end %>

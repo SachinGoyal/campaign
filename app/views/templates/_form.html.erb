@@ -5,7 +5,6 @@
       <div class="col-md-11 col-xs-10">
         <%= form_for(@template, :html => {:class => 'form-horizontal'}) do |f| %>
         <div class="form-group form-group-sm">
-          <!-- <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label> -->
           <%= f.label :name, 'Title', :class => "col-sm-3 col-xs-3 control-label" %>
           <div class="col-sm-5 col-xs-5">
             <%= f.text_field :name, :class => 'form-control', :maxlength => 250 %>
@@ -21,12 +20,12 @@
 
 
         <div class="form-group form-group-sm field">
-          <label class="col-sm-3 col-xs-3 control-label custom-my-label">Status</label>
+          <label class="col-sm-3 col-xs-3 control-label custom-my-label"><%= t('attributes.template.status') %></label>
           <div class="col-sm-9 col-xs-9">
             <%= f.radio_button :status ,1, :checked => @template.new_record? ? true : @template.status ,:id=>"radio01" %>
-            <label for="radio01" class="status_spacer"><span></span>Enabled</label>
+            <label for="radio01" class="status_spacer"><span></span><%= t('frontend.shared.enabled') %></label>
             <%= f.radio_button :status ,0, :checked => @template.new_record? ? false : !@template.status ,:id=>"radio02" %>
-            <label for="radio02"><span></span>Disabled</label>
+            <label for="radio02"><span></span><%= t('frontend.shared.disabled') %></label>
           </div>
         </div>
        

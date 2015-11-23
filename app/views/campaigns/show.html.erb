@@ -12,7 +12,7 @@
         <div class="col-md-5 col-xs-10">
           <form class="form-horizontal">
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label">Name</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('attributes.campaign.name') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @campaign.name%>
               </div>
@@ -20,7 +20,7 @@
 
             <% if @campaign.description.present? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label">Description</label>
+                <label class="col-sm-4 col-xs-12 control-label"><%= t('attributes.campaign.description') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @campaign.description %>
                 </div>
@@ -28,7 +28,7 @@
             <% end %>
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label">Status</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('attributes.campaign.status') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= display_status(@campaign) %>
               </div>
