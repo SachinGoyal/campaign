@@ -1,6 +1,6 @@
   <div class="row">
     <div class="page-title">
-      <div class="title_left"><h2>View Newsletter</h2></div><!-- title_left -->
+      <div class="title_left"><h2><%= t('frontend.shared.view', :model_name => 'Newsletter') %></h2></div><!-- title_left -->
       <div class="clearfix"></div>
     </div><!-- page-title -->
   </div><!--row-->
@@ -14,7 +14,7 @@
 
  
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" >Name</label>
+              <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.name') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @newsletter.name %>
               </div>
@@ -22,7 +22,7 @@
 
             <% if @newsletter.campaign.present? %>
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label" >Campaign</label>
+                <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.campaign_id') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @newsletter.campaign.name %>
                 </div>
@@ -30,7 +30,7 @@
             <% end %>  
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" >Subject</label>
+              <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.subject') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @newsletter.subject %>
               </div>
@@ -38,7 +38,7 @@
 
             <%# unless @contact.profiles.empty? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label" >Template</label>
+                <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.template_id') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @newsletter.template.name %>
                 </div>
@@ -48,7 +48,7 @@
 
             <% unless @newsletter.profiles.blank? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label">Profile(s)</label>
+                <label class="col-sm-4 col-xs-12 control-label"><%= t('frontend.newsletter.profiles') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @newsletter.profiles.map(&:name).join(", ") %>
                 </div>
@@ -57,7 +57,7 @@
 
             <% unless @newsletter.newsletter_emails.blank? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label">Email List</label>
+                <label class="col-sm-4 col-xs-12 control-label"><%= t('frontend.newsletter.email_list') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @newsletter.all_emails %>
                 </div>
@@ -65,7 +65,7 @@
             <% end %>
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label">From Name</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.newsletter.from_name') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @newsletter.from_name %>
               </div>
@@ -73,7 +73,7 @@
 
             <%# unless @contact.interest_areas.empty? %>            
               <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label" >From Email</label>
+                <label class="col-xs-4 text-right control-label" ><%= t('activerecord.attributes.newsletter.from_address') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%=  @newsletter.from_address %> </div>
                   <div class="clearfix"></div> 
@@ -82,7 +82,7 @@
 
             <% unless @newsletter.reply_email.empty? %>            
               <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label">Reply Email</label>
+                <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.reply_email') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%=  @newsletter.reply_email %> </div>
                   <div class="clearfix"></div> 
@@ -91,7 +91,7 @@
 
             <% unless @newsletter.cc_email.empty? %>            
               <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label">CC Email</label>
+                <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.cc_email') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%=  @newsletter.cc_email %> </div>
                   <div class="clearfix"></div> 
@@ -100,7 +100,7 @@
 
             <% unless @newsletter.bcc_email.empty? %>            
               <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label">Bcc Email</label>
+                <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.bcc_email') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%=  @newsletter.bcc_email %> </div>
                   <div class="clearfix"></div> 
@@ -109,7 +109,7 @@
 
             <% if @newsletter.send_at.present? %>            
               <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label">Send at</label>
+                <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.send_at') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%=  format_date(@newsletter, :send_at) %> </div>
                   <div class="clearfix"></div> 
@@ -118,7 +118,7 @@
             
             <% if @newsletter.auto_response.present? %>            
               <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label">Auto Response</label>
+                <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.auto_response') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%=  @newsletter.auto_response %> </div>
                   <div class="clearfix"></div> 
@@ -131,8 +131,6 @@
               <label class="col-sm-4 col-xs-12 control-label" >&nbsp;</label>
               <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
             </div>
-
-
           </div>
           <div class="clearfix"></div>
           <div class="divider"></div>

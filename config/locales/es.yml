@@ -73,6 +73,7 @@ es:
     export: "Exportar a Excel"
     pay_commissions: "Pagar commisíon"
     send: "Enviar"
+    preview: "Avance"
   links:
     cancel: "Cancelar"
     signin: "Iniciar sesión"
@@ -147,11 +148,13 @@ es:
 
       template:
         name: "Nombre"
-        content:
-        status:
+        content: "Descripción"
+        status: "Estado"
+        created_at: "Fecha"
       profile:
         name: "Nombre"
-        status:
+        status: "Estado"
+        created_at: "Fecha"
       contact:
         first_name: "Nombre"
         last_name: "Nombre"
@@ -160,29 +163,35 @@ es:
         city: "Ciudad"
         country: "País"
         gender: "Género"
+        created_at: "Fecha"
       role:
         name: "Nombre"
+        status: "Estado"
+        created_at: "Fecha"
       attribute:
         name: "Nombre"
         description: "Descripción"
+        created_at: "Fecha"
+        status: "Estado"
       company: 
         name: "Nombre"
         free_emails:
         subdomain:
-        status:
+        status: Estado
+        created_at: "Fecha"
       user:   
         username:
         email:
         password:
-        status:  
-      role:
-        name: "Nombre"
+        status: "Estado" 
+        created_at: "Fecha"
       setting:
         site_title:
         free_emails:
         admin_email:
         admin_footer_content:
         name: "Nombre"
+        created_at: "Fecha"
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "Siguiente &#8594;"
@@ -244,10 +253,13 @@ es:
     campaign:
       view_stat: "Ver Stat"
     newsletter:
+      profiles: "Perfil (s)"
+      email_list: "Lista de Correo"
       sample_email: "Muestra Email"
       email_address: "Dirección de correo electrónico"
       sample_email_hint: "Enviar una copia de la campaña para la dirección de correo electrónico siguiente (s ), separados por comas"
       auto_responder_rules: "Auto Reglas Responder"
+      auto_send: "Auto Enviar"
       sender_settings: "ajustes del emisor"
       interest_areas: "Area de interes"
       send_now: "Enviar ahora"

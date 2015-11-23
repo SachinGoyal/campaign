@@ -149,7 +149,7 @@
             <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
             <div class="col-sm-9 col-xs-12 custom-radio-input">
               <input id="radio01" name="" type="radio" value="" class="auto_response_toggle">
-              <label for="radio01"><span></span><%= t('frontend.newsletter.auto_response')%></label>
+              <label for="radio01"><span></span><%= t('frontend.newsletter.auto_responder_rules')%></label>
               <% if @newsletter.auto_response %>
                 <%= f.email_field :auto_response, :class => "form-control" %>
               <% else %>
@@ -162,7 +162,7 @@
             <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
             <div class="col-sm-9 col-xs-12 custom-radio-input">
               <input id="radio02" name="" type="radio" value="" class="send_at_toggle">
-              <label for="radio02"><span></span>Auto Sent</label>
+              <label for="radio02"><span></span><%= t('frontend.newsletter.auto_send') %></label>
               <% if @newsletter.send_at %>
                 <%= f.text_field :send_at, :class => "form-control datetimepicker" %>
               <% else %>
@@ -182,9 +182,9 @@
       <div class="col-lg-2 col-xs-1">&nbsp;</div>
       <div class="col-md-6 col-xs-10">
         <div class="form-group custom-from-group">
-          <button type="button" id='preview-template'>Preview</button>
+          <button type="button" id='preview-template'><%= t('buttons.preview') %></button>
           <%= f.submit  :class => 'btn dark-btn-custom' %>
-          <%= link_to "Cancel", newsletters_path, :class => 'btn custom-link-btn' %>
+          <%= link_to t('cancel'), newsletters_path, :class => 'btn custom-link-btn' %>
            
         </div>
 
