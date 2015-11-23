@@ -101,6 +101,6 @@
       </div><!-- row -->
     </div><!--  custom-container -->
 <% if can? :update, Contact %>    
-  <%= link_to 'Edit', edit_contact_path(@contact) %> |
+  <%= link_to t('buttons.edit'), edit_contact_path(@contact) %> |
 <% end %>
-<%= link_to 'Back', contacts_path %>
+<%= link_to t('buttons.back'), contacts_path %>

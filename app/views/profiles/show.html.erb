@@ -53,6 +53,6 @@
     </div><!--  custom-container -->
 
 <% if can? :update, Profile %>
-  <%= link_to 'Edit', edit_profile_path(@profile) %> |
+  <%= link_to t('buttons.edit'), edit_profile_path(@profile) %> |
 <% end %>
-<%= link_to 'Back', profiles_path %>
+<%= link_to t('buttons.back'), profiles_path %>

@@ -13,6 +13,7 @@
     });
   });
 </script>
+
 <div class="custom-container">
   <div class="row">
     <div class="col-md-12 col-xs-12">
@@ -98,10 +99,10 @@
               <%= f.label :status, :class => "col-sm-3 col-xs-12 control-label" %>
               <div class="col-sm-9 col-xs-12 radio_status">
                 <%= f.radio_button :status, true , :checked => @user.new_record? ? true : @user.status , :value => true %>
-                <%= label :status, "Enabled", :class =>"status_spacer" %>
+                <%= label :status, t('frontend.shared.enabled') , :class =>"status_spacer" %>
 
                 <%= f.radio_button :status, false , :checked => @user.new_record? ? false : !@user.status , :value => false %>
-                <%= label :status, "Disabled" %>
+                <%= label :status, t('frontend.shared.disabled') %>
               </div>
             </div>
 

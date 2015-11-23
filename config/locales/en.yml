@@ -80,10 +80,12 @@ en:
 
   asearch:
     addcondition: "Add Condition"
+    add_condition_group: "Add Conditions Group"
     results: "Results found"
     noresults: "No results for this search"
     breadcrumb: "Advanced Search"
     select_field: "Select a field"
+    select: "Select"
   menu:
     campaign: Campaign
     newsletter: Newsletter
@@ -93,7 +95,7 @@ en:
     role: Role
     attribute: Attribute
     company:  Company
-    user: user   
+    user: User   
     stat: Stat
     report: Report  
     setting: Setting
@@ -232,6 +234,10 @@ en:
       confirm_enable: "Are you sure you want to enable records?"
       confirm_disable: "Are you sure you want to disable records?"
       confirm_delete_all: "Are you sure you want to delete records?"
+      enabled: "Enabled"
+      disabled: "Disabled"
+      advance_search: "Advance Search"
+      no_record: "No Record Found"
     file:
       confirm_delete: "Are you sure you want to delete this project?, all its dependent objects will be also deleted."
 
@@ -240,9 +246,15 @@ en:
 
     user:
       username: "Username"
+      email: "Email"
+      status: "Status"
       password: "Password"
       view: "View User"
-
+      advance_search_list: "User List - Advance Search"
+      add: "Add User"
+      list: "Users list"
+      new: "New User"
+      edit: "Edit User"
     settings:
       name: "Name"
       email: "Email"
