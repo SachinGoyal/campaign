@@ -7,7 +7,9 @@
     });
 });
 </script>
+
 <div class='import_export_links import_export_links_margin'>
+<<<<<<< HEAD
 <% if can? :create, Contact %>
   <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
 <% end %>
@@ -16,87 +18,99 @@
   <%= link_to contacts_path(format: "xls") do %>
     <span>Export Contacts</span>
     <i class="fa fa-file-excel-o"></i>
+=======
+  <% if can? :create, Contact %>
+    <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
   <% end %>
-<% end %>
+  
+  <% if can? :read, Contact %>
+    <%= link_to contacts_path(format: "csv") do %>
+      <span>Export Contacts</span>
+      <i class="fa fa-file-excel-o"></i>
+    <% end %>
+>>>>>>> 268950fd5dd209a196534c68f1447982e47fcb14
+  <% end %>
 </div>
+
 <div id="myModal" class="modal fade" role="dialog">
+
 <div class="modal-dialog">
     <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header">
-  	       <button type="button" class="close" data-dismiss="modal">&times;</button>
-     	   <h4 class="modal-title">Import Contacts</h4>
-      	</div>
-      	<div class="modal-body">
-       		<div class="popup-container">
-          <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, data: {type: "script"} do |f| %>
-    			    <div id="error_explanation">
-                <% if @contact_import and @contact_import.errors.any? %>              
-                  <%= render 'errors', :locals => {:model_name => @contact_import} %>
-                <% end %>
+  <div class="modal-content">
+    <div class="modal-header">
+  	  <button type="button" class="close" data-dismiss="modal">&times;</button>
+     	<h4 class="modal-title">Import Contacts</h4>
+    </div>
+    
+    <div class="modal-body">
+       <div class="popup-container">
+        <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, data: {type: "script"} do |f| %>
+    			<div id="error_explanation">
+            <% if @contact_import and @contact_import.errors.any? %>              
+              <%= render 'errors', :locals => {:model_name => @contact_import} %>
+            <% end %>
+          </div>
+
+		    	
+          <div class="row">
+		        <div class="form-group form-group-sm">
+		          <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select Profile</label>
+		          <div class="col-xs-6">
+  							<%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), {}, { :class => 'form-control' } %>
+		          </div>
+		          
+              <div class="col-xs-3">&nbsp;</div>
+		          <div class="clearfix"></div>
+		        </div>
+        
+        		<div class="form-group form-group-sm">
+            	<label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select File</label>
+          		<div class="col-xs-6">
+          			<div class="input-group">
+              		<input type="text" class="form-control" readonly="" placeholder = "Upload only CSV files">
+              		<span class="input-group-btn">
+          	        <span class="btn btn-primary btn-file custom-dark-btn">
+              	      <%= f.file_field :file %> Browse
+                  	</span>                          
+              		</span>
+
+                  <span class="help-block"></span>
+          			</div>
+          		</div>
+          		<div class="col-xs-3 green-import-btn">
+                <%= button_tag("Import", type: 'submit', class: "fa fa-cloud-download") %>
               </div>
 
-		    	  <div class="row">
-		        	<div class="form-group form-group-sm">
-		            <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select Profile</label>
-		            <div class="col-xs-6">
-		            	<%# if current_user.is_admin? %>
-  							    <%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), {}, { :class => 'form-control' } %>
-  						    <%# else %>
-  						    <%# end %>
-		            </div>
-		            <div class="col-xs-3">&nbsp;</div>
-		            <div class="clearfix"></div>
-		          </div>
-        
-        		  <div class="form-group form-group-sm">
-            		<label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select File</label>
-            		<div class="col-xs-6">
-            			<div class="input-group">
-                			<input type="text" class="form-control" readonly="" placeholder = "Upload only CSV files">
-                			<span class="input-group-btn">
-            	        		<span class="btn btn-primary btn-file custom-dark-btn">
-                	        		<%= f.file_field :file, :accept => "text/csv" %> Browse
-                    			</span>                          
-                			</span>
-
-                      <span class="help-block"></span>
-            			</div>
-            		</div>
-            		<div class="col-xs-3 green-import-btn">
-                  <%= button_tag("Import", type: 'submit', class: "fa fa-cloud-download") %>
-                </div>
-
-            	  <div class="clearfix"></div>
-
-        		<% end %>
+          	  <div class="clearfix"></div>
         		</div>
-    		</div>
-    		<div class="row">
+    		  </div>
+        <% end %>  
+    		
+        <div class="row">
      			<div class="col-xs-12"><div class="sample-fields-heading">Sample Fields</div></div>
     		</div>
     
     		<div class="row">
     			<div class="col-xs-12 popup-sample-table">
-        			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-             			<tr>
-              				<th scope="col">first_name</th>
-              				<th scope="col">last_name</th>
-              				<th scope="col">email</th>
-                      <th scope="col">country</th>
-                      <th scope="col">city</th>
-                      <th scope="col">gender</th>
-             			</tr>
-             			
-             			<tr>
-			              <td scope="col">John</td>
-			              <td scope="col">Doe</td>
-			              <td scope="col">John.Doe@gmail.com</td>
-                    <td scope="col">India</td>
-                    <td scope="col">Delhi</td>
-                    <td scope="col">Male</td>
-			            </tr>
-            		</table>
+      			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+           			<tr>
+            				<th scope="col">first_name</th>
+            				<th scope="col">last_name</th>
+            				<th scope="col">email</th>
+                    <th scope="col">country</th>
+                    <th scope="col">city</th>
+                    <th scope="col">gender</th>
+           			</tr>
+           			
+           			<tr>
+		              <td scope="col">John</td>
+		              <td scope="col">Doe</td>
+		              <td scope="col">John.Doe@gmail.com</td>
+                  <td scope="col">India</td>
+                  <td scope="col">Delhi</td>
+                  <td scope="col">Male</td>
+		            </tr>
+          		</table>
         		</div>
     		</div>
     	</div>

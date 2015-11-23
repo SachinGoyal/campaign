@@ -16,9 +16,7 @@ class ProfilesController < ApplicationController
   end
 
   def search
-    association = Hash.new()
-    # Contact.reflect_on_all_associations(:belongs_to).each { |a| association[a.foreign_key.to_s] = a.class_name }
-    
+    association = Hash.new()    
     @attributes = Hash.new()
 
     Profile.columns_hash.slice('name', 'created_at').each do |k,v|
@@ -93,7 +91,6 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
-    
     respond_to do |format|
       if @profile.destroy
         format.html { redirect_to profiles_url, notice: 'Profile was successfully deleted.' }

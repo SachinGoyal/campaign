@@ -10,7 +10,7 @@ class ContactImport
   attr_accessor :file, :profile_id
   validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
   # validates_format_of :file, :with => %r{\.csv\z}i, :message => "file must be in .csv format"
-  validate :check_file_ext
+  # validate :check_file_ext
   validates :profile_id, presence: true
 
   def check_file_ext
@@ -33,7 +33,6 @@ class ContactImport
   end
 
   def save
-
     if valid?
       if imported_contacts.map(&:valid?).all?
         successfull_records = []
@@ -89,8 +88,8 @@ class ContactImport
   def open_spreadsheet
     case File.extname(file.original_filename)
     when ".csv" then Roo::CSV.new(file.path)
-    when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
-    when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
+    when ".xls" then Roo::Excel.new(file.path)
+    when ".xlsx" then Roo::Excelx.new(file.path)
     else raise "Unknown file type: #{file.original_filename}"
     end
   end

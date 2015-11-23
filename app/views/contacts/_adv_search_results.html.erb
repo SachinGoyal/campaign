@@ -53,11 +53,15 @@
   });
 
 	$(".contact_newsletter").change(function(){
-		if ($(this).is(':checked')){
-			if(!$.trim($(".contact_emails").val()))
+		contact_emails_val = $(".contact_emails").val();
+    if ($(this).is(':checked')){
+			if(!$.trim(contact_emails_val))
 	    	$('.contact_emails').html($(this).val())
 			else
-				$('.contact_emails').append(", " + $(this).val())
+        if(contact_emails_val.endsWith(",") || contact_emails_val.endsWith(", "))
+				  $('.contact_emails').append($(this).val())
+        else
+          $('.contact_emails').append(", " + $(this).val())
 		}
 		else{
 			var value = $('.contact_emails').val();

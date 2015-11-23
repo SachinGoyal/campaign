@@ -182,17 +182,4 @@ class User < ActiveRecord::Base
   def is_companyadmin?
     role.name == COMPANY_ADMIN
   end
-
-  private
-
-
-  # def self.ransackable_scopes(auth_object = nil)
-  #   if auth_object.try(:admin?)
-  #     # allow admin users access to all three methods
-  #     %i(active hired_since salary_gt)
-  #   else
-  #     # allow other users to search on active and hired_since only
-  #     %i(auth_object.company.users)
-  #   end
-  # end
 end

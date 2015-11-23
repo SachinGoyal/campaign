@@ -56,12 +56,7 @@ class Attribute < ActiveRecord::Base
       %w(name)
     end
   end
-  # ransacker :id do
-  #   Arel.sql(
-  #     "regexp_replace(
-  #       to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')"
-  #   )
-  # end
+  
 
   #Class Methods
   class << self
