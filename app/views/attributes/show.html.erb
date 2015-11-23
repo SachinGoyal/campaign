@@ -1,6 +1,6 @@
   <div class="row">
     <div class="page-title">
-      <div class="title_left"><h2>View Attribute</h2></div><!-- title_left -->
+      <div class="title_left"><h2><%= t('frontend.attribute.view') %></h2></div><!-- title_left -->
 
       <div class="clearfix"></div>
 
@@ -18,7 +18,7 @@
 
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('attributes.attribute.name') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @attribute.name%>
               </div>
@@ -26,7 +26,7 @@
 
             <% if @attribute.description.present? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Description</label>
+                <label class="col-sm-4 col-xs-12 control-label"><%= t('attributes.attribute.description') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @attribute.description%>
                 </div>
@@ -34,7 +34,7 @@
             <% end %>
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('attributes.attribute.status') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= display_status @attribute %>
               </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="col-lg-4 col-xs-1">
           <div class="form-group form-group-sm">
-            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+            <label class="col-sm-4 col-xs-12 control-label">&nbsp;</label>
             <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
           </div>
 
