@@ -118,7 +118,7 @@ class RolesController < ApplicationController
     def set_role
       @role = Role.find(params[:id])
       unless @role
-        return redirect_to roles_path, :alert => "Could not find role"
+        return redirect_to roles_path, :alert => t("controller.shared.alert.message" , model: 'Role')
       end
     end
 

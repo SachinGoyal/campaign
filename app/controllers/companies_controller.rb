@@ -111,7 +111,7 @@ class CompaniesController < ApplicationController
     def set_company
       @company = Company.find(params[:id])
       unless @company
-        return redirect_to companies_path, :alert => "Could not find company"
+        return redirect_to companies_path, :alert => t("controller.shared.alert.message" , model: 'Company')
       end
     end
 

@@ -335,7 +335,10 @@ en:
     improcedent: Improcedente
     
   controller:
+    unauthorized_domain: "You are not authorized to access that subdomain."
     shared: 
+      alert:
+        message: "Could not find %{model}"
       flash:
         delete_all: "%{model} deleted successfully"
         create:
@@ -356,6 +359,7 @@ en:
         error: "Operation failed"
     contact:
       import: "Contacts imported."
+      select_profile: "Please select atleast one"
     user:
       delete: "Cannot delete user with company admin role"
       delete_all: "Users deleted successfully. Users with associated data or company admin role could not be deleted."

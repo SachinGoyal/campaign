@@ -68,7 +68,7 @@ class AttributesController < ApplicationController
         format.json { render :show, status: :ok, location: @attribute }
       else
         format.html { render :edit }
-        format.json { render json: @attribute.errors, status: t("controller.shared.flash.status.notice", model: "Attribute") }
+        format.json { render json: @attribute.errors, status: t("controller.shared.flash.update.status") }
       end
     end
   end
@@ -91,7 +91,7 @@ class AttributesController < ApplicationController
     def set_attribute
       @attribute = Attribute.find(params[:id])
       unless @attribute
-        return redirect_to attributes_path, :alert => "Could not find attribute"
+        return redirect_to attributes_path, :alert => t("controller.shared.alert.message" , model: 'Attribute')
       end
     end
 

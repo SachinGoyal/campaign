@@ -107,13 +107,13 @@ class ContactsController < ApplicationController
 
     if (contact_params[:profile_ids] - [""]).empty? 
       @contact.valid?
-      @contact.errors[:profile_ids] << "Please select atleast one"
+      @contact.errors[:profile_ids] << t("controller.contact.select_profile")
       render :new
       return
     end
 
     if (contact_params[:profile_ids] - [""]).empty? and !@contact.valid?
-      @contact.errors[:profile_ids] << "Please select atleast one"
+      @contact.errors[:profile_ids] << t("controller.contact.select_profile")
       render :new
       return
     end
@@ -124,7 +124,7 @@ class ContactsController < ApplicationController
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit }
-        format.json { render json: @contact.errors, status: t("controller.shared.flash.update.notice", model: "Contact") }
+        format.json { render json: @contact.errors, status: t("controller.shared.flash.update.status" }
       end
     end
   end

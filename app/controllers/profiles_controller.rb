@@ -106,7 +106,7 @@ class ProfilesController < ApplicationController
     def set_profile
       @profile = Profile.find(params[:id])
       unless @profile
-        return redirect_to profiles_path, :alert => "Could not find profile"
+        return redirect_to profiles_path, :alert => t("controller.shared.alert.message" , model: 'Profile')
       end
     end
 

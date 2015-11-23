@@ -92,7 +92,7 @@ class UsersController < ApplicationController
 	def set_user
 	  @user = User.find(params[:id])
     unless @user
-      return redirect_to users_path, :alert => "Could not find user"
+      return redirect_to users_path, :alert => t("controller.shared.alert.message" , model: 'User')
     end
 	end
 
