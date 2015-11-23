@@ -60,7 +60,7 @@
         <% elsif element.is_a?(Newsletter) %>
           <% if element.editable_or_deletable? %>
             <li class="custom-delete">
-            <%= link_to element, method: :delete, data: { confirm: 'Are you sure you want delete campaign and all the associated data?' } do %>
+            <%= link_to element, method: :delete, data: { confirm: t('frontend.newsletter.confirm_delete') } do %>
               <i class="fa fa-plus"></i>
               <span><%= t("frontend.shared.delete") %></span>
             <% end %>
@@ -69,14 +69,14 @@
 
         <% elsif element.is_a?(Company) %>
           <li class="custom-delete">
-            <%= link_to element, method: :delete, data: { confirm: 'Are you sure want to delete this company? It will delete associated admin and other data.' } do %>
+            <%= link_to element, method: :delete, data: { confirm: t('frontend.company.confirm_delete') } do %>
               <i class="fa fa-plus"></i>
               <span><%= t("frontend.shared.delete") %></span>
             <% end %>
           </li>
         <% else %>
           <li class="custom-delete">
-            <%= link_to element, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete') } do %>
               <i class="fa fa-plus"></i>
               <span><%= t("frontend.shared.delete") %></span>
             <% end %>
