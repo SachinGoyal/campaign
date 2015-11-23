@@ -2,6 +2,157 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  controller:
+    campaign: 
+      create:
+        flash:
+          notice: "Campaign was successfully created."
+          status: "unprocessable_entity"
+      update:
+          notice: "Campaign was successfully updated."
+          status: "unprocessable_entity"
+      destroy:
+          notice: "Campaign was successfully deleted."
+      edit_all:
+        notice:
+          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          update_all: "Campaigns updated successfully."
+
+    newsletter: 
+      create:
+        flash:
+          notice: "Campaign was successfully created."
+          status: "unprocessable_entity"
+      update:
+          notice: "Campaign was successfully updated."
+          status: "unprocessable_entity"
+      destroy:
+          notice: "Campaign was successfully deleted."
+      edit_all:
+        notice:
+          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          update_all: "Campaigns updated successfully."
+
+    template: 
+      create:
+        flash:
+          notice: "Campaign was successfully created."
+          status: "unprocessable_entity"
+      update:
+          notice: "Campaign was successfully updated."
+          status: "unprocessable_entity"
+      destroy:
+          notice: "Campaign was successfully deleted."
+      edit_all:
+        notice:
+          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          update_all: "Campaigns updated successfully."
+
+    profile: 
+      create:
+        flash:
+          notice: "Campaign was successfully created."
+          status: "unprocessable_entity"
+      update:
+          notice: "Campaign was successfully updated."
+          status: "unprocessable_entity"
+      destroy:
+          notice: "Campaign was successfully deleted."
+      edit_all:
+        notice:
+          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          update_all: "Campaigns updated successfully."
+
+    contact: 
+      create:
+        flash:
+          notice: "Campaign was successfully created."
+          status: "unprocessable_entity"
+      update:
+          notice: "Campaign was successfully updated."
+          status: "unprocessable_entity"
+      destroy:
+          notice: "Campaign was successfully deleted."
+      edit_all:
+        notice:
+          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          update_all: "Campaigns updated successfully."
+
+    role: 
+      create:
+        flash:
+          notice: "Campaign was successfully created."
+          status: "unprocessable_entity"
+      update:
+          notice: "Campaign was successfully updated."
+          status: "unprocessable_entity"
+      destroy:
+          notice: "Campaign was successfully deleted."
+      edit_all:
+        notice:
+          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          update_all: "Campaigns updated successfully."
+
+    attribute: 
+      create:
+        flash:
+          notice: "Campaign was successfully created."
+          status: "unprocessable_entity"
+      update:
+          notice: "Campaign was successfully updated."
+          status: "unprocessable_entity"
+      destroy:
+          notice: "Campaign was successfully deleted."
+      edit_all:
+        notice:
+          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          update_all: "Campaigns updated successfully."
+          
+    company:  
+      create:
+        flash:
+          notice: "Campaign was successfully created."
+          status: "unprocessable_entity"
+      update:
+          notice: "Campaign was successfully updated."
+          status: "unprocessable_entity"
+      destroy:
+          notice: "Campaign was successfully deleted."
+      edit_all:
+        notice:
+          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          update_all: "Campaigns updated successfully."
+
+    user:    
+      create:
+        flash:
+          notice: "Campaign was successfully created."
+          status: "unprocessable_entity"
+      update:
+          notice: "Campaign was successfully updated."
+          status: "unprocessable_entity"
+      destroy:
+          notice: "Campaign was successfully deleted."
+      edit_all:
+        notice:
+          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
+          update_all: "Campaigns updated successfully."
+
+    stat: 
+
+    report:   
+
+    setting: 
+      create:
+        flash:
+          notice: "User account was successfully created."
+      update:
+          notice: "User account was successfully created."
+      destroy:
+          notice: "User account was successfully created."
+
+
+
   search: "Search"
   dashboard:
     log-out: "Log-Out"
