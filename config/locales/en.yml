@@ -2,8 +2,10 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  log-out: "Log-Out"
   search: "Search"
+  dashboard:
+    log-out: "Log-Out"
+    edit-profile: "Edit"
   cancan:
     default_message: 'You are not authorized to access this page.'
   unauthorized:
@@ -75,6 +77,7 @@ en:
 
 
   links:
+    cancel: "Cancel"
     signin: "Sign in"
     forgotpass: "Forgot your password?"
 
@@ -266,10 +269,42 @@ en:
     campaign:
       view_stat: "View Stat"
       confirm_delete: "Are you sure you want delete newsletter and all the associated data?"
-    newsletter:
+      new: "New Campaign"
+      edit: "Edit Campaign"
+      placeholder:
+    newsletter: 
+      placeholder:
       send_now: "Send Now"
-    company:
+    template: 
+      copy: "Copy"
+      placeholder:
+    profile: 
+      placeholder:
+    contact: 
+      placeholder:
+    role: 
+      name: "Name"
+      placeholder:
+    attribute: 
+      list: "Attribute List"
+      placeholder:
+    company:  
+      placeholder:
       confirm_delete: "Are you sure want to delete this company? It will delete associated admin and other data."
+    user:    
+      placeholder:
+      username: "Username"
+      password: "Password"
+      view: "View User"
+    stat: 
+      placeholder:
+    report:   
+      placeholder:
+    setting: 
+      placeholder:
+      name: "Name"
+      email: "Email"
+      web: "Website"      
 
   words:
     procedent: Procedente

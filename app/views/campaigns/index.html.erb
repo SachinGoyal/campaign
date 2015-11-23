@@ -13,7 +13,7 @@
             </div> 
           <% end %>
           <% if can? :create, Campaign %>
-            <div class="custom-add"><%= link_to new_campaign_path, :title => "New Campaign" do %><i class="fa fa-plus"></i><% end %></div>
+            <div class="custom-add"><%= link_to new_campaign_path, :title => t("frontend.campaign.new") do %><i class="fa fa-plus"></i><% end %></div>
           <% end %>
 
       </div>

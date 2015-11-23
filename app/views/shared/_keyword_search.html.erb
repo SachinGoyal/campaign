@@ -1,6 +1,6 @@
 <%= search_form_for @q ,class: 'custom-input-search ' do |f| %>
   <div class="input-group">
-    <%= f.search_field condition.to_sym, :class => "form-control", :placeholder => "Enter Keyword", :maxlength => 255 %>
+    <%= f.search_field condition.to_sym, :class => "form-control", :placeholder => t("frontend.shared.placeholder.search"), :maxlength => 255 %>
     <span class="input-group-btn">
     <%= button_tag(type: 'submit', class: "btn btn-default") do %>
         <i class="fa fa-search"></i>
