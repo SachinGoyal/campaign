@@ -49,12 +49,12 @@ class TemplatesController < ApplicationController
       template.name = template.name + '_copy'
       template.save
       respond_to do |format|
-        format.html { redirect_to templates_url, notice: 'Template was successfully copied.' }
+        format.html { redirect_to templates_url, notice: t("controller.template.copy.success") }
         format.json { head :no_content }
       end
     rescue 
       respond_to do |format|
-        format.html { redirect_to templates_url, notice: 'Operation failed' }
+        format.html { redirect_to templates_url, notice: t("controller.template.copy.error") }
         format.json { head :no_content }
       end
     end
@@ -78,11 +78,11 @@ class TemplatesController < ApplicationController
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to @template, notice: 'Template was successfully created.' }
+        format.html { redirect_to @template, notice: t("controller.shared.flash.create.notice", model: "Template") }
         format.json { render :show, status: :created, location: @template }
       else
         format.html { render :new }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
+        format.json { render json: @template.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -92,11 +92,11 @@ class TemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to  @template, notice: 'Template was successfully updated.' }
+        format.html { redirect_to  @template, notice: t("controller.shared.flash.update.notice", model: "Template") }
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
+        format.json { render json: @template.errors, status: t("controller.shared.flash.update.notice") }
       end
     end
   end
@@ -106,7 +106,7 @@ class TemplatesController < ApplicationController
   def destroy
     if @template.destroy
       respond_to do |format|
-        format.html { redirect_to templates_url, notice: 'Template was successfully deleted.' }
+        format.html { redirect_to templates_url, notice: t("controller.shared.flash.destroy.notice", model: "Template") }
         format.json { head :no_content }
       end
     else
@@ -131,9 +131,9 @@ class TemplatesController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          "Templates deleted successfully. Templates with associated data could not be deleted."
+          t("controller.shared.flash.edit_all.notice.delete_all", model: "Templates")
         else
-          "Templates updated successfully."
+          t("controller.shared.flash.edit_all.notice.update_all", model: "Templates")
       end
 
     end

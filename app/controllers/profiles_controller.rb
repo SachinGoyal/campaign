@@ -50,11 +50,11 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html { redirect_to @profile, notice: t("controller.shared.flash.create.notice", model: "Profile") }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
+        format.json { render json: @profile.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -79,7 +79,7 @@ class ProfilesController < ApplicationController
     params[:profile][:interest_area_ids] ||= []
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to @profile, notice: t("controller.shared.flash.update.notice", model: "Profile") }
         format.json { render :show, status: :ok, location: @profile }
       else
         format.html { render :edit }
@@ -93,7 +93,7 @@ class ProfilesController < ApplicationController
   def destroy
     respond_to do |format|
       if @profile.destroy
-        format.html { redirect_to profiles_url, notice: 'Profile was successfully deleted.' }
+        format.html { redirect_to profiles_url, notice: t("controller.shared.flash.destroy.notice", model: "Profile") }
         format.json { head :no_content }
       else
         format.html { redirect_to profiles_url, notice: @profile.errors.full_messages.join(", ") }
@@ -118,9 +118,9 @@ class ProfilesController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          "Profiles deleted successfully. Profiles with associated data could not be deleted."
+          t("controller.shared.flash.edit_all.notice.delete_all", model: "Profile")
         else
-          "Profiles updated successfully."
+          t("controller.shared.flash.edit_all.notice.update_all", model: "Profile")
       end
 
     end

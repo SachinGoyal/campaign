@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
 
   def import  
     Contact.import_records(params[:file], params[:profile_id])  
-    redirect_to profiles_path, notice: "Contacts imported."  
+    redirect_to profiles_path, notice: t("controller.contact.import")  
   end  
  
   def search
@@ -77,11 +77,11 @@ class ContactsController < ApplicationController
     
     respond_to do |format|
       if @contact.save
-        format.html { return redirect_to @contact, notice: 'Contact was successfully created.' }
+        format.html { return redirect_to @contact, notice: t("controller.shared.flash.create.notice", model: "Contact") }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.json { render json: @contact.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -120,11 +120,11 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+        format.html { redirect_to @contact, notice: t("controller.shared.flash.update.notice", model: "Contact") }
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.json { render json: @contact.errors, status: t("controller.shared.flash.update.notice", model: "Contact") }
       end
     end
   end
@@ -134,7 +134,7 @@ class ContactsController < ApplicationController
   def destroy
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully deleted.' }
+      format.html { redirect_to contacts_url, notice: t("controller.shared.flash.destroy.notice", model: "Contact") }
       format.json { head :no_content }
     end
   end
@@ -153,9 +153,9 @@ class ContactsController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          "Contacts deleted successfully."
+          t("controller.contact.delete_all")
         else
-          "Contacts updated successfully."
+          t("controller.shared.flash.edit_all.notice.update_all", model: "Contacts")
       end
     end
 end

@@ -333,17 +333,25 @@ en:
     improcedent: Improcedente
     
   controller:
-    campaign: 
-      create:
-        flash:
-          notice: "Campaign was successfully created."
+    shared: 
+      flash:
+        create:
+          notice: "%{model} was successfully created."
           status: "unprocessable_entity"
-      update:
-          notice: "Campaign was successfully updated."
+        update:
+          notice: "%{model} was successfully updated."
           status: "unprocessable_entity"
-      destroy:
-          notice: "Campaign was successfully deleted."
-      edit_all:
-        notice:
-          delete_all: "Campaigns deleted successfully. Campaigns with associated data could not be deleted."
-          update_all: "Campaigns updated successfully."
+        destroy:
+          notice: "%{model} was successfully deleted."
+        edit_all:
+          notice:
+            delete_all: "%{model} deleted successfully. %{model} with associated data could not be deleted."
+            update_all: "%{model} updated successfully."
+    template:
+      copy:
+        success: "Template was successfully copied."
+        error: "Operation failed"
+    contact:
+      delete_all: "Contacts deleted successfully"
+      import: "Contacts imported."
+

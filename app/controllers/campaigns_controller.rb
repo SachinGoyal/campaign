@@ -72,11 +72,11 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new(campaign_params)
     respond_to do |format|
       if @campaign.save
-        format.html { redirect_to @campaign, notice: t("controller.campaign.create.notice") }
+        format.html { redirect_to @campaign, notice: t("controller.shared.flash.create.notice", model: "Campaign") }
         format.json { render :show, status: :created, location: @campaign }
       else
         format.html { render :new }
-        format.json { render json: @campaign.errors, status: t("controller.campaign.create.status") }
+        format.json { render json: @campaign.errors, status: t("controller.shared.flash.create.status",model: "Campaign") }
       end
     end
   end
@@ -86,11 +86,11 @@ class CampaignsController < ApplicationController
   def update
     respond_to do |format|
       if @campaign.update(campaign_params)
-        format.html { redirect_to @campaign, notice: t("controller.campaign.update.notice") }
+        format.html { redirect_to @campaign, notice: t("controller.shared.flash.update.notice",model: "Campaign") }
         format.json { render :show, status: :ok, location: @campaign }
       else
         format.html { render :edit }
-        format.json { render json: @campaign.errors, status: t("controller.campaign.update.status") }
+        format.json { render json: @campaign.errors, status: t("controller.shared.flash.update.status") }
       end
     end
   end
@@ -100,7 +100,7 @@ class CampaignsController < ApplicationController
   def destroy
     if @campaign.destroy
       respond_to do |format|
-        format.html { redirect_to campaigns_url, notice: t("controller.campaign.destroy.notice") }
+        format.html { redirect_to campaigns_url, notice: t("controller.shared.notice.destroy.notice",model: "Campaign") }
         format.json { head :no_content }
       end
     else
@@ -125,9 +125,9 @@ class CampaignsController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          t("controller.campaign.edit_all.notice.delete_all")
+          t("controller.shared.flash.edit_all.notice.delete_all",model: "Campaigns")
         else
-          t("controller.campaign.edit_all.notice.update_all")
+          t("controller.shared.flash.edit_all.notice.update_all",model: "Campaigns")
       end
 
     end
