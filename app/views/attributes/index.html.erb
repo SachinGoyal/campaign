@@ -14,7 +14,7 @@
   </div>              
 </div><!--row-->
 
-<%- model_class = Campaign -%>
+<%- model_class = Attribute -%>
 <div class="custom-table" data-bottom-url='/attributes/edit_all'>
   <div class="row th" id="attributes_header">
     <div class="col-md-1">
@@ -22,11 +22,10 @@
         <input name="" id='select-all' type="checkbox" value="">
       <% end %>
     </div>
-    <div class="col-md-2"><%=sort_link(@q, :name, 'Attribute Name')%></div>
-    <!-- <div class="col-md-3"><%#= model_class.human_attribute_name(:description) %></div> -->
-    <div class="col-md-1"><%=sort_link(@q, :status)%></div>
+    <div class="col-md-4"><%=sort_link(@q, :name, 'Attribute Name')%></div>
+    <div class="col-md-3"><%=sort_link(@q, :status)%></div>
     <div class="col-md-3"><%=sort_link(@q, :created_at, 'Date')%></div>
-    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
   <% if @attributes.present? %>

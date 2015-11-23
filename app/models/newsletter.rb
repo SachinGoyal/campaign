@@ -66,14 +66,6 @@ class Newsletter < ActiveRecord::Base
     end
   end
 
-  ransacker :created_at do
-    Arel::Nodes::SqlLiteral.new("date(newsletters.created_at)")
-  end
-  
-  def self.ransackable_attributes(auth_object = nil)
-    %w(name subject created_at)
-  end
-
   def sent?
     if send_at
       send_at <= Time.now
