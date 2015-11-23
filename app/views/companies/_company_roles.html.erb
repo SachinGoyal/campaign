@@ -1,5 +1,5 @@
 <% if @user %>
-	<%= collection_select(:user, :role_id, @roles, :id, :name, {:selected => @user.try(:role_id), :prompt => 'Please select a role'}, {:class => 'form-control dynamic_company_roles'}) %>
+	<%= collection_select(:user, :role_id, @roles, :id, :name, {:selected => @user.try(:role_id), :prompt => t('frontend.company.select_role')}, {:class => 'form-control dynamic_company_roles'}) %>
 <% else %>
-	<%= collection_select(:user, :role_id, @roles, :id, :name,{ :prompt => 'Please select a role'}, {:class => 'form-control dynamic_company_roles'}) %>
+	<%= collection_select(:user, :role_id, @roles, :id, :name,{ :prompt => t('frontend.company.select_role')}, {:class => 'form-control dynamic_company_roles'}) %>
 <% end %>

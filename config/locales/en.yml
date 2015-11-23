@@ -245,6 +245,12 @@ en:
       disabled: "Disabled"
       advance_search: "Advance Search"
       no_record: "No Record Found"
+      created_at: "Date"
+      list: "%{model_name} List"
+      edit: "Edit %{model_name}"
+      new: "New %{model_name}"
+      add: "Add %{model_name}"
+      view: "View %{model_name}"
     file:
       confirm_delete: "Are you sure you want to delete this project?, all its dependent objects will be also deleted."
 
@@ -296,9 +302,14 @@ en:
       placeholder:
     attribute: 
       list: "Attribute List"
+      edit: "Edit Attribute"
+      new: "New Attribute"
+      add: "Add Attribute"
+      view: "View Attribute"
       placeholder:
     company:  
       advanced_search: "Company-List Advanced Search"
+      select_role: "Please select a role"
       placeholder:
       confirm_delete: "Are you sure want to delete this company? It will delete associated admin and other data."
     user:    

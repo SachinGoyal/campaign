@@ -2,9 +2,9 @@
   <div class="custom-table" data-bottom-url='/campaigns/edit_all'>
     <div class="row th">
       <div class="col-md-2"><input name="" id='select-all' type="checkbox" value=""></div>
-      <div class="col-md-3"><%=sort_link(@q, :name)%></div>
-      <div class="col-md-3"><%=sort_link(@q, :status)%></div>
-      <div class="col-md-3"><%=sort_link(@q, :created_at, 'Date')%></div>
+      <div class="col-md-3"><%= sort_link(@q, :name)%></div>
+      <div class="col-md-3"><%= sort_link(@q, :status)%></div>
+      <div class="col-md-3"><%= sort_link(@q, :created_at, t('frontend.shared.created_at'))%></div>
       <div class="col-md-1">&nbsp;</div>
     </div><!-- row -->
     <% if @campaigns.present? %>
