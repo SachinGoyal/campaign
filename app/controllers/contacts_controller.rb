@@ -153,7 +153,7 @@ class ContactsController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          t("controller.contact.delete_all")
+          t("controller.shared.flash.delete_all", model: "Contacts")
         else
           t("controller.shared.flash.edit_all.notice.update_all", model: "Contacts")
       end

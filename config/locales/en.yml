@@ -337,6 +337,7 @@ en:
   controller:
     shared: 
       flash:
+        delete_all: "%{model} deleted successfully"
         create:
           notice: "%{model} was successfully created."
           status: "unprocessable_entity"
@@ -354,6 +355,9 @@ en:
         success: "Template was successfully copied."
         error: "Operation failed"
     contact:
-      delete_all: "Contacts deleted successfully"
       import: "Contacts imported."
+    user:
+      delete: "Cannot delete user with company admin role"
+      delete_all: "Users deleted successfully. Users with associated data or company admin role could not be deleted."
+    role:
 

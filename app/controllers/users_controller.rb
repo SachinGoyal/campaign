@@ -42,11 +42,11 @@ class UsersController < ApplicationController
           u.skip_invitation = true
         end
         @user.deliver_invitation
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: t("controller.shared.flash.create.notice", model: "User") }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
     if @user.update_attributes(user_params)
-      flash[:notice] = "Successfully updated User."
+      flash[:notice] = t("controller.shared.flash.update.notice", model: "User")
       redirect_to users_path
     else
       render :action => 'edit'
@@ -77,11 +77,11 @@ class UsersController < ApplicationController
 
   def destroy
     if @user.role.try(:name) == COMPANY_ADMIN
-      return redirect_to users_path, :notice => "Cannot delete user with company admin role"
+      return redirect_to users_path, :notice => t("controller.user.delete")
     end
 
   	if @user.destroy
-  	 redirect_to users_path, :success => "Successfully deleted user"
+  	 redirect_to users_path, :success => t("controller.shared.flash.destroy.notice", model: "User")
     else
       redirect_to users_path, :notice => @user.errors.full_messages.join(", ")
     end
@@ -104,9 +104,9 @@ class UsersController < ApplicationController
   def updateable_messages(action)
     case action
       when 'Delete'
-        "Users deleted successfully. Users with associated data or company admin role could not be deleted."
+        t("controller.user.delete_all")
       else
-        "Users updated successfully."
+        t("controller.shared.flash.edit_all.notice.update_all", model: "User")
     end
 
   end
