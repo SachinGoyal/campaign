@@ -11,10 +11,10 @@
     				<!-- <h2>Forgot your password?</h2> -->
     			</div>
     			<div class="custom-user-password">
-    				<%= f.email_field :email, autofocus: true, :placeholder => "Enter your email address", :class => "form-control", :maxlength => 255 %>
+    				<%= f.email_field :email, autofocus: true, :placeholder => t("devise.view.password.new.enter_email"), :class => "form-control", :maxlength => 255 %>
     			</div>
     			<div>
-                    <%= f.submit "Send" ,:class =>"btn btn-default form-control dark-theme-btn submit" %>
+                    <%= f.submit t("devise.view.password.new.send") ,:class =>"btn btn-default form-control dark-theme-btn submit" %>
     			</div>
     			<div class="clearfix"></div>
 			

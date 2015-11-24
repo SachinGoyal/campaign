@@ -2,6 +2,22 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  devise:
+    view:
+      sessions:
+        new:
+          username: "Username"
+          password: "Password"
+          lost_password: "Lost your password?"
+          login: "Login"
+      password:
+        edit:
+          password: "Password"
+          c_password: "Password Confirmation"
+          change_password: "Change Password"
+        new:
+          enter_email: "Enter your email address12"
+          send: "Send"
   welcome: "Welcome to Sperant!!"
   search: "Search"
   dashboard:

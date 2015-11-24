@@ -10,14 +10,14 @@
                         <h1>Sperant</h1>
                         <div class="custom-user-name">
                             <%= f.hidden_field :reset_password_token %>
-                            <%= f.password_field :password, autofocus: true, autocomplete: "off",:class => "form-control", :placeholder => "Password" %>
+                            <%= f.password_field :password, autofocus: true, autocomplete: "off",:class => "form-control", :placeholder => t("devise.view.password.edit.password") %>
                             
                         </div>
                         <div class="custom-user-password">
-                        <%= f.password_field :password_confirmation, autocomplete: "off" ,:class => "form-control", :placeholder => "Password Confirmation"%>
+                        <%= f.password_field :password_confirmation, autocomplete: "off" ,:class => "form-control", :placeholder => t("devise.view.password.edit.c_password")%>
                         </div>
                         <div>
-                            <%= f.submit "Change Password" , :class =>"btn btn-default form-control dark-theme-btn submit"%>
+                            <%= f.submit t("devise.view.password.edit.change_password") , :class =>"btn btn-default form-control dark-theme-btn submit"%>
                                                 </div>
                         <div class="clearfix"></div>
                         
