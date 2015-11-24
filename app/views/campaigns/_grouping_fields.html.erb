@@ -1,7 +1,7 @@
 <fieldset class="field my_fieldset">
   <div class="center group_condition_legend">
 
-    <div class="advance-search-drop" ><%= "Choose #{f.combinator_select} condition".html_safe %></div>
+    <div class="advance-search-drop" ><%= t("asearch.choose_combinations") %> <%= f.combinator_select.html_safe %></div>
 	    <div class="col-xs-1 text-center delete-icon advance-search-delete">
         <%= link_to "#", {:class => 'remove_fields'} do %>
           <i class="fa fa-plus"></i>

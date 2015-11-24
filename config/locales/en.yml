@@ -94,6 +94,7 @@ en:
     breadcrumb: "Advanced Search"
     select_field: "Select a field"
     select: "Select"
+    choose_combinations: "Choose condition"    
   menu:
     campaign: Campaign
     newsletter: Newsletter

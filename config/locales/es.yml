@@ -91,6 +91,7 @@ es:
     breadcrumb: "Búsqueda Avanzada"
     select_field: "Seleccione un campo"
     select: "Seleccionar"
+    choose_combinations: "Elija estado"    
   menu:
     campaign: Campañas
     newsletter: "Hoja informativa"
@@ -243,6 +244,7 @@ es:
       add: "Añadir %{model_name}"
       view: "Ver %{model_name}"
       status: "Estado"
+      advanced_search: "Búsqueda Avanzada"
       multiselect: "Presione Ctrl para múltiples seleccione"
       gender:
         male: "Masculino"
