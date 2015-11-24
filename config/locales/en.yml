@@ -345,6 +345,8 @@ en:
       username: "Username"
       password: "Password"
       view: "View User"
+      select_company: "Please select a company"
+      select_role: "Please select a role"
     stat: 
       placeholder:
     report:   
