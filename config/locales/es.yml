@@ -261,6 +261,7 @@ es:
       web: "Página web"
     attribute:
       list: "Lista de atributos"
+      name: 'Nombre del Atributo'
     template:
       copy: "Copia"
       content: "Contenido Plantilla"
@@ -298,6 +299,7 @@ es:
       placeholder:
       first_name: "Nombre"
     company:
+      advanced_search: "Compañía - Búsqueda avanzada"
       confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."
       select_role: "Seleccione Papel"
       free_emails: "Los correos electrónicos gratuitos"

@@ -277,6 +277,7 @@ en:
       web: "Website"
     attribute:
       list: "Attribute List"
+      name: 'Attribute Name'
     template:
       copy: "Copy"
     campaign:

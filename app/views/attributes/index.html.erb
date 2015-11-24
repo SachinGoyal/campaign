@@ -2,14 +2,14 @@
 
 <div class="row">
    <div class="col-xs-4">
-    <div class="title_left"><h2><%= t("frontend.attribute.list") %></h2></div><!-- title_left -->
+    <div class="title_left"><h2><%= t("frontend.shared.list", :model_name => 'Attribute') %></h2></div><!-- title_left -->
   </div>
   <div class="col-xs-5 form-group pull-right top_search">
   <% if can? :read, Attribute %>
     <%= render 'shared/keyword_search', :condition => :name_cont %>
   <% end %>  
   <% if can? :create, Attribute %>
-    <div class="custom-add"><%= link_to new_attribute_path, :title => t('frontend.attribute.new') do %><i class="fa fa-plus"></i><% end %></div>
+    <div class="custom-add"><%= link_to new_attribute_path, :title => t('frontend.shared.new', :model_name => 'Attribute') do %><i class="fa fa-plus"></i><% end %></div>
   <% end %>    
   </div>              
 </div><!--row-->
@@ -22,9 +22,9 @@
         <input name="" id='select-all' type="checkbox" value="">
       <% end %>
     </div>
-    <div class="col-md-4"><%= sort_link(@q, :name, 'Attribute Name')%></div>
+    <div class="col-md-4"><%= sort_link(@q, :name, t('frontend.attribute.name'))%></div>
     <div class="col-md-3"><%= sort_link(@q, :status)%></div>
-    <div class="col-md-3"><%= sort_link(@q, :created_at, 'Date')%></div>
+    <div class="col-md-3"><%= sort_link(@q, :created_at)%></div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
