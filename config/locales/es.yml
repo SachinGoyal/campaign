@@ -237,6 +237,8 @@ es:
         male: "Masculino"
         female: "Hembra"
     role:
+      create: "Créer"
+      update: "Modifier "
       name: "Nombre"
       actions: "Acciones"
     user:

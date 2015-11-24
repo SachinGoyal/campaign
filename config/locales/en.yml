@@ -257,10 +257,6 @@ en:
       gender:
         male: "Male"
         female: "Female"
-    file:
-      confirm_delete: "Are you sure you want to delete this project?, all its dependent objects will be also deleted."
-    role:
-        name: "Name"
     user:
       username: "Username"
       email: "Email"
