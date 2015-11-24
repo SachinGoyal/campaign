@@ -10,14 +10,14 @@
 
 <div class='import_export_links import_export_links_margin'>
 <% if can? :create, Contact %>
-  <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
+  <a href="#" data-toggle="modal" data-target="#myModal"><%= t('buttons.import') %><i class="fa fa-file-excel-o"></i></a>
 <% end %>
   
   <% if can? :read, Contact %>
 
     <%#= link_to contacts_path(format: "xls") do %>
     <%= link_to contacts_path(format: "csv") do %>
-      <span>Export Contacts</span>
+      <span><%= t('buttons.export') %></span>
       <i class="fa fa-file-excel-o"></i>
     <% end %>
   <% end %>
@@ -30,7 +30,7 @@
   <div class="modal-content">
     <div class="modal-header">
   	  <button type="button" class="close" data-dismiss="modal">&times;</button>
-     	<h4 class="modal-title">Import Contacts</h4>
+     	<h4 class="modal-title"><%= t('buttons.import') %></h4>
     </div>
     
     <div class="modal-body">
@@ -45,7 +45,7 @@
 		    	
           <div class="row">
 		        <div class="form-group form-group-sm">
-		          <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select Profile</label>
+		          <label class="col-sm-3 col-xs-3 control-label"><%= t('frontend.import.select_profile') %></label>
 		          <div class="col-xs-6">
   							<%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), {}, { :class => 'form-control' } %>
 		          </div>
@@ -55,13 +55,13 @@
 		        </div>
         
         		<div class="form-group form-group-sm">
-            	<label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select File</label>
+            	<label class="col-sm-3 col-xs-3 control-label"><%= t('frontend.import.select_file') %></label>
           		<div class="col-xs-6">
           			<div class="input-group">
-              		<input type="text" class="form-control" readonly="" placeholder = "Upload only CSV files">
+              		<input type="text" class="form-control" readonly="" placeholder = <%= t('frontend.import.placeholder.csv_file') %>>
               		<span class="input-group-btn">
           	        <span class="btn btn-primary btn-file custom-dark-btn">
-              	      <%= f.file_field :file %> Browse
+              	      <%= f.file_field :file %> <%= t('buttons.browse') %>
                   	</span>                          
               		</span>
 
@@ -69,7 +69,7 @@
           			</div>
           		</div>
           		<div class="col-xs-3 green-import-btn">
-                <%= button_tag("Import", type: 'submit', class: "fa fa-cloud-download") %>
+                <%= button_tag(t('frontend.import.import'), type: 'submit', class: "fa fa-cloud-download") %>
               </div>
 
           	  <div class="clearfix"></div>
@@ -78,7 +78,7 @@
         <% end %>  
     		
         <div class="row">
-     			<div class="col-xs-12"><div class="sample-fields-heading">Sample Fields</div></div>
+     			<div class="col-xs-12"><div class="sample-fields-heading"><%= t('words.sample_fields') %></div></div>
     		</div>
     
     		<div class="row">
@@ -108,7 +108,7 @@
     </div>
     
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('buttons.close') %></button>
     </div>
 </div>
 </div>

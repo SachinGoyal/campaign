@@ -74,16 +74,23 @@ es:
     pay_commissions: "Pagar commisíon"
     send: "Enviar"
     preview: "Avance"
+    save: "Guardar"
+    import: "Importar contactos"
+    export: "Exportar contactos"
+    close: "Cerca"
+    browse: "Vistazo"
   links:
     cancel: "Cancelar"
     signin: "Iniciar sesión"
     forgotpass: "¿Olvidó su contraseña?"
   asearch:
     addcondition: "Agregar condición"
+    add_condition_group: "Añadir | Condiciones"
     results: "Resultados encontrados"
     noresults: "No hay ningun resultado para su busqueda"
     breadcrumb: "Búsqueda Avanzada"
     select_field: "Seleccione un campo"
+    select: "Seleccionar"
   menu:
     campaign: Campañas
     newsletter: "Hoja informativa"
@@ -164,6 +171,7 @@ es:
         country: "País"
         gender: "Género"
         created_at: "Fecha"
+        
       role:
         name: "Nombre"
         status: "Estado"
@@ -252,6 +260,10 @@ es:
       list: "Lista de atributos"
     template:
       copy: "Copia"
+      content: "Contenido Plantilla"
+      placeholder:
+      advanced_search: "Plantilla - Búsqueda avanzada"
+      name: "Título"
     campaign:
       view_stat: "Ver Stat"
     newsletter:
@@ -275,9 +287,29 @@ es:
         gender:
           male: "Masculino"
           female: "Hembra"
+    profile:
+      number_contacts: "Número de contactos"
+      interest_areas: "Area de interes"
+    contact: 
+      advanced_search: "Contacto - Búsqueda avanzada"
+      placeholder:
+      first_name: "Nombre"
     company:
       confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."
+    import:
+      import: "Importar"
+      first_name:
+      last_name:
+      email:
+      gender:
+      city:
+      country:      
+      select_file: "Seleccione Archivo"
+      select_profile: "Seleccionar perfil"
+      placeholder:
+        csv_file: "Sube sólo los archivos CSV"
   words:
     procedent: Procedente
     improcedent: Improcedente
     and: "y"
+    sample_fields: "Los campos de ejemplo"

@@ -76,7 +76,10 @@ en:
     hold_over: "Posponer"
     send: "Send"
     preview: "Preview"
-
+    import: "Import Contacts"
+    export: "Export Contacts"
+    close: "Close"
+    browse: "Browse"
 
   links:
     cancel: "Cancel"
@@ -304,6 +307,8 @@ en:
       copy: "Copy"
       placeholder:
       advanced_search: "Template-List Advanced Search"
+      content: "Template Content"
+      name: "Title"
     profile: 
       advanced_search: "Profile-List Advanced Search"
       interest_areas: "Area of Interest"
@@ -312,6 +317,7 @@ en:
     contact: 
       advanced_search: "Contact-List Advanced Search"
       placeholder:
+      first_name: "Name"
     role: 
       name: "Name"
       create: "Create Role"
@@ -344,11 +350,24 @@ en:
       name: "Name"
       email: "Email"
       web: "Website"      
+    import:
+      import: "Import"
+      first_name:
+      last_name:
+      email:
+      gender:
+      city:
+      country:
+      select_file: "Select File"
+      select_profile: "Select Profile"
+      placeholder:
+        csv_file: "Upload only CSV files"
 
   words:
     procedent: Procedente
     improcedent: Improcedente
     and: "and"
+    sample_fields: "Sample Fields"
     
   controller:
     unauthorized_domain: "You are not authorized to access that subdomain."

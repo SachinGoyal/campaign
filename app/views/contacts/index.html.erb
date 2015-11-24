@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-xs-3">  
-      <div class="title_left"><h2>Contact list</h2></div><!-- title_left -->
+      <div class="title_left"><h2><%= t('frontend.shared.list', :model_name => 'Contact') %></h2></div><!-- title_left -->
   </div>
 
   <div class="col-xs-9 form-group pull-right top_search">
@@ -16,14 +16,14 @@
         <%= render 'shared/keyword_search', :condition => :email_cont %>
          
         <div class="advance-search">
-          <%= link_to search_contacts_path do %>
+          <%= link_to search_contacts_path, :title => t('frontend.shared.advance_search') do %>
             <i class="fa fa-dot-circle-o"></i>
           <% end %>
         </div> 
       <% end %>
       
       <% if can? :create, Contact %>
-        <div class="custom-add"><%= link_to new_contact_path, :title => "New Contact" do %><i class="fa fa-plus"></i><% end %></div>
+        <div class="custom-add"><%= link_to new_contact_path, :title => t('frontend.shared.new', :model_name => 'Contact') do %><i class="fa fa-plus"></i><% end %></div>
       <% end %> 
 
     </div>
