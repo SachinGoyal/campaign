@@ -34,6 +34,9 @@ es:
       confirmed: 'Su cuenta fue confirmada exitosamente, usted ha sido ingresado al sistema.'
       resend: "Resend confirmation instrucciones"
     registrations:
+      edit_profile: "Editar perfil"
+      confirm_password: "Confirmar contraseña"
+      current_password: "Contraseña actual"
       signed_up: '¡Bienvenido! Ha ingresado al sistema exitosamente.'
       inactive_signed_up: 'Se ha registrado exitosamente; sin embargo, no lo hemos podido ingresar debido a que su cuenta está %{reason}.'
       updated: 'Usted actualizó su cuenta exitosamente.'

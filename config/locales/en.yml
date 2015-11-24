@@ -96,7 +96,8 @@ en:
     export: "Export Contacts"
     close: "Close"
     browse: "Browse"
-
+    update: "Update"
+    upload: "Upload"
   links:
     cancel: "Cancel"
     signin: "Sign in"
@@ -423,6 +424,7 @@ en:
     and: "and"
     sample_fields: "Sample Fields"
     per_month: "per month"
+    images_only: "Upload Images only"
     
   controller:
     unauthorized_domain: "You are not authorized to access that subdomain."

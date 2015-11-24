@@ -94,6 +94,8 @@ es:
     export: "Exportar contactos"
     close: "Cerca"
     browse: "Vistazo"
+    update: "Actualizar"
+    upload: "Subir"
   links:
     cancel: "Cancelar"
     signin: "Iniciar sesión"
@@ -387,3 +389,4 @@ es:
     and: "y"
     sample_fields: "Los campos de ejemplo"
     per_month: "al mes"
+    images_only: "Subir imágenes solamente"
