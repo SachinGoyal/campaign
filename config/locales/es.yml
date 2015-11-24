@@ -75,6 +75,10 @@ es:
     send: "Enviar"
     preview: "Avance"
     save: "Guardar"
+    import: "Importar contactos"
+    export: "Exportar contactos"
+    close: "Cerca"
+    browse: "Vistazo"
   links:
     cancel: "Cancelar"
     signin: "Iniciar sesión"
@@ -167,6 +171,7 @@ es:
         country: "País"
         gender: "Género"
         created_at: "Fecha"
+        
       role:
         name: "Nombre"
         status: "Estado"
@@ -280,9 +285,29 @@ es:
         gender:
           male: "Masculino"
           female: "Hembra"
+    profile:
+      number_contacts: "Número de contactos"
+      interest_areas: "Area de interes"
+    contact: 
+      advanced_search: "Contacto - Búsqueda avanzada"
+      placeholder:
+      first_name: "Nombre"
     company:
       confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."
+    import:
+      import: "Importar"
+      first_name:
+      last_name:
+      email:
+      gender:
+      city:
+      country:      
+      select_file: "Seleccione Archivo"
+      select_profile: "Seleccionar perfil"
+      placeholder:
+        csv_file: "Sube sólo los archivos CSV"
   words:
     procedent: Procedente
     improcedent: Improcedente
     and: "y"
+    sample_fields: "Los campos de ejemplo"
