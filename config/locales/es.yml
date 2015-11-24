@@ -17,6 +17,19 @@ es:
         new:
           enter_email: "Enter your email address1"
           send: "Send"
+      mailer:
+        confirmation_instruction:
+          welcome: "Welcome"
+          confirm_link: "You can confirm your account email through the link below:"
+          con_account: 'Confirm my account'
+        reset_password_instruction:
+          hello: "Hello"
+          send_instruction: "Someone has requested a link to change your password. You can do this through the link below."
+          c_password: "Change my password"
+          ignore_mail: "If you didn't request this, please ignore this email."
+          access_link: "Your password won't change until you access the link above and create a new one."
+        unlock_instruction:
+ 
   helpers:
     submit:
       create: "Créer"
