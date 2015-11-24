@@ -177,14 +177,14 @@ es:
         status: "Estado"
         created_at: "Fecha"
       attribute:
-        name: "Nombre"
+        name: "Attribute Nombre"
         description: "Descripción"
         created_at: "Fecha"
         status: "Estado"
       company: 
-        name: "Nombre"
-        free_emails:
-        subdomain:
+        name: "Company Nombre"
+        free_emails: "Free Emails"
+        subdomain: "Subdomain"
         status: Estado
         created_at: "Fecha"
       user:   
@@ -258,6 +258,7 @@ es:
       web: "Página web"
     attribute:
       list: "Lista de atributos"
+      new: "New Attribute"
     template:
       copy: "Copia"
       content: "Contenido Plantilla"
@@ -296,6 +297,7 @@ es:
       first_name: "Nombre"
     company:
       confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."
+      new_company: "New Company"
     import:
       import: "Importar"
       first_name:

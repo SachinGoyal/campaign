@@ -13,7 +13,7 @@
             </div> 
           <% end %>
           <% if can? :create, Company %>
-            <div class="custom-add"><%= link_to new_company_path, :title => "New Company" do %><i class="fa fa-plus"></i><% end %></div>
+            <div class="custom-add"><%= link_to new_company_path, :title => t("frontend.company.new_company") do %><i class="fa fa-plus"></i><% end %></div>
           <% end %>
 
       </div>

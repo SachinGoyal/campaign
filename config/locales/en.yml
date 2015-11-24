@@ -187,12 +187,12 @@ en:
         created_at: "Date"
         company_id: "Company"
       attribute:
-        name: "Name"
+        name: "Attribute Name"
         description: "Description"
         created_at: "Date"
         company_id: "Company"
       company: 
-        name: "Name"
+        name: "Company Name"
         free_emails: "Free Emails"
         subdomain: "Subdomain"
         status: "Status"
@@ -335,6 +335,7 @@ en:
       select_role: "Please select a role"
       placeholder:
       confirm_delete: "Are you sure want to delete this company? It will delete associated admin and other data."
+      new_company: "New Company"
     user:    
       advanced_search: "User-List Advanced Search"
       placeholder:
