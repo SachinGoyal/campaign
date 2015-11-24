@@ -14,28 +14,28 @@
 
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Site title</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.setting.site_title') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @setting.site_title%>
               </div>
             </div>
 
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Free Emails</label>
+                <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.setting.free_emails') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @setting.free_emails %>
                 </div>
               </div>
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Admin email</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.setting.admin_email') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @setting.admin_email %>
               </div>
             </div>
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Admin footer content</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.setting.admin_footer_content') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @setting.admin_footer_content %>
               </div>

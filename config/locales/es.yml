@@ -163,15 +163,15 @@ es:
         status: "Estado"
         created_at: "Fecha"
       contact:
-        first_name: "Nombre"
-        last_name: "Nombre"
+        first_name: "Nombre de pila"
+        last_name: "Apellido"
         email:
         status: "Estado"
         city: "Ciudad"
         country: "País"
         gender: "Género"
         created_at: "Fecha"
-        
+        profile_id: "Perfil"
       role:
         name: "Nombre"
         status: "Estado"
@@ -188,16 +188,19 @@ es:
         status: Estado
         created_at: "Fecha"
       user:   
-        username:
-        email:
-        password:
+        username: "Nombre de usuario"
+        email: "Email"
+        password: "Clave"
+        password_confirmation: "Confirmación de Contraseña"
         status: "Estado" 
         created_at: "Fecha"
+        company_id: "Compañía"
+        role_id: "Papel"
       setting:
-        site_title:
-        free_emails:
-        admin_email:
-        admin_footer_content:
+        site_title: "Título del sitio"
+        free_emails: "Los correos electrónicos gratuitos"
+        admin_email: "Email Admin"
+        admin_footer_content: "Admin contenido de pie de página" 
         name: "Nombre"
         created_at: "Fecha"
   will_paginate:
@@ -252,6 +255,8 @@ es:
     user:
       username: "Usuario"
       password: "Contraseña"
+      select_company: "Por favor, seleccione una empresa"
+      select_role: "Por favor, seleccione un papel"
     settings:
       name: "Nombre"
       email: "Correo electrónico"
@@ -297,7 +302,12 @@ es:
       first_name: "Nombre"
     company:
       confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."
-      new_company: "New Company"
+      select_role: "Seleccione Papel"
+      free_emails: "Los correos electrónicos gratuitos"
+      name: "Compañía Nombre"
+      number_free_emails: "Número de correos electrónicos gratis"
+      username: "Nombre de Usuario"
+      password_confirmation: "Confirmar contraseña"
     import:
       import: "Importar"
       first_name:
@@ -310,8 +320,15 @@ es:
       select_profile: "Seleccionar perfil"
       placeholder:
         csv_file: "Sube sólo los archivos CSV"
+    setting: 
+      placeholder:
+      name: "Nombre"
+      email: "Email"
+      web: "Sitio web"      
+
   words:
     procedent: Procedente
     improcedent: Improcedente
     and: "y"
     sample_fields: "Los campos de ejemplo"
+    per_month: "al mes"

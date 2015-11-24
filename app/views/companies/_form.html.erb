@@ -5,7 +5,7 @@
       <div class="col-md-7 col-xs-10">
         <%= form_for @company, :html => { :class => "form-horizontal company" } do |f| %>
           <div class="form-group form-group-sm">
-            <%= f.label :name, "Company Name", :class => "col-sm-4 col-xs-12 control-label"%>
+            <%= f.label :name, t('frontend.company.name'), :class => "col-sm-4 col-xs-12 control-label"%>
             <!-- <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Company Name</label> -->
             <div class="col-sm-5 col-xs-12">
               <%= f.text_field :name, :class => 'form-control', :maxlength => 255 %>
@@ -13,11 +13,11 @@
           </div>
 
           <div class="form-group form-group-sm">
-            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Number of Free Emails</label>
+            <label class="col-sm-4 col-xs-12 control-label"><%= t('frontend.company.number_free_emails') %></label>
             <div class="col-sm-5 col-xs-12">
                <%= f.text_field :free_emails, :class => 'form-control', :maxlength => 11 %>
             </div>
-            <div class="col-md-3">(per month)</div>
+            <div class="col-md-3"><%= t('words.per_month') %></div>
           </div>
           
           <% if @company.new_record? %>
@@ -31,7 +31,7 @@
               </div>
                   
               <div class="form-group form-group-sm">
-                <%= user_form.label :username, "User Name", :class => "col-sm-4 col-xs-12 control-label"%>
+                <%= user_form.label :username, t('frontend.company.username'), :class => "col-sm-4 col-xs-12 control-label"%>
                 <div class="col-sm-5 col-xs-12">
 
                   <%= user_form.text_field :username, :class => 'form-control', :maxlength => 50 %>
@@ -46,7 +46,7 @@
               </div>
               
               <div class="form-group form-group-sm">
-                <%= user_form.label :password_confirmation, "Confirm Password", :class => "col-sm-4 col-xs-12 control-label"%>
+                <%= user_form.label :password_confirmation, t('frontend.company.username'), :class => "col-sm-4 col-xs-12 control-label"%>
                 <div class="col-sm-5 col-xs-12">
                   <%= user_form.password_field :password_confirmation, :class => 'form-control' %>
                 </div>

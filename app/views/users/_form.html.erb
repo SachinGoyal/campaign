@@ -24,7 +24,7 @@
               <% if @user.new_record? %>
                 <div class="field form-group form-group-sm role_company">
                   <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                  <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => 'Please select a company'}, {:class => 'form-control required'}) %>  </div>
+                  <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => t('frontend.user.select_company')}, {:class => 'form-control required'}) %>  </div>
                 </div> 
               <% else %>
                 <%= f.hidden_field :company_id, :value => @user.company_id%>
@@ -35,7 +35,7 @@
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
 
                   <div class="col-sm-9 col-xs-12">
-                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required dynamic_company_roles'}) %> 
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => t('frontend.user.select_role')}, {:class => 'form-control required dynamic_company_roles'}) %> 
                   </div>                
                 </div>
               <% elsif @user.role.try(:name) == COMPANY_ADMIN %>
@@ -43,7 +43,7 @@
                   <div class="field form-group form-group-sm">
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
                   <div class="col-sm-9 col-xs-12">
-                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required dynamic_company_roles'}) %> 
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => t('frontend.user.select_role')}, {:class => 'form-control required dynamic_company_roles'}) %> 
                   </div>                
                 </div>
 
@@ -63,7 +63,7 @@
                 <div class="field form-group form-group-sm">
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
                   <div class="col-sm-9 col-xs-12">
-                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required dynamic_company_roles'}) %> 
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => t('frontend.user.select_role')}, {:class => 'form-control required dynamic_company_roles'}) %> 
                   </div>                
                 </div>
               <% elsif @user.role.try(:name) == COMPANY_ADMIN %>
@@ -71,7 +71,7 @@
                   <div class="field form-group form-group-sm">
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
                   <div class="col-sm-9 col-xs-12">
-                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required company_admin_select dynamic_company_roles'}) %> 
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => t('frontend.user.select_role')}, {:class => 'form-control required company_admin_select dynamic_company_roles'}) %> 
                   </div>                
                 </div>
 
@@ -124,9 +124,9 @@
             <div class="col-xs-4">&nbsp;</div>
                         
             <div class="col-xs-8 text-left">
-              <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
+              <%= f.submit t('buttons.save') ,:class => 'btn dark-btn-custom'%>
               <% if can? :read, User %>
-                <%= link_to "Cancel", users_path, class: 'btn custom-link-btn' %>
+                <%= link_to t('cancel'), users_path, class: 'btn custom-link-btn' %>
               <% end %>
             </div>
         </div>
