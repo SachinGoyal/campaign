@@ -119,6 +119,7 @@ es:
         taken: "ya ha sido tomado"
         too_short: "es demasiado corto ( mínimo es de %{count} caracteres )"
         too_long: "es demasiado largo ( máximo es %{count} caracteres )"
+        invalid: "es inválido"
       models:
         company:
           attributes:
@@ -153,7 +154,6 @@ es:
             base:
               delete_company_admin: "No se puede eliminar de administración de la empresa"
               delete_super_admin: "No se puede eliminar el papel súper administrador"
-                attribute:
         attribute:        
           attributes:
             base:
