@@ -177,14 +177,14 @@ es:
         status: "Estado"
         created_at: "Fecha"
       attribute:
-        name: "Nombre"
+        name: "Attribute Nombre"
         description: "Descripción"
         created_at: "Fecha"
         status: "Estado"
       company: 
-        name: "Nombre"
-        free_emails:
-        subdomain:
+        name: "Company Nombre"
+        free_emails: "Free Emails"
+        subdomain: "Subdomain"
         status: Estado
         created_at: "Fecha"
       user:   
@@ -248,6 +248,8 @@ es:
         male: "Masculino"
         female: "Hembra"
     role:
+      create: "Créer"
+      update: "Modifier "
       name: "Nombre"
       actions: "Acciones"
     user:
@@ -262,6 +264,7 @@ es:
     attribute:
       list: "Lista de atributos"
       name: 'Nombre del Atributo'
+      new: "New Attribute"
     template:
       copy: "Copia"
       content: "Contenido Plantilla"

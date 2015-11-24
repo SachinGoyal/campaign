@@ -6,11 +6,12 @@
       <input name="select-all"  id='select-all' type="checkbox" value="">
     <% end %>  
     </div>
+
     <div class="col-md-2"><%= sort_link(@q, :name, t('frontend.company.name'))%></div>
     <!-- <div class="col-md-2"><%#= sort_link(@q, :subdomain) %></div> -->
     <div class="col-md-3"><%= sort_link(@q, :free_emails, t('frontend.company.free_emails')) %></div>
     <div class="col-md-2"><%= sort_link(@q, :status) %></div>
-    <div class="col-md-3"><%= sort_link(@q, :created_at, t('frontend.shared.created_at')) %></div>
+    <div class="col-md-3"><%= sort_link(@q, :created_at) %></div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 

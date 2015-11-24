@@ -9,7 +9,7 @@
     <%= render 'shared/keyword_search', :condition => :name_cont %>
   <% end %>  
   <% if can? :create, Attribute %>
-    <div class="custom-add"><%= link_to new_attribute_path, :title => t('frontend.shared.new', :model_name => 'Attribute') do %><i class="fa fa-plus"></i><% end %></div>
+    <div class="custom-add"><%= link_to new_attribute_path, :title => t("frontend.attribute.new") do %><i class="fa fa-plus"></i><% end %></div>
   <% end %>    
   </div>              
 </div><!--row-->
