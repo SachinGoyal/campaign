@@ -14,7 +14,7 @@
         <div class="form-group form-group-sm">
           <%= f.label :content, t('frontend.template.content'), :class => "col-sm-3 col-xs-3 control-label" %>
           <div class="col-sm-9 col-xs-9">
-            <%= f.text_area :content,id: 'summernote'%>
+            <%= f.text_area :content, class: 'summernote'%>
           </div>
         </div>
 
@@ -62,6 +62,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#summernote').summernote();
+    $('.summernote').summernote();
   });
 </script>

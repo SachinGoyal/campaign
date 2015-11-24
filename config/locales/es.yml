@@ -114,15 +114,51 @@ es:
     errors:
       messages:
         record_invalid: "La Validación falló: %{errors}"
+        blank: "Este campo no puede estar vacío"
+        confirmation: "no coincide con la contraseña"
+        taken: "ya ha sido tomado"
+        too_short: "es demasiado corto ( mínimo es de %{count} caracteres )"
+        too_long: "es demasiado largo ( máximo es %{count} caracteres )"
       models:
+        company:
+          attributes:
+            name:
+              format: "Sólo puede contener caracteres alfanuméricos y el espacio."
+        campaign:
+          attributes:
+            name:
+              format: "Sólo puede contener caracteres alfanuméricos y el espacio."
+            base:
+              newsletters_exist: "No se puede eliminar la campaña, ya que ha enviado boletines."
+        profile:
+          attributes:
+            base: 
+              contacts_exist: "No se puede eliminar el perfil, mientras que existen Contactos"      
         user:
           attributes:
             email:
               taken: "ya está en uso"
-        zone:
+            username:
+              format: "Sólo alfanumérico y el espacio permitido"
+            base:
+              delete_admin: "No se puede eliminar súper admin"
+        template:
           attributes:
-            name:
-              taken: "ya está en uso"
+            base:
+              associated_newsletter: "No se puede actualizar o borrar la plantilla. Se asocia con un boletín de noticias." 
+        role:
+          attributes:
+            name: 
+              format: 'Sólo puede contener caracteres alfanuméricos y el espacio. Debe comenzar con un carácter'          
+            base:
+              delete_company_admin: "No se puede eliminar de administración de la empresa"
+              delete_super_admin: "No se puede eliminar el papel súper administrador"
+                attribute:
+        attribute:        
+          attributes:
+            base:
+              contacts_exist: "No se puede eliminar Atributo mientras existan Contactos / Perfiles"
+
     models:
       campaign: Campañas
       newsletter: Newsletter

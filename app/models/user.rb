@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   # devise 
   
   # validation
-  validates :username, presence: true, uniqueness: true, length: { in: 4..50 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, :message => "Only alphanumeric and space allowed"}
+  validates :username, presence: true, uniqueness: true, length: { in: 4..50 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, :message => I18n.t('activerecord.errors.models.user.attributes.username.format')}
   validates :role_id, presence: true
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
   # validation
@@ -96,7 +96,8 @@ class User < ActiveRecord::Base
     #   return false
     # end
     if role.name == SUPERADMIN
-      errors[:base] << "Cannot delete super admin"
+      errors.add(:base, :delete_admin)
+      # errors[:base] << "Cannot delete super admin"
       return false
     end
   end

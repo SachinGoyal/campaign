@@ -48,7 +48,7 @@ class Profile < ActiveRecord::Base
 
   def check_contacts
     if contacts.count > 0
-      errors[:base] << "Cannot delete Profile while Contacts exist"
+      errors.add(:base, :contacts_exist)
       return false
     end
   end

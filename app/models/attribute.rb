@@ -44,7 +44,7 @@ class Attribute < ActiveRecord::Base
 
   def check_contacts_and_profiles
     if contacts.any? or profiles.any?
-      errors[:base] << "Cannot delete Attribute while Contacts/Profiles exist"
+      errors.add(:base, :contacts_exist)
       return false
     end
   end

@@ -31,7 +31,7 @@ class Company < ActiveRecord::Base
   validates :name, uniqueness: true, 
                    presence: true, 
                    format: { with: /\A[a-zA-Z0-9 ]+\z/, 
-                             message: 'Can only contain alphanumeric and space.'},
+                             message: I18n.t('activerecord.errors.models.company.attributes.name.format')},
                    length: {in: 2..255}
 
   validates :free_emails, numericality: {less_than_or_equal_to: 99999, greater_than_or_equal_to: 0, :message => "Enter values between 0 and 99999"}, 

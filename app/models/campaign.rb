@@ -34,14 +34,13 @@ class Campaign < ActiveRecord::Base
   validates :name, uniqueness: true, 
                    presence: true, 
                    format: { with: /\A[a-zA-Z0-9 ]+\z/, 
-                             message: 'Can only contain alphanumeric and space.'},
+                             message: I18n.t('activerecord.errors.models.campaign.attributes.name.format')},
                    length: {in: 2..150}
 
-  validates :description, 
-                   presence: true#, 
-                   # format: { with: /\A[a-zA-Z0-9 ]+\z/, 
-                   #           message: 'Can only contain alphanumeric and space.'},
-                   # length: {in: 2..255}
+  validates :description, presence: true#, 
+                          # format: { with: /\A[a-zA-Z0-9 ]+\z/, 
+                          #           message: 'Can only contain alphanumeric and space.'},
+                          # length: {in: 2..255}
   validates_inclusion_of :status, in: [true, false]
   #validation
 
@@ -70,7 +69,7 @@ class Campaign < ActiveRecord::Base
 
   def check_newsletter
     if newsletters.any? and newsletters.map(&:editable_or_deletable?).include?(false)
-      errors[:base] << "Cannot delete campaign as it has sent newsletters."
+      errors.add(:base, :newsletters_exist)
       return false
     end
   end

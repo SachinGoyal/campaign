@@ -30,7 +30,7 @@ class Template < ActiveRecord::Base
   #scope
 
   # validation
-  validates_presence_of :name, length: { in: 2..250}
+  validates :name, presence: true, length: { in: 2..250}
   validates_presence_of :content
   validates_uniqueness_to_tenant :name
   validates_inclusion_of :status, in: [true, false]
@@ -79,7 +79,7 @@ class Template < ActiveRecord::Base
 
   def check_newsletter
     if newsletters.any?
-      errors[:base] << "Cannot update or delete template. It is associated with a newsletter."
+      errors.add(:base, :associated_newsletter)
       return false
     end
   end

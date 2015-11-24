@@ -118,16 +118,45 @@ en:
     units_reserved: "Reservas"
     errors:
       messages:
-        record_invalid: "La Validación falló: %{errors}"
       models:
-        user:
-          attributes:
-            email:
-              taken: "ya está en uso"
         zone:
           attributes:
             name:
               taken: "ya está en uso"
+        profile:
+          attributes:
+            base: 
+              contacts_exist: "Cannot delete Profile while Contacts exist"
+        company:
+          attributes:
+            name:
+              format: 'Can only contain alphanumeric and space.'
+        campaign:
+          attributes:
+            base:
+              newsletters_exist: "Cannot delete campaign as it has sent newsletters."
+            name:
+              format: 'Can only contain alphanumeric and space.'
+        user:
+          attributes:
+            base:
+              delete_admin: "Cannot delete super admin"
+        template:
+          attributes:
+            base:
+              associated_newsletter: "Cannot update or delete template. It is associated with a newsletter."
+        role:
+          attributes:
+            name: 
+              format: 'Can only contain alphanumeric and space. Must begin with a character'
+            base:
+              delete_company_admin: "Cannot delete Company Admin"
+              delete_super_admin: "Cannot delete super admin role"
+        attribute:
+          attributes:
+            base:
+              contacts_exist:
+
     models:
       campaign: Campaign
       newsletter: Newsletter

@@ -24,7 +24,7 @@ class Role < ActiveRecord::Base
 
   #validation
   validates :name, presence: true, length: { in: 2..50 }, format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
-                             message: 'Can only contain alphanumeric and space. Must begin with a character'}
+                             message: I18n.t('activerecord.errors.models.role.attributes.name.format')}
 
   #validates_uniqueness_to_tenant :name
   validates_uniqueness_of :name, :scope => :company_id  
@@ -73,7 +73,7 @@ class Role < ActiveRecord::Base
 
   def check_generic_companyadmin
     if self.id == COMPANY_ADMIN_ID
-      errors[:base] << "Cannot delete Company admin"
+      errors.add(:base, :delete_company_admin)
       return false
     end
   end
@@ -101,7 +101,7 @@ class Role < ActiveRecord::Base
   private
     def check_admin
       if self.id == ADMIN
-        errors.add :base, "Cannot delete super admin role"
+        errors.add(:base, :delete_super_admin)
         return false
       end
     end

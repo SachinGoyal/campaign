@@ -13,7 +13,7 @@
 
 class Setting < ActiveRecord::Base
  #validation
- validates_presence_of :site_title ,:free_emails ,:admin_email ,:admin_footer_content
+ validates_presence_of :site_title, :free_emails, :admin_email, :admin_footer_content
  #validation
 
 end
