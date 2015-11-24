@@ -300,6 +300,11 @@ es:
     company:
       confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."
       select_role: "Seleccione Papel"
+      free_emails: "Los correos electrónicos gratuitos"
+      name: "Compañía Nombre"
+      number_free_emails: "Número de correos electrónicos gratis"
+      username: "Nombre de Usuario"
+      password_confirmation: "Confirmar contraseña"
     import:
       import: "Importar"
       first_name:
@@ -323,3 +328,4 @@ es:
     improcedent: Improcedente
     and: "y"
     sample_fields: "Los campos de ejemplo"
+    per_month: "al mes"

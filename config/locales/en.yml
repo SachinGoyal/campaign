@@ -339,6 +339,11 @@ en:
       select_role: "Please select a role"
       placeholder:
       confirm_delete: "Are you sure want to delete this company? It will delete associated admin and other data."
+      free_emails: "Free Emails"
+      name: "Company Name"
+      number_free_emails: "Number of free emails"
+      username: "User Name"
+      password_confirmation: "Confirm Password"
     user:    
       advanced_search: "User-List Advanced Search"
       placeholder:
@@ -374,6 +379,7 @@ en:
     improcedent: Improcedente
     and: "and"
     sample_fields: "Sample Fields"
+    per_month: "per month"
     
   controller:
     unauthorized_domain: "You are not authorized to access that subdomain."
