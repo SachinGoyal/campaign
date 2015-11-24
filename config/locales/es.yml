@@ -74,16 +74,19 @@ es:
     pay_commissions: "Pagar commisíon"
     send: "Enviar"
     preview: "Avance"
+    save: "Guardar"
   links:
     cancel: "Cancelar"
     signin: "Iniciar sesión"
     forgotpass: "¿Olvidó su contraseña?"
   asearch:
     addcondition: "Agregar condición"
+    add_condition_group: "Añadir | Condiciones"
     results: "Resultados encontrados"
     noresults: "No hay ningun resultado para su busqueda"
     breadcrumb: "Búsqueda Avanzada"
     select_field: "Seleccione un campo"
+    select: "Seleccionar"
   menu:
     campaign: Campañas
     newsletter: "Hoja informativa"
@@ -250,6 +253,10 @@ es:
       list: "Lista de atributos"
     template:
       copy: "Copia"
+      content: "Contenido Plantilla"
+      placeholder:
+      advanced_search: "Plantilla - Búsqueda avanzada"
+      name: "Título"
     campaign:
       view_stat: "Ver Stat"
     newsletter:

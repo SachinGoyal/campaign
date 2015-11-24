@@ -308,6 +308,8 @@ en:
       copy: "Copy"
       placeholder:
       advanced_search: "Template-List Advanced Search"
+      content: "Template Content"
+      name: "Title"
     profile: 
       advanced_search: "Profile-List Advanced Search"
       interest_areas: "Area of Interest"
