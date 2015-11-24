@@ -299,6 +299,7 @@ es:
       first_name: "Nombre"
     company:
       confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."
+      select_role: "Seleccione Papel"
     import:
       import: "Importar"
       first_name:

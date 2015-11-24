@@ -24,7 +24,7 @@
               <% if @user.new_record? %>
                 <div class="field form-group form-group-sm role_company">
                   <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                  <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => t('frontend.user.select_role')}, {:class => 'form-control required'}) %>  </div>
+                  <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => t('frontend.user.select_company')}, {:class => 'form-control required'}) %>  </div>
                 </div> 
               <% else %>
                 <%= f.hidden_field :company_id, :value => @user.company_id%>
