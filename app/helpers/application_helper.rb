@@ -22,6 +22,6 @@ module ApplicationHelper
   end
 
   def display_status(obj)
-    obj.status ? 'Enabled' : 'Disabled' 
+    obj.status ? t('frontend.shared.enabled') : t('frontend.shared.disabled') 
   end
 end

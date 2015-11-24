@@ -124,7 +124,7 @@ class ContactsController < ApplicationController
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit }
-        format.json { render json: @contact.errors, status: t("controller.shared.flash.update.status" }
+        format.json { render json: @contact.errors, status: t("controller.shared.flash.update.status") }
       end
     end
   end
