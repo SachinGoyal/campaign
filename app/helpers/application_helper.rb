@@ -26,7 +26,7 @@ module ApplicationHelper
     obj.status ? t('frontend.shared.enabled') : t('frontend.shared.disabled') 
   end
 
-  def pick_model_from_locale
-    
+  def pick_model_from_locale(model_name)
+     I18n.backend.send(:translations)[I18n.locale][:activerecord][:models][model_name]
   end
 end

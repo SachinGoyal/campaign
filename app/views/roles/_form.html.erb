@@ -6,10 +6,10 @@
   <%= form_for @role, :html => { :class => "form-horizontal campaign" } do |f| %>
     <div class="row">
       <% if @role.name == COMPANY_ADMIN %>
-        <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control", :placeholder => t('frontend.shared.new', :model_name => 'Role'), :disabled => true %></div>
+        <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control", :placeholder => t('frontend.shared.new', :model_name => pick_model_from_locale(:role)), :disabled => true %></div>
       <%= f.hidden_field :name %>
       <% else %>
-        <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control", :placeholder=> t('frontend.shared.new', :model_name => 'Role'), :maxlength => 50 %></div>
+        <div class="col-xs-3"><%= f.text_field :name , :class=> "form-control", :placeholder=> t('frontend.shared.new', :model_name => pick_model_from_locale(:role)), :maxlength => 50 %></div>
       <% end %>
         <div class="col-xs-3">
         <% if @role.new_record? %>

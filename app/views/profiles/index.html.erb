@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-xs-4">
-    <div class="title_left"><h2><%= t('frontend.shared.list', :model_name => 'Profile') %></h2></div><!-- title_left -->
+    <div class="title_left"><h2><%= t('frontend.shared.list', :model_name => pick_model_from_locale(:profile)) %></h2></div><!-- title_left -->
   </div>
   
   <div class="col-xs-5 form-group pull-right top_search">
@@ -14,7 +14,7 @@
     </div> 
   <% end %>  
   <% if can? :create, Profile %>
-    <div class="custom-add"><%= link_to new_profile_path, :title => t('frontend.shared.new', :model_name => 'Profile') do %><i class="fa fa-plus"></i><% end %></div>
+    <div class="custom-add"><%= link_to new_profile_path, :title => t('frontend.shared.new', :model_name => pick_model_from_locale(:profile)) do %><i class="fa fa-plus"></i><% end %></div>
   <% end %>    
   </div>              
 
