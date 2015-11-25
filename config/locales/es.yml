@@ -227,7 +227,7 @@ es:
 
     models:
       campaign: Campañas
-      newsletter: Newsletter
+      newsletter: Hoja informativa
       template: Plantilla
       profile: Perfil
       contact: Contacto
@@ -241,6 +241,7 @@ es:
         name: "Nombre"
         description: "Descripción"
         status: "Estado"
+        created_at: "Fecha"
       newsletter:
         name: "Nombre"
         subject: "Sujeto"
@@ -255,7 +256,7 @@ es:
         bcc_email: "BCC Email"
         send_at: "Enviar A"
         auto_response: "Auto Response"
-
+        created_at: "Fecha"
       template:
         name: "Nombre"
         content: "Descripción"
@@ -348,6 +349,7 @@ es:
       status: "Estado"
       advanced_search: "Búsqueda Avanzada"
       multiselect: "Presione Ctrl para múltiples seleccione"
+      csv: "should be CSV"
       gender:
         male: "Masculino"
         female: "Hembra"
@@ -392,6 +394,7 @@ es:
       select_campaign: "Por favor, seleccione una campaña"
       select_template: "Por favor, seleccione una modelo"
       select_profile: "Prupo de contacto de selección"
+      advanced_search: "Hoja informativa - Búsqueda avanzada"
       search:
         city: "Introduce la ciudad"
         country: "Seleccione un país"

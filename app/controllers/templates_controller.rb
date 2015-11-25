@@ -78,7 +78,7 @@ class TemplatesController < ApplicationController
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to @template, notice: t("controller.shared.flash.create.notice", model: "Template") }
+        format.html { redirect_to @template, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:template)) }
         format.json { render :show, status: :created, location: @template }
       else
         format.html { render :new }
