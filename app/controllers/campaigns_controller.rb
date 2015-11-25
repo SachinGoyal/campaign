@@ -72,11 +72,11 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new(campaign_params)
     respond_to do |format|
       if @campaign.save
-        format.html { redirect_to @campaign, notice: t("controller.shared.flash.create.notice", model: "Campaign") }
+        format.html { redirect_to @campaign, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:campaign)) }
         format.json { render :show, status: :created, location: @campaign }
       else
         format.html { render :new }
-        format.json { render json: @campaign.errors, status: t("controller.shared.flash.create.status",model: "Campaign") }
+        format.json { render json: @campaign.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -86,7 +86,7 @@ class CampaignsController < ApplicationController
   def update
     respond_to do |format|
       if @campaign.update(campaign_params)
-        format.html { redirect_to @campaign, notice: t("controller.shared.flash.update.notice",model: "Campaign") }
+        format.html { redirect_to @campaign, notice: t("controller.shared.flash.update.notice",model: pick_model_from_locale(:campaign)) }
         format.json { render :show, status: :ok, location: @campaign }
       else
         format.html { render :edit }
@@ -100,7 +100,7 @@ class CampaignsController < ApplicationController
   def destroy
     if @campaign.destroy
       respond_to do |format|
-        format.html { redirect_to campaigns_url, notice: t("controller.shared.notice.destroy.notice",model: "Campaign") }
+        format.html { redirect_to campaigns_url, notice: t("controller.shared.notice.destroy.notice",model: pick_model_from_locale(:campaign)) }
         format.json { head :no_content }
       end
     else
@@ -125,9 +125,9 @@ class CampaignsController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          t("controller.shared.flash.edit_all.notice.delete_all",model: "Campaigns")
+          t("controller.shared.flash.edit_all.notice.delete_all",model: pick_model_from_locale(:campaign))
         else
-          t("controller.shared.flash.edit_all.notice.update_all",model: "Campaigns")
+          t("controller.shared.flash.edit_all.notice.update_all",model: pick_model_from_locale(:campaign))
       end
 
     end

@@ -42,7 +42,7 @@ class UsersController < ApplicationController
           u.skip_invitation = true
         end
         @user.deliver_invitation
-        format.html { redirect_to @user, notice: t("controller.shared.flash.create.notice", model: "User") }
+        format.html { redirect_to @user, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:user)) }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
     if @user.update_attributes(user_params)
-      flash[:notice] = t("controller.shared.flash.update.notice", model: "User")
+      flash[:notice] = t("controller.shared.flash.update.notice", model: pick_model_from_locale(:user))
       redirect_to users_path
     else
       render :action => 'edit'
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
     end
 
   	if @user.destroy
-  	 redirect_to users_path, :success => t("controller.shared.flash.destroy.notice", model: "User")
+  	 redirect_to users_path, :success => t("controller.shared.flash.destroy.notice", model: pick_model_from_locale(:user))
     else
       redirect_to users_path, :notice => @user.errors.full_messages.join(", ")
     end
@@ -92,7 +92,7 @@ class UsersController < ApplicationController
 	def set_user
 	  @user = User.find(params[:id])
     unless @user
-      return redirect_to users_path, :alert => t("controller.shared.alert.message" , model: 'User')
+      return redirect_to users_path, :alert => t("controller.shared.alert.message" , model: pick_model_from_locale(:user))
     end
 	end
 
@@ -106,7 +106,7 @@ class UsersController < ApplicationController
       when 'Delete'
         t("controller.user.delete_all")
       else
-        t("controller.shared.flash.edit_all.notice.update_all", model: "User")
+        t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:user))
     end
 
   end

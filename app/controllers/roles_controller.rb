@@ -54,7 +54,7 @@ class RolesController < ApplicationController
     @functions = Function.all.group_by(&:agroup)
     respond_to do |format|
       if @role.save
-        format.html { redirect_to  @role, notice: t("controller.shared.flash.create.notice", model: "Role") }
+        format.html { redirect_to  @role, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:role)) }
         format.json { render json: @role, status: :created, location: @role }
       else
         format.html { render "new" }
@@ -89,7 +89,7 @@ class RolesController < ApplicationController
     respond_to do |format|
       if @role.update_attributes(role_params)
         @role.assign_permission if @role.id == COMPANY_ADMIN_ID
-        format.html { redirect_to @role, notice: t("controller.shared.flash.update.notice", model: "Role") }
+        format.html { redirect_to @role, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:role)) }
         format.json { head :no_content }
       else
         format.html { render "edit" }
@@ -104,7 +104,7 @@ class RolesController < ApplicationController
     role = Role.find(params[:id])
     if role.destroy
       respond_to do |format|
-        format.html { redirect_to roles_url, notice: t("controller.shared.flash.destroy.notice", model: "Role") }
+        format.html { redirect_to roles_url, notice: t("controller.shared.flash.destroy.notice", model: pick_model_from_locale(:role)) }
         format.json { head :no_content }
       end
     else
@@ -118,7 +118,7 @@ class RolesController < ApplicationController
     def set_role
       @role = Role.find(params[:id])
       unless @role
-        return redirect_to roles_path, :alert => t("controller.shared.alert.message" , model: 'Role')
+        return redirect_to roles_path, :alert => t("controller.shared.alert.message" , model: pick_model_from_locale(:role))
       end
     end
 
@@ -130,9 +130,9 @@ class RolesController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          t("controller.shared.flash.delete_all", model: "Role")
+          t("controller.shared.flash.delete_all", model: pick_model_from_locale(:role))
         else
-          t("controller.shared.flash.edit_all.notice.update_all", model: "Role")
+          t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:role))
       end
 
   end

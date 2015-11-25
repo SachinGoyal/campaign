@@ -50,7 +50,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: t("controller.shared.flash.create.notice", model: "Profile") }
+        format.html { redirect_to @profile, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:profile)) }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
@@ -79,7 +79,7 @@ class ProfilesController < ApplicationController
     params[:profile][:interest_area_ids] ||= []
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: t("controller.shared.flash.update.notice", model: "Profile") }
+        format.html { redirect_to @profile, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:profile)) }
         format.json { render :show, status: :ok, location: @profile }
       else
         format.html { render :edit }
@@ -93,7 +93,7 @@ class ProfilesController < ApplicationController
   def destroy
     respond_to do |format|
       if @profile.destroy
-        format.html { redirect_to profiles_url, notice: t("controller.shared.flash.destroy.notice", model: "Profile") }
+        format.html { redirect_to profiles_url, notice: t("controller.shared.flash.destroy.notice", model: pick_model_from_locale(:profile)) }
         format.json { head :no_content }
       else
         format.html { redirect_to profiles_url, notice: @profile.errors.full_messages.join(", ") }
@@ -106,7 +106,7 @@ class ProfilesController < ApplicationController
     def set_profile
       @profile = Profile.find(params[:id])
       unless @profile
-        return redirect_to profiles_path, :alert => t("controller.shared.alert.message" , model: 'Profile')
+        return redirect_to profiles_path, :alert => t("controller.shared.alert.message" , model: pick_model_from_locale(:profile))
       end
     end
 
@@ -118,9 +118,9 @@ class ProfilesController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          t("controller.shared.flash.edit_all.notice.delete_all", model: "Profile")
+          t("controller.shared.flash.edit_all.notice.delete_all", model: pick_model_from_locale(:profile))
         else
-          t("controller.shared.flash.edit_all.notice.update_all", model: "Profile")
+          t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:profile))
       end
 
     end

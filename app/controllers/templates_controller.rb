@@ -92,7 +92,7 @@ class TemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to  @template, notice: t("controller.shared.flash.update.notice", model: "Template") }
+        format.html { redirect_to  @template, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:template)) }
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit }
@@ -106,7 +106,7 @@ class TemplatesController < ApplicationController
   def destroy
     if @template.destroy
       respond_to do |format|
-        format.html { redirect_to templates_url, notice: t("controller.shared.flash.destroy.notice", model: "Template") }
+        format.html { redirect_to templates_url, notice: t("controller.shared.flash.destroy.notice", model: pick_model_from_locale(:template)) }
         format.json { head :no_content }
       end
     else
@@ -131,9 +131,9 @@ class TemplatesController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          t("controller.shared.flash.edit_all.notice.delete_all", model: "Templates")
+          t("controller.shared.flash.edit_all.notice.delete_all", model: pick_model_from_locale(:template))
         else
-          t("controller.shared.flash.edit_all.notice.update_all", model: "Templates")
+          t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:template))
       end
 
     end

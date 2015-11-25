@@ -77,7 +77,7 @@ class ContactsController < ApplicationController
     
     respond_to do |format|
       if @contact.save
-        format.html { return redirect_to @contact, notice: t("controller.shared.flash.create.notice", model: "Contact") }
+        format.html { return redirect_to @contact, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:contact)) }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
@@ -120,7 +120,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: t("controller.shared.flash.update.notice", model: "Contact") }
+        format.html { redirect_to @contact, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:contact)) }
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit }
@@ -134,7 +134,7 @@ class ContactsController < ApplicationController
   def destroy
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: t("controller.shared.flash.destroy.notice", model: "Contact") }
+      format.html { redirect_to contacts_url, notice: t("controller.shared.flash.destroy.notice", model: pick_model_from_locale(:contact)) }
       format.json { head :no_content }
     end
   end
@@ -153,9 +153,9 @@ class ContactsController < ApplicationController
     def updateable_messages(action)
       case action
         when 'Delete'
-          t("controller.shared.flash.delete_all", model: "Contacts")
+          t("controller.shared.flash.delete_all", model: pick_model_from_locale(:contact))
         else
-          t("controller.shared.flash.edit_all.notice.update_all", model: "Contacts")
+          t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:contact))
       end
     end
 end

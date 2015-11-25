@@ -57,7 +57,7 @@ class NewslettersController < ApplicationController
 
     respond_to do |format|
       if @newsletter.save
-        format.html { redirect_to @newsletter, notice: t("controller.shared.flash.create.notice", model: "Newsletter") }
+        format.html { redirect_to @newsletter, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:newsletter)) }
         format.json { render :show, status: :created, location: @newsletter }
       else
         format.html {
@@ -81,7 +81,7 @@ class NewslettersController < ApplicationController
   def update
     respond_to do |format|
       if @newsletter.update(newsletter_params)
-        format.html { redirect_to @newsletter, notice: t("controller.shared.flash.update.notice", model: "Newsletter") }
+        format.html { redirect_to @newsletter, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:newsletter)) }
         format.json { render :show, status: :ok, location: @newsletter }
       else
         format.html { 
@@ -99,7 +99,7 @@ class NewslettersController < ApplicationController
   def destroy
     @newsletter.destroy
     respond_to do |format|
-      format.html { redirect_to newsletters_url, notice: t("controller.shared.flash.destroy.notice", model: "Newsletter") }
+      format.html { redirect_to newsletters_url, notice: t("controller.shared.flash.destroy.notice", model: pick_model_from_locale(:newsletter)) }
       format.json { head :no_content }
     end
   end
