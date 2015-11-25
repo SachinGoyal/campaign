@@ -318,6 +318,7 @@ en:
       view: "View %{model_name}"
       status: "Status"
       multiselect: "Press Ctrl for multiselect"
+      csv: "should be CSV"
       gender:
         male: "Male"
         female: "Female"

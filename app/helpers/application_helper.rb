@@ -18,11 +18,15 @@ module ApplicationHelper
   end
 
   def format_date(obj, field)
-  	obj.send(field).send(:strftime, "%d/%m/%y, %I:%M %p")
+  	#obj.send(field).send(:strftime, "%d/%m/%y, %I:%M %p")
     l(obj.send(field), format: "%d/%m/%y, %I:%M %p")
   end
 
   def display_status(obj)
     obj.status ? t('frontend.shared.enabled') : t('frontend.shared.disabled') 
+  end
+
+  def pick_model_from_locale
+    
   end
 end
