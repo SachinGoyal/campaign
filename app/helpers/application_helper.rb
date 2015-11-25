@@ -19,6 +19,7 @@ module ApplicationHelper
 
   def format_date(obj, field)
   	obj.send(field).send(:strftime, "%d/%m/%y, %I:%M %p")
+    l(obj.send(field), format: "%d/%m/%y, %I:%M %p")
   end
 
   def display_status(obj)
