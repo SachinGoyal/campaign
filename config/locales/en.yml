@@ -29,6 +29,15 @@ en:
           c_password: "Change my password"
           ignore_mail: "If you didn't request this, please ignore this email."
           access_link: "Your password won't change until you access the link above and create a new one."
+        invitation_instruction:
+          welcome: "Welcome to Sperant Campaign."
+          detail_below: "Please find your account details below:"
+          username: "Username:"
+          site_url: "Site Url"
+          click: "Click Here"
+          set_password: "to set your password"
+          thank: "Thanks"
+          support: "Support Team"
         unlock_instruction:
 
 

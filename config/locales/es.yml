@@ -6,30 +6,38 @@ es:
     view:
       sessions:
         new:
-          username: "Username"
-          password: "Password"
-          lost_password: "Lost your password?"
+          username: "Nombre de usuario"
+          password: "Clave"
+          lost_password: "¿Perdiste tu contraseña?"
+          login: "Iniciar sesión"
       password:
         edit:
-          password: "Password"
-          c_password: "Password Confirmation"
-          change_password: "Change Password"
+          password: "Clave"
+          c_password: "Confirmación de contraseña"
+          change_password: "Cambiar la contraseña"
         new:
-          enter_email: "Enter your email address1"
-          send: "Send"
+          enter_email: "Introduzca su dirección de correo electrónico"
+          send: "Enviar"
       mailer:
         confirmation_instruction:
-          welcome: "Welcome"
-          confirm_link: "You can confirm your account email through the link below:"
-          con_account: 'Confirm my account'
+          welcome: "Bienvenida"
+          confirm_link: "Puede confirmar su cuenta de correo electrónico a través del siguiente enlace :"
+          con_account: 'Confirmar mi cuenta'
         reset_password_instruction:
-          hello: "Hello"
-          send_instruction: "Someone has requested a link to change your password. You can do this through the link below."
-          c_password: "Change my password"
-          ignore_mail: "If you didn't request this, please ignore this email."
-          access_link: "Your password won't change until you access the link above and create a new one."
-        unlock_instruction:
- 
+          hello: "Hola"
+          send_instruction: "Alguien ha pedido un enlace para cambiar su contraseña . Usted puede hacer esto a través del siguiente enlace ."
+          c_password: "Cambiar mi contraseña"
+          ignore_mail: "Si usted no ha solicitado este , por favor, ignora este mensaje ."
+          access_link: "Su contraseña no cambiará hasta que acceda al enlace anterior y crear una nueva."
+        invitation_instruction:
+          welcome: "Bienvenido a Sperant Campaña ."
+          detail_below: "Encuentre datos de su cuenta a continuación:"
+          username: "Nombre de usuario:"
+          site_url: "Sitio URL"
+          click: "Clickea aquí"
+          set_password: "para establecer su contraseña"
+          thank: "Gracias"
+          support: "Equipo de apoyo"
   helpers:
     submit:
       create: "Créer"
@@ -403,3 +411,36 @@ es:
     sample_fields: "Los campos de ejemplo"
     per_month: "al mes"
     images_only: "Subir imágenes solamente"
+
+  controller:
+    unauthorized_domain: "No tiene permisos para acceder a ese subdominio."
+    shared: 
+      alert:
+        message: "No pudo encontrar %{model}"
+      flash:
+        delete_all: "%{model} eliminado correctamente"
+        create:
+          notice: "%{model} fue creado con éxito ."
+          status: "unprocessable_entity"
+        update:
+          notice: "%{model} fue actualizado correctamente ."
+          status: "unprocessable_entity"
+        destroy:
+          notice: "%{model} fue eliminado correctamente ."
+        edit_all:
+          notice:
+            delete_all: "%{model} eliminado correctamente . %{model} con los datos asociados no se pudo eliminar ."
+            update_all: "%{model} Actualizado correctamente."
+    template:
+      copy:
+        success: "Plantilla fue copiado con éxito ."
+        error: "Operación fallida"
+    contact:
+      import: "Contactos importados ."
+      select_profile: "Por favor, seleccione al menos una"
+    user:
+      delete: "No se puede eliminar el usuario con rol de administrador de empresa"
+      delete_all: "Usuarios eliminados con éxito . Los usuarios con datos asociados o rol de administrador de empresa no pueden ser borrados ."
+    role:
+
+

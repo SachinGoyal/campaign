@@ -1,11 +1,11 @@
 <p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.username) %></p>
 
-<p>Welcome to Sperant Campaign.</p>
+<p><%= t("devise.view.mailer.invitation_instruction.welcome")%></p>
 
-<p>Please find your account details below:</p>
-<p>Username: <%= @resource.username %></p>
-<p>Site Url: <%= root_url(:subdomain => @resource.company.try(:subdomain)) %> <p>
-<p><%= link_to "Click Here", accept_invitation_url(@resource, :invitation_token => @token, :subdomain => @resource.company.try(:subdomain) ) %> to set your password</p>
+<p><%= t("devise.view.mailer.invitation_instruction.detail_below")%></p>
+<p><%= t("devise.view.mailer.invitation_instruction.username")%> <%= @resource.username %></p>
+<p><%= t("devise.view.mailer.invitation_instruction.site_url")%> <%= root_url(:subdomain => @resource.company.try(:subdomain)) %> <p>
+<p><%= link_to t("devise.view.mailer.invitation_instruction.click"), accept_invitation_url(@resource, :invitation_token => @token, :subdomain => @resource.company.try(:subdomain) ) %> <%= t("devise.view.mailer.invitation_instruction.set_password")%></p>
 
-<p>Thanks,</p>
-<p>Support Team</p>
+<p><%= t("devise.view.mailer.invitation_instruction.thank")%>,</p>
+<p><%= t("devise.view.mailer.invitation_instruction.support")%></p>
