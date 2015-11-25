@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
+  def pick_model_from_locale(model_name)
+     I18n.backend.send(:translations)[I18n.locale][:activerecord][:models][model_name]
+  end
+
   protected
   
   def layout_by_resource
