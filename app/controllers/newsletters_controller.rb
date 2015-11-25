@@ -119,7 +119,7 @@ class NewslettersController < ApplicationController
     end
 
     def updateable_messages
-      "Newsletter deleted successfully. Newsletter which have already been sent could not be deleted."
+      t("controller.newsletter.updateable_messages")
     end
 
     def set_templates
@@ -128,7 +128,7 @@ class NewslettersController < ApplicationController
 
     def check_editable_or_deletable
       unless @newsletter.editable_or_deletable?
-        return redirect_to newsletters_path, :notice => "Cannot edit/delete the newsletter since it has already been sent."
+        return redirect_to newsletters_path, :notice => t("controller.newsletter.check_editable_or_deletable")
       end
     end
 end
