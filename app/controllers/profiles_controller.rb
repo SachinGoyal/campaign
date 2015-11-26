@@ -41,8 +41,9 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
+    @extra_field = @profile.extra_fields.build
   end
-
+  
   # POST /profiles
   # POST /profiles.json
   def create
@@ -76,7 +77,6 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
-    params[:profile][:interest_area_ids] ||= []
     respond_to do |format|
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:profile)) }
@@ -112,7 +112,8 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:name, :status, :created_by, :updated_by,interest_area_ids: [])
+      params.require(:profile).permit(:name, :status,extra_fields_attributes: [:id,:field_name,
+                                                   :field_type, :_destroy])
     end
 
     def updateable_messages(action)

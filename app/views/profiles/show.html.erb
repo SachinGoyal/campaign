@@ -26,11 +26,11 @@
               </div>
             </div>
 
-            <% unless @profile.interest_areas.empty? %>            
+            <% unless @profile.extra_fields.empty? %>            
                <div class="form-group form-group-sm">
                 <label class="col-xs-4 text-right control-label"><%= t('frontend.profile.interest_areas') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
-                  <%=  @profile.interest_areas.collect(&:name).uniq.map(&:capitalize).join(', ') %> </div>
+                  <%=  @profile.extra_fields.collect(&:field_name).uniq.map(&:capitalize).join(', ') %> </div>
                   <div class="clearfix"></div> 
                 </div>
             <% end %>    

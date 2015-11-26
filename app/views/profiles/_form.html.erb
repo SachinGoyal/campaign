@@ -21,26 +21,11 @@
           </div>
         </div>
 
-        <div class="form-group form-group-sm">
-              <label class="col-xs-4 text-right control-label"><%= t('frontend.profile.interest_areas') %></label>
-              <div class="col-xs-8 custom-checkbox-style">
-                <ul class="interest-area">
-                  <% for attribute in Attribute.active %>
-                   <li> <%= check_box_tag "profile[interest_area_ids][]", attribute.id, @profile.interest_areas.include?(attribute) %>
-                    <%= attribute.name.capitalize %><br/></li>
-                  <% end %>
-                </ul>
-              </div>     
-              <div class="clearfix"></div> 
-            </div>
-
-           <div class="col-lg-4 col-xs-1">
-             <div class="form-group form-group-sm">
-             <label class="col-sm-4 col-xs-12 control-label">&nbsp;</label>
-             <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
-           </div>
-
-
+        <div class="form-group add_field">
+            <%= f.fields_for :extra_fields do |builder| %>
+              <%= render :partial => "extra_fields", :locals => {:f => builder} %>
+            <% end %>
+       <p><%= link_to_add_fields "Add Field", f, :extra_fields %></p>
       </div>
       <div class="clearfix"></div>
       <div class="divider"></div>

@@ -6,8 +6,6 @@
 #  company_id :integer
 #  name       :string
 #  status     :boolean
-#  created_by :integer
-#  updated_by :integer
 #  deleted_at :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -41,10 +39,15 @@ class Profile < ActiveRecord::Base
 
   #relation
   has_and_belongs_to_many :contacts
-  has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "profiles_attributes"
+  has_many :extra_fields , dependent: :destroy
+# has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "profiles_attributes"
   has_many :newsletter_emails
   has_many :newsletters, :through => :newsletter_emails
   #relation
+
+  accepts_nested_attributes_for :extra_fields,
+    :allow_destroy => true,
+    :reject_if     => :all_blank
 
   def check_contacts
     if contacts.count > 0
