@@ -3,7 +3,7 @@
     <div class="col-md-12 col-xs-12">
       <div class="col-lg-2 col-xs-1">&nbsp;</div>
       <div class="col-md-5 col-xs-10">
-        <%= form_for(@profile, :html => {:class => 'form-horizontal'}) do |f| %>
+        <%= nested_form_for(@profile, :html => {:class => 'form-horizontal'}) do |f| %>
         <div class="form-group form-group-sm">
           <!-- <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label> -->
           <%= f.label :name, :class => "col-sm-4 col-xs-12 control-label" %>
@@ -21,12 +21,15 @@
           </div>
         </div>
 
-        <div class="form-group add_field">
-            <%= f.fields_for :extra_fields do |builder| %>
-              <%= render :partial => "extra_fields", :locals => {:f => builder} %>
-            <% end %>
-       <p><%= link_to_add_fields "Add Field", f, :extra_fields %></p>
+      <div class="form-group add_field">
+          <%= f.fields_for :extra_fields do |task_form| %>
+            <%= task_form.text_field :field_name %>
+            <%= task_form.text_field :field_type %>
+            <%= task_form.link_to_remove "Remove this task" %>
+          <% end %>
+          <p><%= f.link_to_add "Add a task", :extra_fields %></p>
       </div>
+
       <div class="clearfix"></div>
       <div class="divider"></div>
     </div>

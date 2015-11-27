@@ -41,7 +41,6 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
-    @extra_field = @profile.extra_fields.build
   end
   
   # POST /profiles
