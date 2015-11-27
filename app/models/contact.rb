@@ -4,18 +4,11 @@
 #
 #  id         :integer          not null, primary key
 #  company_id :integer
-#  first_name :string
-#  last_name  :string
 #  email      :string
 #  status     :boolean          default(TRUE)
-#  created_by :integer
-#  updated_by :integer
 #  deleted_at :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  city       :string
-#  country    :string
-#  gender     :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -35,14 +28,11 @@ class Contact < ActiveRecord::Base
   #scope
 
   #validation
-  validates :first_name, presence: true, length: { in: 2..150}
-  validates :last_name, presence: true, length: { in: 2..150}
   validates_presence_of :email, length: { in: 3..255}
   # validates_presence_of :profile_ids, message: 'Please select atleast one'
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
-  # validates :gender, :presence => true
   # validates_inclusion_of :gender, in: [true, false], message: "Should either be male or female"
   #validation
 
@@ -54,7 +44,7 @@ class Contact < ActiveRecord::Base
 
   #relation
   has_and_belongs_to_many :profiles
-  has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "contacts_attributes"
+ # has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "contacts_attributes"
   #relation
 
   #ransack
@@ -179,6 +169,7 @@ class Contact < ActiveRecord::Base
   # class methods
 
   def name
-    "#{first_name} #{last_name}"
+   # "#{first_name} #{last_name}"
+    ""
   end 
 end

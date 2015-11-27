@@ -62,6 +62,19 @@ $(document).ready( function() {
           }
     });
 
+    $("#contact_profile_ids").on('change', function(){
+          var profile_id = $('#contact_profile_ids').val();
+          if (profile_id == '')
+              alert("Please Select a profile");
+          else {
+              $.ajax({
+                method: "POST",
+                data: { profile_id: profile_id },
+                url: '/contacts/dynamic_field.js'
+              })
+          }
+    });
+
 
     $(function () {
         $('#sidebar-menu li ul').slideUp();

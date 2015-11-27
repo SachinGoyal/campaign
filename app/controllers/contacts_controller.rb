@@ -8,6 +8,11 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   #filter
 
+  def dynamic_field
+    @profile = Profile.find(params[:profile_id])
+    @extra_fields = @profile.extra_fields
+  end
+
   def import  
     Contact.import_records(params[:file], params[:profile_id])  
     redirect_to profiles_path, notice: t("controller.contact.import")  
@@ -67,6 +72,7 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
+    binding.pry
     @contact = Contact.new(contact_params)
     if (contact_params[:profile_ids] - [""]).empty? 
       @contact.valid?

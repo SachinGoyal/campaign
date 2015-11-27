@@ -37,7 +37,8 @@ Rails.application.routes.draw do
 
   resources :contacts ,concerns: [:edit_all,:search] do
     collection do
-     post :import 
+      post :import 
+      post :dynamic_field
     end
   end
   resources :campaigns, concerns: [:edit_all,:search] do

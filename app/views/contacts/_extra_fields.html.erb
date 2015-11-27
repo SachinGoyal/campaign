@@ -1,0 +1,8 @@
+<%= fields_for :extra_fields do %>
+	<% extra_fields.each do |field|%>
+		<div>
+			<%= label_tag :field_name,field.field_name%>	
+			<%= text_field_tag "extra_fields[fields][][#{field.field_name}]"%>
+		</div>
+	<% end %>
+<% end %>

@@ -8,24 +8,11 @@
         <div class="form-group form-group-sm">
           <%= f.label :profile_ids,'Profiles', :class => "col-sm-4 col-xs-12 control-label required"%>
           <div class="col-xs-8 custom-checkbox-style" id="profile-custom-select">
-            <%= collection_select(:contact, :profile_ids, Profile.active, :id, :name, {:include_blank => 'Press ctrl for multiselect'}, {:multiple => true, :name => 'contact[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
+            <%= collection_select(:contact, :profile_ids, Profile.active, :id, :name, {:include_blank => 'Select Profile'}, {:multiple => false, :name => 'contact[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
           </div>
           <div class="clearfix"></div> 
         </div>                                   
 
-
-        <div class="form-group form-group-sm">
-          <%= f.label :first_name, :class => "col-sm-4 col-xs-12 control-label", :maxlength => 150 %>
-          <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :first_name, :class => 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group form-group-sm">
-          <%= f.label :last_name, :class => "col-sm-4 col-xs-12 control-label"%>
-          <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :last_name, :class => 'form-control', :maxlength => 150 %>
-          </div>
-        </div>
 
         <div class="form-group form-group-sm">
           <%= f.label :email, :class => "col-sm-4 col-xs-12 control-label"%>
@@ -34,20 +21,7 @@
           </div>
         </div>
 
-        <div class="form-group form-group-sm">
-          <%= f.label :city, :class => "col-sm-4 col-xs-12 control-label"%>
-          <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :city, :class => 'form-control' %>
-          </div>
-        </div>
-
-        <div class="form-group form-group-sm">
-          <%= f.label :country, :class => "col-sm-4 col-xs-12 control-label"%>
-          <div class="col-sm-8 col-xs-12">
-            <%= country_select("contact", "country",  { priority_countries: ["IN", "ES"] }, { selected: "IN", class: 'form-control'} ) %>
-            <%#= f.text_field :email, :class => 'form-control' %>
-          </div>
-        </div>
+        
 
 
 
@@ -61,32 +35,16 @@
               </div>
         </div>
 
-        <div class="form-group form-group-sm field">
-          <%= f.label :gender, :class => "col-sm-4 col-xs-12 control-label status_radio required"%>
-               <div class="col-sm-8 col-xs-12 radio_status">
-                <%= f.radio_button :gender, true, :checked => @contact.new_record? ? true : @contact.gender ,:id=>"radio01" %>
-                <label for="radio01" class="status_spacer"><span></span>Male</label>
-                <%= f.radio_button :gender, false, :checked => @contact.new_record? ? false : !@contact.gender ,:id=>"radio02" %>
-                <label for="radio02"><span></span>Female</label>
-              </div>
+        <div class = 'dynamic_field'>
+          
+
         </div>
 
        
-        
-        <div class="form-group form-group-sm">
-                    <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
-                    <div class="col-xs-8 custom-checkbox-style">
-                    <ul class="interest-area">
-                      <% for attribute in Attribute.active %>
-                          <li><%= check_box_tag "contact[interest_area_ids][]", attribute.id, @contact.interest_areas.include?(attribute) %>
-                          <%= attribute.name.capitalize %></li>
-                      <% end %>
-                      </ul>
-                    </div>
-                    <div class="clearfix"></div> 
-                    </div>                                   
-        </div>
 
+       
+        
+       
       <div class="col-lg-4 col-xs-1">
         <div class="form-group form-group-sm">
           <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
@@ -106,7 +64,7 @@
           <div class="col-xs-4">&nbsp;</div>
 
           <div class="col-xs-8 text-left">
-            <%= f.submit t(:save) ,:class => 'btn dark-btn-custom'%>
+            <%= f.submit t("button.save") ,:class => 'btn dark-btn-custom'%>
             <%= link_to t(:cancel), contacts_path,class: 'btn custom-link-btn' %>
           </div>
           <% end %>

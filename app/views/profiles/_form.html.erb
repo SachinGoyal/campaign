@@ -23,11 +23,13 @@
 
       <div class="form-group add_field">
           <%= f.fields_for :extra_fields do |task_form| %>
+            <%= task_form.label :field_name, "Name" %>
             <%= task_form.text_field :field_name %>
-            <%= task_form.text_field :field_type %>
-            <%= task_form.link_to_remove "Remove this task" %>
+            <%= task_form.label :field_type, 'Type' %>
+            <%= task_form.select :field_type, ['textbox', 'radio'], include_blank: true %>            
+            <%= task_form.link_to_remove "Remove" %>
           <% end %>
-          <p><%= f.link_to_add "Add a task", :extra_fields %></p>
+          <p><%= f.link_to_add "Add Field", :extra_fields %></p>
       </div>
 
       <div class="clearfix"></div>

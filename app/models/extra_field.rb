@@ -11,5 +11,6 @@
 #
 
 class ExtraField < ActiveRecord::Base
+  validates_uniqueness_of :field_name, :scope => :profile_id
   belongs_to :profile
 end

@@ -39,8 +39,7 @@ class Profile < ActiveRecord::Base
 
   #relation
   has_and_belongs_to_many :contacts
-  has_many :extra_fields , dependent: :destroy
-# has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "profiles_attributes"
+  has_many :extra_fields ,:inverse_of => :profile, dependent: :destroy
   has_many :newsletter_emails
   has_many :newsletters, :through => :newsletter_emails
   #relation
