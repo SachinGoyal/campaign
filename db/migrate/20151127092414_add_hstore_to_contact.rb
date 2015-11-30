@@ -1,5 +1,6 @@
 class AddHstoreToContact < ActiveRecord::Migration
   def change
-  	#add_column :contacts, :extra_fields, :hstore
+  	enable_extension :hstore
+  	add_column :contacts, :extra_fields, :hstore
   end
 end
