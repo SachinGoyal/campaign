@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get 'email_services/index'
+
   get 'contact_imports/new'
   get 'apis/index'
 

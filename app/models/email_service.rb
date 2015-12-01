@@ -6,6 +6,8 @@
 #  newsletter_id :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  list_id       :string
+#  campaign_id   :string
 #
 # Indexes
 #
@@ -17,26 +19,30 @@ class EmailService < ActiveRecord::Base
 
   delegate :subject, :from_address, :from_name, :to => :newsletter
 
-  def create_campaign
+  def create_campaign(list_id)
   	gb = gibbon_request
-  	begin
-  		response = gb.campaigns.create({:body => {:type => "plaintext", 
-  									   :recipients =>  {:list_id=>"adacda43cf"}, 
-  									   :settings => {:subject_line => @email_service.subject,				   	
-  									   				 :title => @email_service.subject
-  									   				 :reply_to => @email_service.from_address, 
-  									   				 :from_name => "abc",
-  													 :to_name =>"Programmer"}
-  									   }
-  							})
-  		campaign_id = response["id"]
-  	rescue Exception => e
-  	end
+  	# begin
+  	# 	response = gb.campaigns.create({:body => {:type => "plaintext", 
+  	# 								   :recipients =>  {:list_id => list_id}, 
+  	# 								   # :recipients =>  {:list_id => "adacda43cf"}, 
+  	# 								   :settings => {:subject_line => @email_service.subject,				   	
+  	# 								   				 :title => @email_service.subject
+  	# 								   				 :reply_to => @email_service.from_address, 
+  	# 								   				 :from_name => "abc",
+  	# 												 :to_name =>"Programmer"}
+  	# 								   }
+  	# 						})
+  	# 	campaign_id = response["id"]
+  	# 	save
+  	# rescue Exception => e
+  	# end
   end
 
   def send_campaign
   	gb = gibbon_request
   	begin
+  		campaign_id = "7ec6edb4c9"
+  		response = gb.campaigns(campaign_id).actions.send.create
   	rescue Exception => e
   	end
   end
@@ -44,6 +50,23 @@ class EmailService < ActiveRecord::Base
   def create_list
   	gb = gibbon_request
   	begin
+  		response = gb.lists.create(:body => {:name => 'list10',
+  								  :contact => {:company => "Q3tech",
+  								  			   :address1 => "address1",
+  								  			   :city => "New Delhi",
+  								  			   :state => "Delhi",
+  								  			   :zip => "110058",
+  								  			   :country => "India"
+  								  			  },
+  								  :permission_reminder => "You signed up for the newsletter",
+  								  :campaign_defaults => {:from_name => "From Name",
+  								  						 :from_email => "sbhatia1@q3tech.com",
+  								  						 :subject => "Sample Subject",
+  								  						 :language => "EN"},
+  								  :email_type_option => true,
+  								 })
+  		list_id = response["id"]
+  		save
   	rescue Exception => e
   	end
   end
@@ -51,6 +74,7 @@ class EmailService < ActiveRecord::Base
   def fetch_lists
   	gb = gibbon_request
   	begin
+  		response = gb.lists.retrieve
   	rescue Exception => e
   	end
   end
@@ -62,7 +86,7 @@ class EmailService < ActiveRecord::Base
   	end
   end
 
-  def add_members_to_list(list_id)
+  def add_members_to_list(list_id, emails)
   	gb = gibbon_request
   	begin
   		response = gb.batches.create({:body => {
@@ -77,6 +101,12 @@ class EmailService < ActiveRecord::Base
   end
 
   def get_stats
+  end
+
+  def add_template
+  end
+
+  def edit_template
   end
   
   def gibbon_request

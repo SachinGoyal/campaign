@@ -50,6 +50,7 @@ class Newsletter < ActiveRecord::Base
 
   #callback
   before_update :mark_children_for_removal
+  after_create :create_campaign_and_list
   #callback
 
   #association
@@ -57,14 +58,34 @@ class Newsletter < ActiveRecord::Base
   belongs_to :template
   has_many :newsletter_emails, inverse_of: :newsletter
   has_many :profiles, :through => :newsletter_emails
-
+  has_one :email_service
+  
   accepts_nested_attributes_for :newsletter_emails, reject_if: proc { |attrs| attrs['profile_id'].blank? and attrs['emails'].blank? and attrs['id'].blank? }, :allow_destroy => true
   #association
 
 
+  def create_campaign_and_list
+    begin
+      es = email_service.create
+      list_id = es.create_list if es 
+      add_response = es.add_members_to_list(list_id, newsletter_emails.emails) if list_id
+      # template_id = es.create_template()
+      campaign_id = es.create_campaign(list_id) if list_id #and template_id   
+      
+    rescue Exception => e
+    end  
+  end
+
   def mark_children_for_removal
     newsletter_emails.each do |child|
       child.mark_for_destruction if child.emails.blank? and child.profile_id.blank?
+    end
+  end
+
+  def send
+    begin
+      send_response = email_service.send_campaign(campaign_id) if campaign_id    
+    rescue Exception => e
     end
   end
 

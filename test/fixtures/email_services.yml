@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: email_services
+#
+#  id            :integer          not null, primary key
+#  newsletter_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  list_id       :string
+#  campaign_id   :string
+#
+# Indexes
+#
+#  index_email_services_on_newsletter_id  (newsletter_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  newsletter_id: 
+
+two:
+  newsletter_id: 
