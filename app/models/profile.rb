@@ -51,6 +51,10 @@ class Profile < ActiveRecord::Base
       errors.add(:base, :contacts_exist)
       return false
     end
+    if newsletter_emails.count > 0
+      errors.add(:base, :newsletters_exist)
+      return false
+    end
   end
 
   # class methods

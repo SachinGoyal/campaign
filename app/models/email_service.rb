@@ -68,13 +68,11 @@ class EmailService < ActiveRecord::Base
   								  						 :language => I18n.locale.to_s.upcase},
   								  :email_type_option => true,
   								 })
-  		binding.pry
-  		puts response
-  		list_id = response["id"]
+
+  		self.list_id = response["id"]
   		save
-  		list_id
+  		self.list_id
   	rescue Exception => e
-  		binding.pry
   	end
   end
 
@@ -96,14 +94,17 @@ class EmailService < ActiveRecord::Base
   def add_members_to_list(emails)
   	gb = gibbon_request
   	begin
+  		email_arr = []
+  		emails.each do |email|
+  			email_arr << { :method => 'POST', 
+  						   :path => "lists/#{list_id}/members", 
+  						   :body => "{\"email_address\":\"#{email}\", \"status\":\"subscribed\"}" }
+  		end		
   		response = gb.batches.create({:body => {
-  										:operations => [
-  												{ :method => 'POST', 
-  												  :path => 'lists/adacda43cf/members', 
-  												  :body => "{\"email_address\":\"email1@domain.tld\", \"status\":\"subscribed\"}" }
-  												] 
+  										:operations => email_arr  												
   									}})
   	rescue Exception => e
+
   	end
   end
 

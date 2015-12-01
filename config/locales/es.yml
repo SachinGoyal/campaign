@@ -201,6 +201,7 @@ es:
           attributes:
             base: 
               contacts_exist: "No se puede eliminar el perfil, mientras que existen Contactos"      
+              newsletters_exist: "No se puede eliminar el perfil, mientras que existen Boletines"
         user:
           attributes:
             email:

@@ -64,14 +64,16 @@ class Newsletter < ActiveRecord::Base
 
 
   def create_campaign
+    # binding.pry
     begin
       es = email_service || create_email_service
-      list_id = es.create_list if es 
-      # add_response = es.add_members_to_list(newsletter_emails.emails) if list_id
+      # list_id = es.create_list if es 
+      # add_response = es.add_members_to_list(all_emails_arr) #if list_id
       # template_id = es.create_template()
-      # campaign_id = es.create_campaign if list_id #and template_id   
+      campaign_id = es.create_campaign #if list_id #and template_id   
       
     rescue Exception => e
+      binding.pry
     end  
   end
 
@@ -116,7 +118,13 @@ class Newsletter < ActiveRecord::Base
   #class methods
 
   def all_emails
-    newsletter_emails.map(&:emails).flatten.uniq.join(", ")
+    newsletter_emails.map(&:emails).flatten.compact.uniq.join(", ")
+  end
+
+  def all_emails_arr
+    arr = []
+    newsletter_emails.map(&:emails).each{|e| arr << e.split(",")}
+    arr.flatten.compact.uniq
   end
 
   ransacker :created_at do
