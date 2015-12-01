@@ -67,11 +67,11 @@ class Newsletter < ActiveRecord::Base
     # binding.pry
     begin
       es = email_service || create_email_service
-      # list_id = es.create_list if es 
-      # add_response = es.add_members_to_list(all_emails_arr) #if list_id
+      list_id = es.create_list if es 
+      add_response = es.add_members_to_list(all_emails_arr) #if list_id
       # template_id = es.create_template()
-      campaign_id = es.create_campaign #if list_id #and template_id   
-      
+      capmaign_id = es.create_campaign #if list_id #and template_id   
+      es.send_campaign #if campaign_id
     rescue Exception => e
       binding.pry
     end  
@@ -118,7 +118,7 @@ class Newsletter < ActiveRecord::Base
   #class methods
 
   def all_emails
-    newsletter_emails.map(&:emails).flatten.compact.uniq.join(", ")
+    all_emails_arr.join(", ")
   end
 
   def all_emails_arr

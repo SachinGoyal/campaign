@@ -24,55 +24,63 @@ class EmailService < ActiveRecord::Base
 
   def create_campaign
   	gb = gibbon_request
-  	# begin
-  	# 	response = gb.campaigns.create({:body => {:type => "plaintext", 
-  	# 								   :recipients =>  {:list_id => list_id}, 
-  	# 								   # :recipients =>  {:list_id => "adacda43cf"}, 
-  	# 								   :settings => {:subject_line => @email_service.subject,				   	
-  	# 								   				 :title => @email_service.subject
-  	# 								   				 :reply_to => @email_service.from_address, 
-  	# 								   				 :from_name => "abc",
-  	# 												 :to_name =>"Programmer"}
-  	# 								   }
-  	# 						})
-  	# 	campaign_id = response["id"]
-  	# 	save
-  	# rescue Exception => e
-  	# end
+  	begin
+  		response = gb.campaigns.create({
+                       :body => { 
+                          :type => "plaintext", 
+  									      :recipients =>  {:list_id => list_id}, 
+  									       :settings => {
+                               :subject_line  => subject,				   	
+  									   				 :title         => subject,
+  									   				 :reply_to      => from_address, 
+  									   				 :from_name     => from_name}
+  									   }
+  							})
+  	
+  		self.campaign_id = response["id"]
+  		save
+  	rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+  	end
   end
 
   def send_campaign
   	gb = gibbon_request
   	begin
-  		campaign_id = "7ec6edb4c9"
   		response = gb.campaigns(campaign_id).actions.send.create
-  	rescue Exception => e
+  	rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
   	end
   end
 
   def create_list
   	gb = gibbon_request
   	begin
-  		response = gb.lists.create(:body => {:name => name,
-  								  :contact => {:company => company.try(:name) || "Sperant",
-  								  			   :address1 => "address1",
-  								  			   :city => "New Delhi",
-  								  			   :state => "Delhi",
-  								  			   :zip => "110058",
-  								  			   :country => "India"
-  								  			  },
+  		response = gb.lists.create(
+                    :body => {
+                      :name => name,
+  								    :contact => {
+                        :company  => company.try(:name) || "Sperant",
+  								  		:address1 => "address1",
+  								  		:city     => "New Delhi",
+  								  		:state    => "Delhi",
+  								  		:zip      => "110058",
+  								  		:country  => "India"
+  								  	},
   								  :permission_reminder => I18n.t('words.permission_reminder'),
-  								  :campaign_defaults => {:from_name => from_name,
-  								  						 :from_email => from_address,
-  								  						 :subject => subject,
-  								  						 :language => I18n.locale.to_s.upcase},
+  								  :campaign_defaults => {
+                      :from_name       => from_name,
+  								  	:from_email      => from_address,
+  								  	:subject         => subject,
+  								  	:language        => I18n.locale.to_s.upcase},
   								  :email_type_option => true,
   								 })
 
   		self.list_id = response["id"]
   		save
   		self.list_id
-  	rescue Exception => e
+  	rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
   	end
   end
 
@@ -80,14 +88,16 @@ class EmailService < ActiveRecord::Base
   	gb = gibbon_request
   	begin
   		response = gb.lists.retrieve
-  	rescue Exception => e
+  	rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
   	end
   end
 
   def add_member_to_list
   	gb = gibbon_request
   	begin
-  	rescue Exception => e
+  	rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
   	end
   end
 
@@ -103,8 +113,8 @@ class EmailService < ActiveRecord::Base
   		response = gb.batches.create({:body => {
   										:operations => email_arr  												
   									}})
-  	rescue Exception => e
-
+  	rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
   	end
   end
 
@@ -118,6 +128,6 @@ class EmailService < ActiveRecord::Base
   end
   
   def gibbon_request
-  	Gibbon::Request.new(api_key: "fe7ef49e4934c504860020bd65e2fdc3-us12")
+  	Gibbon::Request.new(api_key: GIBBON_KEY)
   end
 end
