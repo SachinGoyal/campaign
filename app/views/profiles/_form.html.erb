@@ -21,13 +21,24 @@
           </div>
         </div>
 
+        <div class="form-group form-group-sm">
+          <div class="col-sm-4 col-xs-12 control-label">
+          </div>
+          <div class="col-sm-8 col-xs-12">
+            <%= text_field_tag 'Email','Email',class: 'form-control',:readonly => true %>
+          </div>
+        </div>
       <div class="form-group add_field">
           <%= f.fields_for :extra_fields do |task_form| %>
-            <%= task_form.label :field_name, "Name" %>
-            <%= task_form.text_field :field_name %>
-            <%= task_form.label :field_type, 'Type' %>
-            <%= task_form.select :field_type, ['textbox', 'radio'], include_blank: true %>            
-            <%= task_form.link_to_remove "Remove" %>
+            <div class="form-group form-group-sm">
+              <div class="col-sm-4 col-xs-12 control-label">
+                <%= task_form.label :field_name, "Name" %>
+              </div>
+              <div class="col-sm-8 col-xs-12">
+                <%= task_form.text_field :field_name %>   
+                <%= task_form.link_to_remove "Remove" %>
+              </div>
+            </div>
           <% end %>
           <p><%= f.link_to_add "Add Field", :extra_fields %></p>
       </div>

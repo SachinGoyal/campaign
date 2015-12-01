@@ -103,11 +103,12 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
+    params.permit!
     @contact = Contact.find(params[:id])
-    @contact.attributes = contact_params
+    @contact.attributes = params[:contact]
 
     respond_to do |format|
-      if @contact.update(contact_params)
+      if @contact.update(params[:contact])
         format.html { redirect_to @contact, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:contact)) }
         format.json { render :show, status: :ok, location: @contact }
       else

@@ -12,18 +12,6 @@
           <div class="clearfix"></div> 
         </div>                                   
 
-
-        <div class="form-group form-group-sm">
-          <%= f.label :email, :class => "col-sm-4 col-xs-12 control-label"%>
-          <div class="col-sm-8 col-xs-12">
-            <%= f.text_field :email, :class => 'form-control' , :maxlength => 255 %>
-          </div>
-        </div>
-
-        
-
-
-
         <div class="form-group form-group-sm field">
           <%= f.label :status, :class => "col-sm-4 col-xs-12 control-label status_radio"%>
                <div class="col-sm-8 col-xs-12 radio_status">
@@ -34,10 +22,28 @@
               </div>
         </div>
 
-        <div class = 'dynamic_field'>
-          
-
+        <div class="form-group form-group-sm">
+          <%= f.label :email, :class => "col-sm-4 col-xs-12 control-label"%>
+          <div class="col-sm-8 col-xs-12">
+            <%= f.email_field :email, :class => 'form-control' , :maxlength => 255 %>
+          </div>
         </div>
+        <% if @contact.new_record? %>
+          <div class = 'dynamic_field'></div>
+        <% else %>
+          <% if @contact.extra_fields.present? %>
+            <%= fields_for :extra_fields do %>
+              <% @contact.extra_fields.each do |field|%>
+                    <div class="form-group form-group-sm">
+                  <%= label_tag :field_name,field.first,class: "col-sm-4 col-xs-12 control-label"%>  
+                  <div class="col-sm-8 col-xs-12">
+                    <%= text_field_tag "contact[extra_fields][#{field.first}]",field.last,class: 'form-control',required: true %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
 
        
 

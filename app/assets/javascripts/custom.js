@@ -22,6 +22,19 @@ $(document).ready( function() {
         }
     };
 
+    var dynamic_field = function() {
+     var profile_id = $('#contact_profile_ids').val();
+          if (profile_id == '')
+              $('.dynamic_field').hide();
+          else {
+              $('.dynamic_field').show();
+              $.ajax({
+                method: "POST",
+                data: { profile_id: profile_id },
+                url: '/contacts/dynamic_field.js'
+              })
+          }
+    }
     function get_ids(){
         var a = [];
         $('input[type=checkbox]').each(function (index) {
@@ -62,18 +75,14 @@ $(document).ready( function() {
           }
     });
 
-    $("#contact_profile_ids").on('change', function(){
-          var profile_id = $('#contact_profile_ids').val();
-          if (profile_id == '')
-              alert("Please Select a profile");
-          else {
-              $.ajax({
-                method: "POST",
-                data: { profile_id: profile_id },
-                url: '/contacts/dynamic_field.js'
-              })
-          }
+    $("#new_contact").on('load', function(){
+    dynamic_field();
     });
+    
+    $("#contact_profile_ids").on('change', function(){
+          dynamic_field();
+    });
+
 
 
     $(function () {
