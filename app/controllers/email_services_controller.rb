@@ -3,6 +3,7 @@ class EmailServicesController < ApplicationController
 
   def index
   	# @email_service = EmailService.find(params[:id])
+  	Newsletter.first.save
   	gb = Gibbon::Request.new(api_key: "fe7ef49e4934c504860020bd65e2fdc3-us12")
   	begin
   		# response = gb.campaigns.create({:body => {:type => "plaintext", 

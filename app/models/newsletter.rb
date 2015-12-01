@@ -31,7 +31,6 @@
 class Newsletter < ActiveRecord::Base
   
   acts_as_paranoid # Soft Delete
-
   acts_as_tenant(:company) #multitenant
 
   #scope
@@ -50,7 +49,7 @@ class Newsletter < ActiveRecord::Base
 
   #callback
   before_update :mark_children_for_removal
-  after_create :create_campaign_and_list
+  after_save :create_campaign
   #callback
 
   #association
@@ -64,13 +63,13 @@ class Newsletter < ActiveRecord::Base
   #association
 
 
-  def create_campaign_and_list
+  def create_campaign
     begin
-      es = email_service.create
+      es = email_service || create_email_service
       list_id = es.create_list if es 
-      add_response = es.add_members_to_list(list_id, newsletter_emails.emails) if list_id
+      # add_response = es.add_members_to_list(newsletter_emails.emails) if list_id
       # template_id = es.create_template()
-      campaign_id = es.create_campaign(list_id) if list_id #and template_id   
+      # campaign_id = es.create_campaign if list_id #and template_id   
       
     rescue Exception => e
     end  
@@ -82,9 +81,9 @@ class Newsletter < ActiveRecord::Base
     end
   end
 
-  def send
+  def send_email
     begin
-      send_response = email_service.send_campaign(campaign_id) if campaign_id    
+      send_response = email_service.send_campaign if email_service.campaign_id.present?    
     rescue Exception => e
     end
   end

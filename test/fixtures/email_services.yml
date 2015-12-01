@@ -8,6 +8,7 @@
 #  updated_at    :datetime         not null
 #  list_id       :string
 #  campaign_id   :string
+#  company_id    :integer
 #
 # Indexes
 #

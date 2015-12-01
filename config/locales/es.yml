@@ -442,6 +442,7 @@ es:
     sample_fields: "Los campos de ejemplo"
     per_month: "al mes"
     images_only: "Subir imágenes solamente"
+    permission_reminder: "Usted firmó en el boletín"
   controller:
     unauthorized_domain: "No tiene permisos para acceder a ese subdominio."
     shared: 

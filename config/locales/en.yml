@@ -449,6 +449,7 @@ en:
     sample_fields: "Sample Fields"
     per_month: "per month"
     images_only: "Upload Images only"
+    permission_reminder: "You signed up for the newsletter"
     
   controller:
     unauthorized_domain: "You are not authorized to access that subdomain."

@@ -8,6 +8,7 @@
 #  updated_at    :datetime         not null
 #  list_id       :string
 #  campaign_id   :string
+#  company_id    :integer
 #
 # Indexes
 #
@@ -15,11 +16,13 @@
 #
 
 class EmailService < ActiveRecord::Base
+  
+  acts_as_tenant(:company) #multitenant
   belongs_to :newsletter
 
-  delegate :subject, :from_address, :from_name, :to => :newsletter
+  delegate :name, :subject, :from_address, :from_name, :to => :newsletter
 
-  def create_campaign(list_id)
+  def create_campaign
   	gb = gibbon_request
   	# begin
   	# 	response = gb.campaigns.create({:body => {:type => "plaintext", 
@@ -50,24 +53,28 @@ class EmailService < ActiveRecord::Base
   def create_list
   	gb = gibbon_request
   	begin
-  		response = gb.lists.create(:body => {:name => 'list10',
-  								  :contact => {:company => "Q3tech",
+  		response = gb.lists.create(:body => {:name => name,
+  								  :contact => {:company => company.try(:name) || "Sperant",
   								  			   :address1 => "address1",
   								  			   :city => "New Delhi",
   								  			   :state => "Delhi",
   								  			   :zip => "110058",
   								  			   :country => "India"
   								  			  },
-  								  :permission_reminder => "You signed up for the newsletter",
-  								  :campaign_defaults => {:from_name => "From Name",
-  								  						 :from_email => "sbhatia1@q3tech.com",
-  								  						 :subject => "Sample Subject",
-  								  						 :language => "EN"},
+  								  :permission_reminder => I18n.t('words.permission_reminder'),
+  								  :campaign_defaults => {:from_name => from_name,
+  								  						 :from_email => from_address,
+  								  						 :subject => subject,
+  								  						 :language => I18n.locale.to_s.upcase},
   								  :email_type_option => true,
   								 })
+  		binding.pry
+  		puts response
   		list_id = response["id"]
   		save
+  		list_id
   	rescue Exception => e
+  		binding.pry
   	end
   end
 
@@ -79,14 +86,14 @@ class EmailService < ActiveRecord::Base
   	end
   end
 
-  def add_member_to_list(list_id)
+  def add_member_to_list
   	gb = gibbon_request
   	begin
   	rescue Exception => e
   	end
   end
 
-  def add_members_to_list(list_id, emails)
+  def add_members_to_list(emails)
   	gb = gibbon_request
   	begin
   		response = gb.batches.create({:body => {
