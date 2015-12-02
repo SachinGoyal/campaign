@@ -5,7 +5,7 @@ class NewslettersController < ApplicationController
   #filter
   before_action :authenticate_user!
   load_and_authorize_resource #cancan
-  before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
+  before_action :set_newsletter, only: [:show, :edit, :update, :destroy, :send_now]
   before_action :set_templates, only: [:new, :create, :edit, :update]
   before_action :check_editable_or_deletable, only: [:edit, :update, :destroy]
   #filter
@@ -81,6 +81,7 @@ class NewslettersController < ApplicationController
   def update
     respond_to do |format|
       if @newsletter.update(newsletter_params)
+        @newsletter.email_service.update_campaign
         format.html { redirect_to @newsletter, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:newsletter)) }
         format.json { render :show, status: :ok, location: @newsletter }
       else
@@ -97,7 +98,9 @@ class NewslettersController < ApplicationController
   # DELETE /newsletters/1
   # DELETE /newsletters/1.json
   def destroy
+    @newsletter.email_service.delete_campaign
     @newsletter.destroy
+
     respond_to do |format|
       format.html { redirect_to newsletters_url, notice: t("controller.shared.flash.destroy.notice", model: pick_model_from_locale(:newsletter)) }
       format.json { head :no_content }
@@ -105,7 +108,9 @@ class NewslettersController < ApplicationController
   end
 
   def send_now
-    return redirect_to newsletters_path
+    @newsletter.email_service.send_campaign
+    @newsletter.update_attributes(:send_at => Time.zone.now)
+    return redirect_to newsletters_path, notice: t('controller.newsletter.send_successful')
   end
 
   private

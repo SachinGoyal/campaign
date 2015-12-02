@@ -73,7 +73,6 @@ class Newsletter < ActiveRecord::Base
       capmaign_id = es.create_campaign #if list_id #and template_id   
       es.send_campaign #if campaign_id
     rescue Exception => e
-      binding.pry
     end  
   end
 

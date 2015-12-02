@@ -476,6 +476,7 @@ es:
     newsletter:
       updateable_messages: "Boletín eliminado correctamente . Boletín de noticias que ya se han enviado no se pudo eliminar ."
       check_editable_or_deletable: "No se puede editar / borrar el boletín de noticias , puesto que ya ha sido enviado."
+      send_successful: "Boletín ha sido enviado con éxito"
   time:
     am: am
     pm: pm

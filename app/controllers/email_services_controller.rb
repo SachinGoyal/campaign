@@ -6,6 +6,7 @@ class EmailServicesController < ApplicationController
   	Newsletter.first.save
   	gb = Gibbon::Request.new(api_key: "fe7ef49e4934c504860020bd65e2fdc3-us12")
   	begin
+  		EmailService.last.get_stats
   		# response = gb.campaigns.create({:body => {:type => "plaintext", 
   		# 							   :recipients =>  {:list_id=>"adacda43cf"}, 
   		# 							   :settings => {:subject_line => @email_service.subject,				   	

@@ -2,13 +2,26 @@
 #
 # Table name: email_services
 #
-#  id            :integer          not null, primary key
-#  newsletter_id :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  list_id       :string
-#  campaign_id   :string
-#  company_id    :integer
+#  id                       :integer          not null, primary key
+#  newsletter_id            :integer
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  list_id                  :string
+#  campaign_id              :string
+#  company_id               :integer
+#  opens_total              :integer
+#  unique_opens             :integer
+#  clicks_total             :integer
+#  unique_clicks            :integer
+#  unique_subscriber_clicks :integer
+#  hard_bounces             :integer
+#  soft_bounces             :integer
+#  unsubscribed             :integer
+#  forwards_count           :integer
+#  forwards_opens           :integer
+#  emails_sent              :integer
+#  abuse_reports            :integer
+#  send_at                  :datetime
 #
 # Indexes
 #
@@ -27,13 +40,14 @@ class EmailService < ActiveRecord::Base
   	begin
   		response = gb.campaigns.create({
                        :body => { 
-                          :type => "plaintext", 
+                          :type => "regular", 
   									      :recipients =>  {:list_id => list_id}, 
   									       :settings => {
                                :subject_line  => subject,				   	
   									   				 :title         => subject,
   									   				 :reply_to      => from_address, 
-  									   				 :from_name     => from_name}
+  									   				 :from_name     => from_name,
+                               :template_id   => 25229}
   									   }
   							})
   	
@@ -44,6 +58,29 @@ class EmailService < ActiveRecord::Base
   	end
   end
 
+  def update_campaign
+    gb = gibbon_request
+    begin
+      response = gb.campaigns(campaign_id).patch({
+                       :body => { 
+                          :type => "regular", 
+                          :recipients =>  {:list_id => list_id}, 
+                           :settings => {
+                               :subject_line  => subject,           
+                               :title         => subject,
+                               :reply_to      => from_address, 
+                               :from_name     => from_name,
+                               :template_id   => 25229}
+                       }
+                })
+    
+      self.campaign_id = response["id"]
+      save
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+    end
+  end
+
   def send_campaign
   	gb = gibbon_request
   	begin
@@ -52,6 +89,16 @@ class EmailService < ActiveRecord::Base
       puts "We have a problem: #{e.message} - #{e.raw_body}"
   	end
   end
+
+  def delete_campaign
+    gb = gibbon_request
+    begin
+      response = gb.campaigns(campaign_id).delete
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+    end
+  end
+
 
   def create_list
   	gb = gibbon_request
@@ -119,6 +166,41 @@ class EmailService < ActiveRecord::Base
   end
 
   def get_stats
+    gb = gibbon_request
+    begin
+      response = gb.reports(campaign_id).retrieve
+      self.emails_sent = response["emails_sent"]
+      self.abuse_reports = response["abuse_reports"]
+      self.unsubscribed = response["unsubscribed"]
+      if response.has_key?("bounces")
+        self.hard_bounces = response["bounces"]["hard_bounces"]
+        self.soft_bounces = response["bounces"]["soft_bounces"]
+      end  
+      if response.has_key?("forwards")
+        self.forwards_opens = response["forwards"]["forwards_opens"]
+        self.forwards_count = response["forwards"]["forwards_count"]
+      end
+      if response.has_key?("opens")
+        self.opens_total = response["opens"]["opens_total"]
+        self.unique_opens = response["opens"]["unique_opens"]        
+      end
+      if response.has_key?("clicks")
+        self.clicks_total = response["clicks"]["clicks_total"]
+        self.unique_clicks = response["clicks"]["unique_clicks"]        
+      end
+      save
+
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+    end
+  end
+
+  def update_stats
+    begin
+      
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+    end
   end
 
   def add_template

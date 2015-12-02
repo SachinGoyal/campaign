@@ -484,4 +484,5 @@ en:
     newsletter:
       updateable_messages: "Newsletter deleted successfully. Newsletter which have already been sent could not be deleted."
       check_editable_or_deletable: "Cannot edit/delete the newsletter since it has already been sent."
+      send_successful: "Newletter has been successfully sent."
   
