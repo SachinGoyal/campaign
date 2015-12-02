@@ -73,7 +73,6 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    binding.pry
     params.permit!
     @contact = Contact.new(params[:contact])
     respond_to do |format|
