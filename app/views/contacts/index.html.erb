@@ -13,13 +13,19 @@
     </div>
     <div class="col-xs-8">        
       <% if can? :search, Contact %>       
-        <%= render 'shared/keyword_search', :condition => :email_cont %>
-         
-        <div class="advance-search">
-          <%= link_to search_contacts_path, :title => t('frontend.shared.advance_search') do %>
-            <i class="fa fa-dot-circle-o"></i>
-          <% end %>
-        </div> 
+        <%= search_form_for @q do |f| %>
+          <div class="field">
+            <%= f.label :email_cont, "Email" %>
+            <%= f.text_field :email_cont %>
+          </div>
+          <div class="field">
+            <%= f.label :first_name_cont, "First Name" %>
+            <%= f.text_field :first_name_cont %>
+            <%= f.label :last_name_cont, "Last Name" %>
+            <%= f.text_field :last_name_cont %>    
+          </div>
+          <div class="actions"><%= f.submit "Search" %></div>
+        <% end %>         
       <% end %>
       
       <% if can? :create, Contact %>

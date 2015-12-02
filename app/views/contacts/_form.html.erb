@@ -5,10 +5,16 @@
       <div class="col-md-5 col-xs-10">
         <%= form_for @contact, :html => { :class => "form-horizontal contact" } do |f| %>
         <div class="form-group form-group-sm">
-          <%= f.label :profile_ids,'Profiles', :class => "col-sm-4 col-xs-12 control-label required"%>
+          <%= f.label :profile_id,'Profiles', :class => "col-sm-4 col-xs-12 control-label required"%>
+          <% if @contact.new_record? %>
           <div class="col-xs-8 custom-checkbox-style" id="profile-custom-select">
-            <%= collection_select(:contact, :profile_ids, Profile.active, :id, :name, {:include_blank => 'Select Profile'}, {:multiple => false, :name => 'contact[profile_ids][]', :selected => 0, :class => 'form-control'}) %>
+            <%= collection_select(:contact, :profile_id, Profile.active, :id, :name, {:include_blank => 'Select Profile'}, {:multiple => false, :name => 'contact[profile_id]', :selected => 0, :class => 'form-control'}) %>
           </div>
+          <% else %>
+          <div class="col-xs-8 custom-checkbox-style" id="profile-custom-select">
+            <%= text_field_tag "name",@contact.profile.name,class: 'form-control',:readonly => true %>
+          </div>
+          <% end %>
           <div class="clearfix"></div> 
         </div>                                   
 

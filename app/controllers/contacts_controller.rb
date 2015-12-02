@@ -73,6 +73,7 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
+    binding.pry
     params.permit!
     @contact = Contact.new(params[:contact])
     respond_to do |format|
@@ -136,7 +137,7 @@ class ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:email, :status).permit!
+      params.require(:contact).permit(:email, :status, :profile_id)
     end
 
     def updateable_messages(action)

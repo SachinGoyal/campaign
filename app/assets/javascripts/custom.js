@@ -23,7 +23,7 @@ $(document).ready( function() {
     };
 
     var dynamic_field = function() {
-     var profile_id = $('#contact_profile_ids').val();
+     var profile_id = $('#contact_profile_id').val();
           if (profile_id == '')
               $('.dynamic_field').hide();
           else {
@@ -79,7 +79,7 @@ $(document).ready( function() {
     dynamic_field();
     });
     
-    $("#contact_profile_ids").on('change', function(){
+    $("#contact_profile_id").on('change', function(){
           dynamic_field();
     });
 

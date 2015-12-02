@@ -10,6 +10,7 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  extra_fields :hstore
+#  profile_id   :integer
 #
 # Indexes
 #
@@ -46,8 +47,7 @@ class Contact < ActiveRecord::Base
   # callbacks
 
   #relation
-  has_and_belongs_to_many :profiles
- # has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "contacts_attributes"
+  belongs_to :profile
   #relation
 
   #ransack
@@ -55,6 +55,14 @@ class Contact < ActiveRecord::Base
 
   ransacker :created_at do
     Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
+  end
+
+  ransacker :first_name do |parent|  
+    Arel::Nodes::InfixOperation.new('->', parent.table[:extra_fields], Arel::Nodes.build_quoted('first_name'))
+  end
+
+  ransacker :last_name do |parent|  
+    Arel::Nodes::InfixOperation.new('->', parent.table[:extra_fields], Arel::Nodes.build_quoted('last_name'))
   end
 
   scope :matches_all_attributes, -> *attribute_ids { where(matches_all_attributes_arel(attribute_ids)) }
@@ -90,19 +98,8 @@ class Contact < ActiveRecord::Base
     end
   end
 
-  def country_name
-    country_name = ISO3166::Country[country]
-    country_name.try(:name)
-  end  
-  #ransack
-
-  def convert_lower
-    # self.gender.try(:downcase!) 
-  end
-
-  def convert_country_code
-    self.country = ISO3166::Country.find_by_name(country).try(:first) unless ISO3166::Country[country]
-  end
+  
+ 
 
   # class methods
   class << self
