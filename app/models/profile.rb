@@ -35,6 +35,7 @@ class Profile < ActiveRecord::Base
   
   #callback
   before_destroy :check_contacts
+  after_update :update_contact_extra_fields
   #callback
 
   #relation
@@ -53,6 +54,29 @@ class Profile < ActiveRecord::Base
       errors.add(:base, :contacts_exist)
       return false
     end
+  end
+
+  def update_contact_extra_fields
+    profile_field = extra_fields.map(&:field_name)
+    contact_field = contacts.first.extra_fields.keys
+
+    profile_field.each do |field|
+      if !contact_field.include?(:field)
+        contacts.each do |contact|
+          contact.extra_fields[field] = ""
+          contact.save
+        end
+      end
+    end
+
+    contact_field.each do |field|
+      if !profile_field.include?(:field)
+        contacts.each do |contact|
+          contact.extra_fields.delete(field)
+          contact.save
+        end
+      end
+    end 
   end
 
   # class methods
