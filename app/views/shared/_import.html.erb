@@ -1,4 +1,4 @@
-<%#= content_tag :a, "Import", href: "#", data: {toggle: 'modal', target: '#mymodal'} %>
+ <%#= content_tag :a, "Import", href: "#", data: {toggle: 'modal', target: '#mymodal'} %>
 <script type="text/javascript">
   $(document).ready( function() {
     $('[data-dismiss=modal]').on('click', function (e) {
@@ -47,7 +47,7 @@
 		        <div class="form-group form-group-sm">
 		          <label class="col-sm-3 col-xs-3 control-label"><%= t('frontend.import.select_profile') %></label>
 		          <div class="col-xs-6">
-  							<%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), {}, { :class => 'form-control' } %>
+  							<%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), {}, { :class => 'form-control profile-sample' } %>
 		          </div>
 		          
               <div class="col-xs-3">&nbsp;</div>
@@ -83,25 +83,9 @@
     
     		<div class="row">
     			<div class="col-xs-12 popup-sample-table">
-      			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-           			<tr>
-            				<th scope="col">first_name</th>
-            				<th scope="col">last_name</th>
-            				<th scope="col">email</th>
-                    <th scope="col">country</th>
-                    <th scope="col">city</th>
-                    <th scope="col">gender</th>
-           			</tr>
-           			
-           			<tr>
-		              <td scope="col">John</td>
-		              <td scope="col">Doe</td>
-		              <td scope="col">John.Doe@gmail.com</td>
-                  <td scope="col">India</td>
-                  <td scope="col">Delhi</td>
-                  <td scope="col">Male</td>
-		            </tr>
-          		</table>
+            <div class='sample-fields'>
+              <%= render partial: 'shared/sample_fields', locals: {profile: @profile}%>
+            </div>    
         		</div>
     		</div>
     	</div>

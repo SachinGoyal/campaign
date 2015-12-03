@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     collection do
       post :import 
       post :dynamic_field
+      post :sample_fields
     end
   end
   resources :campaigns, concerns: [:edit_all,:search] do

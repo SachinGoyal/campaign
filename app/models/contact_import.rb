@@ -33,24 +33,35 @@ class ContactImport
   end
 
   def save
+    profile = Profile.find(profile_id.to_i)
     if valid?
-      if imported_contacts.map(&:valid?).all?
+      if imported_contacts(profile).map(&:valid?).all?
         successfull_records = []
-        profile = Profile.find(profile_id.to_i)
-        imported_contacts.each_with_index.each do |contact, index|
-          if profile.contacts.create(contact.attributes)
-            successfull_records << contact
+        imported_contacts(profile).each_with_index.each do |contact, index|
+          if contact.new_record?
+            if profile.contacts.create(contact.attributes)
+              successfull_records << contact
+            else
+              contact.errors.full_messages.each do |message|
+                errors.add :base, "Row #{index+2}: #{message}"
+              end
+            end
           else
-            contact.errors.full_messages.each do |message|
-              errors.add :base, "Row #{index+2}: #{message}"
+            if contact.save
+              successfull_records << contact
+            else
+              contact.errors.full_messages.each do |message|
+                errors.add :base, "Row #{index+2}: #{message}"
+              end
             end
           end
-        end        
+        end
+          
         
-        imported_contacts == successfull_records
+        imported_contacts(profile) == successfull_records
         
       else
-        imported_contacts.each_with_index do |contact, index|
+        imported_contacts(profile).each_with_index do |contact, index|
           contact.errors.full_messages.each do |message|
             errors.add :base, "Row #{index+2}: #{message}"
           end
@@ -62,35 +73,35 @@ class ContactImport
     end
   end
 
-  def imported_contacts
-    @imported_contacts ||= load_imported_contacts
+  def imported_contacts profile
+    @imported_contacts ||= load_imported_contacts(profile)
   end
 
-  def load_imported_contacts
+  def load_imported_contacts profile
+    attributes = profile.extra_fields.map(&:field_name)                                                                                                                                                                                                                                                                                   
     spreadsheet = open_spreadsheet
     header = spreadsheet.row(1)
-    (2..spreadsheet.last_row).map do |i|
+    (2..spreadsheet.last_row).to_a.map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      contact = Contact.find_by_id(row["id"]) || Contact.new
+      contact = Contact.find_by_email(row["email"]) || Contact.new
       h = row.to_hash.slice(*Contact.accessible_attributes)
-      if h.has_key?("gender")
-        if h["gender"] == "male" or h["gender"] == "Male"
-          h["gender"] = true
-        elsif h["gender"] == "female" or h["gender"] == "Female"
-          h["gender"] = false
-        end
+      hash = {}
+      attributes.each do |field|
+        hash[field] = row[field] if row[field].present?
       end
-      contact.attributes = h
+      contact.extra_fields = hash
+      contact.email = row["email"]
       contact
     end
   end
 
   def open_spreadsheet
     case File.extname(file.original_filename)
-    when ".csv" then Roo::CSV.new(file.path)
-    when ".xls" then Roo::Excel.new(file.path)
-    when ".xlsx" then Roo::Excelx.new(file.path)
-    else raise "Unknown file type: #{file.original_filename}"
+      when ".csv" then Roo::CSV.new(file.path)
+      when ".xls" then Roo::Excel.new(file.path)
+      when ".xlsx" then Roo::Excelx.new(file.path)
+    else 
+        raise "Unknown file type: #{file.original_filename}"
     end
   end
 end

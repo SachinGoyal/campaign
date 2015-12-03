@@ -58,25 +58,26 @@ class Profile < ActiveRecord::Base
 
   def update_contact_extra_fields
     profile_field = extra_fields.map(&:field_name)
-    contact_field = contacts.first.extra_fields.keys
-
-    profile_field.each do |field|
-      if !contact_field.include?(:field)
-        contacts.each do |contact|
-          contact.extra_fields[field] = ""
-          contact.save
+    if contacts.any? #&& contacts.first.extra_fields.any?
+      contact_field = contacts.first.extra_fields.keys 
+      profile_field.each do |field|
+        if !contact_field.include?(:field)
+          contacts.each do |contact|
+            contact.extra_fields[field] = ""
+            contact.save
+          end
         end
       end
+
+      contact_field.each do |field|
+        if !profile_field.include?(:field)
+          contacts.each do |contact|
+            contact.extra_fields.delete(field)
+            contact.save
+          end
+        end
+      end 
     end
-
-    contact_field.each do |field|
-      if !profile_field.include?(:field)
-        contacts.each do |contact|
-          contact.extra_fields.delete(field)
-          contact.save
-        end
-      end
-    end 
   end
 
   # class methods

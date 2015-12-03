@@ -8,6 +8,10 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   #filter
 
+  def sample_fields
+    @profile = Profile.find(params[:profile_id])
+  end
+
   def dynamic_field
     @contact = Contact.new
     @profile = Profile.find(params[:profile_id])
