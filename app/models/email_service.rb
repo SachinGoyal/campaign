@@ -140,9 +140,10 @@ class EmailService < ActiveRecord::Base
   	end
   end
 
-  def add_member_to_list
+  def add_member_to_list(email)
   	gb = gibbon_request
   	begin
+      gb.lists(list_id).members.create(body: {email_address: email, status: "subscribed"})
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
   	end

@@ -58,6 +58,18 @@ class Contact < ActiveRecord::Base
   has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "contacts_attributes"
   #relation
 
+
+  def add_to_list    
+    newsletter_emails = NewsletterEmail.unsent.where(:profile_id => profiles.map(&:id))
+    newsletter_emails.each do |newsletter_email|
+      emails_arr = newsletter_email.emails.split(",")
+      emails_arr << self.email
+      newsletter_email.update_attributes(emails: emails_arr.join(","))              
+    end
+    newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
+      newsletter_email.newsletter.email_service.add_member_to_list(self.email)
+    end
+  end
   
   def remove_from_list
     newsletter_emails = NewsletterEmail.unsent.where('emails LIKE ?', "%#{self.email}%")
