@@ -62,9 +62,7 @@ class Contact < ActiveRecord::Base
   def add_to_list    
     newsletter_emails = NewsletterEmail.unsent.where(:profile_id => profiles.map(&:id))
     newsletter_emails.each do |newsletter_email|
-      emails_arr = newsletter_email.emails.split(",")
-      emails_arr << self.email
-      newsletter_email.update_attributes(emails: emails_arr.join(","))              
+      newsletter_email.add_contact(self.email)
     end
     newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
       newsletter_email.newsletter.email_service.add_member_to_list(self.email)
@@ -74,22 +72,12 @@ class Contact < ActiveRecord::Base
   def remove_from_list
     newsletter_emails = NewsletterEmail.unsent.where('emails LIKE ?', "%#{self.email}%")
     newsletter_emails.each do |newsletter_email|
-      emails_arr = newsletter_email.emails.split(",")
-      emails_arr.delete(self.email)
-      newsletter_email.update_attributes(emails: emails_arr.join(","))      
+      newsletter_email.delete_contact(self.email)
     end
     newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
       newsletter_email.newsletter.email_service.delete_member_from_list(self.email)
     end
   end
-
-  # def in_newsletters
-  #   profiles.newsletters
-  # end
-
-  # def in_newsletter_emails
-  #   in_newsletters.collect(&:newsletter_emails).flatten.uniq
-  # end
 
   ransacker :created_at do
     Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
