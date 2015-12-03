@@ -159,10 +159,19 @@ class EmailService < ActiveRecord::Base
   		end		
   		response = gb.batches.create({:body => {
   										:operations => email_arr  												
-  									}})
+  									}})      
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
   	end
+  end
+
+  def delete_member_from_list(email)
+    gb = gibbon_request
+    begin
+      response = gb.lists(list_id).members(Digest::MD5.hexdigest(email)).delete
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+    end
   end
 
   def get_stats

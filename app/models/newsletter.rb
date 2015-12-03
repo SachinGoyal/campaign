@@ -35,6 +35,8 @@ class Newsletter < ActiveRecord::Base
 
   #scope
   default_scope {order('id DESC')}
+  scope :sent, -> { where('DATE(send_at) < ?', Time.zone.now)}
+  scope :unsent, -> { where('DATE(send_at) > ?', Time.zone.now)}
   #scope
   
   # validation
@@ -55,16 +57,14 @@ class Newsletter < ActiveRecord::Base
   #association
   belongs_to :campaign
   belongs_to :template
-  has_many :newsletter_emails, inverse_of: :newsletter
+  has_many :newsletter_emails, inverse_of: :newsletter, :dependent => :destroy
   has_many :profiles, :through => :newsletter_emails
   has_one :email_service
   
   accepts_nested_attributes_for :newsletter_emails, reject_if: proc { |attrs| attrs['profile_id'].blank? and attrs['emails'].blank? and attrs['id'].blank? }, :allow_destroy => true
   #association
 
-
   def create_campaign
-    # binding.pry
     begin
       es = email_service || create_email_service
       list_id = es.create_list if es 
@@ -74,6 +74,13 @@ class Newsletter < ActiveRecord::Base
       es.send_campaign #if campaign_id
     rescue Exception => e
     end  
+  end
+
+  def mark_sent
+    update_attributes(:send_at => Time.zone.now)
+    newsletter_emails.each do |ne|
+      ne.mark_sent
+    end
   end
 
   def mark_children_for_removal

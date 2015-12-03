@@ -42,7 +42,6 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
-  # validates :gender, :presence => true
   # validates_inclusion_of :gender, in: [true, false], message: "Should either be male or female"
   #validation
 
@@ -50,6 +49,8 @@ class Contact < ActiveRecord::Base
   # callbacks
   # before_validation :convert_lower
   before_validation :convert_country_code
+  after_create :add_to_list
+  before_destroy :remove_from_list
   # callbacks
 
   #relation
@@ -57,8 +58,26 @@ class Contact < ActiveRecord::Base
   has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "contacts_attributes"
   #relation
 
-  #ransack
-  # delegate :id, to: :interest_areas, prefix: true
+  
+  def remove_from_list
+    newsletter_emails = NewsletterEmail.unsent.where('emails LIKE ?', "%#{self.email}%")
+    newsletter_emails.each do |newsletter_email|
+      emails_arr = newsletter_email.emails.split(",")
+      emails_arr.delete(self.email)
+      newsletter_email.update_attributes(emails: emails_arr.join(","))      
+    end
+    newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
+      newsletter_email.newsletter.email_service.delete_member_from_list(self.email)
+    end
+  end
+
+  # def in_newsletters
+  #   profiles.newsletters
+  # end
+
+  # def in_newsletter_emails
+  #   in_newsletters.collect(&:newsletter_emails).flatten.uniq
+  # end
 
   ransacker :created_at do
     Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")

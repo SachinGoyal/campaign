@@ -10,15 +10,20 @@
 #  updated_at    :datetime         not null
 #  sample        :boolean
 #  from_contacts :boolean
+#  sent          :boolean          default(TRUE)
 #
 
 class NewsletterEmail < ActiveRecord::Base
+
+	validate :cs_emails
+
+	before_save :populate_profile_emails
+	before_save :remove_duplicate_emails_and_strip
+
 	belongs_to :profile
 	belongs_to :newsletter, inverse_of: :newsletter_emails
 
-	validate :cs_emails
-	before_save :populate_profile_emails
-	before_save :remove_duplicate_emails_and_strip
+	scope :unsent, -> { where(sent: 'false') }
 
 	def cs_emails
 		invalid_emails = []
@@ -38,5 +43,9 @@ class NewsletterEmail < ActiveRecord::Base
 
 	def remove_duplicate_emails_and_strip
 		self.emails = self.emails.split(",").map(&:strip).uniq.join(",")
+	end
+
+	def mark_sent
+		update_attributes(:sent => true)
 	end
 end

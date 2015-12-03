@@ -109,7 +109,7 @@ class NewslettersController < ApplicationController
 
   def send_now
     @newsletter.email_service.send_campaign
-    @newsletter.update_attributes(:send_at => Time.zone.now)
+    @newsletter.mark_sent
     return redirect_to newsletters_path, notice: t('controller.newsletter.send_successful')
   end
 
