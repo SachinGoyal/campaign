@@ -147,6 +147,9 @@ GEM
     highcharts-rails (3.0.10)
       railties (>= 3.1)
     hitimes (1.2.3)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     i18n_data (0.7.0)
     iconv (1.0.4)
@@ -181,6 +184,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.8.1)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     nenv (0.2.0)
     nokogiri (1.6.6.2)
@@ -345,6 +349,7 @@ DEPENDENCIES
   gibbon
   guard
   highcharts-rails (~> 3.0.0)
+  httparty
   iconv (~> 1.0.3)
   jbuilder (~> 2.0)
   jquery-rails

@@ -22,6 +22,7 @@
 #  emails_sent              :integer
 #  abuse_reports            :integer
 #  send_at                  :datetime
+#  template_id              :integer
 #
 # Indexes
 #
@@ -47,7 +48,7 @@ class EmailService < ActiveRecord::Base
   									   				 :title         => subject,
   									   				 :reply_to      => from_address, 
   									   				 :from_name     => from_name,
-                               :template_id   => 25229}
+                               :template_id   => 26205 }
   									   }
   							})
   	
@@ -70,7 +71,7 @@ class EmailService < ActiveRecord::Base
                                :title         => subject,
                                :reply_to      => from_address, 
                                :from_name     => from_name,
-                               :template_id   => 25229}
+                               :template_id   => 74661 }
                        }
                 })
     
@@ -213,7 +214,21 @@ class EmailService < ActiveRecord::Base
     end
   end
 
-  def add_template
+  def create_template
+    begin
+      response = HTTParty.post(V2_URL, 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :name => name, 
+                      :html => newsletter.template.content
+                    }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' } )
+      self.template_id = response["template_id"]
+      save
+    rescue Exception => e
+      puts e.message
+    end
+    #  curl -H "Content-Type: application/json" -X POST -d '{"apikey":"fe7ef49e4934c504860020bd65e2fdc3-us12","name":"dummy", "html": "example html"}' https://us12.api.mailchimp.com/2.0/templates/add
   end
 
   def edit_template

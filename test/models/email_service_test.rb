@@ -22,6 +22,7 @@
 #  emails_sent              :integer
 #  abuse_reports            :integer
 #  send_at                  :datetime
+#  template_id              :integer
 #
 # Indexes
 #

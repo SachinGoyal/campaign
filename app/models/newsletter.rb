@@ -51,7 +51,6 @@ class Newsletter < ActiveRecord::Base
 
   #callback
   before_update :mark_children_for_removal
-  after_save :create_campaign
   #callback
 
   #association
@@ -64,15 +63,18 @@ class Newsletter < ActiveRecord::Base
   accepts_nested_attributes_for :newsletter_emails, reject_if: proc { |attrs| attrs['profile_id'].blank? and attrs['emails'].blank? and attrs['id'].blank? }, :allow_destroy => true
   #association
 
+  after_create :create_campaign
+
   def create_campaign
     begin
       es = email_service || create_email_service
       list_id = es.create_list if es 
       add_response = es.add_members_to_list(all_emails_arr) #if list_id
-      # template_id = es.create_template()
+      template_id = es.create_template
       capmaign_id = es.create_campaign #if list_id #and template_id   
-      es.send_campaign #if campaign_id
+      # es.send_campaign #if campaign_id
     rescue Exception => e
+      binding.pry
     end  
   end
 
