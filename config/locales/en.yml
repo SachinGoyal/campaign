@@ -444,14 +444,17 @@ en:
         csv_file: "Upload only CSV files"
 
   words:
-    procedent: Procedente
-    improcedent: Improcedente
     and: "and"
     sample_fields: "Sample Fields"
     per_month: "per month"
     images_only: "Upload Images only"
     permission_reminder: "You signed up for the newsletter"
-    
+    hi: "Hi"
+    thank_you: "Thank You"
+  mailer:
+    mailchimp:
+      error: "The following request failed at mailchimp. The error log is as follows"  
+      action: "Please take appropriate action or contact admin."
   controller:
     unauthorized_domain: "You are not authorized to access that subdomain."
     shared: 
@@ -485,4 +488,4 @@ en:
       updateable_messages: "Newsletter deleted successfully. Newsletter which have already been sent could not be deleted."
       check_editable_or_deletable: "Cannot edit/delete the newsletter since it has already been sent."
       send_successful: "Newletter has been successfully sent."
-  
+      not_imported: "Contacts not imported yet. Please wait for sometime before sending the newsletter."  

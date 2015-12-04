@@ -52,7 +52,8 @@ class NewslettersController < ApplicationController
 
   def create
     @newsletter = Newsletter.new(newsletter_params)
-
+    @newsletter.creator = current_user
+    
     respond_to do |format|
       if @newsletter.save
         format.html { redirect_to @newsletter, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:newsletter)) }
@@ -106,6 +107,11 @@ class NewslettersController < ApplicationController
   end
 
   def send_now
+    email_service = @newsletter.email_service
+    if email_service.members_from_list.count <= 0
+      return redirect_to newsletters_path, notice: t('controller.newsletter.not_imported')
+    end
+
     @newsletter.email_service.send_campaign
     @newsletter.mark_sent
     return redirect_to newsletters_path, notice: t('controller.newsletter.send_successful')

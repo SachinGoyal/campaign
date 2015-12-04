@@ -23,6 +23,8 @@
 #  abuse_reports            :integer
 #  send_at                  :datetime
 #  template_id              :integer
+#  scheduled_at             :datetime
+#  user_id                  :integer
 #
 # Indexes
 #

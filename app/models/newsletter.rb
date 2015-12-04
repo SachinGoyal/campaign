@@ -20,6 +20,7 @@
 #  send_at       :datetime
 #  auto_response :string
 #  company_id    :integer
+#  user_id       :integer
 #
 # Indexes
 #
@@ -59,6 +60,7 @@ class Newsletter < ActiveRecord::Base
   has_many :newsletter_emails, inverse_of: :newsletter, :dependent => :destroy
   has_many :profiles, :through => :newsletter_emails
   has_one :email_service
+  belongs_to :creator, class_name: "User", foreign_key: :user_id
   
   accepts_nested_attributes_for :newsletter_emails, reject_if: proc { |attrs| attrs['profile_id'].blank? and attrs['emails'].blank? and attrs['id'].blank? }, :allow_destroy => true
   #association
@@ -67,14 +69,16 @@ class Newsletter < ActiveRecord::Base
 
   def create_campaign
     begin
-      es = email_service || create_email_service
+      es = email_service || create_email_service(:user_id => self.user_id)
       list_id = es.create_list if es 
       add_response = es.add_members_to_list(all_emails_arr) #if list_id
       template_id = es.create_template
-      capmaign_id = es.create_campaign #if list_id #and template_id   
-      # es.send_campaign #if campaign_id
+      capmaign_id = es.create_campaign #if list_id #and template_id
+      if send_at.present?
+        es.schedule_campaign
+      end   
     rescue Exception => e
-      binding.pry
+      ApplicationMailer.mailchimp_error(creator, "Could not connect to mailchimp").deliver_now
     end  
   end
 
