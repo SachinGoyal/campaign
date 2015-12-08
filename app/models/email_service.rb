@@ -34,6 +34,9 @@
 class EmailService < ActiveRecord::Base
   
   acts_as_tenant(:company) #multitenant
+
+  before_destroy :delete_dependencies
+
   belongs_to :newsletter
   belongs_to :creator, class_name: "User", foreign_key: :user_id
 
@@ -66,7 +69,7 @@ class EmailService < ActiveRecord::Base
   def update_campaign
     gb = gibbon_request
     begin
-      response = gb.campaigns(campaign_id).patch({
+      response = gb.campaigns(campaign_id).update({
                        :body => { 
                           :type => "regular", 
                           :recipients =>  {:list_id => list_id}, 
@@ -78,9 +81,6 @@ class EmailService < ActiveRecord::Base
                                :template_id   => 74661 }
                        }
                 })
-    
-      self.campaign_id = response["id"]
-      save
     rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
@@ -103,7 +103,7 @@ class EmailService < ActiveRecord::Base
                     :body => { 
                       :apikey => GIBBON_KEY, 
                       :cid => campaign_id, 
-                      :schedule_time => newsletter.send_at.strftime("%Y-%m-%d %H:%M:%S")
+                      :schedule_time => newsletter.send_at.utc.strftime("%Y-%m-%d %H:%M:%S")
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' })
       
@@ -237,6 +237,16 @@ class EmailService < ActiveRecord::Base
     end
   end
 
+  def delete_list
+    gb = gibbon_request
+    begin
+      response = gb.lists(list_id).delete
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
+    end
+  end
+
   def get_stats
     gb = gibbon_request
     begin
@@ -296,6 +306,28 @@ class EmailService < ActiveRecord::Base
   end
 
   def edit_template
+  end
+
+  def delete_template
+    begin
+      response = HTTParty.post(V2_URL+"2.0/templates/del", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :template_id => template_id                    
+                      }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' } )
+      self.template_id = response["template_id"]
+      save
+    rescue Exception => e
+      puts e.message
+      ApplicationMailer.mailchimp_error(creator, "#{e.raw_body}").deliver_now
+    end
+  end
+
+  def delete_dependencies
+    delete_campaign
+    delete_list
+    delete_template
   end
   
   def gibbon_request

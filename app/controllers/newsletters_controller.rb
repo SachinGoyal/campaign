@@ -97,7 +97,6 @@ class NewslettersController < ApplicationController
   # DELETE /newsletters/1
   # DELETE /newsletters/1.json
   def destroy
-    @newsletter.email_service.delete_campaign
     @newsletter.destroy
 
     respond_to do |format|
@@ -108,7 +107,7 @@ class NewslettersController < ApplicationController
 
   def send_now
     email_service = @newsletter.email_service
-    if email_service.members_from_list.count <= 0
+    if email_service.members_in_list.count <= 0
       return redirect_to newsletters_path, notice: t('controller.newsletter.not_imported')
     end
 
