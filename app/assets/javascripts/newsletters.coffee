@@ -37,4 +37,7 @@ jQuery ->
 
   $('.newsletter_form').submit (e) ->
     #e.preventDefault()
-  $('.datetimepicker').datetimepicker()
+  $('.datetimepicker').datetimepicker({
+    minDate: 0,
+    step: 30
+  })
