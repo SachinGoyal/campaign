@@ -64,6 +64,7 @@ class Contact < ActiveRecord::Base
     newsletter_emails.each do |newsletter_email|
       newsletter_email.add_contact(self.email)
     end
+    binding.pry
     newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
       newsletter_email.newsletter.email_service.add_member_to_list(self.email)
     end

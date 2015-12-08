@@ -94,8 +94,6 @@ class NewslettersController < ApplicationController
     end
   end
 
-  # DELETE /newsletters/1
-  # DELETE /newsletters/1.json
   def destroy
     @newsletter.destroy
 
@@ -111,8 +109,9 @@ class NewslettersController < ApplicationController
       return redirect_to newsletters_path, notice: t('controller.newsletter.not_imported')
     end
 
-    @newsletter.email_service.send_campaign
-    @newsletter.mark_sent
+    if @newsletter.email_service.send_campaign
+      @newsletter.mark_sent
+    end
     return redirect_to newsletters_path, notice: t('controller.newsletter.send_successful')
   end
 

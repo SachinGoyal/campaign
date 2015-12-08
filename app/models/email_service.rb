@@ -54,7 +54,7 @@ class EmailService < ActiveRecord::Base
   									   				 :title         => subject,
   									   				 :reply_to      => from_address, 
   									   				 :from_name     => from_name,
-                               :template_id   => 26205 }
+                               :template_id   => template_id }
   									   }
   							})
   	
@@ -78,7 +78,7 @@ class EmailService < ActiveRecord::Base
                                :title         => subject,
                                :reply_to      => from_address, 
                                :from_name     => from_name,
-                               :template_id   => 74661 }
+                               :template_id   => template_id }
                        }
                 })
     rescue Gibbon::MailChimpError => e
@@ -91,6 +91,7 @@ class EmailService < ActiveRecord::Base
   	gb = gibbon_request
   	begin
   		response = gb.campaigns(campaign_id).actions.send.create
+      true
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now

@@ -10,7 +10,7 @@
 #  updated_at    :datetime         not null
 #  sample        :boolean
 #  from_contacts :boolean
-#  sent          :boolean          default(TRUE)
+#  sent          :boolean          default(FALSE)
 #
 
 class NewsletterEmail < ActiveRecord::Base
