@@ -43,7 +43,7 @@ gem 'country_select'
 gem 'summernote-rails'
 gem 'gibbon'
 gem 'httparty'
-
+gem 'whenever', :require => false
 # Use Uglifier as compressor for JavaScript assets
 # gem 'activerecord-import'
 

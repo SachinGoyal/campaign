@@ -36,6 +36,7 @@ class Newsletter < ActiveRecord::Base
 
   #scope
   default_scope {order('id DESC')}
+  scope :unscheduled, -> { where(:send_at => nil) }
   scope :sent, -> { where('DATE(send_at) < ?', Time.zone.now)}
   scope :unsent, -> { where('DATE(send_at) > ? OR send_at IS NULL', Time.zone.now)}
   #scope
