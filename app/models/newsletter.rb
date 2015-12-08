@@ -21,6 +21,7 @@
 #  auto_response :string
 #  company_id    :integer
 #  user_id       :integer
+#  scheduled_at  :datetime
 #
 # Indexes
 #
@@ -67,7 +68,7 @@ class Newsletter < ActiveRecord::Base
   #association
 
   after_create :create_campaign
-  before_destory :check_sent
+  before_destroy :check_sent
 
   def create_campaign
     begin
