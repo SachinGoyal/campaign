@@ -66,6 +66,7 @@ class Newsletter < ActiveRecord::Base
   #association
 
   after_create :create_campaign
+  before_destory :check_sent
 
   def create_campaign
     begin
@@ -95,6 +96,14 @@ class Newsletter < ActiveRecord::Base
     end
   end
 
+  def check_sent
+    if editable_or_deletable?
+      errors.add(:base, :already_sent)
+      return false
+    end
+
+  end
+
   def send_email
     begin
       send_response = email_service.send_campaign if email_service.campaign_id.present?    
@@ -111,7 +120,7 @@ class Newsletter < ActiveRecord::Base
   end
 
   def editable_or_deletable?
-    sent?
+    !sent?
     # false
   end
 

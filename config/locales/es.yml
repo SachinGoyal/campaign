@@ -221,6 +221,9 @@ es:
             base:
               delete_company_admin: "No se puede eliminar de administración de la empresa"
               delete_super_admin: "No se puede eliminar el papel súper administrador"
+        newsletter:
+          attributes:
+            base: "No puede ser editado o borrado como boletín ya se envía"
         attribute:        
           attributes:
             base:

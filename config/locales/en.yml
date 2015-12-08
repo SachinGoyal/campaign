@@ -155,7 +155,6 @@ en:
     price_list: "Price List"
 
   activerecord:
-    units_reserved: "Reservas"
     errors:
       messages:
       models:
@@ -193,6 +192,9 @@ en:
             base:
               delete_company_admin: "Cannot delete Company Admin"
               delete_super_admin: "Cannot delete super admin role"
+        newsletter:
+          attributes:
+            base: "Cannot be edited or deleted as newsletter is already sent"
         attribute:
           attributes:
             base:
