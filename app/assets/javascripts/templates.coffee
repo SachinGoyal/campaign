@@ -1,3 +1,22 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+sendFile = (file) ->
+  data = new FormData
+  data.append 'template_image[image]', file
+  $.ajax
+    data: data
+    type: 'POST'
+    url: '/uploads/create'
+    cache: false
+    contentType: false
+    processData: false
+    success: (data) ->
+      $(".summernote").summernote "insertImage", data.url
+ 
+$ ->
+  $(".summernote").summernote
+    height: 360
+    codemirror:
+      lineNumbers: true
+      tabSize: 2
+      theme: "solarized light"
+    onImageUpload: (files) ->
+      sendFile files[0]

@@ -42,6 +42,8 @@ class EmailService < ActiveRecord::Base
 
   delegate :name, :subject, :from_address, :from_name, :to => :newsletter
 
+  scope :unsent, -> { where(:send_at => nil) }
+
   def create_campaign
   	gb = gibbon_request
   	begin
@@ -53,8 +55,8 @@ class EmailService < ActiveRecord::Base
                                :subject_line  => subject,				   	
   									   				 :title         => subject,
   									   				 :reply_to      => from_address, 
-  									   				 :from_name     => from_name,
-                               :template_id   => template_id }
+  									   				 :from_name     => from_name
+                            }
   									   }
   							})
   	
@@ -64,6 +66,22 @@ class EmailService < ActiveRecord::Base
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
+  end
+
+  def update_content
+    gb = gibbon_request
+    begin
+      body = { template: {
+                  id: 29065,
+                  sections: {
+                    "std_content00": self.newsletter.template.content
+                  }
+                }
+              }
+      response = gb.campaigns(campaign_id).content.upsert(body: body)
+
+    rescue Gibbon::MailChimpError => e
+    end
   end
 
   def update_campaign

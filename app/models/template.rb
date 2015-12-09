@@ -2,16 +2,17 @@
 #
 # Table name: templates
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  content    :text
-#  status     :boolean
-#  created_by :integer
-#  updated_by :integer
-#  deleted_at :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  company_id :integer
+#  id              :integer          not null, primary key
+#  name            :string
+#  content         :text
+#  status          :boolean
+#  created_by      :integer
+#  updated_by      :integer
+#  deleted_at      :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  company_id      :integer
+#  template_images :json
 #
 # Indexes
 #
@@ -45,6 +46,7 @@ class Template < ActiveRecord::Base
   has_many :newsletters
   #association
 
+    mount_uploaders :template_image, TemplateImageUploader
 
   #ransack
 

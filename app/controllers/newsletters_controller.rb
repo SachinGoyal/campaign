@@ -109,7 +109,8 @@ class NewslettersController < ApplicationController
       return redirect_to newsletters_path, notice: t('controller.newsletter.not_imported')
     end
 
-    if @newsletter.email_service.send_campaign
+    email_service.uddate_content
+    if email_service.send_campaign
       @newsletter.mark_sent
     end
     return redirect_to newsletters_path, notice: t('controller.newsletter.send_successful')

@@ -17,7 +17,7 @@ gem 'cancancan'
 #Soft delete
 gem 'paranoia'
 gem 'simple_form'
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "rmagick"
 gem 'mini_magick'
 gem 'acts_as_tenant'
