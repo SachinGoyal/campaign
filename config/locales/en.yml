@@ -232,6 +232,7 @@ en:
         bcc_email: "BCC Email"
         send_at: "Send At"
         auto_response: "Auto Response"
+        scheduled_at: "Scheduled At"
       template:
         name: "Name"
         content: "Content"

@@ -9,8 +9,8 @@ jQuery ->
 
   $('form').on 'click', '.auto_response_toggle', (event) ->
     $('#newsletter_auto_response').toggle()
-  $('form').on 'click', '.send_at_toggle', (event) ->
-    $('#newsletter_send_at').toggle()
+  $('form').on 'click', '.scheduled_at_toggle', (event) ->
+    $('#newsletter_scheduled_at_at').toggle()
       
   $('form').on 'click', '.contact_search_for_newsletter', (event) ->
     search_params = {q:{}}

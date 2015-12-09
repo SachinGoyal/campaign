@@ -261,6 +261,7 @@ es:
         send_at: "Enviar A"
         auto_response: "Auto Response"
         created_at: "Fecha"
+        scheduled_at: "Programada en"
       template:
         name: "Nombre"
         content: "Descripción"

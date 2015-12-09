@@ -107,6 +107,15 @@
                 </div>
             <% end %>
 
+            <% if @newsletter.scheduled_at.present? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.scheduled_at') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  format_date(@newsletter, :scheduled_at) %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+
             <% if @newsletter.send_at.present? %>            
               <div class="form-group form-group-sm">
                 <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.send_at') %></label>

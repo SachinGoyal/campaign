@@ -161,12 +161,12 @@
           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
             <div class="col-sm-9 col-xs-12 custom-radio-input">
-              <input id="radio02" name="" type="radio" value="" class="send_at_toggle">
+              <input id="radio02" name="" type="radio" value="" class="scheduled_at_toggle">
               <label for="radio02"><span></span><%= t('frontend.newsletter.auto_send') %></label>
-              <% if @newsletter.send_at %>
-                <%= f.text_field :send_at, :class => "form-control datetimepicker" %>
+              <% if @newsletter.scheduled_at %>
+                <%= f.text_field :scheduled_at, :class => "form-control datetimepicker" %>
               <% else %>
-                <%= f.text_field :send_at, :class => "form-control datetimepicker", :style => "display:none" %>
+                <%= f.text_field :scheduled_at, :class => "form-control datetimepicker", :style => "display:none" %>
               <% end %>              
             </div>
           </div>

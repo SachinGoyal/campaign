@@ -38,11 +38,13 @@
           <span><%= t("frontend.campaign.view_stat") %></span>
           <% end %>
         </li>
-        <li><%= link_to send_now_newsletter_path(element),  method: :post do %>
-          <i class="fa fa-eye"></i>
-          <span><%= t("frontend.newsletter.send_now") %></span>
-          <% end %>
-        </li>
+        <% if !element.scheduled_at.present? or !element.sent? %>
+          <li><%= link_to send_now_newsletter_path(element),  method: :post do %>
+            <i class="fa fa-eye"></i>
+            <span><%= t("frontend.newsletter.send_now") %></span>
+            <% end %>
+          </li>
+        <% end %>  
       <% end %>
 
       <% if can? :read , element %> 

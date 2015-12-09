@@ -77,7 +77,7 @@ class Newsletter < ActiveRecord::Base
       add_response = es.add_members_to_list(all_emails_arr) #if list_id
       template_id = es.create_template
       capmaign_id = es.create_campaign #if list_id #and template_id
-      if send_at.present?
+      if scheduled_at.present?
         es.schedule_campaign
       end   
     rescue Exception => e

@@ -104,11 +104,11 @@ class EmailService < ActiveRecord::Base
                     :body => { 
                       :apikey => GIBBON_KEY, 
                       :cid => campaign_id, 
-                      :schedule_time => newsletter.send_at.utc.strftime("%Y-%m-%d %H:%M:%S")
+                      :schedule_time => newsletter.scheduled_at.utc.strftime("%Y-%m-%d %H:%M:%S")
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' })
       
-      update_attributes(:scheduled_at => newsletter.send_at) if response.has_key?("complete") and response["complete"]
+      update_attributes(:send_at => newsletter.send_at) if response.has_key?("complete") and response["complete"]
     rescue Exception => e
       puts e.message
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
