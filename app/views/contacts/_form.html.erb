@@ -18,20 +18,15 @@
           <div class="clearfix"></div> 
         </div>                                   
 
-        <div class="form-group form-group-sm field">
-          <%= f.label :status, :class => "col-sm-4 col-xs-12 control-label status_radio"%>
-               <div class="col-sm-8 col-xs-12 radio_status">
-                <%= f.radio_button :status ,1, :checked => @contact.new_record? ? true : @contact.status ,:id=>"radio01" %>
-                <label for="radio01" class="status_spacer"><span></span><%= t('frontend.shared.enabled') %></label>
-                <%= f.radio_button :status ,0, :checked => @contact.new_record? ? false : !@contact.status ,:id=>"radio02" %>
-                <label for="radio02"><span></span><%= t('frontend.shared.disabled') %></label>
-              </div>
-        </div>
-
+        
         <div class="form-group form-group-sm">
           <%= f.label :email, :class => "col-sm-4 col-xs-12 control-label"%>
           <div class="col-sm-8 col-xs-12">
-            <%= f.email_field :email, :class => 'form-control' , :maxlength => 255 %>
+            <% if @contact.new_record? %>
+              <%= f.email_field :email, :class => 'form-control' , :maxlength => 255 %>
+            <% else %>
+              <%= f.email_field :email, :class => 'form-control' , :maxlength => 255 , readonly: true %>
+            <% end %>
           </div>
         </div>
         <% if @contact.new_record? %>
@@ -43,13 +38,27 @@
                     <div class="form-group form-group-sm">
                   <%= label_tag :field_name,field.first,class: "col-sm-4 col-xs-12 control-label"%>  
                   <div class="col-sm-8 col-xs-12">
-                    <%= text_field_tag "contact[extra_fields][#{field.first}]",field.last,class: 'form-control',required: true %>
+                    <%= text_field_tag "contact[extra_fields][#{field.first}]",field.last,class: 'form-control' %>
                   </div>
                 </div>
               <% end %>
             <% end %>
           <% end %>
         <% end %>
+
+        
+        <% if !@contact.new_record? %>
+          <div class="form-group form-group-sm field">
+            <%= f.label :status, :class => "col-sm-4 col-xs-12 control-label status_radio"%>
+                 <div class="col-sm-8 col-xs-12 radio_status">
+                  <%= f.radio_button :status ,1, :checked => @contact.new_record? ? true : @contact.status ,:id=>"radio01" %>
+                  <label for="radio01" class="status_spacer"><span></span><%= t('frontend.shared.enabled') %></label>
+                  <%= f.radio_button :status ,0, :checked => @contact.new_record? ? false : !@contact.status ,:id=>"radio02" %>
+                  <label for="radio02"><span></span><%= t('frontend.shared.disabled') %></label>
+                </div>
+          </div>
+        <% end %>
+
 
        
 

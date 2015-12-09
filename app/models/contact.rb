@@ -65,20 +65,8 @@ class Contact < ActiveRecord::Base
     Arel::Nodes::InfixOperation.new('->', parent.table[:extra_fields], Arel::Nodes.build_quoted('last_name'))
   end
 
-  scope :matches_all_attributes, -> *attribute_ids { where(matches_all_attributes_arel(attribute_ids)) }
 
-  def self.matches_all_attributes_arel(attribute_ids)
-    contacts = Arel::Table.new(:contacts)
-    attributes = Arel::Table.new(:attributes)
-    contacts_attributes = Arel::Table.new(:contacts_attributes)
-
-    contacts[:id].in(
-      contacts.project(contacts[:id])
-        .join(contacts_attributes).on(contacts[:id].eq(contacts_attributes[:contact_id]))
-        .join(attributes).on(contacts_attributes[:attribute_id].eq(attributes[:id]))
-        .where(attributes[:id].in(attribute_ids))
-    )
-  end
+  
 
   def self.ransackable_scopes(auth_object = nil)
     if auth_object
@@ -90,11 +78,11 @@ class Contact < ActiveRecord::Base
 
   def self.ransackable_attributes(auth_object = nil)
     if auth_object == "newsletter"
-      %w(gender country city interest_areas_id)
+      %w(gender country city profile_id )
     elsif auth_object == "own"
-      %w(first_name last_name email created_at status)
+      %w(first_name last_name email created_at status profile_id)
     else
-      %w(first_name last_name email created_at status)
+      %w(first_name last_name email created_at status profile_id)
     end
   end
 
@@ -130,37 +118,44 @@ class Contact < ActiveRecord::Base
     
     #Company Export contact 
     def to_csv(options = {})
-      column_names = ["first_name", "last_name", "email","country","city","gender","status","created_at" ] 
-      column_names_csv = ["first_name", "last_name", "email","country","city","gender","status","Date" ] 
+      profile = Profile.find(24)
+      extra_fields = profile.contacts.first.extra_fields.keys
+      column_names = ["email","status"] 
+      column_names_csv = ["Email", "Status"] + extra_fields + ["Date"]
       CSV.generate(options) do |csv|
         csv << column_names_csv
-        all.each do |contact|
-          country = contact.try(:country_name)
+        profile.contacts.each do |contact|
+          date = contact.created_at
+          value = contact.extra_fields.values
           contact = contact.attributes.values_at(*column_names)
-          contact[3] = country
-          contact[5] = contact[5].present? ? 'Male' : 'Female' # override product status to enabel desable
-          contact[6] = contact[6].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
-          contact[7] = contact[7].to_datetime.strftime("%d/%m/%y, %I:%M %p")
+          contact[1] = contact[1].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
+          contact = contact + value
+          contact =  contact + [date.to_datetime.strftime("%d/%m/%y, %I:%M %p")]
           csv << contact
         end
       end
     end
 
     #Admin Export
-    def to_admin_csv(options = {})
-      column_names = ["company_id", "first_name", "last_name", "email","country","city","gender", "status","created_at"] 
-      column_names_csv = ["company", "first_name", "last_name", "email","country","city","gender", "status","Date"] 
-      CSV.generate(options) do |csv|
-        csv << column_names_csv
-        all.each do |contact|
-          country = contact.try(:country_name)
-          contact = contact.attributes.values_at(*column_names)
-          contact[0] = Company.find(contact[0]).try(:name) if contact[0].present?
-          contact[4] = country
-          contact[6] = contact[6].present? ? 'Male' : 'Female'
-          contact[7] = contact[7].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
-          contact[8] = contact[8].to_datetime.strftime("%d/%m/%y, %I:%M %p")
-          csv << contact
+    def to_admin_csv(options = {},profile_id = '')
+      profile = Profile.find(24)
+      binding.pry
+      if profile.contacts.any? 
+        extra_fields = profile.contacts.last.extra_fields.keys
+        column_names = ["company_id", "email","status"] 
+        column_names_csv = ["Company", "email", "status"] + extra_fields + ["Date"]
+        CSV.generate(options) do |csv|
+          csv << column_names_csv
+          profile.contacts.each do |contact|
+            date = contact.created_at
+            value = contact.extra_fields.values
+            contact = contact.attributes.values_at(*column_names)
+            contact[0] = Company.find(contact[0]).try(:name) if contact[0].present?
+            contact[2] = contact[2].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
+            contact = contact + value
+            contact =  contact + [date.to_datetime.strftime("%d/%m/%y, %I:%M %p")]
+            csv << contact
+          end
         end
       end
     end

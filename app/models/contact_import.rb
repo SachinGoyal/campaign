@@ -91,6 +91,7 @@ class ContactImport
       end
       contact.extra_fields = hash
       contact.email = row["email"]
+      contact.status = row["status"] == 'Enabled' ? true : false 
       contact
     end
   end
