@@ -16,3 +16,4 @@ config/database.yml
 .idea
 db/schema.rb
 public/assets/*
+public/uploads/*
