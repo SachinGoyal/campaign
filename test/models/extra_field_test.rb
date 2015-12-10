@@ -1,23 +1,18 @@
 # == Schema Information
 #
-# Table name: profiles
+# Table name: extra_fields
 #
 #  id         :integer          not null, primary key
-#  company_id :integer
-#  name       :string
-#  status     :boolean
-#  deleted_at :datetime
+#  field_name :string
+#  field_type :string
+#  profile_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#
-# Indexes
-#
-#  index_profiles_on_company_id  (company_id)
 #
 
 require 'test_helper'
 
-class ProfileTest < ActiveSupport::TestCase
+class ExtraFieldTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

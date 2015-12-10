@@ -16,4 +16,5 @@
 //= require bootstrap-datepicker
 //= require summernote
 //= require highcharts
+//= require jquery_nested_form
 //= require_tree .

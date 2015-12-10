@@ -22,6 +22,32 @@ $(document).ready( function() {
         }
     };
 
+    var sample_fields = function() {
+        var profile_id = $('.profile-sample').val();
+          if (profile_id == '')
+            alert("Select Profile to upload Contacts");
+          else {
+              $.ajax({
+                method: "POST",
+                data: { profile_id: profile_id },
+                url: '/contacts/sample_fields.js'
+              })
+          }
+    }
+
+    var dynamic_field = function() {
+     var profile_id = $('#contact_profile_id').val();
+          if (profile_id == '')
+              $('.dynamic_field').hide();
+          else {
+              $('.dynamic_field').show();
+              $.ajax({
+                method: "POST",
+                data: { profile_id: profile_id },
+                url: '/contacts/dynamic_field.js'
+              })
+          }
+    }
     function get_ids(){
         var a = [];
         $('input[type=checkbox]').each(function (index) {
@@ -31,6 +57,8 @@ $(document).ready( function() {
         });
      return a;
     }
+     
+    sample_fields();
 
     $(".selected-td ul li a").on('click', function(){
           var url = $(".custom-table").data('bottom-url');
@@ -61,6 +89,19 @@ $(document).ready( function() {
               })
           }
     });
+
+    $("#new_contact").on('load', function(){
+    dynamic_field();
+    });
+    
+    $("#contact_profile_id").on('change', function(){
+          dynamic_field();
+    });
+    
+    $(".profile-sample").on('change', function(){
+      sample_fields();
+    });
+
 
 
     $(function () {

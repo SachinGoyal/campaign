@@ -2,15 +2,14 @@
 #
 # Table name: profiles
 #
-#  id         :integer          not null, primary key
-#  company_id :integer
-#  name       :string
-#  status     :boolean
-#  created_by :integer
-#  updated_by :integer
-#  deleted_at :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  company_id  :integer
+#  name        :string
+#  status      :boolean
+#  deleted_at  :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  description :text
 #
 # Indexes
 #
@@ -37,14 +36,19 @@ class Profile < ActiveRecord::Base
   
   #callback
   before_destroy :check_contacts
+  after_update :update_contact_extra_fields
   #callback
 
   #relation
-  has_and_belongs_to_many :contacts
-  has_and_belongs_to_many :interest_areas, class_name: "Attribute", join_table: "profiles_attributes"
+  has_many :contacts
+  has_many :extra_fields ,:inverse_of => :profile
   has_many :newsletter_emails
   has_many :newsletters, :through => :newsletter_emails
   #relation
+
+  accepts_nested_attributes_for :extra_fields,
+    :allow_destroy => true,
+    :reject_if     => :all_blank
 
   def check_contacts
     if contacts.count > 0
@@ -54,6 +58,30 @@ class Profile < ActiveRecord::Base
     if newsletter_emails.count > 0
       errors.add(:base, :newsletters_exist)
       return false
+    end
+  end
+
+  def update_contact_extra_fields
+    profile_field = extra_fields.map(&:field_name)
+    if contacts.any? #&& contacts.first.extra_fields.any?
+      contact_field = contacts.first.extra_fields.keys 
+      profile_field.each do |field|
+        if !contact_field.include?(:field)
+          contacts.each do |contact|
+            contact.extra_fields[field] = ""
+            contact.save
+          end
+        end
+      end
+
+      contact_field.each do |field|
+        if !profile_field.include?(:field)
+          contacts.each do |contact|
+            contact.extra_fields.delete(field)
+            contact.save
+          end
+        end
+      end 
     end
   end
 

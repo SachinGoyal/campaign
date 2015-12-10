@@ -1,42 +1,105 @@
+    <div class="row">
+      <div class="page-title">
+        <div class="title_left">
+          <h2><%= t('frontend.shared.list', :model_name => pick_model_from_locale(:contact)) %></h2>
+        </div>
+        <!-- title_left -->
+        <div class="title_right">
+          <div class="col-md-1 col-sm-1 col-xs-12 form-group pull-right">
+            <% if can? :create, Contact %>
+              <div class="custom-add"><%= link_to new_contact_path, :title => t('frontend.shared.new', :model_name => pick_model_from_locale(:contact)) do %>
+                  <i class="fa fa-plus"></i>
+                <% end %>
+              </div>
+            <% end %> 
+          </div>
+          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <%= render 'shared/import' %>
+          </div>
+        </div>
+        <!--title_right -->
+        <div class="clearfix"></div>
+      </div>
+      <!-- page-title -->
+    </div>
+    <!--row-->
+    <div class="whitebg">
+      <div class="row">
+        <% if can? :search, Contact %>       
+          <%= search_form_for @q do |f| %>
+        <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-3 text-right margin-top"><strong>Profile</strong></div>
+            <div class="col-sm-9">
+              <%= f.collection_select :profile_id_eq, Profile.all, :id, :name,{:include_blank => true,prompt: "Select Profile"}, {class: "form-control"}%>
+            </div>
+          </div>
+          <div class="vheight"></div>
+          <div class="row">
+            <div class="col-sm-3 text-right margin-top"><strong>Status</strong></div>
+            <div class="col-sm-9">
+              <%= f.select :status_eq, options_for_select([["Enabled" , 1],["Desabled", 0]]), { include_blank: true },:class => 'form-control' %>
 
-
-<div class="row">
-  <div class="col-xs-3">  
-      <div class="title_left"><h2><%= t('frontend.shared.list', :model_name => pick_model_from_locale(:contact)) %></h2></div><!-- title_left -->
-  </div>
-
-  <div class="col-xs-9 form-group pull-right top_search">
-  <div class="row">
+            </div>
+          </div>
+          <div class="vheight"></div>
+          <div class="row">
+            <div class="col-sm-3  text-right margin-top"><strong>First Name</strong></div>
+            <div class="col-sm-9">
+               <%= f.text_field :first_name_cont,:class=> "form-control",:id=> "inputEmail3" ,:placeholder=>"First Name" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+        <div class="row hidediv margin-top">
+            <div class="col-sm-3 text-right margin-top"> &nbsp;</div>
+            <div class="col-sm-9">
+         &nbsp;
+            </div>
+          </div>
+          <div class="vheight"></div>
+          <div class="row">
+            <div class="col-sm-3 text-right margin-top"><strong>Email</strong></div>
+            <div class="col-sm-9">
+              <%= f.text_field :email_cont ,:class=> "form-control",:id=> "inputEmail3" ,:placeholder=>"Email"%>
+            </div>
+          </div>
+          <div class="vheight"></div>
+          <div class="row">
+            <div class="col-sm-3  text-right margin-top"><strong>Last Name</strong></div>
+            <div class="col-sm-9">
+              <%= f.text_field :last_name_cont ,:class=> "form-control",:id=> "inputEmail3" ,:placeholder=>"Last Name"%>
+            </div>
+          </div>
+        </div>
+        <div class="vheight"></div>
    
-    <div class="col-xs-4">
-      <%= render 'shared/import' %>
-    </div>
-    <div class="col-xs-8">        
-      <% if can? :search, Contact %>       
-        <%= render 'shared/keyword_search', :condition => :email_cont %>
-         
-        <div class="advance-search">
-          <%= link_to search_contacts_path, :title => t('frontend.shared.advance_search') do %>
-            <i class="fa fa-dot-circle-o"></i>
-          <% end %>
-        </div> 
+             <div class="col-xs-1 dark-btn contact-blue-btn"><button>Search</button></div>
+
+      </div>
+
+      <% end %>         
       <% end %>
-      
-      <% if can? :create, Contact %>
-        <div class="custom-add"><%= link_to new_contact_path, :title => t('frontend.shared.new', :model_name => pick_model_from_locale(:contact)) do %><i class="fa fa-plus"></i><% end %></div>
-      <% end %> 
+      <!-- whitebg -->
 
-    </div>
-  </div>
-</div>
+      <div>&nbsp;</div>
+      <div class="clearfix"></div>
+      <div id="results">
+        <%= render :partial => "results", :locals => {:contacts => @contacts} %>
+      </div>
 
-     
-<div class="clearfix"></div>                
-</div><!-- page-title -->
-</div><!--row-->
-<div id="results">
-  <%= render :partial => "results", :locals => {:contacts => @contacts} %>
-</div>
+      <%= render 'shared/bootam_action_link', element: Contact %>
+      <%= will_paginate @contacts , renderer: BootstrapPagination::Rails%>
 
-<%= render 'shared/bootam_action_link', element: Contact %>
-<%= will_paginate @contacts , renderer: BootstrapPagination::Rails%>
+      </div>
+
+
+
+
+
+
+
+
+
+
+

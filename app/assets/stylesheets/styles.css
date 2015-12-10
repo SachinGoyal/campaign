@@ -6768,3 +6768,74 @@ li.current-page i{color:#1ABB9C;}
     background-color: #39455b;
     color: #fff;
 }
+
+
+.addfield{
+    font-family:Arial, Helvetica, sans-serif;
+    color:#00bbb9;
+    font-size:14px;
+    font-weight:normal;
+    text-decoration:underline;
+}
+
+.addprofile-delicon{
+position:absolute; 
+top:7px; 
+right:-30px;
+background-image:url(cross-close-btn.png);
+height:20px;
+width:20px;
+}
+
+.dynamic-field-input{
+    width: 284px !important;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    height: 30px;
+}
+
+.dynamic-field-div{
+    width: 436px !important;
+    left: 147px;
+}
+
+.action-radio{
+padding-left:29px !important;
+font-family:sans-serif !important;
+}
+
+.radioalign{
+margin-top:7px !important;
+}
+
+.contact-list-greenbar{
+margin-top:15px;
+}
+
+.whitebg{
+background-color:#fff;
+border: 1px solid #e6eaed;
+padding: 20px 30px;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+}
+.margin-top{
+margin-top:10px;
+}
+.vheight{ display:block; clear:both; height:10px;}
+
+.contact-blue-btn{
+float:right;
+left:-204px;
+}
+
+.space-radio{
+    margin-left: 1px !important;
+
+}
+
+.space-label{
+    margin-left: 4px !important;
+    margin-right:5px !important;
+}
