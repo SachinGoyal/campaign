@@ -33,6 +33,7 @@ class Contact < ActiveRecord::Base
 
   #validation
   validates_presence_of :email, length: { in: 3..255}
+  validates_presence_of :profile_id, length: { in: 3..255}
   # validates_presence_of :profile_ids, message: 'Please select atleast one'
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
