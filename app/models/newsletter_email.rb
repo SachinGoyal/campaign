@@ -50,18 +50,18 @@ class NewsletterEmail < ActiveRecord::Base
 	  update_attributes(:sent => true)
 	end
 
-	def delete_email
-	end
-
 	def add_contact(email)
 	  emails_arr = self.emails.split(",")
       emails_arr << email
+      emails_arr.uniq!
       self.update_attributes(emails: emails_arr.join(","))              
 	end
 
-	def delete_contact(email)
-	  emails_arr = self.emails.split(",")
+	def delete_email(email)
+	  emails_arr = emails.split(",")
       emails_arr.delete(email)
-      self.update_attributes(emails: emails_arr.join(","))
+      emails_arr.uniq!
+      self.emails = emails_arr.join(',')
+      save!
 	end
 end

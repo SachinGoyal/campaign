@@ -116,11 +116,8 @@ class Newsletter < ActiveRecord::Base
   end
 
   def sent?
-    if send_at
-      send_at <= Time.now
-    else
-      true
-    end
+    send_at and send_at > Time.zone.now
+    
   end
 
   def editable_or_deletable?

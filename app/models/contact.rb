@@ -44,32 +44,42 @@ class Contact < ActiveRecord::Base
   # callbacks
   # before_validation :convert_lower
   after_create :add_to_list
-  before_destroy :remove_from_list
+  after_destroy :remove_from_list
+  after_update :update_list_for_status
   # callbacks
 
   #relation
   belongs_to :profile
   #relation
 
+  def update_list_for_status
+    if status_changed?
+      if status
+        add_to_list
+      else
+        remove_from_list
+      end
+    end
+  end
 
   def add_to_list    
-    newsletter_emails = NewsletterEmail.unsent.where(:profile_id => profiles.map(&:id))
+    newsletter_emails = NewsletterEmail.unsent.where(:profile_id => profile_id)
     newsletter_emails.each do |newsletter_email|
       newsletter_email.add_contact(self.email)
     end
-    binding.pry
     newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
       newsletter_email.newsletter.email_service.add_member_to_list(self.email)
     end
   end
   
   def remove_from_list
-    newsletter_emails = NewsletterEmail.unsent.where('emails LIKE ?', "%#{self.email}%")
+    newsletter_emails = NewsletterEmail.unsent.where('emails LIKE ?', "%#{self.email_was}%")
     newsletter_emails.each do |newsletter_email|
-      newsletter_email.delete_contact(self.email)
+      newsletter_email.delete_email(self.email_was)
     end
+    
     newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
-      newsletter_email.newsletter.email_service.delete_member_from_list(self.email)
+      newsletter_email.newsletter.email_service.delete_member_from_list(self.email_was)
     end
   end
 
