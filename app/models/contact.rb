@@ -108,7 +108,7 @@ class Contact < ActiveRecord::Base
 
   def self.ransackable_attributes(auth_object = nil)
     if auth_object == "newsletter"
-      %w(gender country city profile_id )
+      %w(gender country city profile_id email)
     elsif auth_object == "own"
       %w(first_name last_name email created_at status profile_id)
     else
