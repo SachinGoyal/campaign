@@ -137,14 +137,13 @@ class Contact < ActiveRecord::Base
     end
 
     #Admin Export
-    def to_admin_csv(options = {},profile_id = '')
-      profile = Profile.find(24)
-      binding.pry
+    def to_admin_csv(options = {})
+      profile = Profile.find(options[:profile_id])
       if profile.contacts.any? 
         extra_fields = profile.contacts.last.extra_fields.keys
         column_names = ["company_id", "email","status"] 
         column_names_csv = ["Company", "email", "status"] + extra_fields + ["Date"]
-        CSV.generate(options) do |csv|
+        CSV.generate() do |csv|
           csv << column_names_csv
           profile.contacts.each do |contact|
             date = contact.created_at
