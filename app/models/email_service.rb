@@ -115,6 +115,7 @@ class EmailService < ActiveRecord::Base
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
+      false
   	end
   end
 
