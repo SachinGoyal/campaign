@@ -81,6 +81,8 @@ class EmailService < ActiveRecord::Base
       response = gb.campaigns(campaign_id).content.upsert(body: body)
 
     rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
 
