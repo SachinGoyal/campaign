@@ -150,7 +150,7 @@
             <div class="col-sm-9 col-xs-12 custom-radio-input">
               <input id="radio01" name="" type="radio" value="" class="auto_response_toggle">
               <label for="radio01"><span></span><%= t('frontend.newsletter.auto_responder_rules')%></label>
-              <% if @newsletter.auto_response %>
+              <% if !@newsletter.auto_response.try(:blank?) %>
                 <%= f.email_field :auto_response, :class => "form-control" %>
               <% else %>
                 <%= f.email_field :auto_response, :class => "form-control", :style => "display:none" %>
@@ -163,7 +163,7 @@
             <div class="col-sm-9 col-xs-12 custom-radio-input">
               <input id="radio02" name="" type="radio" value="" class="scheduled_at_toggle">
               <label for="radio02"><span></span><%= t('frontend.newsletter.auto_send') %></label>
-              <% if @newsletter.scheduled_at %>
+              <% if @newsletter.scheduled_at.try(:blank?) %>
                 <%= f.text_field :scheduled_at, :class => "form-control datetimepicker" %>
               <% else %>
                 <%= f.text_field :scheduled_at, :class => "form-control datetimepicker", :style => "display:none" %>

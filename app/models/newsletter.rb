@@ -75,6 +75,7 @@ class Newsletter < ActiveRecord::Base
       es = email_service || create_email_service(:user_id => self.user_id)
       list_id = es.create_list if es 
       add_response = es.add_members_to_list(all_emails_arr) #if list_id
+      es.add_webhook_for_unsubscribe
       # template_id = es.create_template
       capmaign_id = es.create_campaign #if list_id #and template_id
       es.update_content

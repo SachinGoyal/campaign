@@ -32,7 +32,7 @@
 #
 
 class EmailService < ActiveRecord::Base
-  
+  include Rails.application.routes.url_helpers  
   acts_as_tenant(:company) #multitenant
 
   before_destroy :delete_dependencies
@@ -256,6 +256,33 @@ class EmailService < ActiveRecord::Base
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
+  end
+
+  def add_webhook_for_unsubscribe
+    begin
+      response = HTTParty.post(V2_URL+"2.0/lists/webhook-add", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :id => list_id,
+                      # :url => (root_url(:host => 'sperantcrm.com', :subdomain => creator.company.try(:subdomain)) + '/newsletter_emails/unsubscribe').to_s,
+                      :url => (root_url(:host => HOST_URL, :subdomain => creator.company.try(:subdomain))).to_s,
+                      :actions => {
+                        :subscribe => true,
+                        :unsubscribe => true,
+                        :profile => true,
+                        :cleaned => true,
+                        :upemail => true,
+                        :campaign => true},
+                      :sources => {
+                        :user => true,
+                        :admin => true,
+                        :api => true }
+                    }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' } )
+    rescue Exception => e
+      puts "We have a problem: #{e.message}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
+    end  
   end
 
   def delete_list
