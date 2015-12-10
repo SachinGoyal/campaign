@@ -1,4 +1,4 @@
-sendFile = (file) ->
+sendFile = (file, callback) ->
   data = new FormData
   data.append 'template_image[image]', file
   $.ajax
@@ -18,5 +18,7 @@ $ ->
       lineNumbers: true
       tabSize: 2
       theme: "solarized light"
-    onImageUpload: (files) ->
-      sendFile files[0]
+    onImageUpload: (files, editor, welEditable) ->
+      sendFile files[0], (data) ->
+		url = "#{data.scheme}://#{data.host}#{data.path}"
+		editor.insertImage(welEditable, url)

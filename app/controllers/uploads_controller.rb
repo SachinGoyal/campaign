@@ -4,9 +4,8 @@ class UploadsController < ApplicationController
   def create
     @template_image = TemplateImageUploader.new
     @template_image.store!(params[:template_image][:image])
-    # binding.pry
     respond_to do |format|
-      format.json { render :json => { url: @template_image.url } }
+      format.json { render :json => { url: (URI.parse(root_url) + @template_image.url).to_s } }
     end
   end
 end
