@@ -17,7 +17,7 @@ gem 'cancancan'
 #Soft delete
 gem 'paranoia'
 gem 'simple_form'
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "rmagick"
 gem 'mini_magick'
 gem 'acts_as_tenant'
@@ -42,7 +42,8 @@ gem 'roo-xls'
 gem 'country_select'
 gem 'summernote-rails'
 gem 'gibbon'
-
+gem 'httparty'
+gem 'whenever', :require => false
 # Use Uglifier as compressor for JavaScript assets
 # gem 'activerecord-import'
 

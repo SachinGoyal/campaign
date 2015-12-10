@@ -10,8 +10,6 @@ class NewslettersController < ApplicationController
   before_action :check_editable_or_deletable, only: [:edit, :update, :destroy]
   #filter
 
-  # GET /newsletters
-  # GET /newsletters.json
   def index
     @q = Newsletter.ransack(params[:q], auth_object: 'own')
     @newsletters = @q.result.paginate(:page => params[:page], :per_page => 10)
@@ -54,7 +52,8 @@ class NewslettersController < ApplicationController
 
   def create
     @newsletter = Newsletter.new(newsletter_params)
-
+    @newsletter.creator = current_user
+    
     respond_to do |format|
       if @newsletter.save
         format.html { redirect_to @newsletter, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:newsletter)) }
@@ -95,10 +94,7 @@ class NewslettersController < ApplicationController
     end
   end
 
-  # DELETE /newsletters/1
-  # DELETE /newsletters/1.json
   def destroy
-    @newsletter.email_service.delete_campaign
     @newsletter.destroy
 
     respond_to do |format|
@@ -108,8 +104,15 @@ class NewslettersController < ApplicationController
   end
 
   def send_now
-    @newsletter.email_service.send_campaign
-    @newsletter.update_attributes(:send_at => Time.zone.now)
+    email_service = @newsletter.email_service
+    if email_service.members_in_list.count <= 0
+      return redirect_to newsletters_path, notice: t('controller.newsletter.not_imported')
+    end
+
+    email_service.update_content
+    if email_service.send_campaign
+      @newsletter.mark_sent
+    end
     return redirect_to newsletters_path, notice: t('controller.newsletter.send_successful')
   end
 
@@ -120,7 +123,7 @@ class NewslettersController < ApplicationController
     end
 
     def newsletter_params
-      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email, :send_at, :profile_ids => [], :newsletter_emails_attributes => [ :emails, :sample, :from_contacts, :id ])
+      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email, :send_at, :scheduled_at, :auto_response, :profile_ids => [], :newsletter_emails_attributes => [ :emails, :sample, :from_contacts, :id ])
     end
 
     def updateable_messages

@@ -7,6 +7,16 @@ GIT
       rails (>= 4.0.0, < 4.3.0)
 
 GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: e3acabb512cb55b683b6d74a63db0723f06df091
+  specs:
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 665e50e7511d5418fbcf76ccb15c593f953d197a
   specs:
@@ -74,11 +84,6 @@ GEM
       railties (>= 3.0)
     builder (3.2.2)
     cancancan (1.13.0)
-    carrierwave (0.10.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
     celluloid (0.17.2)
       celluloid-essentials
       celluloid-extras
@@ -96,6 +101,7 @@ GEM
       timers (>= 4.1.1)
     celluloid-supervision (0.20.5)
       timers (>= 4.1.1)
+    chronic (0.10.2)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -147,6 +153,9 @@ GEM
     highcharts-rails (3.0.10)
       railties (>= 3.1)
     hitimes (1.2.3)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     i18n_data (0.7.0)
     iconv (1.0.4)
@@ -181,6 +190,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.8.1)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     nenv (0.2.0)
     nested_form (0.3.2)
@@ -321,6 +331,8 @@ GEM
       unicorn
     warden (1.2.3)
       rack (>= 1.0)
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
     will_paginate (3.0.7)
     will_paginate-bootstrap (1.0.1)
       will_paginate (>= 3.0.3)
@@ -336,7 +348,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-datepicker-rails
   cancancan
-  carrierwave
+  carrierwave!
   client_side_validations!
   coffee-rails (~> 4.1.0)
   country_select
@@ -346,6 +358,7 @@ DEPENDENCIES
   gibbon
   guard
   highcharts-rails (~> 3.0.0)
+  httparty
   iconv (~> 1.0.3)
   jbuilder (~> 2.0)
   jquery-rails
@@ -373,6 +386,7 @@ DEPENDENCIES
   twitter-bootstrap-rails!
   uglifier (>= 1.3.0)
   unicorn-rails
+  whenever
   will_paginate-bootstrap
 
 BUNDLED WITH

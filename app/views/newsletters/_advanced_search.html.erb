@@ -1,49 +1,13 @@
-      <div class="green-Border green-text text-right"><%= t('frontend.shared.advance_search')%> <i class="fa fa-caret-down"></i></div> 
+      <div class="green-Border green-text text-right"><%= t('search')%> <i class="fa fa-caret-down"></i></div> 
         <div class="grey-box">
           <div class="row">
-            <%#= search_form_for @search, :html => {:class => "form-inline"} do |f| %>
               <div class="form-group form-group-sm">
-                <label class="col-xs-3 text-right control-label"><%= t('activerecord.attributes.contact.gender') %></label>
-                <div class="col-xs-3 gender_buttons">  
-                    <%= radio_button_tag 'q[gender_true]', 1, false, {"data-value" => 0} %>
-                    <label><span></span><%= t('frontend.newsletter.search.gender.male') %></label>              
-                    <%= radio_button_tag 'q[gender_false]', 1, false, {"data-value" => 1} %>
-                    <label><span></span><%= t('frontend.newsletter.search.gender.female') %></label>
-                </div >                            
+                <label class="col-xs-3 text-right control-label" ><%= t('activerecord.attributes.contact.email') %></label>
+                <div class="col-xs-3"> <%= text_field_tag 'q[email_cont]', '', :class => "form-control", :placeholder => t('activerecord.attributes.contact.email') %> </div>
                 <div class="clearfix"></div> 
               </div>
 
-              <div class="clearfix"></div> 
-            
-              <div class="form-group form-group-sm">
-                <label class="col-xs-3 text-right control-label"><%= t('activerecord.attributes.contact.country') %></label>
-                <div class="col-xs-3">
-                  <%= country_select("q", "country_eq", {priority: %w(IN ES), prompt: t('frontend.newsletter.search.country')}, :class=>"form-control" ) %>
-                </div>
-                <div class="clearfix"></div> 
-              </div>
-
-              <div class="form-group form-group-sm">
-                <label class="col-xs-3 text-right control-label" ><%= t('activerecord.attributes.contact.city') %></label>
-                <div class="col-xs-3"> <%= text_field_tag 'q[city_cont]', '', :class => "form-control", :placeholder => t('frontend.newsletter.search.city') %> </div>
-                <div class="clearfix"></div> 
-              </div>
-
-              <div class="form-group form-group-sm">
-                <label class="col-xs-3 text-right control-label" ><%= t('frontend.newsletter.interest_areas') %></label>
-                <div class="col-xs-3">
-
-                  <% Attribute.active.each do |attribute| %>
-                    <%#= check_box_tag 'contact[interest_area_ids][]', attribute.id %> 
-                    <%= check_box_tag('q[matches_all_attributes][]', attribute.id, params["q"] && params["q"].fetch("matches_all_attributes", []).include?(attribute.id.to_s)) %>
-                    <label><span></span><%= attribute.name %></label><br/>
-                  <% end %>
-                </div>              
-                <div class="clearfix"></div> 
-              </div>
               <%= link_to t('search'), "#", :class => ' btn btn-default pull-right contact_search_for_newsletter' %>
-              <%#= f.submit "Search" %> 
-            <%# end %>
           </div>
         </div>
         <div id="results"></div>

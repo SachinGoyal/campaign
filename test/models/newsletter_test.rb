@@ -20,6 +20,8 @@
 #  send_at       :datetime
 #  auto_response :string
 #  company_id    :integer
+#  user_id       :integer
+#  scheduled_at  :datetime
 #
 # Indexes
 #

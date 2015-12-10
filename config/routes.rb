@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'email_services/index'
+  post 'uploads/create'
+
+  post 'newsletter_emails/unsubscribe'
 
   get 'contact_imports/new'
   get 'apis/index'

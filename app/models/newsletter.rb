@@ -20,6 +20,8 @@
 #  send_at       :datetime
 #  auto_response :string
 #  company_id    :integer
+#  user_id       :integer
+#  scheduled_at  :datetime
 #
 # Indexes
 #
@@ -35,6 +37,9 @@ class Newsletter < ActiveRecord::Base
 
   #scope
   default_scope {order('id DESC')}
+  scope :unscheduled, -> { where(:send_at => nil) }
+  scope :sent, -> { where('DATE(send_at) < ?', Time.zone.now)}
+  scope :unsent, -> { where('DATE(send_at) > ? OR send_at IS NULL', Time.zone.now)}
   #scope
   
   # validation
@@ -49,37 +54,59 @@ class Newsletter < ActiveRecord::Base
 
   #callback
   before_update :mark_children_for_removal
-  after_save :create_campaign
   #callback
 
   #association
   belongs_to :campaign
   belongs_to :template
-  has_many :newsletter_emails, inverse_of: :newsletter
+  has_many :newsletter_emails, inverse_of: :newsletter, :dependent => :destroy
   has_many :profiles, :through => :newsletter_emails
-  has_one :email_service
+  has_one :email_service, :dependent => :destroy
+  belongs_to :creator, class_name: "User", foreign_key: :user_id
   
   accepts_nested_attributes_for :newsletter_emails, reject_if: proc { |attrs| attrs['profile_id'].blank? and attrs['emails'].blank? and attrs['id'].blank? }, :allow_destroy => true
   #association
 
+  after_create :create_campaign
+  before_destroy :check_sent
 
   def create_campaign
-    # binding.pry
     begin
-      es = email_service || create_email_service
+      es = email_service || create_email_service(:user_id => self.user_id)
       list_id = es.create_list if es 
       add_response = es.add_members_to_list(all_emails_arr) #if list_id
-      # template_id = es.create_template()
-      capmaign_id = es.create_campaign #if list_id #and template_id   
-      es.send_campaign #if campaign_id
+      es.add_webhook_for_unsubscribe
+      # template_id = es.create_template
+      capmaign_id = es.create_campaign #if list_id #and template_id
+      es.update_content
+      if scheduled_at.present?
+        es.schedule_campaign
+      end   
     rescue Exception => e
+      binding.pry
+      ApplicationMailer.mailchimp_error(creator, "Could not connect to mailchimp").deliver_now
     end  
+  end
+
+  def mark_sent
+    update_attributes(:send_at => Time.zone.now)
+    newsletter_emails.each do |ne|
+      ne.mark_sent
+    end
   end
 
   def mark_children_for_removal
     newsletter_emails.each do |child|
       child.mark_for_destruction if child.emails.blank? and child.profile_id.blank?
     end
+  end
+
+  def check_sent
+    if editable_or_deletable?
+      errors.add(:base, :already_sent)
+      return false
+    end
+
   end
 
   def send_email
@@ -90,15 +117,12 @@ class Newsletter < ActiveRecord::Base
   end
 
   def sent?
-    if send_at
-      send_at <= Time.now
-    else
-      true
-    end
+    send_at and send_at > Time.zone.now
+    
   end
 
   def editable_or_deletable?
-    sent?
+    !sent?
     # false
   end
 

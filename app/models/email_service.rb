@@ -22,6 +22,9 @@
 #  emails_sent              :integer
 #  abuse_reports            :integer
 #  send_at                  :datetime
+#  template_id              :integer
+#  scheduled_at             :datetime
+#  user_id                  :integer
 #
 # Indexes
 #
@@ -29,11 +32,17 @@
 #
 
 class EmailService < ActiveRecord::Base
-  
+  include Rails.application.routes.url_helpers  
   acts_as_tenant(:company) #multitenant
+
+  before_destroy :delete_dependencies
+
   belongs_to :newsletter
+  belongs_to :creator, class_name: "User", foreign_key: :user_id
 
   delegate :name, :subject, :from_address, :from_name, :to => :newsletter
+
+  scope :unsent, -> { where(:send_at => nil) }
 
   def create_campaign
   	gb = gibbon_request
@@ -46,8 +55,8 @@ class EmailService < ActiveRecord::Base
                                :subject_line  => subject,				   	
   									   				 :title         => subject,
   									   				 :reply_to      => from_address, 
-  									   				 :from_name     => from_name,
-                               :template_id   => 25229}
+  									   				 :from_name     => from_name
+                            }
   									   }
   							})
   	
@@ -55,13 +64,32 @@ class EmailService < ActiveRecord::Base
   		save
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
+  end
+
+  def update_content
+    gb = gibbon_request
+    begin
+      body = { template: {
+                  id: 29065,
+                  sections: {
+                    "std_content00": self.newsletter.template.content
+                  }
+                }
+              }
+      response = gb.campaigns(campaign_id).content.upsert(body: body)
+
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
+    end
   end
 
   def update_campaign
     gb = gibbon_request
     begin
-      response = gb.campaigns(campaign_id).patch({
+      response = gb.campaigns(campaign_id).update({
                        :body => { 
                           :type => "regular", 
                           :recipients =>  {:list_id => list_id}, 
@@ -70,14 +98,12 @@ class EmailService < ActiveRecord::Base
                                :title         => subject,
                                :reply_to      => from_address, 
                                :from_name     => from_name,
-                               :template_id   => 25229}
+                               :template_id   => template_id }
                        }
                 })
-    
-      self.campaign_id = response["id"]
-      save
     rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
 
@@ -85,9 +111,28 @@ class EmailService < ActiveRecord::Base
   	gb = gibbon_request
   	begin
   		response = gb.campaigns(campaign_id).actions.send.create
+      true
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
+  end
+
+  def schedule_campaign
+    begin
+      response = HTTParty.post(V2_URL+"2.0/campaigns/schedule", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :cid => campaign_id, 
+                      :schedule_time => newsletter.scheduled_at.utc.strftime("%Y-%m-%d %H:%M:%S")
+                    }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' })
+      
+      update_attributes(:send_at => newsletter.send_at) if response.has_key?("complete") and response["complete"]
+    rescue Exception => e
+      puts e.message
+      ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
+    end
   end
 
   def delete_campaign
@@ -96,6 +141,7 @@ class EmailService < ActiveRecord::Base
       response = gb.campaigns(campaign_id).delete
     rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
 
@@ -128,23 +174,49 @@ class EmailService < ActiveRecord::Base
   		self.list_id
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
 
-  def fetch_lists
+  def self.fetch_lists
   	gb = gibbon_request
   	begin
   		response = gb.lists.retrieve
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
 
-  def add_member_to_list
+  def fetch_list
+    gb = gibbon_request
+    begin
+      response = gb.lists(list_id).retrieve
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
+    end
+  end
+
+  def members_in_list
+        gb = gibbon_request
+    begin
+      response = gb.lists(list_id).members.retrieve
+      response["members"]
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
+    end
+  end
+
+
+  def add_member_to_list(email)
   	gb = gibbon_request
   	begin
+      gb.lists(list_id).members.create(body: {email_address: email, status: "subscribed"})
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
 
@@ -154,15 +226,73 @@ class EmailService < ActiveRecord::Base
   		email_arr = []
   		emails.each do |email|
   			email_arr << { :method => 'POST', 
-  						   :path => "lists/#{list_id}/members", 
-  						   :body => "{\"email_address\":\"#{email}\", \"status\":\"subscribed\"}" }
+  						         :path => "lists/#{list_id}/members", 
+  						         :body => "{\"email_address\":\"#{email}\", \"status\":\"subscribed\"}" }
   		end		
   		response = gb.batches.create({:body => {
   										:operations => email_arr  												
-  									}})
-  	rescue Gibbon::MailChimpError => e
+  									}})      
+  	rescue Gibbon::MailChimpError => e      
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
+  end
+
+  def delete_member_from_list(email)
+    gb = gibbon_request
+    begin
+      response = gb.lists(list_id).members(Digest::MD5.hexdigest(email)).delete
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
+    end
+  end
+
+  def fetch_clients
+    gb = gibbon_request
+    begin
+      response = gb.lists(list_id).clients.retrieve
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
+    end
+  end
+
+  def add_webhook_for_unsubscribe
+    begin
+      response = HTTParty.post(V2_URL+"2.0/lists/webhook-add", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :id => list_id,
+                      # :url => (root_url(:host => 'sperantcrm.com', :subdomain => creator.company.try(:subdomain)) + '/newsletter_emails/unsubscribe').to_s,
+                      :url => (root_url(:host => HOST_URL, :subdomain => creator.company.try(:subdomain))).to_s,
+                      :actions => {
+                        :subscribe => true,
+                        :unsubscribe => true,
+                        :profile => true,
+                        :cleaned => true,
+                        :upemail => true,
+                        :campaign => true},
+                      :sources => {
+                        :user => true,
+                        :admin => true,
+                        :api => true }
+                    }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' } )
+    rescue Exception => e
+      puts "We have a problem: #{e.message}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
+    end  
+  end
+
+  def delete_list
+    gb = gibbon_request
+    begin
+      response = gb.lists(list_id).delete
+    rescue Gibbon::MailChimpError => e
+      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
+    end
   end
 
   def get_stats
@@ -192,6 +322,7 @@ class EmailService < ActiveRecord::Base
 
     rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
 
@@ -200,13 +331,51 @@ class EmailService < ActiveRecord::Base
       
     rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
 
-  def add_template
+  def create_template
+    begin
+      response = HTTParty.post(V2_URL+"2.0/templates/add", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :name => name, 
+                      :html => newsletter.template.content
+                    }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' } )
+      self.template_id = response["template_id"]
+      save
+    rescue Exception => e
+      puts e.message
+      ApplicationMailer.mailchimp_error(creator, "#{e.raw_body}").deliver_now
+    end
+    #  curl -H "Content-Type: application/json" -X POST -d '{"apikey":"fe7ef49e4934c504860020bd65e2fdc3-us12","name":"dummy", "html": "example html"}' https://us12.api.mailchimp.com/2.0/templates/add
   end
 
   def edit_template
+  end
+
+  def delete_template
+    begin
+      response = HTTParty.post(V2_URL+"2.0/templates/del", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :template_id => template_id                    
+                      }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' } )
+      self.template_id = response["template_id"]
+      save
+    rescue Exception => e
+      puts e.message
+      ApplicationMailer.mailchimp_error(creator, "#{e.raw_body}").deliver_now
+    end
+  end
+
+  def delete_dependencies
+    delete_campaign
+    delete_list
+    delete_template
   end
   
   def gibbon_request

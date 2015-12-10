@@ -44,15 +44,45 @@ class Contact < ActiveRecord::Base
   
   # callbacks
   # before_validation :convert_lower
-#  before_validation :convert_country_code
+  after_create :add_to_list
+  after_destroy :remove_from_list
+  after_update :update_list_for_status
   # callbacks
 
   #relation
   belongs_to :profile
   #relation
 
-  #ransack
-  # delegate :id, to: :interest_areas, prefix: true
+  def update_list_for_status
+    if status_changed?
+      if status
+        add_to_list
+      else
+        remove_from_list
+      end
+    end
+  end
+
+  def add_to_list    
+    newsletter_emails = NewsletterEmail.unsent.where(:profile_id => profile_id)
+    newsletter_emails.each do |newsletter_email|
+      newsletter_email.add_contact(self.email)
+    end
+    newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
+      newsletter_email.newsletter.email_service.add_member_to_list(self.email)
+    end
+  end
+  
+  def remove_from_list
+    newsletter_emails = NewsletterEmail.unsent.where('emails LIKE ?', "%#{self.email_was}%")
+    newsletter_emails.each do |newsletter_email|
+      newsletter_email.delete_email(self.email_was)
+    end
+    
+    newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
+      newsletter_email.newsletter.email_service.delete_member_from_list(self.email_was)
+    end
+  end
 
   ransacker :created_at do
     Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
@@ -79,7 +109,7 @@ class Contact < ActiveRecord::Base
 
   def self.ransackable_attributes(auth_object = nil)
     if auth_object == "newsletter"
-      %w(gender country city profile_id )
+      %w(gender country city profile_id email)
     elsif auth_object == "own"
       %w(first_name last_name email created_at status profile_id)
     else
