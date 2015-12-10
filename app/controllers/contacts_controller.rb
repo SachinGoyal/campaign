@@ -8,6 +8,16 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   #filter
 
+  def sample_fields
+    @profile = Profile.find(params[:profile_id])
+  end
+
+  def dynamic_field
+    @contact = Contact.new
+    @profile = Profile.find(params[:profile_id])
+    @extra_fields = @profile.extra_fields
+  end
+
   def import  
     Contact.import_records(params[:file], params[:profile_id])  
     redirect_to profiles_path, notice: t("controller.contact.import")  
@@ -67,14 +77,8 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(contact_params)
-    if (contact_params[:profile_ids] - [""]).empty? 
-      @contact.valid?
-      @contact.errors[:profile_ids] << "Please select atleast one"
-      render :new
-      return
-    end
-    
+    params.permit!
+    @contact = Contact.new(params[:contact])
     respond_to do |format|
       if @contact.save
         format.html { return redirect_to @contact, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:contact)) }
@@ -88,7 +92,9 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/edit
   def edit
+
   end
+
   # GET /contacts/edit_all
   def edit_all
     Contact.edit_all(params[:group_ids], params[:get_action])  
@@ -101,25 +107,12 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
-    params[:contact][:interest_area_ids] ||= []
+    params.permit!
     @contact = Contact.find(params[:id])
-    @contact.attributes = contact_params
-
-    if (contact_params[:profile_ids] - [""]).empty? 
-      @contact.valid?
-      @contact.errors[:profile_ids] << t("controller.contact.select_profile")
-      render :new
-      return
-    end
-
-    if (contact_params[:profile_ids] - [""]).empty? and !@contact.valid?
-      @contact.errors[:profile_ids] << t("controller.contact.select_profile")
-      render :new
-      return
-    end
+    @contact.attributes = params[:contact]
 
     respond_to do |format|
-      if @contact.update(contact_params)
+      if @contact.update(params[:contact])
         format.html { redirect_to @contact, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:contact)) }
         format.json { render :show, status: :ok, location: @contact }
       else
@@ -147,7 +140,7 @@ class ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:first_name, :last_name, :email, :status, :country, :city, :gender, :created_by, :updated_by, interest_area_ids: [],profile_ids: [])
+      params.require(:contact).permit(:email, :status, :profile_id)
     end
 
     def updateable_messages(action)

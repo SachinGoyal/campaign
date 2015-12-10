@@ -1,68 +1,88 @@
 <div class="custom-container">
-  <div class="row">
-    <div class="col-md-12 col-xs-12">
-      <div class="col-lg-2 col-xs-1">&nbsp;</div>
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <div class="col-lg-2 col-xs-1">&nbsp;</div>
       <div class="col-md-5 col-xs-10">
-        <%= form_for(@profile, :html => {:class => 'form-horizontal'}) do |f| %>
-        <div class="form-group form-group-sm">
-          <!-- <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label> -->
-          <%= f.label :name, :class => "col-sm-4 col-xs-12 control-label" %>
-          <div class="col-sm-8 col-xs-12">
-          <%= f.text_field :name, :class => 'form-control', :maxlength => 250 %>
-          </div>
-        </div>
-        <div class="form-group form-group-sm field">
-          <label class="col-sm-4 col-xs-12 control-label"><%= t('frontend.shared.status') %></label>
-          <div class="col-sm-8 col-xs-12 radio_status">
-            <%= f.radio_button :status ,1, :checked => @profile.new_record? ? true : @profile.status ,:id=>"radio01" %>
-            <label for="radio01" class="status_spacer"><span></span><%= t('frontend.shared.enabled') %></label>
-            <%= f.radio_button :status ,0, :checked => @profile.new_record? ? false : !@profile.status ,:id=>"radio02" %>
-            <label for="radio02"><span></span><%= t('frontend.shared.disabled') %></label>
-          </div>
-        </div>
+        <%= nested_form_for(@profile, :html => {:class => 'form-horizontal'}) do |f| %>            
 
-        <div class="form-group form-group-sm">
-              <label class="col-xs-4 text-right control-label"><%= t('frontend.profile.interest_areas') %></label>
-              <div class="col-xs-8 custom-checkbox-style">
-                <ul class="interest-area">
-                  <% for attribute in Attribute.active %>
-                   <li> <%= check_box_tag "profile[interest_area_ids][]", attribute.id, @profile.interest_areas.include?(attribute) %>
-                    <%= attribute.name.capitalize %><br/></li>
-                  <% end %>
-                </ul>
-              </div>     
-              <div class="clearfix"></div> 
+          <div class="form-group form-group-sm">
+            <%= f.label :name, :class => "col-sm-4 col-xs-12 control-label" %>
+            <div class="col-sm-8 col-xs-12">
+              <%= f.text_field :name, :class => 'form-control', :maxlength => 250 %>
             </div>
+          </div>
 
-           <div class="col-lg-4 col-xs-1">
-             <div class="form-group form-group-sm">
-             <label class="col-sm-4 col-xs-12 control-label">&nbsp;</label>
-             <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
-           </div>
+          <div class="form-group form-group-sm">
+            <%= f.label :description, :class => "col-sm-4 col-xs-12 control-label" %>
+            <div class="col-sm-8 col-xs-12">
+               <%= f.text_area :name, :class => 'form-control', :maxlength => 250 %>
+            </div>
+          </div>
 
+          <div class="form-group form-group-sm field">
+            <label class="col-sm-4 col-xs-12 control-label"><%= t('frontend.shared.status') %></label>
+            <div class="col-sm-8 col-xs-12 radio_status">
+              <%= f.radio_button :status ,1, :checked => @profile.new_record? ? true : @profile.status ,:id=>"radio01" %>
+              <label for="radio01" class="status_spacer"><span></span><%= t('frontend.shared.enabled') %></label>
+              <%= f.radio_button :status ,0, :checked => @profile.new_record? ? false : !@profile.status ,:id=>"radio02" %>
+              <label for="radio02"><span></span><%= t('frontend.shared.disabled') %></label>
+            </div>
+          </div>
 
+          <div class="form-group form-group-sm">
+            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Fields</label>
+            <div class="col-sm-8 col-xs-12">
+                <%= text_field_tag 'Email','Email',class: 'form-control',:readonly => true %>
+            </div>
+          </div>
+          <div class="col-sm-8 col-xs-12 dynamic-field-div">
+            <%= f.fields_for :extra_fields do |task_form| %>        
+              <%= task_form.text_field :field_name, class: "dynamic-field-input" %>   
+              <%= task_form.link_to_remove image_tag("cross-close-btn")%>    
+            <% end %>   
+          </div>
+           
+          <div class="form-group form-group-sm">
+            <label class="col-sm-4 col-xs-12 control-label" ></label>
+            <div class="col-sm-8 col-xs-12 dynamic-field-div">
+              <%= f.link_to_add "Add Field", :extra_fields %>
+            </div>
+          </div>          
+           
+      </div>
+      <div class="col-lg-4 col-xs-1">
+      <div class="form-group form-group-sm">
+        <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+        <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+      </div>
+      
+      <div class="form-group form-group-sm">
+        <label class="col-sm-1 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+        
+      </div>
       </div>
       <div class="clearfix"></div>
       <div class="divider"></div>
-    </div>
-
-    <div class="col-md-12 col-xs-12">
-        <div class="col-lg-2 col-xs-1">&nbsp;</div>
-        <div class="col-md-5 col-xs-10">
-          <div class="form-group custom-from-group">
-            <div class="col-xs-4">&nbsp;</div>                        
-            <div class="col-xs-8 text-left">
+  </div>
+  
+  <div class="col-md-12 col-xs-12">
+    <div class="col-lg-2 col-xs-1">&nbsp;</div>
+      <div class="col-md-5 col-xs-10">
+        <div class="form-group custom-from-group">
+          <div class="col-xs-4">&nbsp;</div>
+          
+          <div class="col-xs-8 text-left">
               <%= f.submit t('buttons.save'), :class => 'btn dark-btn-custom' %>
               <% if can? :read, Profile %>
                 <%= link_to t(:cancel), profiles_path, class: 'btn custom-link-btn' %>
               <% end %>
-            </div>
-        </div>
-                         
+          </div>
+        <% end %>
+           
       </div>
       <div class="col-lg-4 col-xs-1">&nbsp;</div>
-      <div class="clearfix"></div>    
-    <% end %>
-    </div>
-  </div><!-- row -->
+      <div class="clearfix"></div>
+     
+  </div>
+</div><!-- row -->
 </div><!--  custom-container -->

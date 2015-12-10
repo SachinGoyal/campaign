@@ -4,18 +4,11 @@
 #
 #  id         :integer          not null, primary key
 #  company_id :integer
-#  first_name :string
-#  last_name  :string
 #  email      :string
 #  status     :boolean          default(TRUE)
-#  created_by :integer
-#  updated_by :integer
 #  deleted_at :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  city       :string
-#  country    :string
-#  gender     :boolean          default(TRUE)
 #
 # Indexes
 #

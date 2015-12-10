@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-
+gem "nested_form"
 gem "highcharts-rails", "~> 3.0.0" # report chart use
 #client side validation 
 gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
