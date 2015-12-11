@@ -39,9 +39,9 @@ class ContactImport
       when "Import"
         if valid?
           contacts = imported_contacts(profile).compact
-          if contacts.any? && contacts.map(&:valid?).all?
+          if imported_contacts(profile).compact.any? && imported_contacts(profile).compact.map(&:valid?).all?
             successfull_records = []
-            contacts.each_with_index.each do |contact, index|
+            imported_contacts(profile).compact.each_with_index.each do |contact, index|
               if contact.new_record?
                 if profile.contacts.create(contact.attributes)
                   successfull_records << contact
