@@ -65,9 +65,11 @@ class ContactImport
             imported_contacts(profile) == successfull_records
             
           else
-            imported_contacts(profile).each_with_index do |contact, index|
-              contact.errors.full_messages.each do |message|
-                errors.add :base, "Row #{index+2}: #{message}"
+            if imported_contacts(profile).compact.any?
+              imported_contacts(profile).each_with_index do |contact, index|
+                contact.errors.full_messages.each do |message|
+                  errors.add :base, "Row #{index+2}: #{message}"
+                end
               end
             end
             false
