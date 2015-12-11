@@ -389,11 +389,15 @@ en:
       advanced_search: "Profile-List Advanced Search"
       interest_areas: "Area of Interest"
       number_contacts: "No. of Contacts"
+      add_field: "Add Field"
       placeholder:
     contact: 
       advanced_search: "Contact-List Advanced Search"
       placeholder:
       first_name: "Name"
+      firstname: "First Name"
+      lastname: "Last Name"
+      select_profile: "Select Profile"
     role: 
       name: "Name"
       create: "Create Role"

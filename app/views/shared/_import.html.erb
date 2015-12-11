@@ -13,14 +13,13 @@
   <a href="#" data-toggle="modal" data-target="#myModal"><%= t('buttons.import') %><i class="fa fa-file-excel-o"></i></a>
   <% end %>
 
-  <% if can? :read, Contact %>
-
+  <%# if can? :read, Contact %>
   <%#= link_to contacts_path(format: "xls") do %>
-  <%= link_to contacts_path(format: "csv") do %>
-  <span><%= t('buttons.export') %></span>
-  <i class="fa fa-file-excel-o"></i>
-  <% end %>
-  <% end %>
+  <%#= link_to contacts_path(format: "csv") do %>
+  <!-- <span><%#= t('buttons.export') %></span> -->
+  <!-- <i class="fa fa-file-excel-o"></i> -->
+  <%# end %>
+  <%# end %>
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -36,7 +35,7 @@
       <div class="modal-body">
         <div class="popup-container">
           <div class="row">
-            <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, data: {type: "script"} do |f| %>
+            <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, html: { data: {  type: 'js' } } do |f| %>
             <div id="error_explanation">
               <% if @contact_import and @contact_import.errors.any? %>              
               <%= render 'errors', :locals => {:model_name => @contact_import} %>

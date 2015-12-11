@@ -29,14 +29,14 @@
           <%= search_form_for @q do |f| %>
         <div class="col-sm-5">
         <div class="row">
-            <div class="col-sm-3 text-right margin-top"><strong>Profile</strong></div>
+            <div class="col-sm-3 text-right margin-top"><strong><%= t('activerecord.attributes.contact.profile_id') %></strong></div>
             <div class="col-sm-9">
-              <%= f.collection_select :profile_id_eq, Profile.all, :id, :name,{prompt: "Select Profile"}, {class: "form-control"}%>
+              <%= f.collection_select :profile_id_eq, Profile.all, :id, :name,{prompt: t('frontend.contact.select_profile') }, {class: "form-control"}%>
             </div>
           </div>
           <div class="vheight"></div>
           <div class="row">
-            <div class="col-sm-3 text-right margin-top"><strong>Status</strong></div>
+            <div class="col-sm-3 text-right margin-top"><strong><%= t('activerecord.attributes.contact.status') %></strong></div>
             <div class="col-sm-9">
               <%= f.select :status_eq, options_for_select([["Enabled" , 1],["Disabled", 0]]), { include_blank: true },:class => 'form-control' %>
 
@@ -44,9 +44,9 @@
           </div>
           <div class="vheight"></div>
           <div class="row">
-            <div class="col-sm-3  text-right margin-top"><strong>First Name</strong></div>
+            <div class="col-sm-3  text-right margin-top"><strong><%= t('frontend.contact.firstname') %></strong></div>
             <div class="col-sm-9">
-               <%= f.text_field :first_name_cont,:class=> "form-control",:id=> "inputEmail3" ,:placeholder=>"First Name" %>
+               <%= f.text_field :first_name_cont,:class=> "form-control",:id=> "inputEmail3", :placeholder => t('frontend.contact.firstname') %>
             </div>
           </div>
         </div>
@@ -59,16 +59,16 @@
           </div>
           <div class="vheight"></div>
           <div class="row">
-            <div class="col-sm-3 text-right margin-top"><strong>Email</strong></div>
+            <div class="col-sm-3 text-right margin-top"><strong><%= t('activerecord.attributes.contact.email') %></strong></div>
             <div class="col-sm-9">
-              <%= f.text_field :email_cont ,:class=> "form-control", :id => "inputEmail3", :placeholder=>"Email"%>
+              <%= f.text_field :email_cont ,:class=> "form-control", :id => "inputEmail3", :placeholder => "Email" %>
             </div>
           </div>
           <div class="vheight"></div>
           <div class="row">
-            <div class="col-sm-3  text-right margin-top"><strong>Last Name</strong></div>
+            <div class="col-sm-3  text-right margin-top"><strong><%= t('frontend.contact.lastname') %></strong></div>
             <div class="col-sm-9">
-              <%= f.text_field :last_name_cont ,:class=> "form-control", :id => "inputEmail3", :placeholder=>"Last Name"%>
+              <%= f.text_field :last_name_cont ,:class=> "form-control", :id => "inputEmail3", :placeholder => t('frontend.contact.lastname') %>
             </div>
           </div>
         </div>
