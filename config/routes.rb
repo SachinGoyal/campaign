@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   post 'uploads/create'
 
-  post 'newsletter_emails/unsubscribe'
-  get 'newsletter_emails/unsubscribe'
+  # post 'newsletter_emails/unsubscribe'
+  # get 'newsletter_emails/unsubscribe'
 
   get 'contact_imports/new'
   get 'apis/index'
@@ -21,6 +21,13 @@ Rails.application.routes.draw do
       get :search
     end
   end   
+
+  resources :newsletter_emails do
+   collection do
+    post :unsubscribe
+    get :unsubscribe
+   end
+  end
 
   resources :companies ,concerns: [:edit_all,:search] do
     collection do
@@ -74,7 +81,8 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/signout', to: 'devise/sessions#destroy', as: :signout
   end
-  resources :users,concerns: [:edit_all,:search]
+
+  resources :users, concerns: [:edit_all, :search]
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

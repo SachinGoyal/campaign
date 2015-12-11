@@ -1,14 +1,17 @@
 class NewsletterEmailsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
-  def unsubscribe
-    body = JSON.parse(request.body)
-    if body[:type] == "unsubscribe"
-        contact = Contact.where(email: body["data"]["email"]).first        
-        contact.destroy     
-    end    
-    render :nothing => true
-  end
+   def unsubscribe
+    body_val = request.body.read
+
+    if params[:type] == "unsubscribe"
+        contact = Contact.where(email: params["data"]["email"]).first
+        contact.destroy
+    end
+
+   render status: 200, json: {:ok => "ok"}.to_json
+ end
+
 
 
   # def unsubscribe
