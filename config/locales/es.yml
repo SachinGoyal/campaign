@@ -292,7 +292,7 @@ es:
         status: "Estado"
       company: 
         name: "Company Nombre"
-        free_emails: "Free Emails"
+        free_emails: "Los correos electrónicos gratuitos"
         subdomain: "Subdomain"
         status: Estado
         created_at: "Fecha"
@@ -409,10 +409,14 @@ es:
     profile:
       number_contacts: "Número de contactos"
       interest_areas: "Area de interes"
+      add_field: "Agregue campo"
     contact: 
       advanced_search: "Contacto - Búsqueda avanzada"
       placeholder:
       first_name: "Nombre"
+      firstname: "Nombre"
+      lastname: "Apellido"
+      select_profile: "Seleccionar Perfil"
     company:
       advanced_search: "Compañía - Búsqueda avanzada"
       confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."

@@ -89,9 +89,9 @@
       <% end %>  
 
       <% if element.is_a?(Profile) and can?(:read , element)%> 
-        <li><%= link_to contacts_path(:format => :csv, profile_id: element.id) do %>
+        <li><%= link_to contacts_path(:format => :xlsx, profile_id: element.id) do %>
           <i class="fa fa-line-chart"></i>
-          <span><%#= t("frontend.campaign.view_stat") %>Import</span>
+          <span><%#= t("frontend.campaign.view_stat") %>Export</span>
           <% end %>
         </li>
       <% end %>
