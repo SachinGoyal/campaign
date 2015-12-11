@@ -37,7 +37,8 @@ class Newsletter < ActiveRecord::Base
 
   #scope
   default_scope {order('id DESC')}
-  scope :unscheduled, -> { where(:send_at => nil) }
+  scope :unscheduled, -> { where(:scheduled_at => nil) }
+  scope :scheduled, -> { where.not(:scheduled_at => nil) }
   scope :sent, -> { where('DATE(send_at) < ?', Time.zone.now)}
   scope :unsent, -> { where('DATE(send_at) > ? OR send_at IS NULL', Time.zone.now)}
   #scope
@@ -88,10 +89,11 @@ class Newsletter < ActiveRecord::Base
   end
 
   def mark_sent
-    update_attributes(:send_at => Time.zone.now)
+    update_attributes(:send_at => Time.now)
     newsletter_emails.each do |ne|
       ne.mark_sent
     end
+    email_service.update_attributes(:send_at => Time.now)
   end
 
   def mark_children_for_removal
@@ -116,8 +118,7 @@ class Newsletter < ActiveRecord::Base
   end
 
   def sent?
-    send_at and send_at > Time.zone.now
-    
+    send_at and send_at < Time.zone.now
   end
 
   def editable_or_deletable?

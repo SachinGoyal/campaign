@@ -105,15 +105,18 @@ class NewslettersController < ApplicationController
 
   def send_now
     email_service = @newsletter.email_service
-    if email_service.members_in_list.count <= 0
+    if email_service.members_in_list.count < 0
       return redirect_to newsletters_path, notice: t('controller.newsletter.not_imported')
     end
 
     email_service.update_content
     if email_service.send_campaign
       @newsletter.mark_sent
+      return redirect_to newsletters_path, notice: t('controller.newsletter.send_successful')
+    else
+      return redirect_to newsletters_path, notice: t('controller.newsletter.not_imported')
     end
-    return redirect_to newsletters_path, notice: t('controller.newsletter.send_successful')
+    
   end
 
   private
@@ -123,7 +126,9 @@ class NewslettersController < ApplicationController
     end
 
     def newsletter_params
-      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, :reply_email, :created_by, :updated_by, :bcc_email, :cc_email, :send_at, :scheduled_at, :auto_response, :profile_ids => [], :newsletter_emails_attributes => [ :emails, :sample, :from_contacts, :id ])
+      params.require(:newsletter).permit(:campaign_id, :template_id, :name, :subject, :from_name, :from_address, 
+        :reply_email, :created_by, :updated_by, :bcc_email, :cc_email, :send_at, :scheduled_at, 
+        :auto_response, :profile_ids => [], :newsletter_emails_attributes => [ :emails, :sample, :from_contacts, :id ])
     end
 
     def updateable_messages
