@@ -83,7 +83,6 @@ class Newsletter < ActiveRecord::Base
         es.schedule_campaign
       end   
     rescue Exception => e
-      binding.pry
       ApplicationMailer.mailchimp_error(creator, "Could not connect to mailchimp").deliver_now
     end  
   end
