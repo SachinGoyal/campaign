@@ -51,10 +51,17 @@ class Newsletter < ActiveRecord::Base
   validates :from_name, presence: true, length: { in: 2..150 }
   validates :from_address, presence: true, format: {with: Devise.email_regexp}
   validates_format_of :reply_email, :cc_email, :bcc_email, :with => Devise.email_regexp, :allow_blank => true
+  validate :scheduled_at_cannot_be_in_the_past
+
+  def scheduled_at_cannot_be_in_the_past
+    errors.add(:scheduled_at, "can't be less than current time") if
+      !scheduled_at.blank? and scheduled_at < Time.zone.now
+  end
   # validation
 
   #callback
   before_update :mark_children_for_removal
+  before_save :format_scheduled_at
   #callback
 
   #association
@@ -80,21 +87,20 @@ class Newsletter < ActiveRecord::Base
       # template_id = es.create_template
       capmaign_id = es.create_campaign #if list_id #and template_id
       es.update_content
-      if scheduled_at.present?
-        es.schedule_campaign
-      end   
+      # if scheduled_at.present?
+      #   es.schedule_campaign
+      # end   
     rescue Exception => e
-      binding.pry
       ApplicationMailer.mailchimp_error(creator, "Could not connect to mailchimp").deliver_now
     end  
   end
 
   def mark_sent
-    update_attributes(:send_at => Time.now)
+    update_attributes(:send_at => Time.zone.now)
     newsletter_emails.each do |ne|
       ne.mark_sent
     end
-    email_service.update_attributes(:send_at => Time.now)
+    email_service.update_attributes(:send_at => Time.zone.now)
   end
 
   def mark_children_for_removal
@@ -108,7 +114,9 @@ class Newsletter < ActiveRecord::Base
       errors.add(:base, :already_sent)
       return false
     end
+  end
 
+  def format_scheduled_at
   end
 
   def send_email
