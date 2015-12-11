@@ -168,8 +168,7 @@ class Contact < ActiveRecord::Base
 
     #Admin Export
     def to_admin_csv(options = {},profile_id = '')
-      profile = Profile.find(24)
-      binding.pry
+    profile = Profile.first
       if profile.contacts.any? 
         extra_fields = profile.contacts.last.extra_fields.keys
         column_names = ["company_id", "email","status"] 
