@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'uploads/create'
 
   post 'newsletter_emails/unsubscribe'
+  get 'newsletter_emails/unsubscribe'
 
   get 'contact_imports/new'
   get 'apis/index'
