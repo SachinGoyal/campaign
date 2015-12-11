@@ -19,7 +19,8 @@
 
 # Learn more: http://github.com/javan/whenever
 set :output, "log/cron.log"
+set :environment, 'development'
 
-every 5.minutes do
+every 2.minutes do
 	rake 'newsletter:scheduled_send'  # Send Unset Newsletters as per sch...
 end
