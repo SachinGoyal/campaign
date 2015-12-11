@@ -35,7 +35,7 @@
       <div class="modal-body">
         <div class="popup-container">
           <div class="row">
-            <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, html: { data: {  type: 'js' } } do |f| %>
+            <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, data: {type: "script"} do |f| %>
             <div id="error_explanation">
               <% if @contact_import and @contact_import.errors.any? %>              
               <%= render 'errors', :locals => {:model_name => @contact_import} %>
@@ -127,7 +127,7 @@
                   <div class="form-group custom-from-group">
                     <div class="col-xs-2">&nbsp;</div>              
                     <div class="col-xs-10 text-left">
-                      <%= button_tag(t('frontend.import.import'), type: 'submit') %>
+                      <%= f.submit %>
                       <% if can? :read, Contact %>
                         <%= link_to t(:cancel), contacts_path %>
                       <% end %>
@@ -148,16 +148,15 @@
 
   <script type="text/javascript">
 
-    $( document ).ready(function() {  
-      $('.new_contact_import').submit(function() {      
+    $('form#new_contact_import').on('submit', function() { 
+        alert("hello");
         $.ajax({
           type: "POST",
-          url: $(this).attr('action'),
+          url: ''+ $(this).attr('action') + '.js',
           data: new FormData( this ),
           processData: false,
           contentType: false
         });
       return false; // prevents normal behaviour
       });
-    });
   </script>
