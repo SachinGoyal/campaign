@@ -33,6 +33,7 @@ class Contact < ActiveRecord::Base
 
   #validation
   validates_presence_of :email, length: { in: 3..255}
+  validates_presence_of :profile_id, length: { in: 3..255}
   # validates_presence_of :profile_ids, message: 'Please select atleast one'
   validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
@@ -167,13 +168,13 @@ class Contact < ActiveRecord::Base
     end
 
     #Admin Export
-    def to_admin_csv(options = {},profile_id = '')
-    profile = Profile.first
+    def to_admin_csv(options = {})
+      profile = Profile.find(options[:profile_id])
       if profile.contacts.any? 
         extra_fields = profile.contacts.last.extra_fields.keys
         column_names = ["company_id", "email","status"] 
         column_names_csv = ["Company", "email", "status"] + extra_fields + ["Date"]
-        CSV.generate(options) do |csv|
+        CSV.generate() do |csv|
           csv << column_names_csv
           profile.contacts.each do |contact|
             date = contact.created_at

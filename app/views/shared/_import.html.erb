@@ -35,25 +35,6 @@
 
       <div class="modal-body">
         <div class="popup-container">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <div class="row">
             <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, data: {type: "script"} do |f| %>
             <div id="error_explanation">
@@ -61,13 +42,19 @@
               <%= render 'errors', :locals => {:model_name => @contact_import} %>
               <% end %>
             </div>
-            <div class="form-group form-group-sm">
 
+            <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Action</label> 
               <div class="radio">
-                <label class="radio-inline action-radio"><input type="radio" name="optradio" checked class="radioalign">Import</label>
-                <label class="radio-inline action-radio"><input type="radio" name="optradio" class="radioalign">Unsubscribe</label>
-              </div> </div>
+                <div class="col-sm-8 col-xs-12 radio_status">
+                  <%= f.radio_button :action ,"Import",class: "space-radio" %>
+                  <label for="radio01" class="space-label"><span></span><%#= t('frontend.shared.enabled') %>Import</label>
+                  <%= f.radio_button :action ,"Unsubscribe",class: "space-radio" %>
+                  <label for="radio02" class="space-label"><span></span><%#= t('frontend.shared.disabled') %>Unsubscribe</label>
+                </div>
+              </div> 
+            </div>
+            
 
 
 
@@ -100,17 +87,17 @@
                 <div class="clearfix"></div>
               </div>
 
-              <div class="form-group form-group-sm">
+              <div class="col-sm-8 col-xs-12 radio_status">
 
                 <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Contacts</label> 
                 <div class="radio">
-                  <label class="radio-inline action-radio"><input type="radio" name="optradio" class="radioalign">Add</label>
-                  <label class="radio-inline action-radio"><input type="radio" name="optradio" class="radioalign">Replace</label>
-                  <label class="radio-inline action-radio"><input type="radio" name="optradio" class="radioalign">Add / Update</label>
+                  <%= f.radio_button :way ,"Add",class: "space-radio" %>
+                  <label for="radio01" class="space-label"><span></span><%#= t('frontend.shared.enabled') %>Add</label>
+                  <%= f.radio_button :way ,"Replace",class: "space-radio" %>
+                  <label for="radio02" class="space-label"><span></span><%#= t('frontend.shared.disabled') %>Replace</label>
+                  <%= f.radio_button :way ,"Add/Update",class: "space-radio" %>
+                  <label for="radio02" class="space-label"><span></span><%#= t('frontend.shared.disabled') %>Add / Update</label>
                 </div> </div>
-
-
-
               </div>
               <div class="row">
 
@@ -134,11 +121,8 @@
 
               <div class="clearfix"></div><br>
 
-
-
               <div class="col-md-12 col-xs-12">
-                            <div class="clearfix"></div><br>
-
+              <div class="clearfix"></div><br>
                 <div class="col-lg-2 col-xs-1">&nbsp;</div>
                 <div class="col-md-5 col-xs-10">
                   <div class="form-group custom-from-group">
@@ -155,10 +139,7 @@
                 <div class="clearfix"></div>
               </div>
               <% end %>
-
-
-            </div>
-         
+            </div>         
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('buttons.close') %></button>
         </div>
@@ -177,7 +158,7 @@
           processData: false,
           contentType: false
         });
-return false; // prevents normal behaviour
-});
+      return false; // prevents normal behaviour
+      });
     });
   </script>
