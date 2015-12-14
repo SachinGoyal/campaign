@@ -149,7 +149,6 @@
   <script type="text/javascript">
 
     $('form#new_contact_import').on('submit', function() { 
-        alert("hello");
         $.ajax({
           type: "POST",
           url: ''+ $(this).attr('action') + '.js',
