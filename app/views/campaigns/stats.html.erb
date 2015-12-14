@@ -111,9 +111,18 @@
   <div class="custom-white-spacer">
   <% if @data.present? %>
       <% @data.each_with_index do |data , i| %>
-        <span><%= @stats[i] %></span>
-        <div id="container<%= i%>" style="display:inline-block;" data-stat='<%= data%>'></div>
-        <span><%=data%></span>
+
+        <div class="row box">
+          <div><%= @stats[i] %></div>
+        <div>
+        <div class="col-sm-2 box2"> 
+          <div id="container<%= i%>" style="" data-stat='<%= data%>'></div>
+
+          <div>(<%= data %>)</div>
+        </div>
+            
+        </div>
+        </div>
       <% end %>
   <% end %>
   </div>
