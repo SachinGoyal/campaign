@@ -110,7 +110,7 @@ class Newsletter < ActiveRecord::Base
   end
 
   def check_sent
-    if editable_or_deletable?
+    if !editable_or_deletable?
       errors.add(:base, :already_sent)
       return false
     end
