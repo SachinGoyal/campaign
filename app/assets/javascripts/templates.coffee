@@ -10,7 +10,6 @@ sendFile = (file, callback) ->
     processData: false
     success: (data) ->
       $(".summernote").summernote "insertImage", data.url
-
 $ ->
   $(".summernote").summernote
     height: 360

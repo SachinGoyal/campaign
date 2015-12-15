@@ -196,7 +196,6 @@ class Contact < ActiveRecord::Base
   # class methods
 
   def name
-   # "#{first_name} #{last_name}"
-    ""
+    extra_fields
   end 
 end

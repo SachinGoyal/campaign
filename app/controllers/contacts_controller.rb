@@ -43,10 +43,10 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def index
     if params[:q] and params[:q][:auth_object] == "newsletter"
-      @q = Contact.active.ransack(params[:q], auth_object: 'newsletter')
+      @q = Contact.ransack(params[:q], auth_object: 'newsletter')
       @contacts = @q.result
     else
-      @q = Contact.active.ransack(params[:q])
+      @q = Contact.ransack(params[:q])
       @contacts = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)       
     end    
     contacts = @q.result

@@ -45,12 +45,10 @@
             <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Action</label> 
               <div class="radio">
-                <div class="col-sm-8 col-xs-12 radio_status">
-                  <%= f.radio_button :action ,"Import",class: "space-radio" %>
-                  <label for="radio01" class="space-label"><span></span><%#= t('frontend.shared.enabled') %>Import</label>
-                  <%= f.radio_button :action ,"Unsubscribe",class: "space-radio" %>
-                  <label for="radio02" class="space-label"><span></span><%#= t('frontend.shared.disabled') %>Unsubscribe</label>
-                </div>
+                  <label for="radio01" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.enabled') %>
+                  <%= f.radio_button :action ,"Import",class: "radioalign" %>Import</label>
+                  <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
+                  <%= f.radio_button :action ,"Unsubscribe",class: "radioalign" %>Unsubscribe</label>
               </div> 
             </div>
             
@@ -86,18 +84,23 @@
                 <div class="clearfix"></div>
               </div>
 
-              <div class="col-sm-8 col-xs-12 radio_status">
+              
+
+
+
+
+
 
                 <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Contacts</label> 
                 <div class="radio">
-                  <%= f.radio_button :way ,"Add",class: "space-radio" %>
-                  <label for="radio01" class="space-label"><span></span><%#= t('frontend.shared.enabled') %>Add</label>
-                  <%= f.radio_button :way ,"Replace",class: "space-radio" %>
-                  <label for="radio02" class="space-label"><span></span><%#= t('frontend.shared.disabled') %>Replace</label>
-                  <%= f.radio_button :way ,"Add/Update",class: "space-radio" %>
-                  <label for="radio02" class="space-label"><span></span><%#= t('frontend.shared.disabled') %>Add / Update</label>
+                  <label for="radio01" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.enabled') %>
+                  <%= f.radio_button :way ,"Add",class: "radioalign" %>Add</label>
+                  <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
+                  <%= f.radio_button :way ,"Replace",class: "radioalign" %>Replace</label>
+                  <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
+                  <%= f.radio_button :way ,"Add/Update",class: "radioalign" %>Add / Update</label>
                 </div> </div>
-              </div>
+             
               <div class="row">
 
               </div>
@@ -127,9 +130,9 @@
                   <div class="form-group custom-from-group">
                     <div class="col-xs-2">&nbsp;</div>              
                     <div class="col-xs-10 text-left">
-                      <%= f.submit %>
+                      <%= f.submit :class =>  'btn btn-primary btn-file custom-dark-btn' %>
                       <% if can? :read, Contact %>
-                        <%= link_to t(:cancel), contacts_path %>
+                        <%= link_to t(:cancel), contacts_path,class: 'calender-margin' %>
                       <% end %>
                     </div>
                   </div>             
@@ -140,7 +143,7 @@
               <% end %>
             </div>         
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('buttons.close') %></button>
+          <button type="button" class="btn btn-primary btn-file custom-dark-btn" data-dismiss="modal"><%= t('buttons.close') %></button>
         </div>
       </div>
     </div>

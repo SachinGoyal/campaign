@@ -24,6 +24,7 @@
               </div>
             </div>
 
+
             <div class="form-group form-group-sm">
               <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.template.content') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
@@ -37,7 +38,10 @@
                 <%= display_status(@template) %>
               </div>
             </div>
-      </div><!-- row -->
+   </div><!-- row -->
+  <div class="clearfix"></div>
+<div class="divider"></div>   
+
     </div><!--  custom-container -->
     <% if can? :update, Template %>
      <%= link_to t('buttons.edit'), edit_template_path(@template) %> |

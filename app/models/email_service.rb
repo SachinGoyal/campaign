@@ -320,6 +320,7 @@ class EmailService < ActiveRecord::Base
         self.unique_clicks = response["clicks"]["unique_clicks"]        
       end
       save
+      self
 
     rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
