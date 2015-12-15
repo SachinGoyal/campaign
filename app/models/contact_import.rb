@@ -13,6 +13,7 @@ class ContactImport
    # validate :check_file_ext
   validates :profile_id, presence: true
   validates :action, presence: true
+  validate :check_way
 
   def check_file_ext
     begin
@@ -23,6 +24,13 @@ class ContactImport
     rescue
       true
     end  
+  end
+
+  def check_way
+    if action == "Import" and way.blank?
+      errors[:way] = I18n.t("frontend.import.select_way")
+      return false      
+    end
   end
   
   def initialize(attributes = {})
@@ -35,6 +43,11 @@ class ContactImport
 
   def save
     profile = Profile.find(profile_id.to_i)
+    if action.blank?
+        errors[:action] = I18n.t("frontend.import.select_action")
+        return false      
+    end
+
     case self.action
       when "Import"
         if valid?
@@ -59,11 +72,8 @@ class ContactImport
                   end
                 end
               end
-            end
-              
-            
-            imported_contacts(profile) == successfull_records
-            
+            end                          
+            imported_contacts(profile) == successfull_records            
           else
             if imported_contacts(profile).compact.any?
               imported_contacts(profile).each_with_index do |contact, index|
@@ -78,16 +88,19 @@ class ContactImport
           false
         end
       when "Unsubscribe"
-        emails = profile.contacts.map(&:email)
-        spreadsheet = open_spreadsheet
-        header = spreadsheet.row(1)
-        (2..spreadsheet.last_row).to_a.map do |i|
-          row = Hash[[header, spreadsheet.row(i)].transpose]
-          if emails.include?(row["email"])
-            Contact.find_by_email(row["email"]).destroy
+        if valid?
+          emails = profile.contacts.map(&:email)
+          spreadsheet = open_spreadsheet
+          header = spreadsheet.row(1)
+          (2..spreadsheet.last_row).to_a.map do |i|
+            row = Hash[[header, spreadsheet.row(i)].transpose]
+            if emails.include?(row["email"])
+              Contact.find_by_email(row["email"]).destroy
+            end
           end
+        else  
+          false
         end
-
     end
   end
 

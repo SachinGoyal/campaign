@@ -76,6 +76,10 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
+    if params[:profile][:status] and ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:profile][:status]) != @profile.status
+      return redirect_to edit_profile_path(@profile), notice: t('activerecord.errors.models.profile.attributes.base.newsletters_exist')
+    end
+
     respond_to do |format|
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:profile)) }

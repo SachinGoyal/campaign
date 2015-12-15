@@ -35,7 +35,7 @@ class Contact < ActiveRecord::Base
   validates_presence_of :email, length: { in: 3..255}
   validates_presence_of :profile_id, length: { in: 3..255}
   # validates_presence_of :profile_ids, message: 'Please select atleast one'
- validates_uniqueness_to_tenant :email
+  validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
   # validates_inclusion_of :gender, in: [true, false], message: "Should either be male or female"
@@ -78,7 +78,7 @@ class Contact < ActiveRecord::Base
     newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
       newsletter_email.newsletter.email_service.delete_member_from_list(self.email_was)
     end
-
+    
     newsletter_emails.each do |newsletter_email|
       newsletter_email.delete_email(self.email_was)
     end

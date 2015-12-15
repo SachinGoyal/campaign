@@ -436,6 +436,7 @@ es:
       country:      
       select_file: "Seleccione Archivo"
       select_profile: "Seleccionar perfil"
+      select_action: "Please select action"
       placeholder:
         csv_file: "Sube sólo los archivos CSV"
     setting: 

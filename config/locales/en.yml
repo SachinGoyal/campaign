@@ -447,6 +447,7 @@ en:
       country:
       select_file: "Select File"
       select_profile: "Select Profile"
+      select_action: "Please select action"
       placeholder:
         csv_file: "Upload only CSV files"
 
