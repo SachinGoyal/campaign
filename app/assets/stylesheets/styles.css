@@ -6747,6 +6747,8 @@ label.required:after {
 .import_export_links_margin{
     display: block;
     margin-top: 8px;
+    float: right;
+    margin-right: 25px;
 }
 ul.interest-area { list-style-type: none; margin:5px 0 0 0; padding: 0px;}
 ul.interest-area li{ display: block; float: left; margin-right: 4px; width: 100px; padding-left: 20px; position: relative;}
@@ -6830,7 +6832,7 @@ float:right;
 left:-204px;
 }
 
-.space-radio{
+/*.space-radio{
     margin-left: 1px !important;
 
 }
@@ -6839,7 +6841,7 @@ left:-204px;
     margin-left: 4px !important;
     margin-right:5px !important;
 }
-
+*/
 
 .box{
 float:left;
@@ -6863,4 +6865,8 @@ font-family:Arial, Helvetica, sans-serif;
 font-size:15px;
 border:solid 0px #eaeaea !important;
 text-align:center;
+}
+
+.calender-margin{
+margin-left: 10px;
 }

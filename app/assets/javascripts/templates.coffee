@@ -10,7 +10,6 @@ sendFile = (file, callback) ->
     processData: false
     success: (data) ->
       $(".summernote").summernote "insertImage", data.url
-###
 $ ->
   $(".summernote").summernote
     height: 360
@@ -20,6 +19,5 @@ $ ->
       theme: "solarized light"
     onImageUpload: (files, editor, welEditable) ->
       sendFile files[0], (data) ->
-		url = "#{data.scheme}://#{data.host}#{data.path}"
-		editor.insertImage(welEditable, url)
-###
+		    url = "#{data.scheme}://#{data.host}#{data.path}"
+		    editor.insertImage(welEditable, url)

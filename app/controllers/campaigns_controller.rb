@@ -79,8 +79,8 @@ class CampaignsController < ApplicationController
           campaign = Campaign.find(campaign_id)
           campaign.newsletters.each do |newsletter|
             if newsletter.email_service.present?
-             # email_stat = newsletter.email_service.get_stats
-              email_stat = newsletter.email_service
+              email_stat = newsletter.email_service.get_stats
+             # email_stat = newsletter.email_service
               email_stat = email_stat.attributes.extract!(*columns).values
               email_stat.map! { |x| x || 0 }
               array << email_stat
