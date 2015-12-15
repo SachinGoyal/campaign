@@ -34,7 +34,7 @@
       
       <% if element.is_a?(Newsletter) and can?(:create , element) %> 
         <% if element.sent? %>
-          <li><%= link_to stats_campaigns_path(newsletter_id: element.id),  method: :post do %>
+          <li><%= link_to stats_campaigns_path(newsletter_id: element.id),  method: :get do %>
             <i class="fa fa-line-chart"></i>
             <span><%= t("frontend.campaign.view_stat") %></span>
             <% end %>
@@ -90,7 +90,7 @@
 
       <% if element.is_a?(Profile) and can?(:read , element)%> 
         <li><%= link_to contacts_path(:format => :xlsx, profile_id: element.id) do %>
-          <i class="fa fa-line-chart"></i>
+          <i class="fa fa-file-excel-o"></i>
           <span><%#= t("frontend.campaign.view_stat") %>Export</span>
           <% end %>
         </li>

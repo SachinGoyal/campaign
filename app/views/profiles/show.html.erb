@@ -28,9 +28,9 @@
 
             <% unless @profile.extra_fields.empty? %>            
                <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label"><%= t('frontend.profile.interest_areas') %></label>
+                <label class="col-xs-4 text-right control-label"><%#= t('frontend.profile.extra_fields') %>Extra Fields</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
-                  <%=  @profile.extra_fields.collect(&:field_name).uniq.map(&:capitalize).join(', ') %> </div>
+                  <%=  @profile.extra_fields.collect(&:field_name).uniq.map(&:humanize).join(', ') %> </div>
                   <div class="clearfix"></div> 
                 </div>
             <% end %>    

@@ -12,7 +12,7 @@
           </div>
           <% else %>
           <div class="col-xs-8 custom-checkbox-style" id="profile-custom-select">
-            <%= text_field_tag "name",@contact.profile.name,class: 'form-control',:readonly => true %>
+            <%= text_field_tag "name",@contact.profile.name,class: 'form-control', :disabled => true %>
           </div>
           <% end %>
           <div class="clearfix"></div> 
@@ -25,12 +25,12 @@
             <% if @contact.new_record? %>
               <%= f.email_field :email, :class => 'form-control' , :maxlength => 255 %>
             <% else %>
-              <%= f.email_field :email, :class => 'form-control' , :maxlength => 255 , readonly: true %>
+              <%= f.email_field :email, :class => 'form-control' , :maxlength => 255 , disabled: true %>
             <% end %>
           </div>
         </div>
         <% if @contact.new_record? %>
-          <div class = 'dynamic_field'></div>
+          <div class = 'dynamic_field'> </div>
         <% else %>
           <% if @contact.extra_fields.present? %>
             <%= fields_for :extra_fields do %>
@@ -44,6 +44,9 @@
               <% end %>
             <% end %>
           <% end %>
+        <% end %>
+        <% if @contact.new_record? %>
+          Please use 'firstname' and 'lastname' as fields for better search results
         <% end %>
 
         
@@ -59,15 +62,9 @@
           </div>
         <% end %>
 
-
-       
-
-       
-        
-       
       <div class="col-lg-4 col-xs-1">
         <div class="form-group form-group-sm">
-          <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+          <label class="col-sm-4 col-xs-12 control-label">&nbsp;</label>
           <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
         </div>
 
