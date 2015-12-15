@@ -13,7 +13,7 @@ class ContactImport
    # validate :check_file_ext
   validates :profile_id, presence: true
   validates :action, presence: true
-#  validates :profile_id, presence: true
+
   def check_file_ext
     begin
       if file and !(FILE_TYPES.include?(file.content_type))
@@ -120,6 +120,7 @@ class ContactImport
         contact.extra_fields = hash
         contact.email = row["email"]
         contact.status = row["status"] == 'Enabled' ? true : false 
+        contact.profile_id = profile_id
         contact
       end
     end

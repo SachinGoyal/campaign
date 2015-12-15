@@ -18,6 +18,4 @@ $ ->
       tabSize: 2
       theme: "solarized light"
     onImageUpload: (files, editor, welEditable) ->
-      sendFile files[0], (data) ->
-		    url = "#{data.scheme}://#{data.host}#{data.path}"
-		    editor.insertImage(welEditable, url)
+      sendFile files[0]

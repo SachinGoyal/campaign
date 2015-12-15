@@ -266,7 +266,7 @@ class EmailService < ActiveRecord::Base
                       :apikey => GIBBON_KEY, 
                       :id => list_id,
                       # :url => (root_url(:host => 'sperantcrm.com', :subdomain => creator.company.try(:subdomain)) + '/newsletter_emails/unsubscribe').to_s,
-                      :url => (root_url(:host => HOST_URL, :subdomain => creator.company.try(:subdomain))).to_s,
+                      :url => (root_url(:host => HOST_URL, :subdomain => creator.company.try(:subdomain)) + 'newsletter_emails/unsubscribe').to_s,
                       :actions => {
                         :subscribe => true,
                         :unsubscribe => true,
