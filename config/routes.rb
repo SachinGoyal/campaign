@@ -59,7 +59,7 @@ Rails.application.routes.draw do
     collection do
       get :select_newsletter
       get :reports
-      post :stats
+      get :stats
     end
   end
   resources :attributes, concerns: :edit_all

@@ -39,9 +39,9 @@ class ContactImport
       when "Import"
         if valid?
           contacts = imported_contacts(profile).compact
-          if contacts.any? && contacts.map(&:valid?).all?
+          if imported_contacts(profile).compact.any? && imported_contacts(profile).compact.map(&:valid?).all?
             successfull_records = []
-            contacts.each_with_index.each do |contact, index|
+            imported_contacts(profile).compact.each_with_index.each do |contact, index|
               if contact.new_record?
                 if profile.contacts.create(contact.attributes)
                   successfull_records << contact
@@ -65,9 +65,11 @@ class ContactImport
             imported_contacts(profile) == successfull_records
             
           else
-            imported_contacts(profile).each_with_index do |contact, index|
-              contact.errors.full_messages.each do |message|
-                errors.add :base, "Row #{index+2}: #{message}"
+            if imported_contacts(profile).compact.any?
+              imported_contacts(profile).each_with_index do |contact, index|
+                contact.errors.full_messages.each do |message|
+                  errors.add :base, "Row #{index+2}: #{message}"
+                end
               end
             end
             false
