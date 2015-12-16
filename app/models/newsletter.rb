@@ -50,8 +50,8 @@ class Newsletter < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..250 }
   validates :subject, presence: true, length: { in: 2..255 }
   validates :from_name, presence: true, length: { in: 2..150 }
-  validates :from_address, presence: true, format: {with: Devise.email_regexp}
-  validates_format_of :reply_email, :cc_email, :bcc_email, :with => Devise.email_regexp, :allow_blank => true
+  validates :reply_email, presence: true, format: {with: Devise.email_regexp}
+  validates_format_of :cc_email, :bcc_email, :with => Devise.email_regexp, :allow_blank => true
   validate :scheduled_at_cannot_be_in_the_past, on: :create
 
   def scheduled_at_cannot_be_in_the_past

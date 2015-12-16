@@ -40,7 +40,7 @@ class EmailService < ActiveRecord::Base
   belongs_to :newsletter
   belongs_to :creator, class_name: "User", foreign_key: :user_id
 
-  delegate :name, :subject, :from_address, :from_name, :to => :newsletter
+  delegate :name, :subject, :reply_email, :from_name, :to => :newsletter
 
   scope :unsent, -> { where(:send_at => nil) }
 
@@ -54,7 +54,7 @@ class EmailService < ActiveRecord::Base
   									       :settings => {
                                :subject_line  => subject,				   	
   									   				 :title         => subject,
-  									   				 :reply_to      => from_address, 
+  									   				 :reply_to      => reply_email, 
   									   				 :from_name     => from_name
                             }
   									   }
@@ -96,7 +96,7 @@ class EmailService < ActiveRecord::Base
                            :settings => {
                                :subject_line  => subject,           
                                :title         => subject,
-                               :reply_to      => from_address, 
+                               :reply_to      => reply_email, 
                                :from_name     => from_name }
                        }
                 })
@@ -163,7 +163,7 @@ class EmailService < ActiveRecord::Base
   								  :permission_reminder => I18n.t('words.permission_reminder'),
   								  :campaign_defaults => {
                       :from_name       => from_name,
-  								  	:from_email      => from_address,
+  								  	:from_email      => reply_email,
   								  	:subject         => subject,
   								  	:language        => I18n.locale.to_s.upcase},
   								  :email_type_option => true,
