@@ -493,6 +493,7 @@ es:
       check_editable_or_deletable: "No se puede editar / borrar el boletín de noticias , puesto que ya ha sido enviado."
       send_successful: "Boletín ha sido enviado con éxito"
       not_imported: "Contactos aún no importan. Por favor espere a que en algún momento antes de enviar el boletín."  
+      add_contacts: "Please add contacts to newsletter"
   time:
     am: am
     pm: pm

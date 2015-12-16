@@ -90,6 +90,10 @@ class TemplatesController < ApplicationController
   # PATCH/PUT /templates/1
   # PATCH/PUT /templates/1.json
   def update
+    if params[:template][:status] and ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:template][:status]) != @template.status
+      return redirect_to edit_template_path(@template), notice: t('activerecord.errors.models.template.attributes.base.associated_newsletter')
+    end
+
     respond_to do |format|
       if @template.update(template_params)
         format.html { redirect_to  @template, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:template)) }

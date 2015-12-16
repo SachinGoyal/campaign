@@ -497,3 +497,4 @@ en:
       check_editable_or_deletable: "Cannot edit/delete the newsletter since it has already been sent."
       send_successful: "Newletter has been successfully sent."
       not_imported: "Contacts not imported yet. Please wait for sometime before sending the newsletter."  
+      add_contacts: "Please add contacts to newsletter"

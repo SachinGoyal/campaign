@@ -232,19 +232,40 @@ class EmailService < ActiveRecord::Base
   		response = gb.batches.create({:body => {
   										:operations => email_arr  												
   									}})      
-  	rescue Gibbon::MailChimpError => e      
+  	  binding.pry 
+    rescue Gibbon::MailChimpError => e      
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
 
-  def delete_members_from_list(emails)
-    emails_arr = []
-    emails.each do |email|
-      emails_arr << {'email' => email}
-    end
-
+  def add_members_to_list1(emails)  
     begin
+      emails_arr = []
+      emails.each do |email|
+        emails_arr << {'email' => {'email' => email}, 'email_type' => 'html'}
+      end
+      response = HTTParty.post(V2_URL+"2.0/lists/batch-subscribe", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :id => list_id,
+                      :batch => emails_arr,
+                      :double_optin => false
+                    }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' } )
+      binding.pry
+    rescue Exception => e
+      puts "We have a problem: #{e.message}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
+    end
+  end
+
+  def delete_members_from_list(emails)  
+    begin
+      emails_arr = []
+      emails.each do |email|
+        emails_arr << {'email' => email}
+      end
       response = HTTParty.post(V2_URL+"2.0/lists/batch-unsubscribe", 
                     :body => { 
                       :apikey => GIBBON_KEY, 
@@ -253,6 +274,7 @@ class EmailService < ActiveRecord::Base
                       :send_goodbye => false
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
+      binding.pry
     rescue Exception => e
       puts "We have a problem: #{e.message}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now

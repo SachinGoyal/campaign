@@ -13,7 +13,7 @@
         <% end %>  
 
       <% else %>
-        <% if element.class.name != 'Template'%>
+        
           <% if can? :update, element    %>
             <li><%= link_to [:edit , element] do %>
               <i class="fa fa-pencil"></i>
@@ -21,7 +21,8 @@
               <% end %>
             </li>
           <% end %>
-        <% else %>
+      <% end %>
+      <% if element.class.name == 'Template'%>
           <% if can? :create, element    %>
             <li><%= link_to copy_templates_path(template_id: element.id) do %>
               <i class="fa fa-pencil"></i>
@@ -29,9 +30,8 @@
               <% end %>
             </li>
           <% end %>
-        <% end %>
       <% end %>
-      
+ 
       <% if element.is_a?(Newsletter) and can?(:create , element) %> 
         <% if element.sent? %>
           <li><%= link_to stats_campaigns_path(newsletter_id: element.id),  method: :get do %>
@@ -59,7 +59,7 @@
       
 
 
-      <% if can? :delete, element    %>
+      <% if can? :delete, element %>
         <% if element.is_a?(User) and element == current_user %>
         <% elsif element.is_a?(Newsletter) %>
           <% if element.editable_or_deletable? %>
@@ -71,6 +71,15 @@
           </li>
           <% end %>  
 
+        <% elsif element.class.name == 'Template' %>
+         <% if !element.newsletters.any? %>
+            <li class="custom-delete">
+              <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete') } do %>
+                <i class="fa fa-plus"></i>
+                <span> <%= t("frontend.shared.delete_link") %></span>
+              <% end %>
+            </li>  
+          <% end %>          
         <% elsif element.is_a?(Company) %>
           <li class="custom-delete">
             <%= link_to element, method: :delete, data: { confirm: t('frontend.company.confirm_delete') } do %>
@@ -78,6 +87,15 @@
               <span><%= t("frontend.shared.delete_link") %></span>
             <% end %>
           </li>
+        <% elsif element.is_a?(Profile) %>
+          <% if !element.newsletter_emails.any? %>
+            <li class="custom-delete">
+              <%= link_to element, method: :delete, data: { confirm: t('frontend.company.confirm_delete') } do %>
+                <i class="fa fa-plus"></i>
+                <span><%= t("frontend.shared.delete_link") %></span>
+              <% end %>
+            </li>
+          <% end %>  
         <% else %>
           <li class="custom-delete">
             <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete') } do %>

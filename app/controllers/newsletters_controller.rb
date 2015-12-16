@@ -83,9 +83,9 @@ class NewslettersController < ApplicationController
       if @newsletter.update(newsletter_params)
         @newsletter.email_service.update_campaign
         @newsletter.email_service.update_content
-        
-        @newsletter.email_service.delete_members_from_list(emails_was)
-        @newsletter.email_service.add_members_to_list(@newsletter.all_emails_arr)
+
+        @newsletter.email_service.delete_members_from_list(emails_was - @newsletter.all_emails_arr)
+        @newsletter.email_service.add_members_to_list1(@newsletter.all_emails_arr - emails_was)
         
         format.html { redirect_to @newsletter, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:newsletter)) }
         format.json { render :show, status: :ok, location: @newsletter }
