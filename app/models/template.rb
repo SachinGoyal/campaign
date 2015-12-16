@@ -46,8 +46,7 @@ class Template < ActiveRecord::Base
   has_many :newsletters
   #association
 
-    mount_uploaders :template_image, TemplateImageUploader
-
+  mount_uploaders :template_image, TemplateImageUploader
   #ransack
 
   ransacker :created_at do

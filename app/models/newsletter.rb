@@ -49,13 +49,13 @@ class Newsletter < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..250 }
   validates :subject, presence: true, length: { in: 2..255 }
   validates :from_name, presence: true, length: { in: 2..150 }
-  validates :from_address, presence: true, format: {with: Devise.email_regexp}
-  validates_format_of :reply_email, :cc_email, :bcc_email, :with => Devise.email_regexp, :allow_blank => true
-  validate :scheduled_at_cannot_be_in_the_past, on: :create
+  validates :reply_email, presence: true, format: {with: Devise.email_regexp}
+  validates_format_of :cc_email, :bcc_email, :with => Devise.email_regexp, :allow_blank => true
+  validate :scheduled_at_cannot_be_in_the_past
 
   def scheduled_at_cannot_be_in_the_past
-    errors.add(:scheduled_at, "can't be less than current time") if
-      !scheduled_at.blank? and scheduled_at < Time.zone.now
+    errors.add(:scheduled_at, I18n.t('activerecord.errors.models.newsletter.attributes.scheduled_at.in_past')) if
+      !scheduled_at.blank? and scheduled_at < Time.zone.now and scheduled_at_changed?
   end
   # validation
 
@@ -82,7 +82,7 @@ class Newsletter < ActiveRecord::Base
     begin
       es = email_service || create_email_service(:user_id => self.user_id)
       list_id = es.create_list if es 
-      add_response = es.add_members_to_list(all_emails_arr)
+      add_response = es.add_members_to_list1(all_emails_arr)
       es.add_webhook_for_unsubscribe
       # template_id = es.create_template
       capmaign_id = es.create_campaign #if list_id #and template_id

@@ -200,6 +200,8 @@ class Contact < ActiveRecord::Base
   # class methods
 
   def name
-    "#{extra_fields["firstname"] || extra_fields["first_name"]} #{extra_fields["lastname"] || extra_fields["last_name"]}"
+    if extra_fields
+      "#{extra_fields["firstname"] || extra_fields["first_name"]} #{extra_fields["lastname"] || extra_fields["last_name"]}"
+    end 
   end 
 end

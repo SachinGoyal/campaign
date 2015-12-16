@@ -40,7 +40,7 @@ class EmailService < ActiveRecord::Base
   belongs_to :newsletter
   belongs_to :creator, class_name: "User", foreign_key: :user_id
 
-  delegate :name, :subject, :from_address, :from_name, :to => :newsletter
+  delegate :name, :subject, :reply_email, :from_name, :to => :newsletter
 
   scope :unsent, -> { where(:send_at => nil) }
 
@@ -54,7 +54,7 @@ class EmailService < ActiveRecord::Base
   									       :settings => {
                                :subject_line  => subject,				   	
   									   				 :title         => subject,
-  									   				 :reply_to      => from_address, 
+  									   				 :reply_to      => reply_email, 
   									   				 :from_name     => from_name
                             }
   									   }
@@ -96,7 +96,7 @@ class EmailService < ActiveRecord::Base
                            :settings => {
                                :subject_line  => subject,           
                                :title         => subject,
-                               :reply_to      => from_address, 
+                               :reply_to      => reply_email, 
                                :from_name     => from_name }
                        }
                 })
@@ -154,16 +154,16 @@ class EmailService < ActiveRecord::Base
                       :name => name,
   								    :contact => {
                         :company  => company.try(:name) || "Sperant",
-  								  		:address1 => "address1",
-  								  		:city     => "New Delhi",
-  								  		:state    => "Delhi",
-  								  		:zip      => "110058",
+  								  		:address1 => "Q3 Tech",
+  								  		:city     => "Gurgaon",
+  								  		:state    => "Haryana",
+  								  		:zip      => "122017",
   								  		:country  => "India"
   								  	},
   								  :permission_reminder => I18n.t('words.permission_reminder'),
   								  :campaign_defaults => {
                       :from_name       => from_name,
-  								  	:from_email      => from_address,
+  								  	:from_email      => reply_email,
   								  	:subject         => subject,
   								  	:language        => I18n.locale.to_s.upcase},
   								  :email_type_option => true,
@@ -232,19 +232,38 @@ class EmailService < ActiveRecord::Base
   		response = gb.batches.create({:body => {
   										:operations => email_arr  												
   									}})      
-  	rescue Gibbon::MailChimpError => e      
+    rescue Gibbon::MailChimpError => e      
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
 
-  def delete_members_from_list(emails)
-    emails_arr = []
-    emails.each do |email|
-      emails_arr << {'email' => email}
-    end
-
+  def add_members_to_list1(emails)  
     begin
+      emails_arr = []
+      emails.each do |email|
+        emails_arr << {'email' => {'email' => email}, 'email_type' => 'html'}
+      end
+      response = HTTParty.post(V2_URL+"2.0/lists/batch-subscribe", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :id => list_id,
+                      :batch => emails_arr,
+                      :double_optin => false
+                    }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' } )
+    rescue Exception => e
+      puts "We have a problem: #{e.message}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
+    end
+  end
+
+  def delete_members_from_list(emails)  
+    begin
+      emails_arr = []
+      emails.each do |email|
+        emails_arr << {'email' => email}
+      end
       response = HTTParty.post(V2_URL+"2.0/lists/batch-unsubscribe", 
                     :body => { 
                       :apikey => GIBBON_KEY, 

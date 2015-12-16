@@ -95,9 +95,21 @@ class CampaignsController < ApplicationController
       end
       @data = email_stat
     end
-#    @data = [32,34,43,43,35,23,12,54,45,54,34,32 ]
+
     @campaign = Campaign.first
-    @stats = ["Open Total", "Unique Total", "Click Total", "Unique Click" , "Unique Subscriber Clicks", "Hard Bounces", "Soft Bounces", "Unsubscribed", "Forwards Count" , "Forwards Opens", "Emails Sent", "Abuse Reports"]
+    @stats = [t('activerecord.attributes.email_service.opens_total') ,
+        t('activerecord.attributes.email_service.unique_opens') ,
+        t('activerecord.attributes.email_service.clicks_total'),
+        t('activerecord.attributes.email_service.unique_clicks'),
+        t('activerecord.attributes.email_service.unique_subscriber_clicks'),
+        t('activerecord.attributes.email_service.hard_bounces'),
+        t('activerecord.attributes.email_service.soft_bounces'),
+        t('activerecord.attributes.email_service.unsubscribed'),
+        t('activerecord.attributes.email_service.forwards_count'),
+        t('activerecord.attributes.email_service.forwards_opens'),
+        t('activerecord.attributes.email_service.emails_sent'),
+        t('activerecord.attributes.email_service.abuse_reports')]
+
   end
 
   def select_newsletter

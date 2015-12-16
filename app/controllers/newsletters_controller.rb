@@ -83,16 +83,25 @@ class NewslettersController < ApplicationController
       if @newsletter.update(newsletter_params)
         @newsletter.email_service.update_campaign
         @newsletter.email_service.update_content
-        
-        @newsletter.email_service.delete_members_from_list(emails_was)
-        @newsletter.email_service.add_members_to_list(@newsletter.all_emails_arr)
+
+        @newsletter.email_service.delete_members_from_list(emails_was - @newsletter.all_emails_arr)
+        @newsletter.email_service.add_members_to_list1(@newsletter.all_emails_arr - emails_was)
         
         format.html { redirect_to @newsletter, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:newsletter)) }
         format.json { render :show, status: :ok, location: @newsletter }
       else
         format.html { 
-          # @sample_newsletter_email = @newsletter.newsletter_emails.where(:sample => true).try(:first)
-          # @newsletter_email = @newsletter.newsletter_emails.where(:from_contacts => true).try(:first)
+          email_attrs = params[:newsletter][:newsletter_emails_attributes]
+          contact_emails = email_attrs[email_attrs.keys.first][:emails]
+          sample_emails = email_attrs[email_attrs.keys.last][:emails]
+
+          if contact_emails.blank?
+            @newsletter_email = @newsletter.newsletter_emails.build(from_contacts: true)
+          end
+
+          if sample_emails.blank?
+            @sample_newsletter_email = @newsletter.newsletter_emails.build(sample: true)
+          end
           render :edit 
         }
         format.json { render json: @newsletter.errors, status: t("controller.shared.flash.update.status") }
