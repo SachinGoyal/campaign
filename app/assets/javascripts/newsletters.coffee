@@ -24,3 +24,5 @@ jQuery ->
     minDate: 0,
     step: 30
   })
+  $(document).on 'click', '.datepicker-icon', ->
+    $(this).siblings('.datetimepicker').datetimepicker('show')

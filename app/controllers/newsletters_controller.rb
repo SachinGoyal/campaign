@@ -78,9 +78,15 @@ class NewslettersController < ApplicationController
   end
 
   def update
+    emails_was = @newsletter.all_emails_arr
     respond_to do |format|
       if @newsletter.update(newsletter_params)
         @newsletter.email_service.update_campaign
+        @newsletter.email_service.update_content
+        
+        @newsletter.email_service.delete_members_from_list(emails_was)
+        @newsletter.email_service.add_members_to_list(@newsletter.all_emails_arr)
+        
         format.html { redirect_to @newsletter, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:newsletter)) }
         format.json { render :show, status: :ok, location: @newsletter }
       else
@@ -104,6 +110,10 @@ class NewslettersController < ApplicationController
   end
 
   def send_now
+    unless @newsletter.all_emails_arr.any?
+      return redirect_to newsletters_path, notice: t('controller.newsletter.add_contacts')
+    end 
+      
     email_service = @newsletter.email_service
     if email_service.members_in_list.count < 0
       return redirect_to newsletters_path, notice: t('controller.newsletter.not_imported')

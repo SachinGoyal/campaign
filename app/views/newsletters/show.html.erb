@@ -89,7 +89,7 @@
                 </div>
             <% end %>
 
-            <% unless @newsletter.cc_email.empty? %>            
+            <% unless @newsletter.cc_email.try(:empty?) %>            
               <div class="form-group form-group-sm">
                 <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.cc_email') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
@@ -98,7 +98,7 @@
                 </div>
             <% end %>
 
-            <% unless @newsletter.bcc_email.empty? %>            
+            <% unless @newsletter.bcc_email.try(:empty?) %>            
               <div class="form-group form-group-sm">
                 <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.bcc_email') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
@@ -125,7 +125,7 @@
                 </div>
             <% end %>
             
-            <% if @newsletter.auto_response.present? %>            
+            <% if @newsletter.auto_response.try(:present?) %>            
               <div class="form-group form-group-sm">
                 <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.auto_response') %></label>
                 <div class="col-sm-8 col-xs-12 default-without-input">

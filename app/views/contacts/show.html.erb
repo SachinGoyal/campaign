@@ -34,7 +34,7 @@
                 </div>
               </div>
             <% end %>
-
+            <% if @contact.extra_fields %>
             <% @contact.extra_fields.each do |key, val| %>
               <div class="form-group form-group-sm">
                 <label class="col-sm-4 col-xs-12 control-label" ><%= key.humanize %></label>
@@ -43,6 +43,7 @@
                 </div>
               </div>
             <% end %>  
+            <% end %>
             </form>
 
           </div>
