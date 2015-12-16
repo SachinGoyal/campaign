@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-sm-3 text-right margin-top"><strong><%= t('activerecord.attributes.contact.profile_id') %></strong></div>
             <div class="col-sm-9">
-              <%= f.collection_select :profile_id_eq, Profile.all, :id, :name,{prompt: t('frontend.contact.select_profile') }, {class: "form-control"}%>
+              <%= f.collection_select :profile_id_eq, Profile.all, :id, :name, { prompt: t('frontend.contact.select_profile') }, {class: "form-control"}%>
             </div>
           </div>
           <div class="vheight"></div>
@@ -46,7 +46,9 @@
           <div class="row">
             <div class="col-sm-3  text-right margin-top"><strong><%= t('frontend.contact.firstname') %></strong></div>
             <div class="col-sm-9">
-               <%= f.text_field :first_name_cont,:class=> "form-control",:id=> "inputEmail3", :placeholder => t('frontend.contact.firstname') %>
+               <%= f.text_field :first_name_or_firstname_cont, :class => "form-control", :placeholder => t('frontend.contact.firstname') %>
+              <%#= f.hidden_field :firstname_cont %>
+
             </div>
           </div>
         </div>
@@ -68,7 +70,7 @@
           <div class="row">
             <div class="col-sm-3  text-right margin-top"><strong><%= t('frontend.contact.lastname') %></strong></div>
             <div class="col-sm-9">
-              <%= f.text_field :last_name_cont ,:class=> "form-control", :id => "inputEmail3", :placeholder => t('frontend.contact.lastname') %>
+              <%= f.text_field :last_name_or_lastname_cont ,:class=> "form-control", :id => "inputEmail3", :placeholder => t('frontend.contact.lastname') %>
             </div>
           </div>
         </div>
@@ -92,14 +94,3 @@
       <%= will_paginate @contacts , renderer: BootstrapPagination::Rails%>
 
       </div>
-
-
-
-
-
-
-
-
-
-
-

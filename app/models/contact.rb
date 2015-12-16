@@ -35,7 +35,7 @@ class Contact < ActiveRecord::Base
   validates_presence_of :email, length: { in: 3..255}
   validates_presence_of :profile_id, length: { in: 3..255}
   # validates_presence_of :profile_ids, message: 'Please select atleast one'
- validates_uniqueness_to_tenant :email
+  validates_uniqueness_to_tenant :email
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
   # validates_inclusion_of :gender, in: [true, false], message: "Should either be male or female"
@@ -94,13 +94,17 @@ class Contact < ActiveRecord::Base
     Arel::Nodes::InfixOperation.new('->', parent.table[:extra_fields], Arel::Nodes.build_quoted('first_name'))
   end
 
+  ransacker :firstname do |parent|  
+    Arel::Nodes::InfixOperation.new('->', parent.table[:extra_fields], Arel::Nodes.build_quoted('firstname'))
+  end
+
+  ransacker :lastname do |parent|  
+    Arel::Nodes::InfixOperation.new('->', parent.table[:extra_fields], Arel::Nodes.build_quoted('lastname'))
+  end
+
   ransacker :last_name do |parent|  
     Arel::Nodes::InfixOperation.new('->', parent.table[:extra_fields], Arel::Nodes.build_quoted('last_name'))
   end
-
-
-  
-
   def self.ransackable_scopes(auth_object = nil)
     if auth_object
       super + %w(matches_all_attributes)
@@ -113,9 +117,9 @@ class Contact < ActiveRecord::Base
     if auth_object == "newsletter"
       %w(gender country city profile_id email)
     elsif auth_object == "own"
-      %w(first_name last_name email created_at status profile_id)
+      %w(first_name last_name email firstname lastname created_at status profile_id)
     else
-      %w(first_name last_name email created_at status profile_id)
+      %w(first_name last_name email firstname lastname created_at status profile_id)
     end
   end
 
@@ -196,6 +200,6 @@ class Contact < ActiveRecord::Base
   # class methods
 
   def name
-    extra_fields
+    "#{extra_fields["firstname"] || extra_fields["first_name"]} #{extra_fields["lastname"] || extra_fields["last_name"]}"
   end 
 end
