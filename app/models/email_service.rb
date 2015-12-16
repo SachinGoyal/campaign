@@ -154,10 +154,10 @@ class EmailService < ActiveRecord::Base
                       :name => name,
   								    :contact => {
                         :company  => company.try(:name) || "Sperant",
-  								  		:address1 => "address1",
-  								  		:city     => "New Delhi",
-  								  		:state    => "Delhi",
-  								  		:zip      => "110058",
+  								  		:address1 => "Q3 Tech",
+  								  		:city     => "Gurgaon",
+  								  		:state    => "Haryana",
+  								  		:zip      => "122017",
   								  		:country  => "India"
   								  	},
   								  :permission_reminder => I18n.t('words.permission_reminder'),

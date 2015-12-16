@@ -48,6 +48,7 @@ class NewsletterEmail < ActiveRecord::Base
 	def cs_emails
 	  invalid_emails = []
 	  if emails
+	  	emails.strip!
 		emails.delete(' ').split(",").each do |email|
 		  invalid_emails << email if (email =~ Devise.email_regexp).nil?
 		end
