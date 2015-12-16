@@ -21,7 +21,7 @@
             useHTML: true
         },
         title: {
-            text: 'Newsletter'
+            text: "<%= t('activerecord.models.newsletter') %>"
         },
 
         credits: {
@@ -29,17 +29,29 @@
         },
 
         xAxis: {
-            categories:  ["Open Total", "Unique Total", "Click Total", "Unique Click" , "Unique Subscriber Clicks", "Hard Bounces", "Soft Bounces", "Unsubscribed", "Forwards Count" , "Forwards Opens", "Emails Sent", "Abuse Reports"]
+            categories: 
+        ["<%= t('activerecord.attributes.email_service.opens_total') %>",
+        "<%= t('activerecord.attributes.email_service.unique_opens') %>",
+        "<%= t('activerecord.attributes.email_service.clicks_total')%>",
+        "<%= t('activerecord.attributes.email_service.unique_clicks')%>",
+        "<%= t('activerecord.attributes.email_service.unique_subscriber_clicks')%>",
+        "<%= t('activerecord.attributes.email_service.hard_bounces')%>",
+        "<%= t('activerecord.attributes.email_service.soft_bounces')%>",
+        "<%= t('activerecord.attributes.email_service.unsubscribed')%>",
+        "<%= t('activerecord.attributes.email_service.forwards_count')%>",
+        "<%= t('activerecord.attributes.email_service.forwards_opens')%>",
+        "<%= t('activerecord.attributes.email_service.emails_sent')%>",
+        "<%= t('activerecord.attributes.email_service.abuse_reports')%>"]
         },
         yAxis: {
             title: {
-                text: 'Newsletter Sent'
+                text: "<%= t('frontend.campaign.newsletter_sent') %>"
             }
         },
         series: [
            {
             showInLegend: false,  
-            name: 'Newsletter',
+            name: "<%= t('activerecord.models.newsletter') %>",
             data: $('#container').data('report'),
             color: '#1ABB9C',
             pointWidth: 35
@@ -58,12 +70,12 @@
   <div class="row">
     <div class="col-md-12">
         <div class="col-md-8">
-        <label class="col-xs-2 custom-label-control control-label">Repots <i class="fa fa-chevron-right custom-spacing-left"></i></label>
+        <label class="col-xs-2 custom-label-control control-label"><%= t('frontend.shared.reports') %> <i class="fa fa-chevron-right custom-spacing-left"></i></label>
         <div class="col-xs-5">
-        <%= collection_select(:report, :campaign_id, @campaigns, :id, :name, {:prompt => 'Select Campaign', selected: @campaign_id}, {:class => 'form-control required'}) %>
+        <%= collection_select(:report, :campaign_id, @campaigns, :id, :name, {:prompt => t('frontend.campaign.select_campaign'), selected: @campaign_id}, {:class => 'form-control required'}) %>
         </div><!-- col-xs-5 -->
         <div class="col-xs-5" id= 'campaign-newsletter'>
-            <%= collection_select(:report, :newsletter_id, @newsletters, :id, :name, {:prompt => 'Select Newsletter', selected: @newsletter_id}, {:class => 'form-control required'}) %>
+            <%= collection_select(:report, :newsletter_id, @newsletters, :id, :name, {:prompt => t('frontend.campaign.select_newsletter'), selected: @newsletter_id}, {:class => 'form-control required'}) %>
         </div><!-- col-xs-5 -->
         </div><!-- col-md-8 -->
        <%= f.submit "Report", class: 'btn dark-btn-custom' %>

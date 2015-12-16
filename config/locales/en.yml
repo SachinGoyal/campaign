@@ -288,7 +288,20 @@ en:
         admin_footer_content: "Admin Footer Content"
         name: "Name"
         created_at: "Date"
-
+      email_service:
+        opens_total: "Total Opens"
+        unique_opens: "Unique Opens"
+        clicks_total: "Total Clicks"
+        unique_clicks: "Unique Clicks"
+        unique_subscriber_clicks: "Unique subscriber clicks"
+        hard_bounces: "Hard Bounces"
+        soft_bounces: "Soft Bounces"
+        unsubscribed: "Unsubscribed"
+        forwards_count: "Forwards Count"
+        forwards_opens: "Forwards Open"
+        emails_sent: "Emails Sent"
+        abuse_reports: "Abuse Reports"
+  
   will_paginate:
     previous_label: "&#8592; Previous"
     next_label: "Next &#8594;"
@@ -331,6 +344,8 @@ en:
       view: "View %{model_name}"
       status: "Status"
       multiselect: "Press Ctrl for multiselect"
+      reports: "Reports"
+      stats: "Stats"
       csv: "should be CSV"
       gender:
         male: "Male"
@@ -356,6 +371,11 @@ en:
       new: "New Campaign"
       edit: "Edit Campaign"
       advanced_search: "Campaign-List Advanced Search"
+      select_campaign: "Select Campaign"
+      select_newsletter: "Select Newsletter"
+      report: "Report"
+      newsletter_sent: 'Newsletter Sent'
+      stat: "Stat"
       placeholder:
     newsletter: 
       profile: "Profile(s)"

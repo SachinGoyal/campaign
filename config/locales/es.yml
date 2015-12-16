@@ -312,6 +312,20 @@ es:
         admin_footer_content: "Admin contenido de pie de página" 
         name: "Nombre"
         created_at: "Fecha"
+      email_service:
+        opens_total: "Total Opens"
+        unique_opens: "Unique Opens"
+        clicks_total: "Total Clicks"
+        unique_clicks: "Unique Clicks"
+        unique_subscriber_clicks: "Unique subscriber clicks"
+        hard_bounces: "Hard Bounces"
+        soft_bounces: "Soft Bounces"
+        unsubscribed: "Unsubscribed"
+        forwards_count: "Forwards Count"
+        forwards_opens: "Forwards Open"
+        emails_sent: "Emails Sent"
+        abuse_reports: "Abuse Reports"
+
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "Siguiente &#8594;"
@@ -354,6 +368,8 @@ es:
       status: "Estado"
       advanced_search: "Búsqueda Avanzada"
       multiselect: "Presione Ctrl para múltiples seleccione"
+      reports: "Reports"
+      stats: "Stats"
       csv: "should be CSV"
       gender:
         male: "Masculino"
@@ -384,6 +400,11 @@ es:
       name: "Título"
     campaign:
       view_stat: "Ver Stat"
+      select_campaign: "Select Campaign"
+      select_newsletter: "Select Newsletter"
+      report: "Report"
+      newsletter_sent: 'Newsletter Sent'     
+      stat: "Stat" 
     newsletter:
       profiles: "Perfil (s)"
       email_list: "Lista de Correo"
