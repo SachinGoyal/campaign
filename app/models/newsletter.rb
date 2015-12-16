@@ -55,7 +55,7 @@ class Newsletter < ActiveRecord::Base
   validate :scheduled_at_cannot_be_in_the_past
 
   def scheduled_at_cannot_be_in_the_past
-    errors.add(:scheduled_at, "can't be less than current time") if
+    errors.add(:scheduled_at, I18n.t('activerecord.errors.models.newsletter.attributes.scheduled_at.in_past')) if
       !scheduled_at.blank? and scheduled_at < Time.zone.now and scheduled_at_changed?
   end
   # validation

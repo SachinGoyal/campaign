@@ -224,6 +224,8 @@ es:
         newsletter:
           attributes:
             base: "No puede ser editado o borrado como boletín ya se envía"
+            scheduled_at:
+              in_past: "can't be in the past"
         attribute:        
           attributes:
             base:

@@ -195,6 +195,8 @@ en:
         newsletter:
           attributes:
             base: "Cannot be edited or deleted as newsletter is already sent"
+            scheduled_at:
+              in_past: "can't be in the past"
         attribute:
           attributes:
             base:
