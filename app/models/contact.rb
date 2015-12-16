@@ -78,7 +78,7 @@ class Contact < ActiveRecord::Base
     newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
       newsletter_email.newsletter.email_service.delete_member_from_list(self.email_was)
     end
-
+    
     newsletter_emails.each do |newsletter_email|
       newsletter_email.delete_email(self.email_was)
     end

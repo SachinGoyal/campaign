@@ -19,12 +19,31 @@ class NewsletterEmail < ActiveRecord::Base
 
 	before_save :populate_profile_emails
 	before_save :remove_duplicate_emails_and_strip
-
+	# after_update :update_list
+	
 	belongs_to :profile
 	belongs_to :newsletter, inverse_of: :newsletter_emails
 
 	scope :unsent, -> { where(sent: 'false') }
 	scope :sent, -> { where(sent: 'true') }
+
+	## if custom emails changed, change in mailchimp
+	def update_list
+		if emails_changed? and from_contacts
+			emails_was_arr = emails_was.split(",")
+			emails_arr = emails.split(",")
+			deleted_emails = emails_was_arr.diff emails_arr
+			added_emails = emails_arr.diff - emails_was_arr
+			
+			deleted_emails.each do |email|
+				newsletter.email_service(delete_member_from_list(email))
+			end
+
+			added_emails.each do |email|
+				newsletter.email_service(add_member_to_list(email))
+			end
+		end
+	end
 
 	def cs_emails
 	  invalid_emails = []

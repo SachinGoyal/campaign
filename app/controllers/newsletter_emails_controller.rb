@@ -5,7 +5,7 @@ class NewsletterEmailsController < ApplicationController
     body_val = request.body.read
 
     if params[:type] == "unsubscribe"
-        contact = Contact.where(email: params["data"]["email"]).first
+        contact = Contact.where(email: params[:data][:email]).first
         contact.destroy
     end
 

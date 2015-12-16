@@ -89,7 +89,7 @@
             <div class="col-xs-4">&nbsp;</div>
                         
             <div class="col-xs-8 text-left">
-              <%= f.submit t(:save) ,:class => 'btn dark-btn-custom'%>
+              <%= f.submit t('buttons.save') ,:class => 'btn dark-btn-custom'%>
               <% if can? :read, Company %>
 
                 <%= link_to t(:cancel), companies_path,:class => 'btn custom-link-btn' %>

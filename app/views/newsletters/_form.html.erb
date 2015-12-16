@@ -89,36 +89,36 @@
                   <%= f.text_field :from_name, :class => 'form-control' %>
                 </div>
               </div>
-          <div class="form-group form-group-sm">
-            <%= f.label :from_address, :class => "col-sm-3 col-xs-12 control-label" %>
-            <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :from_address, :class => 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group form-group-sm">
-            <%= f.label :reply_email, :class => "col-sm-3 col-xs-12 control-label" %>
-            <div class="col-sm-9 col-xs-12">
-              <%= f.email_field :reply_email, :class => 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group form-group-sm">
-            <%= f.label :cc_email, :class => "col-sm-3 col-xs-12 control-label" %>
-            <div class="col-sm-9 col-xs-12">
-              <%= f.email_field :cc_email, :class => 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group form-group-sm">
-            <%= f.label :bcc_email, :class => "col-sm-3 col-xs-12 control-label" %>
-            <div class="col-sm-9 col-xs-12">
-              <%= f.email_field :bcc_email, :class => 'form-control' %>
-            </div>
-          </div>
-        </div>
+              <div class="form-group form-group-sm">
+                <%= f.label :from_address, :class => "col-sm-3 col-xs-12 control-label" %>
+                <div class="col-sm-9 col-xs-12">
+                  <%= f.text_field :from_address, :class => 'form-control' %>
+                </div>
+              </div>
+              <div class="form-group form-group-sm">
+                <%= f.label :reply_email, :class => "col-sm-3 col-xs-12 control-label" %>
+                <div class="col-sm-9 col-xs-12">
+                  <%= f.email_field :reply_email, :class => 'form-control' %>
+                </div>
+              </div>
+<!--               <div class="form-group form-group-sm">
+                <%#= f.label :cc_email, :class => "col-sm-3 col-xs-12 control-label" %>
+                <div class="col-sm-9 col-xs-12">
+                  <%#= f.email_field :cc_email, :class => 'form-control' %>
+                </div>
+              </div>
+              <div class="form-group form-group-sm">
+                <%#= f.label :bcc_email, :class => "col-sm-3 col-xs-12 control-label" %>
+                <div class="col-sm-9 col-xs-12">
+                  <%#= f.email_field :bcc_email, :class => 'form-control' %>
+                </div>
+              </div>
+ -->            </div>
 
       </div>
       <div class="col-lg-4 col-xs-1">&nbsp;</div>
       <div class="clearfix"></div>
-      <div class="custom-divider"></div>
+      <!-- <div class="custom-divider"></div> -->
     </div>
 
     <div class="col-md-12 col-xs-12">
@@ -126,13 +126,13 @@
       <div class="col-md-6 col-xs-10">
         <div class="form-horizontal">
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 blue-heading col-xs-12 control-label" ><%= t('frontend.newsletter.sample_email') %></label>
+            <label class="col-sm-3 blue-heading col-xs-12 control-label" ><%#= t('frontend.newsletter.sample_email') %></label>
             <div class="col-sm-9 col-xs-12">
             </div>
           </div>
 
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" ><%= t('frontend.newsletter.email_address') %></label>
+            <label class="col-sm-3 col-xs-12 control-label" >Sample Email Address<%#= t('frontend.newsletter.email_address') %></label>
             <div class="col-sm-9 col-xs-12">
               <%= f.fields_for :newsletter_emails, @sample_newsletter_email do |sample_newsletter_email_form| %>
                 <% if sample_newsletter_email_form.object.sample? %>
@@ -141,33 +141,43 @@
                 <% end %>
               <% end %>
               
-              <span class="small"><%= t('frontend.newsletter.sample_email_hint') %>:</span>
+              <!-- <span class="small"><%#= t('frontend.newsletter.sample_email_hint') %>:</span> -->
             </div>
           </div>
 
-          <div class="form-group form-group-sm">
+<!--           <div class="form-group form-group-sm">
             <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
             <div class="col-sm-9 col-xs-12 custom-radio-input">
               <input id="radio01" name="" type="radio" value="" class="auto_response_toggle">
-              <label for="radio01"><span></span><%= t('frontend.newsletter.auto_responder_rules')%></label>
-              <% if !@newsletter.auto_response.try(:blank?) %>
-                <%= f.email_field :auto_response, :class => "form-control" %>
-              <% else %>
-                <%= f.email_field :auto_response, :class => "form-control", :style => "display:none" %>
-              <% end %>
+              <label for="radio01"><span></span><%#= t('frontend.newsletter.auto_responder_rules')%></label>
+              <%# if !@newsletter.auto_response.try(:blank?) %>
+                <%#= f.email_field :auto_response, :class => "form-control" %>
+              <%# else %>
+                <%#= f.email_field :auto_response, :class => "form-control", :style => "display:none" %>
+              <%# end %>
             </div>
           </div>
-          
+ -->         
+
+
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
-            <div class="col-sm-9 col-xs-12 custom-radio-input">
-              <input id="radio02" name="" type="radio" value="" class="scheduled_at_toggle">
-              <label for="radio02"><span></span><%= t('frontend.newsletter.auto_send') %></label>
-              <% if @newsletter.scheduled_at.try(:blank?) %>
-                <%= f.text_field :scheduled_at, :class => "form-control datetimepicker" %>
-              <% else %>
-                <%= f.text_field :scheduled_at, :class => "form-control datetimepicker", :style => "display:none" %>
-              <% end %>              
+            <label class="col-sm-3 col-xs-12 control-label" >Auto Send at</label>
+            <!-- <div class="col-sm-9 col-xs-12 add-on input-group date datepicker"> -->
+            <div class="col-sm-9 col-xs-12">
+              <!-- <input id="radio02" name="" type="radio" value="" class="scheduled_at_toggle"> -->
+              <!-- <label for="radio02"><span></span><%#= t('frontend.newsletter.auto_send') %></label> -->
+              <%# if @newsletter.scheduled_at.try(:blank?) %>
+              <!-- <input type="text" id="newsletter_scheduled_at" name="newsletter[scheduled_at]" class="form-control datetimepicker"><i class="fa fa-calendar"></i> -->
+                <%= f.text_field :scheduled_at, :class => "form-control datetimepicker" %>            
+             <div class="input-group-btn datepicker-icon" style="height:30px;">
+            <!-- <button class="btn btn-default" style="height: 30px;"> -->
+                <!-- <i class="fa fa-calendar"></i> -->
+            <!-- </button> -->
+        </div>     
+            
+              <%# else %>
+                <%#= f.text_field :scheduled_at, :class => "form-control datetimepicker", :style => "display:none" %>
+              <%# end %>              
             </div>
           </div>
         </div>

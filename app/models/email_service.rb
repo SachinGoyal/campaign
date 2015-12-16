@@ -97,8 +97,7 @@ class EmailService < ActiveRecord::Base
                                :subject_line  => subject,           
                                :title         => subject,
                                :reply_to      => from_address, 
-                               :from_name     => from_name,
-                               :template_id   => template_id }
+                               :from_name     => from_name }
                        }
                 })
     rescue Gibbon::MailChimpError => e
@@ -237,6 +236,27 @@ class EmailService < ActiveRecord::Base
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
+  end
+
+  def delete_members_from_list(emails)
+    emails_arr = []
+    emails.each do |email|
+      emails_arr << {'email' => email}
+    end
+
+    begin
+      response = HTTParty.post(V2_URL+"2.0/lists/batch-unsubscribe", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :id => list_id,
+                      :batch => emails_arr,
+                      :send_goodbye => false
+                    }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' } )
+    rescue Exception => e
+      puts "We have a problem: #{e.message}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
+    end
   end
 
   def delete_member_from_list(email)
