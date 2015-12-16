@@ -117,7 +117,7 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :free_emails, :status, :created_by, :updated_by, :subdomain, users_attributes: [:id, :email, :username, :password, :password_confirmation, :role_id, :status])
+      params.require(:company).permit(:name, :free_emails, :status, :created_by, :updated_by, :subdomain, :company_logo, users_attributes: [:id, :email, :username, :password, :password_confirmation, :role_id, :status])
     end
 
     def updateable_messages(action)

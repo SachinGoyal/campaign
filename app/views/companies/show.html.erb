@@ -24,6 +24,11 @@
               </div>
             </div>
 
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label">Logo</label>
+                <%= image_tag @company.company_logo_url %>
+            </div>
+
             <% if @company.free_emails.present? %>            
               <div class="form-group form-group-sm">
                 <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.contact.free_emails') %></label>
