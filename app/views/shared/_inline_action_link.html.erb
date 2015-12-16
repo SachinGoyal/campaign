@@ -42,7 +42,7 @@
         <% end %>  
         <% if !element.scheduled_at? and !element.sent? %>
           <li><%= link_to send_now_newsletter_path(element),  method: :post do %>
-            <i class="fa fa-eye"></i>
+            <i class="fa fa-paper-plane"></i>
             <span><%= t("frontend.newsletter.send_now") %></span>
             <% end %>
           </li>
