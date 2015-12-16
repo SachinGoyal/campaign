@@ -52,11 +52,11 @@ class Newsletter < ActiveRecord::Base
   validates :from_name, presence: true, length: { in: 2..150 }
   validates :reply_email, presence: true, format: {with: Devise.email_regexp}
   validates_format_of :cc_email, :bcc_email, :with => Devise.email_regexp, :allow_blank => true
-  validate :scheduled_at_cannot_be_in_the_past, on: :create
+  validate :scheduled_at_cannot_be_in_the_past
 
   def scheduled_at_cannot_be_in_the_past
     errors.add(:scheduled_at, "can't be less than current time") if
-      !scheduled_at.blank? and scheduled_at < Time.zone.now
+      !scheduled_at.blank? and scheduled_at < Time.zone.now and scheduled_at_changed?
   end
   # validation
 
