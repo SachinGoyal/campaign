@@ -1,5 +1,1 @@
-<% if @newsletters.present? %>
-  $('#campaign-newsletter').html("<%= j (collection_select(:report, :newsletter_id, @newsletters, :id, :name, {:prompt => 'select Newsletter'}, {:class => 'form-control required'})) %>");
-<% else %>
-  $('#campaign-newsletter').html(<select class="form-control"><option>select Newsletter</option></select>);
-<% end %>
+$('#campaign-newsletter').html("<%= j (collection_select(:report, :newsletter_id, @newsletters, :id, :name, {:prompt => 'Select Newsletter'}, {:class => 'form-control required'})) %>");

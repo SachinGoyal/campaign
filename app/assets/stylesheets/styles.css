@@ -6870,3 +6870,33 @@ text-align:center;
 .calender-margin{
 margin-left: 10px;
 }
+
+
+.stat-heading{
+    text-align: center;
+    background-color: #f3f3f3;
+    border: solid 1px #eaeaea;
+    height: 30px;
+    padding-top: 4px;
+
+
+}
+
+.stat-div{
+    background-color: #fff;
+    width: 153px;
+   padding-left: 28px;
+   margin: 0px auto;
+   padding-top: 30px;
+    padding-bottom: 30px;
+
+
+
+}
+
+.stat-count{
+    text-align: center;
+
+}
+
+.box-bg{background-color: #fff; border-right: solid 1px #eaeaea;}

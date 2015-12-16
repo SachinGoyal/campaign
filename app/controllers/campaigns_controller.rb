@@ -7,6 +7,7 @@ class CampaignsController < ApplicationController
   
   #filter
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  before_action :filter_reports, only: [:reports, :stats]
   #filter
   
   # GET /campaigns
@@ -30,24 +31,26 @@ class CampaignsController < ApplicationController
   end
 
   def reports
+    
+   # @campaigns =Campaign.active
     if params[:report].present?
       campaign_id = params[:report][:campaign_id]
       newsletter_id = params[:report][:newsletter_id]
       columns = ['opens_total','unique_opens','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'emails_sent', 'abuse_reports']
-      if newsletter_id.present?
+      if newsletter_id.present? 
         newsletter = Newsletter.find(newsletter_id)
-       # email_stat = newsletter.email_service.get_stats
-        email_stat = newsletter.email_service
-        email_stat = email_stat.attributes.extract!(*columns).values
-        email_stat.map! { |x| x || 0 }
+        if newsletter.email_service.present?
+          email_stat = newsletter.email_service.get_stats
+          email_stat = email_stat.attributes.extract!(*columns).values
+          email_stat.map! { |x| x || 0 }
+        end
       else
         if campaign_id.present?
           array = []
           campaign = Campaign.find(campaign_id)
           campaign.newsletters.each do |newsletter|
             if newsletter.email_service.present?
-             # email_stat = newsletter.email_service.get_stats
-              email_stat = newsletter.email_service
+              email_stat = newsletter.email_service.get_stats
               email_stat = email_stat.attributes.extract!(*columns).values
               email_stat.map! { |x| x || 0 }
               array << email_stat
@@ -63,16 +66,17 @@ class CampaignsController < ApplicationController
   end
 
   def stats
-    if params[:report].present?
-      campaign_id = params[:report][:campaign_id]
-      newsletter_id = params[:report][:newsletter_id]
+    if params[:newsletter_id] || params[:report].present?
+      campaign_id = params[:report][:campaign_id] if params[:report].present?
+      newsletter_id = params[:newsletter_id].present? ? params[:newsletter_id] : params[:report][:newsletter_id]
       columns = ['opens_total','unique_opens','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'emails_sent', 'abuse_reports']
       if newsletter_id.present?
         newsletter = Newsletter.find(newsletter_id)
-       # email_stat = newsletter.email_service.get_stats
-        email_stat = newsletter.email_service
-        email_stat = email_stat.attributes.extract!(*columns).values
-        email_stat.map! { |x| x || 0 }
+        if newsletter.email_service.present?
+          email_stat = newsletter.email_service.get_stats
+          email_stat = email_stat.attributes.extract!(*columns).values
+          email_stat.map! { |x| x || 0 }
+        end
       else
         if campaign_id.present?
           array = []
@@ -190,4 +194,12 @@ class CampaignsController < ApplicationController
       end
 
     end
+
+    def filter_reports
+      report = params[:report]
+      @campaign_id = (report and report.has_key?('campaign_id') ? report[:campaign_id] : '')
+      @newsletter_id = (report and report.has_key?('newsletter_id') ? report[:newsletter_id] : '')
+      @newsletters = Newsletter.where(campaign_id: @campaign_id) #if report.present? && report[:newsletter_id].present?
+    end
+
 end
