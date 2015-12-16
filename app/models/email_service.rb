@@ -232,7 +232,6 @@ class EmailService < ActiveRecord::Base
   		response = gb.batches.create({:body => {
   										:operations => email_arr  												
   									}})      
-  	  binding.pry 
     rescue Gibbon::MailChimpError => e      
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
@@ -253,7 +252,6 @@ class EmailService < ActiveRecord::Base
                       :double_optin => false
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
-      binding.pry
     rescue Exception => e
       puts "We have a problem: #{e.message}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
@@ -274,7 +272,6 @@ class EmailService < ActiveRecord::Base
                       :send_goodbye => false
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
-      binding.pry
     rescue Exception => e
       puts "We have a problem: #{e.message}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
