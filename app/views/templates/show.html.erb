@@ -43,7 +43,7 @@
 <div class="divider"></div>   
 
     </div><!--  custom-container -->
-    <% if can? :update, Template %>
+    <% if can? :update, ActiveRecord::Base::Template %>
      <%= link_to t('buttons.edit'), edit_template_path(@template) %> |
     <% end %>
     <%= link_to t('buttons.back'), templates_path %>
