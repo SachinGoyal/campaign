@@ -6829,8 +6829,9 @@ width:20px;
 }
 
 .dynamic-field-div{
-    width: 436px !important;
-    left: 147px;
+    width: 469px !important;
+    left: 158px;    
+    display: block;
 }
 
 .action-radio{
@@ -6932,3 +6933,8 @@ margin-left: 10px;
 
 .box-bg{background-color: #fff; border-right: solid 1px #eaeaea;}
 .smaller_font{font-size: 11px;}
+.dy_div{
+    width: 92% !important;
+    height: 30px;
+    margin-bottom: 9px;
+}
