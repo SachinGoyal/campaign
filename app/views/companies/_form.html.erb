@@ -16,7 +16,9 @@
             <!-- <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Company Name</label> -->
             <div class="col-sm-5 col-xs-12">
               <%= f.file_field :company_logo %>
-              <%= image_tag @company.company_logo_url %>
+              <% if @company.company_logo.present? %>
+                <%= image_tag @company.company_logo_url %>
+              <% end %>
             </div>
           </div>
 
