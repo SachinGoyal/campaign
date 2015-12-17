@@ -57,11 +57,10 @@ class ContactsController < ApplicationController
       if current_user.is_admin?
         format.csv { send_data contacts.to_admin_csv(col_sep: "\t",profile_id: params[:profile_id]) }
         format.xls { send_data contacts.to_admin_csv(col_sep: "\t",profile_id: params[:profile_id]) }
-        format.xlsx { send_data contacts.to_admin_csv(col_sep: "\t",profile_id: params[:profile_id]) }
 
       else
         format.csv { send_data contacts.to_csv }
-        format.xls { send_data contacts.to_csv(col_sep: "\t") }
+        format.xls { send_data contacts.to_csv(col_sep: "\t",profile_id: params[:profile_id])}
       end        
     end
   end
