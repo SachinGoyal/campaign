@@ -69,7 +69,7 @@ class Contact < ActiveRecord::Base
       newsletter_email.add_contact(self.email)
     end
     newsletter_emails.select("DISTINCT(newsletter_id)").each do |newsletter_email|
-      newsletter_email.newsletter.email_service.add_member_to_list(self.email)
+      newsletter_email.newsletter.email_service.add_member_to_list(self.email) if newsletter_email.newsletter.email_service.present?
     end
   end
   
@@ -155,11 +155,11 @@ class Contact < ActiveRecord::Base
     
     #Company Export contact 
     def to_csv(options = {})
-      profile = Profile.find(24)
-      extra_fields = profile.contacts.first.extra_fields.keys
+      profile = Profile.find(options[:profile_id])
+      extra_fields = profile.contacts.last.extra_fields.keys
       column_names = ["email","status"] 
-      column_names_csv = ["Email", "Status"] + extra_fields + ["Date"]
-      CSV.generate(options) do |csv|
+      column_names_csv = ["email", "status"] + extra_fields + ["Date"]
+      CSV.generate() do |csv|
         csv << column_names_csv
         profile.contacts.each do |contact|
           date = contact.created_at

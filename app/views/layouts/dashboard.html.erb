@@ -35,7 +35,7 @@
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
                         <%#= link_to '', root_path, :class => 'site_title'%>
-                        <% if current_user.try(:company).try(:company_logo) %>
+                        <% if current_user.company.present? %>
                           <%= link_to root_path, :class => 'comp_logo' do %>
                             <span>
                             <%= image_tag current_user.company.try(:company_logo_url) %>
@@ -83,8 +83,7 @@
                                     <span><%= t("menu.newsletter")%></span>
                                   <% end %></li>
                                 <% end %>
-                                
-                                <% if can? :read, Template %>
+                                <% if can? :read, ActiveRecord::Base::Template %>
                                   <li class="<%= "current-page" if params[:controller] == "templates" %>"><%= link_to templates_path do %>
                                      <i class="fa fa-clone"></i>
                                     <span><%= t("menu.template")%></span>
@@ -113,12 +112,7 @@
                                   <% end %></li>
                                 <% end %>
 
-                                <% if can? :read, Attribute %>
-                                  <li class="<%= "current-page" if params[:controller] == "attributes" %>"><%= link_to attributes_path do %>
-                                     <i class="fa fa-attributes"></i>
-                                    <span><%= t("menu.attribute")%></span>
-                                  <% end %></li>
-                                <% end %>
+                        
 
                                 <% if can? :read, Company %>
                                   <li class="<%= "current-page" if params[:controller] == "companies" %>"><%= link_to companies_path do %>

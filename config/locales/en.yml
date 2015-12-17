@@ -166,7 +166,7 @@ en:
           attributes:
             base: 
               contacts_exist: "Cannot delete Profile while Contacts exist"
-              newsletters_exist: "Cannot delete Profile while Newsletters exist"
+              newsletters_exist: "Cannot delete/deactivate Profile while Newsletters exist"
         company:
           attributes:
             name:
