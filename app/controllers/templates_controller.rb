@@ -90,7 +90,7 @@ class TemplatesController < ApplicationController
   # PATCH/PUT /templates/1
   # PATCH/PUT /templates/1.json
   def update
-    if params[:template][:status] and ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:template][:status]) != @template.status
+    if params[:template][:status] and ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:template][:status]) != @template.status and @template.newsletters.any?
       return redirect_to edit_template_path(@template), notice: t('activerecord.errors.models.template.attributes.base.associated_newsletter')
     end
 
