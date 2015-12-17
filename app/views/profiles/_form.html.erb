@@ -30,25 +30,25 @@
           </div>
 
           <div class="form-group form-group-sm">
-            <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Fields</label>
+            <label class="col-sm-4 col-xs-12 control-label">Fields</label>
             <div class="col-sm-8 col-xs-12">
                 <%= text_field_tag 'Email','Email',class: 'form-control',:readonly => true %>
             </div>
           </div>
-          <div class="col-sm-8 col-xs-12 dynamic-field-div">
-            <%= f.fields_for :extra_fields do |task_form| %>        
-              <%= task_form.text_field :field_name, class: "dynamic-field-input" %>   
-              <%= task_form.link_to_remove image_tag("cross-close-btn")%>    
-            <% end %>   
-          </div>
-           
+
           <div class="form-group form-group-sm">
-            <label class="col-sm-4 col-xs-12 control-label" ></label>
-            <div class="col-sm-8 col-xs-12 dynamic-field-div">
+            <label class="col-sm-4 col-xs-12 control-label"></label>
+            <div class="col-sm-8 col-xs-12">
+                <%= f.fields_for :extra_fields do |task_form| %>        
+                <%= task_form.text_field :field_name, class: 'dy_div' %>   
+                <%= task_form.link_to_remove image_tag("cross-close-btn")%>    
+              <% end %>   
+          
               <%= f.link_to_add t('frontend.profile.add_field'), :extra_fields %>
               <p class="smaller_font">Please use 'first_name' and 'last_name' as names of extra fields for better search results</p>
             </div>
-          </div>          
+          </div>
+
           
            
       </div>

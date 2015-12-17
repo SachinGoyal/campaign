@@ -76,7 +76,7 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
-    if params[:profile][:status] and ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:profile][:status]) != @profile.status
+    if params[:profile][:status] and ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:profile][:status]) != @profile.status and @profile.newsletter_emails.count > 0
       return redirect_to edit_profile_path(@profile), notice: t('activerecord.errors.models.profile.attributes.base.newsletters_exist')
     end
 
