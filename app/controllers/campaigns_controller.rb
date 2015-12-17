@@ -7,7 +7,8 @@ class CampaignsController < ApplicationController
   
   #filter
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
-  before_action :filter_reports, only: [:reports, :stats]
+  # before_action :filter_reports, only: [:reports, :stats]
+  before_filter :get_translations, only: [:stats]
   #filter
   
   # GET /campaigns
@@ -66,25 +67,29 @@ class CampaignsController < ApplicationController
   end
 
   def stats
-    if params[:newsletter_id] || params[:report].present?
-      campaign_id = params[:report][:campaign_id] if params[:report].present?
-      newsletter_id = params[:newsletter_id].present? ? params[:newsletter_id] : params[:report][:newsletter_id]
+    @campaigns = Campaign.all
+    @newsletter = Newsletter.find(params[:newsletter_id]) if params[:newsletter_id] and !params[:newsletter_id].blank?
+    if params[:campaign_id] and !params[:campaign].blank?
+      @campaign = Campaign.find(params[:campaign_id])
+    end
+    if @newsletter
+      @campaign = @newsletter.campaign
+    end
+
+    if @newsletter 
       columns = ['opens_total','unique_opens','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'emails_sent', 'abuse_reports']
-      if newsletter_id.present?
-        newsletter = Newsletter.find(newsletter_id)
-        if newsletter.email_service.present?
-          email_stat = newsletter.email_service.get_stats
+      if @newsletter
+        if @newsletter.email_service.present?
+          email_stat = @newsletter.email_service.get_stats
           email_stat = email_stat.attributes.extract!(*columns).values
           email_stat.map! { |x| x || 0 }
         end
       else
-        if campaign_id.present?
-          array = []
-          campaign = Campaign.find(campaign_id)
-          campaign.newsletters.each do |newsletter|
+        if @campaign
+          array = []        
+          @campaign.newsletters.each do |newsletter|
             if newsletter.email_service.present?
               email_stat = newsletter.email_service.get_stats
-             # email_stat = newsletter.email_service
               email_stat = email_stat.attributes.extract!(*columns).values
               email_stat.map! { |x| x || 0 }
               array << email_stat
@@ -95,29 +100,15 @@ class CampaignsController < ApplicationController
       end
       @data = email_stat
     end
-
-    @campaign = Campaign.first
-    @stats = [t('activerecord.attributes.email_service.opens_total') ,
-        t('activerecord.attributes.email_service.unique_opens') ,
-        t('activerecord.attributes.email_service.clicks_total'),
-        t('activerecord.attributes.email_service.unique_clicks'),
-        t('activerecord.attributes.email_service.unique_subscriber_clicks'),
-        t('activerecord.attributes.email_service.hard_bounces'),
-        t('activerecord.attributes.email_service.soft_bounces'),
-        t('activerecord.attributes.email_service.unsubscribed'),
-        t('activerecord.attributes.email_service.forwards_count'),
-        t('activerecord.attributes.email_service.forwards_opens'),
-        t('activerecord.attributes.email_service.emails_sent'),
-        t('activerecord.attributes.email_service.abuse_reports')]
-
   end
 
   def select_newsletter
-    begin
-      @newsletters = Campaign.find(params[:campaign_id]).newsletters
-    rescue
-      @newsletters = nil
-    end 
+    # binding.pry
+    # begin
+      @newsletters = Campaign.find(params[:campaign_id]).try(:newsletters).try(:sent)
+    # rescue
+    #   @newsletters = nil
+    # end 
   end
 
   # GET /campaigns/1
@@ -212,6 +203,21 @@ class CampaignsController < ApplicationController
       @campaign_id = (report and report.has_key?('campaign_id') ? report[:campaign_id] : '')
       @newsletter_id = (report and report.has_key?('newsletter_id') ? report[:newsletter_id] : '')
       @newsletters = Newsletter.where(campaign_id: @campaign_id) #if report.present? && report[:newsletter_id].present?
+    end
+
+    def get_translations
+          @stats = [t('activerecord.attributes.email_service.opens_total') ,
+        t('activerecord.attributes.email_service.unique_opens') ,
+        t('activerecord.attributes.email_service.clicks_total'),
+        t('activerecord.attributes.email_service.unique_clicks'),
+        t('activerecord.attributes.email_service.unique_subscriber_clicks'),
+        t('activerecord.attributes.email_service.hard_bounces'),
+        t('activerecord.attributes.email_service.soft_bounces'),
+        t('activerecord.attributes.email_service.unsubscribed'),
+        t('activerecord.attributes.email_service.forwards_count'),
+        t('activerecord.attributes.email_service.forwards_opens'),
+        t('activerecord.attributes.email_service.emails_sent'),
+        t('activerecord.attributes.email_service.abuse_reports')]
     end
 
 end

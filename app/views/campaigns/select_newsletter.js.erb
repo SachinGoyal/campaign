@@ -1,1 +1,5 @@
-$('#campaign-newsletter').html("<%= j (collection_select(:report, :newsletter_id, @newsletters, :id, :name, {:prompt => 'Select Newsletter'}, {:class => 'form-control required'})) %>");
+
+
+$('#campaign-newsletter').html("<%= j(select_tag(:newsletter_id, options_from_collection_for_select(@newsletters, 'id', 'name'), {:prompt => t('frontend.campaign.select_newsletter'), :class => 'form-control required'} )) %>");
+
+
