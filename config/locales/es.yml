@@ -449,6 +449,7 @@ es:
       number_free_emails: "Número de correos electrónicos gratis"
       username: "Nombre de Usuario"
       password_confirmation: "Confirmar contraseña"
+      logo: "Company Logo"
     import:
       import: "Importar"
       first_name:
