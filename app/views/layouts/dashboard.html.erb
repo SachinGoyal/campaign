@@ -35,8 +35,18 @@
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
                         <%#= link_to '', root_path, :class => 'site_title'%>
-                        <a href="/" class="site_title">
-                        <span><%= Setting.first.site_title.titleize%></span></a>
+                        <% if current_user.try(:company).try(:company_logo) %>
+                          <%= link_to root_path, :class => 'comp_logo' do %>
+                            <span>
+                            <%= image_tag current_user.company.try(:company_logo_url) %>
+                            <%= current_user.try(:company).try(:name).try(:titleize) %>
+                            </span>
+                          <% end %>
+                          
+                        <% else %>
+                          <a href="/" class="site_title">
+                          <span><%= Setting.first.site_title.titleize %></span></a>
+                        <% end %>
                     </div>
                     <div class="clearfix"></div>
                     

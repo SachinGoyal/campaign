@@ -39,6 +39,17 @@ body.nav-sm .navbar.nav_title a i {
     background-position: 6px 7px;
 }
 
+.comp_logo i {
+    border: 1px solid #EAEAEA;
+    padding: 5px 6px;
+    border-radius: 50%;
+}
+.comp_logo span {
+    background-repeat:no-repeat;
+    padding: 10px 50px;
+    background-position: 6px 7px;
+}
+
 body.nav-sm .main_container .top_nav {
     padding: 0 !important;
     display: block;
@@ -800,6 +811,26 @@ li.current-page a {
 
 .site_title:hover,
 .site_title:focus {
+    text-decoration: none
+}
+
+.comp_logo {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 400;
+    font-size: 22px;
+    width: 100%;
+    color: #ECF0F1 !important;
+    margin-left: -45px !important;
+    line-height: 59px;
+    display: block;
+    height: 55px;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.comp_logo:hover,
+.comp_logo:focus {
     text-decoration: none
 }
 

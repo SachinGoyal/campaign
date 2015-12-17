@@ -2,20 +2,21 @@
 #
 # Table name: companies
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  free_emails :integer
-#  status      :boolean
-#  created_by  :integer
-#  updated_by  :integer
-#  deleted_at  :datetime
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  subdomain   :string
+#  id           :integer          not null, primary key
+#  name         :string
+#  free_emails  :integer
+#  status       :boolean
+#  created_by   :integer
+#  updated_by   :integer
+#  deleted_at   :datetime
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  subdomain    :string
+#  company_logo :string
 #
 
 class Company < ActiveRecord::Base
-  
+  mount_uploader :company_logo, AvatarUploader
   acts_as_paranoid  # Soft Delete
 
 
