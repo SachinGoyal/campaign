@@ -158,7 +158,7 @@ class Contact < ActiveRecord::Base
       profile = Profile.find(options[:profile_id])
       extra_fields = profile.contacts.last.extra_fields.keys
       column_names = ["email","status"] 
-      column_names_csv = ["Email", "Status"] + extra_fields + ["Date"]
+      column_names_csv = ["email", "status"] + extra_fields + ["Date"]
       CSV.generate() do |csv|
         csv << column_names_csv
         profile.contacts.each do |contact|
