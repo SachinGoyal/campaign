@@ -1,68 +1,70 @@
-<script type="text/javascript">
-  
-  $(function () { 
-    $('#container').highcharts({
-        chart: {
-            type: 'column',
+<% if @data.present? %>
+    <script type="text/javascript">
+      
+      $(function () { 
+        $('#container').highcharts({
+            chart: {
+                type: 'column',
 
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        title: {
-            text: "<%= t('activerecord.models.newsletter') %>"
-        },
-
-        credits: {
-          enabled: false
-        },
-
-        xAxis: {
-            categories: 
-        ["<%= t('activerecord.attributes.email_service.opens_total') %>",
-        "<%= t('activerecord.attributes.email_service.unique_opens') %>",
-        "<%= t('activerecord.attributes.email_service.clicks_total')%>",
-        "<%= t('activerecord.attributes.email_service.unique_clicks')%>",
-        "<%= t('activerecord.attributes.email_service.unique_subscriber_clicks')%>",
-        "<%= t('activerecord.attributes.email_service.hard_bounces')%>",
-        "<%= t('activerecord.attributes.email_service.soft_bounces')%>",
-        "<%= t('activerecord.attributes.email_service.unsubscribed')%>",
-        "<%= t('activerecord.attributes.email_service.forwards_count')%>",
-        "<%= t('activerecord.attributes.email_service.forwards_opens')%>",
-        "<%= t('activerecord.attributes.email_service.emails_sent')%>",
-        "<%= t('activerecord.attributes.email_service.abuse_reports')%>"]
-        },
-        yAxis: {
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
             title: {
-                text: "<%= t('frontend.campaign.newsletter_sent') %>"
-            }
-        },
-        series: [
-           {
-            showInLegend: false,  
-            name: "<%= t('activerecord.models.newsletter') %>",
-            data: $('#container').data('report'),
-            color: '#1ABB9C',
-            pointWidth: 35
+                text: "<%= t('activerecord.models.newsletter') %>"
+            },
 
-        },
-        ]
+            credits: {
+              enabled: false
+            },
+
+            xAxis: {
+                categories: 
+            ["<%= t('activerecord.attributes.email_service.opens_total') %>",
+            "<%= t('activerecord.attributes.email_service.unique_opens') %>",
+            "<%= t('activerecord.attributes.email_service.clicks_total')%>",
+            "<%= t('activerecord.attributes.email_service.unique_clicks')%>",
+            "<%= t('activerecord.attributes.email_service.unique_subscriber_clicks')%>",
+            "<%= t('activerecord.attributes.email_service.hard_bounces')%>",
+            "<%= t('activerecord.attributes.email_service.soft_bounces')%>",
+            "<%= t('activerecord.attributes.email_service.unsubscribed')%>",
+            "<%= t('activerecord.attributes.email_service.forwards_count')%>",
+            "<%= t('activerecord.attributes.email_service.forwards_opens')%>",
+            "<%= t('activerecord.attributes.email_service.emails_sent')%>",
+            "<%= t('activerecord.attributes.email_service.abuse_reports')%>"]
+            },
+            yAxis: {
+                title: {
+                    text: "<%= t('frontend.campaign.newsletter_sent') %>"
+                }
+            },
+            series: [
+               {
+                showInLegend: false,  
+                name: "<%= t('activerecord.models.newsletter') %>",
+                data: $('#container').data('report'),
+                color: '#1ABB9C',
+                pointWidth: 35
+
+            },
+            ]
+        });
     });
-});
 
 
-</script>
+    </script>
+<% end %>
 
 
 <%= form_tag(reports_campaigns_path, {:method => :get}) do %>
