@@ -32,55 +32,20 @@ class CampaignsController < ApplicationController
   end
 
   def reports
-    
-   # @campaigns =Campaign.active
-    if params[:report].present?
-      campaign_id = params[:report][:campaign_id]
-      newsletter_id = params[:report][:newsletter_id]
-      columns = ['opens_total','unique_opens','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'emails_sent', 'abuse_reports']
-      if newsletter_id.present? 
-        newsletter = Newsletter.find(newsletter_id)
-        if newsletter.email_service.present?
-          email_stat = newsletter.email_service.get_stats
-          email_stat = email_stat.attributes.extract!(*columns).values
-          email_stat.map! { |x| x || 0 }
-        end
-      else
-        if campaign_id.present?
-          array = []
-          campaign = Campaign.find(campaign_id)
-          campaign.newsletters.each do |newsletter|
-            if newsletter.email_service.present?
-              email_stat = newsletter.email_service.get_stats
-              email_stat = email_stat.attributes.extract!(*columns).values
-              email_stat.map! { |x| x || 0 }
-              array << email_stat
-            end
-          end
-          email_stat = array.transpose.map {|x| x.reduce(:+)}
-        end
-      end
-      @data = email_stat
-    end
-#    @data = [32,34,43,43,35,23,12,54,45,54,34,32 ]
-    @campaign = Campaign.first
-  end
-
-  def stats
     @campaigns = Campaign.all
     @newsletter = Newsletter.find(params[:newsletter_id]) if params[:newsletter_id] and !params[:newsletter_id].blank?
-    if params[:campaign_id] and !params[:campaign].blank?
+    if params[:campaign_id] and !params[:campaign_id].blank?
       @campaign = Campaign.find(params[:campaign_id])
     end
     if @newsletter
       @campaign = @newsletter.campaign
     end
 
-    if @newsletter 
       columns = ['opens_total','unique_opens','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'emails_sent', 'abuse_reports']
       if @newsletter
-        if @newsletter.email_service.present?
-          email_stat = @newsletter.email_service.get_stats
+        es = @newsletter.email_service
+        if es.present?
+          email_stat = es.get_stats
           email_stat = email_stat.attributes.extract!(*columns).values
           email_stat.map! { |x| x || 0 }
         end
@@ -88,8 +53,9 @@ class CampaignsController < ApplicationController
         if @campaign
           array = []        
           @campaign.newsletters.each do |newsletter|
-            if newsletter.email_service.present?
-              email_stat = newsletter.email_service.get_stats
+            es = newsletter.email_service
+            if es.present?
+              email_stat = es.get_stats
               email_stat = email_stat.attributes.extract!(*columns).values
               email_stat.map! { |x| x || 0 }
               array << email_stat
@@ -99,7 +65,42 @@ class CampaignsController < ApplicationController
         end
       end
       @data = email_stat
+  end
+
+  def stats
+    @campaigns = Campaign.all
+    @newsletter = Newsletter.find(params[:newsletter_id]) if params[:newsletter_id] and !params[:newsletter_id].blank?
+    if params[:campaign_id] and !params[:campaign_id].blank?
+      @campaign = Campaign.find(params[:campaign_id])
     end
+    if @newsletter
+      @campaign = @newsletter.campaign
+    end
+
+      columns = ['opens_total','unique_opens','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'emails_sent', 'abuse_reports']
+      if @newsletter
+        es = @newsletter.email_service
+        if es.present?
+          email_stat = es.get_stats
+          email_stat = email_stat.attributes.extract!(*columns).values
+          email_stat.map! { |x| x || 0 }
+        end
+      else
+        if @campaign
+          array = []        
+          @campaign.newsletters.each do |newsletter|
+            es = newsletter.email_service
+            if es.present?
+              email_stat = es.get_stats
+              email_stat = email_stat.attributes.extract!(*columns).values
+              email_stat.map! { |x| x || 0 }
+              array << email_stat
+            end
+          end
+          email_stat = array.transpose.map {|x| x.reduce(:+)}
+        end
+      end
+      @data = email_stat
   end
 
   def select_newsletter

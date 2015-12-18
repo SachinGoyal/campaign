@@ -150,7 +150,7 @@
       </div><!-- row -->
     </div><!--  custom-container -->
 
-<% if can? :update, Newsletter %>    
+<% if (can? :update, Newsletter) and !@newsletter.sent? %>    
   <%= link_to t('buttons.edit'), edit_newsletter_path(@newsletter) %> |
 <% end %>
 <%= link_to t('buttons.back'), newsletters_path %>

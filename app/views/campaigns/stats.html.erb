@@ -69,9 +69,6 @@
                 }]
             });
             
-
-
-
             Highcharts.setOptions({
                 colors: ['#1ABB9C', '#e8ebeb']
             });
@@ -95,7 +92,10 @@
 
         <div class="col-xs-5" id='campaign-newsletter'>
         <% if @newsletter %>
-            <%= select_tag :newsletter_id, options_from_collection_for_select(@newsletter.campaign.newsletters, "id", "name", @newsletter.id), {:prompt => t('frontend.campaign.select_newsletter'), :class => 'form-control required'} %>
+            <%= select_tag :newsletter_id, options_from_collection_for_select(@newsletter.campaign.newsletters.sent, "id", "name", @newsletter.id), {:prompt => t('frontend.campaign.select_newsletter'), :class => 'form-control required'} %>
+        <% elsif @campaign %>
+            <%= select_tag :newsletter_id, options_from_collection_for_select(@campaign.newsletters.sent, "id", "name"), {:prompt => t('frontend.campaign.select_newsletter'), :class => 'form-control required'} %>
+
         <% else %>
             <%= select_tag :newsletter_id, '', {:prompt => t('frontend.campaign.select_newsletter'), :class => 'form-control required'} %>
         <% end %>
