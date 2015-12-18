@@ -17,7 +17,14 @@
                 <%= @profile.name%>
               </div>
             </div>
-
+            <% if @profile.description.present? %>
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.profile.description') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @profile.description %>
+                </div>
+              </div>
+            <% end %>  
 
             <div class="form-group form-group-sm">
               <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.profile.status') %></label>

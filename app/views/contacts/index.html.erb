@@ -38,8 +38,11 @@
           <div class="row">
             <div class="col-sm-3 text-right margin-top"><strong><%= t('activerecord.attributes.contact.status') %></strong></div>
             <div class="col-sm-9">
-              <%= f.select :status_eq, options_for_select([["Enabled" , 1],["Disabled", 0]]), { include_blank: 'Select Status' },:class => 'form-control' %>
-
+              <% if params[:q] and params[:q][:status_eq] %>            
+                <%= f.select :status_eq, options_for_select([["Enabled" , 1],["Disabled", 0]], params[:q][:status_eq].to_i), { include_blank: 'Select Status' },:class => 'form-control' %>
+              <% else %>
+                <%= f.select :status_eq, options_for_select([["Enabled" , 1],["Disabled", 0]]), { include_blank: 'Select Status' },:class => 'form-control' %>
+              <% end %>  
             </div>
           </div>
           <div class="vheight"></div>

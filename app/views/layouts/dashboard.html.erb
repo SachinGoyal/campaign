@@ -71,7 +71,8 @@
                             <h3>&nbsp; </h3>
                             <ul class="nav side-menu">
                                 <% if can? :read, Campaign %>
-                                  <li class="<%= "current-page" if params[:controller] == "campaigns" %>"><%= link_to campaigns_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "campaigns" and !(params[:action] == 'stats' or params[:action] == 'reports')%>">
+                                  <%= link_to campaigns_path do %>
                                      <i class="fa fa-bullhorn"></i>
                                     <span><%= t("menu.campaign")%></span>
                                   <% end %></li>
@@ -122,27 +123,36 @@
                                 <% end %>
 
                                 <% if can? :read, User %>
-                                  <li class="<%= "current-page" if params[:controller] == "users" %>"><%= link_to users_path do %>
+                                  <li class="<%= "current-page" if params[:controller] == "users" %>">
+                                  <%= link_to users_path do %>
                                      <i class="fa fa-user"></i>
                                     <span><%= t("menu.user")%></span>
                                   <% end %></li>
                                 <% end %>
 
                                 <% if can? :read, Campaign %>
-                                  <li><%= link_to stats_campaigns_path(newsletter_id: nil),  method: :get do %>
+                                  
+                                 <li class="<%= "current-page" if params[:controller] == "campaigns" and params[:action] == 'stats' %>">
+                                  <%= link_to stats_campaigns_path do %>
                                      <i class="fa fa-line-chart"></i>
                                     <span><%= t("menu.stat")%></span>
-                                  <% end %></li>
-                                  <li><%= link_to reports_campaigns_path do %>
-                                     <i class="fa fa-pie-chart"></i>
-                                    <span><%= t("menu.report")%></span>
-                                  <% end %></li>
+                                  <% end %>
+                                 </li>
+                                
+                                  <li class="<%= "current-page" if params[:controller] == "campaigns" and params[:action] == 'reports' %>">
+                                    <%= link_to reports_campaigns_path do %>
+                                       <i class="fa fa-pie-chart"></i>
+                                      <span><%= t("menu.report")%></span>
+                                    <% end %>
+                                  </li>
+                                <% end %>
 
-                                  <li><%= link_to setting_path(Setting.first) do %>
+                                <li><%= link_to setting_path(Setting.first) do %>
                                      <i class="fa fa-cog"></i>
                                     <span><%= t("menu.setting")%></span>
-                                  <% end %></li>
-                                <% end %>
+                                  <% end %>
+                                </li>
+
                             </ul>
                         </div>
                      </div>
