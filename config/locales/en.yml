@@ -16,7 +16,7 @@ en:
           c_password: "Password Confirmation"
           change_password: "Change Password"
         new:
-          enter_email: "Enter your email address12"
+          enter_email: "Enter your email address"
           send: "Send"
       mailer:
         confirmation_instruction:
@@ -424,6 +424,8 @@ en:
       name: "Name"
       create: "Create Role"
       update: "Update Role"
+      action: 
+        destroy: "Delete"
       placeholder:
     attribute: 
       list: "Attribute List"
