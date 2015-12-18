@@ -32,9 +32,10 @@ class Template < ActiveRecord::Base
 
   # validation
   validates :name, presence: true, length: { in: 2..250}
-  validates_presence_of :content
   validates_uniqueness_to_tenant :name
   validates_inclusion_of :status, in: [true, false]
+  validate :content_check
+
   # validation
 
   #callback
@@ -85,3 +86,11 @@ class Template < ActiveRecord::Base
     end
   end
 end
+  
+
+  def content_check
+    val = '<p><br></p>'
+    if content == val or content.blank?
+      errors.add(:content, "can't be blank")
+    end
+  end
