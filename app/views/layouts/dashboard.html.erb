@@ -127,7 +127,9 @@
                                     <span><%= t("menu.user")%></span>
                                   <% end %></li>
                                 <% end %>
-                                 <li><%= link_to stats_campaigns_path(newsletter_id: nil),  method: :get do %>
+
+                                <% if can? :read, Campaign %>
+                                  <li><%= link_to stats_campaigns_path(newsletter_id: nil),  method: :get do %>
                                      <i class="fa fa-line-chart"></i>
                                     <span><%= t("menu.stat")%></span>
                                   <% end %></li>
@@ -140,6 +142,7 @@
                                      <i class="fa fa-cog"></i>
                                     <span><%= t("menu.setting")%></span>
                                   <% end %></li>
+                                <% end %>
                             </ul>
                         </div>
                      </div>
