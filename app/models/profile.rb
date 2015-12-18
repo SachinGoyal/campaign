@@ -38,7 +38,6 @@ class Profile < ActiveRecord::Base
   before_destroy :check_contacts
   before_destroy :used_in_unsent_newsletter
   before_update :used_in_unsent_newsletter, if: :status_changed?
-  after_update :update_contact_extra_fields
   #callback
 
   #relation
@@ -47,6 +46,8 @@ class Profile < ActiveRecord::Base
   has_many :newsletter_emails
   has_many :newsletters, :through => :newsletter_emails
   #relation
+
+  after_update :update_contact_extra_fields
 
   accepts_nested_attributes_for :extra_fields,
     :allow_destroy => true,
@@ -68,26 +69,19 @@ class Profile < ActiveRecord::Base
   end
 
   def update_contact_extra_fields
-    profile_field = extra_fields.map(&:field_name)
+    profile_fields = extra_fields.map(&:field_name)
     if contacts.any? #&& contacts.first.extra_fields.any?
-      contact_field = contacts.first.extra_fields.keys 
-      profile_field.each do |field|
-        if !contact_field.include?(:field)
-          contacts.each do |contact|
-            contact.extra_fields[field] = ""
-            contact.save
-          end
+      contact_fields = contacts.first.extra_fields.try(:keys) || []      
+      fields_to_be_added = profile_fields - contact_fields
+      fields_to_be_deleted = contact_fields - profile_fields
+      contacts.each do |contact|
+        contact.extra_fields = {} if !contact.extra_fields
+        fields_to_be_added.each do |fld|
+          contact.extra_fields[fld] = ""
         end
+        contact.extra_fields.except!(*fields_to_be_deleted)
+        contact.save
       end
-
-      contact_field.each do |field|
-        if !profile_field.include?(:field)
-          contacts.each do |contact|
-            contact.extra_fields.delete(field)
-            contact.save
-          end
-        end
-      end 
     end
   end
 
