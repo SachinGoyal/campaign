@@ -6,7 +6,7 @@ class NewsletterEmailsController < ApplicationController
 
     if params[:type] == "unsubscribe"
         contact = Contact.where(email: params[:data][:email]).first
-        contact.destroy
+        contact.update_attributes(:status => false)
     end
 
    render status: 200, json: {:ok => "ok"}.to_json
