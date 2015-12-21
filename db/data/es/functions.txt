@@ -30,7 +30,4 @@ contact; read; contact
 contact; create; contact
 contact; update; contact
 contact;  destroy; contact
-setting; read; setting
-setting; create; setting
-setting; update; setting
-setting;  destroy; setting
+
