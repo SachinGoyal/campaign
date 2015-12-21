@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource #cancan
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :check_deactivation, only: [:update]
   #filter
 
   # GET /profiles
@@ -72,10 +73,6 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
-    if params[:profile][:status] and ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:profile][:status]) != @profile.status and @profile.newsletter_emails.count > 0
-      return redirect_to edit_profile_path(@profile), notice: t('activerecord.errors.models.profile.attributes.base.newsletters_exist')
-    end
-
     respond_to do |format|
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:profile)) }
@@ -116,12 +113,23 @@ class ProfilesController < ApplicationController
     end
 
     def updateable_messages(action)
+
       case action
         when 'Delete'
-          t("controller.shared.flash.edit_all.notice.delete_all", model: pick_model_from_locale(:profile))
+          t("controller.profile.delete_all", model: pick_model_from_locale(:profile))
+        when 'Disable'
+          t("controller.profile.disable_all", model: pick_model_from_locale(:profile))
         else
           t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:profile))
       end
+    end
 
+    def check_deactivation
+      if params[:profile] and params[:profile][:status]
+        profile_status_bool = ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:profile][:status])
+        if profile_status_bool == false and profile_status_bool != @profile.status and @profile.newsletter_emails.count > 0
+          return redirect_to edit_profile_path(@profile), notice: t('activerecord.errors.models.profile.attributes.base.newsletters_exist')
+        end
+      end
     end
 end

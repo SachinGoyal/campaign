@@ -44,17 +44,17 @@ class TemplatesController < ApplicationController
   end
 
   def copy
-    begin
-      template = Template.find(params[:template_id]).dup
-      template.name = template.name + '_copy'
-      template.save
+    
+    template = Template.find(params[:template_id]).dup
+    template.name = "#{template.name}_#{Time.zone.now.strftime("%d/%m/%y, %H:%M:%S")}" #'_copy'
+    if  template.save
       respond_to do |format|
         format.html { redirect_to templates_url, notice: t("controller.template.copy.success") }
         format.json { head :no_content }
       end
-    rescue 
+    else
       respond_to do |format|
-        format.html { redirect_to templates_url, notice: t("controller.template.copy.error") }
+        format.html { redirect_to templates_url, notice: template.errors.full_messages.join(", ") }
         format.json { head :no_content }
       end
     end

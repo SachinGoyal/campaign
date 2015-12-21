@@ -37,7 +37,7 @@ class Profile < ActiveRecord::Base
   #callback
   before_destroy :check_contacts
   before_destroy :used_in_unsent_newsletter
-  before_update :used_in_unsent_newsletter, if: :status_changed?
+  before_update :used_in_unsent_newsletter_update
   #callback
 
   #relation
@@ -53,6 +53,12 @@ class Profile < ActiveRecord::Base
     :allow_destroy => true,
     :reject_if     => :all_blank
 
+  def used_in_unsent_newsletter_update
+    if status_changed? and !status and newsletter_emails.count > 0
+      errors.add(:base, :newsletters_exist)
+      return false
+    end
+  end
 
   def used_in_unsent_newsletter
     if newsletter_emails.count > 0

@@ -40,7 +40,7 @@ class Template < ActiveRecord::Base
 
   #callback
   before_destroy :check_newsletter
-  before_update :check_newsletter
+  # before_update :check_newsletter
   #callback
 
   #association
