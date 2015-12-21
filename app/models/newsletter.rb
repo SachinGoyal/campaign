@@ -63,6 +63,7 @@ class Newsletter < ActiveRecord::Base
   #callback
   before_update :mark_children_for_removal
   before_save :format_scheduled_at
+  before_destroy :check_sent
   #callback
 
   #association
@@ -77,7 +78,6 @@ class Newsletter < ActiveRecord::Base
   #association
 
   after_create :create_campaign
-  before_destroy :check_sent
 
   def create_campaign
     begin
