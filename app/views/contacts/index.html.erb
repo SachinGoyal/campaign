@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-sm-3 text-right margin-top"><strong><%= t('activerecord.attributes.contact.profile_id') %></strong></div>
             <div class="col-sm-9">
-              <%= f.collection_select :profile_id_eq, Profile.all, :id, :name, { prompt: t('frontend.contact.select_profile') }, {class: "form-control"}%>
+              <%= f.collection_select :profile_id_eq, Profile.all, :id, :name, { include_blank: t('frontend.contact.select_profile') }, {class: "form-control"}%>
             </div>
           </div>
           <div class="vheight"></div>
