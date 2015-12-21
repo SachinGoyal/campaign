@@ -32,7 +32,7 @@ class Template < ActiveRecord::Base
 
   # validation
   validates :name, presence: true, length: { in: 2..250}
-  validates_presence_of :content
+  validates :content, presence: true
   validates_uniqueness_to_tenant :name
   validates_inclusion_of :status, in: [true, false]
   # validation
