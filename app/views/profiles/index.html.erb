@@ -7,11 +7,11 @@
   <div class="col-xs-5 form-group pull-right top_search">
   <% if can? :read, Profile %>
     <%= render 'shared/keyword_search', :condition => :name_cont %>
-    <div class="advance-search">
-      <%= link_to search_profiles_path do %>
+    <!-- <div class="advance-search">
+      <%#= link_to search_profiles_path do %>
        <i class="fa fa-dot-circle-o"></i>
-      <% end %>
-    </div> 
+      <%# end %>
+    </div>  -->
   <% end %>  
   <% if can? :create, Profile %>
     <div class="custom-add"><%= link_to new_profile_path, :title => t('frontend.shared.new', :model_name => pick_model_from_locale(:profile)) do %><i class="fa fa-plus"></i><% end %></div>
