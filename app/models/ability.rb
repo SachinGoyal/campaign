@@ -5,6 +5,7 @@ class Ability
    # user ||= User.new # guest user (not logged in)
   
     alias_action :search, to: :read
+    alias_action :copy, to: :create
     alias_action :edit_all, to: :update
     alias_action :delete, to: :destroy
     alias_action :send_now, to: :create
