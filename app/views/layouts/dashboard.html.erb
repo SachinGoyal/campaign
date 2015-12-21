@@ -130,25 +130,29 @@
                                   <% end %></li>
                                 <% end %>
 
+                                <% if can? :read, Campaign %>
+                                  
                                  <li class="<%= "current-page" if params[:controller] == "campaigns" and params[:action] == 'stats' %>">
                                   <%= link_to stats_campaigns_path do %>
                                      <i class="fa fa-line-chart"></i>
                                     <span><%= t("menu.stat")%></span>
                                   <% end %>
-                                </li>
+                                 </li>
                                 
-                                <li class="<%= "current-page" if params[:controller] == "campaigns" and params[:action] == 'reports' %>">
-                                  <%= link_to reports_campaigns_path do %>
-                                     <i class="fa fa-pie-chart"></i>
-                                    <span><%= t("menu.report")%></span>
-                                  <% end %>
-                                </li>
+                                  <li class="<%= "current-page" if params[:controller] == "campaigns" and params[:action] == 'reports' %>">
+                                    <%= link_to reports_campaigns_path do %>
+                                       <i class="fa fa-pie-chart"></i>
+                                      <span><%= t("menu.report")%></span>
+                                    <% end %>
+                                  </li>
+                                <% end %>
 
                                 <li><%= link_to setting_path(Setting.first) do %>
                                      <i class="fa fa-cog"></i>
                                     <span><%= t("menu.setting")%></span>
                                   <% end %>
                                 </li>
+
                             </ul>
                         </div>
                      </div>

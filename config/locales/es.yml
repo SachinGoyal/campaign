@@ -381,6 +381,9 @@ es:
       update: "Modifier "
       name: "Nombre"
       actions: "Acciones"
+      action: 
+        destroy: "Delete"
+
     user:
       username: "Usuario"
       password: "Contraseña"
