@@ -473,6 +473,7 @@ en:
       select_file: "Select File"
       select_profile: "Select Profile"
       select_action: "Please select action"
+      select_way: "Please select way"
       placeholder:
         csv_file: "Upload only CSV files"
 

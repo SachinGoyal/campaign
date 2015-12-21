@@ -67,15 +67,16 @@
  
           <div class="upload-pic">
             <div class="input-group">
-              <input type="text" readonly="" placeholder=<%= t('words.images_only') %> >              
-              <span class="input-group-btn">
+              <!-- <input type="text" readonly="" placeholder=<%#= t('words.images_only') %> >               -->
+              <%= f.file_field :image, :placeholder => t('words.images_only') %>
+              <!-- <span class="input-group-btn">
                 <span class="btn btn-primary btn-file upload-btn custom-dark-btn">
-                  <%= f.file_field :image, :class => 'form-control fa fa-upload hide_input' %> <%= t('buttons.upload') %>
-                  <%= f.hidden_field :image_cache %>
+                   <%#= t('buttons.upload') %>
+                  <%#= f.hidden_field :image_cache %>
 
                   <!-- <i class="fa fa-upload"></i>Upload Picture<input type="file" multiple=""> -->
-                </span>
-              </span>
+<!--                 </span>
+              </span> -->
             </div>
           </div>
           <div class="clearfix"></div>

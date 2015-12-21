@@ -22,20 +22,18 @@
 <div class="custom-container">
     <div class="row">
       <div class="col-md-12">
-        <h4 class="text-center">Role: <%= @role.name %></h4>
+        <h4 class="text-center"><%= t('menu.role') %>: <%= @role.name %></h4>
         <% if @role.company %>
-          <h4 class="text-center"><%= t('attributes.role.company_id')%> <%= @role.company.name %>
+          <h4 class="text-center"><%= t('attributes.role.company_id')%>: <%= @role.company.name %>
         </h4>
         <% end %>
       </div><!-- col-md-12 -->
-      
-
     </div>
 <!-- row -->
       <% @functions.each do |group, actions|%>
         <div class="row">
           <div class="col-md-8 col-xs-offset-2 bottom-spacer">
-            <div class="custom-panel-heading"><%= group.capitalize%></div>
+            <div class="custom-panel-heading"><%= group.capitalize %></div>
               <div class="custom-panel-body custom-lisiting-style">
                 <ul>
                   <% actions.each do |action|%>
