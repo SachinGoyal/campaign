@@ -146,12 +146,14 @@
                                     <% end %>
                                   </li>
                                 <% end %>
-
-                                <li><%= link_to setting_path(Setting.first) do %>
-                                     <i class="fa fa-cog"></i>
-                                    <span><%= t("menu.setting")%></span>
-                                  <% end %>
-                                </li>
+ 
+                                <% if current_user.is_admin?  %>
+                                  <li><%= link_to setting_path(Setting.first) do %>
+                                       <i class="fa fa-cog"></i>
+                                      <span><%= t("menu.setting")%></span>
+                                    <% end %>
+                                  </li>
+                                <% end %>
 
                             </ul>
                         </div>
