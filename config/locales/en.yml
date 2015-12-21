@@ -125,7 +125,7 @@ en:
     cancel: "Cancel"
     signin: "Sign in"
     forgotpass: "Forgot your password?"
-
+    import: "Import"
   asearch:
     addcondition: "Add Condition"
     add_condition_group: "Add Conditions Group"
@@ -520,6 +520,6 @@ en:
     newsletter:
       updateable_messages: "Newsletter deleted successfully. Newsletter which have already been sent could not be deleted."
       check_editable_or_deletable: "Cannot edit/delete the newsletter since it has already been sent."
-      send_successful: "Newletter has been successfully sent."
+      send_successful: "Newsletter has been successfully sent."
       not_imported: "Contacts not imported yet. Please wait for sometime before sending the newsletter."  
       add_contacts: "Please add contacts to newsletter"

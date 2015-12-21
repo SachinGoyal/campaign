@@ -1,11 +1,10 @@
 class SettingsController < ApplicationController 
 
   layout 'dashboard' # set custom layout 
-
+  before_action :authenticate_user!
   load_and_authorize_resource #cancan
 
   #filter
-  before_action :authenticate_user!
   before_action :set_setting, only: [:show, :edit, :update]
   #filter
 
