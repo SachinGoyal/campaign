@@ -3,7 +3,7 @@
     <ul>
       
       <%if element.name != 'Newsletter'%>
-        <% if can? :update, element %>
+        <% if can? :update, element or ( element.class.name == Template and can? :update, ActiveRecord::Base::Template) %>
           <li>
   	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_enable') } do %>
   	        <i class="fa fa-pencil profile-enable"></i>
@@ -20,7 +20,7 @@
         <% end %>
       <% end %>
 
-      <% if can? :delete, element %>
+      <% if can? :delete, element or ( element.class.name == Template and can? :update, ActiveRecord::Base::Template) %>
       	<li>
 	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_delete_all') } do %>
 	        <span class="custom-delete"><i class="fa fa-plus"></i></span>
