@@ -113,9 +113,12 @@ class ProfilesController < ApplicationController
     end
 
     def updateable_messages(action)
+
       case action
         when 'Delete'
-          t("controller.shared.flash.edit_all.notice.delete_all", model: pick_model_from_locale(:profile))
+          t("controller.profile.delete_all", model: pick_model_from_locale(:profile))
+        when 'Disable'
+          t("controller.profile.disable_all", model: pick_model_from_locale(:profile))
         else
           t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:profile))
       end
