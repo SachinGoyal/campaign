@@ -104,7 +104,6 @@ class CampaignsController < ApplicationController
   end
 
   def select_newsletter
-    # binding.pry
     # begin
       @newsletters = Campaign.find(params[:campaign_id]).try(:newsletters).try(:sent)
     # rescue
@@ -167,7 +166,7 @@ class CampaignsController < ApplicationController
   def destroy
     if @campaign.destroy
       respond_to do |format|
-        format.html { redirect_to campaigns_url, notice: t("controller.shared.notice.destroy.notice",model: pick_model_from_locale(:campaign)) }
+        format.html { redirect_to campaigns_url, notice: t("controller.shared.flash.destroy.notice",model: pick_model_from_locale(:campaign)) }
         format.json { head :no_content }
       end
     else

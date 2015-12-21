@@ -121,10 +121,10 @@
                   <div class="form-group custom-from-group">
                     <div class="col-xs-2">&nbsp;</div>              
                     <div class="col-xs-10 text-left">
-                      <%= f.submit 'Submit',  :class =>  'btn btn-primary btn-file custom-dark-btn' %>
-                      <%# if can? :read, Contact %>
-                        <%#= link_to t(:cancel), contacts_path,class: 'calender-margin' %>
-                      <%# end %>
+                      <%= f.submit t('links.import'),  :class =>  'btn btn-primary btn-file custom-dark-btn' %>
+                      <% if can? :read, Contact %>
+                        <%= link_to t(:cancel), contacts_path,class: 'calender-margin' %>
+                      <% end %>
                     </div>
                   </div>             
                 </div>
@@ -134,7 +134,7 @@
               <% end %>
             </div>         
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-file custom-dark-btn" data-dismiss="modal"><%= t('buttons.close') %></button>
+          <!-- <button type="button" class="btn btn-primary btn-file custom-dark-btn" data-dismiss="modal"><%= t('buttons.close') %></button> -->
         </div>
       </div>
     </div>
