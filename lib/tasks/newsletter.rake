@@ -8,10 +8,15 @@ namespace :newsletter do
       puts Time.zone.now
       puts newsletter.scheduled_at.between?(Time.zone.now - 5.minutes, Time.zone.now)
     	if newsletter.scheduled_at.between?(Time.zone.now - 5.minutes, Time.zone.now) and email_service.members_in_list.count > 0
-        puts "here"
-    		newsletter.email_service.update_content
-    		newsletter.email_service.send_campaign
-    		newsletter.mark_sent
+    		es = newsletter.email_service
+        es.update_content
+        checklist_fail = es.checklist_campaign
+        if checklist_fail
+          ApplicationMailer.mailchimp_error(es.creator, "#{checklist_fail}").deliver_now
+        else
+          es.send_campaign
+          newsletter.mark_sent
+        end  
   		end
   	end
   end	
