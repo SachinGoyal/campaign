@@ -31,9 +31,12 @@
     </div>
 
   <% end %>
-
-
 </div><!-- greyBg -->
+<%- model_class = Newsletter -%>
+<div class="page-header">
+  <h2><%= t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
+</div>
+
 <%= render 'results', :locals => {:newsletters => @newsletters }%>
 <%= render 'shared/bootam_action_link', element: Newsletter %>
 <%= will_paginate @newsletters , renderer: BootstrapPagination::Rails %>

@@ -10,7 +10,7 @@
 
 <div class='import_export_links import_export_links_margin'>
   <% if can? :create, Contact %>
-  <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-file-excel-o"></i><%= t('buttons.import') %></a>
+    <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-file-excel-o"></i> &nbsp;<%= t('buttons.import') %></a>
   <% end %>
 
   <%# if can? :read, Contact %>
