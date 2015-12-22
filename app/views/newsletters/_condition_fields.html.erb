@@ -1,5 +1,5 @@
 <div class="field">
-  <div class="row form-group">
+  <div class="row form-group" style="position:relative;">
     <div class="search_attribute">
       <div class="col-xs-3">      
         <%= f.attribute_fields do |a| %>
@@ -19,11 +19,10 @@
       </div>  
    
     <div class="box_select inline col-xs-4" style="display:none"></div>     
-    <div class="col-xs-1 text-center delete-icon">
+    <div class="cond_cross">
       <%= link_to "#", {:class => 'remove_fields'} do %>
-        <i class="fa fa-plus"></i>
+        <i class="fa fa-times"></i>
       <% end %>    
-    </div>
-    
+    </div>    
   </div>
 </div>

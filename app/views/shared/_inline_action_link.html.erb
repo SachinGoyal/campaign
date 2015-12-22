@@ -74,7 +74,7 @@
         <% elsif element.class.name == 'Template' %>
          <% if !element.newsletters.any? %>
             <li class="custom-delete">
-              <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete') } do %>
+              <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete', :model_name => pick_model_from_locale(element.class.name.downcase.to_sym).downcase) } do %>
                 <i class="fa fa-plus"></i>
                 <span> <%= t("frontend.shared.delete_link") %></span>
               <% end %>
@@ -98,7 +98,7 @@
           <% end %>  
         <% else %>
           <li class="custom-delete">
-            <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete') } do %>
+            <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete', :model_name => pick_model_from_locale(element.class.name.downcase.to_sym).downcase) } do %>
               <i class="fa fa-plus"></i>
               <span><%= t("frontend.shared.delete_link") %></span>
             <% end %>
