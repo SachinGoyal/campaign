@@ -44,9 +44,18 @@ class TemplatesController < ApplicationController
   end
 
   def copy
-    
+    binding.pry
     template = Template.find(params[:template_id]).dup
-    template.name = "#{template.name}_#{Time.zone.now.strftime("%d/%m/%y, %H:%M:%S")}" #'_copy'
+    # if template.name.split('_').length > 1
+    #   name = template.name.split('_')
+    #   if name.last.length == 14 
+    #     name.pop
+    #   end
+    #   name = name.join('_')
+    # else
+    #   name = template.name
+    # end
+    template.name = "#{template.name}_#{(Time.zone.now.to_f * 10).to_i.to_s}" #'_copy'
     if  template.save
       respond_to do |format|
         format.html { redirect_to templates_url, notice: t("controller.template.copy.success") }
