@@ -327,12 +327,12 @@ en:
       edit_link: "Edit"
       view_link: "View"
       delete_link: "Delete"
-      confirm_delete: "Are you sure?"
+      confirm_delete: "Are you sure you want to delete the %{model_name}?"
       enable: "Enable"
       disable: "Disable"
       confirm_enable: "Are you sure you want to enable records?"
       confirm_disable: "Are you sure you want to disable records?"
-      confirm_delete_all: "Are you sure you want to delete records?"
+      confirm_delete_all: "Are you sure you want to delete %{model_name}?"
       addcondition: "Add Conditions Group"
       enabled: "Enabled"
       disabled: "Disabled"
@@ -506,7 +506,7 @@ en:
           notice: "%{model} deleted successfully."
         edit_all:
           notice:
-            delete_all: "%{model} deleted successfully. %{model} with associated data could not be deleted."
+            delete_all: "%{model} deleted successfully. %{model} which is associated is not deleted."
             update_all: "%{model} updated successfully."
       copy:
         success: "Template copied successfully."

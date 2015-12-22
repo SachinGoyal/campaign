@@ -6971,3 +6971,12 @@ margin-left: 10px;
     text-decoration: underline;
     color: #39455b;
 }
+.group_cross{
+    padding:10px 10px 10px 0;
+}
+.cond_cross{
+    position: absolute;
+    right: 39px;
+    top: 4px;
+    font-size: 20px;
+}
