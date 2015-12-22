@@ -348,7 +348,7 @@ en:
       multiselect: "Press Ctrl for multiselect"
       reports: "Reports"
       stats: "Stats"
-      csv: "should be CSV"
+      csv: "format incorrect"
       gender:
         male: "Male"
         female: "Female"
@@ -497,20 +497,20 @@ en:
       flash:
         delete_all: "%{model} deleted successfully"
         create:
-          notice: "%{model} was successfully created."
+          notice: "%{model} created successfully."
           status: "unprocessable_entity"
         update:
-          notice: "%{model} was successfully updated."
+          notice: "%{model} updated successfully."
           status: "unprocessable_entity"
         destroy:
-          notice: "%{model} was successfully deleted."
+          notice: "%{model} deleted successfully."
         edit_all:
           notice:
             delete_all: "%{model} deleted successfully. %{model} with associated data could not be deleted."
             update_all: "%{model} updated successfully."
     template:
       copy:
-        success: "Template was successfully copied."
+        success: "Template copied successfully."
         error: "Operation failed"
     contact:
       import: "Contacts imported."
