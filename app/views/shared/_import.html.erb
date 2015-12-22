@@ -55,7 +55,7 @@
               <div class="form-group form-group-sm">
                 <label class="col-sm-3 col-xs-3 control-label"><%= t('frontend.import.select_profile') %></label>
                 <div class="col-xs-6">
-                  <%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), {}, { :class => 'form-control profile-sample' } %>
+                  <%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), { include_blank: t('frontend.contact.select_profile') }, { :class => 'form-control profile-sample' } %>
                 </div>
 
                 <div class="col-xs-3">&nbsp;</div>
@@ -70,7 +70,7 @@
                     <input type="text" class="form-control" readonly="" placeholder = <%= t('frontend.import.placeholder.csv_file') %>>
                     <span class="input-group-btn">
                       <span class="btn btn-primary btn-file custom-dark-btn">
-                        <%= f.file_field :file %> <%= t('buttons.browse') %>
+                        <%= f.file_field :file ,  :accept => 'text/xls'%> <%= t('buttons.browse') %>
                       </span>                          
                     </span>
 

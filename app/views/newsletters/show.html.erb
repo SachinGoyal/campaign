@@ -48,7 +48,7 @@
 
             <% unless @newsletter.profiles.blank? %>            
               <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label"><%= t('frontend.newsletter.profiles') %></label>
+                <label class="col-sm-4 col-xs-12 control-label"><%#= t('frontend.newsletter.profiles') %>Profile(s)</label>
                 <div class="col-sm-8 col-xs-12 default-without-input">
                   <%= @newsletter.profiles.map(&:name).join(", ") %>
                 </div>
