@@ -219,7 +219,7 @@ body.nav-sm .menu_section h3 {
 body.nav-md .container.body .col-md-3.left_col {
     width: 230px;
     padding: 0;
-    position: fixed;
+    position: absolute;
     display: flex;
     z-index:111111;
 }
@@ -6937,4 +6937,37 @@ margin-left: 10px;
     width: 92% !important;
     height: 30px;
     margin-bottom: 9px;
+}
+
+
+.datepicker.dropdown-menu {
+  cursor: pointer;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10000 !important;
+  float: left;
+  display: none;
+  min-width: 160px;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  color: #333333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.428571429;
+}
+.reset_pass2{
+    text-decoration: underline;
+    color: #39455b;
 }
