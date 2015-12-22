@@ -6,7 +6,7 @@ class ContactImport
   include ActiveModel::Conversion
   include ActiveModel::Validations
   FILE_TYPES = ['text/csv', 'application/csv', 
-    'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel"]#, "application/octet-stream"]
+    'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel", "application/octet-stream"]
   attr_accessor :file, :profile_id, :action, :way
   validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
   # validates_format_of :file, :with => %r{\.csv\z}i, :message => "file must be in .csv format"
@@ -43,66 +43,70 @@ class ContactImport
   end
 
   def save
-    if action.blank?
-        errors[:action] = I18n.t("frontend.import.select_action")
-        return false      
-    end
+    begin
+      if action.blank?
+          errors[:action] = I18n.t("frontend.import.select_action")
+          return false      
+      end
 
-    case self.action
-      when "Import"
-        if valid?
-          profile = Profile.find(profile_id.to_i)
-          contacts = imported_contacts(profile).compact
-          if imported_contacts(profile).compact.any? && imported_contacts(profile).compact.map(&:valid?).all?
-            successfull_records = []
-            imported_contacts(profile).compact.each_with_index.each do |contact, index|
-              if contact.new_record?
-                if profile.contacts.create(contact.attributes)
-                  successfull_records << contact
+      case self.action
+        when "Import"
+          if valid?
+            profile = Profile.find(profile_id.to_i)
+            contacts = imported_contacts(profile).compact
+            if imported_contacts(profile).compact.any? && imported_contacts(profile).compact.map(&:valid?).all?
+              successfull_records = []
+              imported_contacts(profile).compact.each_with_index.each do |contact, index|
+                if contact.new_record?
+                  if profile.contacts.create(contact.attributes)
+                    successfull_records << contact
+                  else
+                    contact.errors.full_messages.each do |message|
+                      errors.add :base, "Row #{index+2}: #{message}"
+                    end
+                  end
                 else
-                  contact.errors.full_messages.each do |message|
-                    errors.add :base, "Row #{index+2}: #{message}"
+                  if contact.save
+                    successfull_records << contact
+                  else
+                    contact.errors.full_messages.each do |message|
+                      errors.add :base, "Row #{index+2}: #{message}"
+                    end
                   end
                 end
-              else
-                if contact.save
-                  successfull_records << contact
-                else
+              end  
+              imported_contacts(profile) == successfull_records            
+            else
+              if imported_contacts(profile).compact.any?
+                imported_contacts(profile).each_with_index do |contact, index|
                   contact.errors.full_messages.each do |message|
                     errors.add :base, "Row #{index+2}: #{message}"
                   end
                 end
               end
-            end                          
-            imported_contacts(profile) == successfull_records            
-          else
-            if imported_contacts(profile).compact.any?
-              imported_contacts(profile).each_with_index do |contact, index|
-                contact.errors.full_messages.each do |message|
-                  errors.add :base, "Row #{index+2}: #{message}"
-                end
-              end
+              false
             end
+          else
             false
           end
-        else
-          false
-        end
-      when "Unsubscribe"
-        if valid?
-          profile = Profile.find(profile_id.to_i)
-          emails = profile.contacts.map(&:email)
-          spreadsheet = open_spreadsheet
-          header = spreadsheet.row(1)
-          (2..spreadsheet.last_row).to_a.map do |i|
-            row = Hash[[header, spreadsheet.row(i)].transpose]
-            if emails.include?(row["email"])
-              Contact.find_by_email(row["email"]).destroy
+        when "Unsubscribe"
+          if valid?
+            profile = Profile.find(profile_id.to_i)
+            emails = profile.contacts.map(&:email)
+            spreadsheet = open_spreadsheet
+            header = spreadsheet.row(1)
+            (2..spreadsheet.last_row).to_a.map do |i|
+              row = Hash[[header, spreadsheet.row(i)].transpose]
+              if emails.include?(row["email"])
+                Contact.find_by_email(row["email"]).destroy
+              end
             end
+          else  
+            false
           end
-        else  
-          false
-        end
+      end
+    rescue
+      false
     end
   end
 
@@ -117,9 +121,9 @@ class ContactImport
     (2..spreadsheet.last_row).to_a.map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       case self.way
-
         when "Add"
           contact = Contact.find_by_email(row["email"])
+          errors.add :base, "#{row['email']} already exists" if contact
           contact = contact.present? ? nil : Contact.new
         when "Replace"
           contact = Contact.find_by_email(row["email"])
