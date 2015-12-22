@@ -46,7 +46,7 @@
               <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Action</label> 
               <div class="radio">
                   <label for="radio01" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.enabled') %>
-                  <%= f.radio_button :action ,"Import",class: "radioalign" %>Import</label>
+                  <%= f.radio_button :action ,"Import",class: "radioalign",checked: true %>Import</label>
                   <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
                   <%= f.radio_button :action ,"Unsubscribe",class: "radioalign" %>Unsubscribe</label>
               </div> 
@@ -85,7 +85,7 @@
                 <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Contacts</label> 
                 <div class="radio">
                   <label for="radio01" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.enabled') %>
-                  <%= f.radio_button :way ,"Add",class: "radioalign" %>Add</label>
+                  <%= f.radio_button :way ,"Add",class: "radioalign",checked: true %>Add</label>
                   <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
                   <%= f.radio_button :way ,"Replace",class: "radioalign" %>Replace</label>
                   <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
@@ -98,9 +98,9 @@
 
               <div class="row">
                 <div class="col-xs-12 popup-sample-table">
-                  <div class="row">
+                 <!--  <div class="row">
                     <div class="col-xs-12"><div class="sample-fields-heading"><%= t('words.sample_fields') %></div></div>
-                  </div>
+                  </div> -->
 
             <div class="row">
               <div class="col-xs-12 popup-sample-table">

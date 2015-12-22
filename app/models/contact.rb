@@ -167,7 +167,7 @@ class Contact < ActiveRecord::Base
         csv << column_names_csv
         profile.contacts.each do |contact|
           date = contact.created_at
-          value = contact.extra_fields.values
+          value = contact.extra_fields.try(:values)
           contact = contact.attributes.values_at(*column_names)
           contact[1] = contact[1].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
           contact = contact + value if extra_fields.present?

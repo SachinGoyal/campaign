@@ -32,6 +32,8 @@ class CampaignsController < ApplicationController
   end
 
   def reports
+    @total_emails = 0
+    @emails_sent = 0
     @campaigns = Campaign.all
     @newsletter = Newsletter.find(params[:newsletter_id]) if params[:newsletter_id] and !params[:newsletter_id].blank?
     if params[:campaign_id] and !params[:campaign_id].blank?
@@ -41,33 +43,39 @@ class CampaignsController < ApplicationController
       @campaign = @newsletter.campaign
     end
 
-      columns = ['opens_total','unique_opens','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'emails_sent', 'abuse_reports']
+      columns = ['opens_total','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'abuse_reports','emails_sent']
       if @newsletter
         es = @newsletter.email_service
-        if es.present?
+        if @newsletter.sent?  && es.present? 
           email_stat = es.get_stats
           email_stat = email_stat.attributes.extract!(*columns).values
           email_stat.map! { |x| x || 0 }
+          @total_emails = @newsletter.all_emails_arr.count
+          @emails_sent = email_stat.pop
         end
       else
         if @campaign
           array = []        
           @campaign.newsletters.each do |newsletter|
             es = newsletter.email_service
-            if es.present?
+            if newsletter.sent? && es.present? 
               email_stat = es.get_stats
               email_stat = email_stat.attributes.extract!(*columns).values
               email_stat.map! { |x| x || 0 }
+              @total_emails = newsletter.all_emails_arr.count
               array << email_stat
             end
           end
           email_stat = array.transpose.map {|x| x.reduce(:+)}
+          @emails_sent = email_stat.pop
         end
       end
       @data = email_stat
   end
 
   def stats
+    @total_emails = 0
+    @emails_sent = 0
     @campaigns = Campaign.all
     @newsletter = Newsletter.find(params[:newsletter_id]) if params[:newsletter_id] and !params[:newsletter_id].blank?
     if params[:campaign_id] and !params[:campaign_id].blank?
@@ -77,38 +85,38 @@ class CampaignsController < ApplicationController
       @campaign = @newsletter.campaign
     end
 
-      columns = ['opens_total','unique_opens','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'emails_sent', 'abuse_reports']
+      columns = ['opens_total','unique_opens','clicks_total','unique_clicks','unique_subscriber_clicks','hard_bounces','soft_bounces','unsubscribed','forwards_count','forwards_opens', 'abuse_reports','emails_sent']
       if @newsletter
         es = @newsletter.email_service
-        if es.present?
+        if @newsletter.sent?  && es.present? 
           email_stat = es.get_stats
           email_stat = email_stat.attributes.extract!(*columns).values
           email_stat.map! { |x| x || 0 }
+          @total_emails = @newsletter.all_emails_arr.count
+          @emails_sent = email_stat.pop
         end
       else
         if @campaign
           array = []        
           @campaign.newsletters.each do |newsletter|
             es = newsletter.email_service
-            if es.present?
+            if newsletter.sent? && es.present? 
               email_stat = es.get_stats
               email_stat = email_stat.attributes.extract!(*columns).values
               email_stat.map! { |x| x || 0 }
+              @total_emails = newsletter.all_emails_arr.count
               array << email_stat
             end
           end
           email_stat = array.transpose.map {|x| x.reduce(:+)}
+          @emails_sent = email_stat.pop
         end
       end
       @data = email_stat
   end
 
   def select_newsletter
-    # begin
-      @newsletters = Campaign.find(params[:campaign_id]).try(:newsletters).try(:sent)
-    # rescue
-    #   @newsletters = nil
-    # end 
+    @newsletters = Campaign.find(params[:campaign_id]).try(:newsletters).try(:sent)
   end
 
   # GET /campaigns/1
@@ -216,7 +224,6 @@ class CampaignsController < ApplicationController
         t('activerecord.attributes.email_service.unsubscribed'),
         t('activerecord.attributes.email_service.forwards_count'),
         t('activerecord.attributes.email_service.forwards_opens'),
-        t('activerecord.attributes.email_service.emails_sent'),
         t('activerecord.attributes.email_service.abuse_reports')]
     end
 

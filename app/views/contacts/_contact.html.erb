@@ -4,8 +4,8 @@
         <input name="" type="checkbox" value=<%= contact.id %> >
       <% end %>
   </div>
-  <div class="col-md-2"><%= contact.name %>&nbsp;</div>
   <div class="col-md-2 custom-break break_email"><%= contact.email %>&nbsp;</div>
+  <div class="col-md-2"><%= contact.name %>&nbsp;</div>
   <div class="col-md-1 "><%= contact.profile.try(:name) %>&nbsp;</div>
   <div class="col-md-1"><%= display_status(contact) %>&nbsp;</div>
   <div class="col-md-2"><%= format_date(contact, :created_at) %>&nbsp;</div>

@@ -39,7 +39,7 @@
                     series: noBorder
                 }, 
                 title: {
-                    text: "<%=((data * 100).to_f/@data.sum.to_f).round(2) %>%",
+                    text: "<%=((data * 100).to_f/@total_emails.to_f).round(2) %>%",
                     align: 'center',
                     verticalAlign: 'middle',
                     style: {
@@ -52,7 +52,7 @@
                 },
                 series: [{
                     name: 'Browsers',
-                    data: [[<%=@data.sum%>,<%=data%>],[,99.00]],
+                    data: [["Stat", <%= data %>],[,<%= @total_emails - data%>]],
                     innerSize: '80%',
                     showInLegend:false,
                     dataLabels: {
@@ -73,6 +73,64 @@
                 colors: ['#1ABB9C', '#e8ebeb']
             });
             <% end %>
+
+            var chart_completion = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container11',
+                    type: 'pie',
+                    margin: [0,0,0,0],
+                    height: 100,
+                    width: 100
+
+                },
+                tooltip: {
+                    enabled: false,
+                },
+                plotOptions: {
+                    pie: {
+                        slicedOffset: 0,
+                        size: '100%',
+                        dataLabels: {
+                            enabled: false
+                        }
+                    },
+                    series: noBorder
+                }, 
+                title: {
+                    text: "<%=((@emails_sent.to_f * 100).to_f/@total_emails.to_f).round(2) %>%",
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    style: {
+                        fontSize: '9.5px'
+                    }
+                    
+                },      
+                credits: {
+                   enabled: false
+                },
+                series: [{
+                    name: 'Browsers',
+                    data: [['Stat' ,<%=@emails_sent.to_f %>],['', <%=@total_emails.to_f - @emails_sent.to_f%>]],
+                    innerSize: '80%',
+                    showInLegend:false,
+                    dataLabels: {
+                        enabled: false
+                    },
+                    states:{
+                        hover: {
+                            enabled: false
+                        }
+                    },
+                    point : {
+                        
+                    }
+                }]
+            });
+            
+            Highcharts.setOptions({
+                colors: ['#1ABB9C', '#e8ebeb']
+            });
+
           <% end %>
 
     });
@@ -108,6 +166,7 @@
 
   <div class = 'row'>
   <div class="custom-white-spacer">
+
   <% if @data.present? %>
       <% @data.each_with_index do |data , i| %>
             <div class = 'col-sm-2'>
@@ -125,6 +184,20 @@
         </div>
         </div>
       <% end %>
+      <div class = 'col-sm-2'>
+                <div class="row">
+                  <div class = 'stat-heading'><%= t('activerecord.attributes.email_service.emails_sent') %></div>
+                <div class = 'box-bg'>
+                <div class = 'row'>
+                  <div id="container11" style="" class = 'stat-div'></div>
+                </div>
+                <div class = 'row'>
+                  <div class = 'stat-count'>(<%= @emails_sent %>)</div>
+                </div>
+            </div>
+            
+        </div>
+        </div>
   <% end %>
   </div>
 <% end %>
