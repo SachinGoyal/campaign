@@ -508,10 +508,10 @@ en:
           notice:
             delete_all: "%{model} deleted successfully. %{model} with associated data could not be deleted."
             update_all: "%{model} updated successfully."
-    template:
       copy:
         success: "Template copied successfully."
         error: "Operation failed"
+    template:
     contact:
       import: "Contacts imported."
       select_profile: "Please select atleast one"

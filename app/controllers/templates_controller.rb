@@ -44,7 +44,6 @@ class TemplatesController < ApplicationController
   end
 
   def copy
-    binding.pry
     template = Template.find(params[:template_id]).dup
     # if template.name.split('_').length > 1
     #   name = template.name.split('_')
@@ -58,7 +57,7 @@ class TemplatesController < ApplicationController
     template.name = "#{template.name}_#{(Time.zone.now.to_f * 10).to_i.to_s}" #'_copy'
     if  template.save
       respond_to do |format|
-        format.html { redirect_to templates_url, notice: t("controller.template.copy.success") }
+        format.html { redirect_to templates_url, notice: t("controller.shared.copy.success") }
         format.json { head :no_content }
       end
     else
