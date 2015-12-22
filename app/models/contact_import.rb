@@ -6,11 +6,11 @@ class ContactImport
   include ActiveModel::Conversion
   include ActiveModel::Validations
   FILE_TYPES = ['text/csv', 'application/csv', 
-    'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel", "application/octet-stream"]
+    'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel"]#, "application/octet-stream"]
   attr_accessor :file, :profile_id, :action, :way
   validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
   # validates_format_of :file, :with => %r{\.csv\z}i, :message => "file must be in .csv format"
-   # validate :check_file_ext
+  validate :check_file_ext
   validates :profile_id, presence: true
   validates :action, presence: true
   validate :check_way
@@ -18,11 +18,12 @@ class ContactImport
   def check_file_ext
     begin
       if file and !(FILE_TYPES.include?(file.content_type))
-        errors[:file] = I18n.t("frontend.csv")
+        errors[:file] = I18n.t("frontend.shared.csv")
         false
       end
-    rescue
-      true
+    rescue   
+      errors[:file] = "Something was wrong with file"
+      false
     end  
   end
 
@@ -42,7 +43,6 @@ class ContactImport
   end
 
   def save
-    profile = Profile.find(profile_id.to_i)
     if action.blank?
         errors[:action] = I18n.t("frontend.import.select_action")
         return false      
@@ -51,6 +51,7 @@ class ContactImport
     case self.action
       when "Import"
         if valid?
+          profile = Profile.find(profile_id.to_i)
           contacts = imported_contacts(profile).compact
           if imported_contacts(profile).compact.any? && imported_contacts(profile).compact.map(&:valid?).all?
             successfull_records = []
@@ -89,6 +90,7 @@ class ContactImport
         end
       when "Unsubscribe"
         if valid?
+          profile = Profile.find(profile_id.to_i)
           emails = profile.contacts.map(&:email)
           spreadsheet = open_spreadsheet
           header = spreadsheet.row(1)
@@ -140,7 +142,6 @@ class ContactImport
   end
 
   def open_spreadsheet
-
     case File.extname(file.original_filename)
       when ".csv" then Roo::CSV.new(file.path)
       when ".xls" then Roo::Excel.new(file.path)
