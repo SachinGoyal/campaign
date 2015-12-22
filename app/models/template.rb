@@ -22,7 +22,6 @@
 class Template < ActiveRecord::Base
   
   acts_as_paranoid # Soft Delete
-
   acts_as_tenant(:company) #multitenant#multitenant
 
   #scope
@@ -41,7 +40,7 @@ class Template < ActiveRecord::Base
 
   #callback
   before_destroy :check_newsletter
-  # before_update :check_newsletter
+  before_update :check_newsletter_update
   #callback
 
   #association
@@ -85,6 +84,13 @@ class Template < ActiveRecord::Base
       errors.add(:base, :associated_newsletter)
       return false
     end
+  end
+
+  def check_newsletter_update
+    if newsletters.any? and status_changed? and !status
+      errors.add(:base, :associated_newsletter)
+      return false
+    end    
   end
 end
   

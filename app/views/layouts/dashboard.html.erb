@@ -200,7 +200,7 @@
               <div class='default-top-spacing'>
                 <div class="display_flash">
                   <% flash.each do |key, value| %>
-                    <%= content_tag :div, value, class: "flash alert-#{key} alert" %>
+                    <%= content_tag :div, value.html_safe, class: "flash alert-#{key} alert" %>
                   <% end %>
                 </div>
                 <%= yield %>

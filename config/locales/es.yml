@@ -510,6 +510,7 @@ es:
       copy:
         success: "Plantilla fue copiado con éxito ."
         error: "Operación fallida"
+      disable_all: "Templates successfully disabled. Template with associated newsletters could not disabled"    
     contact:
       import: "Contactos importados ."
       select_profile: "Por favor, seleccione al menos una"

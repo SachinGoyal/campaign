@@ -118,6 +118,31 @@ class EmailService < ActiveRecord::Base
   	end
   end
 
+  def checklist_campaign
+    begin
+      response = HTTParty.post(V2_URL+"2.0/campaigns/ready", 
+                    :body => { 
+                      :apikey => GIBBON_KEY, 
+                      :cid => campaign_id
+                      
+                    }.to_json,
+                    :headers => { 'Content-Type' => 'application/json' })
+      
+      if response.has_key?('is_ready') and !response['is_ready']
+        response_str = "Newsletter is not ready to send. There are following issues. "
+        response['items'].each do |item|
+          response_str += "<p>#{item['heading']} - #{item['details']}</p>".html_safe if item['type'] == "cross-large"
+        end
+        return response_str
+      else
+        return false
+      end
+    rescue Exception => e
+      puts e.message
+      ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
+    end
+  end
+
   def schedule_campaign
     begin
       response = HTTParty.post(V2_URL+"2.0/campaigns/schedule", 
@@ -214,6 +239,7 @@ class EmailService < ActiveRecord::Base
   	gb = gibbon_request
   	begin
       gb.lists(list_id).members.create(body: {email_address: email, status: "subscribed"})
+
   	rescue Gibbon::MailChimpError => e
       puts "We have a problem: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
@@ -252,6 +278,15 @@ class EmailService < ActiveRecord::Base
                       :double_optin => false
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
+      if response["error_count"] and response["error_count"] > 0
+        email_body = "There was an error in importing "
+
+        response['errors'].each do |err|
+          email_body += "<p>#{err['email']['email']} - #{err['error']}</p>"
+        end
+
+        ApplicationMailer.mailchimp_error(creator, email_body).deliver_now
+      end
     rescue Exception => e
       puts "We have a problem: #{e.message}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
@@ -385,7 +420,7 @@ class EmailService < ActiveRecord::Base
                       :html => newsletter.template.content
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
-      self.template_id = response["template_id"]
+      self.template_id = response["template_id"] if response.has_key?('template_id')
       save
     rescue Exception => e
       puts e.message
@@ -405,7 +440,7 @@ class EmailService < ActiveRecord::Base
                       :template_id => template_id                    
                       }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
-      self.template_id = response["template_id"]
+      self.template_id = response["template_id"] if response.has_key?('template_id')
       save
     rescue Exception => e
       puts e.message

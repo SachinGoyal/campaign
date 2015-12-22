@@ -4,7 +4,7 @@
 
 <p>
 	<%= t('mailer.mailchimp.error') %>
-	<div><%= @message %></div>
+	<div><%= @message.html_safe %></div>
 	<%= t('mailer.mailchimp.action') %>
 </p>
 

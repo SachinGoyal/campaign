@@ -124,6 +124,11 @@ class NewslettersController < ApplicationController
     end 
       
     email_service = @newsletter.email_service
+    checklist_fail = email_service.checklist_campaign
+    if checklist_fail
+      flash[:notice] = checklist_fail
+      return redirect_to newsletters_path 
+    end
     if email_service.members_in_list.count < 0
       return redirect_to newsletters_path, notice: t('controller.newsletter.not_imported')
     end

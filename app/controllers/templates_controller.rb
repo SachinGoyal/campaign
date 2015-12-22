@@ -136,8 +136,10 @@ class TemplatesController < ApplicationController
       case action
         when 'Delete'
           t("controller.shared.flash.edit_all.notice.delete_all", model: pick_model_from_locale(:template))
+        when 'Disable'
+          t("controller.profile.disable_all", model: pick_model_from_locale(:profile))
         else
-          t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:template))
+          t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:profile))
       end
 
     end
