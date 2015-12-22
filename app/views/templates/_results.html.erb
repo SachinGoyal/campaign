@@ -13,6 +13,6 @@
   <% else %>
     <h2 class='text-center'><em><%= t('frontend.shared.no_record') %></em></h2>  
   <% end %>
-  <%= render 'shared/bootam_action_link', element: Template %>
+  <%= render 'shared/bootam_action_link', element: ActiveRecord::Base::Template %>
   <%= will_paginate @templates , renderer: BootstrapPagination::Rails%>
 </div>
