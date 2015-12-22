@@ -184,7 +184,7 @@ en:
         template:
           attributes:
             base:
-              associated_newsletter: "Cannot update or delete template. It is associated with a newsletter."
+              associated_newsletter: "Cannot disable or delete template. It has associated newsletter(s)"
         role:
           attributes:
             name: 
@@ -528,3 +528,5 @@ en:
       update: "Profile updated successfully. Profiles used in newsletter cannot be deactivated."
       disable_all: "Profiles successfully disabled. Profile with associated newsletters could not disabled"
       delete_all: "Profiles successfully deleted. Profile with associated newsletters could not deleted"
+    template:
+      disable_all: "Templates successfully disabled. Template with associated newsletters could not disabled"    
