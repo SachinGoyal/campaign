@@ -25,7 +25,7 @@ $(document).ready( function() {
     var sample_fields = function() {
         var profile_id = $('.profile-sample').val();
           if (profile_id == '')
-            alert("Select Profile to upload Contacts");
+            console.log("Select Profile to upload Contacts");
           else {
               $.ajax({
                 method: "POST",
@@ -58,7 +58,6 @@ $(document).ready( function() {
      return a;
     }
      
-    sample_fields();
 
     $(".selected-td ul li a").on('click', function(){
           var url = $(".custom-table").data('bottom-url');
