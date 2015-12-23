@@ -19,7 +19,7 @@ class NewslettersController < ApplicationController
   def search
     @attributes = Hash.new()
 
-    Newsletter.columns_hash.slice('name', 'subject', 'created_at').each do |k,v|
+    Newsletter.columns_hash.slice('name', 'subject', 'created_at', 'from_name', 'reply_email').each do |k,v|
       @attributes[k] = {value: k, type: v.type.to_s, association: nil}
     end
 

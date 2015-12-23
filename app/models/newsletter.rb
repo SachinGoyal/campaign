@@ -167,7 +167,7 @@ class Newsletter < ActiveRecord::Base
 
   def self.ransackable_attributes(auth_object = nil)
     if auth_object == "own"
-      %w(name created_at subject)
+      %w(name created_at subject from_name reply_email)
     else
       %w(name)
     end
