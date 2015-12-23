@@ -162,7 +162,7 @@ class ContactImport
           raise "Unknown file type: #{file.original_filename}"
       end
     rescue
-      errors.add :base, "Incomatable File"
+      errors.add :base, "Incompatible File"
     end
   end
 end
