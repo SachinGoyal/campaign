@@ -90,7 +90,7 @@
         <% elsif element.is_a?(Profile) %>
           <% if !element.newsletter_emails.any? %>
             <li class="custom-delete">
-              <%= link_to element, method: :delete, data: { confirm: t('frontend.company.confirm_delete') } do %>
+              <%= link_to element, method: :delete, data: { confirm: t('frontend.shared.confirm_delete', :model_name => 'profile') } do %>
                 <i class="fa fa-plus"></i>
                 <span><%= t("frontend.shared.delete_link") %></span>
               <% end %>
