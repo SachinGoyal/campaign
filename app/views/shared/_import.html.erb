@@ -142,7 +142,7 @@
   </div>
 
   <script type="text/javascript">
-  // $(document).ready( function() {
+  $(document).ready( function() {
     $('form#new_contact_import').on('submit', function() { 
         $.ajax({
           type: "POST",
@@ -153,5 +153,5 @@
         });
       return false; // prevents normal behaviour
       });
-  // }
+  });
   </script>
