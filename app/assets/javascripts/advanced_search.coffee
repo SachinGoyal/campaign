@@ -47,11 +47,12 @@ class  SearchbyDateType
       else 'No tiene tipo'
 
   selectPredicateDisabled: (attributes_enabled, selected = null) ->
-    @predicate_select.find('option').prop('disabled', true)
+    @predicate_select.html("<option value='eq'>Equal</option><option value='not_eq'>not equal to</option><option value='lt'>less than</option><option value='lteq'>Less than</option><option value='gt'>greater than</option><option value='gteq'>Greater than</option><option value='in'>in</option><option selected='selected' value='cont'>Contains</option><option value='not_cont'>Not contains</option><option value='start'>starts with</option><option value='not_start'>doesn't start with</option><option value='end'>ends with</option><option value='not_end'>doesn't end with</option><option value='date_eq'>date_eq</option><option value='date_not_eq'>date_not_eq</option><option value='date_lt'>date_lt</option><option value='date_lteq'>date_lteq</option><option value='date_gt'>date_gt</option><option value='date_gteq'>date_gteq</option>")
     if @no_load
       if selected then @predicate_select.val(selected) else @predicate_select.val(attributes_enabled[0])
+
     @predicate_select.find('option').each (i) ->
-      this.disabled = false if this.value in attributes_enabled
+      this.remove() unless this.value in attributes_enabled
       return true
 
   renderDropDownBoolean: (name_select_value) ->
