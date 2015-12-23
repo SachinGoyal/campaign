@@ -51,7 +51,7 @@ class CampaignsController < ApplicationController
           email_stat = email_stat.attributes.extract!(*columns).values
           email_stat.map! { |x| x || 0 }
           @total_emails = @newsletter.all_emails_arr.count
-          @emails_sent = email_stat.pop
+#          @emails_sent = email_stat.pop
         end
       else
         if @campaign
@@ -67,7 +67,7 @@ class CampaignsController < ApplicationController
             end
           end
           email_stat = array.transpose.map {|x| x.reduce(:+)}
-          @emails_sent = email_stat.pop
+ #         @emails_sent = email_stat.pop
         end
       end
       @data = email_stat
