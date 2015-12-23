@@ -53,7 +53,11 @@ class NewsletterEmail < ActiveRecord::Base
 		  invalid_emails << email if (email =~ Devise.email_regexp).nil?
 		end
 		unless invalid_emails.empty?
-		  errors[:emails] << invalid_emails.join(", ") + " are invalid"
+		  if invalid_emails.length <= 1
+		    errors[:emails] << (invalid_emails.join(", ") + I18n.t('words.newsletter_email.cs_error.invalid_email'))
+		  else
+		    errors[:emails] << (invalid_emails.join(", ") + I18n.t('words.newsletter_email.cs_error.invalid_emails'))
+	      end
 		end
 	  end		
 	end
