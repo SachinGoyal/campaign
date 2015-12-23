@@ -5,14 +5,14 @@
       <%if element.name != 'Newsletter'%>
         <% if can? :update, element %>
           <li>
-  	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_enable') } do %>
+  	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_enable', :model_name => pick_model_from_locale(element.name.downcase.to_sym).try(:downcase).try(:pluralize,2)) } do %>
   	        <i class="fa fa-pencil profile-enable"></i>
   	        <span><%= t('frontend.shared.enable') %></span>
   	      <% end %>
         	</li>
 
         	<li>
-  	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_disable') } do %>
+  	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_disable',  :model_name => pick_model_from_locale(element.name.downcase.to_sym).try(:downcase).try(:pluralize,2)) } do %>
   	        <i class="fa fa-pencil"></i>
   	        <span><%= t('frontend.shared.disable') %></span>
   	      <% end %>
@@ -22,7 +22,7 @@
 
       <% if can? :delete, element  %>
       	<li>
-	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_delete_all', :model_name => pick_model_from_locale(element.name.downcase.to_sym).try(:downcase).try(:plularize)) } do %>
+	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_delete_all', :model_name => pick_model_from_locale(element.name.downcase.to_sym).try(:downcase).try(:pluralize,2)) } do %>
           
 	        <span class="custom-delete"><i class="fa fa-plus"></i></span>
 	        <span><%= t('frontend.shared.delete_link') %></span>
