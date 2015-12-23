@@ -24,15 +24,15 @@ $(document).ready( function() {
 
     var sample_fields = function() {
         var profile_id = $('.profile-sample').val();
-          if (profile_id == '')
-            console.log("Select Profile to upload Contacts");
-          else {
+          // if (profile_id == '')
+          //   console.log("Select Profile to upload Contacts");
+          // else {
               $.ajax({
                 method: "POST",
                 data: { profile_id: profile_id },
                 url: '/contacts/sample_fields.js'
               })
-          }
+      //    }
     }
 
     var dynamic_field = function() {
