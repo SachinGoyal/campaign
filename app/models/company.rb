@@ -62,8 +62,10 @@ class Company < ActiveRecord::Base
    
 
   #ransack
-  ransacker :created_at do
-    Arel::Nodes::SqlLiteral.new("date(companies.created_at)")
+  def self.load_custom_attributes
+    ransacker :created_at do
+      Arel::Nodes::SqlLiteral.new("date(companies.created_at)")
+    end
   end
   
   def self.ransackable_attributes(auth_object = nil)

@@ -86,9 +86,11 @@ class Contact < ActiveRecord::Base
     
   end
 
-  ransacker :created_at do
-    Arel::Nodes::SqlLiteral.new("date(contacts.created_at)")
-  end
+  # def self.load_custom_attributes
+  #   ransacker :created_at do
+  #     Arel.sql("date(contacts.created_at)")
+  #   end
+  # end
 
   ransacker :first_name do |parent|  
     Arel::Nodes::InfixOperation.new('->', parent.table[:extra_fields], Arel::Nodes.build_quoted('first_name'))

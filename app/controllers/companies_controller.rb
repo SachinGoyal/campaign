@@ -16,6 +16,7 @@ class CompaniesController < ApplicationController
   end
 
   def search
+    Company.load_custom_attributes
     @attributes = Hash.new()
 
     Company.columns_hash.slice('name', 'subdomain', 'created_at', 'status' , 'free_emails').each do |k,v|

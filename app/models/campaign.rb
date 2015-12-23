@@ -57,8 +57,10 @@ class Campaign < ActiveRecord::Base
   #delegate
 
   #ransack
-  ransacker :created_at do
-    Arel::Nodes::SqlLiteral.new("date(campaigns.created_at)")
+  def self.load_custom_attributes
+    ransacker :created_at do
+      Arel::Nodes::SqlLiteral.new("date(campaigns.created_at)")
+    end
   end
   
   def self.ransackable_attributes(auth_object = nil)
