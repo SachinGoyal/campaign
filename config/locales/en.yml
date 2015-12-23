@@ -69,7 +69,7 @@ en:
       true: "Is true"
       false: "Is false"
   buttons:
-    login: "Log in"
+    login: "Login"
     save: "Save"
     send: "Send"
     cancel: "Cancel"
