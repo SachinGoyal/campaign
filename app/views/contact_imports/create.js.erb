@@ -1,5 +1,5 @@
 <%if @contact_import.errors.any? %>	
-	$('#error_explanation').html("<%= j render partial: 'shared/errors_without_title', locals: {model_name: @contact_import } %>");
+	$('#error_disp').html("<%= j render partial: 'shared/errors_without_title', locals: {model_name: @contact_import } %>");
 	$('#results').html("<%= j render partial: 'contacts/results', locals: {contacts: @contacts} %>");
 <% else %>
 	$('#myModal').modal('hide');

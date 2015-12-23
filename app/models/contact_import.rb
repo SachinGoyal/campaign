@@ -7,7 +7,7 @@ class ContactImport
   include ActiveModel::Validations
   FILE_TYPES = ['text/csv', 'application/csv', 
     'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel", "application/octet-stream",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/kset"]
   attr_accessor :file, :profile_id, :action, :way
   validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
   # validates_format_of :file, :with => %r{\.csv\z}i, :message => "file must be in .csv format"
@@ -96,10 +96,16 @@ class ContactImport
             emails = profile.contacts.map(&:email)
             spreadsheet = open_spreadsheet
             header = spreadsheet.row(1)
-            (2..spreadsheet.last_row).to_a.map do |i|
-              row = Hash[[header, spreadsheet.row(i)].transpose]
-              if emails.include?(row["email"])
-                Contact.find_by_email(row["email"]).destroy
+            if emails.empty?
+              errors.add :base, "Selected Profile is empty"
+            else            
+              (2..spreadsheet.last_row).to_a.map do |index|
+                row = Hash[[header, spreadsheet.row(index)].transpose]
+                if emails.include?(row["email"])
+                  Contact.find_by_email(row["email"]).destroy              
+                else
+                  errors.add :base, "Row #{index}: #{row['email']} not found"
+                end
               end
             end
           else  
@@ -139,7 +145,7 @@ class ContactImport
         end
         contact.extra_fields = hash
         contact.email = row["email"]
-        contact.status = row["status"] == 'Enabled' ? true : false 
+        (contact.status = row["status"] == 'Enabled' ? true : false) if row["status"].present?
         contact.profile_id = profile_id
         contact
       end

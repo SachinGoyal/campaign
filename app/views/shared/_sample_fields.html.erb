@@ -1,7 +1,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <th scope="col">Email</th>
 		<% if profile.present? %>
+   		   <th scope="col">Email</th>
 			<% profile.extra_fields.map(&:field_name).each do |field|%>               
 			  <th scope="col"><%= field %></th>
 			<% end %>

@@ -6753,6 +6753,30 @@ a.anchor-block {
     max-height: 150px;
     overflow-y: auto; 
 }
+
+
+#error_disp{
+    color: #A94442;
+    background-color: #F2DEDE;
+    border-color: #EBCCD1;
+    margin-bottom: 10px;
+}
+#error_disp div{
+    padding: 5px;
+}
+#error_disp h2{
+   font-size: 13px;
+}
+#error_disp li{
+    list-style: none; 
+    font-size: 12px;
+    text-align: left;
+}
+#error_disp .error_display{
+    max-height: 150px;
+    overflow-y: auto; 
+}
+
 label.required:after {
     content: " *";
     color: red;

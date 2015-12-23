@@ -9,7 +9,12 @@ class ContactsController < ApplicationController
   #filter
 
   def sample_fields
-    @profile = Profile.find(params[:profile_id])
+    if params[:profile_id].present?
+      @profile = Profile.find(params[:profile_id]) 
+    else
+      @profile = nil
+    end
+
   end
 
   def dynamic_field
