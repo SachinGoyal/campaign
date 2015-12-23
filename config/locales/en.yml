@@ -161,7 +161,9 @@ en:
     metraje: "List Footage"
     plans: "Plans"
     price_list: "Price List"
-
+  errors:
+    messages: 
+      extension_white_list_error: 'You can only upload following files: jpg,jpeg,gif,png'
   activerecord:
     errors:
       messages:
