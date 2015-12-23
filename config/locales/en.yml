@@ -332,6 +332,7 @@ en:
       multi_page_html: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{count}</b> in total"
   frontend:
     shared:
+      setting: "Setting"
       placeholder:
         search: "Enter Keyword"
       edit_link: "Edit"
