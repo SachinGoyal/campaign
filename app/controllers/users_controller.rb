@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def search
+    User.load_custom_attributes
     @attributes = Hash.new()
 
     User.columns_hash.slice('first_name', 'email', 'last_name', 'created_at' , 'username' , 'status').each do |k,v|

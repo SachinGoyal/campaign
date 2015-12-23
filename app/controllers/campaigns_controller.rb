@@ -19,6 +19,7 @@ class CampaignsController < ApplicationController
   end
 
   def search
+    Campaign.load_custom_attributes
     @attributes = Hash.new()
 
     Campaign.columns_hash.slice('name','created_at', 'status').each do |k,v|

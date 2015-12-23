@@ -17,6 +17,7 @@ class NewslettersController < ApplicationController
 
 
   def search
+    Newsletter.load_custom_attributes
     @attributes = Hash.new()
 
     Newsletter.columns_hash.slice('name', 'subject', 'created_at', 'from_name', 'reply_email').each do |k,v|

@@ -161,8 +161,10 @@ class Newsletter < ActiveRecord::Base
     arr.flatten.compact.uniq
   end
 
-  ransacker :created_at do
-    Arel::Nodes::SqlLiteral.new("date(newsletters.created_at)")
+  def self.load_custom_attributes
+    ransacker :created_at do
+      Arel::Nodes::SqlLiteral.new("date(newsletters.created_at)")
+    end
   end
 
   def self.ransackable_attributes(auth_object = nil)

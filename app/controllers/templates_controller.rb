@@ -17,6 +17,7 @@ class TemplatesController < ApplicationController
   end
 
   def search
+    Template.load_custom_attributes
     @attributes = Hash.new()
 
     Template.columns_hash.slice('name', 'content', 'created_at').each do |k,v|

@@ -86,8 +86,10 @@ class User < ActiveRecord::Base
   
 
   #ransack
-  ransacker :created_at do
-    Arel::Nodes::SqlLiteral.new("date(users.created_at)")
+  def self.load_custom_attributes
+    ransacker :created_at do
+      Arel::Nodes::SqlLiteral.new("date(users.created_at)")
+    end
   end
 
   def check_company_admin
