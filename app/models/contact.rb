@@ -163,7 +163,7 @@ class Contact < ActiveRecord::Base
       else
         column_names_csv = ["email", "status"] + ["Date"] 
       end
-      CSV.generate() do |csv|
+      CSV.generate(col_sep: "\t") do |csv|
         csv << column_names_csv
         profile.contacts.each do |contact|
           date = contact.created_at
