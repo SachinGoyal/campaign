@@ -37,7 +37,7 @@
               <div class="custom-panel-body custom-lisiting-style">
                 <ul>
                   <% actions.each do |action|%>
-                      <li><%= action.action.capitalize %></li>
+                      <li><%= t("frontend.role.action.#{action.action}")  %></li>
                   <%end%> 
                   </ul>
               </div>

@@ -434,6 +434,9 @@ en:
       update: "Update Role"
       action: 
         destroy: "Delete"
+        read: "Read"
+        create: "Create"
+        update: "Update"
       placeholder:
     attribute: 
       list: "Attribute List"
