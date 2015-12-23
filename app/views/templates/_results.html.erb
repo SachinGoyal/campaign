@@ -6,7 +6,7 @@
     <div class="col-md-2"><%=sort_link(@q, :created_at)%></div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
-  <% if true %>
+  <% if @templates.present? %>
     <div id="template">
       <%= render @templates %>
     </div>
