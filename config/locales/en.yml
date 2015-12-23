@@ -69,7 +69,7 @@ en:
       true: "Is true"
       false: "Is false"
   buttons:
-    login: "Log in"
+    login: "Login"
     save: "Save"
     send: "Send"
     cancel: "Cancel"
@@ -285,8 +285,8 @@ en:
         image: "Image"
       setting:
         site_title: "Site Title"
-        free_emails: "Free Emails"
-        admin_email: "Admin Email"
+        free_emails: "Total free campaign mails"
+        admin_email: "Admin Email Address"
         admin_footer_content: "Admin Footer Content"
         name: "Name"
         created_at: "Date"
