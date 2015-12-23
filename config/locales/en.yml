@@ -153,8 +153,8 @@ en:
     attribute: Attribute
     company:  Company
     user: User   
-    stat: Stat
-    report: Report  
+    stat: Stats
+    report: Reports
     setting: Setting
 
   submenus:
