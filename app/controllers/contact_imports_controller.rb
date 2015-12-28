@@ -1,4 +1,6 @@
 class ContactImportsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  respond_to :js
   def new
     @contact_import = ContactImport.new
   end
@@ -11,8 +13,10 @@ class ContactImportsController < ApplicationController
     @q.sorts = 'id desc' if @q.sorts.empty?
     @contacts = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
-    
-    render 'create.js.erb'
+    respond_to do |format|
+	format.js
+    end
+    #render 'create.js.erb'
   end
 
   def search

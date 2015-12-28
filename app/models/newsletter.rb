@@ -22,7 +22,6 @@
 #  company_id    :integer
 #  user_id       :integer
 #  scheduled_at  :datetime
-#  all_emails    :string
 #
 # Indexes
 #

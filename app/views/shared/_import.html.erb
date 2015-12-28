@@ -35,7 +35,8 @@
       <div class="modal-body">
         <div class="popup-container">
           <div class="row">
-            <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, data: {type: "script"} do |f| %>
+            <%#= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, html: { 'data-type': 'script'}  do |f| %>
+            <%= form_for ContactImport.new, url: contact_imports_path(:format => "js") , remote: true, multipart: true, html: { 'data-type': 'script'} do |f| %>
               <div id="error_disp">
               <% if @contact_import and @contact_import.errors.any? %>              
                 <%= render 'errors', :locals => {:model_name => @contact_import} %>
@@ -122,7 +123,7 @@
                   <div class="form-group custom-from-group">
                     <div class="col-xs-2">&nbsp;</div>              
                     <div class="col-xs-10 text-left">
-                      <%= f.submit t('links.import'),  :class =>  'btn btn-primary btn-file custom-dark-btn' %>
+                      <%= f.submit t('links.import'),  :class =>  'btn btn-primary btn-file custom-dark-btn'%>
                       <% if can? :read, Contact %>
                         <%= link_to t(:cancel), contacts_path,class: 'calender-margin' %>
                       <% end %>
@@ -140,18 +141,5 @@
       </div>
     </div>
   </div>
-
-  <script type="text/javascript">
-  $(document).ready( function() {
-    $('form#new_contact_import').on('submit', function() { 
-        $.ajax({
-          type: "POST",
-          url: ''+ $(this).attr('action') + '.js',
-          data: new FormData( this ),
-          processData: false,
-          contentType: false
-        });
-      return false; // prevents normal behaviour
-      });
-  });
-  </script>
+  
+   

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require datetimepicker
 //= require bootstrap-datepicker
 //= require summernote

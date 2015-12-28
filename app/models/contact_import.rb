@@ -7,7 +7,7 @@ class ContactImport
   include ActiveModel::Validations
   FILE_TYPES = ['text/csv', 'application/csv', 
     'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel", "application/octet-stream",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/kset"]
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/kset", "application/vnd.xls"]
   attr_accessor :file, :profile_id, :action, :way
   validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
   # validates_format_of :file, :with => %r{\.csv\z}i, :message => "file must be in .csv format"
