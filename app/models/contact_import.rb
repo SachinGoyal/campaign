@@ -44,19 +44,18 @@ class ContactImport
   end
 
   def save
+    successfull_records = []
     begin
       if action.blank?
           errors[:action] = I18n.t("frontend.import.select_action")
           return false      
       end
-
       case self.action
         when "Import"
           if valid?
             profile = Profile.find(profile_id.to_i)
             contacts = imported_contacts(profile).compact
             if imported_contacts(profile).compact.any? && imported_contacts(profile).compact.map(&:valid?).all?
-              successfull_records = []
               imported_contacts(profile).compact.each_with_index.each do |contact, index|
                 if contact.new_record?
                   if profile.contacts.create(contact.attributes)
@@ -114,6 +113,13 @@ class ContactImport
       end
     rescue
       false
+    end
+    if errors.any?
+      if successfull_records.present?
+        successfull_records.each do |record|
+          errors.add :base, "#{record.email} added successfully" 
+        end
+      end
     end
   end
 
