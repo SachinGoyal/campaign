@@ -5,6 +5,14 @@
       $('#error_disp').html('');
       $('#new_contact_import').trigger("reset");
     });
+    $('#contact_import_action_import').click(function() {
+      $('.contacts_label').show();
+      $('.contacts_options').show();
+    });
+    $('#contact_import_action_unsubscribe').click(function() {
+      $('.contacts_label').hide();
+      $('.contacts_options').hide();
+    });
   });
 </script>
 
@@ -83,16 +91,17 @@
                 <div class="clearfix"></div>
               </div>
 
-              
-                <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Contacts</label> 
-                <div class="radio">
+                
+                <label class="col-sm-3 col-xs-3 control-label contacts_label" for="formGroupInputSmall">Contacts</label> 
+                <div class="radio contacts_options">
                   <label for="radio01" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.enabled') %>
                   <%= f.radio_button :way ,"Add",class: "radioalign",checked: true %>Add</label>
                   <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
                   <%= f.radio_button :way ,"Replace",class: "radioalign" %>Replace</label>
                   <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
                   <%= f.radio_button :way ,"Add/Update",class: "radioalign" %>Add / Update</label>
-                </div> </div>
+                </div> 
+                </div>
              
               <div class="row">
 
