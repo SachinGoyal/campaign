@@ -62,6 +62,12 @@ en:
       lteq: "Less than Equal to"
       lt: "Less than"
       eq: "Equal"
+      not_eq: "Not equal to"
+      in: "In"
+      start: 'Starts With'
+      not_start: "Doesn't start with"
+      end: "Ends with"
+      not_end: "Doesn't end with"
       gteq: "Greater than Equal to"
       gt: "Greater than"
       cont: "Contains"
