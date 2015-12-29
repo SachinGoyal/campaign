@@ -52,12 +52,9 @@ class ContactImport
           return false      
         end
         spreadsheet = open_spreadsheet
-        if !(spreadsheet.last_row) 
-          errors[:base] = " Valid Format (.xls / .xlsx) but complete blank file." 
-          return false
-
-        elsif !(spreadsheet.last_row and spreadsheet.last_row > 1) 
-          errors[:base] = "Valid Format (.xls / .xlsx) but Only header is present and no data." 
+       
+          if !(spreadsheet.last_row and spreadsheet.last_row > 1) 
+            errors[:base] = "Invalid file content. Please check file header and content and try again!" 
           return false        
         end
       else
@@ -148,7 +145,6 @@ class ContactImport
       row = Hash[[header, spreadsheet.row(i)].transpose]
       case self.way
         when "Add"
-          binding.pry
           contact = profile.contacts.find_by_email(row["email"])
           errors.add :base, "#{row['email']} already exists" if contact
           contact = contact.present? ? nil : Contact.new
