@@ -1,4 +1,5 @@
-<%if @contact_import.errors.any? %>	
+$('#contact_search').trigger('reset');
+<% if @contact_import.errors.any? %>	
 	$('#error_disp').html("<%= j render partial: 'shared/errors_without_title', locals: {model_name: @contact_import } %>");
 	$('#results').html("<%= j render partial: 'contacts/results', locals: {contacts: @contacts} %>");
 <% else %>
@@ -9,5 +10,9 @@
 		$("#profile_<%= @profile.id %> .contact_count").html(new_contact_count);
 	<% end %>
 	$('#results').html("<%= j render partial: 'contacts/results', locals: {contacts: @contacts} %>");
-	$('.display_flash').html("<div class='flash alert-success alert'>Contacts successfully imported</div>")
+	<% if params[:contact_import][:action] == "Unsubscribe" %>
+		$('.display_flash').html("<div class='flash alert-success alert'>Contacts successfully unsubscribed</div>")
+	<% else %>
+		$('.display_flash').html("<div class='flash alert-success alert'>Contacts successfully imported</div>")
+	<% end %>
 <% end %>
