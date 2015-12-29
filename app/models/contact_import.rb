@@ -93,8 +93,13 @@ class ContactImport
 
               if imported_contacts(profile).compact.any?
                 imported_contacts(profile).each_with_index do |contact, index|
-                  contact.errors.full_messages.each do |message|
-                    errors.add :base, "Row #{index+2}: #{message}"
+                  if contact.valid?
+                    successfull_records << contact
+                    contact.save
+                  else
+                    contact.errors.full_messages.each do |message|
+                      errors.add :base, "Row #{index+2}: #{message}"
+                    end
                   end
                 end
               end
@@ -143,6 +148,7 @@ class ContactImport
       row = Hash[[header, spreadsheet.row(i)].transpose]
       case self.way
         when "Add"
+          binding.pry
           contact = profile.contacts.find_by_email(row["email"])
           errors.add :base, "#{row['email']} already exists" if contact
           contact = contact.present? ? nil : Contact.new
