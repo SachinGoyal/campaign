@@ -42,6 +42,7 @@ en:
 
 
   welcome: "Welcome to Sperant!!"
+  cancel: "Cancel"
   search: "Search"
   dashboard:
     log-out: "Log-Out"
