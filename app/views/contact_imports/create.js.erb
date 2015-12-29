@@ -1,10 +1,11 @@
 $('#contact_search').trigger('reset');
 <% if @contact_import.errors.any? %>	
 	$('#error_disp').html("<%= j render partial: 'shared/errors_without_title', locals: {model_name: @contact_import } %>");
-	$('#results').html("<%= j render partial: 'contacts/results', locals: {contacts: @contacts} %>");
+	$('#contact_import_file').val('');
 <% else %>
+	$('#new_contact_import').trigger("reset");      
+	$('#error_disp').html('');
 	$('#myModal').modal('hide');
-	$('#new_contact_import').trigger("reset");
 	<% if @profile %>
 		var new_contact_count = parseInt($("#profile_<%= @profile.id %> .contact_count").html()) + 1;
 		$("#profile_<%= @profile.id %> .contact_count").html(new_contact_count);
