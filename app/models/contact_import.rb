@@ -55,7 +55,8 @@ class ContactImport
         if !(spreadsheet.last_row) 
           errors[:base] = " Valid Format (.xls / .xlsx) but complete blank file." 
           return false
-        elsif !(spreadsheet.last_row and spreadsheet.last_row > 2) 
+
+        elsif !(spreadsheet.last_row and spreadsheet.last_row > 1) 
           errors[:base] = "Valid Format (.xls / .xlsx) but Only header is present and no data." 
           return false        
         end
