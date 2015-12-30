@@ -36,15 +36,12 @@
               </div>
             </div>
 
-            <%# unless @contact.profiles.empty? %>            
-              <div class="form-group form-group-sm">
-                <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.template_id') %></label>
-                <div class="col-sm-8 col-xs-12 default-without-input">
-                  <%= @newsletter.template.name %>
-                </div>
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.template_id') %></label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @newsletter.template.name %>
               </div>
-            <%# end %>
-
+            </div>
 
             <% unless @newsletter.profiles.blank? %>            
               <div class="form-group form-group-sm">
