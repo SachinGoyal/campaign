@@ -5,7 +5,6 @@ class CampaignsController < ApplicationController
   layout 'dashboard' # set custom layout 
   
   
-  #filter
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
   # before_action :filter_reports, only: [:reports, :stats]
   before_filter :get_translations, only: [:stats]

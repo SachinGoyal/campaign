@@ -39,14 +39,12 @@ class Newsletter < ActiveRecord::Base
   default_scope {order('id DESC')}
   scope :unscheduled, -> { where(:scheduled_at => nil) }
   scope :scheduled, -> { where.not(:scheduled_at => nil) }
-  # scope :sent, -> { where('DATE(send_at) < ?', Time.zone.now)}
   scope :sent, -> { where("send_at < ?", Time.zone.now) }
   scope :unsent, -> { where('send_at > ? OR send_at IS NULL', Time.zone.now)}
   #scope
   
   # validation
   validates_presence_of :campaign_id, :template_id
-
   validates :name, presence: true, length: { in: 2..250 }
   validates :subject, presence: true, length: { in: 2..255 }
   validates :from_name, presence: true, length: { in: 2..150 }
@@ -133,7 +131,6 @@ class Newsletter < ActiveRecord::Base
 
   def editable_or_deletable?
     !sent?
-    # false
   end
 
   #class methods

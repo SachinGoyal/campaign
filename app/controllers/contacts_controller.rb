@@ -4,9 +4,7 @@ class ContactsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource #cancan
 
-  #filter
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
-  #filter
 
   def sample_fields
     if params[:profile_id].present?
@@ -36,9 +34,9 @@ class ContactsController < ApplicationController
       @attributes[k] = {value: k, type: v.type.to_s, association: association[k]}
     end
     
-    Attribute.columns_hash.slice('name').each do |k,v|
-      @attributes["interest_areas_#{k}"] = {value: k, type: v.type.to_s, association: nil}
-    end
+    # Attribute.columns_hash.slice('name').each do |k,v|
+    #   @attributes["interest_areas_#{k}"] = {value: k, type: v.type.to_s, association: nil}
+    # end
     @q  = Contact.search(params[:q])
     @contacts = @q.result.includes(:interest_areas).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    

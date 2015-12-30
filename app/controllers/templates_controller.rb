@@ -46,15 +46,6 @@ class TemplatesController < ApplicationController
 
   def copy
     template = Template.find(params[:template_id]).dup
-    # if template.name.split('_').length > 1
-    #   name = template.name.split('_')
-    #   if name.last.length == 14 
-    #     name.pop
-    #   end
-    #   name = name.join('_')
-    # else
-    #   name = template.name
-    # end
     template.name = "#{template.name}_#{(Time.zone.now.to_f * 10).to_i.to_s}" #'_copy'
     if  template.save
       respond_to do |format|

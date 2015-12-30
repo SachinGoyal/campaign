@@ -99,7 +99,6 @@ class User < ActiveRecord::Base
     # end
     if role.name == SUPERADMIN
       errors.add(:base, :delete_admin)
-      # errors[:base] << "Cannot delete super admin"
       return false
     end
   end
@@ -111,7 +110,6 @@ class User < ActiveRecord::Base
 
   # class function
   class << self
-    
     def edit_all(ids, action)
       action = action.strip.downcase
       ids.reject!(&:empty?)

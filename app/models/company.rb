@@ -19,10 +19,6 @@ class Company < ActiveRecord::Base
   mount_uploader :company_logo, AvatarUploader
   acts_as_paranoid  # Soft Delete
 
-
-  # Company name is used as subdomain
-  # acts_as_universal_and_determines_tenant
-
   #scope
   default_scope {order('id DESC')}
   #scope

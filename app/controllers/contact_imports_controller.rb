@@ -14,9 +14,8 @@ class ContactImportsController < ApplicationController
     @contacts = @q.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
     @q.build_condition    
     respond_to do |format|
-	format.js
+	    format.js
     end
-    #render 'create.js.erb'
   end
 
   def search

@@ -5,9 +5,7 @@ class AttributesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource #cancan
 
-  #filter
   before_action :set_attribute, only: [:show, :edit, :update, :destroy]
-  #filter
   
 
   # GET /attributes
@@ -35,7 +33,7 @@ class AttributesController < ApplicationController
   def edit
   end
 
-  # GET /profiles/edit_all
+  # GET /attributes/edit_all
   def edit_all
     Attribute.edit_all(params[:group_ids], params[:get_action])
     @attributes = Attribute.all.paginate(:page => params[:page], :per_page => 10)

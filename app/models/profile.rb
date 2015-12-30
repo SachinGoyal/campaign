@@ -108,10 +108,6 @@ class Profile < ActiveRecord::Base
   end
   # class methods
 
-  # ransacker :created_at do
-  #   Arel::Nodes::SqlLiteral.new("date(profiles.created_at)")
-  # end
-
   def self.ransackable_attributes(auth_object = nil)
     if auth_object == "own"
       %w(name created_at status)

@@ -19,7 +19,6 @@ class SettingsController < ApplicationController
   def edit
   end
 
-  
 
   # PATCH/PUT /settings/1
   # PATCH/PUT /settings/1.json

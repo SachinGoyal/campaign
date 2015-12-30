@@ -113,7 +113,6 @@ class ProfilesController < ApplicationController
     end
 
     def updateable_messages(action)
-
       case action
         when 'Delete'
           t("controller.profile.delete_all", model: pick_model_from_locale(:profile))

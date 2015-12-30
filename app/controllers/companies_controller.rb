@@ -4,9 +4,7 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :except => [:select_roles] #cancan
 
-  #filter
   before_action :set_company, only: [:show, :edit, :update, :destroy, :select_roles]
-  #filter
 
   # GET /companies
   # GET /companies.json
