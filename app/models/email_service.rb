@@ -72,7 +72,7 @@ class EmailService < ActiveRecord::Base
     gb = gibbon_request
     begin
       body = { template: {
-                  id: 29065,
+                  id: DEFAULT_TEMPLATE_ID,
                   sections: {
                     "std_content00": self.newsletter.template.content
                   }
@@ -130,8 +130,11 @@ class EmailService < ActiveRecord::Base
       
       if response.has_key?('is_ready') and !response['is_ready']
         response_str = "Newsletter is not ready to send. There are following issues. "
+        
         response['items'].each do |item|
-          response_str += "<p>#{item['heading']} - #{item['details']}</p>".html_safe if item['type'] == "cross-large"
+          if !item.blank? and item.is_a?(Hash) and item['type'] == "cross-large" 
+            response_str += "<p>#{item['heading']} - #{item['details']}</p>".html_safe 
+          end 
         end
         return response_str
       else
