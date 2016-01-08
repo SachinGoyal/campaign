@@ -93,5 +93,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "unicorn-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'activerecord-session_store'#, github: 'rails/activerecord-session_store'
 
 
