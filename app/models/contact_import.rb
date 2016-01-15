@@ -23,7 +23,7 @@ class ContactImport
         false
       end
     rescue   
-      errors[:file] = "Something was wrong with file"
+      errors[:file] = I18n.t("frontend.shared.contact_import.error_in_file")
       false
     end  
   end
@@ -54,7 +54,7 @@ class ContactImport
         spreadsheet = open_spreadsheet
        
           if !(spreadsheet.last_row and spreadsheet.last_row > 1) 
-            errors[:base] = "Invalid file content. Please check file header and content and try again!" 
+            errors[:base] = I18n.t("frontend.shared.contact_import.invalid_content") 
           return false        
         end
       else
@@ -108,14 +108,14 @@ class ContactImport
             emails = profile.contacts.map(&:email)
             header = spreadsheet.row(1)
             if emails.empty?
-              errors.add :base, "Selected Profile is empty"
+              errors.add :base, I18n.t("frontend.shared.contact_import.empty_profile")
             else            
               (2..spreadsheet.last_row).to_a.map do |index|
                 row = Hash[[header, spreadsheet.row(index)].transpose]
                 if emails.include?(row["email"])
                   Contact.find_by_email(row["email"]).update_attributes(:status => false)
                 else
-                  errors.add :base, "Row #{index}: #{row['email']} not found"
+                  errors.add :base, "Row #{index}: #{row['email']} #{I18n.t("frontend.shared.contact_import.not_found")}"
                 end
               end
             end
@@ -127,7 +127,7 @@ class ContactImport
     if errors.any?
       if successfull_records.present?
         successfull_records.each do |record|
-          errors.add :base, "#{record.email} added successfully" 
+          errors.add :base, "#{record.email} #{I18n.t("frontend.shared.contact_import.added")}" 
         end
       end
     end
@@ -146,12 +146,12 @@ class ContactImport
       case self.way
         when "Add"
           contact = profile.contacts.find_by_email(row["email"])
-          errors.add :base, "#{row['email']} already exists" if contact
+          errors.add :base, "#{row['email']} #{I18n.t("frontend.shared.contact_import.exist")}" if contact
           contact = contact.present? ? nil : Contact.new
         when "Replace"
           contact = profile.contacts.find_by_email(row["email"])
           unless contact.present?
-            errors.add :base, "Row #{i}: Email  #{row["email"]} not exist "
+            errors.add :base, "Row #{i}: Email  #{row["email"]} #{I18n.t("frontend.shared.contact_import.not_exist")} "
           end
         when "Add/Update"
           contact = profile.contacts.find_by_email(row["email"]) || Contact.new
@@ -181,10 +181,10 @@ class ContactImport
         when ".xls" then Roo::Excel.new(file.path)
         when ".xlsx" then Roo::Excelx.new(file.path)
       else 
-          raise "Unknown file type: #{file.original_filename}"
+          raise "#{I18n.t("frontend.shared.contact_import.unknown_file")}: #{file.original_filename}"
       end
     rescue
-      errors.add :base, "#{file.original_filename} Incompatible File"
+      errors.add :base, "#{file.original_filename} #{I18n.t("frontend.shared.contact_import.incompatible")}"
     end
   end
 end

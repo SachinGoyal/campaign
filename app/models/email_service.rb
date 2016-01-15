@@ -63,7 +63,7 @@ class EmailService < ActiveRecord::Base
   		self.campaign_id = response["id"]
   		save
   	rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
@@ -81,7 +81,7 @@ class EmailService < ActiveRecord::Base
       response = gb.campaigns(campaign_id).content.upsert(body: body)
 
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
@@ -101,7 +101,7 @@ class EmailService < ActiveRecord::Base
                        }
                 })
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
@@ -112,7 +112,7 @@ class EmailService < ActiveRecord::Base
   		response = gb.campaigns(campaign_id).actions.send.create
       true
   	rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
       false
   	end
@@ -129,7 +129,7 @@ class EmailService < ActiveRecord::Base
                     :headers => { 'Content-Type' => 'application/json' })
       
       if response.has_key?('is_ready') and !response['is_ready']
-        response_str = "Newsletter is not ready to send. There are following issues. "
+        response_str = I18n.t('activerecord.attributes.email_service.not_ready')
         
         response['items'].each do |item|
           if !item.blank? and item.is_a?(Hash) and item['type'] == "cross-large" 
@@ -168,7 +168,7 @@ class EmailService < ActiveRecord::Base
     begin
       response = gb.campaigns(campaign_id).delete
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
@@ -201,7 +201,7 @@ class EmailService < ActiveRecord::Base
   		save
   		self.list_id
   	rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
@@ -211,7 +211,7 @@ class EmailService < ActiveRecord::Base
   	begin
   		response = gb.lists.retrieve
   	rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
@@ -221,7 +221,7 @@ class EmailService < ActiveRecord::Base
     begin
       response = gb.lists(list_id).retrieve
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
@@ -232,7 +232,7 @@ class EmailService < ActiveRecord::Base
       response = gb.lists(list_id).members.retrieve
       response["members"]
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
@@ -244,7 +244,7 @@ class EmailService < ActiveRecord::Base
       gb.lists(list_id).members.create(body: {email_address: email, status: "subscribed"})
 
   	rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
@@ -262,7 +262,7 @@ class EmailService < ActiveRecord::Base
   										:operations => email_arr  												
   									}})      
     rescue Gibbon::MailChimpError => e      
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
   end
@@ -282,7 +282,7 @@ class EmailService < ActiveRecord::Base
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
       if response["error_count"] and response["error_count"] > 0
-        email_body = "There was an error in importing "
+        email_body = I18n.t('activerecord.attributes.email_service.error_import')
 
         response['errors'].each do |err|
           email_body += "<p>#{err['email']['email']} - #{err['error']}</p>"
@@ -291,7 +291,7 @@ class EmailService < ActiveRecord::Base
         ApplicationMailer.mailchimp_error(creator, email_body).deliver_now
       end
     rescue Exception => e
-      puts "We have a problem: #{e.message}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
     end
   end
@@ -311,7 +311,7 @@ class EmailService < ActiveRecord::Base
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
     rescue Exception => e
-      puts "We have a problem: #{e.message}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
     end
   end
@@ -321,7 +321,7 @@ class EmailService < ActiveRecord::Base
     begin
       response = gb.lists(list_id).members(Digest::MD5.hexdigest(email)).delete
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
@@ -331,7 +331,7 @@ class EmailService < ActiveRecord::Base
     begin
       response = gb.lists(list_id).clients.retrieve
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
@@ -358,7 +358,7 @@ class EmailService < ActiveRecord::Base
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
     rescue Exception => e
-      puts "We have a problem: #{e.message}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
     end  
   end
@@ -368,7 +368,7 @@ class EmailService < ActiveRecord::Base
     begin
       response = gb.lists(list_id).delete
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
@@ -400,7 +400,7 @@ class EmailService < ActiveRecord::Base
       self
 
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end
@@ -409,7 +409,7 @@ class EmailService < ActiveRecord::Base
     begin
       
     rescue Gibbon::MailChimpError => e
-      puts "We have a problem: #{e.message} - #{e.raw_body}"
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
     end
   end

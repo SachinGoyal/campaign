@@ -52,12 +52,12 @@
             
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Action</label> 
+              <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall"><%= t('frontend.import.action') %></label> 
               <div class="radio">
                   <label for="radio01" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.enabled') %>
-                  <%= f.radio_button :action ,"Import",class: "radioalign",checked: true %>Import</label>
+                  <%= f.radio_button :action ,"Import",class: "radioalign",checked: true %><%= t('frontend.import.import') %></label>
                   <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
-                  <%= f.radio_button :action ,"Unsubscribe",class: "radioalign" %>Unsubscribe</label>
+                  <%= f.radio_button :action ,"Unsubscribe",class: "radioalign" %><%= t('frontend.import.unsubscribe') %></label>
               </div> 
             </div>
             
@@ -72,14 +72,14 @@
               </div>
 
               <div class="form-group form-group-sm">
-                <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select File</label>
+                <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall"><%= t('frontend.import.file') %></label>
                 <div class="col-xs-6">
                   <div class="input-group">
 		   <%= f.file_field :file, :placeholder =>  t('frontend.import.placeholder.csv_file') %>
-                   <!-- <input type="text" class="form-control" readonly="" placeholder = <%= t('frontend.import.placeholder.csv_file') %> value=<%= @contact_import.try(:file).try(:original_filename) %>>
+                   <!-- <input type="text" class="form-control" readonly="" placeholder = <%#= t('frontend.import.placeholder.csv_file') %> value=<%#= @contact_import.try(:file).try(:original_filename) %>>
                     <span class="input-group-btn">
                       <span class="btn btn-primary btn-file custom-dark-btn">
-                        <%#= f.file_field :file ,  :accept => 'text/xls'%> <%= t('buttons.browse') %>
+                        <%#= f.file_field :file ,  :accept => 'text/xls'%> <%#= t('buttons.browse') %>
                       </span>                          
                     </span> -->
 
@@ -91,14 +91,14 @@
               </div>
 
                 
-                <label class="col-sm-3 col-xs-3 control-label contacts_label" for="formGroupInputSmall">Contacts</label> 
+                <label class="col-sm-3 col-xs-3 control-label contacts_label" for="formGroupInputSmall"><%= t('frontend.import.contacts') %></label> 
                 <div class="radio contacts_options">
                   <label for="radio01" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.enabled') %>
-                  <%= f.radio_button :way ,"Add",class: "radioalign",checked: true %>Add</label>
+                  <%= f.radio_button :way ,"Add",class: "radioalign",checked: true %><%= t('frontend.import.add') %></label>
                   <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
-                  <%= f.radio_button :way ,"Replace",class: "radioalign" %>Replace</label>
+                  <%= f.radio_button :way ,"Replace",class: "radioalign" %><%= t('frontend.import.replace') %></label>
                   <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
-                  <%= f.radio_button :way ,"Add/Update",class: "radioalign" %>Add / Update</label>
+                  <%= f.radio_button :way ,"Add/Update",class: "radioalign" %><%= t('frontend.import.add_update') %></label>
                 </div> 
                 </div>
              
@@ -109,7 +109,7 @@
               <div class="row">
                 <div class="col-xs-12 popup-sample-table">
                  <!--  <div class="row">
-                    <div class="col-xs-12"><div class="sample-fields-heading"><%= t('words.sample_fields') %></div></div>
+                    <div class="col-xs-12"><div class="sample-fields-heading"><%#= t('words.sample_fields') %></div></div>
                   </div> -->
 
             <div class="row">
