@@ -28,6 +28,7 @@ module ApplicationHelper
   end
 
   def pick_model_from_locale(model_name)
+     I18n.t('activerecord.errors.models')
      I18n.backend.send(:translations)[I18n.locale][:activerecord][:models][model_name]
   end
 end
