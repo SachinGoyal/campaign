@@ -23,8 +23,9 @@ class Role < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #validation
-  validates :name, presence: true, length: { in: 2..50 }, format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
-                             message: I18n.t('activerecord.errors.models.role.attributes.name.format')}
+  validates :name, presence: true, length: { in: 2..50 }
+  # , format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
+  #                            message: I18n.t('activerecord.errors.models.role.attributes.name.format')}
 
   #validates_uniqueness_to_tenant :name
   validates_uniqueness_of :name, :scope => :company_id  

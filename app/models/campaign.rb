@@ -33,8 +33,8 @@ class Campaign < ActiveRecord::Base
   #validation
   validates :name, uniqueness: true, 
                    presence: true, 
-                   format: { with: /\A[a-zA-Z0-9 ]+\z/, 
-                             message: I18n.t('activerecord.errors.models.campaign.attributes.name.format')},
+                   # format: { with: /\A[a-zA-Z0-9 ]+\z/, 
+                   #           message: I18n.t('activerecord.errors.models.campaign.attributes.name.format')},
                    length: {in: 2..150}
 
   validates :description, presence: true#, 

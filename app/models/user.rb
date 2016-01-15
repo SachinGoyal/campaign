@@ -69,7 +69,8 @@ class User < ActiveRecord::Base
   # devise 
   
   # validation
-  validates :username, presence: true, uniqueness: true, length: { in: 4..50 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, :message => I18n.t('activerecord.errors.models.user.attributes.username.format')}
+  validates :username, presence: true, uniqueness: true, length: { in: 4..50 }
+  # , format: { with: /\A[a-zA-Z0-9 ]+\z/, :message => I18n.t('activerecord.errors.models.user.attributes.username.format')}
   validates :role_id, presence: true
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
   # validation
