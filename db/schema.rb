@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127092414) do
+ActiveRecord::Schema.define(version: 20160224061847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "accesses", force: :cascade do |t|
     t.integer  "role_id",     null: false
@@ -59,18 +60,21 @@ ActiveRecord::Schema.define(version: 20151127092414) do
     t.integer  "created_by"
     t.integer  "updated_by"
     t.datetime "deleted_at"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "subdomain"
+    t.string   "company_logo"
   end
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "company_id"
     t.string   "email"
-    t.boolean  "status",     default: true
+    t.boolean  "status",       default: true
     t.datetime "deleted_at"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.hstore   "extra_fields"
+    t.integer  "profile_id"
   end
 
   add_index "contacts", ["company_id"], name: "index_contacts_on_company_id", using: :btree
@@ -99,9 +103,35 @@ ActiveRecord::Schema.define(version: 20151127092414) do
   add_index "contacts_profiles", ["contact_id"], name: "index_contacts_profiles_on_contact_id", using: :btree
   add_index "contacts_profiles", ["profile_id"], name: "index_contacts_profiles_on_profile_id", using: :btree
 
+  create_table "email_services", force: :cascade do |t|
+    t.integer  "newsletter_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "list_id"
+    t.string   "campaign_id"
+    t.integer  "company_id"
+    t.integer  "opens_total"
+    t.integer  "unique_opens"
+    t.integer  "clicks_total"
+    t.integer  "unique_clicks"
+    t.integer  "unique_subscriber_clicks"
+    t.integer  "hard_bounces"
+    t.integer  "soft_bounces"
+    t.integer  "unsubscribed"
+    t.integer  "forwards_count"
+    t.integer  "forwards_opens"
+    t.integer  "emails_sent"
+    t.integer  "abuse_reports"
+    t.datetime "send_at"
+    t.integer  "template_id"
+    t.datetime "scheduled_at"
+    t.integer  "user_id"
+  end
+
+  add_index "email_services", ["newsletter_id"], name: "index_email_services_on_newsletter_id", using: :btree
+
   create_table "extra_fields", force: :cascade do |t|
     t.string   "field_name"
-    t.string   "field_type"
     t.integer  "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -126,10 +156,11 @@ ActiveRecord::Schema.define(version: 20151127092414) do
     t.integer  "newsletter_id"
     t.integer  "profile_id"
     t.string   "emails"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.boolean  "sample"
     t.boolean  "from_contacts"
+    t.boolean  "sent",          default: false
   end
 
   create_table "newsletters", force: :cascade do |t|
@@ -150,6 +181,8 @@ ActiveRecord::Schema.define(version: 20151127092414) do
     t.datetime "send_at"
     t.string   "auto_response"
     t.integer  "company_id"
+    t.integer  "user_id"
+    t.datetime "scheduled_at"
   end
 
   add_index "newsletters", ["campaign_id"], name: "index_newsletters_on_campaign_id", using: :btree
@@ -161,8 +194,9 @@ ActiveRecord::Schema.define(version: 20151127092414) do
     t.string   "name"
     t.boolean  "status"
     t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
   end
 
   add_index "profiles", ["company_id"], name: "index_profiles_on_company_id", using: :btree
@@ -195,6 +229,16 @@ ActiveRecord::Schema.define(version: 20151127092414) do
 
   add_index "roles", ["company_id"], name: "index_roles_on_company_id", using: :btree
 
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
   create_table "settings", force: :cascade do |t|
     t.string   "site_title"
     t.string   "free_emails"
@@ -211,9 +255,11 @@ ActiveRecord::Schema.define(version: 20151127092414) do
     t.integer  "created_by"
     t.integer  "updated_by"
     t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "company_id"
+    t.json     "template_images"
+    t.integer  "profile_id"
   end
 
   add_index "templates", ["company_id"], name: "index_templates_on_company_id", using: :btree
@@ -270,6 +316,7 @@ ActiveRecord::Schema.define(version: 20151127092414) do
   add_foreign_key "contacts_newsletters", "newsletters"
   add_foreign_key "contacts_profiles", "contacts"
   add_foreign_key "contacts_profiles", "profiles"
+  add_foreign_key "email_services", "newsletters"
   add_foreign_key "newsletters", "campaigns"
   add_foreign_key "newsletters", "companies"
   add_foreign_key "newsletters", "templates"

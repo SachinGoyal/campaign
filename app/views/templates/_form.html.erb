@@ -12,6 +12,13 @@
         </div>
 
         <div class="form-group form-group-sm">
+            <%= f.label :profile_id, :class => "col-sm-3 col-xs-12 control-label"%>      
+            <div class="col-sm-5 col-xs-5">
+              <%= collection_select(:template, :profile_id, Profile.active, :id, :name, {:prompt => t('frontend.template.select_profile')}, {:class => 'form-control'}) %> 
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm">
           <%= f.label :content, t('frontend.template.content'), :class => "col-sm-3 col-xs-3 control-label" %>
           <div class="col-sm-9 col-xs-9">
             <%= f.text_area :content, class: 'summernote' %>

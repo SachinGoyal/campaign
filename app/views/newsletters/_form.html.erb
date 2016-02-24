@@ -33,13 +33,14 @@
                 <%= collection_select(:newsletter, :template_id, @templates, :id, :name, {:prompt => t('frontend.newsletter.select_template')}, {:class => 'form-control'}) %> 
               </div>
             </div>
-
+            <% if false %>
             <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-12 control-label" ><%= t("frontend.newsletter.select_profile") %></label>
               <div class="col-xs-9 custom-checkbox-style" id="profile-custom-select">
                 <%= collection_select(:newsletter, :profile_ids, Profile.active, :id, :name, {:include_blank => t('frontend.shared.multiselect')}, {:multiple => true, :class => 'form-control'}) %>
               </div>
             </div>
+            <% end %>
           
             <div class="form-group form-group-sm">
               <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>

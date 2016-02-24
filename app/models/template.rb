@@ -13,6 +13,7 @@
 #  updated_at      :datetime         not null
 #  company_id      :integer
 #  template_images :json
+#  profile_id      :integer
 #
 # Indexes
 #
@@ -31,6 +32,7 @@ class Template < ActiveRecord::Base
 
   # validation
   validates :name, presence: true, length: { in: 2..250}
+  validates :profile_id, presence: true
   validates :content, presence: true#, length: { in: 2..250}
   validates_uniqueness_to_tenant :name
   validates_inclusion_of :status, in: [true, false]
@@ -45,6 +47,7 @@ class Template < ActiveRecord::Base
 
   #association
   has_many :newsletters
+  belongs_to :profile
   #association
 
   mount_uploaders :template_image, TemplateImageUploader

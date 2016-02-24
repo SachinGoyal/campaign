@@ -57,6 +57,11 @@ class NewslettersController < ApplicationController
     
     respond_to do |format|
       if @newsletter.save
+        if @newsletter.template.present?
+          profile = @newsletter.template.profile
+          @newsletter.profiles = []
+          @newsletter.profiles << profile
+        end
         format.html { redirect_to @newsletter, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:newsletter)) }
         format.json { render :show, status: :created, location: @newsletter }
       else
@@ -82,12 +87,16 @@ class NewslettersController < ApplicationController
     emails_was = @newsletter.all_emails_arr
     respond_to do |format|
       if @newsletter.update(newsletter_params)
+        if @newsletter.template.present?
+          profile = @newsletter.template.profile
+          @newsletter.profiles = []
+          @newsletter.profiles << profile
+        end
         @newsletter.email_service.update_campaign
         @newsletter.email_service.update_content
 
         @newsletter.email_service.delete_members_from_list(emails_was - @newsletter.all_emails_arr)
         @newsletter.email_service.add_members_to_list1(@newsletter.all_emails_arr - emails_was)
-        
         format.html { redirect_to @newsletter, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:newsletter)) }
         format.json { render :show, status: :ok, location: @newsletter }
       else

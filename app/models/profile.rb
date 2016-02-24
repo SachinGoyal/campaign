@@ -41,6 +41,7 @@ class Profile < ActiveRecord::Base
   #callback
 
   #relation
+  has_one :template
   has_many :contacts
   has_many :extra_fields, :inverse_of => :profile
   has_many :newsletter_emails

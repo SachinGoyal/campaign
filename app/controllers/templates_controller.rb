@@ -129,7 +129,7 @@ class TemplatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def template_params
-      params.require(:template).permit(:user_id, :name, :content, :status, :created_by, :updated_by)
+      params.require(:template).permit(:user_id, :name,:profile_id, :content, :status, :created_by, :updated_by)
     end
 
     def updateable_messages(action)
