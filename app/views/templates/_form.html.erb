@@ -20,10 +20,23 @@
 
         <div class="form-group form-group-sm">
           <%= f.label :content, t('frontend.template.content'), :class => "col-sm-3 col-xs-3 control-label" %>
-          <div class="col-sm-9 col-xs-9">
-            <%= f.text_area :content, class: 'summernote' %>
+          <div class="col-sm-6 col-xs-6">
+            <%= f.text_area :content, class: 'summernote',:contenteditable =>"true" %>
           </div>
+
+           <div class="col-sm-3 col-xs-3" style = "background-color: whitesmoke;">
+             <h4 style="background-color: powderblue;">Select variable to substitute in template</h4>
+             <% Profile.active.find_each do |profile|%>
+               <div style="background-color: white;">
+                 <b><%= profile.name.capitalize %><label class="e_specchar" value = *|<%= profile.name %>|* ><%= profile.name.capitalize %></label></b></br>
+                 <%= profile.extra_fields.map(&:field_name).join(' ')%>
+               </div>
+               <div class="clearfix"></div>
+               </br>
+             <% end %>
+           </div>
         </div>
+
 
 
         <div class="form-group form-group-sm field">
@@ -65,3 +78,30 @@
     </div>
   </div><!-- row -->
 </div><!--  custom-container -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+     var selection = '';
+     var cursorPos = '';
+     var oldContent = '';
+     var node = '';
+    $('.note-editable').on('blur',function(){
+      selection = document.getSelection();
+      cursorPos = selection.anchorOffset;
+      oldContent = selection.anchorNode.nodeValue;
+      node = selection.anchorNode;
+      console.log(node);
+    });
+    $('.e_specchar').click(function(){
+      if (typeof selection !== 'undefined') {
+        var toInsert = $(this).attr('value');
+        length = $(this).attr('value').length;
+        var newContent = oldContent.substring(0, cursorPos) + ' ' + toInsert + ' ' + oldContent.substring(cursorPos);
+        node.nodeValue = newContent;
+        oldContent = newContent;
+        cursorPos = cursorPos + length + 1;
+      }
+    });
+
+  });
+</script>

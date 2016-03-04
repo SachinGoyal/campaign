@@ -255,6 +255,7 @@ en:
         scheduled_at: "Scheduled At"
       template:
         name: "Name"
+        profile: "Profile"
         content: "Content"
         status: "Status"
         created_at: "Date"
@@ -436,6 +437,7 @@ en:
       copy: "Copy"
       placeholder:
       advanced_search: "Template-List Advanced Search"
+      select_profile: "Select Profile"
       content: "Template Content"
       name: "Title"
     profile: 
