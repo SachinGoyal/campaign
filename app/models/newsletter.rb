@@ -22,6 +22,7 @@
 #  company_id    :integer
 #  user_id       :integer
 #  scheduled_at  :datetime
+#  all_emails    :string
 #
 # Indexes
 #
@@ -81,7 +82,7 @@ class Newsletter < ActiveRecord::Base
     begin
       es = email_service || create_email_service(:user_id => self.user_id)
       list_id = es.create_list if es 
-      add_response = es.add_members_to_list1(all_emails_arr)
+      add_response = es.add_members_to_list1
       es.add_webhook_for_unsubscribe
       # template_id = es.create_template
       capmaign_id = es.create_campaign #if list_id #and template_id
@@ -90,7 +91,7 @@ class Newsletter < ActiveRecord::Base
       #   es.schedule_campaign
       # end   
     rescue Exception => e
-      ApplicationMailer.mailchimp_error(creator, "Could not connect to mailchimp").deliver_now
+      ApplicationMailer.mailchimp_error(creator, e.message).deliver_now
     end  
   end
 

@@ -71,7 +71,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles, concerns: [:edit_all, :search]
+  resources :profiles, concerns: [:edit_all, :search] do
+    member do
+      get :extra_fields
+    end
+  end
+
   resources :contact_imports
 
   get 'home/index'

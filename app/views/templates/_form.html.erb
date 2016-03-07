@@ -12,10 +12,16 @@
         </div>
 
         <div class="form-group form-group-sm">
-            <%= f.label :profile_id, :class => "col-sm-3 col-xs-12 control-label"%>      
-            <div class="col-sm-5 col-xs-5">
-              <%= collection_select(:template, :profile_id, Profile.active, :id, :name, {:prompt => t('frontend.template.select_profile')}, {:class => 'form-control'}) %> 
-            </div>
+          <%= f.label :profile_id, :class => "col-sm-3 col-xs-12 control-label"%>      
+          <div class="col-sm-5 col-xs-5">
+            <%= collection_select(:template, :profile_id, Profile.active, :id, :name, {:prompt => t('frontend.template.select_profile')}, {:class => 'form-control'}) %> 
+          </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+          <div class="col-sm-3 col-xs-12"></div>
+          <div class="col-sm-5 col-xs-5 small_border" id="extra_fields_display">
+          </div>
         </div>
 
         <div class="form-group form-group-sm">
@@ -23,21 +29,7 @@
           <div class="col-sm-6 col-xs-6">
             <%= f.text_area :content, class: 'summernote',:contenteditable =>"true" %>
           </div>
-
-           <div class="col-sm-3 col-xs-3" style = "background-color: whitesmoke;">
-             <h4 style="background-color: powderblue;">Select variable to substitute in template</h4>
-             <% Profile.active.find_each do |profile|%>
-               <div style="background-color: white;">
-                 <b><%= profile.name.capitalize %><label class="e_specchar" value = *|<%= profile.name %>|* ><%= profile.name.capitalize %></label></b></br>
-                 <%= profile.extra_fields.map(&:field_name).join(' ')%>
-               </div>
-               <div class="clearfix"></div>
-               </br>
-             <% end %>
-           </div>
         </div>
-
-
 
         <div class="form-group form-group-sm field">
           <label class="col-sm-3 col-xs-3 control-label custom-my-label"><%= t('activerecord.attributes.template.status') %></label>
@@ -66,7 +58,7 @@
             <div class="col-xs-4">&nbsp;</div>
                         
             <div class="col-xs-8 text-left">
-              <%= f.submit t('buttons.save') ,:class => 'btn dark-btn-custom'%>
+              <%= f.submit t('buttons.save'), :class => 'btn dark-btn-custom'%>
               <%= link_to t('cancel'), templates_path, class: 'btn custom-link-btn' %>
             </div>
         </div>
@@ -78,30 +70,3 @@
     </div>
   </div><!-- row -->
 </div><!--  custom-container -->
-
-<script type="text/javascript">
-  $(document).ready(function(){
-     var selection = '';
-     var cursorPos = '';
-     var oldContent = '';
-     var node = '';
-    $('.note-editable').on('blur',function(){
-      selection = document.getSelection();
-      cursorPos = selection.anchorOffset;
-      oldContent = selection.anchorNode.nodeValue;
-      node = selection.anchorNode;
-      console.log(node);
-    });
-    $('.e_specchar').click(function(){
-      if (typeof selection !== 'undefined') {
-        var toInsert = $(this).attr('value');
-        length = $(this).attr('value').length;
-        var newContent = oldContent.substring(0, cursorPos) + ' ' + toInsert + ' ' + oldContent.substring(cursorPos);
-        node.nodeValue = newContent;
-        oldContent = newContent;
-        cursorPos = cursorPos + length + 1;
-      }
-    });
-
-  });
-</script>

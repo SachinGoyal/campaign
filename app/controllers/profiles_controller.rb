@@ -4,8 +4,8 @@ class ProfilesController < ApplicationController
   
   #filter
   before_action :authenticate_user!
-  load_and_authorize_resource #cancan
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource except: [:extra_fields] #cancan
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :extra_fields]
   before_action :check_deactivation, only: [:update]
   #filter
 
@@ -94,6 +94,12 @@ class ProfilesController < ApplicationController
       else
         format.html { redirect_to profiles_url, notice: @profile.errors.full_messages.join(", ") }
       end
+    end
+  end
+
+  def extra_fields
+    respond_to do |format|
+      format.html{ render :layout => false }
     end
   end
 

@@ -35,13 +35,17 @@ class EmailService < ActiveRecord::Base
   include Rails.application.routes.url_helpers  
   acts_as_tenant(:company) #multitenant
 
+  #Callbacks
   before_destroy :delete_dependencies
 
+  #Associations
   belongs_to :newsletter
   belongs_to :creator, class_name: "User", foreign_key: :user_id
 
+  #Delegation
   delegate :name, :subject, :reply_email, :from_name, :to => :newsletter
 
+  #Scope
   scope :unsent, -> { where(:send_at => nil) }
 
   def create_campaign
@@ -199,11 +203,26 @@ class EmailService < ActiveRecord::Base
 
   		self.list_id = response["id"]
   		save
+      add_merge_variables
   		self.list_id
   	rescue Gibbon::MailChimpError => e
       puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
   	end
+  end
+
+  def add_merge_variables
+    gb = gibbon_request
+    begin
+      newsletter.template.profile.extra_fields.each do |extra_field|
+        gb.lists(self.list_id).merge_fields.create({
+          body: { name: extra_field.field_name, type: 'text', tag: extra_field.field_name.upcase }
+        })
+      end  
+    rescue Gibbon::MailChimpError => e
+      puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message} - #{e.raw_body}"
+      ApplicationMailer.mailchimp_error(creator, "#{e.message} - #{e.raw_body}").deliver_now
+    end
   end
 
   def self.fetch_lists
@@ -227,7 +246,7 @@ class EmailService < ActiveRecord::Base
   end
 
   def members_in_list
-        gb = gibbon_request
+    gb = gibbon_request
     begin
       response = gb.lists(list_id).members.retrieve
       response["members"]
@@ -267,12 +286,15 @@ class EmailService < ActiveRecord::Base
   	end
   end
 
-  def add_members_to_list1(emails)  
+  def add_members_to_list1
     begin
       emails_arr = []
-      emails.each do |email|
-        emails_arr << {'email' => {'email' => email}, 'email_type' => 'html'}
+      newsletter.template.profile.contacts.active.each do |contact|
+        emails_arr << {'email' => {'email' => contact.email}, 
+                       'merge_vars' => Hash[contact.extra_fields.map {|k,v| [k.upcase, v] }],  
+                       'email_type' => 'html' }
       end
+
       response = HTTParty.post(V2_URL+"2.0/lists/batch-subscribe", 
                     :body => { 
                       :apikey => GIBBON_KEY, 
@@ -283,7 +305,6 @@ class EmailService < ActiveRecord::Base
                     :headers => { 'Content-Type' => 'application/json' } )
       if response["error_count"] and response["error_count"] > 0
         email_body = I18n.t('activerecord.attributes.email_service.error_import')
-
         response['errors'].each do |err|
           email_body += "<p>#{err['email']['email']} - #{err['error']}</p>"
         end

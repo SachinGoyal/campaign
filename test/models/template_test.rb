@@ -13,6 +13,7 @@
 #  updated_at      :datetime         not null
 #  company_id      :integer
 #  template_images :json
+#  profile_id      :integer
 #
 # Indexes
 #

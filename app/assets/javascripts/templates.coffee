@@ -19,3 +19,9 @@ $ ->
       theme: "solarized light"
     onImageUpload: (files, editor, welEditable) ->
       sendFile files[0]
+
+  $('#template_profile_id').change ->
+    $('#extra_fields_display').load("/profiles/" + $(this).val() + "/extra_fields")
+
+
+
