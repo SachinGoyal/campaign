@@ -11,6 +11,7 @@ sendFile = (file, callback) ->
     success: (data) ->
       $(".summernote").summernote "insertImage", data.url
 $ ->
+  $('#extra_fields_display').load("/profiles/" + $("#template_profile_id option:selected").val() + "/extra_fields")
   $(".summernote").summernote
     height: 360
     codemirror:

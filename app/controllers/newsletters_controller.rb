@@ -84,19 +84,41 @@ class NewslettersController < ApplicationController
   end
 
   def update
-    emails_was = @newsletter.all_emails_arr
+    profile_emails_was = @newsletter.newsletter_emails.from_profile.map(&:emails).flatten
+    sample_emails_was  = @newsletter.newsletter_emails.from_sample.map(&:emails).flatten.first
+    contact_emails_was = @newsletter.newsletter_emails.from_contacts.map(&:emails).flatten.first
+
     respond_to do |format|
       if @newsletter.update(newsletter_params)
-        if @newsletter.template.present?
-          profile = @newsletter.template.profile
-          @newsletter.profiles = []
-          @newsletter.profiles << profile
+        if @newsletter.previous_changes.keys.include?("template_id")
+
+          if @newsletter.template.present?
+            profile = @newsletter.template.profile
+            @newsletter.profiles = []
+            @newsletter.profiles << profile
+          end
+          @newsletter.email_service.add_profile_members_to_list
+          @newsletter.email_service.delete_members_from_list(profile_emails_was.first.split(","))
         end
+
+        sample_emails_is = @newsletter.newsletter_emails.from_sample.map(&:emails).flatten.first
+        if sample_emails_is != sample_emails_was
+          @newsletter.email_service.delete_member_from_list(sample_emails_was) if sample_emails_was
+          @newsletter.email_service.add_member_to_list(sample_emails_is) if sample_emails_is
+        end
+        
+        contact_emails_is = @newsletter.newsletter_emails.from_contacts.map(&:emails).flatten.first
+        if contact_emails_is != contact_emails_was
+          @newsletter.email_service.delete_member_from_list(contact_emails_was) if contact_emails_was
+          @newsletter.email_service.add_member_to_list(contact_emails_is) if contact_emails_is
+        end
+        
         @newsletter.email_service.update_campaign
         @newsletter.email_service.update_content
 
-        @newsletter.email_service.delete_members_from_list(emails_was - @newsletter.all_emails_arr)
-        @newsletter.email_service.add_members_to_list1(@newsletter.all_emails_arr - emails_was)
+        # @newsletter.email_service.delete_members_from_list(emails_was - @newsletter.all_emails_arr)
+        # @newsletter.email_service.add_members_to_list1(@newsletter.all_emails_arr - emails_was)
+        
         format.html { redirect_to @newsletter, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:newsletter)) }
         format.json { render :show, status: :ok, location: @newsletter }
       else

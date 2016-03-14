@@ -63,7 +63,6 @@ class EmailService < ActiveRecord::Base
                             }
   									   }
   							})
-  	
   		self.campaign_id = response["id"]
   		save
   	rescue Gibbon::MailChimpError => e
@@ -286,20 +285,13 @@ class EmailService < ActiveRecord::Base
   	end
   end
 
-  def add_members_to_list1
+  def send_bulk_emails_add_request(emails)
     begin
-      emails_arr = []
-      newsletter.template.profile.contacts.active.each do |contact|
-        emails_arr << {'email' => {'email' => contact.email}, 
-                       'merge_vars' => Hash[contact.extra_fields.map {|k,v| [k.upcase, v] }],  
-                       'email_type' => 'html' }
-      end
-
       response = HTTParty.post(V2_URL+"2.0/lists/batch-subscribe", 
                     :body => { 
                       :apikey => GIBBON_KEY, 
                       :id => list_id,
-                      :batch => emails_arr,
+                      :batch => emails,
                       :double_optin => false
                     }.to_json,
                     :headers => { 'Content-Type' => 'application/json' } )
@@ -315,6 +307,34 @@ class EmailService < ActiveRecord::Base
       puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
     end
+  end
+
+  def add_members_to_list1
+    emails_arr = []
+    profile_contacts = newsletter.template.profile.contacts.active
+    profile_contacts.each do |contact|
+      emails_arr << {'email' => {'email' => contact.email}, 
+                     'merge_vars' => contact.extra_fields.present? ? (Hash[contact.extra_fields.map {|k,v| [k.upcase, v] }]) : {},  
+                     'email_type' => 'html' }
+    end
+
+    other_emails = (newsletter.newsletter_emails.from_contacts.map(&:emails) + newsletter.newsletter_emails.from_sample.map(&:emails) ).flatten.uniq - profile_contacts.map(&:email)
+    other_emails.each do |email|
+      emails_arr << {'email' => {'email' => email}, 
+                     'email_type' => 'html' }
+    end
+    send_bulk_emails_add_request(emails_arr)
+  end
+
+  def add_profile_members_to_list
+    emails_arr = []
+    profile_contacts = newsletter.template.profile.contacts.active
+    profile_contacts.each do |contact|
+      emails_arr << {'email' => {'email' => contact.email}, 
+                       'merge_vars' => contact.extra_fields.present? ? (Hash[contact.extra_fields.map {|k,v| [k.upcase, v] }]) : {},  
+                       'email_type' => 'html' }
+    end
+    send_bulk_emails_add_request(emails_arr)
   end
 
   def delete_members_from_list(emails)  

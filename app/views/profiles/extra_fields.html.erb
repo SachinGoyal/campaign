@@ -1,38 +1,21 @@
+<h4>Select variable to substitute in template</h4>
+
 <% if @profile.extra_fields.present? %> 
-  Extra Fields
-  <% @profile.extra_fields.map(&:field_name).each do |field_name| %>
-    <div class="e_specchar" data-value="*|<%= field_name %>|*"><%= field_name %></div>
-  <% end %>
+  <div>
+    <% @profile.extra_fields.map(&:field_name).each do |field_name| %>
+      <div class="e_specchar" data-value="*|<%= field_name %>|*"><%= field_name %></div>
+    <% end %>
+    <div class="e_specchar" data-value="*|email|*">email</div>
+  </div>  
 <% else %>
-  No extra fields
+  <div class="e_specchar" data-value="*|email|*">email</div>
 <% end %>
 
 
 <script type="text/javascript">
   $(document).ready(function(){
-     var selection = '';
-     var cursorPos = '';
-     var oldContent = '';
-     var node = '';
-    $('.note-editable').on('blur',function(){
-      selection = document.getSelection();
-      cursorPos = selection.anchorOffset;
-      oldContent = selection.anchorNode.nodeValue || "";
-      node = selection.anchorNode;
-    });
-
-    $(".e_specchar").on("click", function() {
-      if (typeof selection !== 'undefined') {
-        var toInsert = $(this).data('value');
-        length = $(this).data('value').length;
-        var newContent = oldContent.substring(0, cursorPos) + ' ' + toInsert + ' ' + oldContent.substring(cursorPos);
-        node.nodeValue = newContent;
-        oldContent = newContent;
-        if(cursorPos == '')
-          cursorPos = length + 1;
-       	else
-       	  cursorPos = cursorPos + length + 1;
-      }
+    $(".e_specchar").on("click", function() { 
+      $('.summernote').summernote('insertText', $(this).data('value'));
     });
   });
 </script>

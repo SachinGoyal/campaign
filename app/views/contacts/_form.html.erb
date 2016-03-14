@@ -30,12 +30,25 @@
           </div>
         </div>
         <% if @contact.new_record? %>
-          <div class = 'dynamic_field'> </div>
+          <div class='dynamic_field'></div>
+          <% if @contact.extra_fields.present? %>
+            <%= fields_for :extra_fields do %>
+              <% @contact.extra_fields.each do |field|%>
+                <div class="form-group form-group-sm">
+                  <%= label_tag :field_name, field.first, class: "col-sm-4 col-xs-12 control-label"%>  
+                  <div class="col-sm-8 col-xs-12">
+                    <%= text_field_tag "contact[extra_fields][#{field.first}]",field.last,class: 'form-control' %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+
         <% else %>
           <% if @contact.extra_fields.present? %>
             <%= fields_for :extra_fields do %>
               <% @contact.extra_fields.each do |field|%>
-                    <div class="form-group form-group-sm">
+                <div class="form-group form-group-sm">
                   <%= label_tag :field_name,field.first,class: "col-sm-4 col-xs-12 control-label"%>  
                   <div class="col-sm-8 col-xs-12">
                     <%= text_field_tag "contact[extra_fields][#{field.first}]",field.last,class: 'form-control' %>

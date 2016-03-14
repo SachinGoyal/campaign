@@ -26,7 +26,9 @@ class NewsletterEmail < ActiveRecord::Base
 
 	scope :unsent, -> { where(sent: 'false') }
 	scope :sent, -> { where(sent: 'true') }
-
+	scope :from_contacts, -> { where(from_contacts: true) }
+	scope :from_sample, -> { where(sample: true) }
+	scope :from_profile, -> {where('profile_id IS NOT NULL')}
 	## if custom emails changed, change in mailchimp
 	def update_list
 		if emails_changed? and from_contacts

@@ -19,16 +19,12 @@
         </div>
 
         <div class="form-group form-group-sm">
-          <div class="col-sm-3 col-xs-12"></div>
-          <div class="col-sm-5 col-xs-5 small_border" id="extra_fields_display">
-          </div>
-        </div>
-
-        <div class="form-group form-group-sm">
           <%= f.label :content, t('frontend.template.content'), :class => "col-sm-3 col-xs-3 control-label" %>
           <div class="col-sm-6 col-xs-6">
             <%= f.text_area :content, class: 'summernote',:contenteditable =>"true" %>
           </div>
+
+          <div class="col-sm-3 col-xs-3 " style = "background-color: whitesmoke;" id='extra_fields_display'></div>        
         </div>
 
         <div class="form-group form-group-sm field">

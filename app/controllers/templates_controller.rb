@@ -90,12 +90,25 @@ class TemplatesController < ApplicationController
   # PATCH/PUT /templates/1
   # PATCH/PUT /templates/1.json
   def update
+    profile_id_was = @template.profile_id
     if params[:template][:status] and ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:template][:status]) != @template.status and @template.newsletters.any?
       return redirect_to edit_template_path(@template), notice: t('activerecord.errors.models.template.attributes.base.associated_newsletter')
     end
 
     respond_to do |format|
       if @template.update(template_params)
+        if @template.profile_id != profile_id_was
+          @template.newsletters.unsent.each do |newsletter|
+            newsletter_email = newsletter.newsletter_emails.from_profile.first
+            newsletter.email_service.delete_members_from_list(newsletter_email.emails.split(","))
+
+            profile = newsletter.template.profile
+            newsletter.profiles = []
+            newsletter.profiles << profile
+
+            newsletter.email_service.add_profile_members_to_list
+          end
+        end
         format.html { redirect_to  @template, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:template)) }
         format.json { render :show, status: :ok, location: @template }
       else
