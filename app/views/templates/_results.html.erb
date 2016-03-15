@@ -1,9 +1,9 @@
-  <%- model_class = Template -%>
+<%- model_class = Template -%>
 <div class="custom-table" data-bottom-url='/templates/edit_all'>
   <div class="row th">
     <div class="col-md-1"><input name="" id='select-all' type="checkbox" value=""></div>
     <div class="col-md-5"><%=sort_link(@q, :name)%></div>
-    <div class="col-md-3"><%= model_class.human_attribute_name(:profile_id) %></div>
+    <div class="col-md-3"><%= t('activerecord.models.profile') %></div>
     <div class="col-md-2"><%#=sort_link(@q, :created_at)%>Date</div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
