@@ -40,7 +40,7 @@
             <label class="col-sm-4 col-xs-12 control-label"></label>
             <div class="col-sm-8 col-xs-12">
                 <%= f.fields_for :extra_fields do |task_form| %>        
-                <%= task_form.text_field :field_name, class: 'dy_div' ,maxlength: s"10"%>   
+                <%= task_form.text_field :field_name, class: 'dy_div' ,maxlength: "10"%>   
                 <%= task_form.link_to_remove image_tag("cross-close-btn")%>    
               <% end %>   
           
