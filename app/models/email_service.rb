@@ -341,16 +341,17 @@ class EmailService < ActiveRecord::Base
     begin
       emails_arr = []
       emails.each do |email|
-        emails_arr << {'email' => email}
+        delete_member_from_list(email)
+        #emails_arr << {'email' => email}
       end
-      response = HTTParty.post(V2_URL+"2.0/lists/batch-unsubscribe", 
-                    :body => { 
-                      :apikey => GIBBON_KEY, 
-                      :id => list_id,
-                      :batch => emails_arr,
-                      :send_goodbye => false
-                    }.to_json,
-                    :headers => { 'Content-Type' => 'application/json' } )
+      # response = HTTParty.post(V2_URL+"2.0/lists/batch-unsubscribe", 
+      #               :body => { 
+      #                 :apikey => GIBBON_KEY, 
+      #                 :id => list_id,
+      #                 :batch => emails_arr,
+      #                 :send_goodbye => false
+      #               }.to_json,
+      #               :headers => { 'Content-Type' => 'application/json' } )
     rescue Exception => e
       puts "#{I18n.t('activerecord.attributes.email_service.problem')}: #{e.message}"
       ApplicationMailer.mailchimp_error(creator, "#{e.message}").deliver_now
