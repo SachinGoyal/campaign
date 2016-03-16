@@ -6961,10 +6961,13 @@ margin-left: 10px;
 .box-bg{background-color: #fff; border-right: solid 1px #eaeaea;}
 .smaller_font{font-size: 11px;}
 .dy_div{
-    width: 92% !important;
+    width: 91% !important;
     height: 30px;
     margin-bottom: 9px;
+    position: relative;
 }
+
+.remove_nested_fields {margin-left: 4px; margin-top: 4px !important; position: absolute;}
 
 
 .datepicker.dropdown-menu {
