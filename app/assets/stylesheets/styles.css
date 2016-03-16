@@ -7020,3 +7020,5 @@ span.help-block{
 .e_specchar{
     cursor: pointer;
 }
+
+.right-nav-bg {background-color: #eee; padding: 10px; margin-bottom: 10px;}

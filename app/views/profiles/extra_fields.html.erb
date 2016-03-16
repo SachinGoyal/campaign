@@ -1,7 +1,7 @@
-<h4>Select variable to substitute in template</h4>
+<h5>Select variable to substitute in template</h5>
 
 <% if @profile.extra_fields.present? %> 
-  <div>
+  <div class="right-nav-bg">
     <% @profile.extra_fields.map(&:field_name).each do |field_name| %>
       <div class="e_specchar" data-value="*|<%= field_name %>|*"><%= field_name %></div>
     <% end %>
