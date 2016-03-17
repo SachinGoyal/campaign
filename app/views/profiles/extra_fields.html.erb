@@ -1,4 +1,4 @@
-<h5>Select variable to substitute in template</h5>
+<h5>Select variable to substitute in template</h4>
 
 <% if @profile.extra_fields.present? %> 
   <div class="right-nav-bg">
@@ -12,10 +12,36 @@
 <% end %>
 
 
+  
+
 <script type="text/javascript">
   $(document).ready(function(){
-    $(".e_specchar").on("click", function() { 
-      $('.summernote').summernote('insertText', $(this).data('value'));
+     var selection = '';
+     var cursorPos = '';
+     var oldContent = '';
+     var node = '';
+     $('.summernote').summernote('focus');
+    $('.note-editable').on('blur',function(){
+      selection = document.getSelection();
+      cursorPos = selection.anchorOffset;
+      oldContent = selection.anchorNode.nodeValue;
+      node = selection.anchorNode;
     });
+    $('.e_specchar').click(function(){
+      if (typeof selection !== 'undefined') {
+        var toInsert = $(this).attr('data-value');
+        length = $(this).attr('data-value').length;
+        if (oldContent !== null)
+          var newContent = oldContent.substring(0, cursorPos) + ' ' + toInsert + ' ' + oldContent.substring(cursorPos);
+        else
+          $('.summernote').summernote('insertText', $(this).data('value'));
+        
+        node.nodeValue = newContent;
+        oldContent = newContent;
+        cursorPos = cursorPos + length + 1;
+      }
+    });
+
   });
 </script>
+
