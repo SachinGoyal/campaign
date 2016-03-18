@@ -24,5 +24,9 @@ jQuery ->
     minDate: 0,
     step: 30
   })
+
+  $('li').on 'click', '.send_newsletter', ->
+    $(@).addClass('inactiveLink')
+
   $(document).on 'click', '.datepicker-icon', ->
     $(this).siblings('.datetimepicker').datetimepicker('show')
