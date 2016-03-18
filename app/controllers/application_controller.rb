@@ -15,7 +15,11 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def pick_model_from_locale(model_name)
+    begin 
      I18n.backend.send(:translations)[I18n.locale][:activerecord][:models][model_name]
+    rescue
+      model_name.blank? ? "Record" : model_name.to_s.humanize
+    end
   end
 
   protected
