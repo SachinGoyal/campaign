@@ -185,11 +185,11 @@ class EmailService < ActiveRecord::Base
                       :name => name,
   								    :contact => {
                         :company  => company.try(:name) || "Sperant",
-  								  		:address1 => "Q3 Tech",
-  								  		:city     => "Gurgaon",
-  								  		:state    => "Haryana",
-  								  		:zip      => "122017",
-  								  		:country  => "India"
+  								  		:address1 => "San Borja Sur 754",
+  								  		:city     => "Lima",
+  								  		:state    => "San Borja",
+  								  		:zip      => "Lima 41",
+  								  		:country  => "Perú"
   								  	},
   								  :permission_reminder => I18n.t('words.permission_reminder'),
   								  :campaign_defaults => {
