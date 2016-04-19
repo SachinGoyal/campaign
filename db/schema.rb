@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20160224061847) do
     t.integer  "company_id"
     t.integer  "user_id"
     t.datetime "scheduled_at"
+    t.string   "all_emails"
   end
 
   add_index "newsletters", ["campaign_id"], name: "index_newsletters_on_campaign_id", using: :btree

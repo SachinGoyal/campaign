@@ -1,3 +1,4 @@
+
 class TemplatesController < ApplicationController
   
   layout 'dashboard' # set custom layout 
@@ -42,6 +43,7 @@ class TemplatesController < ApplicationController
   # GET /templates/new
   def new
     @template = Template.new
+    @template.content = " "
   end
 
   def copy

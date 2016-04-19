@@ -20,8 +20,9 @@
 
         <div class="form-group form-group-sm">
           <%= f.label :content, t('frontend.template.content'), :class => "col-sm-3 col-xs-3 control-label" %>
+          
           <div class="col-sm-6 col-xs-6">
-            <%= f.text_area :content, class: 'summernote',:contenteditable =>"true" %>
+            <%= f.text_area :content, class: 'summernote', autofocus: true %>
           </div>
 
           <div class="col-sm-3 col-xs-3 " style = "background-color: whitesmoke; display: none;" id='extra_fields_display'></div>        
@@ -66,3 +67,9 @@
     </div>
   </div><!-- row -->
 </div><!--  custom-container -->
+
+<script type="text/javascript">
+ $(document).ready(function(){
+  // $('.note-editable').trigger('focus');
+ });
+</script>
