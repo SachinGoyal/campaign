@@ -1,3 +1,4 @@
+
 <div class="custom-container">
   <%= form_for(@newsletter, :html => {:class => 'form-horizontal newsletter_form'}) do |f| %>
     <div class="row">
@@ -196,7 +197,7 @@
       <div class="col-md-6 col-xs-10">
         <div class="form-group custom-from-group">
           <button type="button" id='preview-template'><%= t('buttons.preview') %></button>
-          <%= f.submit  :class => 'btn dark-btn-custom' %>
+          <%= f.submit  :class => 'btn dark-btn-custom', data: {disable_with: "Processing..."} %>
           <%= link_to t('cancel'), newsletters_path, :class => 'btn custom-link-btn' %>
            
         </div>

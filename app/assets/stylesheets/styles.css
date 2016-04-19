@@ -7022,3 +7022,8 @@ span.help-block{
 }
 
 .right-nav-bg {background-color: #eee; padding: 10px; margin-bottom: 10px;}
+
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
+}
