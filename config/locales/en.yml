@@ -521,6 +521,7 @@ en:
 
   words:
     and: "and"
+    or: "or"
     sample_fields: "Sample Fields"
     per_month: "per month"
     images_only: "Upload Images only"

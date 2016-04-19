@@ -43,25 +43,27 @@
               </div>
             <% end %>
           
-            <div class="form-group form-group-sm">
-              <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
-              <div class="col-sm-9 col-xs-12">
-                <div class="saprator"><%= t('words.and')%></div>
-              </div>
-            </div>
+
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
-              <div class="col-sm-9 col-xs-12">
-                <%= f.fields_for :newsletter_emails, @newsletter_email do |newsletter_email_form| %>                  
-                  <% if newsletter_email_form.object.from_contacts? %>
+              <%= f.fields_for :newsletter_emails, @newsletter_email do |newsletter_email_form| %>                  
+                <% if newsletter_email_form.object.from_contacts? %>
+                  <%= newsletter_email_form.label :emails, class: "col-sm-3 col-xs-12 control-label"%>
+                  <div class="col-xs-9">
                     <%= newsletter_email_form.text_area :emails, :class => "form-control contact_emails" %>
-                    <%= newsletter_email_form.hidden_field :from_contacts, :value => true %>
-                  <% end %>
+                  </div>
+                  <%= newsletter_email_form.hidden_field :from_contacts, :value => true %>
                 <% end %>
-              </div>
-
+              <% end %>
             </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
+              <div class="col-sm-9 col-xs-12">
+                <div class="saprator"><%= t('words.or')%></div>
+              </div>
+            </div>
+
           </div><!-- form-horizontal -->
         </div>
         <div class="col-lg-4 col-xs-1">&nbsp;</div>

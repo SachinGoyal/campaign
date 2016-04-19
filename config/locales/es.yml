@@ -477,6 +477,7 @@ es:
     procedent: Procedente
     improcedent: Improcedente
     and: "y"
+    or: "o"
     sample_fields: "Los campos de ejemplo"
     per_month: "al mes"
     images_only: "Subir imágenes solamente"

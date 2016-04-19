@@ -406,8 +406,8 @@ body {
     padding: 0 !important;
     display: block;
     padding: 10px 20px 0;
-    margin-left: 230px;
-    position: fixed;
+    /*margin-left: 230px;*/
+    /*position: fixed;*/
     width: 100%;
     right: 0px;
 z-index: 111;   
