@@ -3,7 +3,7 @@
 <% if @profile.extra_fields.present? %> 
   <div class="right-nav-bg">
     <% @profile.extra_fields.map(&:field_name).each do |field_name| %>
-      <div class="e_specchar" data-value="*|<%= field_name %>|*" onFocus="alert('here');"><%= field_name %></div>
+      <div class="e_specchar" data-value="*|<%= field_name %>|*"><%= field_name %></div>
     <% end %>
     <div class="e_specchar" data-value="*|email|*">email</div>
   </div>  
