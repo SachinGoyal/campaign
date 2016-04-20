@@ -18,8 +18,7 @@
 
 class Attribute < ActiveRecord::Base
   
-  acts_as_paranoid # Soft Delete
-  
+  acts_as_paranoid # Soft Delete  
   acts_as_tenant(:company) #multitenant
   
   #scope
@@ -28,7 +27,7 @@ class Attribute < ActiveRecord::Base
   #scope
 
   #validation
-  validates_uniqueness_to_tenant :name
+  validates_uniqueness_to_tenant :name, scope: :deleted_at
   validates :name, presence: true, length: {in: 2..150}
   validates :description, presence: true, length: {in: 2..255}
   validates_inclusion_of :status, in: [true, false]

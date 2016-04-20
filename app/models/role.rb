@@ -28,7 +28,8 @@ class Role < ActiveRecord::Base
   #                            message: I18n.t('activerecord.errors.models.role.attributes.name.format')}
 
   #validates_uniqueness_to_tenant :name
-  validates_uniqueness_of :name, :scope => :company_id  
+  validates_uniqueness_of :name, scope: [:company_id, :deleted_at]  
+  validate :custom_validations
   #validation
 
   #callback
@@ -97,6 +98,12 @@ class Role < ActiveRecord::Base
 
   def name=(value)
     write_attribute(:name, value.downcase)
+  end
+
+  def custom_validations
+    if name == "admin" or name == "Admin"
+      errors.add(:name, "cannot be admin")
+    end
   end
 
   private

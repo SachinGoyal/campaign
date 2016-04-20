@@ -524,6 +524,7 @@ es:
       send_successful: "Boletín ha sido enviado con éxito"
       not_imported: "Contactos aún no importan. Por favor espere a que en algún momento antes de enviar el boletín."  
       add_contacts: "Please add contacts to newsletter"
+      not_found: "No se pudo encontrar boletín"
     profile:
       update: "Profile updated successfully. Profiles used in newsletter cannot be deactivated."
       disable_all: "Profiles successfully disabled. Profile with associated newsletters could not disabled"

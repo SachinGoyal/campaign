@@ -178,7 +178,10 @@ class NewslettersController < ApplicationController
   private
 
     def set_newsletter
-      @newsletter = Newsletter.find(params[:id])
+      @newsletter = Newsletter.where(id: params[:id]).first
+      unless @newsletter
+        return redirect_to newsletters_url, notice: t('controller.newsletter.not_found')
+      end
     end
 
     def newsletter_params

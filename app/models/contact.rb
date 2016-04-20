@@ -20,10 +20,7 @@
 class Contact < ActiveRecord::Base
   
   acts_as_paranoid # Soft Delete
-
   acts_as_tenant(:company) #multitenant
-  # GENDERS = ['male', 'female']
-
   #store_accessor :extra_fields
   
   #scope
@@ -35,10 +32,9 @@ class Contact < ActiveRecord::Base
   validates_presence_of :email, length: { in: 3..255}
   validates_presence_of :profile_id, length: { in: 3..255}
   # validates_presence_of :profile_ids, message: 'Please select atleast one'
-  validates_uniqueness_to_tenant :email
+  validates_uniqueness_to_tenant :email, scope: :deleted_at
   validates_format_of :email, :with => Devise.email_regexp
   validates_inclusion_of :status, in: [true, false]
-  # validates_inclusion_of :gender, in: [true, false], message: "Should either be male or female"
   #validation
 
   
@@ -125,9 +121,6 @@ class Contact < ActiveRecord::Base
     end
   end
 
-  
- 
-
   # class methods
   class << self
 
@@ -207,7 +200,6 @@ class Contact < ActiveRecord::Base
         end
       end
     end
-
   end
   # class methods
 

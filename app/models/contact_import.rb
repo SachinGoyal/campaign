@@ -1,14 +1,16 @@
 require 'csv'
 
 class ContactImport
-  # switch to ActiveModel::Model in Rails 4
   extend ActiveModel::Naming
   include ActiveModel::Conversion
   include ActiveModel::Validations
+
   FILE_TYPES = ['text/csv', 'application/csv', 
     'text/comma-separated-values','attachment/csv', "application/vnd.ms-excel", "application/octet-stream",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/kset", "application/vnd.xls"]
+
   attr_accessor :file, :profile_id, :action, :way, :row_count
+
   validates :file, presence: true#, :format => { :with => /\A.+\.(csv)\z/ , message: "Upload only csv files" }
   # validates_format_of :file, :with => %r{\.csv\z}i, :message => "file must be in .csv format"
   validate :check_file_ext

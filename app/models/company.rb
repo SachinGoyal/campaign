@@ -22,10 +22,9 @@ class Company < ActiveRecord::Base
   #scope
   default_scope {order('id DESC')}
   #scope
-  
-  
+    
   # validation
-  validates :name, uniqueness: true, 
+  validates :name, uniqueness: {scope: :deleted_at}, 
                    presence: true, 
                    # format: { with: /\A[a-zA-Z0-9 ]+\z/, 
                    #           message: I18n.t('activerecord.errors.models.company.attributes.name.format')},

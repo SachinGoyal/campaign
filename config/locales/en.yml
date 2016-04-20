@@ -571,6 +571,7 @@ en:
       send_successful: "Newsletter has been successfully sent."
       not_imported: "Contacts not imported yet. Please wait for sometime before sending the newsletter."  
       add_contacts: "Please add contacts to newsletter"
+      not_found: "Could not find newsletter"
     profile:
       update: "Profile updated successfully. Profiles used in newsletter cannot be deactivated."
       disable_all: "Profiles successfully disabled. Profile with associated newsletters could not disabled"
