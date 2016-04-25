@@ -151,7 +151,7 @@ class Contact < ActiveRecord::Base
     #Company Export contact 
     def to_csv(options = {})
       profile = Profile.find(options[:profile_id])
-      extra_fields = profile.contacts.last.try(:extra_fields).try(:keys)
+      extra_fields = profile.extra_fields.map(&:field_name)
       column_names = ["email","status"] 
       if extra_fields.present?
         column_names_csv = ["email", "status"] + extra_fields + ["Date"] 
@@ -162,12 +162,13 @@ class Contact < ActiveRecord::Base
         csv << column_names_csv
         profile.contacts.each do |contact|
           date = contact.created_at
-          value = contact.extra_fields.try(:values)
-          contact = contact.attributes.values_at(*column_names)
-          contact[1] = contact[1].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
-          contact = contact + value if extra_fields.present?
-          contact =  contact + [date.to_datetime.strftime("%d/%m/%y, %I:%M %p")]
-          csv << contact
+          contacts_hash = contact.attributes.values_at(*column_names)
+          contacts_hash[1] = contacts_hash[1].present? ? 'Enabled' : 'Disabled' # override product status to enabel desable
+          extra_fields.each do |extra|
+            contacts_hash << (contact.extra_fields && contact.extra_fields[extra]) || "-"
+          end
+          contacts_hash << date.to_datetime.strftime("%d/%m/%y %I:%M %p")
+          csv << contacts_hash
         end
       end
     end
