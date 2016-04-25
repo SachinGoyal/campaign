@@ -275,6 +275,7 @@ en:
         gender: "Gender"
         created_at: "Date"
         company_id: "Company"
+        profile_id: "Profile"
       role:
         name: "Name"
         status: "Status"
