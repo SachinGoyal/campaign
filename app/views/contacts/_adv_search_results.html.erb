@@ -8,11 +8,9 @@
     <div class="col-md-2">
         <input name="" id='select-all-newsletters' type="checkbox" value="">
     </div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:name) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:email) %></div>
+    <div class="col-md-4"><%= model_class.human_attribute_name(:name) %></div>
+    <div class="col-md-4"><%= model_class.human_attribute_name(:email) %></div>
     <div class="col-md-2"><%= model_class.human_attribute_name(:profile_id) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:city) %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:country) %></div>
   </div><!-- row -->
 
   <% if @contacts.present? %>
@@ -23,8 +21,8 @@
         		<%= check_box_tag '', contact.email, false, class: 'contact_newsletter' %>
     		</div>
   			
-  			<div class="col-md-2"><%= contact.name %>&nbsp;</div>
-  			<div class="col-md-2 custom-break break_email"><%= contact.email %>&nbsp;</div>
+  			<div class="col-md-4"><%= contact.name %>&nbsp;</div>
+  			<div class="col-md-4 custom-break break_email"><%= contact.email %>&nbsp;</div>
   			<div class="col-md-2 "><%= contact.profile.name %>&nbsp;</div>
 		</div>
       <% end %>
