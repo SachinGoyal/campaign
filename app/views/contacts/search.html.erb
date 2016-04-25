@@ -39,7 +39,7 @@
 </div><!-- greyBg -->
 <%= render 'results', :locals => {:contacts => @contacts }%>
 <%= render 'shared/bootam_action_link', element: Contact %>
-<%= will_paginate @contacts , renderer: BootstrapPagination::Rails%>
+<%= will_paginate @contacts , renderer: BootstrapPagination::Rails, params: { q: params[:q]} %>
 
 <div>
   <%= link_to t('buttons.back'), contacts_path %>

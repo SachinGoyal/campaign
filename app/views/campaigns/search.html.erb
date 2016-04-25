@@ -37,7 +37,7 @@
 </div>
 <%= render 'results'%>
 
-<%= will_paginate @campaigns , renderer: BootstrapPagination::Rails %>
+<%= will_paginate @campaigns , renderer: BootstrapPagination::Rails, params: { q: params[:q]} %>
 <div>
   <%= link_to t('buttons.back'), campaigns_path %>
 </div>

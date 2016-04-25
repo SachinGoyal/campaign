@@ -36,7 +36,7 @@
 </div><!-- greyBg -->
 <%= render 'results', :locals => {:profiles => @profiles }%>
 <%= render 'shared/bootam_action_link', element: Profile %>
-<%= will_paginate @profiles , renderer: BootstrapPagination::Rails%>
+<%= will_paginate @profiles , renderer: BootstrapPagination::Rails, params: { q: params[:q]} %>
 <div>
   <%= link_to t('buttons.back'), profiles_path %>
 </div>

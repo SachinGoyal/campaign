@@ -39,7 +39,7 @@
 
 <%= render 'results', :locals => {:newsletters => @newsletters }%>
 <%= render 'shared/bootam_action_link', element: Newsletter %>
-<%= will_paginate @newsletters , renderer: BootstrapPagination::Rails %>
+<%= will_paginate @newsletters , renderer: BootstrapPagination::Rails, params: { q: params[:q]} %>
 
 <div>
   <%= link_to t('buttons.back'), newsletters_path %>
