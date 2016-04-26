@@ -1,5 +1,6 @@
 
-Role.create(:name => 'admin', :editable => false)
+role = Role.new(:name => 'admin', :editable => false)
+role.save(validate: false)
 Role.create(:name => 'company admin')
 User.create(:role_id =>1 ,
 	:username => 'admin',
