@@ -1,8 +1,8 @@
 class CompaniesController < ApplicationController
 
-  layout 'dashboard' # set custom layout 
+  layout 'dashboard'
   before_action :authenticate_user!
-  load_and_authorize_resource :except => [:select_roles] #cancan
+  load_and_authorize_resource :except => [:select_roles]
 
   before_action :set_company, only: [:show, :edit, :update, :destroy, :select_roles]
 
@@ -106,7 +106,6 @@ class CompaniesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_company
       @company = Company.find(params[:id])
       unless @company
@@ -114,7 +113,6 @@ class CompaniesController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, :free_emails, :status, :created_by, :updated_by, :subdomain, :company_logo, users_attributes: [:id, :email, :username, :password, :password_confirmation, :role_id, :status])
     end

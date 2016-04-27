@@ -51,8 +51,14 @@ class Template < ActiveRecord::Base
   #association
 
   mount_uploaders :template_image, TemplateImageUploader
-  #ransack
-   
+
+
+  def name_with_profile
+    "#{name.try(:titleize)} - #{profile.try(:name).try(:titleize)}"
+  end
+
+
+  #ransack   
   def self.load_custom_attributes
     ransacker :created_at do
       Arel::Nodes::SqlLiteral.new("date(templates.created_at)")
@@ -62,7 +68,6 @@ class Template < ActiveRecord::Base
   def self.ransackable_attributes(auth_object = nil)
     super & %w(name content created_at)
   end
-
   #ransack
 
   # class methods

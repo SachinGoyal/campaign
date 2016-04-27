@@ -1,10 +1,10 @@
 class NewslettersController < ApplicationController
 
-  layout 'dashboard' # set custom layout 
+  layout 'dashboard' 
     
   #filter
   before_action :authenticate_user!
-  load_and_authorize_resource #cancan
+  load_and_authorize_resource 
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy, :send_now]
   before_action :set_templates, only: [:new, :create, :edit, :update]
   before_action :check_editable_or_deletable, only: [:edit, :update, :destroy]

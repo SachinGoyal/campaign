@@ -12,4 +12,10 @@
 class ExtraField < ActiveRecord::Base
   validates_uniqueness_of :field_name, :scope => :profile_id
   belongs_to :profile
+
+  before_validation :remove_trailing_space
+
+  def remove_trailing_space
+  	self.field_name.strip!
+  end
 end

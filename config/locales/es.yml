@@ -276,7 +276,7 @@ es:
       contact:
         first_name: "Nombre de pila"
         last_name: "Apellido"
-        email:
+        email: Email
         status: "Estado"
         city: "Ciudad"
         country: "País"

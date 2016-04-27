@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
 
-  layout 'dashboard' # set custom layout 
-
+  layout 'dashboard'
   #filter
   before_action :authenticate_user!
   before_action :check_subdomain
@@ -18,5 +17,4 @@ class HomeController < ApplicationController
       end
     end
   end  
-
 end

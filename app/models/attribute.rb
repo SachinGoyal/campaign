@@ -73,6 +73,4 @@ class Attribute < ActiveRecord::Base
     end
   end
   #Class Methods
-
-
 end
