@@ -31,7 +31,7 @@
             <div class="form-group form-group-sm">
               <%= f.label :template_id, :class => "col-sm-3 col-xs-12 control-label"%>      
               <div class="col-sm-9 col-xs-12">
-                <%= collection_select(:newsletter, :template_id, @templates, :id, :name, {:prompt => t('frontend.newsletter.select_template')}, {:class => 'form-control'}) %> 
+                <%= collection_select(:newsletter, :template_id, @templates, :id, :name_with_profile, {:prompt => t('frontend.newsletter.select_template')}, {:class => 'form-control'}) %> 
               </div>
             </div>
             
