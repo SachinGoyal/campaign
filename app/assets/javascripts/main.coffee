@@ -35,4 +35,12 @@ jQuery ->
       $('.check').find(":checkbox").prop("checked", false)
       $(".selected-row-bottom").hide()
 
+  $('.datepicker').datepicker(
+    format: "dd/mm/yyyy"
+    startDate: "01-01-1950"
+    endDate: "today"
+    todayHighlight: true 
+    todayBtn: "linked"
+    autoclose: true
+  )
 

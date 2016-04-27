@@ -88,6 +88,10 @@ class Contact < ActiveRecord::Base
   #   end
   # end
 
+  ransacker :created_at do
+    Arel.sql("date(contacts.created_at)")
+  end
+  
   ransacker :first_name do |parent|  
     Arel::Nodes::InfixOperation.new('->', parent.table[:extra_fields], Arel::Nodes.build_quoted('first_name'))
   end
@@ -138,7 +142,7 @@ class Contact < ActiveRecord::Base
     end
 
     def accessible_attributes
-      ["first_name", "last_name", "email", "company_id", "gender", "country", "city", "profile_ids", "interest_areas_id"]
+      ["first_name", "last_name", "email", "company_id", "gender", "country", "city", "profile_ids", "interest_areas_id","created_at"]
     end
     
     def import_records(file, profile_id = nil)
