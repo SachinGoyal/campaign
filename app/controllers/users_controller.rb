@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
   
-  layout 'dashboard' # set custom layout 
+  layout 'dashboard'
 
   #filter
   before_action :authenticate_user!
-  load_and_authorize_resource #cancan
+  load_and_authorize_resource 
   skip_authorize_resource :only => :search  
-
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   #filter
 
@@ -89,7 +88,6 @@ class UsersController < ApplicationController
   end
 
 	private
-	# Use callbacks to share common setup or constraints between actions.
 	def set_user
 	  @user = User.find(params[:id])
     unless @user
@@ -97,7 +95,6 @@ class UsersController < ApplicationController
     end
 	end
 
-	# Never trust parameters from the scary internet, only allow the white list through.
 	def user_params
 	  params.require(:user).permit(:username, :email, :status, :password, :password_confirmation, :role_id, :image, :company_id)
   end

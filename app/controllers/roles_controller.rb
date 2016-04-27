@@ -1,10 +1,9 @@
 class RolesController < ApplicationController
 
-  layout 'dashboard' # set custom layout 
-  
+  layout 'dashboard' 
   #filter
   before_action :authenticate_user!
-  load_and_authorize_resource #cancan
+  load_and_authorize_resource
   before_action :set_role, only: [:show, :edit, :update, :destroy]
   #filter
 
@@ -114,7 +113,6 @@ class RolesController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_role
       @role = Role.find(params[:id])
       unless @role
@@ -122,7 +120,6 @@ class RolesController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
       params.require(:role).permit(:name, :company_id, function_ids: [])
     end

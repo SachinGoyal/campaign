@@ -1,8 +1,8 @@
 class ContactsController < ApplicationController
   
-  layout 'dashboard' # set custom layout 
+  layout 'dashboard' 
   before_action :authenticate_user!
-  load_and_authorize_resource #cancan
+  load_and_authorize_resource
 
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
@@ -137,12 +137,10 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
       params.require(:contact).permit(:email, :status, :profile_id)
     end

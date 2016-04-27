@@ -85,7 +85,6 @@ class AttributesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_attribute
       @attribute = Attribute.find(params[:id])
       unless @attribute
@@ -93,7 +92,6 @@ class AttributesController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def attribute_params
       params.require(:attribute).permit(:company_id, :name, :description, :status)
     end
@@ -105,6 +103,5 @@ class AttributesController < ApplicationController
       else
         t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:attribute))
       end
-
     end
 end

@@ -1,12 +1,11 @@
 
 class TemplatesController < ApplicationController
   
-  layout 'dashboard' # set custom layout 
-
+  layout 'dashboard' 
 
   #filter
   before_action :authenticate_user!  
-  load_and_authorize_resource #cancan
+  load_and_authorize_resource 
   before_action :set_template, only: [:show, :edit, :update, :destroy]
   #filter
 
@@ -137,12 +136,10 @@ class TemplatesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_template
       @template = Template.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def template_params
       params.require(:template).permit(:user_id, :name,:profile_id, :content, :status, :created_by, :updated_by)
     end
@@ -156,6 +153,5 @@ class TemplatesController < ApplicationController
         else
           t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:profile))
       end
-
     end
 end

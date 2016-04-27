@@ -1,10 +1,10 @@
 class ProfilesController < ApplicationController 
   
-  layout 'dashboard' # set custom layout   
+  layout 'dashboard' 
   
   #filter
   before_action :authenticate_user!
-  load_and_authorize_resource except: [:extra_fields] #cancan
+  load_and_authorize_resource except: [:extra_fields] 
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :extra_fields]
   before_action :check_deactivation, only: [:update]
   #filter
