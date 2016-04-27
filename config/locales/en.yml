@@ -454,6 +454,7 @@ en:
       firstname: "First Name"
       lastname: "Last Name"
       select_profile: "Select Profile"
+      created_at: "Date"
     role: 
       name: "Name"
       create: "Create Role"
