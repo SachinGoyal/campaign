@@ -32,7 +32,7 @@
             <div class="col-sm-3 text-right margin-top"><strong><%= t('activerecord.attributes.contact.profile_id') %></strong></div>
             <div class="col-sm-9">
               <%= f.collection_select :profile_id_eq, Profile.all, :id, :name, { include_blank: t('frontend.contact.select_profile') }, {class: "form-control"}%>
-            </div>
+            </div>         
           </div>
           <div class="vheight"></div>
           <div class="row">
@@ -51,16 +51,16 @@
             <div class="col-sm-9">
                <%= f.text_field :first_name_or_firstname_cont, :class => "form-control", :placeholder => t('frontend.contact.firstname') %>
               <%#= f.hidden_field :firstname_cont %>
-
             </div>
           </div>
         </div>
         <div class="col-sm-5">
-        <div class="row hidediv margin-top">
-            <div class="col-sm-3 text-right margin-top"> &nbsp;</div>
-            <div class="col-sm-9">
-         &nbsp;
-            </div>
+            
+          <div class="row">
+              <div class="col-sm-3  text-right margin-top"><strong>Created At</strong></div>
+              <div class="col-sm-9">
+                <%= f.text_field :created_at_date_eq , :class => "datepicker form-control", :placeholder => t('frontend.contact.lastname') %>
+              </div>
           </div>
           <div class="vheight"></div>
           <div class="row">
