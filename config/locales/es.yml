@@ -327,6 +327,8 @@ es:
         forwards_opens: "Forwards Open"
         emails_sent: "Emails Sent"
         abuse_reports: "Abuse Reports"
+        problem: "Tenemos un problema.."
+
 
   will_paginate:
     previous_label: "&#8592; Anterior"
