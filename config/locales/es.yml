@@ -445,7 +445,7 @@ es:
       firstname: "Nombre"
       lastname: "Apellido"
       select_profile: "Seleccionar Perfil"
-      created_at: 'Fetcha'
+      created_at: 'Fecha'
     company:
       advanced_search: "Compañía - Búsqueda avanzada"
       confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."

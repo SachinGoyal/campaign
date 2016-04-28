@@ -77,16 +77,9 @@ class Contact < ActiveRecord::Base
     
     newsletter_emails.each do |newsletter_email|
       newsletter_email.delete_email(self.email_was)
-    end
-    
-    
+    end    
   end
 
-  # def self.load_custom_attributes
-  #   ransacker :created_at do
-  #     Arel.sql("date(contacts.created_at)")
-  #   end
-  # end
 
   ransacker :created_at do
     Arel.sql("date(contacts.created_at)")
