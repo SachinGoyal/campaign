@@ -1,23 +1,582 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  devise:
+    view:
+      sessions:
+        new:
+          username: "Username"
+          password: "Password"
+          lost_password: "Lost your password?"
+          login: "Login"
+      password:
+        edit:
+          password: "Password"
+          c_password: "Password Confirmation"
+          change_password: "Change Password"
+        new:
+          enter_email: "Enter your email address"
+          send: "Send"
+      mailer:
+        confirmation_instruction:
+          welcome: "Welcome"
+          confirm_link: "You can confirm your account email through the link below:"
+          con_account: 'Confirm my account'
+        reset_password_instruction:
+          hello: "Hello"
+          send_instruction: "Someone has requested a link to change your password. You can do this through the link below."
+          c_password: "Change my password"
+          ignore_mail: "If you didn't request this, please ignore this email."
+          access_link: "Your password won't change until you access the link above and create a new one."
+        invitation_instruction:
+          welcome: "Welcome to Sperant Campaign."
+          detail_below: "Please find your account details below:"
+          username: "Username:"
+          site_url: "Site Url"
+          click: "Click Here"
+          set_password: "to set your password"
+          thank: "Thanks"
+          support: "Support Team"
+        unlock_instruction:
+
+
+  welcome: "Welcome to Sperant!"
+  cancel: "Cancel"
+  search: "Search"
+  dashboard:
+    log-out: "Log-Out"
+    edit_profile: "Edit Profile"
+  cancan:
+    default_message: 'You are not authorized to access this page.'
+  unauthorized:
+    default: 'You are not authorized to access this page.'
+  actions:
+    select_all: "Select all"
+  ransack:
+    any: 'OR'
+    all: 'AND'
+    asc: "ascending"
+    desc: "descending"
+    predicates:
+      lteq: "Less than Equal to"
+      lt: "Less than"
+      eq: "Equal"
+      not_eq: "Not equal to"
+      in: "In"
+      start: 'Starts With'
+      not_start: "Doesn't start with"
+      end: "Ends with"
+      not_end: "Doesn't end with"
+      gteq: "Greater than Equal to"
+      gt: "Greater than"
+      cont: "Contains"
+      not_cont: "Not contains"
+      blank: "Is blank"
+      null: "Is null"
+      not_null: "Is not null"
+      date_eq: "Date Equal To"
+      date_not_eq: "Date not equal to"
+      date_lt: "Date less than"
+      date_gt: "Date greater than"
+      date_gteq: "Date greater than equal to"
+      date_lteq: "Date less than equal to"
+      true: "Is true"
+      false: "Is false"
+  buttons:
+    login: "Login"
+    save: "Save"
+    send: "Send"
+    cancel: "Cancel"
+    mail: "Mail"
+    messages: "Messages"
+    configuration: "Configuration"
+    profile: "Profile"
+    calendar: "Events"
+    notification_center: "Notification center"
+    edit: "Edit"
+    approve: "Approve"
+    disapprove: "Disapprove"
+    edit_pass: "Edit password"
+    delete: "Delete"
+    new: "New"
+    show: "Show"
+    back: "Back"
+    select: "Select"
+    back_inbox: "Back to inbox"
+    thumb_view: "Thumbnail view"
+    list_view: "List view"
+    map_view: "Map view"
+    add_units: "Units"
+    import: "Import from Excel"
+    export: "Export to Excel"
+    update: "Update"
+    addpicture: "Add new picture"
+    assigned: "Assigned"
+    privatisation_unit: "Privatisation unit"
+    reserve_unit: "Reserve Unit"
+    assigned_supervisor: "Assigning supervisors"
+    assigned_agent: "Assigning sellers"
+    new_interaction: "New Interaction"
+    new_event: "New Event"
+    edit_event: "Edit Event"
+    new_price_list: "New Price List"
+    new_metraje: "New Footage List"
+    price_list_approved: "Approve Price List"
+    price_list_disapprove: "Disapprove Price List"
+    metraje_approved: "List Footage Approve"
+    metraje_disapprove: "List Footage Disapprove"
+    add_field: "Add field"
+    hold_over: "Posponer"
+    send: "Send"
+    preview: "Preview"
+    import: "Import Contacts"
+    export: "Export Contacts"
+    close: "Close"
+    browse: "Browse"
+    update: "Update"
+    upload: "Upload"
+  links:
+    cancel: "Cancel"
+    signin: "Sign in"
+    forgotpass: "Forgot your password?"
+    import: "Import"
+  asearch:
+    addcondition: "Add Condition"
+    add_condition_group: "Add Conditions Group"
+    results: "Results found"
+    noresults: "No results for this search"
+    breadcrumb: "Advanced Search"
+    select_field: "Select a field"
+    select: "Select"
+    choose_combinations: "Choose condition"    
+  menu:
+    campaign: Campaign
+    newsletter: Newsletter
+    template: Template
+    profile: Profile
+    contact: Contact
+    role: Role
+    attribute: Attribute
+    company:  Company
+    user: User   
+    stat: Stats
+    report: Reports
+    setting: Setting
+
+  submenus:
+    metraje: "List Footage"
+    plans: "Plans"
+    price_list: "Price List"
+  errors:
+    messages: 
+      extension_white_list_error: 'You can only upload following files: jpg,jpeg,gif,png'
+  activerecord:
+    errors:
+      messages:
+      models:
+        zone:
+          attributes:
+            name:
+              taken: "ya está en uso"
+        profile:
+          attributes:
+            base: 
+              contacts_exist: "Cannot delete Profile while Contacts exist"
+              newsletters_exist: "Cannot delete/deactivate Profile while Newsletters exist"
+        company:
+          attributes:
+            name:
+              format: 'Can only contain alphanumeric and space.'
+        campaign:
+          attributes:
+            base:
+              newsletters_exist: "Cannot delete campaign as it has sent newsletters."
+            name:
+              format: 'Can only contain alphanumeric and space.'
+        user:
+          attributes:
+            base:
+              delete_admin: "Cannot delete super admin"
+        template:
+          attributes:
+            base:
+              associated_newsletter: "Cannot disable or delete template. It has associated newsletter(s)"
+        role:
+          attributes:
+            name: 
+              format: 'Can only contain alphanumeric and space. Must begin with a character'
+            base:
+              delete_company_admin: "Cannot delete Company Admin"
+              delete_super_admin: "Cannot delete super admin role"
+        newsletter:
+          attributes:
+
+            base: "Cannot be edited or deleted as newsletter is already sent"
+            scheduled_at:
+              in_past: "can't be in the past"
+        attribute:
+          attributes:
+            base:
+              contacts_exist:
+
+    models:
+      campaign: Campaign
+      newsletter: Newsletter
+      template: Template
+      profile: Profile
+      contact: Contact
+      role: Role
+      attribute: Attribute
+      company:  Company
+      user: User  
+      setting: Setting
+    attributes:
+      campaign:
+        name: "Name"
+        description: "Description"
+        status: "Status"
+        created_at: "Date"
+        company_id: "Company"
+      newsletter:
+        name: "Name"
+        created_at: "Date"
+        company_id: "Company"
+        campaign_id: "Campaign"
+        template_id: "Template"
+        subject: "Subject"
+        from_name: "From Name"
+        from_address: "From Address"
+        reply_email: "Reply Email"
+        cc_email: "CC Email"
+        bcc_email: "BCC Email"
+        send_at: "Send At"
+        auto_response: "Auto Response"
+        scheduled_at: "Scheduled At"
+      template:
+        name: "Name"
+        profile: "Profile"
+        content: "Content"
+        status: "Status"
+        created_at: "Date"
+        company_id: "Company"
+      profile:
+        name: "Name"
+        status: "Status"
+        created_at: "Date"
+        company_id: "Company"
+      contact:
+        first_name: "Firstname"
+        last_name: "Lastname"
+        email: "Email"
+        status: "Status"
+        city: "City"
+        country: "Country"
+        gender: "Gender"
+        created_at: "Date"
+        company_id: "Company"
+        profile_id: "Profile"
+      role:
+        name: "Name"
+        status: "Status"
+        editable: "Editable"
+        created_at: "Date"
+        company_id: "Company"
+      attribute:
+        name: "Attribute Name"
+        description: "Description"
+        created_at: "Date"
+        company_id: "Company"
+      company: 
+        name: "Company Name"
+        free_emails: "Free Emails"
+        subdomain: "Subdomain"
+        status: "Status"
+        created_at: "Date"
+      user:   
+        username: "Username"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+        status: "Status"
+        created_at: "Date"
+        company_id: "Company"
+        role_id: "Role"
+        image: "Image"
+      setting:
+        site_title: "Site Title"
+        free_emails: "Total free campaign mails"
+        admin_email: "Admin Email Address"
+        admin_footer_content: "Admin Footer Content"
+        name: "Name"
+        created_at: "Date"
+      email_service: 
+        opens_total: "Total Opens"
+        unique_opens: "Unique Opens"
+        clicks_total: "Total Clicks"
+        unique_clicks: "Unique Clicks"
+        unique_subscriber_clicks: "Unique subscriber clicks"
+        hard_bounces: "Hard Bounces"
+        soft_bounces: "Soft Bounces"
+        unsubscribed: "Unsubscribed"
+        forwards_count: "Forwards Count"
+        forwards_opens: "Forwards Open"
+        emails_sent: "Emails Sent"
+        abuse_reports: "Abuse Reports"
+        problem: "We have a problem"
+        not_ready: "Newsletter is not ready to send. There are following issues. "
+        error_import: "There was an error in importing "
+  will_paginate:
+    previous_label: "&#8592; Previous"
+    next_label: "Next &#8594;"
+    page_gap: "&hellip;"
+    page_entries_info:
+      single_page:
+        zero:  "No %{model} encontrado"
+        one:   "Displaying 1 %{model}"
+        other: "Displaying all %{count} %{model}"
+      single_page_html:
+        zero:  "No %{model} found"
+        one:   "Displaying <b>1</b> %{model}"
+        other: "<b>%{count}</b>&nbsp; Results"
+
+      multi_page: "Displaying %{model} %{from} - %{to} of %{count} in total"
+      multi_page_html: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{count}</b> in total"
+  frontend:
+    shared:
+      setting: "Setting"
+      placeholder:
+        search: "Enter Keyword"
+      edit_link: "Edit"
+      view_link: "View"
+      delete_link: "Delete"
+      confirm_delete: "Are you sure you want to delete the %{model_name}?"
+      enable: "Enable"
+      disable: "Disable"
+      confirm_enable: "Are you sure you want to enable %{model_name}?"
+      confirm_disable: "Are you sure you want to disable %{model_name}?"
+      confirm_delete_all: "Are you sure you want to delete %{model_name}?"
+      addcondition: "Add Conditions Group"
+      enabled: "Enabled"
+      disabled: "Disabled"
+      advance_search: "Advance Search"
+      no_record: "No Record Found"
+      created_at: "Date"
+      list: "%{model_name} List"
+      edit: "Edit %{model_name}"
+      new: "New %{model_name}"
+      add: "Add %{model_name}"
+      view: "View %{model_name}"
+      status: "Status"
+      multiselect: "Press Ctrl for multiselect"
+      reports: "Reports"
+      stats: "Stats"
+      csv: "format incorrect"
+      gender:
+        male: "Male"
+        female: "Female"
+      contact_import:
+        error_in_file: "Something was wrong with file"
+        invalid_content: "Invalid file content. Please check file header and content and try again!"
+        empty_profile: "Selected Profile is empty"
+        not_found: "not found"
+        added: "added successfully"
+        exist: "already exists"
+        not_exist: "not exist"
+        unknown_file: "Unknown file type"
+        incompatible: "Incompatible File"
+    user:
+      username: "Username"
+      email: "Email"
+      status: "Status"
+      password: "Password"
+      view: "View User"
+      advance_search_list: "User List - Advance Search"
+    settings:
+      name: "Name"
+      email: "Email"
+      web: "Website"
+    attribute:
+      list: "Attribute List"
+      name: 'Attribute Name'
+    template:
+      copy: "Copy"
+    campaign:
+      view_stat: "View Stat"
+      new: "New Campaign"
+      edit: "Edit Campaign"
+      advanced_search: "Campaign-List Advanced Search"
+      select_campaign: "Select Campaign"
+      select_newsletter: "Select Newsletter"
+      report: "Report"
+      newsletter_sent: 'Newsletter Sent'
+      stat: "Stat"
+      placeholder:
+    newsletter: 
+      profile: "Profile(s)"
+      email_list: "Email List"
+      sample_email: "Sample Email"
+      email_address: "Email Address"
+      sample_email_hint: "Send a copy of the campaign to the following email address(es), separated by commas"
+      auto_responder_rules: "Auto Responder Rules"
+      auto_send: "Auto Send"
+      sender_settings: "Sender Settings"
+      interest_areas: "Area of Interest"
+      advanced_search: "Newsletter-List Advanced Search"
+      confirm_delete: "Are you sure you want delete newsletter and all the associated data?"
+      placeholder:
+      send_now: "Send Now"
+      select_campaign: "Please select a campaign"
+      select_profile: "Select Contact Group"
+      search:
+        city: "Enter the city"
+        country: "Select a Country"
+        gender:
+          male: "Male"
+          female: "Female"
+    template: 
+      copy: "Copy"
+      placeholder:
+      advanced_search: "Template-List Advanced Search"
+      select_profile: "Select Profile"
+      content: "Template Content"
+      name: "Title"
+    profile: 
+      advanced_search: "Profile-List Advanced Search"
+      interest_areas: "Area of Interest"
+      number_contacts: "No. of Contacts"
+      add_field: "Add Field"
+      placeholder:
+    contact: 
+      advanced_search: "Contact-List Advanced Search"
+      placeholder:
+      first_name: "Name"
+      firstname: "First Name"
+      lastname: "Last Name"
+      select_profile: "Select Profile"
+      created_at: "Date"
+    role: 
+      name: "Name"
+      create: "Create Role"
+      update: "Update Role"
+      action: 
+        destroy: "Delete"
+        read: "Read"
+        create: "Create"
+        update: "Update"
+      placeholder:
+    attribute: 
+      list: "Attribute List"
+      edit: "Edit Attribute"
+      new: "New Attribute"
+      add: "Add Attribute"
+      view: "View Attribute"
+      placeholder:
+    company:  
+      advanced_search: "Company-List Advanced Search"
+      select_role: "Please select a role"
+      placeholder:
+      confirm_delete: "Are you sure want to delete this company? It will delete associated admin and other data."
+      free_emails: "Free Emails"
+      name: "Company Name"
+      number_free_emails: "Number of free emails"
+      username: "User Name"
+      password_confirmation: "Confirm Password"
+      logo: "Company Logo"
+    user:    
+      advanced_search: "User-List Advanced Search"
+      placeholder:
+      username: "Username"
+      password: "Password"
+      view: "View User"
+      select_company: "Please select a company"
+      select_role: "Please select a role"
+    stat: 
+      placeholder:
+    report:   
+      placeholder:
+    setting: 
+      placeholder:
+      name: "Name"
+      email: "Email"
+      web: "Website"      
+    import:
+      import: "Import"
+      action: "Action"
+      unsubscribe: "Unsubscribe"
+      file: "Select File"
+      add: "Add"
+      replace: "Replace"
+      add_update: "Add / Update"
+      first_name:
+      last_name:
+      email:
+      gender:
+      city:
+      country:
+      select_file: "Select File"
+      select_profile: "Select Profile"
+      select_action: "Please select action"
+      select_way: "Please select way"
+      placeholder:
+        csv_file: "Upload only CSV files"
+
+  words:
+    and: "and"
+    or: "or"
+    sample_fields: "Sample Fields"
+    per_month: "per month"
+    images_only: "Upload Images only"
+    permission_reminder: "You signed up for the newsletter"
+    hi: "Hi"
+    thank_you: "Thank You"
+    newsletter_email:
+      cs_error:
+        invalid_email: " is invalid"
+        invalid_emails: " are invalid"
+  mailer:
+    mailchimp:
+      error: "The following request failed at mailchimp. The error log is as follows"  
+      action: "Please take appropriate action or contact admin."
+  controller:
+    unauthorized_domain: "You are not authorized to access that subdomain."
+    shared: 
+      alert:
+        message: "Could not find %{model}"
+      flash:
+        delete_all: "%{model} deleted successfully"
+        create:
+          notice: "%{model} created successfully."
+          status: "unprocessable_entity"
+        update:
+          notice: "%{model} updated successfully."
+          status: "unprocessable_entity"
+        destroy:
+          notice: "%{model} deleted successfully."
+        edit_all:
+          notice:
+            delete_all: "%{model} deleted successfully. %{model} which is associated is not deleted."
+            update_all: "%{model} updated successfully."
+      copy:
+        success: "Template copied successfully."
+        error: "Operation failed"
+    template:
+    contact:
+      import: "Contacts imported."
+      select_profile: "Please select atleast one"
+    user:
+      delete: "Cannot delete user with company admin role"
+      delete_all: "Users deleted successfully. Users with associated data or company admin role could not be deleted."
+    newsletter:
+      updateable_messages: "Newsletter deleted successfully. Newsletter which have already been sent could not be deleted."
+      check_editable_or_deletable: "Cannot edit/delete the newsletter since it has already been sent."
+      send_successful: "Newsletter has been successfully sent."
+      not_imported: "Contacts not imported yet. Please wait for sometime before sending the newsletter."  
+      add_contacts: "Please add contacts to newsletter"
+      not_found: "Could not find newsletter"
+    profile:
+      update: "Profile updated successfully. Profiles used in newsletter cannot be deactivated."
+      disable_all: "Profiles successfully disabled. Profile with associated newsletters could not disabled"
+      delete_all: "Profiles successfully deleted. Profile with associated newsletters could not deleted"
+    template:
+      disable_all: "Templates successfully disabled. Template with associated newsletters could not disabled"    

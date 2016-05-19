@@ -1,0 +1,630 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  devise:
+    view:
+      sessions:
+        new:
+          username: "Nombre de usuario"
+          password: "Clave"
+          lost_password: "¿Perdiste tu contraseña?"
+          login: "Iniciar sesión"
+      password:
+        edit:
+          password: "Clave"
+          c_password: "Confirmación de contraseña"
+          change_password: "Cambiar la contraseña"
+        new:
+          enter_email: "Introduzca su dirección de correo electrónico"
+          send: "Enviar"
+      mailer:
+        confirmation_instruction:
+          welcome: "Bienvenida"
+          confirm_link: "Puede confirmar su cuenta de correo electrónico a través del siguiente enlace :"
+          con_account: 'Confirmar mi cuenta'
+        reset_password_instruction:
+          hello: "Hola"
+          send_instruction: "Alguien ha pedido un enlace para cambiar su contraseña . Usted puede hacer esto a través del siguiente enlace ."
+          c_password: "Cambiar mi contraseña"
+          ignore_mail: "Si usted no ha solicitado este , por favor, ignora este mensaje ."
+          access_link: "Su contraseña no cambiará hasta que acceda al enlace anterior y crear una nueva."
+        invitation_instruction:
+          welcome: "Bienvenido a Sperant Campaña ."
+          detail_below: "Encuentre datos de su cuenta a continuación:"
+          username: "Nombre de usuario:"
+          site_url: "Sitio URL"
+          click: "Clickea aquí"
+          set_password: "para establecer su contraseña"
+          thank: "Gracias"
+          support: "Equipo de apoyo"
+  helpers:
+    submit:
+      create: "Créer"
+      update: "Modifier "
+  welcome: "Bienvenido"
+  dashboard:
+    edit_profile: "Editar perfil"
+  enable: "Habilitar"
+  desable: "Inhabilitar"
+  log-out: "Cerrar Sesion"
+  search: "Buscar"
+  save: "Guardar"
+  cancel: "Cancelar"
+  cancan:
+    default_message: "Usted no está autorizado para acceder a esta página."
+  unauthorized:
+    default: Usted no está autorizado para acceder a esta página.
+  actions:
+    select_all: "Seleccionar todo"
+    metraje_list_approved: "Aprobar Lista de Metraje"
+  ransack:
+    any: 'O'
+    all: 'Y'
+    asc: "ascendente"
+    desc: "descendiendo"
+    predicates:
+      lt: "Menor que"
+      lteq: "Menor igual que"
+      eq: "Igual"
+      gteq: "Mayor igual que"
+      gt: "Mayor que"
+      cont: "Contiene"
+      not_cont: "No contiene"
+      blank: "Está en blanco"
+      present: "Está presente"
+      null: "Es nulo"
+      not_null: "No es nulo"
+      not_eq: 'No igual a'
+      true: "Es verdadero"
+      false: "Es falso"
+      in: "En"
+      not_in: "No en"
+      start: "Inicia con"
+      not_start: "No inicia con"
+      end: "Termina con"
+      not_end: "No termina con"
+      date_eq: "Igual(Fecha)"
+      date_not_eq: 'No igual a(Fecha)'
+      date_lt: "Menor que(Fecha)"
+      date_lteq: "Menor igual que(Fecha)"
+      date_eq: "Igual(Fecha)"
+      date_gteq: "Mayor igual que(Fecha)"
+      date_gt: "Mayor que(Fecha)"
+  buttons:
+    login: "Entrar"
+    submit: "Guardar"
+    send: "Enviar"
+    cancel: "Cancelar"
+    messages: "Mensajes"
+    profile: "Perfil"
+    edit: "Editar"
+    delete: "Eliminar"
+    new: "Nuevo"
+    show: "Ver"
+    back: "Volver"
+    select: "Seleccionar"
+    list_view: "Vista de lista"
+    import: "Importar desde Excel"
+    export: "Exportar a Excel"
+    pay_commissions: "Pagar commisíon"
+    send: "Enviar"
+    preview: "Avance"
+    save: "Guardar"
+    import: "Importar contactos"
+    export: "Exportar contactos"
+    close: "Cerca"
+    browse: "Vistazo"
+    update: "Actualizar"
+    upload: "Subir"
+  links:
+    cancel: "Cancelar"
+    signin: "Iniciar sesión"
+    forgotpass: "¿Olvidó su contraseña?"
+  asearch:
+    addcondition: "Agregar condición"
+    add_condition_group: "Añadir | Condiciones"
+    results: "Resultados encontrados"
+    noresults: "No hay ningun resultado para su busqueda"
+    breadcrumb: "Búsqueda Avanzada"
+    select_field: "Seleccione un campo"
+    select: "Seleccionar"
+    choose_combinations: "Elija estado"    
+  menu:
+    campaign: Campañas
+    newsletter: "Hoja informativa"
+    template: Plantilla
+    profile: Perfil
+    contact: Contacto
+    role: Papel
+    attribute: Atributo
+    company:  Compañía
+    user: Usuario   
+    stat: Estadísticas
+    report: Informe  
+    setting: Ajuste
+  submenus:
+  activerecord:
+    errors:
+      messages:
+        not_file: Tiene que ser un archivo Excel(*.xls)
+        accepted: Debe ser aceptado
+        record_invalid: "La Validación falló: %{errors}"
+        blank: "Este campo no puede estar vacío"
+        confirmation: "no coincide con la contraseña"
+        taken: "ya ha sido tomado"
+        too_long:
+          one: es demasiado largo (máximo 1 caracter)
+          other: es demasiado largo (máximo %{count} caracteres)
+        too_short:
+          one: es demasiado corto (mínimo 1 caracter)
+          other: es demasiado corto (mínimo %{count} caracteres)
+        wrong_length:
+          one: longitud errónea (debe ser de 1 caracter)
+          other: longitud errónea (debe ser de %{count} caracteres)
+        complement_values_zero: "Sin Complementos"
+        invalid: "es inválido"
+        inclusion: No está incluido en la lista
+        equal_to: Debe ser igual a %{count}
+        even: Debe ser par
+        exclusion: Está reservado
+        greater_than: Debe ser mayor que %{count}
+        greater_than_or_equal_to: Debe ser mayor que o igual a %{count}
+        less_than: Debe ser menor que %{count}
+        less_than_or_equal_to: Debe ser menor que o igual a %{count}
+        not_a_number: No es un número
+        not_an_integer: Debe ser un entero
+        odd: Debe ser impar
+        wrong_length: No tiene la longitud correcta (%{count} caracteres exactos)
+        complement_values_zero: "Sin Complementos"
+        invalid_date: "is not a valid date"
+        invalid_time: "is not a valid time"
+        invalid_datetime: "is not a valid datetime"
+        is_at: "must be at %{restriction}"
+        before: "must be before %{restriction}"
+        on_or_before: "must be on or before %{restriction}"
+        after: "must be after %{restriction}"
+        on_or_after: "debe ser igual o después de %{restriction}"
+
+      models:
+        company:
+          attributes:
+            name:
+              format: "Sólo puede contener caracteres alfanuméricos y el espacio."
+        campaign:
+          attributes:
+            name:
+              format: "Sólo puede contener caracteres alfanuméricos y el espacio."
+            base:
+              newsletters_exist: "No se puede eliminar la campaña, ya que ha enviado boletines."
+        profile:
+          attributes:
+            base: 
+              contacts_exist: "No se puede eliminar el perfil, mientras que existen Contactos"      
+              newsletters_exist: "No se puede eliminar el perfil, mientras que existen Boletines"
+        user:
+          attributes:
+            email:
+              taken: "ya está en uso"
+            username:
+              format: "Sólo alfanumérico y el espacio permitido"
+            base:
+              delete_admin: "No se puede eliminar súper admin"
+        template:
+          attributes:
+            base:
+              associated_newsletter: "No se puede actualizar o borrar la plantilla. Se asocia con un boletín de noticias." 
+        role:
+          attributes:
+            name: 
+              format: 'Sólo puede contener caracteres alfanuméricos y el espacio. Debe comenzar con un carácter'          
+            base:
+              delete_company_admin: "No se puede eliminar de administración de la empresa"
+              delete_super_admin: "No se puede eliminar el papel súper administrador"
+        newsletter:
+          attributes:
+            base: "No puede ser editado o borrado como boletín ya se envía"
+            scheduled_at:
+              in_past: "can't be in the past"
+        attribute:        
+          attributes:
+            base:
+              contacts_exist: "No se puede eliminar Atributo mientras existan Contactos / Perfiles"
+
+    models:
+      campaign: Campañas
+      newsletter: Hoja informativa
+      template: Plantilla
+      profile: Perfil
+      contact: Contacto
+      role: Papel
+      attribute: Atributo
+      company:  Compañía
+      user: Usuario     
+      setting: Ajuste
+    attributes:
+      campaign:
+        name: "Nombre"
+        description: "Descripción"
+        status: "Estado"
+        created_at: "Fecha"
+      newsletter:
+        name: "Nombre"
+        subject: "Sujeto"
+        campaign_id: "Campañas"
+        template_id: "Plantilla"
+        company_id: "Compañía"
+        created_at: "Fecha"
+        from_name: "De Nombre"
+        from_address: "De Dirección"
+        reply_email: "Responder Email"
+        cc_email: "CC Email"
+        bcc_email: "BCC Email"
+        send_at: "Enviar A"
+        auto_response: "Auto Response"
+        created_at: "Fecha"
+        scheduled_at: "Programada en"
+      template:
+        name: "Nombre"
+        content: "Descripción"
+        status: "Estado"
+        created_at: "Fecha"
+      profile:
+        name: "Nombre"
+        status: "Estado"
+        created_at: "Fecha"
+      contact:
+        first_name: "Nombre de pila"
+        last_name: "Apellido"
+        email: Email
+        status: "Estado"
+        city: "Ciudad"
+        country: "País"
+        gender: "Género"
+        created_at: "Fecha"
+        profile_id: "Perfil"
+      role:
+        name: "Nombre"
+        status: "Estado"
+        created_at: "Fecha"
+      attribute:
+        name: "Attribute Nombre"
+        description: "Descripción"
+        created_at: "Fecha"
+        status: "Estado"
+      company: 
+        name: "Company Nombre"
+        free_emails: "Los correos electrónicos gratuitos"
+        subdomain: "Subdomain"
+        status: Estado
+        created_at: "Fecha"
+      user:   
+        username: "Nombre de usuario"
+        email: "Email"
+        password: "Clave"
+        password_confirmation: "Confirmación de Contraseña"
+        status: "Estado" 
+        created_at: "Fecha"
+        company_id: "Compañía"
+        role_id: "Papel"
+      setting:
+        site_title: "Título del sitio"
+        free_emails: "Los correos electrónicos gratuitos"
+        admin_email: "Email Admin"
+        admin_footer_content: "Admin contenido de pie de página" 
+        name: "Nombre"
+        created_at: "Fecha"
+      email_service:
+        opens_total: "Total Opens"
+        unique_opens: "Unique Opens"
+        clicks_total: "Total Clicks"
+        unique_clicks: "Unique Clicks"
+        unique_subscriber_clicks: "Unique subscriber clicks"
+        hard_bounces: "Hard Bounces"
+        soft_bounces: "Soft Bounces"
+        unsubscribed: "Unsubscribed"
+        forwards_count: "Forwards Count"
+        forwards_opens: "Forwards Open"
+        emails_sent: "Emails Sent"
+        abuse_reports: "Abuse Reports"
+        problem: "Tenemos un problema.."
+
+
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Siguiente &#8594;"
+    page_gap: "&hellip;"
+    page_entries_info:
+      single_page:
+        zero:  "No %{model} encontrado"
+        one:   "Viendo 1 %{model}"
+        other: "Viendo todo %{count} %{model}"
+      single_page_html:
+        zero:  "No %{model} encontrado"
+        one:   "Viendo <b>1</b> %{model}"
+        other: "<b>%{count}</b>&nbsp; Resultados"
+      multi_page: "%{model} %{from} - %{to} de %{count}"
+      multi_page_html: "<b>%{from}&nbsp;-&nbsp;%{to}</b> de <b>%{count}</b>"
+  frontend:
+    shared:
+      placeholder:
+        search: "Inserte palabra clave"
+      edit_link: "Editar"
+      view_link: "Ver"
+      delete_link: "Borrar"
+      confirm_delete: "Estas seguro"
+      enable: "Habilitar"
+      disable: "Inhabilitar"
+      confirm_enable: "Seguro que desea habilitar registros?"
+      confirm_disable: "Seguro que deseas desactivar los registros?"
+      confirm_delete_all: "Seguro que quieres borrar registros?"
+      addcondition: "Añadir | Condiciones"
+      enabled: "Activado"
+      disabled: "Incapacitado"
+      advance_search: "Búsqueda avanzada"
+      no_record: "Ningún record fue encontrado"
+      created_at: "Fecha"
+      list: "%{model_name} Lista"
+      edit: "Editar %{model_name}"
+      new: "Nuevo %{model_name}"
+      add: "Añadir %{model_name}"
+      view: "Ver %{model_name}"
+      status: "Estado"
+      advanced_search: "Búsqueda Avanzada"
+      multiselect: "Presione Ctrl para múltiples seleccione"
+      reports: "Reports"
+      stats: "Stats"
+      csv: "should be CSV"
+      gender:
+        male: "Masculino"
+        female: "Hembra"
+    role:
+      create: "Créer"
+      update: "Modifier "
+      name: "Nombre"
+      actions: "Acciones"
+      action: 
+        destroy: "Delete"
+
+    user:
+      username: "Usuario"
+      password: "Contraseña"
+      select_company: "Por favor, seleccione una empresa"
+      select_role: "Por favor, seleccione un papel"
+    settings:
+      name: "Nombre"
+      email: "Correo electrónico"
+      web: "Página web"
+    attribute:
+      list: "Lista de atributos"
+      name: 'Nombre del Atributo'
+      new: "New Attribute"
+    template:
+      copy: "Copia"
+      content: "Contenido Plantilla"
+      placeholder:
+      advanced_search: "Plantilla - Búsqueda avanzada"
+      name: "Título"
+    campaign:
+      view_stat: "Ver Stat"
+      select_campaign: "Select Campaign"
+      select_newsletter: "Select Newsletter"
+      report: "Report"
+      newsletter_sent: 'Newsletter Sent'     
+      stat: "Stat" 
+    newsletter:
+      profiles: "Perfil (s)"
+      email_list: "Lista de Correo"
+      sample_email: "Muestra Email"
+      email_address: "Dirección de correo electrónico"
+      sample_email_hint: "Enviar una copia de la campaña para la dirección de correo electrónico siguiente (s ), separados por comas"
+      auto_responder_rules: "Auto Reglas Responder"
+      auto_send: "Auto Enviar"
+      sender_settings: "ajustes del emisor"
+      interest_areas: "Area de interes"
+      send_now: "Enviar ahora"
+      confirm_delete: "Seguro que quieres eliminar boletín y todos los datos asociados?"
+      select_campaign: "Por favor, seleccione una campaña"
+      select_template: "Por favor, seleccione una modelo"
+      select_profile: "Prupo de contacto de selección"
+      advanced_search: "Hoja informativa - Búsqueda avanzada"
+      search:
+        city: "Introduce la ciudad"
+        country: "Seleccione un país"
+        gender:
+          male: "Masculino"
+          female: "Hembra"
+    profile:
+      number_contacts: "Número de contactos"
+      interest_areas: "Area de interes"
+      add_field: "Agregue campo"
+    contact: 
+      advanced_search: "Contacto - Búsqueda avanzada"
+      placeholder:
+      first_name: "Nombre"
+      firstname: "Nombre"
+      lastname: "Apellido"
+      select_profile: "Seleccionar Perfil"
+      created_at: 'Fecha'
+    company:
+      advanced_search: "Compañía - Búsqueda avanzada"
+      confirm_delete: "Seguro que quieres eliminar esta empresa? Se eliminará administrador asociado y otros datos."
+      select_role: "Seleccione Papel"
+      free_emails: "Los correos electrónicos gratuitos"
+      name: "Compañía Nombre"
+      number_free_emails: "Número de correos electrónicos gratis"
+      username: "Nombre de Usuario"
+      password_confirmation: "Confirmar contraseña"
+      logo: "Company Logo"
+    import:
+      import: "Importar"
+      first_name:
+      last_name:
+      email:
+      gender:
+      city:
+      country:      
+      select_file: "Seleccione Archivo"
+      select_profile: "Seleccionar perfil"
+      select_action: "Please select action"
+      select_way: "Please select way"
+      placeholder:
+        csv_file: "Sube sólo los archivos CSV"
+    setting: 
+      placeholder:
+      name: "Nombre"
+      email: "Email"
+      web: "Sitio web"      
+
+  words:
+    procedent: Procedente
+    improcedent: Improcedente
+    and: "y"
+    or: "o"
+    sample_fields: "Los campos de ejemplo"
+    per_month: "al mes"
+    images_only: "Subir imágenes solamente"
+    permission_reminder: "Usted firmó en el boletín"
+    hi: "Hola"
+    thank_you: "Gracias"
+  mailer:
+    mailchimp:
+      error: "La siguiente petición falló en MailChimp. El registro de errores es la siguiente"
+      action: "Por favor, tome las medidas adecuadas o contacto administrativo."
+  controller:
+    unauthorized_domain: "No tiene permisos para acceder a ese subdominio."
+    shared: 
+      alert:
+        message: "No pudo encontrar %{model}"
+      flash:
+        delete_all: "%{model} eliminado correctamente"
+        create:
+          notice: "%{model} fue creado con éxito ."
+          status: "unprocessable_entity"
+        update:
+          notice: "%{model} fue actualizado correctamente ."
+          status: "unprocessable_entity"
+        destroy:
+          notice: "%{model} fue eliminado correctamente ."
+        edit_all:
+          notice:
+            delete_all: "%{model} eliminado correctamente . %{model} con los datos asociados no se pudo eliminar ."
+            update_all: "%{model} Actualizado correctamente."
+    template:
+      copy:
+        success: "Plantilla fue copiado con éxito ."
+        error: "Operación fallida"
+      disable_all: "Templates successfully disabled. Template with associated newsletters could not disabled"    
+    contact:
+      import: "Contactos importados ."
+      select_profile: "Por favor, seleccione al menos una"
+    user:
+      delete: "No se puede eliminar el usuario con rol de administrador de empresa"
+      delete_all: "Usuarios eliminados con éxito . Los usuarios con datos asociados o rol de administrador de empresa no pueden ser borrados ."
+    newsletter:
+      updateable_messages: "Boletín eliminado correctamente . Boletín de noticias que ya se han enviado no se pudo eliminar ."
+      check_editable_or_deletable: "No se puede editar / borrar el boletín de noticias , puesto que ya ha sido enviado."
+      send_successful: "Boletín ha sido enviado con éxito"
+      not_imported: "Contactos aún no importan. Por favor espere a que en algún momento antes de enviar el boletín."  
+      add_contacts: "Please add contacts to newsletter"
+      not_found: "No se pudo encontrar boletín"
+    profile:
+      update: "Profile updated successfully. Profiles used in newsletter cannot be deactivated."
+      disable_all: "Profiles successfully disabled. Profile with associated newsletters could not disabled"
+      delete_all: "Profiles successfully deleted. Profile with associated newsletters could not deleted"
+  time:
+    am: am
+    pm: pm
+
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%u%n'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: S/.
+    format:
+      delimiter: ! ','
+      precision: 2
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          unit: ''
+      format:
+        delimiter: ! ','
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ! ','
+    precision:
+      format:
+        delimiter: ! ','
+  support:
+    array:
+      last_word_connector: ! ' y '
+      two_words_connector: ! ' y '
+      words_connector: ! ', '
+  distance:
+    unit:
+      one: "m2"
+      other: "m2"
+
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: cerca de 1 hora
+        other: cerca de %{count} horas
+      about_x_months:
+        one: cerca de 1 mes
+        other: cerca de %{count} meses
+      about_x_years:
+        one: cerca de 1 año
+        other: cerca de %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: ! '%{count} días'
+      x_minutes:
+        one: 1 minuto
+        other: ! '%{count} minutos'
+      x_months:
+        one: 1 mes
+        other: ! '%{count} meses'
+      x_seconds:
+        one: 1 segundo
+        other: ! '%{count} segundos'
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minuto
+      month: Mes
+      second: Segundos
+      year: Año

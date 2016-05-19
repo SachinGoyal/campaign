@@ -1,18 +1,18 @@
 <div class="row">
     <div class="page-title">
-      <div class="title_left"><h2>View Role</h2></div><!-- title_left -->
+      <div class="title_left"><h2><%= t('frontend.shared.view', :model_name => pick_model_from_locale(:role)) %></h2></div><!-- title_left -->
         <div class="pull-right custom-box">
-        <span class="edit-icon">
-        <%= link_to edit_role_path(@role) do %>
-          <i class="fa fa-pencil"></i>
-        <% end %>
-        </span>
-        <span class="delate-icon">
-          <%= link_to @role, method: :delete do %>
-            <i class="fa fa-trash-o"></i>
-          <% end %>
-        </span>
-        </div>
+<!--           <span class="edit-icon">
+            <%#= link_to edit_role_path(@role) do %>
+              <i class="fa fa-pencil"></i>
+            <%# end %>
+          </span>
+          <span class="delate-icon">
+            <%#= link_to @role, method: :delete do %>
+              <i class="fa fa-trash-o"></i>
+            <%# end %>
+          </span>
+ -->        </div>
         <div class="clearfix"></div>
         
         
@@ -22,29 +22,31 @@
 <div class="custom-container">
     <div class="row">
       <div class="col-md-12">
-        <h4 class="text-center">Role:</h4>
-          <h2 class="text-center"><%= "#{@role.name} #{@role.company.try(:name)}" %></h2>
+        <h4 class="text-center"><%= t('menu.role') %>: <%= @role.name %></h4>
+        <% if @role.company %>
+          <h4 class="text-center"><%= t('attributes.role.company_id')%>: <%= @role.company.name %>
+        </h4>
+        <% end %>
       </div><!-- col-md-12 -->
-      
-
     </div>
 <!-- row -->
       <% @functions.each do |group, actions|%>
         <div class="row">
           <div class="col-md-8 col-xs-offset-2 bottom-spacer">
-            <div class="custom-panel-heading"><%= group.capitalize%></div>
+            <div class="custom-panel-heading"><%= group.capitalize %></div>
               <div class="custom-panel-body custom-lisiting-style">
                 <ul>
                   <% actions.each do |action|%>
-                      <li><%= action.action.capitalize %></li>
+                      <li><%= t("frontend.role.action.#{action.action}")  %></li>
                   <%end%> 
                   </ul>
               </div>
           </div>
         </div>
       <% end %>
-
-<%= link_to 'Edit', edit_role_path(@role) %> |
-<%= link_to 'Back', roles_path %>
+<% if can? :update, Role %>
+  <%= link_to t('buttons.edit'), edit_role_path(@role) %> |
+<% end %>
+<%= link_to t('buttons.back'), roles_path %>
 
 </div><!--  custom-container -->

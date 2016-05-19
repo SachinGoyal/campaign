@@ -1,0 +1,64 @@
+<%# @contacts.each do |contact| %>
+	<!-- <%#= check_box_tag '', contact.email, false, class: 'contact_newsletter' %> <%#= contact.email %><br/> -->
+<%# end %>
+
+<%- model_class = Contact -%>
+<div class="custom-table" data-bottom-url='/contacts/edit_all'>
+  <div class="row th">
+    <div class="col-md-2">
+        <input name="" id='select-all-newsletters' type="checkbox" value="">
+    </div>
+    <div class="col-md-4"><%= model_class.human_attribute_name(:name) %></div>
+    <div class="col-md-4"><%= model_class.human_attribute_name(:email) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:profile_id) %></div>
+  </div><!-- row -->
+
+  <% if @contacts.present? %>
+    <div id="contact">
+      <% @contacts.each do |contact| %>
+        <div class="row td">
+	  		<div class="col-md-2">
+        		<%= check_box_tag '', contact.email, false, class: 'contact_newsletter' %>
+    		</div>
+  			
+  			<div class="col-md-4"><%= contact.name %>&nbsp;</div>
+  			<div class="col-md-4 custom-break break_email"><%= contact.email %>&nbsp;</div>
+  			<div class="col-md-2 "><%= contact.profile.name %>&nbsp;</div>
+		</div>
+      <% end %>
+    </div>
+  <%else%>
+    <h2 class='text-center'><em><%= t('frontend.shared.no_record') %></em></h2>  
+  <% end %>
+</div>
+
+<script type="text/javascript">	
+  $("#select-all-newsletters").change(function () {
+    $(".contact_newsletter").prop('checked',this.checked);
+    if ($(this).is(':checked')){
+      var value = $('.contact_newsletter').map(function (i,cb) { return cb.value} ).get().join(", ");
+      $('.contact_emails').html(value);
+    }
+    else{
+      $('.contact_emails').html('');
+    }  
+  });
+
+	$(".contact_newsletter").change(function(){
+		contact_emails_val = $(".contact_emails").val();
+    if ($(this).is(':checked')){
+			if(!$.trim(contact_emails_val))
+	    	$('.contact_emails').html($(this).val())
+			else
+        if(contact_emails_val.endsWith(",") || contact_emails_val.endsWith(", "))
+				  $('.contact_emails').append($(this).val())
+        else
+          $('.contact_emails').append(", " + $(this).val())
+		}
+		else{
+			var value = $('.contact_emails').val();
+			value = value.replace(new RegExp($(this).val() + ',?'), '')
+			$('.contact_emails').html(value);
+		}		
+	});
+</script>

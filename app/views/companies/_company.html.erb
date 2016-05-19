@@ -1,7 +1,10 @@
 <div class="row td">
-	<div class="col-md-1"><input name="" type="checkbox" value=<%=company.id%> ></div>
+	<div class="col-md-1 check">
+	<% if can?(:update , Company) or can?(:delete , Company) %>
+		<input name="" type="checkbox" value=<%=company.id%> >
+	<% end %>		
+	</div>
 	<div class="col-md-2"><%= company.name %>&nbsp;</div>
-	<!-- <div class="col-md-2"><%#= company.subdomain %>&nbsp;</div> -->
 	<div class="col-md-3"><%= company.free_emails %>&nbsp;</div>
 	<div class="col-md-2"><%= display_status(company) %>&nbsp;</div>
 	<div class="col-md-3"><%= format_date(company, :created_at) %>&nbsp;</div>

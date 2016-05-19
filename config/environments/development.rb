@@ -4,8 +4,24 @@ Rails.application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  config.action_mailer.default_url_options = { host: 'campaign', port: 8082 }
+  config.action_mailer.default_url_options = { host: 'sperantcrm.com' }
   config.cache_classes = false
+  # config.action_mailer.default_url_options = { host: "lvh.me:3000" }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+
+  ActionMailer::Base.default(from: 'support@sperantcrm.com')
+
+  ActionMailer::Base.smtp_settings = {
+    :port           => 587,
+    :address        => "smtp.mandrillapp.com",
+    :user_name      => "app10453745@heroku.com",
+    :password       => "109lRaN59Bb7HKkssiTTnA",
+    :domain         => 'sperantcrm.com',
+    :authentication => :plain,
+  }
+  ActionMailer::Base.delivery_method = :smtp
+
 
   # Do not eager load code on boot.
   config.eager_load = false

@@ -1,27 +1,29 @@
 <div class="row">
-  <div class="page-title">
-    <div class="title_left"><h2>Role list</h2></div><!-- title_left -->
-      <div class="title_right">
-        <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">       
-        <% if can? :read, Role %>
-          <%= render 'shared/keyword_search', :condition => :name_cont %>       
-        <% end %>
-        <% if can? :create, Role %>
-          <div class="custom-add"><%= link_to new_role_path, :title => "New Role" do %><i class="fa fa-plus"></i><% end %></div>
-        <% end %>
-      </div>
-    </div>
-    <div class="clearfix"></div>                
-  </div><!-- page-title -->
+  <div class="col-xs-4">
+    <div class="title_left"><h2><%= t('frontend.shared.list', :model_name => pick_model_from_locale(:role)) %></h2></div><!-- title_left -->
+  </div>
+  
+  <div class="col-xs-5 form-group pull-right top_search">
+    <% if can? :read, Role %>
+      <%= render 'shared/keyword_search', :condition => :name_cont %>
+    <% end %>  
+    <% if can? :create, Role %>
+      <div class="custom-add"><%= link_to new_role_path, :title => "New Role" do %><i class="fa fa-plus"></i><% end %></div>
+    <% end %>    
+  </div>              
 </div><!--row-->
 
 <%- model_class = Role -%>
-<div class="custom-table">
+<div class="custom-table" data-bottom-url='/roles/edit_all'>
   <div class="row th" id="attributes_header">
-    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
-    <div class="col-md-3"><%= model_class.human_attribute_name(:name) %></div>
-    <div class="col-md-3"><%= model_class.human_attribute_name(:status) %>&nbsp;</div>
-    <div class="col-md-3"><%= model_class.human_attribute_name(:created_at) %></div>
+    <div class="col-md-1">
+      <% if can?(:update , Role) or can?(:delete , Role) %>
+        <input name="" id='select-all' type="checkbox" value="">
+      <% end %>
+    </div>
+    <div class="col-md-3"><%=sort_link(@q, :name)%></div>
+    <div class="col-md-3"><%=sort_link(@q, :status)%>&nbsp;</div>
+    <div class="col-md-3"><%#=sort_link(@q, :created_at, t('frontend.shared.created_at'))%>Date</div>
     <div class="col-md-2">&nbsp;</div>
   </div><!-- row -->
 
@@ -30,9 +32,9 @@
    <%= render @roles %>
   </div>
   <%else%>
-   <h2 class='text-center'><em>No Record Found</em></h2>  
+   <h2 class='text-center'><em><%= t('frontend.shared.no_record') %></em></h2>  
   <% end %>
-  <%= render 'shared/bootam_action_link', element: 'roles' %>
+  <%= render 'shared/bootam_action_link', element: Role %>
 
   <%= will_paginate @roles, renderer: BootstrapPagination::Rails %>
   </div>

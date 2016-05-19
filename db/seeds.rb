@@ -1,5 +1,6 @@
 
-Role.create(:name => 'admin', :editable => false)
+role = Role.new(:name => 'admin', :editable => false)
+role.save(validate: false)
 Role.create(:name => 'company admin')
 User.create(:role_id =>1 ,
 	:username => 'admin',
@@ -8,8 +9,8 @@ User.create(:role_id =>1 ,
 	:password_confirmation => 'admin@123',
 	:status => true)
 
-Gender.create(:name => 'Male')
-Gender.create(:name => 'Female')
+# Gender.create(:name => 'Male')
+# Gender.create(:name => 'Female')
 
 RUTA = File.dirname(__FILE__)
 p "Data Functions"
@@ -26,27 +27,7 @@ File.open(File.expand_path('data/es/functions.txt', RUTA)) do |file|
   end
 end
 
-Function.all.each do |f|
+Function.where.not(agroup: 'company').each do |f|
   Access.create(:role_id => 2, :function_id => f.id)
 end
-# # user.add_role :admin
-# Role.destroy_all
-# #ActiveRecord::Base.connection.reset_pk_sequence!('roles')
-
-# File.open(File.expand_path('data/es/role_base.txt', RUTA)) do |file|
-#  file.each_line do |line|
-#    name, is_base, is_agent, is_supervisor = line.strip.split(';')
-#      role = Role.new
-#      role.name = name.strip
-#      role.is_base = is_base.strip
-#      role.is_agent = is_agent.strip
-#      role.is_supervisor = is_supervisor.strip
-#      role.save
-#  end
-# end
-
-
-
-# Function.destroy_all
-# File.open(functions.txt) do |file|
-# 	
+Setting.create(:site_title => "Sperant", :admin_footer_content => "Sperant", :free_emails => 10, :admin_email => "admin@sperant.com")

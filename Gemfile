@@ -3,29 +3,35 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-
-# Multi tenant Database
-# gem 'apartment'# Use postgresql as the database for Active Record
+gem "nested_form"
+gem "highcharts-rails", "~> 3.0.0" # report chart use
 #client side validation 
 gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 # Search feature with ransack
 gem 'ransack'
 # Login 
 gem 'devise'
+gem 'devise_invitable'
 # Permission module
 gem 'cancancan'
 #Soft delete
 gem 'paranoia'
 gem 'simple_form'
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "rmagick"
 gem 'mini_magick'
-# gem 'milia'
-# gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'acts_as_tenant'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap-datepicker-rails'
+# gem 'momentjs-rails', '>= 2.9.0'
+# gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+gem 'remotipart', '~> 1.2'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-datetimepicker'
+end
+
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
@@ -35,8 +41,11 @@ gem 'sidekiq'
 gem "iconv", "~> 1.0.3"
 gem 'roo'
 gem 'roo-xls'
-gem 'bootstrap-wysihtml5-rails'
 gem 'country_select'
+gem 'summernote-rails'
+gem 'gibbon'
+gem 'httparty'
+gem 'whenever', :require => false
 # Use Uglifier as compressor for JavaScript assets
 # gem 'activerecord-import'
 
@@ -84,5 +93,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "unicorn-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'activerecord-session_store'#, github: 'rails/activerecord-session_store'
 
 

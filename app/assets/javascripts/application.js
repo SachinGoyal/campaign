@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
+//= require datetimepicker
 //= require bootstrap-datepicker
-//= require bootstrap-wysihtml5
+//= require summernote
+//= require highcharts
+//= require jquery_nested_form
 //= require_tree .

@@ -1,24 +1,63 @@
-<p id="notice"><%= notice %></p>
+  <div class="row">
+    <div class="page-title">
+      <div class="title_left"><h2><%= t('frontend.shared.setting')%></h2></div><!-- title_left -->
 
-<p>
-  <strong>User:</strong>
-  <%= @setting.user %>
-</p>
+      <div class="clearfix"></div>
 
-<p>
-  <strong>Site title:</strong>
-  <%= @setting.site_title %>
-</p>
 
-<p>
-  <strong>Admin email:</strong>
-  <%= @setting.admin_email %>
-</p>
 
-<p>
-  <strong>Admin footer content:</strong>
-  <%= @setting.admin_footer_content %>
-</p>
+    </div><!-- page-title -->
+  </div><!--row-->
 
-<%= link_to 'Edit', edit_setting_path(@setting) %> |
-<%= link_to 'Back', settings_path %>
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-8 col-xs-10">
+          <form class="form-horizontal">
+
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.setting.site_title') %></label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @setting.site_title%>
+              </div>
+            </div>
+
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.setting.free_emails') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @setting.free_emails %>
+                </div>
+              </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.setting.admin_email') %></label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @setting.admin_email %>
+              </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.setting.admin_footer_content') %></label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @setting.admin_footer_content %>
+              </div>
+              </div> 
+          </form>
+
+        </div>
+        <div class="col-lg-4 col-xs-1">
+          <div class="form-group form-group-sm">
+            <label class="col-sm-4 col-xs-12 control-label">&nbsp;</label>
+            <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+          </div>
+        </div>
+        
+        <div class="clearfix"></div>
+        <div class="divider"></div>
+      </div>
+
+    </div><!-- row -->
+  </div><!--  custom-container -->
+<%= link_to t('buttons.edit'), edit_setting_path(@setting) %>

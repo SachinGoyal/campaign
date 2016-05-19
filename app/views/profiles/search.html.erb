@@ -1,0 +1,42 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    var attributes = <%= @attributes.to_json.html_safe %>
+    search_init.selectSearch(attributes);
+  });
+</script>
+
+<div class="row">
+  <div class="page-title">
+    <div class="title_left"><h2><%= t('frontend.profile.advance_search') %> </h2></div><!-- title_left -->
+      <div class="title_right">                     
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group custom-input-search">
+          </div><!-- input-group -->                     
+        </div>                           
+      </div><!--title_right -->
+      <div class="clearfix"></div>
+  </div><!-- page-title -->
+</div><!--row-->
+
+<div class="greyBg">
+
+  <%= search_form_for @q, url: search_profiles_path, method: :post do |f| %>
+    <%= f.grouping_fields do |g| %>
+      <%= render "grouping_fields", f: g %>
+    <% end %>
+   
+    <div class="row add_link">
+      <div class="col-xs-11 text-right custom-label"><%= link_to_add_condition_group t('asearch.add_condition_group'), f, :grouping %></div>
+      <div class="col-xs-1 dark-btn"><%= button_tag(t('search'), type: 'submit', class: "btn btn-default") %></div>
+    </div>
+
+  <% end %>
+
+
+</div><!-- greyBg -->
+<%= render 'results', :locals => {:profiles => @profiles }%>
+<%= render 'shared/bootam_action_link', element: Profile %>
+<%= will_paginate @profiles , renderer: BootstrapPagination::Rails, params: { q: params[:q]} %>
+<div>
+  <%= link_to t('buttons.back'), profiles_path %>
+</div>

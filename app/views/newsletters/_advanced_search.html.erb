@@ -1,0 +1,14 @@
+<div class="green-Border green-text text-right"><%= t('search')%> <i class="fa fa-caret-down"></i></div> 
+  <div class="grey-box">
+    <div class="row">
+        <div class="form-group form-group-sm">
+          <label class="col-xs-3 text-right control-label" ><%= t('activerecord.attributes.contact.email') %></label>
+          <div class="col-xs-3"> <%= text_field_tag 'q[email_cont]', '', class: "form-control", placeholder: t('activerecord.attributes.contact.email') %> </div>
+          <div class="clearfix"></div> 
+        </div>
+        <%= link_to t('search'), "#", class: 'btn btn-default pull-right contact_search_for_newsletter' %>
+    </div>
+  
+    <div id="results"></div>
+  </div>
+</div>

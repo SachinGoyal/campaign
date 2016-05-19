@@ -1,10 +1,9 @@
 class RolesController < ApplicationController
 
-  layout 'dashboard' # set custom layout 
-  
+  layout 'dashboard' 
   #filter
   before_action :authenticate_user!
-  load_and_authorize_resource #cancan
+  load_and_authorize_resource
   before_action :set_role, only: [:show, :edit, :update, :destroy]
   #filter
 
@@ -16,8 +15,7 @@ class RolesController < ApplicationController
     else
       @q = Role.where.not(name: COMPANY_ADMIN).where(editable: true).ransack(params[:q])
     end
-    @q.sorts = 'id desc' if @q.sorts.empty?    
-    @roles = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @roles = @q.result.paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -55,11 +53,11 @@ class RolesController < ApplicationController
     @functions = Function.all.group_by(&:agroup)
     respond_to do |format|
       if @role.save
-        format.html { redirect_to  @role, notice: "Role was successfully created." }
+        format.html { redirect_to  @role, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:role)) }
         format.json { render json: @role, status: :created, location: @role }
       else
         format.html { render "new" }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
+        format.json { render json: @role.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -69,6 +67,16 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
     @functions = Function.all.group_by(&:agroup)
   end
+
+  # GET /contacts/edit_all
+  def edit_all
+    Role.edit_all(params[:group_ids], params[:get_action])  
+    @roles = Role.where(editable: true).paginate(:page => params[:page], :per_page => 10)
+    @functions = Function.all.group_by(&:agroup)
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
+  end
+
 
 
   # PUT /roles/1
@@ -80,11 +88,11 @@ class RolesController < ApplicationController
     respond_to do |format|
       if @role.update_attributes(role_params)
         @role.assign_permission if @role.id == COMPANY_ADMIN_ID
-        format.html { redirect_to @role, notice: "Role was successfully updated. " }
+        format.html { redirect_to @role, notice: t("controller.shared.flash.update.notice", model: pick_model_from_locale(:role)) }
         format.json { head :no_content }
       else
         format.html { render "edit" }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
+        format.json { render json: @role.errors, status: t("controller.shared.flash.update.status") }
       end
     end
   end
@@ -95,7 +103,7 @@ class RolesController < ApplicationController
     role = Role.find(params[:id])
     if role.destroy
       respond_to do |format|
-        format.html { redirect_to roles_url, notice: "Role was successfully destroyed." }
+        format.html { redirect_to roles_url, notice: t("controller.shared.flash.destroy.notice", model: pick_model_from_locale(:role)) }
         format.json { head :no_content }
       end
     else
@@ -105,16 +113,24 @@ class RolesController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_role
       @role = Role.find(params[:id])
       unless @role
-        return redirect_to roles_path, :alert => "Could not find role"
+        return redirect_to roles_path, :alert => t("controller.shared.alert.message" , model: pick_model_from_locale(:role))
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
       params.require(:role).permit(:name, :company_id, function_ids: [])
     end
+
+    def updateable_messages(action)
+      case action
+        when 'Delete'
+          t("controller.shared.flash.delete_all", model: pick_model_from_locale(:role))
+        else
+          t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:role))
+      end
+
+  end
 end

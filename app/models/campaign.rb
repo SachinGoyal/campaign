@@ -17,7 +17,7 @@
 #
 #  index_campaigns_on_company_id  (company_id)
 #
-
+  
 class Campaign < ActiveRecord::Base
 
   acts_as_paranoid # Soft Delete
@@ -25,23 +25,56 @@ class Campaign < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
+  scope :active, -> { where(status: 'true') }
   #scope
   
 
   #validation
-  validates_presence_of :name
-  validates_length_of :name,:minimum => 4
+  validates :name, uniqueness: {scope: :deleted_at}, 
+                   presence: true, 
+                   # format: { with: /\A[a-zA-Z0-9 ]+\z/, 
+                   #           message: I18n.t('activerecord.errors.models.campaign.attributes.name.format')},
+                   length: {in: 2..150}
+
+  validates :description, presence: true#, 
+                          # format: { with: /\A[a-zA-Z0-9 ]+\z/, 
+                          #           message: 'Can only contain alphanumeric and space.'},
+                          # length: {in: 2..255}
   validates_inclusion_of :status, in: [true, false]
   #validation
 
+  #callbacks
+  before_destroy :check_newsletter
+  #callbacks
+
   # relation
-  belongs_to :user
+  has_many :newsletters, :dependent => :destroy
   # relation
   
   #delegate
   delegate :username, to: :user, prefix: true
   #delegate
+
+  #ransack
+  def self.load_custom_attributes
+    ransacker :created_at do
+      Arel::Nodes::SqlLiteral.new("date(campaigns.created_at)")
+    end
+  end
+  
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w(name  status created_at)
+  end
+  #ransack
+
+
+  def check_newsletter
+    if newsletters.any? and newsletters.map(&:editable_or_deletable?).include?(false)
+      errors.add(:base, :newsletters_exist)
+      return false
+    end
+  end
 
   #class methods
   class << self
@@ -50,14 +83,13 @@ class Campaign < ActiveRecord::Base
       ids.reject!(&:empty?)
       Campaign.find(ids).each do |campaign|
         if action == 'delete'
-          campaign.destroy!
+          campaign.destroy
         else
-          status = action == 'enable' ? 1 : 0
+          status = action == 'enable' ? true : false
           campaign.update(:status => status )
         end
       end
     end
   end
   #class methods
-
 end

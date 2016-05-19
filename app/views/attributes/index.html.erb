@@ -1,40 +1,41 @@
+
+
 <div class="row">
-  <div class="page-title">
-    <div class="title_left"><h2>Attribute list</h2></div><!-- title_left -->
-      <div class="title_right">
-
-      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
-        <% if can? :read, Attribute %>
-          <%= render 'shared/keyword_search', :condition => :name_cont %>
-        <% end %>  
-        <% if can? :create, Attribute %>
-          <div class="custom-add"><%= link_to new_attribute_path, :title => "New Attribute" do %><i class="fa fa-plus"></i><% end %></div>
-        <% end %>  
-      </div>
-
-    </div>
-      <div class="clearfix"></div>                
-  </div><!-- page-title -->
+   <div class="col-xs-4">
+    <div class="title_left"><h2><%= t("frontend.shared.list", :model_name => pick_model_from_locale(:attribute)) %></h2></div><!-- title_left -->
+  </div>
+  <div class="col-xs-5 form-group pull-right top_search">
+  <% if can? :read, Attribute %>
+    <%= render 'shared/keyword_search', :condition => :name_cont %>
+  <% end %>  
+  <% if can? :create, Attribute %>
+    <div class="custom-add"><%= link_to new_attribute_path, :title => t("frontend.attribute.new") do %><i class="fa fa-plus"></i><% end %></div>
+  <% end %>    
+  </div>              
 </div><!--row-->
-<%- model_class = Campaign -%>
-<div class="custom-table">
+
+<%- model_class = Attribute -%>
+<div class="custom-table" data-bottom-url='/attributes/edit_all'>
   <div class="row th" id="attributes_header">
-    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
-    <div class="col-md-2">Attribute Name</div>
-    <!-- <div class="col-md-3"><%#= model_class.human_attribute_name(:description) %></div> -->
-    <div class="col-md-1"><%= model_class.human_attribute_name(:status) %></div>
-    <div class="col-md-3">Date</div>
-    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-1">
+      <% if can?(:update , Attribute) or can?(:delete , Attribute) %>
+        <input name="" id='select-all' type="checkbox" value="">
+      <% end %>
+    </div>
+    <div class="col-md-4"><%= sort_link(@q, :name, t('frontend.attribute.name'))%></div>
+    <div class="col-md-3"><%= sort_link(@q, :status)%></div>
+    <div class="col-md-3"><%= sort_link(@q, :created_at)%></div>
+    <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
   <% if @attributes.present? %>
-  <div id="attribute">
-   <%= render @attributes %>
-  </div>
+    <div id="attribute">
+     <%= render @attributes %>
+    </div>
   <%else%>
-   <h2 class='text-center'><em>No Record Found</em></h2>  
+   <h2 class='text-center'><em><%= t('frontend.shared.no_record') %></em></h2>  
   <% end %>
-  <%= render 'shared/bootam_action_link', element: 'attributes' %>
+  <%= render 'shared/bootam_action_link', element: Attribute %>
 
   <%= will_paginate @attributes, renderer: BootstrapPagination::Rails %>
   </div>

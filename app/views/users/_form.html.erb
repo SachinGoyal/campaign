@@ -2,7 +2,7 @@
   $( document ).ready(function() {
       $.ajax({
         url: '/companies/select_roles',
-        data: "id="+$('#user_company_id').val()
+        data: "id="+$('#user_company_id').val() + "&user_id="+"<%= @user.try(:id)%>"
       });
       
     $('#user_company_id').on('change', function() {      
@@ -13,6 +13,7 @@
     });
   });
 </script>
+
 <div class="custom-container">
   <div class="row">
     <div class="col-md-12 col-xs-12">
@@ -20,41 +21,70 @@
         <div class="col-md-6 col-xs-10">
           <%= form_for(@user, :validate => true, :html => {:class => 'form-horizontal', :multipart => true}) do |f| %>
             <% if current_user.is_admin? %>
-              <div class="field form-group form-group-sm role_company">
-                <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => 'Please select a company'}, {:class => 'form-control'}) %>  </div>
-              </div> 
-              <% if @user.new_record? and @user.role.try(:name) != COMPANY_ADMIN %>
-                                <div class="field form-group form-group-sm">
+              <% if @user.new_record? %>
+                <div class="field form-group form-group-sm role_company">
+                  <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
+                  <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, Company.all, :id, :name, {:prompt => t('frontend.user.select_company')}, {:class => 'form-control required'}) %>  </div>
+                </div> 
+              <% else %>
+                <%= f.hidden_field :company_id, :value => @user.company_id%>
+              <% end %>
+              
+              <% if @user.new_record? %>
+                <div class="field form-group form-group-sm">
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                  <div class="col-sm-9 col-xs-12" id="dynamic_company_roles">
-                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control required'}) %> 
+
+                  <div class="col-sm-9 col-xs-12">
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => t('frontend.user.select_role')}, {:class => 'form-control required dynamic_company_roles'}) %> 
                   </div>                
                 </div>
+              <% elsif @user.role.try(:name) == COMPANY_ADMIN %>
+              <% else %>
+                  <div class="field form-group form-group-sm">
+                  <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
+                  <div class="col-sm-9 col-xs-12">
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => t('frontend.user.select_role')}, {:class => 'form-control required dynamic_company_roles'}) %> 
+                  </div>                
+                </div>
+
               <% end %>
 
             <% else %>
-              <div class="field form-group form-group-sm role_company">
-                <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
-                <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, [current_user.company], :id, :name, {}, {:class => 'form-control'}) %>  </div>
-              </div> 
-              <% if @user.new_record? and @user.role.try(:name) != COMPANY_ADMIN %>
+              <% if @user.new_record? %>
+                <div class="field form-group form-group-sm role_company">
+                  <%= f.label :company_id, :class => "col-sm-3 col-xs-12 control-label" %>
+                  <div class="col-sm-9 col-xs-12"> <%= collection_select(:user, :company_id, [current_user.company], :id, :name, {}, {:class => 'form-control required'}) %>  </div>
+                </div> 
+                 <% else %>
+                <%= f.hidden_field :company_id, :value => @user.company_id%>
+              <% end %>
+              
+              <% if @user.new_record? %>
                 <div class="field form-group form-group-sm">
                   <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
                   <div class="col-sm-9 col-xs-12">
-                    <%= collection_select(:user, :role_id, current_user.company.roles, :id, :name, {:prompt => 'Please select a role'}, {:class => 'form-control'}) %> 
-                  </div>
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => t('frontend.user.select_role')}, {:class => 'form-control required dynamic_company_roles'}) %> 
+                  </div>                
                 </div>
-              <% end %>
+              <% elsif @user.role.try(:name) == COMPANY_ADMIN %>
+              <% else %>
+                  <div class="field form-group form-group-sm">
+                  <%= f.label :role_id, :class => "col-sm-3 col-xs-12 control-label" %>
+                  <div class="col-sm-9 col-xs-12">
+                    <%= collection_select(:user, :role_id, [], :id, :name, {:prompt => t('frontend.user.select_role')}, {:class => 'form-control required company_admin_select dynamic_company_roles'}) %> 
+                  </div>                
+                </div>
+
+              <% end %>            
             <% end %>
 
             <div class="field form-group form-group-sm">
               <%= f.label :email, :class => "col-sm-3 col-xs-12 control-label" %>
-              <div class="col-sm-9 col-xs-12"> <%= f.text_field :email, :class => 'form-control' %> </div>
+              <div class="col-sm-9 col-xs-12"> <%= f.text_field :email, :class => 'form-control', :maxlength => 255 %> </div>
             </div>          
             <div class="field form-group form-group-sm">
               <%= f.label :username, :class => "col-sm-3 col-xs-12 control-label" %>
-              <div class="col-sm-9 col-xs-12"> <%= f.text_field :username, :class => 'form-control' %> </div>
+              <div class="col-sm-9 col-xs-12"> <%= f.text_field :username, :class => 'form-control', :maxlength => 50 %> </div>
             </div> 
             <div class="field form-group form-group-sm">
               <%= f.label :password, :class => "col-sm-3 col-xs-12 control-label" %>
@@ -69,20 +99,13 @@
               <%= f.label :status, :class => "col-sm-3 col-xs-12 control-label" %>
               <div class="col-sm-9 col-xs-12 radio_status">
                 <%= f.radio_button :status, true , :checked => @user.new_record? ? true : @user.status , :value => true %>
-                <%= label :status, "Enabled", :class =>"status_spacer" %>
+                <%= label :status, t('frontend.shared.enabled') , :class =>"status_spacer" %>
 
                 <%= f.radio_button :status, false , :checked => @user.new_record? ? false : !@user.status , :value => false %>
-                <%= label :status, "Disabled" %>
+                <%= label :status, t('frontend.shared.disabled') %>
               </div>
             </div>
 
-<!--             <div class="field form-group form-group-sm">
-              <%#= f.label :image, :class => "col-sm-3 col-xs-12 control-label" %>
-              <div class="col-sm-9 col-xs-12"> 
-                <%#= f.file_field :image, :class => 'form-control' %> 
-                <%#= f.hidden_field :image_cache %>
-              </div>
-            </div> -->
       <div class="clearfix"></div>
       <div class="divider"></div>
     </div>
@@ -94,9 +117,9 @@
             <div class="col-xs-4">&nbsp;</div>
                         
             <div class="col-xs-8 text-left">
-              <%= f.submit :Save ,:class => 'btn dark-btn-custom'%>
+              <%= f.submit t('buttons.save') ,:class => 'btn dark-btn-custom'%>
               <% if can? :read, User %>
-                <%= link_to "Cancel", users_path %>
+                <%= link_to t('cancel'), users_path, class: 'btn custom-link-btn' %>
               <% end %>
             </div>
         </div>

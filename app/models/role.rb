@@ -8,7 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  company_id :integer
-#  status     :boolean
+#  status     :boolean          default(TRUE)
 #  editable   :boolean          default(TRUE)
 #
 # Indexes
@@ -23,12 +23,19 @@ class Role < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant
 
   #validation
-  validates :name, presence: true, format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
-                             message: 'Can only contain alphanumeric and space. Must begin with a character'}
+  validates :name, presence: true, length: { in: 2..50 }
+  # , format: { with: /\A[a-zA-Z][a-zA-Z0-9 ]+\z/, 
+  #                            message: I18n.t('activerecord.errors.models.role.attributes.name.format')}
 
   #validates_uniqueness_to_tenant :name
-  validates_uniqueness_of :name, :scope => :company_id  
+  validates_uniqueness_of :name, scope: [:company_id, :deleted_at]  
+  validate :custom_validations
   #validation
+
+  #callback
+  before_update :check_companyadmin
+  before_destroy :check_generic_companyadmin
+  #callback
 
   # Association
   belongs_to :company
@@ -41,14 +48,37 @@ class Role < ActiveRecord::Base
   accepts_nested_attributes_for :functions
 
   #scope
-  default_scope {order('id') }
+  # default_scope {order('id DESC') }
   scope :company_admin, -> { where(name: COMPANY_ADMIN) }
   scope :admin, -> { where(name: admin) }
+  scope :editable, -> { where(editable: true)}
+  scope :non_editable, -> { where(editable: false)}
   #scope
 
-  #callback
-  before_update :check_companyadmin
-  #callback
+
+  class << self
+
+    def edit_all(ids, action)
+      action = action.strip.downcase
+      ids.reject!(&:empty?)
+      Role.find(ids).each do |role|
+        if action == 'delete'
+          role.destroy
+        else
+          status = action == 'enable' ? 1 : 0
+          role.update(:status => status )
+        end
+      end
+    end
+
+  end
+
+  def check_generic_companyadmin
+    if self.id == COMPANY_ADMIN_ID
+      errors.add(:base, :delete_company_admin)
+      return false
+    end
+  end
 
   def check_companyadmin
     name == COMPANY_ADMIN if !editable?
@@ -57,7 +87,7 @@ class Role < ActiveRecord::Base
   
   # change permission respective to generic company admin
   def assign_permission
-    company_admin,*company_admin_all = Role.company_admin
+    company_admin,*company_admin_all = Role.company_admin.reorder("id ASC")
     functions = company_admin.try(:function_ids) 
     if company_admin_all.any?
       company_admin_all.each do |c_admin|
@@ -70,10 +100,16 @@ class Role < ActiveRecord::Base
     write_attribute(:name, value.downcase)
   end
 
+  def custom_validations
+    if name == "admin" or name == "Admin"
+      errors.add(:name, "cannot be admin")
+    end
+  end
+
   private
     def check_admin
       if self.id == ADMIN
-        errors.add :base, "Cannot delete super admin role"
+        errors.add(:base, :delete_super_admin)
         return false
       end
     end

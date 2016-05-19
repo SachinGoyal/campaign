@@ -1,0 +1,20 @@
+<%- model_class = Newsletter -%>
+<div class="custom-table" data-bottom-url='/newsletters/edit_all'>
+  <div class="row th">
+    <div class="col-md-1"><input name="" id='select-all' type="checkbox" value=""></div>
+    <div class="col-md-2"><%= sort_link(@q, :name) %></div>
+    <div class="col-md-2"><%= sort_link(@q, :subject) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:campaign_id) %></div>
+    <div class="col-md-2"><%= model_class.human_attribute_name(:template_id) %></div>
+    <div class="col-md-2"><%#= sort_link(@q, :created_at) %>Date</div>
+    <div class="col-md-1">&nbsp;</div>
+  </div><!-- row -->
+
+  <% if @newsletters.present? %>
+    <div id="newsletter">
+      <%= render @newsletters %>
+    </div>
+  <%else%>
+    <h2 class='text-center'><em><%= t('frontend.shared.no_record') %></em></h2>  
+  <% end %>
+</div>

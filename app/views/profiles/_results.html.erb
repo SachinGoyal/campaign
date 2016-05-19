@@ -1,0 +1,26 @@
+<%- model_class = Profile -%>
+<div class="custom-table" data-bottom-url='/profiles/edit_all'>
+  <div class="row th">
+    <div class="col-md-2">
+        <% if can?(:update , Profile) or can?(:delete , Profile) %>
+          <input name="" id='select-all' type="checkbox" value="">
+        <% end %>  
+    </div>
+    <div class="col-md-2"><%=sort_link(@q, :name) %></div>
+    <div class="col-md-2"><%= t('frontend.profile.number_contacts') %></div>
+    <div class="col-md-2"><%=sort_link(@q, :status) %></div>
+    <div class="col-md-2"><%#=sort_link(@q, :created_at, t('frontend.shared.created_at') ) %>Date</div>
+    <div class="col-md-2">&nbsp;</div>
+  </div><!-- row -->
+
+  <% if @profiles.present? %>
+    <div id="profile">
+      <% @profiles.each do |p| %>
+        <%= render :partial => 'profiles/profile', :locals => {:profile => p} %>
+      <% end %>
+    </div>
+  <%else%>
+    <h2 class='text-center'><em><%= t('frontend.shared.no_record') %></em></h2>  
+  <% end %>
+</div>
+

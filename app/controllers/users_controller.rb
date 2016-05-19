@@ -1,39 +1,31 @@
 class UsersController < ApplicationController
   
-  layout 'dashboard' # set custom layout 
+  layout 'dashboard'
 
   #filter
   before_action :authenticate_user!
-  load_and_authorize_resource #cancan
+  load_and_authorize_resource 
   skip_authorize_resource :only => :search  
-
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   #filter
 
   
   def index
     @q = User.where.not(id: 1).ransack(params[:q])
-    @q.sorts = 'id desc' if @q.sorts.empty?
-    @users = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
-    # if current_user.is_superadmin?
-    # else current_user.is_companyadmin?
-    #   @users = current_user.company.users
-  	 #  @q = User.ransack(params[:q])
-    #   @users = @q.result(distinct: true)
-    # end    
+    @users = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
   def search
+    User.load_custom_attributes
     @attributes = Hash.new()
 
-    User.columns_hash.slice('first_name', 'email', 'last_name', 'created_at').each do |k,v|
+    User.columns_hash.slice('first_name', 'email', 'last_name', 'created_at' , 'username' , 'status').each do |k,v|
       @attributes[k] = {value: k, type: v.type.to_s, association: nil}
     end
 
-    @search = User.search(params[:q])
-    @q.sorts = 'id desc' if @q.sorts.empty?
-    @users = @search.result(distinct: true).page(params[:page]).paginate(:page => params[:page], :per_page => 10)
-    @search.build_condition    
+    @q = User.search(params[:q])
+    @users = @q.result.page(params[:page]).paginate(:page => params[:page], :per_page => 10)
+    @q.build_condition    
     @users = @users.where.not(id: 1)
   end
 
@@ -43,14 +35,18 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        @user.confirm!
+        user = User.invite!(:email => @user.email) do |u|
+          u.skip_invitation = true
+        end
+        @user.deliver_invitation
+        format.html { redirect_to @user, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:user)) }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: t("controller.shared.flash.create.status") }
       end
     end
   end
@@ -63,14 +59,16 @@ class UsersController < ApplicationController
 
   def edit_all
     User.edit_all(params[:group_ids], params[:get_action])  
-    @users = User.all
+    @users = User.all.paginate(:page => params[:page], :per_page => 10)
+    action = params[:get_action].strip.capitalize
+    @message = updateable_messages(action)
   end
 
   def update
     params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
     if @user.update_attributes(user_params)
-      flash[:notice] = "Successfully updated User."
+      flash[:notice] = t("controller.shared.flash.update.notice", model: pick_model_from_locale(:user))
       redirect_to users_path
     else
       render :action => 'edit'
@@ -79,28 +77,34 @@ class UsersController < ApplicationController
 
   def destroy
     if @user.role.try(:name) == COMPANY_ADMIN
-      return redirect_to users_path, :notice => "Cannot delete user with company admin role"
+      return redirect_to users_path, :notice => t("controller.user.delete")
     end
 
   	if @user.destroy
-  	 redirect_to users_path, :success => "Successfully deleted user"
+  	 redirect_to users_path, :success => t("controller.shared.flash.destroy.notice", model: pick_model_from_locale(:user))
     else
       redirect_to users_path, :notice => @user.errors.full_messages.join(", ")
     end
   end
 
 	private
-	# Use callbacks to share common setup or constraints between actions.
 	def set_user
 	  @user = User.find(params[:id])
     unless @user
-      return redirect_to users_path, :alert => "Could not find user"
+      return redirect_to users_path, :alert => t("controller.shared.alert.message" , model: pick_model_from_locale(:user))
     end
 	end
 
-	# Never trust parameters from the scary internet, only allow the white list through.
 	def user_params
 	  params.require(:user).permit(:username, :email, :status, :password, :password_confirmation, :role_id, :image, :company_id)
-	end
+  end
 
+  def updateable_messages(action)
+    case action
+      when 'Delete'
+        t("controller.user.delete_all")
+      else
+        t("controller.shared.flash.edit_all.notice.update_all", model: pick_model_from_locale(:user))
+    end
+  end
 end

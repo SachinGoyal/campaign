@@ -1,26 +1,31 @@
-<div class="row selected-row selected-row-bottom " id='controller-<%=element%>'>
+<div class="row selected-row selected-row-bottom white_text" id='controller-<%= element.to_s.downcase.pluralize %>'>
   <div class="col-md-12 selected-td">
     <ul>
-      <% if can? :update, element.classify %>
-        <li>
-	      <%= link_to '#' , data: { confirm: 'Are you sure You want to enable selected?' } do %>
-	        <i class="fa fa-line-chart profile-enable"></i>
-	        <span>Enable</span>
-	      <% end %>
-      	</li>
+      
+      <%if element.name != 'Newsletter'%>
+        <% if can? :update, element %>
+          <li>
+  	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_enable', :model_name => pick_model_from_locale(element.name.downcase.to_sym).try(:downcase).try(:pluralize,2)) } do %>
+  	        <i class="fa fa-pencil profile-enable"></i>
+  	        <span><%= t('frontend.shared.enable') %></span>
+  	      <% end %>
+        	</li>
 
-      	<li>
-	      <%= link_to '#' , data: { confirm: 'Are you sure You want to desable selected?' } do %>
-	        <i class="fa fa-pencil"></i>
-	        <span>Disable</span>
-	      <% end %>
-      	</li>
+        	<li>
+  	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_disable',  :model_name => pick_model_from_locale(element.name.downcase.to_sym).try(:downcase).try(:pluralize,2)) } do %>
+  	        <i class="fa fa-pencil"></i>
+  	        <span><%= t('frontend.shared.disable') %></span>
+  	      <% end %>
+        	</li>
+        <% end %>
       <% end %>
-      <% if can? :destroy, element.classify %>
+
+      <% if can? :delete, element  %>
       	<li>
-	      <%= link_to '#' , data: { confirm: 'Are you sure You want to delete selected ?' } do %>
-	        <i class="custom-delete"></i>
-	        <span>Delete</span>
+	      <%= link_to '#' , data: { confirm: t('frontend.shared.confirm_delete_all', :model_name => pick_model_from_locale(element.name.downcase.to_sym).try(:downcase).try(:pluralize,2)) } do %>
+          
+	        <span class="custom-delete"><i class="fa fa-plus"></i></span>
+	        <span><%= t('frontend.shared.delete_link') %></span>
 	      <% end %>
       	</li>
       <% end %>

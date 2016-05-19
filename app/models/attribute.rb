@@ -18,19 +18,18 @@
 
 class Attribute < ActiveRecord::Base
   
-  acts_as_paranoid # Soft Delete
-  
+  acts_as_paranoid # Soft Delete  
   acts_as_tenant(:company) #multitenant
   
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   scope :active, -> { where(status: 'true') }
   #scope
 
   #validation
-  validates_uniqueness_to_tenant :name
-  validates :name, presence: true, length: {in: 2..50}
-  validates :description, presence: true, length: {in: 2..50}
+  validates_uniqueness_to_tenant :name, scope: :deleted_at
+  validates :name, presence: true, length: {in: 2..150}
+  validates :description, presence: true, length: {in: 2..255}
   validates_inclusion_of :status, in: [true, false]
   #validation
 
@@ -44,20 +43,19 @@ class Attribute < ActiveRecord::Base
 
   def check_contacts_and_profiles
     if contacts.any? or profiles.any?
-      errors[:base] << "Cannot delete Attribute while Contacts/Profiles exist"
+      errors.add(:base, :contacts_exist)
       return false
     end
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(name)
+    if auth_object == "own"
+      %w(name status created_at)
+    else
+      %w(name)
+    end
   end
-  # ransacker :id do
-  #   Arel.sql(
-  #     "regexp_replace(
-  #       to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')"
-  #   )
-  # end
+  
 
   #Class Methods
   class << self
@@ -66,7 +64,7 @@ class Attribute < ActiveRecord::Base
       ids.reject!(&:empty?)
       Attribute.find(ids).each do |attribute|
         if action == 'delete'
-          attribute.destroy!
+          attribute.destroy
         else
           status = action == 'enable' ? 1 : 0
           attribute.update(:status => status )
@@ -75,6 +73,4 @@ class Attribute < ActiveRecord::Base
     end
   end
   #Class Methods
-
-
 end

@@ -1,22 +1,23 @@
 <% model_class = User %>
-<div class="custom-table">
+<div class="custom-table" data-bottom-url='/users/edit_all'>
   <div class="row th">
-    <div class="row th">
-    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:username) %></div>
-    <!-- <div class="col-md-2"><%#= model_class.human_attribute_name(:email) %></div> -->
-    <div class="col-md-2"><%= model_class.human_attribute_name(:status) %></div>
-    <div class="col-md-2">Date</div>
+    <div class="col-md-1">
+      <% if can?(:update , User) or can?(:delete , User) %>
+        <input name="" id='select-all' type="checkbox" value="">
+      <% end %>
+      </div>
+    <div class="col-md-3"><%=sort_link(@q, :username) %></div>
+    <div class="col-md-3"><%=sort_link(@q, :status) %></div>
+    <div class="col-md-4"><%#=sort_link(@q, :created_at) %>Date</div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
-  </div><!-- row -->
-
- <% if @users.present? %>
+  <% if @users.present? %>
     <div id="user">
       <%= render @users %>
     </div>
   <%else%>
-    <h2 class='text-center'><em>No Record Found</em></h2>  
+    <h2 class='text-center'><em><%= t('frontend.shared.no_record') %></em></h2>  
   <% end %>
+
 </div>

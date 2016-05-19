@@ -1,0 +1,2 @@
+class EmailServicesController < ApplicationController
+end

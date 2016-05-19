@@ -22,7 +22,7 @@ class  SearchbyDateType
     attr = @attributes[@attribute_select_val]
     switch attr.type
       when 'boolean'
-        @renderDropDownAssociation(null, name_select_value)
+        @renderDropDownBoolean(@name_select_value)
         @selectPredicateDisabled(booleans_association)
       when 'string', 'text'
         if attr.association
@@ -47,12 +47,29 @@ class  SearchbyDateType
       else 'No tiene tipo'
 
   selectPredicateDisabled: (attributes_enabled, selected = null) ->
-    @predicate_select.find('option').prop('disabled', true)
+    @predicate_select.html("<option value='eq'>Equal</option><option value='not_eq'>Not equal to</option><option value='lt'>Less than</option><option value='lteq'>Less than</option><option value='gt'>Greater than</option><option value='gteq'>Greater than</option><option value='in'>In</option><option selected='selected' value='cont'>Contains</option><option value='not_cont'>Not contains</option><option value='start'>Starts with</option><option value='not_start'>Doesn't start with</option><option value='end'>Ends with</option><option value='not_end'>Doesn't end with</option><option value='date_eq'>Date Equal To</option><option value='date_not_eq'>Date not equal to</option><option value='date_lt'>Date less than</option><option value='date_lteq'>Date greater than equal to</option><option value='date_gt'>Date greater than</option><option value='date_gteq'>Date greater than equal to</option>")
     if @no_load
       if selected then @predicate_select.val(selected) else @predicate_select.val(attributes_enabled[0])
+
     @predicate_select.find('option').each (i) ->
-      this.disabled = false if this.value in attributes_enabled
+      this.remove() unless this.value in attributes_enabled
       return true
+
+  renderDropDownBoolean: (name_select_value) ->
+    row_current = @row
+    elem = $('input[name='+ "'" + name_select_value + "'" +']')
+    
+    selected = row_current.find(".box_search").find('input').val()
+    row_current.find(".box_search").hide()
+    row_current.find(".box_select").empty()
+    select_row = $("<select class='form-control'><option value=''>- Select - </option>")    
+    select_row.prop({'name': name_select_value, 'id': elem.attr('id')})    
+    select_row.append("<option value='true'> Enabled </option>")
+    select_row.append("<option value='false'> Disabled </option>")
+    select_row.val(selected)
+    row_current.find(".box_select").append(select_row)
+    row_current.find(".box_select").show()
+
 
   renderDropDownAssociation: (model, name_select_value) ->
     url = "/apis/index?model=#{model}"

@@ -1,0 +1,204 @@
+<script type="text/javascript">
+        var noBorder = { 
+        states:{
+            hover:{
+                halo: {
+                    size: 1
+                }     
+            }
+        }
+    };
+    $(function() {
+        Highcharts.setOptions({
+            colors: ['#1ABB9C', '#e8ebeb']
+        });
+        <% if @data.present? %>
+            <% @data.each_with_index do |data,i|%>
+
+            // Create the chart for container0
+            var chart_completion = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container<%=i%>',
+                    type: 'pie',
+                    margin: [0,0,0,0],
+                    height: 100,
+                    width: 100
+
+                },
+                tooltip: {
+                    enabled: false,
+                },
+                plotOptions: {
+                    pie: {
+                        slicedOffset: 0,
+                        size: '100%',
+                        dataLabels: {
+                            enabled: false
+                        }
+                    },
+                    series: noBorder
+                }, 
+                title: {
+                    text: "<%=((data * 100).to_f/@total_emails.to_f).round(2) %>%",
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    style: {
+                        fontSize: '9.5px'
+                    }
+                    
+                },      
+                credits: {
+                   enabled: false
+                },
+                series: [{
+                    name: 'Browsers',
+                    data: [["Stat", <%= data %>],[,<%= @total_emails - data%>]],
+                    innerSize: '80%',
+                    showInLegend:false,
+                    dataLabels: {
+                        enabled: false
+                    },
+                    states:{
+                        hover: {
+                            enabled: false
+                        }
+                    },
+                    point : {
+                        
+                    }
+                }]
+            });
+            
+            Highcharts.setOptions({
+                colors: ['#1ABB9C', '#e8ebeb']
+            });
+            <% end %>
+
+            var chart_completion = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container11',
+                    type: 'pie',
+                    margin: [0,0,0,0],
+                    height: 100,
+                    width: 100
+
+                },
+                tooltip: {
+                    enabled: false,
+                },
+                plotOptions: {
+                    pie: {
+                        slicedOffset: 0,
+                        size: '100%',
+                        dataLabels: {
+                            enabled: false
+                        }
+                    },
+                    series: noBorder
+                }, 
+                title: {
+                    text: "<%=((@emails_sent.to_f * 100).to_f/@total_emails.to_f).round(2) %>%",
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    style: {
+                        fontSize: '9.5px'
+                    }
+                    
+                },      
+                credits: {
+                   enabled: false
+                },
+                series: [{
+                    name: 'Browsers',
+                    data: [['Stat' ,<%=@emails_sent.to_f %>],['', <%=@total_emails.to_f - @emails_sent.to_f%>]],
+                    innerSize: '80%',
+                    showInLegend:false,
+                    dataLabels: {
+                        enabled: false
+                    },
+                    states:{
+                        hover: {
+                            enabled: false
+                        }
+                    },
+                    point : {
+                        
+                    }
+                }]
+            });
+            
+            Highcharts.setOptions({
+                colors: ['#1ABB9C', '#e8ebeb']
+            });
+
+          <% end %>
+
+    });
+</script>
+<%= form_tag(stats_campaigns_path, {:method => :get}) do %>
+  <div class="row">
+	<div class="col-md-12">
+		<div class="col-md-8">
+		<label class="col-xs-2 custom-label-control control-label"><%= t('frontend.shared.stats') %> <i class="fa fa-chevron-right custom-spacing-left"></i></label>
+		<div class="col-xs-5">
+        <% if @campaign %>
+            <%= select_tag :campaign_id, options_from_collection_for_select(@campaigns, "id", "name", @campaign.id), {:prompt => t('frontend.campaign.select_campaign'), :class => 'form-control required'} %>
+        <% else %>
+            <%= select_tag :campaign_id, options_from_collection_for_select(@campaigns, "id", "name"), {:prompt => t('frontend.campaign.select_campaign'), :class => 'form-control required'} %>
+        <% end %>
+		</div><!-- col-xs-5 -->
+
+        <div class="col-xs-5" id='campaign-newsletter'>
+        <% if @newsletter %>
+            <%= select_tag :newsletter_id, options_from_collection_for_select(@newsletter.campaign.newsletters.sent, "id", "name", @newsletter.id), {:prompt => t('frontend.campaign.select_newsletter'), :class => 'form-control required'} %>
+        <% elsif @campaign %>
+            <%= select_tag :newsletter_id, options_from_collection_for_select(@campaign.newsletters.sent, "id", "name"), {:prompt => t('frontend.campaign.select_newsletter'), :class => 'form-control required'} %>
+
+        <% else %>
+            <%= select_tag :newsletter_id, '', {:prompt => t('frontend.campaign.select_newsletter'), :class => 'form-control required'} %>
+        <% end %>
+        </div><!-- col-xs-5 -->
+
+		</div><!-- col-md-8 -->
+    <%= submit_tag t('frontend.campaign.stat'), class: 'btn dark-btn-custom' %>
+    </div>
+  </div><!-- row -->
+
+  <div class = 'row'>
+  <div class="custom-white-spacer">
+
+  <% if @data.present? %>
+      <% @data.each_with_index do |data , i| %>
+            <div class = 'col-sm-2'>
+                <div class="row">
+                  <div class = 'stat-heading'><%= @stats[i] %></div>
+                <div class = 'box-bg'>
+                <div class = 'row'>
+                  <div id="container<%= i%>" style="" data-stat='<%= data%>' class = 'stat-div'></div>
+                </div>
+                <div class = 'row'>
+                  <div class = 'stat-count'>(<%= data %>)</div>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+      <% end %>
+      <div class = 'col-sm-2'>
+                <div class="row">
+                  <div class = 'stat-heading'><%= t('activerecord.attributes.email_service.emails_sent') %></div>
+                <div class = 'box-bg'>
+                <div class = 'row'>
+                  <div id="container11" style="" class = 'stat-div'></div>
+                </div>
+                <div class = 'row'>
+                  <div class = 'stat-count'>(<%= @emails_sent %>)</div>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+  <% end %>
+  </div>
+<% end %>
+</div>

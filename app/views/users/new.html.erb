@@ -1,11 +1,6 @@
 <div class="row">
-<div class="page-title">
-  <div class="title_left"><h2>Add User</h2></div><!-- title_left -->
-    
-    <div class="clearfix"></div>
-    
-    
-    
-</div><!-- page-title -->
+	<div class="page-title">
+  <div class="title_left"><h2><%= t("frontend.shared.add", :model_name => pick_model_from_locale(:user))%></h2></div>	  <div class="clearfix"></div>
+	</div><!-- page-title -->
 </div><!--row-->
 <%= render :partial => 'form' %>

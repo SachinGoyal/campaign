@@ -1,6 +1,6 @@
 class ChangeGenderToStringInContact < ActiveRecord::Migration
   def change
   	remove_column :contacts, :gender_id, :integer
-  	add_column :contacts, :gender, :string
+  	add_column :contacts, :gender, :boolean
   end
 end

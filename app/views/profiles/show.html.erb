@@ -1,11 +1,7 @@
   <div class="row">
     <div class="page-title">
-      <div class="title_left"><h2>View Profile</h2></div><!-- title_left -->
-
+      <div class="title_left"><h2><%= t('frontend.shared.view', :model_name => pick_model_from_locale(:profile)) %></h2></div><!-- title_left -->
       <div class="clearfix"></div>
-
-
-
     </div><!-- page-title -->
   </div><!--row-->
 
@@ -15,40 +11,46 @@
         <div class="col-lg-2 col-xs-1">&nbsp;</div>
         <div class="col-md-5 col-xs-10">
           <form class="form-horizontal">
-
-
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Name</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.profile.name') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= @profile.name%>
               </div>
             </div>
-
+            <% if @profile.description.present? %>
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.profile.description') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @profile.description %>
+                </div>
+              </div>
+            <% end %>  
 
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">Status</label>
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.profile.status') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
                 <%= display_status(@profile) %>
               </div>
             </div>
 
-            <% unless @profile.interest_areas.empty? %>            
-               <div class="form-group form-group-sm">
-                <label class="col-xs-4 text-right control-label" for="formGroupInputSmall">Area of interest</label>
-                <div class="col-sm-8 col-xs-12 default-without-input">
-                  <%=  @profile.interest_areas.collect(&:name).uniq.map(&:capitalize).join(' ') %> </div>
-                  <div class="clearfix"></div> 
-                </div>
-            <% end %>    
-            </form>
-
-
+           
+             <div class="form-group form-group-sm">
+              <label class="col-xs-4 text-right control-label"><%#= t('frontend.profile.extra_fields') %>Extra Fields</label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+              <% if @profile.extra_fields.collect(&:field_name).any? %>
+              Email,
+              <% else%>
+              Email
+              <% end %>
+                <%= @profile.extra_fields.collect(&:field_name).uniq.map(&:humanize).join(', ') %> </div>
+                <div class="clearfix"></div> 
+              </div>
             </form>
 
           </div>
           <div class="col-lg-4 col-xs-1">
             <div class="form-group form-group-sm">
-              <label class="col-sm-4 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
+              <label class="col-sm-4 col-xs-12 control-label">&nbsp;</label>
               <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
             </div>
 
@@ -61,6 +63,7 @@
       </div><!-- row -->
     </div><!--  custom-container -->
 
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<% if can? :update, Profile %>
+  <%= link_to t('buttons.edit'), edit_profile_path(@profile) %> |
+<% end %>
+<%= link_to t('buttons.back'), profiles_path %>

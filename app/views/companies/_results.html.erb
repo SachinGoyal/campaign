@@ -1,22 +1,26 @@
 <%- model_class = Company -%>
-<div class="custom-table">
+<div class="custom-table" data-bottom-url='/companies/edit_all'>
   <div class="row th">
-    <div class="col-md-1" id='select-all'><input name="" type="checkbox" value=""></div>
-    <div class="col-md-2"><%= sort_link(@q, :name, "Company Name") %></div>
-    <!-- <div class="col-md-2"><%#= sort_link(@q, :subdomain) %></div> -->
-    <div class="col-md-3"><%= sort_link(@q, :free_emails, "Per Month Emails") %></div>
-    <div class="col-md-2"><%= model_class.human_attribute_name(:status) %></div>
-    <div class="col-md-3">Date</div>
+    <div class="col-md-1">
+    <% if can?(:update , Company) or can?(:delete , Company ) %>
+      <input name="select-all"  id='select-all' type="checkbox" value="">
+    <% end %>  
+    </div>
+
+    <div class="col-md-2"><%= sort_link(@q, :name, t('frontend.company.name'))%></div>
+    <div class="col-md-3"><%= sort_link(@q, :free_emails, t('frontend.company.free_emails')) %></div>
+    <div class="col-md-2"><%= sort_link(@q, :status) %></div>
+    <div class="col-md-3"><%#= sort_link(@q, :created_at) %>Date</div>
     <div class="col-md-1">&nbsp;</div>
   </div><!-- row -->
 
   <% if @companies.present? %>
-    <div id="company">
+    <div id="record">
       <%= render @companies %>
     </div>
   <%else%>
-    <h2 class='text-center'><em>No Record Found</em></h2>  
+    <h2 class='text-center'><em><%= t('frontend.shared.no_record') %></em></h2>  
   <% end %>
-  <%= render 'shared/bootam_action_link', element: 'companies' %>
+  <%= render 'shared/bootam_action_link', element: Company %>
 </div>
 

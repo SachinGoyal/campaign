@@ -6,51 +6,49 @@
 
 /** ******  left menu  *********************** **/
 $(document).ready( function() {
+    
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
 
-    $("#select-all").change(function () {
-        var checked = $("#select-all").find(":checkbox").is(":checked")
-        if(checked){
-            $('.custom-table').find(":checkbox").prop("checked", true);
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
         }
+    };
 
-        else{
-            $('.custom-table').find(":checkbox").prop("checked", false);
-        }
-    });
-//////////////////////////////////////////////////////////////
-    $(":checkbox").on('click',function (e) {
-        if ($('.td').find(':checkbox').is(':checked')){
-            $(".selected-row-bottom").show();
-            $(".selected-row-inline").hide();
-        }
-        else{
-            $(".selected-row-bottom").hide();
-        }
-        $('.td').find("input:checkbox").not(":checked").length > 0 ? $("#select-all input").prop('checked',false) : $("#select-all input").prop('checked',true);
-    });
+    var sample_fields = function() {
+        var profile_id = $('.profile-sample').val();
+          // if (profile_id == '')
+          //   console.log("Select Profile to upload Contacts");
+          // else {
+              $.ajax({
+                method: "POST",
+                data: { profile_id: profile_id },
+                url: '/contacts/sample_fields.js'
+              })
+      //    }
+    }
 
-
-///////////////////////////////////////////////////
-    $('.anchor-block').click(function(e){
-        $('.custom-table').find(":checkbox").prop("checked", false);
-        $(".selected-row-bottom").hide();
-        $(".selected-row-inline").hide();
-        $(this).parent().parent().next().slideToggle();
-        e.stopPropagation();
-    });
-
-    $(".selected-row-bottom").find('ul').children().on('click', function(){
-          var controller = $(".selected-row-bottom").attr('id').split('-')[1]
-          var action = $(this).text();
-          var a = myFunction();
-        $.ajax({
-          method: "GET",
-          url: "/" + controller + "/edit_all/",
-          data: { group_ids: a , get_action: action }
-        })
-    });
-
-    function myFunction(){
+    var dynamic_field = function() {
+     var profile_id = $('#contact_profile_id').val();
+          if (profile_id == '')
+              $('.dynamic_field').hide();
+          else {
+              $('.dynamic_field').show();
+              $.ajax({
+                method: "POST",
+                data: { profile_id: profile_id },
+                url: '/contacts/dynamic_field.js'
+              })
+          }
+    }
+    function get_ids(){
         var a = [];
         $('input[type=checkbox]').each(function (index) {
            if (this.checked) {
@@ -59,6 +57,49 @@ $(document).ready( function() {
         });
      return a;
     }
+     
+
+    $(".selected-td ul li a").on('click', function(){
+          var url = $(".custom-table").data('bottom-url');
+          var action = $(this).text();
+          var a = get_ids();
+          var current_page = getUrlParameter("page");
+        $(this).on('confirm:complete', function(e, response) {
+          if(response) {
+            $.ajax({
+              method: "GET",
+              url: url,
+              data: {group_ids: a, get_action: action, page: current_page}
+            })
+          }
+        });
+    });
+
+    
+
+    $("#preview-template").on('click', function(){
+          var template_id = $('#newsletter_template_id').val();
+          if (template_id == '')
+              alert("Please Select a template");
+          else {
+              $.ajax({
+                method: "GET",
+                url: '/templates/' + template_id + '/preview.js'
+              })
+          }
+    });
+
+    $("#new_contact").on('load', function(){
+    dynamic_field();
+    });
+    
+    $("#contact_profile_id").on('change', function(){
+          dynamic_field();
+    });
+    
+    $(".profile-sample").on('change', function(){
+      sample_fields();
+    });
 
 
 
@@ -83,14 +124,12 @@ $(document).ready( function() {
     });
 
 
-
-
     $(document).on('change', '.btn-file :file', function() {
-  var input = $(this),
+      var input = $(this),
       numFiles = input.get(0).files ? input.get(0).files.length : 1,
       label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-  input.trigger('fileselect', [numFiles, label]);
-});
+      input.trigger('fileselect', [numFiles, label]);
+    });
 
     $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
 

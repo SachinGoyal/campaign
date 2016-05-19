@@ -1,0 +1,20 @@
+<fieldset class="field my_fieldset">
+  <div class="center group_condition_legend">
+
+    <div class="advance-search-drop group_cross"><%= t("asearch.choose_combinations") %> <%= f.combinator_select.html_safe %>
+        <%= link_to "#", {:class => 'remove_fields'} do %>
+          <i class="fa fa-times"></i>
+        <% end %>
+    </div>
+    
+    <div class="cb"></div>   
+  </div>
+
+  <div class="control-group custom_fields">
+    <%= f.condition_fields do |c| %>
+      <%= render "condition_fields", f: c %>
+    <% end %>
+    <%= link_to_add_fields t('asearch.addcondition'), f, :condition %>      
+  </div>
+
+</fieldset>

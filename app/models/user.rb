@@ -21,11 +21,27 @@
 #  company_id             :integer
 #  status                 :boolean
 #  image                  :string
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#  invitation_token       :string
+#  invitation_created_at  :datetime
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_id          :integer
+#  invited_by_type        :string
+#  invitations_count      :integer          default(0)
 #
 # Indexes
 #
 #  index_users_on_company_id            (company_id)
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_invitation_token      (invitation_token) UNIQUE
+#  index_users_on_invitations_count     (invitations_count)
+#  index_users_on_invited_by_id         (invited_by_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
@@ -36,7 +52,7 @@ class User < ActiveRecord::Base
   acts_as_tenant(:company) #multitenant#multitenant
 
   #scope
-  default_scope {order('id ASC')}
+  default_scope {order('id DESC')}
   scope :active, -> { where(status: 'true') }
   #scope
     
@@ -48,29 +64,33 @@ class User < ActiveRecord::Base
   
   # devise 
   attr_accessor :login
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   # devise 
   
   # validation
-  validates :username, presence: true, uniqueness: true, length: { in: 4..50 }, format: { with: /\A[a-zA-Z][a-zA-Z ]+\z/}
+  validates :username, presence: true, uniqueness: {scope: :deleted_at}, length: { in: 4..50 }
+  # , format: { with: /\A[a-zA-Z0-9 ]+\z/, :message => I18n.t('activerecord.errors.models.user.attributes.username.format')}
   validates :role_id, presence: true
   # validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
   # validation
   
+  # callback
+  before_destroy :check_company_admin
+  # callback
+
   # relations
   has_many :campaigns
   belongs_to :role
   belongs_to :company
   # relations
   
-  # callback
-  before_destroy :check_company_admin
-  # callback
 
   #ransack
-  ransacker :created_at do
-    Arel::Nodes::SqlLiteral.new("date(users.created_at)")
+  def self.load_custom_attributes
+    ransacker :created_at do
+      Arel::Nodes::SqlLiteral.new("date(users.created_at)")
+    end
   end
 
   def check_company_admin
@@ -79,25 +99,26 @@ class User < ActiveRecord::Base
     #   return false
     # end
     if role.name == SUPERADMIN
-      errors[:base] << "Cannot delete super admin"
+      errors.add(:base, :delete_admin)
       return false
     end
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    super & %w(username email created_at)
+    super & %w(username email created_at status)
   end
   #ransack
 
   # class function
   class << self
-    
     def edit_all(ids, action)
       action = action.strip.downcase
       ids.reject!(&:empty?)
       User.find(ids).each do |user|
         if action == 'delete'
-          user.destroy!
+          unless user.role.name == COMPANY_ADMIN
+            user.destroy
+          end
         else
           status = action == 'enable' ? 1 : 0
           user.update(:status => status )
@@ -132,6 +153,10 @@ class User < ActiveRecord::Base
     end 
   end 
 
+  def confirmation_required?
+    false
+  end
+
   def self.send_reset_password_instructions(attributes={})
     recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
     if !recoverable.active?
@@ -145,7 +170,11 @@ class User < ActiveRecord::Base
   # class function
 
   def active_for_authentication?
-    super && status == true
+    if is_admin?
+      super 
+    else
+      super && status
+    end
   end
 
   def is_admin?
@@ -155,17 +184,4 @@ class User < ActiveRecord::Base
   def is_companyadmin?
     role.name == COMPANY_ADMIN
   end
-
-  private
-
-
-  # def self.ransackable_scopes(auth_object = nil)
-  #   if auth_object.try(:admin?)
-  #     # allow admin users access to all three methods
-  #     %i(active hired_since salary_gt)
-  #   else
-  #     # allow other users to search on active and hired_since only
-  #     %i(auth_object.company.users)
-  #   end
-  # end
 end

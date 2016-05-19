@@ -1,7 +1,6 @@
-<div class="left_col" role="main">
-              
+<div class="row" role="main">              
   <div class="page-title">
-    <div class="title_left"><h2>Edit Roles</h2></div><!-- title_left -->
+    <div class="title_left"><h2><%= t('frontend.shared.edit', :model_name => pick_model_from_locale(:role)) %></h2></div><!-- title_left -->
       <!--title_right -->
       <div class="clearfix"></div>
 <%= render 'form', role: @role, functions: @functions %>

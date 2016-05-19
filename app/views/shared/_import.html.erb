@@ -1,125 +1,153 @@
-<%#= content_tag :a, "Import", href: "#", data: {toggle: 'modal', target: '#mymodal'} %>
 <script type="text/javascript">
   $(document).ready( function() {
     $('[data-dismiss=modal]').on('click', function (e) {
-      $('#error_explanation').html('');
+      $('#error_disp').html('');
       $('#new_contact_import').trigger("reset");
     });
-});
+    $('#contact_import_action_import').click(function() {
+      $('.contacts_label').show();
+      $('.contacts_options').show();
+    });
+    $('#contact_import_action_unsubscribe').click(function() {
+      $('.contacts_label').hide();
+      $('.contacts_options').hide();
+    });
+  });
 </script>
-<div class='text-right import_export_links'>
-<% if can? :create, Contact %>
-  <a href="#" data-toggle="modal" data-target="#myModal">Import Contacts <i class="fa fa-file-excel-o"></i></a>
-<% end %>
-<% if can? :read, Contact %>
-  <%= link_to contacts_path(format: "csv") do %>
-    <span>Export Contacts</span>
-    <i class="fa fa-file-excel-o"></i>
+
+<div class='import_export_links import_export_links_margin'>
+  <% if can? :create, Contact %>
+    <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-file-excel-o"></i> &nbsp;<%= t('buttons.import') %></a>
   <% end %>
-<% end %>
+
+  <%# if can? :read, Contact %>
+  <%#= link_to contacts_path(format: "xls") do %>
+  <%#= link_to contacts_path(format: "csv") do %>
+  <!-- <span><%#= t('buttons.export') %></span> -->
+  <!-- <i class="fa fa-file-excel-o"></i> -->
+  <%# end %>
+  <%# end %>
 </div>
+
 <div id="myModal" class="modal fade" role="dialog">
-<div class="modal-dialog">
+
+  <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
-        <div class="modal-header">
-  	       <button type="button" class="close" data-dismiss="modal">&times;</button>
-     	   <h4 class="modal-title">Import Contacts</h4>
-      	</div>
-      	<div class="modal-body">
-       		<div class="popup-container">
-          <%= simple_form_for ContactImport.new, remote: true, multipart: true, authenticity_token: true, data: {type: "script"} do |f| %>
-    			    <div id="error_explanation">
-                <% if @contact_import and @contact_import.errors.any? %>              
-                  <%= render 'errors', :locals => {:model_name => @contact_import} %>
-                <% end %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= t('buttons.import') %></h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="popup-container">
+          <div class="row">
+            <%#= simple_form_for @contact_import, remote: true, multipart: true, authenticity_token: true, html: { 'data-type': 'script'}  do |f| %>
+            <%= form_for ContactImport.new, url: contact_imports_path(:format => "js") , remote: true, multipart: true, html: { 'data-type': 'script'} do |f| %>
+              <div id="error_disp">
+              <% if @contact_import and @contact_import.errors.any? %>              
+                <%= render 'errors', :locals => {:model_name => @contact_import} %>
+              <% end %>
               </div>
+            
 
-		    	  <div class="row">
-		        	<div class="form-group form-group-sm">
-		            <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select Profile</label>
-		            <div class="col-xs-6">
-		            	<%# if current_user.is_admin? %>
-  							    <%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), {}, { :class => 'form-control' } %>
-  						    <%# else %>
-  						    <%# end %>
-		            </div>
-		            <div class="col-xs-3">&nbsp;</div>
-		            <div class="clearfix"></div>
-		          </div>
-        
-        		  <div class="form-group form-group-sm">
-            		<label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall">Select File</label>
-            		<div class="col-xs-6">
-            			<div class="input-group">
-                			<input type="text" class="form-control" readonly="" placeholder = "Upload only CSV files">
-                			<span class="input-group-btn">
-            	        		<span class="btn btn-primary btn-file custom-dark-btn">
-                	        		<%= f.file_field :file, :accept => "text/csv" %> Browse
-                    			</span>                          
-                			</span>
-
-                      <span class="help-block"></span>
-            			</div>
-            		</div>
-            		<div class="col-xs-3 green-import-btn">
-                  <%= button_tag("Import", type: 'submit', class: "fa fa-cloud-download") %>
+            <div class="form-group form-group-sm">
+              <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall"><%= t('frontend.import.action') %></label> 
+              <div class="radio">
+                  <label for="radio01" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.enabled') %>
+                  <%= f.radio_button :action ,"Import",class: "radioalign",checked: true %><%= t('frontend.import.import') %></label>
+                  <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
+                  <%= f.radio_button :action ,"Unsubscribe",class: "radioalign" %><%= t('frontend.import.unsubscribe') %></label>
+              </div> 
+            </div>
+            
+              <div class="form-group form-group-sm">
+                <label class="col-sm-3 col-xs-3 control-label"><%= t('frontend.import.select_profile') %></label>
+                <div class="col-xs-6">
+                  <%= f.select :profile_id, options_for_select(Profile.active.pluck(:name, :id)), { include_blank: t('frontend.contact.select_profile') }, { :class => 'form-control profile-sample' } %>
                 </div>
 
-            	  <div class="clearfix"></div>
+                <div class="col-xs-3">&nbsp;</div>
+                <div class="clearfix"></div>
+              </div>
 
-        		<% end %>
-        		</div>
-    		</div>
-    		<div class="row">
-     			<div class="col-xs-12"><div class="sample-fields-heading">Sample Fields</div></div>
-    		</div>
-    
-    		<div class="row">
-    			<div class="col-xs-12 popup-sample-table">
-        			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-             			<tr>
-              				<th scope="col">first_name</th>
-              				<th scope="col">last_name</th>
-              				<th scope="col">email</th>
-                      <th scope="col">country</th>
-                      <th scope="col">city</th>
-                      <th scope="col">gender</th>
-             			</tr>
-             			
-             			<tr>
-			              <td scope="col">John</td>
-			              <td scope="col">Doe</td>
-			              <td scope="col">John.Doe@gmail.com</td>
-                    <td scope="col">India</td>
-                    <td scope="col">Delhi</td>
-                    <td scope="col">Male</td>
-			            </tr>
-            		</table>
-        		</div>
-    		</div>
-    	</div>
+              <div class="form-group form-group-sm">
+                <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall"><%= t('frontend.import.file') %></label>
+                <div class="col-xs-6">
+                  <div class="input-group">
+		   <%= f.file_field :file, :placeholder =>  t('frontend.import.placeholder.csv_file') %>
+                   <!-- <input type="text" class="form-control" readonly="" placeholder = <%#= t('frontend.import.placeholder.csv_file') %> value=<%#= @contact_import.try(:file).try(:original_filename) %>>
+                    <span class="input-group-btn">
+                      <span class="btn btn-primary btn-file custom-dark-btn">
+                        <%#= f.file_field :file ,  :accept => 'text/xls'%> <%#= t('buttons.browse') %>
+                      </span>                          
+                    </span> -->
+
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+              </div>
+
+                
+                <label class="col-sm-3 col-xs-3 control-label contacts_label" for="formGroupInputSmall"><%= t('frontend.import.contacts') %></label> 
+                <div class="radio contacts_options">
+                  <label for="radio01" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.enabled') %>
+                  <%= f.radio_button :way ,"Add",class: "radioalign",checked: true %><%= t('frontend.import.add') %></label>
+                  <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
+                  <%= f.radio_button :way ,"Replace",class: "radioalign" %><%= t('frontend.import.replace') %></label>
+                  <label for="radio02" class="radio-inline action-radio"><span></span><%#= t('frontend.shared.disabled') %>
+                  <%= f.radio_button :way ,"Add/Update",class: "radioalign" %><%= t('frontend.import.add_update') %></label>
+                </div> 
+                </div>
+             
+              <div class="row">
+
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12 popup-sample-table">
+                 <!--  <div class="row">
+                    <div class="col-xs-12"><div class="sample-fields-heading"><%#= t('words.sample_fields') %></div></div>
+                  </div> -->
+
+            <div class="row">
+              <div class="col-xs-12 popup-sample-table">
+                <div class='sample-fields'>
+                  <%= render partial: 'shared/sample_fields', locals: {profile: @profile}%>
+                </div>    
+              </div>
+            </div>
+                </div>
+              </div>
+
+              <div class="clearfix"></div><br>
+
+              <div class="col-md-12 col-xs-12">
+              <div class="clearfix"></div><br>
+                <div class="col-lg-2 col-xs-1">&nbsp;</div>
+                <div class="col-md-5 col-xs-10">
+                  <div class="form-group custom-from-group">
+                    <div class="col-xs-2">&nbsp;</div>              
+                    <div class="col-xs-10 text-left">
+                      <%= f.submit t('links.import'),  :class =>  'btn btn-primary btn-file custom-dark-btn'%>
+                      <% if can? :read, Contact %>
+                        <%= link_to t(:cancel), contacts_path,class: 'calender-margin' %>
+                      <% end %>
+                    </div>
+                  </div>             
+                </div>
+                <div class="col-lg-4 col-xs-1">&nbsp;</div>
+                <div class="clearfix"></div>
+              </div>
+              <% end %>
+            </div>         
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-primary btn-file custom-dark-btn" data-dismiss="modal"><%= t('buttons.close') %></button> -->
+        </div>
+      </div>
     </div>
-    
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    </div>
-</div>
-</div>
-</div>
-
-<script type="text/javascript">
-
-$( document ).ready(function() {  
-  $('.new_contact_import').submit(function() {      
-    $.ajax({
-      type: "POST",
-      url: $(this).attr('action'),
-      data: new FormData( this ),
-      processData: false,
-      contentType: false
-    });
-    return false; // prevents normal behaviour
-  });
-});
-</script>
+  </div>
+  
+   

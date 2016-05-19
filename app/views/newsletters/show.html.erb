@@ -1,49 +1,153 @@
-<p id="notice"><%= notice %></p>
+  <div class="row">
+    <div class="page-title">
+      <div class="title_left"><h2><%= t('frontend.shared.view', :model_name => pick_model_from_locale(:newsletter)) %></h2></div><!-- title_left -->
+      <div class="clearfix"></div>
+    </div><!-- page-title -->
+  </div><!--row-->
 
-<p>
-  <strong>Campaign:</strong>
-  <%= @newsletter.campaign.name %>
-</p>
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-5 col-xs-10">
+          <form class="form-horizontal">
 
-<p>
-  <strong>Template:</strong>
-  <%= @newsletter.template %>
-</p>
+ 
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.name') %></label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @newsletter.name %>
+              </div>
+            </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @newsletter.name %>
-</p>
+            <% if @newsletter.campaign.present? %>
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.campaign_id') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @newsletter.campaign.name %>
+                </div>
+              </div>
+            <% end %>  
 
-<p>
-  <strong>Subject:</strong>
-  <%= @newsletter.subject %>
-</p>
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.subject') %></label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @newsletter.subject %>
+              </div>
+            </div>
 
-<p>
-  <strong>From name:</strong>
-  <%= @newsletter.from_name %>
-</p>
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.template_id') %></label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @newsletter.template.name %>
+              </div>
+            </div>
 
-<p>
-  <strong>From address:</strong>
-  <%= @newsletter.from_address %>
-</p>
+            <% unless @newsletter.profiles.blank? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label"><%#= t('frontend.newsletter.profiles') %>Profile</label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @newsletter.profiles.map(&:name).join(", ") %>
+                </div>
+              </div>
+            <% end %>
 
-<p>
-  <strong>Reply email:</strong>
-  <%= @newsletter.reply_email %>
-</p>
+            <% unless @newsletter.newsletter_emails.blank? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-sm-4 col-xs-12 control-label"><%= t('frontend.newsletter.email_list') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%= @newsletter.all_emails %>
+                </div>
+              </div>
+            <% end %>
 
-<p>
-  <strong>Created by:</strong>
-  <%= @newsletter.created_by %>
-</p>
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label"><%= t('activerecord.attributes.newsletter.from_name') %></label>
+              <div class="col-sm-8 col-xs-12 default-without-input">
+                <%= @newsletter.from_name %>
+              </div>
+            </div>
 
-<p>
-  <strong>Updated by:</strong>
-  <%= @newsletter.updated_by %>
-</p>
+            <%# unless @contact.interest_areas.empty? %>            
+<!--               <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label" ><%#= t('activerecord.attributes.newsletter.from_address') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%#=  @newsletter.from_address %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+ -->            <%# end %>
 
-<%= link_to 'Edit', edit_newsletter_path(@newsletter) %> |
-<%= link_to 'Back', newsletters_path %>
+            <% unless @newsletter.reply_email.empty? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.reply_email') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  @newsletter.reply_email %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+
+<!--             <%# unless @newsletter.cc_email.try(:empty?) %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label"><%#= t('activerecord.attributes.newsletter.cc_email') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%#=  @newsletter.cc_email %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <%# end %>
+ -->
+<!--             <%# unless @newsletter.bcc_email.try(:empty?) %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label"><%#= t('activerecord.attributes.newsletter.bcc_email') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%#=  @newsletter.bcc_email %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <%# end %>
+ -->
+             <% if @newsletter.scheduled_at.present? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.scheduled_at') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  format_date(@newsletter, :scheduled_at) %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+
+            <% if @newsletter.send_at.present? %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.newsletter.send_at') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%=  format_date(@newsletter, :send_at) %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+            <% end %>
+            
+            <%# if @newsletter.auto_response.try(:present?) %>            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-4 text-right control-label"><%#= t('activerecord.attributes.newsletter.auto_response') %></label>
+                <div class="col-sm-8 col-xs-12 default-without-input">
+                  <%#=  @newsletter.auto_response %> </div>
+                  <div class="clearfix"></div> 
+                </div>
+              </div>
+            <%# end %>
+            
+          
+          </form>
+          <div class="col-lg-4 col-xs-1">
+            <div class="form-group form-group-sm">
+              <label class="col-sm-4 col-xs-12 control-label" >&nbsp;</label>
+              <div class="col-sm-8 col-xs-12 custom-radio-input">&nbsp;</div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="divider"></div>
+        </div>
+
+      </div><!-- row -->
+    </div><!--  custom-container -->
+
+<% if (can? :update, Newsletter) and !@newsletter.sent? %>    
+  <%= link_to t('buttons.edit'), edit_newsletter_path(@newsletter) %> |
+<% end %>
+<%= link_to t('buttons.back'), newsletters_path %>

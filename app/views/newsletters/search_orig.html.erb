@@ -1,0 +1,58 @@
+      <div class="green-Border green-text text-right">Advance Search <i class="fa fa-caret-down"></i></div> 
+        <div class="grey-box">
+          <div class="row">
+            <%= search_form_for @q, url: search_newsletters_path, html: { method: :post, :class => 'form-inline' } do |f| %>                
+              <div class="form-group form-group-sm">
+                <label class="col-xs-3 text-right control-label">Gender</label>
+                <div class="col-xs-3 ">  
+                  <%# Gender.all.each do |gender| %>
+                    <%= f.radio_button :gender_true, 1 %>
+                    <%#= radio_button_tag 'contact[gender_id]', gender.id %>                  
+                    <label><span></span>Male<%#= gender.name %></label>              
+                    <%= f.radio_button :gender_false, 1 %>
+                    <label><span></span>Female<%#= gender.name %></label>              
+                  <%# end %>
+                </div >                            
+                <div class="clearfix"></div> 
+              </div>
+
+              <div class="clearfix"></div> 
+            
+              <div class="form-group form-group-sm">
+                <label class="col-xs-3 text-right control-label" >Country</label>
+                <div class="col-xs-3">
+                  <%= country_select("q", "country_eq", {priority: %w(IN ES), prompt: 'Select Country'}, :class=>"form-control" ) %>
+                </div>
+                <div class="clearfix"></div> 
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label class="col-xs-3 text-right control-label" >City</label>
+                <div class="col-xs-3"> <%= f.search_field :city_cont, :class => "form-control" %> </div>
+                <div class="clearfix"></div> 
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label class="col-xs-3 text-right control-label" >Area of interest</label>
+                <div class="col-xs-3">
+                  <%= f.collection_check_boxes :interest_areas_id_in_any, Attribute.active, :id, :name do |b| %>
+                    <div class="collection-check-box">
+                      <%= b.check_box %>
+                      <%= b.label %>
+                    </div>
+                  <% end %>
+                  <%# Attribute.active.each do |attribute| %>1
+                    <%#= check_box_tag 'contact[interest_area_ids][]', attribute.id %> <label><span></span><%#= attribute.name %></label><br/>
+                  <%# end %>
+                </div>              
+                <div class="clearfix"></div> 
+              </div>
+              <%= f.submit "Search" %> 
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <% @contacts.each do |contact| %>
+        <%= contact.email %><br/>
+      <% end %>

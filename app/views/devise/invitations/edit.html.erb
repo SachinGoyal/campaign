@@ -1,0 +1,40 @@
+<div class="">
+        <a class="hiddenanchor" id="toregister"></a>
+        <a class="hiddenanchor" id="tologin"></a>
+
+        <div id="wrapper">
+            <div id="login" class="animate form">
+                <section class="login_content">
+					<%= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put } do |f| %>
+                        <h1>Sperant</h1>
+                          <% if resource.errors[:invitation_token].count > 0 %>
+                          <div id="error_explanation">
+                              <h2>There were following errors</h2>
+                                <ul><li><%= resource.errors[:invitation_token].full_messages %></li></ul>
+                          </div>
+                          <% end %>
+
+                        <%= f.hidden_field :invitation_token %>
+
+                        <div class="custom-user-password">
+                            <%= f.input :password, :label => false, :class => "form-control" ,:placeholder => t('devise.invitations.edit.placeholder.password'), :maxlength => 150  %>
+                        </div>
+                        <div class="custom-user-password">
+                            <%= f.input :password_confirmation, :label => false, :class => "form-control", :placeholder => t('devise.invitations.edit.placeholder.password_confirmation'), :maxlength => 150 %>
+                        </div>
+                        <div>
+                            <%= f.submit t('buttons.login') , :class =>"btn btn-default form-control dark-theme-btn submit"%>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                <% end %>
+                 <!-- form -->
+                </section>
+                <!-- content -->
+            </div>
+            
+        </div>
+    </div>
+
+
+

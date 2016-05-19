@@ -5,11 +5,14 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
+/config/database.yml
 /.bundle
 /config/database.yml
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
 /tmp
-/config/database.yml
 .idea
+db/schema.rb
+public/assets/*
+public/uploads/*

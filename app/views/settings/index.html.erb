@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Settings</h1>
+<h1><%= t('frontend.shared.list', :model_name => pick_model_from_locale(:setting)) %></h1>
 
 <table>
   <thead>
@@ -21,7 +19,7 @@
         <td><%= setting.admin_email %></td>
         <td><%= setting.admin_footer_content %></td>
         <td><%= link_to 'Show', setting %></td>
-        <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
+        <td><%= link_to t('buttons.edit'), edit_setting_path(setting) %></td>
         <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

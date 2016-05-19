@@ -1,4 +1,5 @@
 module ApplicationHelper
+
  def link_to_add_fields(name, f, type)
     new_object = f.object.send "build_#{type}"
     id = "new_#{type}"
@@ -18,10 +19,16 @@ module ApplicationHelper
   end
 
   def format_date(obj, field)
-  	obj.send(field).send(:strftime, "%d/%m/%y, %I:%M %p")
+  	#obj.send(field).send(:strftime, "%d/%m/%y, %I:%M %p")
+    l(obj.send(field), format: "%d/%m/%y, %I:%M %p")
   end
 
   def display_status(obj)
-    obj.status ? 'Enabled' : 'Disabled' 
+    obj.status ? t('frontend.shared.enabled') : t('frontend.shared.disabled') 
+  end
+
+  def pick_model_from_locale(model_name)
+     I18n.t('activerecord.errors.models')
+     I18n.backend.send(:translations)[I18n.locale][:activerecord][:models][model_name]
   end
 end

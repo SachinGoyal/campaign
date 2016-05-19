@@ -1,169 +1,128 @@
+
 <div class="custom-container">
-  <%= form_for(@newsletter, :html => {:class => 'form-horizontal'}) do |f| %>
+  <%= form_for(@newsletter, :html => {:class => 'form-horizontal newsletter_form'}) do |f| %>
     <div class="row">
-    <div class="col-md-12 col-xs-12">
-      <div class="col-lg-2 col-xs-1">&nbsp;</div>
-      <div class="col-md-6 col-xs-10">
-        <div class="form-horizontal">
+      <div class="col-md-12 col-xs-12">
+        <div class="col-lg-2 col-xs-1">&nbsp;</div>
+        <div class="col-md-6 col-xs-10">
+          <div class="form-horizontal">
           
-          <div class="form-group form-group-sm">
-            <%= f.label :name, :class => "col-sm-3 col-xs-12 control-label"%>      
-            <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :name, :class => 'form-control' %>
-            </div>
-          </div>
-          
-          <div class="form-group form-group-sm">
-            <%= f.label :campaign_id, :class => "col-sm-3 col-xs-12 control-label"%>      
-            <div class="col-sm-9 col-xs-12">
-              <%= collection_select(:newsletter, :campaign_id, Campaign.all, :id, :name, {:prompt => 'Please select a campaign'}, {:class => 'form-control'}) %> 
-            </div>
-          </div>
-
-          <div class="form-group form-group-sm">
-            <%= f.label :subject, :class => "col-sm-3 col-xs-12 control-label"%>      
-            <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :subject, :class => 'form-control' %>
-            </div>
-          </div>
-
-          <div class="form-group form-group-sm">
-            <%= f.label :template_id, :class => "col-sm-3 col-xs-12 control-label"%>      
-            <div class="col-sm-9 col-xs-12">
-              <%= collection_select(:newsletter, :template_id, @templates, :id, :name, {:prompt => 'Please select a template'}, {:class => 'form-control'}) %> 
-            </div>
-          </div>
-
-          <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Select contact Group</label>
-            <div class="col-sm-9 col-xs-12">
-              <select class="form-control" name=""><option></option></select>
-            </div>
-          </div>
-          
-          <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
-            <div class="col-sm-9 col-xs-12">
-              <div class="saprator">or</div>
-            </div>
-          </div>
-
-          <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
-            <div class="col-sm-9 col-xs-12">
-              <textarea class="form-control" name="" cols="" rows=""></textarea>
-            </div>
-          </div>
-
-
-
-
-        </div><!-- form-horizontal -->
-
-
-      </div>
-      <div class="col-lg-4 col-xs-1">&nbsp;</div>
-      <div class="clearfix"></div>
-
-    </div>
-
-    <div class="col-xs-1">&nbsp;</div>
-
-    <div class="col-xs-10">
-      <div class="green-Border green-text text-right">Advance Search <i class="fa fa-caret-down"></i></div> 
-        <div class="grey-box">
-          <div class="row">
-            <%#= form_tag search_contacts_path do |f| %>
             <div class="form-group form-group-sm">
-              <label class="col-xs-3 text-right control-label">Gender</label>
-              <div class="col-xs-3 ">  
-                <% Gender.all.each do |gender| %>
-                  <%= radio_button_tag 'contact[gender_id]', gender.id %>                  
-                  <label><span></span><%= gender.name %></label>              
-                <% end %>
-              </div >                            
-              <div class="clearfix"></div> 
-            </div>
-
-            <div class="clearfix"></div> 
-            
-            <div class="form-group form-group-sm">
-              <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Country</label>
-              <div class="col-xs-3">
-                <%= country_select("contact", "country") %>
+              <%= f.label :name, :class => "col-sm-3 col-xs-12 control-label", :maxlength => 250 %>      
+              <div class="col-sm-9 col-xs-12">
+                <%= f.text_field :name, :class => 'form-control' %>
               </div>
-              <div class="clearfix"></div> 
+            </div>
+          
+            <div class="form-group form-group-sm">
+              <%= f.label :campaign_id, :class => "col-sm-3 col-xs-12 control-label"%>      
+              <div class="col-sm-9 col-xs-12">
+                <%= collection_select(:newsletter, :campaign_id, Campaign.active, :id, :name, {:prompt => t('frontend.newsletter.select_campaign')}, {:class => 'form-control'}) %> 
+              </div>
             </div>
 
             <div class="form-group form-group-sm">
-              <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">City</label>
-              <div class="col-xs-3"> <input class="form-control" type="text" id="formGroupInputSmall" ></div>
-              <div class="clearfix"></div> 
+              <%= f.label :subject, :class => "col-sm-3 col-xs-12 control-label", :maxlength => 255 %>      
+              <div class="col-sm-9 col-xs-12">
+                <%= f.text_field :subject, :class => 'form-control' %>
+              </div>
             </div>
 
             <div class="form-group form-group-sm">
-              <label class="col-xs-3 text-right control-label" for="formGroupInputSmall">Area of interest</label>
-              <div class="col-xs-3">
-                <% Attribute.all.each do |attribute| %>
-                  <%= check_box_tag 'contact[interest_area_ids][]', attribute.id %> <label><span></span><%= attribute.name %></label><br/>
+              <%= f.label :template_id, :class => "col-sm-3 col-xs-12 control-label"%>      
+              <div class="col-sm-9 col-xs-12">
+                <%= collection_select(:newsletter, :template_id, @templates, :id, :name_with_profile, {:prompt => t('frontend.newsletter.select_template')}, {:class => 'form-control'}) %> 
+              </div>
+            </div>
+            
+            <% if false %>
+              <div class="form-group form-group-sm">
+                <label class="col-sm-3 col-xs-12 control-label" ><%= t("frontend.newsletter.select_profile") %></label>
+                <div class="col-xs-9 custom-checkbox-style" id="profile-custom-select">
+                  <%= collection_select(:newsletter, :profile_ids, Profile.active, :id, :name, {:include_blank => t('frontend.shared.multiselect')}, {:multiple => true, :class => 'form-control'}) %>
+                </div>
+              </div>
+            <% end %>
+          
+
+
+            <div class="form-group form-group-sm">
+              <%= f.fields_for :newsletter_emails, @newsletter_email do |newsletter_email_form| %>                  
+                <% if newsletter_email_form.object.from_contacts? %>
+                  <%= newsletter_email_form.label :emails, class: "col-sm-3 col-xs-12 control-label"%>
+                  <div class="col-xs-9">
+                    <%= newsletter_email_form.text_area :emails, :class => "form-control contact_emails" %>
+                  </div>
+                  <%= newsletter_email_form.hidden_field :from_contacts, :value => true %>
                 <% end %>
-              </div>              
-              <div class="clearfix"></div> 
+              <% end %>
             </div>
-            <%= link_to "Search" %> 
-          </div>
+
+            <div class="form-group form-group-sm">
+              <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
+              <div class="col-sm-9 col-xs-12">
+                <div class="saprator"><%= t('words.or')%></div>
+              </div>
+            </div>
+
+          </div><!-- form-horizontal -->
         </div>
+        <div class="col-lg-4 col-xs-1">&nbsp;</div>
+        <div class="clearfix"></div>
       </div>
+
       <div class="col-xs-1">&nbsp;</div>
 
+      <div class="col-xs-10">
+        <%= render 'advanced_search' %>
+        <div class="col-xs-1">&nbsp;</div>
 
-    <div class="col-md-12 col-xs-12">
-      <div class="col-lg-2 col-xs-1">&nbsp;</div>
-      <div class="col-md-6 col-xs-10">
-        <div class="form-horizontal">
-          <div class="form-group form-group-sm">
-            <label class="col-sm-3 spacing-top blue-heading col-xs-12 control-label" for="formGroupInputSmall">Sender Settings</label>
-            <div class="col-sm-9 col-xs-12">
 
-            </div>
-          </div>
+        <div class="col-md-12 col-xs-12">
+          <div class="col-lg-2 col-xs-1">&nbsp;</div>
+          <div class="col-md-6 col-xs-10">
+            <div class="form-horizontal">
+              <div class="form-group form-group-sm">
+                <label class="col-sm-3 spacing-top blue-heading col-xs-12 control-label" ><%= t('frontend.newsletter.sender_settings') %></label>
+                <div class="col-sm-9 col-xs-12">  </div>
+              </div>
 
-          <div class="form-group form-group-sm">
-            <%= f.label :from_name, :class => "col-sm-3 col-xs-12 control-label" %>
-            <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :from_name, :class => 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group form-group-sm">
-            <%= f.label :from_address, :class => "col-sm-3 col-xs-12 control-label" %>
-            <div class="col-sm-9 col-xs-12">
-              <%= f.text_field :from_address, :class => 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group form-group-sm">
-            <%= f.label :reply_email, :class => "col-sm-3 col-xs-12 control-label" %>
-            <div class="col-sm-9 col-xs-12">
-              <%= f.email_field :reply_email, :class => 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group form-group-sm">
-            <%= f.label :cc_email, :class => "col-sm-3 col-xs-12 control-label" %>
-            <div class="col-sm-9 col-xs-12">
-              <%= f.email_field :cc_email, :class => 'form-control' %>
-            </div>
-          </div>
-          <div class="form-group form-group-sm">
-            <%= f.label :bcc_email, :class => "col-sm-3 col-xs-12 control-label" %>
-            <div class="col-sm-9 col-xs-12">
-              <%= f.email_field :bcc_email, :class => 'form-control' %>
-            </div>
-          </div>
-        </div>
+              <div class="form-group form-group-sm">
+                <%= f.label :from_name, :class => "col-sm-3 col-xs-12 control-label", :maxlength => 150 %>
+                <div class="col-sm-9 col-xs-12">
+                  <%= f.text_field :from_name, :class => 'form-control' %>
+                </div>
+              </div>
+              <!-- <div class="form-group form-group-sm">
+                <%#= f.label :from_address, :class => "col-sm-3 col-xs-12 control-label" %>
+                <div class="col-sm-9 col-xs-12">
+                  <%#= f.text_field :from_address, :class => 'form-control' %>
+                </div>
+              </div> -->
+              <div class="form-group form-group-sm">
+                <%= f.label :reply_email, :class => "col-sm-3 col-xs-12 control-label" %>
+                <div class="col-sm-9 col-xs-12">
+                  <%= f.email_field :reply_email, :class => 'form-control' %>
+                </div>
+              </div>
+<!--               <div class="form-group form-group-sm">
+                <%#= f.label :cc_email, :class => "col-sm-3 col-xs-12 control-label" %>
+                <div class="col-sm-9 col-xs-12">
+                  <%#= f.email_field :cc_email, :class => 'form-control' %>
+                </div>
+              </div>
+              <div class="form-group form-group-sm">
+                <%#= f.label :bcc_email, :class => "col-sm-3 col-xs-12 control-label" %>
+                <div class="col-sm-9 col-xs-12">
+                  <%#= f.email_field :bcc_email, :class => 'form-control' %>
+                </div>
+              </div>
+ -->            </div>
 
       </div>
       <div class="col-lg-4 col-xs-1">&nbsp;</div>
       <div class="clearfix"></div>
-      <div class="custom-divider"></div>
+      <!-- <div class="custom-divider"></div> -->
     </div>
 
     <div class="col-md-12 col-xs-12">
@@ -171,39 +130,63 @@
       <div class="col-md-6 col-xs-10">
         <div class="form-horizontal">
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 blue-heading col-xs-12 control-label" for="formGroupInputSmall">Sample Email</label>
+            <label class="col-sm-3 blue-heading col-xs-12 control-label" ><%#= t('frontend.newsletter.sample_email') %></label>
             <div class="col-sm-9 col-xs-12">
-
             </div>
           </div>
 
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">Email Address</label>
+            <label class="col-sm-3 col-xs-12 control-label" >Sample Email Address<%#= t('frontend.newsletter.email_address') %></label>
             <div class="col-sm-9 col-xs-12">
-              <input class="form-control" type="text" id="formGroupInputSmall" >
-              <span class="small">Send a copy of the campaign to the following email address(es), separated by commas:</span>
-            </div>
-          </div>
-          <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
-            <div class="col-sm-9 col-xs-12 custom-radio-input">
-              <input id="radio01" name="" type="radio" value="">
-              <label for="radio01"><span></span>Auto Responder Rules</label>
-              <input class="form-control" type="text" id="formGroupInputSmall" >
-            </div>
-          </div>
-          <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" for="formGroupInputSmall">&nbsp;</label>
-            <div class="col-sm-9 col-xs-12 custom-radio-input">
-              <input id="radio02" name="" type="radio" value="">
-              <label for="radio02"><span></span>Auto Sent</label>
-              <input class="form-control" type="text" id="formGroupInputSmall" >
+              <%= f.fields_for :newsletter_emails, @sample_newsletter_email do |sample_newsletter_email_form| %>
+                <% if sample_newsletter_email_form.object.sample? %>
+                  <%= sample_newsletter_email_form.text_field :emails, :class => "form-control" %>
+                  <%= sample_newsletter_email_form.hidden_field :sample, :value => true %>              
+                <% end %>
+              <% end %>
+              
+              <!-- <span class="small"><%#= t('frontend.newsletter.sample_email_hint') %>:</span> -->
             </div>
           </div>
 
+<!--           <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" >&nbsp;</label>
+            <div class="col-sm-9 col-xs-12 custom-radio-input">
+              <input id="radio01" name="" type="radio" value="" class="auto_response_toggle">
+              <label for="radio01"><span></span><%#= t('frontend.newsletter.auto_responder_rules')%></label>
+              <%# if !@newsletter.auto_response.try(:blank?) %>
+                <%#= f.email_field :auto_response, :class => "form-control" %>
+              <%# else %>
+                <%#= f.email_field :auto_response, :class => "form-control", :style => "display:none" %>
+              <%# end %>
+            </div>
+          </div>
+ -->         
+
+
+          <div class="form-group form-group-sm">
+            <label class="col-sm-3 col-xs-12 control-label" >Auto Send at</label>
+            <!-- <div class="col-sm-9 col-xs-12 add-on input-group date datepicker"> -->
+            <div class="col-sm-9 col-xs-12">
+              <!-- <input id="radio02" name="" type="radio" value="" class="scheduled_at_toggle"> -->
+              <!-- <label for="radio02"><span></span><%#= t('frontend.newsletter.auto_send') %></label> -->
+              <%# if @newsletter.scheduled_at.try(:blank?) %>
+              <!-- <input type="text" id="newsletter_scheduled_at" name="newsletter[scheduled_at]" class="form-control datetimepicker"><i class="fa fa-calendar"></i> -->
+                <%= f.text_field :scheduled_at, :class => "form-control datetimepicker" %>            
+             <div class="input-group-btn datepicker-icon" style="height:30px;">
+            <!-- <button class="btn btn-default" style="height: 30px;"> -->
+                <!-- <i class="fa fa-calendar"></i> -->
+            <!-- </button> -->
+        </div>     
+            
+              <%# else %>
+                <%#= f.text_field :scheduled_at, :class => "form-control datetimepicker", :style => "display:none" %>
+              <%# end %>              
+            </div>
+          </div>
         </div>
-
       </div>
+
       <div class="col-lg-4 col-xs-1">&nbsp;</div>
       <div class="clearfix"></div>
       <div class="custom-divider"></div>
@@ -213,9 +196,10 @@
       <div class="col-lg-2 col-xs-1">&nbsp;</div>
       <div class="col-md-6 col-xs-10">
         <div class="form-group custom-from-group">
-          <button>Preview</button>
-          <button>Save</button>
-          <a href="#">Cancel</a>
+          <button type="button" id='preview-template'><%= t('buttons.preview') %></button>
+          <%= f.submit  :class => 'btn dark-btn-custom', data: {disable_with: "Processing..."} %>
+          <%= link_to t('cancel'), newsletters_path, :class => 'btn custom-link-btn' %>
+           
         </div>
 
       </div>
@@ -227,65 +211,7 @@
  <% end %>
 </div><!--  custom-container -->
 
-
-
-
-
-
-
-
-<% if false %>
-<%= form_for [current_user ,@newsletter] do |f| %>
-  <% if @newsletter.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@newsletter.errors.count, "error") %> prohibited this newsletter from being saved:</h2>
-
-      <ul>
-      <% @newsletter.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :campaign_id %><br>
-    <%= f.text_field :campaign_id %>
-  </div>
-  <div class="field">
-    <%= f.label :template_id %><br>
-    <%= f.text_field :template_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :subject %><br>
-    <%= f.text_field :subject %>
-  </div>
-  <div class="field">
-    <%= f.label :from_name %><br>
-    <%= f.text_field :from_name %>
-  </div>
-  <div class="field">
-    <%= f.label :from_address %><br>
-    <%= f.text_field :from_address %>
-  </div>
-  <div class="field">
-    <%= f.label :reply_email %><br>
-    <%= f.text_field :reply_email %>
-  </div>
-  <div class="field">
-    <%= f.label :created_by %><br>
-    <%= f.number_field :created_by %>
-  </div>
-  <div class="field">
-    <%= f.label :updated_by %><br>
-    <%= f.number_field :updated_by %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-<% end %>
+<!-- Preview Template -->
+<!-- Modal -->
+<%#= render :partial => "preview_template" %>
+<!-- Preview Template -->
