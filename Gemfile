@@ -75,7 +75,7 @@ end
 
 group :production do
  # If app deploy on heroku server
-# gem 'pg'
+ gem 'pg'
 end
 
 # Use CoffeeScript for .coffee assets and views
