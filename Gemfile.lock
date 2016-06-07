@@ -72,6 +72,8 @@ GEM
     acts_as_tenant (0.3.9)
       rails (>= 3.1)
       request_store (>= 1.0.5)
+    airbrussh (1.0.2)
+      sshkit (>= 1.6.1, != 1.7.0)
     annotate (2.6.10)
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
@@ -88,6 +90,25 @@ GEM
       railties (>= 3.0)
     builder (3.2.2)
     cancancan (1.13.0)
+    capistrano (3.5.0)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.1.4)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-harrow (0.5.1)
+    capistrano-rails (1.1.6)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capistrano3-puma (1.2.1)
+      capistrano (~> 3.0)
+      puma (>= 2.6)
     celluloid (0.17.2)
       celluloid-essentials
       celluloid-extras
@@ -198,6 +219,9 @@ GEM
     multipart-post (2.0.0)
     nenv (0.2.0)
     nested_form (0.3.2)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (3.1.1)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     notiffany (0.0.8)
@@ -215,6 +239,7 @@ GEM
       slop (~> 3.4)
     pry-nav (0.2.4)
       pry (>= 0.9.10, < 0.11.0)
+    puma (3.4.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -311,6 +336,9 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sshkit (1.10.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     summernote-rails (0.6.16.0)
       railties (>= 3.1)
     therubyracer (0.12.2)
@@ -354,6 +382,11 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-datepicker-rails
   cancancan
+  capistrano
+  capistrano-bundler
+  capistrano-rails
+  capistrano-rvm
+  capistrano3-puma
   carrierwave!
   client_side_validations!
   coffee-rails (~> 4.1.0)
@@ -374,6 +407,7 @@ DEPENDENCIES
   pg
   pry
   pry-nav
+  puma
   quiet_assets
   rails (= 4.2.1)
   rails-assets-datetimepicker!
@@ -397,4 +431,4 @@ DEPENDENCIES
   will_paginate-bootstrap
 
 BUNDLED WITH
-   1.10.6
+   1.12.5

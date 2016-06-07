@@ -31,7 +31,8 @@ gem 'remotipart', '~> 1.2'
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
 end
-
+gem 'therubyracer'
+gem 'execjs'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
@@ -48,10 +49,9 @@ gem 'httparty'
 gem 'whenever', :require => false
 # Use Uglifier as compressor for JavaScript assets
 # gem 'activerecord-import'
+gem 'puma'
 
 group :development, :test do
-  gem 'execjs'
-  gem 'therubyracer'
   gem 'rename' # Rename application
   gem 'quiet_assets' # Dont show assets log on console
   gem "better_errors" # Debugger
@@ -66,6 +66,11 @@ group :development, :test do
   gem 'pg'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
 end
 
 group :production do
