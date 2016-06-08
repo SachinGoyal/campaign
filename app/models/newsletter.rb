@@ -48,7 +48,7 @@ class Newsletter < ActiveRecord::Base
   validates_presence_of :campaign_id, :template_id
   validates :name, presence: true, length: { in: 2..250 }
   validates :subject, presence: true, length: { in: 2..255 }
-  validates :from_name, presence: true, length: { in: 2..150 }
+  validates :from_name, presence: true, length: { in: 2..150 }, format: { with: /\A[a-zA-Z]+\z/, message: "only allows alphabets" }
   validates :reply_email, presence: true, format: {with: Devise.email_regexp}
   validates_format_of :cc_email, :bcc_email, :with => Devise.email_regexp, :allow_blank => true
   validate :scheduled_at_cannot_be_in_the_past
