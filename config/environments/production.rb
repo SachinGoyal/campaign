@@ -29,7 +29,7 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
   config.serve_static_files = true
-
+config.assets.precompile =  ['*.js', '*.css', '*.css.erb', 'fontawesome-webfont.woff', "glyphicons-halflings-regular.eot", "glyphicons-halflings-regular.woff", "glyphicons-halflings-regular.ttf"] 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
