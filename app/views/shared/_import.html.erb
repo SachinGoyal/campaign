@@ -75,7 +75,7 @@
                 <label class="col-sm-3 col-xs-3 control-label" for="formGroupInputSmall"><%= t('frontend.import.file') %></label>
                 <div class="col-xs-6">
                   <div class="input-group">
-		   <%= f.file_field :file, :placeholder =>  t('frontend.import.placeholder.csv_file') %>
+		               <%= f.file_field :file, :placeholder =>  t('frontend.import.placeholder.csv_file') %>
                    <!-- <input type="text" class="form-control" readonly="" placeholder = <%#= t('frontend.import.placeholder.csv_file') %> value=<%#= @contact_import.try(:file).try(:original_filename) %>>
                     <span class="input-group-btn">
                       <span class="btn btn-primary btn-file custom-dark-btn">
@@ -131,7 +131,7 @@
                   <div class="form-group custom-from-group">
                     <div class="col-xs-2">&nbsp;</div>              
                     <div class="col-xs-10 text-left">
-                      <%= f.submit t('links.import'),  :class =>  'btn btn-primary btn-file custom-dark-btn'%>
+                      <%= f.submit t('frontend.import.import'),  :class =>  'btn btn-primary btn-file custom-dark-btn'%>
                       <% if can? :read, Contact %>
                         <%= link_to t(:cancel), contacts_path,class: 'calender-margin' %>
                       <% end %>

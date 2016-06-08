@@ -465,6 +465,13 @@ es:
       logo: "Logo de la compañía"
     import:
       import: "Importar"
+      unsubscribe: "Darse de baja"
+      action: "Acción"
+      add: "Añadir"
+      replace: "Reemplazar"
+      add_update: "Añadir / Actualizar"
+      csv_file: "Elija el archivo"
+      file: "Archivo"
       first_name:
       last_name:
       email:
