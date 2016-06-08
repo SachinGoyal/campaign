@@ -35,7 +35,7 @@
 
            
              <div class="form-group form-group-sm">
-              <label class="col-xs-4 text-right control-label"><%#= t('frontend.profile.extra_fields') %>Extra Fields</label>
+              <label class="col-xs-4 text-right control-label"><%= t('activerecord.attributes.profile.extra_fields') %></label>
               <div class="col-sm-8 col-xs-12 default-without-input">
               <% if @profile.extra_fields.collect(&:field_name).any? %>
               Email,

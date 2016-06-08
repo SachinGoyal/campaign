@@ -136,7 +136,7 @@
           </div>
 
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" >Sample Email Address<%#= t('frontend.newsletter.email_address') %></label>
+            <label class="col-sm-3 col-xs-12 control-label" ><%= t('frontend.newsletter.email_address') %></label>
             <div class="col-sm-9 col-xs-12">
               <%= f.fields_for :newsletter_emails, @sample_newsletter_email do |sample_newsletter_email_form| %>
                 <% if sample_newsletter_email_form.object.sample? %>
@@ -165,7 +165,7 @@
 
 
           <div class="form-group form-group-sm">
-            <label class="col-sm-3 col-xs-12 control-label" >Auto Send at</label>
+            <label class="col-sm-3 col-xs-12 control-label" ><%= t('activerecord.attributes.newsletter.scheduled_at') %></label>
             <!-- <div class="col-sm-9 col-xs-12 add-on input-group date datepicker"> -->
             <div class="col-sm-9 col-xs-12">
               <!-- <input id="radio02" name="" type="radio" value="" class="scheduled_at_toggle"> -->
