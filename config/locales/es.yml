@@ -225,7 +225,7 @@ es:
           attributes:
             base: "No puede ser editado o borrado como boletín ya se envía"
             scheduled_at:
-              in_past: "can't be in the past"
+              in_past: "No puede ser en el pasado"
         attribute:        
           attributes:
             base:
@@ -273,6 +273,8 @@ es:
         name: "Nombre"
         status: "Estado"
         created_at: "Fecha"
+        extra_fields: "Campos Extra"
+        description: "Descripción"
       contact:
         first_name: "Nombre de pila"
         last_name: "Apellido"
@@ -297,6 +299,7 @@ es:
         free_emails: "Los correos electrónicos gratuitos"
         subdomain: "Subdomain"
         status: Estado
+        company_logo: Logo de la compañía
         created_at: "Fecha"
       user:   
         username: "Nombre de usuario"
@@ -310,7 +313,7 @@ es:
       setting:
         site_title: "Título del sitio"
         free_emails: "Los correos electrónicos gratuitos"
-        admin_email: "Email Admin"
+        admin_email: "Correo electrónico del Administrador"
         admin_footer_content: "Admin contenido de pie de página" 
         name: "Nombre"
         created_at: "Fecha"
@@ -328,6 +331,8 @@ es:
         emails_sent: "Emails Sent"
         abuse_reports: "Abuse Reports"
         problem: "Tenemos un problema.."
+      newsletter_email:
+        emails: Los correos electrónicos
 
 
   will_paginate:
@@ -372,8 +377,9 @@ es:
       status: "Estado"
       advanced_search: "Búsqueda Avanzada"
       multiselect: "Presione Ctrl para múltiples seleccione"
-      reports: "Reports"
-      stats: "Stats"
+      reports: "Informes"
+      stats: "Estadísticas"
+      setting: "Ajuste"
       csv: "should be CSV"
       gender:
         male: "Masculino"
@@ -396,26 +402,27 @@ es:
       email: "Correo electrónico"
       web: "Página web"
     attribute:
-      list: "Lista de atributos"
+      list: "Lista de Atributos"
       name: 'Nombre del Atributo'
-      new: "New Attribute"
+      new: "Nuevo Atributo"
     template:
       copy: "Copia"
       content: "Contenido Plantilla"
       placeholder:
       advanced_search: "Plantilla - Búsqueda avanzada"
       name: "Título"
+      select_profile: Seleccionar Perfil
     campaign:
       view_stat: "Ver Stat"
-      select_campaign: "Select Campaign"
-      select_newsletter: "Select Newsletter"
-      report: "Report"
-      newsletter_sent: 'Newsletter Sent'     
-      stat: "Stat" 
+      select_campaign: "Seleccione la campaña"
+      select_newsletter: "Seleccione Hoja informativa"
+      report: "Informe"
+      newsletter_sent: 'boletín de Sent'     
+      stat: "Estadísticas" 
     newsletter:
       profiles: "Perfil (s)"
       email_list: "Lista de Correo"
-      sample_email: "Muestra Email"
+      sample_email: "Muestra de correo electrónico"
       email_address: "Dirección de correo electrónico"
       sample_email_hint: "Enviar una copia de la campaña para la dirección de correo electrónico siguiente (s ), separados por comas"
       auto_responder_rules: "Auto Reglas Responder"
@@ -455,7 +462,7 @@ es:
       number_free_emails: "Número de correos electrónicos gratis"
       username: "Nombre de Usuario"
       password_confirmation: "Confirmar contraseña"
-      logo: "Company Logo"
+      logo: "Logo de la compañía"
     import:
       import: "Importar"
       first_name:
@@ -466,8 +473,8 @@ es:
       country:      
       select_file: "Seleccione Archivo"
       select_profile: "Seleccionar perfil"
-      select_action: "Please select action"
-      select_way: "Please select way"
+      select_action: "Por favor, seleccione la acción"
+      select_way: "Por favor, seleccione camino"
       placeholder:
         csv_file: "Sube sólo los archivos CSV"
     setting: 
@@ -487,6 +494,10 @@ es:
     permission_reminder: "Usted firmó en el boletín"
     hi: "Hola"
     thank_you: "Gracias"
+    profile:
+      extra_fields_hint: "Por favor, utilice 'first_name' y 'last_name' como nombres de campos adicionales para obtener mejores resultados de búsqueda"
+    template:
+      substitute_vars: "Seleccionar variable para sustituir en la plantilla"
   mailer:
     mailchimp:
       error: "La siguiente petición falló en MailChimp. El registro de errores es la siguiente"

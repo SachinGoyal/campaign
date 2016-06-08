@@ -530,10 +530,14 @@ en:
     permission_reminder: "You signed up for the newsletter"
     hi: "Hi"
     thank_you: "Thank You"
+    profile:
+      extra_fields_hint: "Please use 'first_name' and 'last_name' as names of extra fields for better search results"
     newsletter_email:
       cs_error:
         invalid_email: " is invalid"
         invalid_emails: " are invalid"
+    template:
+      substitute_vars: "Select variable to substitute in template"
   mailer:
     mailchimp:
       error: "The following request failed at mailchimp. The error log is as follows"  
