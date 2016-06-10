@@ -20,19 +20,39 @@
      var cursorPos = '';
      var oldContent = '';
      var node = '';
+     // var userAgent = window.navigator.userAgent;
+
+     function isIE(userAgent) {
+        userAgent = userAgent || navigator.userAgent;
+        return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1 || userAgent.indexOf("Edge/") > -1;
+      }
+
      $('.summernote').summernote('focus');
-    $('.note-editable').on('blur',function(){
-      selection = document.getSelection();
-      cursorPos = selection.anchorOffset;
-      oldContent = selection.anchorNode.nodeValue;
-      node = selection.anchorNode;
-    });
+    if (isIE()){
+      $('.note-editable').on('keydown click focus',function(){
+        selection = window.getSelection();
+        cursorPos = selection.anchorOffset;
+        oldContent = selection.anchorNode.nodeValue;
+        node = selection.anchorNode;
+        });
+    }
+    else{
+      $('.note-editable').on('blur',function(){
+        selection = window.getSelection();
+        cursorPos = selection.anchorOffset;
+        oldContent = selection.anchorNode.nodeValue;
+        node = selection.anchorNode;
+      });
+    }
+
     $('.e_specchar').click(function(){
+      var newContent
       if (typeof selection !== 'undefined') {
         var toInsert = $(this).attr('data-value');
         length = $(this).attr('data-value').length;
+
         if (oldContent !== null)
-          var newContent = oldContent.substring(0, cursorPos) + ' ' + toInsert + ' ' + oldContent.substring(cursorPos);
+          newContent = oldContent.substring(0, cursorPos) + ' ' + toInsert + ' ' + oldContent.substring(cursorPos);
         else
           $('.summernote').summernote('insertText', $(this).data('value'));
         
