@@ -38,11 +38,12 @@
 #
 #  index_users_on_company_id            (company_id)
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_email                 (email)
 #  index_users_on_invitation_token      (invitation_token) UNIQUE
 #  index_users_on_invitations_count     (invitations_count)
 #  index_users_on_invited_by_id         (invited_by_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_username              (username)
 #
 
 class User < ActiveRecord::Base
@@ -63,16 +64,22 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   
   # devise 
+
   attr_accessor :login
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   # devise 
-  
+  validate :remove_old_email_validation_error
   # validation
-  validates :username, presence: true, uniqueness: {scope: :deleted_at}, length: { in: 4..50 }
+  validates :username, presence: true, length: { in: 4..50 }
+  validates_uniqueness_to_tenant :email
+  validates_uniqueness_to_tenant :username
+  validates :email, presence: true
+  validates_format_of :email, :with => Devise.email_regexp
+
   # , format: { with: /\A[a-zA-Z0-9 ]+\z/, :message => I18n.t('activerecord.errors.models.user.attributes.username.format')}
   validates :role_id, presence: true
-  # validates_presence_of :company_id, :if => lambda { |o| o.role_id != Role.superadmin.first.id }
+
   # validation
   
   # callback
@@ -168,6 +175,11 @@ class User < ActiveRecord::Base
   end 
 
   # class function
+
+  def remove_old_email_validation_error
+    errors.delete(:email)
+  end
+
 
   def active_for_authentication?
     if is_admin?
