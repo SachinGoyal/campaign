@@ -25,19 +25,21 @@ es:
           con_account: 'Confirmar mi cuenta'
         reset_password_instruction:
           hello: "Hola"
-          send_instruction: "Alguien ha pedido un enlace para cambiar su contraseña . Usted puede hacer esto a través del siguiente enlace ."
+          send_instruction: "Alguien ha solicitado el link para cambiar su contraseña. Lo puede hacer accediendo a este link:"
           c_password: "Cambiar mi contraseña"
-          ignore_mail: "Si usted no ha solicitado este , por favor, ignora este mensaje ."
-          access_link: "Su contraseña no cambiará hasta que acceda al enlace anterior y crear una nueva."
+          ignore_mail: "Si no ha solicitado esto, por favor ignore el correo."
+          access_link: "Su contraseña no cambiará hasta que acceda al link señalado arriba y cree una nueva."
         invitation_instruction:
-          welcome: "Bienvenido a Sperant Campaña ."
-          detail_below: "Encuentre datos de su cuenta a continuación:"
-          username: "Nombre de usuario:"
-          site_url: "Sitio URL"
-          click: "Clickea aquí"
-          set_password: "para establecer su contraseña"
-          thank: "Gracias"
-          support: "Equipo de apoyo"
+          subject: "Instrucciones de bienvenida"
+          hello: "Hola"
+          welcome: "Bienvenido al módulo de campañas de Sperant."
+          detail_below: "Por favor, revise los detalles de su cuenta:"
+          username: "Usuario:"
+          site_url: "URL"
+          click: "Click aquí"
+          set_password: "para establecer su contraseña."
+          thank: "Atentamente"
+          support: "El equipo de soporte"
   helpers:
     submit:
       create: "Créer"
@@ -508,7 +510,7 @@ es:
   mailer:
     mailchimp:
       error: "La siguiente petición falló en MailChimp. El registro de errores es la siguiente"
-      action: "Por favor, tome las medidas adecuadas o contacto administrativo."
+      action: "Por favor, tome las medidas adecuadas o contacte a administración."
   controller:
     unauthorized_domain: "No tiene permisos para acceder a ese subdominio."
     shared: 

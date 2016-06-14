@@ -5,6 +5,6 @@ class ApplicationMailer < ActionMailer::Base
   def mailchimp_error(user, message)
   	 @user = user
   	 @message = message
-  	 mail(to: @user.email, subject: 'MailChimp Error')
+  	 mail(to: @user.email, subject: 'Error en MailChimp')
   end
 end

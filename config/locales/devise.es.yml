@@ -56,6 +56,8 @@ es:
       confirmation_instructions:
         subject: 'Instrucciones de Confirmación'
       reset_password_instructions:
-        subject: 'Instrucciones de reinicio de contraseña'
+        subject: 'Instrucciones para reestablecer la contraseña'
       unlock_instructions:
         subject: 'Instrucciones de desbloqueo'
+      invitation_instructions:
+        subject: "Instrucciones de bienvenida"
