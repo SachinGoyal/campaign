@@ -17,10 +17,10 @@
                         <%= f.hidden_field :invitation_token %>
 
                         <div class="custom-user-password">
-                            <%= f.input :password, :label => false, :class => "form-control" ,:placeholder => t('devise.invitations.edit.placeholder.password'), :maxlength => 150  %>
+                            <%= f.input :password, :label => false, :class => "form-control" ,:placeholder => t('devise.view.password.password'), :maxlength => 150  %>
                         </div>
                         <div class="custom-user-password">
-                            <%= f.input :password_confirmation, :label => false, :class => "form-control", :placeholder => t('devise.invitations.edit.placeholder.password_confirmation'), :maxlength => 150 %>
+                            <%= f.input :password_confirmation, :label => false, :class => "form-control", :placeholder => t('devise.view.password.c_password'), :maxlength => 150 %>
                         </div>
                         <div>
                             <%= f.submit t('buttons.login') , :class =>"btn btn-default form-control dark-theme-btn submit"%>
