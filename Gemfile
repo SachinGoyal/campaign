@@ -51,6 +51,13 @@ gem 'whenever', :require => false
 # gem 'activerecord-import'
 gem 'puma'
 
+gem 'capistrano'
+gem 'capistrano3-puma'
+gem 'capistrano-rails', require: false
+gem 'capistrano-bundler', require: false
+gem 'capistrano-rvm'
+gem 'capistrano-rails-db'
+
 group :development, :test do
   gem 'rename' # Rename application
   gem 'quiet_assets' # Dont show assets log on console
@@ -66,11 +73,8 @@ group :development, :test do
   gem 'pg'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'capistrano'
-  gem 'capistrano3-puma'
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rvm'
+  
+
 end
 
 group :production do
