@@ -25,7 +25,7 @@ Rails.application.configure do
   config.assets.paths << "#{Rails.root}/app/assets"
 
   # Precompile additional assets
-  config.assets.precompile += %w( *.js *.coffee *.css *.scss  .svg .png .eot .woff .woff2 .ttf )
+  config.assets.precompile += %w( *.js *.rb *.coffee *.css *.scss  .svg .png .eot .woff .woff2 .ttf )
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
