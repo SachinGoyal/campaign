@@ -22,10 +22,10 @@ Rails.application.configure do
   # config.assets.precompile += %w( *.css *.js )
 
   # Add the fonts path
-  config.assets.paths << "#{Rails.root}/app/assets/fonts"
+  config.assets.paths << "#{Rails.root}/app/assets"
 
   # Precompile additional assets
-  config.assets.precompile += %w( *.js *.coffee *.css *.scss  .svg .eot .woff .ttf )
+  config.assets.precompile += %w( *.js *.coffee *.css *.scss  .svg .png .eot .woff .woff2 .ttf )
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
