@@ -1,49 +1,79 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.default_url_options = { host: 'sperantcrm.com' }
-  config.cache_classes = false
-  # config.action_mailer.default_url_options = { host: "lvh.me:3000" }
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
+  config.eager_load = true
+  config.assets.js_compressor = :uglifier
 
-  ActionMailer::Base.default(from: 'support@sperantcrm.com')
+  # Settings specified here will take precedence over those in config/environment.rb
 
-  ActionMailer::Base.smtp_settings = {
-    :port           => 587,
-    :address        => "smtp.mandrillapp.com",
-    :user_name      => "app10453745@heroku.com",
-    :password       => "109lRaN59Bb7HKkssiTTnA",
-    :domain         => 'sperantcrm.com',
-    :authentication => :plain,
-  }
-  ActionMailer::Base.delivery_method = :smtp
-  # Code is not reloaded between requests.
-  config.eager_load = false
+  config.force_ssl = false
 
-  # Show full error reports and disable caching.
-  config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = false
-  config.log_level = :info
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-  # Print deprecation notices to the Rails logger.
-  config.active_support.deprecation = :log
-  config.serve_static_files = true
-config.assets.precompile =  ['*.js', '*.css', '*.css.erb', 'fontawesome-webfont.woff', "glyphicons-halflings-regular.eot", "glyphicons-halflings-regular.woff", "glyphicons-halflings-regular.ttf"] 
-  # Raise an error on page load if there are pending migrations.
-  config.active_record.migration_error = :page_load
+  # The production environment is meant for finished, "live" apps.
+  # Code is not reloaded between requests
+  config.cache_classes = true
 
-  # Debug mode disables concatenation and preprocessing of assets.
-  # This option may cause significant delays in view rendering with a large
-  # number of complex assets.
-  config.assets.debug = true
-  config.assets.compile = true
-  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
-  # yet still be able to expire them through the digest params.
+  # Compress JavaScripts and CSS
+  config.assets.compress = true
+
+  # Don't fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = false
+
+  # Generate digests for assets URLs
   config.assets.digest = true
+
+  # config.assets.precompile += %w( *.css *.js )
+
+  # Add the fonts path
+  config.assets.paths << "#{Rails.root}/app/assets/fonts"
+
+  # Precompile additional assets
+  config.assets.precompile += %w( *.js *.coffee *.css *.scss  .svg .eot .woff .ttf )
+
+  # Full error reports are disabled and caching is turned on
+  config.consider_all_requests_local       = false
+  config.action_controller.perform_caching = true
+
+  # if ENV['FOG_DIRECTORY'].present?
+  #   config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  # end
+
+  # Specifies the header that your server uses for sending files
+  config.action_dispatch.x_sendfile_header = "X-Sendfile"
+
+  # For nginx:
+  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
+
+  # If you have no front-end server that supports something like X-Sendfile,
+  # just comment this out and Rails will serve the files
+  config.cache_store = :memory_store
+  #config.cache_store = :dalli_store
+
+  # See everything in the log (default is :info)
+  # config.log_level = :debug
+
+  # Use a different logger for distributed setups
+  # config.logger = SyslogLogger.new
+
+  # Use a different cache store in production
+  # config.cache_store = :mem_cache_store
+
+  # Disable Rails's static asset server
+  # In production, Apache or nginx will already do this
+  config.serve_static_files = true
+
+  # Enable serving of images, stylesheets, and javascripts from an asset server
+  # config.action_controller.asset_host = "http://assets.example.com"
+
+  config.action_mailer.default_url_options = { :host => 'ror-e.herokuapp.com' }
+  # Disable delivery errors, bad email addresses will be ignored
+  # config.action_mailer.raise_delivery_errors = false
+
+  # Enable threaded mode
+  # config.threadsafe!
+
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+  # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
-  # Adds additional error checking when serving assets at runtime.
-  # Checks for improperly declared sprockets dependencies.
-  # Raises helpful error messages.
-  config.assets.raise_runtime_errors = true
+
+  # Send deprecation notices to registered listeners
+  config.active_support.deprecation = :notify
+
 end
