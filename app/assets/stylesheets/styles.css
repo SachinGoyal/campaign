@@ -33,7 +33,7 @@ body.nav-sm .navbar.nav_title a i {
     border-radius: 50%;
 }
 .site_title span {
-    background-image:url(logo.png);
+    background-image:url('logo.png');
     background-repeat:no-repeat;
     padding: 10px 50px;
     background-position: 6px 7px;
@@ -5821,7 +5821,7 @@ form:after {
     letter-spacing: -0.05em;
     line-height: 20px;
     margin: 10px 0 30px;
-    background-image:url(logo.png);
+    background-image:url('logo.png');
     background-repeat: no-repeat;
     background-position: 99px 0px;
     padding: 8px 0px 10px 35px;
