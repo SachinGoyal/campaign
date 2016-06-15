@@ -28,7 +28,7 @@ module CampaignApp
     # config.action_view.embed_authenticity_token_in_remote_forms = true
 #    config.assets.paths << "#{Rails}/vendor/assets/fonts"
     config.assets.paths << Rails.root.join("app", "assets", "fonts", "images")
-    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    config.assets.precompile += %w( *.js *.coffee *.css *.scss  .svg .png .eot .woff .woff2 .ttf )    
     config.to_prepare do
       Devise::SessionsController.skip_before_filter :check_subdomain
     end
