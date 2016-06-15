@@ -1,5 +1,20 @@
 
-server '52.33.21.77', user: 'deploy', roles: %w{web app db}
+server '52.41.79.237', user: 'deploy', roles: %w{web app db}
+
+
+namespace :deploy do
+  desc "Update crontab with whenever"
+  task :update_cron do
+    on roles(:app) do
+      within current_path do
+        execute :bundle, :exec, "whenever --update-crontab #{fetch(:application)}"
+      end
+    end
+  end
+
+  after :finishing, 'deploy:update_cron'
+end
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
