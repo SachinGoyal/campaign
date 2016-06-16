@@ -517,6 +517,7 @@ es:
       alert:
         message: "No pudo encontrar %{model}"
       flash:
+        m_error: "MailChimp Servicio no disponible"
         delete_all: "%{model} eliminado correctamente"
         create:
           notice: "%{model} fue creado con éxito ."

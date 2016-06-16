@@ -52,34 +52,43 @@ class NewslettersController < ApplicationController
   end
 
   def create
-    @newsletter = Newsletter.new(newsletter_params)
-    @newsletter.creator = current_user
-    
-    respond_to do |format|
-      if @newsletter.save
-        if @newsletter.template.present?
-          profile = @newsletter.template.profile
-          @newsletter.profiles = []
-          @newsletter.profiles << profile
-        end
-        format.html { redirect_to @newsletter, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:newsletter)) }
-        format.json { render :show, status: :created, location: @newsletter }
-      else
-        format.html {
-          email_attrs = params[:newsletter][:newsletter_emails_attributes]
-          contact_emails = email_attrs[email_attrs.keys.first][:emails]
-          sample_emails = email_attrs[email_attrs.keys.last][:emails]
-          if contact_emails.blank?
-            @newsletter_email = @newsletter.newsletter_emails.build(from_contacts: true)
-          end
+    if chk_mailchimp
+      @newsletter = Newsletter.new(newsletter_params)
+      @newsletter.creator = current_user
+      
+      respond_to do |format|
+        if @newsletter.create_campaign
+          if @newsletter.save
+            if @newsletter.template.present?
+              profile = @newsletter.template.profile
+              @newsletter.profiles = []
+              @newsletter.profiles << profile
+            end
+            format.html { redirect_to @newsletter, notice: t("controller.shared.flash.create.notice", model: pick_model_from_locale(:newsletter)) }
+            format.json { render :show, status: :created, location: @newsletter }
+          else
+            format.html {
+              email_attrs = params[:newsletter][:newsletter_emails_attributes]
+              contact_emails = email_attrs[email_attrs.keys.first][:emails]
+              sample_emails = email_attrs[email_attrs.keys.last][:emails]
+              if contact_emails.blank?
+                @newsletter_email = @newsletter.newsletter_emails.build(from_contacts: true)
+              end
 
-          if sample_emails.blank?
-            @sample_newsletter_email = @newsletter.newsletter_emails.build(sample: true)
+              if sample_emails.blank?
+                @sample_newsletter_email = @newsletter.newsletter_emails.build(sample: true)
+              end
+              render :new 
+            }
+            format.json { render json: @newsletter.errors, status: t("controller.shared.flash.create.status") }
           end
+        else
           render :new 
-        }
-        format.json { render json: @newsletter.errors, status: t("controller.shared.flash.create.status") }
+        end
       end
+    else
+      flash[:error] = t("controller.shared.flash.m_error")
+      render :new 
     end
   end
 
@@ -201,6 +210,16 @@ class NewslettersController < ApplicationController
     def check_editable_or_deletable
       unless @newsletter.editable_or_deletable?
         return redirect_to newsletters_path, :notice => t("controller.newsletter.check_editable_or_deletable")
+      end
+    end
+
+    def chk_mailchimp
+      gb = Gibbon::Request.new(api_key: GIBBON_KEY)
+      begin
+       gb.lists.retrieve
+       true
+      rescue
+       false
       end
     end
 end

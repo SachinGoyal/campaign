@@ -548,6 +548,7 @@ en:
       alert:
         message: "Could not find %{model}"
       flash:
+        m_error: "MailChimp Service not available"
         delete_all: "%{model} deleted successfully"
         create:
           notice: "%{model} created successfully."
