@@ -8,7 +8,7 @@ Rails.application.initialize!
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
     :authentication => :plain,
-    :user_name      => 'app10453745@heroku.com',
-    :password       => '2pxudzpr4491',
+    :user_name      => 'test@heroku.com',
+    :password       => 'sachin@123',
     :domain         => 'eterniasoft.com',
   }
